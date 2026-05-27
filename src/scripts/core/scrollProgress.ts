@@ -11,11 +11,10 @@ let isInitialized = false;
 let lenisInstance: LenisInstance | null = null;
 let scrollHandler: (() => void) | null = null;
 let rafPending = false;
+let progressFill: HTMLElement | null = null;
 
 function updateProgress(scrollProgress: number = 0): void {
-  const progressFill = document.getElementById('scroll-progress-bar')?.querySelector('.scroll-progress-bar-fill') as HTMLElement;
   if (!progressFill) return;
-
   const progress = Math.min(100, Math.max(0, scrollProgress));
   progressFill.style.setProperty('--scroll-progress', `${progress / 100}`);
 }
@@ -53,6 +52,9 @@ export function initScrollProgress(): void {
   const progressBar = document.getElementById('scroll-progress-bar');
   if (!progressBar) return;
 
+  progressFill = progressBar.querySelector<HTMLElement>('.scroll-progress-bar-fill');
+  if (!progressFill) return;
+
   if (isInitialized) {
     handleNativeScroll();
     return;
@@ -86,5 +88,6 @@ export function cleanupScrollProgress(): void {
   window.removeEventListener('resize', handleResize);
   rafPending = false;
   isInitialized = false;
+  progressFill = null;
 }
 

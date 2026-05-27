@@ -26,31 +26,6 @@ export interface CarouselConfig {
 
 const CAROUSEL_CONFIGS: CarouselConfig[] = [
   {
-    containerId: "code-carousel-container",
-    breakpoint: BREAKPOINTS.MD,
-    carouselOptions: { ...BASE_OPTIONS, autoplayInterval: 4000 },
-  },
-  {
-    containerId: "mission-vision-carousel-container",
-    breakpoint: BREAKPOINTS.LG,
-    carouselOptions: {
-      ...BASE_OPTIONS,
-      autoplayInterval: 5000,
-      loop: false,
-      containScroll: "keepSnaps",
-    },
-  },
-  {
-    containerId: "global-metrics-carousel-container",
-    breakpoint: BREAKPOINTS.MD,
-    carouselOptions: { ...BASE_OPTIONS, autoplayInterval: 3500 },
-  },
-  {
-    containerId: "capabilities-carousel-container",
-    breakpoint: BREAKPOINTS.MD,
-    carouselOptions: { ...BASE_OPTIONS, autoplayInterval: 4500 },
-  },
-  {
     containerId: "services-carousel-container",
     breakpoint: BREAKPOINTS.LG,
     carouselOptions: { ...BASE_OPTIONS, autoplayInterval: 5000 },

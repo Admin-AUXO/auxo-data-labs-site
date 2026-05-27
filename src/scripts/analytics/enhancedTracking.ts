@@ -10,6 +10,7 @@ export class SessionQualityTracker {
   private lastActivityTime: number;
   private engagementInterval: number | null = null;
   private scrollTimeout: number | null = null;
+  private scrollRafPending = false;
 
   constructor() {
     this.startTime = Date.now();
@@ -42,25 +43,30 @@ export class SessionQualityTracker {
     });
 
     window.addEventListener('scroll', () => {
-      const scrollPercent = Math.round(
-        ((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight) * 100
-      );
-      const previousDepth = this.scrollDepth;
-      this.scrollDepth = Math.max(this.scrollDepth, scrollPercent);
-      
-      if (scrollPercent >= 50 && previousDepth < 50) {
-        this.sendSessionQuality();
-      } else if (scrollPercent >= 90 && previousDepth < 90) {
-        this.sendSessionQuality();
-      }
-      
-      if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
-      this.scrollTimeout = window.setTimeout(() => {
-        if (this.scrollDepth > 0) {
+      if (this.scrollRafPending) return;
+      this.scrollRafPending = true;
+      requestAnimationFrame(() => {
+        this.scrollRafPending = false;
+        const scrollPercent = Math.round(
+          ((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight) * 100
+        );
+        const previousDepth = this.scrollDepth;
+        this.scrollDepth = Math.max(this.scrollDepth, scrollPercent);
+
+        if (scrollPercent >= 50 && previousDepth < 50) {
+          this.sendSessionQuality();
+        } else if (scrollPercent >= 90 && previousDepth < 90) {
           this.sendSessionQuality();
         }
-        this.scrollTimeout = null;
-      }, 5000);
+
+        if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+        this.scrollTimeout = window.setTimeout(() => {
+          if (this.scrollDepth > 0) {
+            this.sendSessionQuality();
+          }
+          this.scrollTimeout = null;
+        }, 5000);
+      });
     }, { passive: true });
 
     this.engagementInterval = window.setInterval(() => {
@@ -162,10 +168,10 @@ export function setEnhancedUserProperties(properties: {
 
   if (!properties.browser && navigator.userAgent) {
     const ua = navigator.userAgent;
-    if (ua.includes('Chrome')) userProps.browser = 'Chrome';
-    else if (ua.includes('Safari')) userProps.browser = 'Safari';
+    if (ua.includes('Edg/')) userProps.browser = 'Edge';
     else if (ua.includes('Firefox')) userProps.browser = 'Firefox';
-    else if (ua.includes('Edge')) userProps.browser = 'Edge';
+    else if (ua.includes('Chrome')) userProps.browser = 'Chrome';
+    else if (ua.includes('Safari')) userProps.browser = 'Safari';
     else userProps.browser = 'Other';
   }
 

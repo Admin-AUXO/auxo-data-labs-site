@@ -56,22 +56,6 @@
 }
 
 
-@media (width <= 640px) {
-  .bridge-content-wrapper {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    justify-content: center;
-  }
-
-  .bridge-middle {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
-}
-
-
 .section-hero-line {
   contain: layout style paint;
   width: 100%;

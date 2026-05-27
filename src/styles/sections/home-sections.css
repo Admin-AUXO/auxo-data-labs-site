@@ -315,13 +315,6 @@
   z-index: 1;
 }
 
-.code-edge-pattern {
-  background-image:
-    linear-gradient(45deg, var(--accent-green-opacity-1) 1px, transparent 1px),
-    linear-gradient(-45deg, var(--accent-green-opacity-1) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
 .problem-solution-section {
   isolation: isolate;
   position: relative;

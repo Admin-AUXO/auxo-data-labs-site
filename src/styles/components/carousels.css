@@ -206,8 +206,7 @@
 
 
 .carousel-card-benefit,
-.carousel-card-process,
-.carousel-card-about {
+.carousel-card-process {
   background: var(--bg-card);
   border: var(--carousel-card-border);
   border-radius: var(--carousel-card-radius);
@@ -226,22 +225,19 @@
 
 @media (width >= 640px) {
   .carousel-card-benefit,
-  .carousel-card-process,
-  .carousel-card-about {
+  .carousel-card-process {
     padding: var(--carousel-card-padding-desktop);
   }
 }
 
 @media (width >= 1024px) {
   .carousel-card-benefit,
-  .carousel-card-process,
-  .carousel-card-about {
+  .carousel-card-process {
     padding: var(--carousel-card-padding-desktop);
   }
 }
 
 @media (width <= 767px) {
-  .carousel-card-about,
   .carousel-card-benefit,
   .carousel-card-process {
     -webkit-tap-highlight-color: transparent;
@@ -249,7 +245,7 @@
   }
 
   
-  .carousel-card-about a,
+  
   .carousel-card-benefit a,
   .carousel-card-process a {
     touch-action: manipulation;
