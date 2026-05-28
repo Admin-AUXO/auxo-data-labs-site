@@ -1,5 +1,6 @@
 ---
 import BackgroundDecorations from "./BackgroundDecorations.astro";
+import ParticleField from "../effects/ParticleField.astro";
 
 interface Props {
   as?: "section" | "div" | "footer";
@@ -7,7 +8,7 @@ interface Props {
   padding?: "sm" | "md" | "lg" | "xl";
   background?: "default" | "surface" | "raised" | "sunken" | "accent";
   width?: "prose" | "4xl" | "5xl" | "6xl" | "7xl" | "full";
-  decoration?: "none" | "grid" | "glow";
+  decoration?: "none" | "grid" | "glow" | "aurora";
   class?: string;
   containerClass?: string;
 }
@@ -32,7 +33,16 @@ const Tag = as;
   data-pad={padding}
   data-bg={background === "default" ? undefined : background}
 >
-  {decoration !== "none" && <BackgroundDecorations variant={decoration} />}
+  {
+    decoration === "aurora" ? (
+      <>
+        <BackgroundDecorations variant="aurora" />
+        <ParticleField />
+      </>
+    ) : decoration !== "none" ? (
+      <BackgroundDecorations variant={decoration} />
+    ) : null
+  }
   <div class={`section__container ${containerClass}`.trim()} data-w={width}>
     <slot />
   </div>

@@ -20,13 +20,13 @@ const cells = [
     {
       cells.map((c) => (
         <>
-          <rect x={c.x} y={c.y} width="18" height="18" rx="3" fill="var(--accent)" />
+          <rect x={c.x} y={c.y} width="18" height="18" fill="var(--accent)" />
           <text
             x={c.tx}
             y={c.ty}
             text-anchor="middle"
             font-family="var(--font-brand)"
-            font-weight="800"
+            font-weight="900"
             font-size="13"
             fill="var(--accent-foreground)">{c.label}</text>
         </>
