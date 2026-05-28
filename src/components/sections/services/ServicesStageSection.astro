@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+import Section from "../../layout/Section.astro";
+import SectionHeader from "../../ui/SectionHeader.astro";
+import Card from "../../ui/Card.astro";
+import { serviceCatalog } from "../../../data/services-overview";
+
+const services = serviceCatalog;
+---
+
+<Section padding="lg">
+  <SectionHeader
+    eyebrow="The full library"
+    title="Eight services, each fixing a specific layer"
+    subtitle="Pick the offer that matches where the friction actually starts."
+    highlight="specific layer"
+  />
+  <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      services.map((service) => (
+        <Card href={service.href} interactive class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="icon-badge">
+              <Icon name={service.icon} aria-hidden="true" />
+            </span>
+            {service.group && (
+              <span class="rounded-full border border-border px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-subtle">
+                {service.group}
+              </span>
+            )}
+          </div>
+          <h3 class="card__title mt-2">{service.name}</h3>
+          {service.description && <p class="card__desc">{service.description}</p>}
+          <span class="card__link mt-auto pt-2">
+            See service
+            <Icon name="mdi:arrow-right" aria-hidden="true" />
+          </span>
+        </Card>
+      ))
+    }
+  </div>
+</Section>

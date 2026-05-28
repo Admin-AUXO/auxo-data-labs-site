@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { servicesOverviewContent as c } from "../data/services-overview";
+import HeroSection from "../components/sections/services/HeroSection.astro";
+import ServicesChooserSection from "../components/sections/services/ServicesChooserSection.astro";
+import ServicesStageSection from "../components/sections/services/ServicesStageSection.astro";
+import ImpactSection from "../components/sections/services/ImpactSection.astro";
+import ModelsSection from "../components/sections/services/ModelsSection.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
+---
+
+<BaseLayout
+  title="Analytics Services"
+  description="Eight focused AUXO analytics services across data foundations, reporting, performance, forecasting, decision systems, automation, and applied AI. Start where the friction actually is."
+>
+  <HeroSection hero={c.hero} />
+  <ServicesChooserSection content={c.chooser} />
+  <ServicesStageSection />
+  <ImpactSection content={c.industries} />
+  <ModelsSection content={c.engagementModels} />
+  <CtaSection
+    title={c.cta.title}
+    description={c.cta.description}
+    descriptionHighlight={c.cta.descriptionHighlight}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+  />
+</BaseLayout>

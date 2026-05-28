@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { aboutContent as c } from "../data/about";
+import HeroSection from "../components/sections/about/HeroSection.astro";
+import PurposeSection from "../components/sections/about/PurposeSection.astro";
+import ApproachSection from "../components/sections/about/ApproachSection.astro";
+import PartnershipSection from "../components/sections/about/PartnershipSection.astro";
+import TeamSection from "../components/sections/about/TeamSection.astro";
+import MissionVisionSection from "../components/sections/about/MissionVisionSection.astro";
+import GlobalSection from "../components/sections/about/GlobalSection.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
+---
+
+<BaseLayout
+  title="About AUXO"
+  description="AUXO Data Labs is a Dubai-based decision intelligence partner. We work between business context and technical delivery so analytics changes how the business actually runs."
+>
+  <HeroSection hero={c.hero} />
+  <PurposeSection content={c.purpose} />
+  <ApproachSection content={c.approach} />
+  <PartnershipSection content={c.partnership} />
+  <TeamSection content={c.team} />
+  <MissionVisionSection content={c.mission} />
+  <GlobalSection content={c.global} />
+  <CtaSection
+    title={c.cta.title}
+    description={c.cta.description}
+    descriptionHighlight={c.cta.descriptionHighlight}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+  />
+</BaseLayout>

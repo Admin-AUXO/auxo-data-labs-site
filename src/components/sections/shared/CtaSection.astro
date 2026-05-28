@@ -1,0 +1,47 @@
+---
+import Section from "../../layout/Section.astro";
+import Button from "../../ui/Button.astro";
+import HighlightText from "../../ui/HighlightText.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  titleHighlight?: string | string[];
+  description?: string;
+  descriptionHighlight?: string | string[];
+  ctaText: string;
+  ctaHref: string;
+  reassurance?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  titleHighlight,
+  description,
+  descriptionHighlight,
+  ctaText,
+  ctaHref,
+  reassurance,
+} = Astro.props;
+---
+
+<Section padding="lg" width="5xl">
+  <div class="rounded-2xl border border-border bg-surface p-8 text-center sm:p-12">
+    {eyebrow && <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{eyebrow}</p>}
+    <h2 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+      <HighlightText text={title} highlight={titleHighlight} />
+    </h2>
+    {
+      description && (
+        <p class="mx-auto mt-5 max-w-2xl text-lg text-muted">
+          <HighlightText text={description} highlight={descriptionHighlight} />
+        </p>
+      )
+    }
+    <div class="mt-8 flex justify-center">
+      <Button variant="primary" href={ctaHref} icon>{ctaText}</Button>
+    </div>
+    {reassurance && <p class="mt-4 text-sm text-subtle">{reassurance}</p>}
+  </div>
+</Section>

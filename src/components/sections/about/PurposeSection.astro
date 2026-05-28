@@ -1,0 +1,36 @@
+---
+import Section from "../../layout/Section.astro";
+import SectionHeader from "../../ui/SectionHeader.astro";
+import Card from "../../ui/Card.astro";
+import HighlightText from "../../ui/HighlightText.astro";
+import type { AboutContent } from "../../../data/about";
+
+interface Props {
+  content: AboutContent["purpose"];
+}
+
+const { content } = Astro.props;
+---
+
+<Section padding="lg">
+  <SectionHeader title={content.title} />
+  <p class="mx-auto mt-4 max-w-3xl text-center text-lg text-muted">
+    <HighlightText text={content.description} highlight={content.descriptionHighlight} />
+  </p>
+  <div class="mt-12 grid gap-6 md:grid-cols-3">
+    {
+      content.capabilities.map((cap) => (
+        <Card icon={cap.icon} title={cap.title} description={cap.description} />
+      ))
+    }
+  </div>
+  <div class="mt-10 rounded-2xl border border-border bg-surface-sunken p-8 text-center sm:p-10">
+    <h3 class="text-xl font-bold tracking-tight sm:text-2xl">{content.nameOrigin.title}</h3>
+    <p class="mx-auto mt-4 max-w-2xl text-muted">
+      <HighlightText
+        text={content.nameOrigin.description}
+        highlight={content.nameOrigin.descriptionHighlight}
+      />
+    </p>
+  </div>
+</Section>

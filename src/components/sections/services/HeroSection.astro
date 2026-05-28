@@ -1,0 +1,31 @@
+---
+import Section from "../../layout/Section.astro";
+import Button from "../../ui/Button.astro";
+import HighlightText from "../../ui/HighlightText.astro";
+import type { ServicesOverviewContent } from "../../../data/services-overview";
+
+interface Props {
+  hero: ServicesOverviewContent["hero"];
+}
+
+const { hero } = Astro.props;
+---
+
+<Section padding="xl" decoration="glow" width="6xl" class="text-center">
+  <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{hero.eyebrow}</p>
+  <h1 class="mx-auto mt-5 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+    <HighlightText text={hero.title} highlight={hero.titleHighlight} />
+  </h1>
+  <p class="mx-auto mt-6 max-w-2xl text-lg text-muted">{hero.description}</p>
+  <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+    <Button variant="primary" href={hero.primaryCtaHref} icon>{hero.primaryCtaText}</Button>
+    <Button variant="outline" href={hero.secondaryCtaHref}>{hero.secondaryCtaText}</Button>
+  </div>
+  <ul class="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2.5">
+    {
+      hero.pills.map((p) => (
+        <li class="rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted">{p}</li>
+      ))
+    }
+  </ul>
+</Section>
