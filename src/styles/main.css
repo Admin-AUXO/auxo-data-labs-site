@@ -1,0 +1,6 @@
+/*
+  AUXO design system — entry stylesheet.
+  Tailwind 4 (CSS-first) + cascade layers.
+  The OKLCH token system and component layers are built out in Phase 1+.
+*/
+@import "tailwindcss";

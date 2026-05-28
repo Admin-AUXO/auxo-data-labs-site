@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
 import { fileURLToPath } from 'node:url';
@@ -10,9 +9,6 @@ export default defineConfig({
   site: 'https://auxodata.com',
   prefetch: {
     defaultStrategy: 'viewport',
-  },
-  image: {
-    service: { entrypoint: 'astro/assets/services/sharp' },
   },
   vite: {
     build: {
@@ -26,7 +22,6 @@ export default defineConfig({
               if (id.includes('@emailjs')) return 'emailjs';
               if (id.includes('lenis')) return 'lenis';
             }
-            if (id.includes('src/data/content/services/data')) return 'services-data';
           },
         },
       },
@@ -38,9 +33,6 @@ export default defineConfig({
     resolve: { alias: { '@': srcDir } },
   },
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
@@ -221,7 +213,6 @@ export default defineConfig({
           'source-branch-check',
           'speedometer-medium',
           'star-circle',
-          'briefcase-outline',
           'telescope',
           'text-recognition',
           'timeline-clock-outline',
@@ -244,4 +235,3 @@ export default defineConfig({
     }),
   ],
 });
-
