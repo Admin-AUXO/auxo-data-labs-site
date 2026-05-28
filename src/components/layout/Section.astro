@@ -1,0 +1,39 @@
+---
+import BackgroundDecorations from "./BackgroundDecorations.astro";
+
+interface Props {
+  as?: "section" | "div" | "footer";
+  id?: string;
+  padding?: "sm" | "md" | "lg" | "xl";
+  background?: "default" | "surface" | "raised" | "sunken" | "accent";
+  width?: "prose" | "4xl" | "5xl" | "6xl" | "7xl" | "full";
+  decoration?: "none" | "grid" | "glow";
+  class?: string;
+  containerClass?: string;
+}
+
+const {
+  as = "section",
+  id,
+  padding = "md",
+  background = "default",
+  width = "7xl",
+  decoration = "none",
+  class: className = "",
+  containerClass = "",
+} = Astro.props;
+
+const Tag = as;
+---
+
+<Tag
+  id={id}
+  class={`section ${className}`.trim()}
+  data-pad={padding}
+  data-bg={background === "default" ? undefined : background}
+>
+  {decoration !== "none" && <BackgroundDecorations variant={decoration} />}
+  <div class={`section__container ${containerClass}`.trim()} data-w={width}>
+    <slot />
+  </div>
+</Tag>

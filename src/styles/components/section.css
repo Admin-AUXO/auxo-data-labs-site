@@ -1,0 +1,95 @@
+@layer components {
+  .section {
+    padding-block: var(--section-py, clamp(3rem, 1.5rem + 6vw, 7rem));
+    position: relative;
+  }
+
+  .section[data-pad="sm"] {
+    --section-py: clamp(2rem, 1rem + 4vw, 4rem);
+  }
+
+  .section[data-pad="lg"] {
+    --section-py: clamp(4rem, 2rem + 8vw, 9rem);
+  }
+
+  .section[data-pad="xl"] {
+    --section-py: clamp(5rem, 2.5rem + 10vw, 11rem);
+  }
+
+  .section[data-bg="surface"] {
+    background-color: var(--surface);
+  }
+
+  .section[data-bg="raised"] {
+    background-color: var(--surface-raised);
+  }
+
+  .section[data-bg="sunken"] {
+    background-color: var(--surface-sunken);
+  }
+
+  .section[data-bg="accent"] {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .section__container {
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 0.5rem + 3vw, 2.5rem);
+    position: relative;
+    width: 100%;
+    z-index: var(--z-raised);
+  }
+
+  .section__container[data-w="prose"] {
+    max-width: 68ch;
+  }
+
+  .section__container[data-w="4xl"] {
+    max-width: 56rem;
+  }
+
+  .section__container[data-w="5xl"] {
+    max-width: 64rem;
+  }
+
+  .section__container[data-w="6xl"] {
+    max-width: 72rem;
+  }
+
+  .section__container[data-w="7xl"] {
+    max-width: 80rem;
+  }
+
+  .section__container[data-w="full"] {
+    max-width: none;
+  }
+
+  /* Decorative backdrops (pointer-events-none, behind content) */
+  .section-decoration {
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    z-index: var(--z-base);
+  }
+
+  .section-decoration[data-variant="grid"] {
+    background-image:
+      linear-gradient(to right, color-mix(in oklch, var(--border) 60%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--border) 60%, transparent) 1px, transparent 1px);
+    background-size: 3.5rem 3.5rem;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  }
+
+  .section-decoration[data-variant="glow"]::before {
+    background: radial-gradient(circle, color-mix(in oklch, var(--accent) 22%, transparent), transparent 70%);
+    block-size: 40rem;
+    content: "";
+    inline-size: 40rem;
+    inset-block-start: -16rem;
+    inset-inline-start: 50%;
+    position: absolute;
+    translate: -50% 0;
+  }
+}

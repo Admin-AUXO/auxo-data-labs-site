@@ -1,0 +1,40 @@
+---
+import { Icon } from "astro-icon/components";
+import HighlightText from "./HighlightText.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  highlight?: string | string[];
+  align?: "left" | "center";
+  icon?: string;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  highlight,
+  align = "center",
+  icon,
+  class: className = "",
+} = Astro.props;
+
+const alignment =
+  align === "center" ? "items-center text-center mx-auto max-w-3xl" : "items-start text-left";
+---
+
+<div class={`flex flex-col gap-4 ${alignment} ${className}`.trim()}>
+  {icon && (
+    <span class="card__icon"><Icon name={icon} aria-hidden="true" /></span>
+  )}
+  {eyebrow && (
+    <p class="text-sm font-semibold uppercase tracking-[0.14em] text-accent">{eyebrow}</p>
+  )}
+  <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+    <HighlightText text={title} highlight={highlight} />
+  </h2>
+  {subtitle && <p class="text-lg text-muted">{subtitle}</p>}
+</div>

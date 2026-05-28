@@ -1,0 +1,58 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  as?: "div" | "article" | "li";
+  href?: string;
+  interactive?: boolean;
+  icon?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  metric?: string;
+  /** Renders a "learn more" link (ignored when the whole card is a link). */
+  link?: string;
+  linkLabel?: string;
+  class?: string;
+}
+
+const {
+  as = "div",
+  href,
+  interactive,
+  icon,
+  eyebrow,
+  title,
+  description,
+  metric,
+  link,
+  linkLabel = "Learn more",
+  class: className = "",
+} = Astro.props;
+
+const isLink = Boolean(href);
+const Tag = isLink ? "a" : as;
+const isInteractive = interactive ?? isLink;
+const showInnerLink = Boolean(link) && !isLink;
+---
+
+<Tag
+  class={`card ${className}`.trim()}
+  data-interactive={isInteractive ? "" : undefined}
+  href={isLink ? href : undefined}
+>
+  {icon && (
+    <span class="card__icon"><Icon name={icon} aria-hidden="true" /></span>
+  )}
+  {eyebrow && <p class="text-sm font-semibold text-accent">{eyebrow}</p>}
+  {title && <h3 class="card__title">{title}</h3>}
+  {description && <p class="card__desc">{description}</p>}
+  {metric && <p class="card__metric">{metric}</p>}
+  <slot />
+  {showInnerLink && (
+    <a class="card__link" href={link}>
+      {linkLabel}
+      <Icon name="mdi:arrow-right" aria-hidden="true" />
+    </a>
+  )}
+</Tag>

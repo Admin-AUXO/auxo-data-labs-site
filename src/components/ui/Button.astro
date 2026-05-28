@@ -1,0 +1,65 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  variant?: "primary" | "secondary" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
+  href?: string;
+  target?: string;
+  rel?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  /** Opens the Google Calendar booking dialog instead of navigating. */
+  calendar?: boolean;
+  /** Render a trailing arrow icon that animates on hover. */
+  icon?: boolean;
+  iconName?: string;
+  class?: string;
+  id?: string;
+  ariaLabel?: string;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  target,
+  rel,
+  type = "button",
+  disabled = false,
+  calendar = false,
+  icon = false,
+  iconName = "mdi:arrow-right",
+  class: className = "",
+  id,
+  ariaLabel,
+} = Astro.props;
+
+const isLink = Boolean(href) && !calendar;
+const Tag = isLink ? "a" : "button";
+
+const tagProps = isLink
+  ? {
+      href: disabled ? undefined : href,
+      target,
+      rel: target === "_blank" ? "noopener noreferrer" : rel,
+      "aria-disabled": disabled ? "true" : undefined,
+    }
+  : {
+      type,
+      disabled,
+      ...(calendar ? { "data-google-calendar-open": "" } : {}),
+    };
+---
+
+<Tag
+  id={id}
+  class={`btn ${className}`.trim()}
+  data-variant={variant}
+  data-size={size}
+  aria-label={ariaLabel}
+  {...tagProps}
+>
+  <slot />
+  {icon && <Icon name={iconName} class="btn__icon" aria-hidden="true" />}
+</Tag>

@@ -1,0 +1,11 @@
+---
+interface Props {
+  variant?: "grid" | "glow";
+  class?: string;
+}
+
+const { variant = "grid", class: className = "" } = Astro.props;
+---
+
+<div class={`section-decoration ${className}`.trim()} data-variant={variant} aria-hidden="true">
+</div>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  text: string;
+  highlight?: string | string[];
+  class?: string;
+}
+
+const { text, highlight, class: cls = "text-accent" } = Astro.props;
+
+const terms = (Array.isArray(highlight) ? highlight : highlight ? [highlight] : [])
+  .map(String)
+  .filter(Boolean);
+
+type Part = { t: string; hl: boolean };
+let parts: Part[];
+
+if (terms.length === 0) {
+  parts = [{ t: text, hl: false }];
+} else {
+  const escaped = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const re = new RegExp(`(${escaped.join("|")})`, "gi");
+  const lower = new Set(terms.map((t) => t.toLowerCase()));
+  parts = text
+    .split(re)
+    .filter((s) => s !== "")
+    .map((s) => ({ t: s, hl: lower.has(s.toLowerCase()) }));
+}
+---
+
+{parts.map((p) => (p.hl ? <span class={cls}>{p.t}</span> : <Fragment>{p.t}</Fragment>))}
