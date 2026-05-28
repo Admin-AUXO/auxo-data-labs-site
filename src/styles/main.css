@@ -1,6 +1,11 @@
 /*
-  AUXO design system — entry stylesheet.
-  Tailwind 4 (CSS-first) + cascade layers.
-  The OKLCH token system and component layers are built out in Phase 1+.
+  AUXO design system — entry stylesheet (Tailwind 4, CSS-first).
+  Import order is load-bearing: Tailwind first (it declares the
+  theme/base/components/utilities cascade layers), then our tokens
+  (@theme / @theme inline), then authored base styles in @layer base.
 */
 @import "tailwindcss";
+@import "./tokens.css";
+@import "./base/base.css";
+@import "./base/typography.css";
+@import "./base/a11y.css";

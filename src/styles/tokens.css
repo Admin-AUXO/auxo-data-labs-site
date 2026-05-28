@@ -1,0 +1,160 @@
+/* ============================================================
+   AUXO design tokens — Tailwind 4 (@theme) + semantic theming
+   - Primitives (@theme): theme-agnostic ramps & scales -> also
+     emit Tailwind utilities (bg-accent-400, text-3xl, ...).
+   - Semantic channels (:root / [data-theme]): swap per theme.
+   - @theme inline: map channels -> color utilities so
+     bg-surface / text-muted / ring-ring track the live theme.
+   ============================================================ */
+
+/* data-theme drives color mode (toggle-based, not OS-based) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+@theme {
+  /* --- Accent ramp: OKLCH from #A3E635 (hue ~124) --- */
+  --color-accent-50: oklch(0.971 0.045 124);
+  --color-accent-100: oklch(0.945 0.085 124);
+  --color-accent-200: oklch(0.915 0.130 124);
+  --color-accent-300: oklch(0.895 0.170 124);
+  --color-accent-400: oklch(0.880 0.200 124); /* ~ #A3E635 (dark accent) */
+  --color-accent-500: oklch(0.800 0.196 124);
+  --color-accent-600: oklch(0.685 0.165 124); /* ~ #6F9E2D (light accent) */
+  --color-accent-700: oklch(0.560 0.135 125);
+  --color-accent-800: oklch(0.435 0.100 125);
+  --color-accent-900: oklch(0.335 0.072 126);
+  --color-accent-950: oklch(0.235 0.050 126);
+
+  /* --- Neutral ramp: faint green drift (hue 124), low chroma --- */
+  --color-neutral-0: oklch(1 0 0);
+  --color-neutral-50: oklch(0.985 0.002 124);
+  --color-neutral-100: oklch(0.966 0.004 124);
+  --color-neutral-200: oklch(0.922 0.005 124);
+  --color-neutral-300: oklch(0.874 0.006 124);
+  --color-neutral-400: oklch(0.715 0.007 124);
+  --color-neutral-500: oklch(0.560 0.007 124);
+  --color-neutral-600: oklch(0.448 0.007 124);
+  --color-neutral-700: oklch(0.350 0.008 124);
+  --color-neutral-800: oklch(0.268 0.008 124);
+  --color-neutral-850: oklch(0.205 0.008 124);
+  --color-neutral-900: oklch(0.162 0.008 124);
+  --color-neutral-950: oklch(0.110 0.007 124);
+
+  /* --- Status --- */
+  --color-danger: oklch(0.640 0.205 25);
+  --color-warning: oklch(0.800 0.150 78);
+  --color-info: oklch(0.680 0.140 240);
+  --color-success: oklch(0.720 0.165 150);
+
+  /* --- Typography: families + fluid scale (no breakpoint overrides) --- */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-brand: "Montserrat", system-ui, -apple-system, sans-serif;
+
+  --text-xs: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --text-xs--line-height: 1.5;
+  --text-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.95rem);
+  --text-sm--line-height: 1.55;
+  --text-base: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+  --text-base--line-height: 1.7;
+  --text-lg: clamp(1.15rem, 1.08rem + 0.35vw, 1.35rem);
+  --text-lg--line-height: 1.6;
+  --text-xl: clamp(1.35rem, 1.2rem + 0.7vw, 1.7rem);
+  --text-xl--line-height: 1.4;
+  --text-2xl: clamp(1.7rem, 1.45rem + 1.2vw, 2.3rem);
+  --text-2xl--line-height: 1.25;
+  --text-3xl: clamp(2.1rem, 1.7rem + 2vw, 3.25rem);
+  --text-3xl--line-height: 1.15;
+  --text-4xl: clamp(2.6rem, 2rem + 3vw, 4.5rem);
+  --text-4xl--line-height: 1.08;
+  --text-5xl: clamp(3.2rem, 2.4rem + 4vw, 6rem);
+  --text-5xl--line-height: 1.03;
+
+  /* --- Radii --- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  /* --- Accent glow (dark-theme depth without heavy drop shadows) --- */
+  --shadow-accent: 0 10px 40px -12px color-mix(in oklch, var(--color-accent-400) 45%, transparent);
+
+  /* --- Ultra-wide breakpoint --- */
+  --breakpoint-3xl: 120rem;
+
+  /* --- Motion --- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Non-Tailwind primitives consumed by authored component CSS */
+:root {
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-overlay: 1000;
+  --z-modal: 1100;
+  --z-toast: 1200;
+}
+
+/* --- Semantic channels: DARK (default) --- */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: var(--color-neutral-950);
+  --surface: var(--color-neutral-900);
+  --surface-raised: var(--color-neutral-850);
+  --surface-sunken: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+  --muted: var(--color-neutral-400);
+  --subtle: var(--color-neutral-500);
+  --border: var(--color-neutral-800);
+  --border-strong: var(--color-neutral-700);
+  --accent: var(--color-accent-400);
+  --accent-hover: var(--color-accent-300);
+  --accent-foreground: var(--color-neutral-950);
+  --ring: var(--color-accent-400);
+  --overlay: color-mix(in oklch, var(--color-neutral-950) 72%, transparent);
+}
+
+/* --- Semantic channels: LIGHT --- */
+[data-theme="light"] {
+  color-scheme: light;
+  --background: var(--color-neutral-0);
+  --surface: var(--color-neutral-50);
+  --surface-raised: var(--color-neutral-0);
+  --surface-sunken: var(--color-neutral-100);
+  --foreground: var(--color-neutral-900);
+  --muted: var(--color-neutral-600);
+  --subtle: var(--color-neutral-500);
+  --border: var(--color-neutral-200);
+  --border-strong: var(--color-neutral-300);
+  --accent: var(--color-accent-600);
+  --accent-hover: var(--color-accent-700);
+  --accent-foreground: var(--color-neutral-0);
+  --ring: var(--color-accent-600);
+  --overlay: color-mix(in oklch, var(--color-neutral-900) 45%, transparent);
+}
+
+/* Map semantic channels -> Tailwind color utilities (live, theme-aware) */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+}

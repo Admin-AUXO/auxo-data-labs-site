@@ -1,0 +1,144 @@
+---
+import "../styles/main.css";
+
+const accent = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+const neutral = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950];
+const semantics = [
+  "background",
+  "surface",
+  "surface-raised",
+  "surface-sunken",
+  "border",
+  "border-strong",
+  "accent",
+  "accent-hover",
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AUXO — Style Guide</title>
+    <script is:inline>
+      const t =
+        localStorage.getItem("theme") ??
+        (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.dataset.theme = t;
+    </script>
+  </head>
+  <body class="bg-background text-foreground font-sans">
+    <div class="mx-auto max-w-5xl space-y-14 px-6 py-12">
+      <header class="flex items-center justify-between gap-4">
+        <div>
+          <p class="font-brand text-2xl font-extrabold tracking-tight text-accent">AUXO</p>
+          <h1 class="text-3xl font-bold">Design tokens</h1>
+          <p class="text-muted">OKLCH refresh · dark + light · Tailwind 4</p>
+        </div>
+        <button
+          id="theme-toggle"
+          class="rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
+        >
+          Toggle theme
+        </button>
+      </header>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold">Accent ramp</h2>
+        <div class="grid grid-cols-6 gap-2 sm:grid-cols-11">
+          {
+            accent.map((n) => (
+              <div class="space-y-1">
+                <div
+                  class="h-14 rounded-md border border-border"
+                  style={`background:var(--color-accent-${n})`}
+                />
+                <p class="text-center text-xs text-muted">{n}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold">Neutral ramp</h2>
+        <div class="grid grid-cols-7 gap-2 sm:grid-cols-13">
+          {
+            neutral.map((n) => (
+              <div class="space-y-1">
+                <div
+                  class="h-14 rounded-md border border-border"
+                  style={`background:var(--color-neutral-${n})`}
+                />
+                <p class="text-center text-xs text-muted">{n}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold">Semantic surfaces (theme-aware utilities)</h2>
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {
+            semantics.map((name) => (
+              <div class="space-y-1">
+                <div
+                  class="flex h-16 items-end rounded-lg border border-border p-2"
+                  style={`background:var(--${name})`}
+                >
+                  <span class="rounded bg-background/60 px-1 text-[10px] text-foreground">
+                    {name}
+                  </span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold">Components preview</h2>
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="rounded-lg bg-accent px-5 py-3 font-semibold text-accent-foreground">
+            Accent button
+          </span>
+          <span class="rounded-lg border border-border bg-surface px-5 py-3 font-semibold">
+            Surface button
+          </span>
+          <span class="rounded-lg border border-accent px-5 py-3 font-semibold text-accent">
+            Outline button
+          </span>
+          <button class="rounded-lg bg-surface-raised px-5 py-3 font-semibold">
+            Focus me (Tab)
+          </button>
+        </div>
+        <div class="rounded-xl border border-border bg-surface p-6">
+          <p class="text-muted">Card on surface · <span class="text-foreground">foreground</span> · <span class="text-subtle">subtle</span> · <span class="text-accent">accent</span></p>
+        </div>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-xl font-semibold">Type scale (fluid)</h2>
+        <p class="text-5xl font-bold tracking-tight">Display 5xl</p>
+        <p class="text-4xl font-bold tracking-tight">Heading 4xl</p>
+        <p class="text-3xl font-bold tracking-tight">Heading 3xl</p>
+        <p class="text-2xl font-semibold">Heading 2xl</p>
+        <p class="text-xl font-semibold">Heading xl</p>
+        <p class="text-lg">Body large — measured, decisive analytics.</p>
+        <p class="text-base">Body base — measured, decisive analytics.</p>
+        <p class="text-sm text-muted">Small — supporting detail.</p>
+        <p class="text-xs text-subtle">Caption — fine print.</p>
+      </section>
+    </div>
+
+    <script is:inline>
+      document.getElementById("theme-toggle")?.addEventListener("click", () => {
+        const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("theme", next);
+      });
+    </script>
+  </body>
+</html>

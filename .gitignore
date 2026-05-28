@@ -28,6 +28,7 @@ playwright-report/
 junit.xml
 .playwright-mcp/
 reports/
+/styleguide-*.png
 
 # Logs and temp files
 *.log

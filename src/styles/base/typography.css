@@ -1,0 +1,35 @@
+@layer base {
+  /* Bare-element defaults at zero specificity (:where) so component
+     text-* / font-* utilities always win. Helps prose & unstyled content. */
+  :where(h1, h2, h3, h4, h5, h6) {
+    color: var(--foreground);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  :where(h1) {
+    font-size: var(--text-4xl);
+  }
+
+  :where(h2) {
+    font-size: var(--text-3xl);
+  }
+
+  :where(h3) {
+    font-size: var(--text-2xl);
+  }
+
+  :where(h4) {
+    font-size: var(--text-xl);
+  }
+
+  :where(p) {
+    text-wrap: pretty;
+  }
+
+  :where(:focus):not(:focus-visible) {
+    outline: none;
+  }
+}
