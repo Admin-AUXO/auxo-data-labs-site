@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+import Section from "../../layout/Section.astro";
+import SectionHeader from "../../ui/SectionHeader.astro";
+import Card from "../../ui/Card.astro";
+import type { HomepageContent } from "../../../data/home";
+
+interface Props {
+  content: HomepageContent["capabilities"];
+}
+
+const { content } = Astro.props;
+---
+
+<Section padding="lg">
+  <SectionHeader title={content.title} subtitle={content.subheading} highlight="Six" />
+  <div class="mt-12 grid gap-6 lg:grid-cols-3">
+    {
+      content.pillars.map((pillar, i) => (
+        <Card class="flex flex-col gap-5">
+          <div>
+            <span class="text-sm font-bold text-accent">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="card__title mt-1">{pillar.name}</h3>
+            <p class="card__desc">{pillar.summary}</p>
+          </div>
+          <div class="flex flex-col gap-3">
+            {pillar.capabilities.map((cap) => (
+              <div class="flex gap-3 rounded-lg border border-border bg-surface-sunken p-3">
+                <Icon name={cap.icon} class="mt-0.5 shrink-0 text-xl text-accent" aria-hidden="true" />
+                <div>
+                  <p class="font-semibold">{cap.title}</p>
+                  <p class="text-sm text-muted">{cap.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p class="mt-auto text-sm text-subtle">{pillar.outcome}</p>
+        </Card>
+      ))
+    }
+  </div>
+</Section>

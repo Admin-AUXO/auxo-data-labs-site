@@ -42,6 +42,19 @@
     inline-size: 3rem;
   }
 
+  /* Same look as .card__icon, no margin — for icons placed inline by sections. */
+  .icon-badge {
+    align-items: center;
+    background-color: color-mix(in oklch, var(--accent) 12%, transparent);
+    border-radius: var(--radius-lg);
+    color: var(--accent);
+    display: inline-flex;
+    font-size: 1.25rem;
+    justify-content: center;
+    block-size: 2.75rem;
+    inline-size: 2.75rem;
+  }
+
   .card__title {
     color: var(--foreground);
     font-size: var(--text-xl);

@@ -1,0 +1,43 @@
+---
+import { Icon } from "astro-icon/components";
+import Section from "../../layout/Section.astro";
+import SectionHeader from "../../ui/SectionHeader.astro";
+import Card from "../../ui/Card.astro";
+import Button from "../../ui/Button.astro";
+import type { HomepageContent } from "../../../data/home";
+
+interface Props {
+  content: HomepageContent["featuredServices"];
+}
+
+const { content } = Astro.props;
+---
+
+<Section padding="lg" background="surface">
+  <SectionHeader title={content.title} subtitle={content.subheading} highlight="friction" />
+  <div class="mt-12 grid gap-5 md:grid-cols-3">
+    {
+      content.items.map((s) => (
+        <Card href={s.link} interactive class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="icon-badge">
+              <Icon name={s.icon} aria-hidden="true" />
+            </span>
+            <span class="text-2xl font-bold text-subtle">{s.number}</span>
+          </div>
+          <h3 class="card__title mt-2">{s.title}</h3>
+          <p class="card__desc">{s.shortDescription}</p>
+          <span class="card__link mt-auto pt-2">
+            See service
+            <Icon name="mdi:arrow-right" aria-hidden="true" />
+          </span>
+        </Card>
+      ))
+    }
+  </div>
+  <div class="mt-8 flex justify-center">
+    <Button variant="outline" href={content.navigationButton.href}>
+      {content.navigationButton.text}
+    </Button>
+  </div>
+</Section>

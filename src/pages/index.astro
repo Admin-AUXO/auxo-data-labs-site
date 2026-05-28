@@ -1,25 +1,26 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Section from "../components/layout/Section.astro";
-import Button from "../components/ui/Button.astro";
+import { homepageContent as c } from "../data/home";
+import HeroSection from "../components/sections/home/HeroSection.astro";
+import ProblemSolutionSection from "../components/sections/home/ProblemSolutionSection.astro";
+import DecisionFitSection from "../components/sections/home/DecisionFitSection.astro";
+import CapabilitiesSection from "../components/sections/home/CapabilitiesSection.astro";
+import ServicesIntroSection from "../components/sections/home/ServicesIntroSection.astro";
+import MethodologySection from "../components/sections/home/MethodologySection.astro";
+import TechStackSection from "../components/sections/home/TechStackSection.astro";
+import FinalCta from "../components/sections/home/FinalCta.astro";
 ---
 
 <BaseLayout
   title="Decision intelligence for the GCC"
-  description="AUXO is a Dubai-based decision intelligence partner. We turn data into decisions your teams can act on."
+  description="AUXO is a Dubai-based decision intelligence partner. We fix the reporting, planning, and analytics workflows underneath so data changes how your teams decide."
 >
-  <Section padding="xl" decoration="glow" width="6xl" class="text-center">
-    <p class="text-sm font-semibold uppercase tracking-[0.14em] text-accent">AUXO Data Labs</p>
-    <h1 class="mx-auto mt-4 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl">
-      Look beyond data.
-    </h1>
-    <p class="mx-auto mt-6 max-w-2xl text-lg text-muted">
-      Shell scaffolding for Phase 3 — navigation, footer, theme, view transitions and SEO are
-      live. Real page content lands in Phase 4.
-    </p>
-    <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <Button variant="primary" calendar icon>Book a call</Button>
-      <Button variant="outline" href="/services/">Explore services</Button>
-    </div>
-  </Section>
+  <HeroSection hero={c.hero} />
+  <ProblemSolutionSection content={c.valueProposition} />
+  <DecisionFitSection content={c.decisionFit} />
+  <CapabilitiesSection content={c.capabilities} />
+  <ServicesIntroSection content={c.featuredServices} />
+  <MethodologySection content={c.methodology} />
+  <TechStackSection content={c.techStack} />
+  <FinalCta content={c.finalCta} />
 </BaseLayout>

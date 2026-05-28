@@ -1,0 +1,51 @@
+---
+import { Icon } from "astro-icon/components";
+import Section from "../../layout/Section.astro";
+import SectionHeader from "../../ui/SectionHeader.astro";
+import Card from "../../ui/Card.astro";
+import Button from "../../ui/Button.astro";
+import HighlightText from "../../ui/HighlightText.astro";
+import type { HomepageContent } from "../../../data/home";
+
+interface Props {
+  content: HomepageContent["methodology"];
+}
+
+const { content } = Astro.props;
+---
+
+<Section padding="lg" decoration="grid">
+  <SectionHeader
+    title={`${content.title} ${content.titleHighlight}`}
+    highlight={content.titleHighlight}
+    subtitle={content.subtitle}
+  />
+  <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      content.steps.map((step) => (
+        <Card class="flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="icon-badge">
+              <Icon name={step.icon} aria-hidden="true" />
+            </span>
+            <span class="text-sm font-bold text-accent">0{step.number}</span>
+          </div>
+          <h3 class="text-lg font-bold">{step.title}</h3>
+          <p class="text-sm text-muted">
+            <HighlightText text={step.description} highlight={step.descriptionHighlight} />
+          </p>
+          {step.output && (
+            <p class="mt-auto text-xs font-semibold uppercase tracking-wider text-subtle">
+              {step.output}
+            </p>
+          )}
+        </Card>
+      ))
+    }
+  </div>
+  <div class="mt-8 flex justify-center">
+    <Button variant="ghost" href={content.navigationButton.href} icon>
+      {content.navigationButton.text}
+    </Button>
+  </div>
+</Section>

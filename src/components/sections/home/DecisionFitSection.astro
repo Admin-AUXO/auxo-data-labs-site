@@ -1,0 +1,28 @@
+---
+import Section from "../../layout/Section.astro";
+import SectionHeader from "../../ui/SectionHeader.astro";
+import Card from "../../ui/Card.astro";
+import type { HomepageContent } from "../../../data/home";
+
+interface Props {
+  content: HomepageContent["decisionFit"];
+}
+
+const { content } = Astro.props;
+---
+
+<Section padding="lg" background="surface" decoration="grid">
+  <SectionHeader title={content.title} subtitle={content.subheading} highlight="AUXO" />
+  <div class="mt-12 grid gap-5 md:grid-cols-3">
+    {
+      content.items.map((it) => (
+        <Card class="flex flex-col gap-3">
+          <h3 class="card__title">{it.title}</h3>
+          <p class="text-muted">{it.pressure}</p>
+          <p class="text-sm text-subtle">{it.signal}</p>
+          <p class="mt-auto border-t border-border pt-3 text-sm font-medium text-accent">{it.outcome}</p>
+        </Card>
+      ))
+    }
+  </div>
+</Section>
