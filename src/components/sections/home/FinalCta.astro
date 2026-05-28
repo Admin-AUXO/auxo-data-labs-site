@@ -13,8 +13,7 @@ const { content } = Astro.props;
 
 <Section padding="lg" width="5xl">
   <div class="relative overflow-hidden rounded-2xl border border-border bg-surface p-8 text-center sm:p-12">
-    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{content.subtitle}</p>
-    <h2 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">{content.title}</h2>
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{content.title}</h2>
     <p class="mx-auto mt-5 max-w-2xl text-lg text-muted">
       <HighlightText text={content.body} highlight={content.bodyHighlight} />
     </p>

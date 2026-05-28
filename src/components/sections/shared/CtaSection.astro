@@ -15,7 +15,6 @@ interface Props {
 }
 
 const {
-  eyebrow,
   title,
   titleHighlight,
   description,
@@ -28,8 +27,7 @@ const {
 
 <Section padding="lg" width="5xl">
   <div class="rounded-2xl border border-border bg-surface p-8 text-center sm:p-12">
-    {eyebrow && <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{eyebrow}</p>}
-    <h2 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
       <HighlightText text={title} highlight={titleHighlight} />
     </h2>
     {

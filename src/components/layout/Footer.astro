@@ -7,18 +7,46 @@ import { siteData } from "../../data/site";
 
 const { sections } = footerContent;
 const year = new Date().getFullYear();
+const location = `${siteData.address.city}, ${siteData.address.country}`;
 ---
 
 <footer class="footer">
   <div class="footer__inner">
     <div class="footer__brand">
       <Logo />
-      <p class="footer__tagline">{siteData.tagline}. {siteData.description}</p>
-      <a href={`mailto:${siteData.email}`} class="footer__email">{siteData.email}</a>
-      <SocialLinks class="footer__social" />
+
+      <ul class="footer__contact">
+        <li>
+          <a href={`mailto:${siteData.email}`} class="footer__contact-item">
+            <span class="footer__contact-icon">
+              <Icon name="mdi:email-outline" aria-hidden="true" />
+            </span>
+            <span class="footer__contact-text">
+              <span class="footer__contact-value">{siteData.email}</span>
+              <span class="footer__contact-note">
+                <Icon name="mdi:clock-outline" aria-hidden="true" />
+                Response within <strong>24 hours</strong>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <span class="footer__contact-item">
+            <span class="footer__contact-icon">
+              <Icon name="mdi:map-marker-outline" aria-hidden="true" />
+            </span>
+            <span class="footer__contact-value">{location}</span>
+          </span>
+        </li>
+      </ul>
+
+      <div class="footer__social-block">
+        <p class="footer__social-label">Follow us</p>
+        <SocialLinks />
+      </div>
     </div>
 
-    <div class="footer__cols">
+    <nav class="footer__cols" aria-label="Footer">
       {
         sections.map((s) => (
           <div class="footer__col">
@@ -38,18 +66,28 @@ const year = new Date().getFullYear();
           </div>
         ))
       }
-    </div>
+    </nav>
   </div>
 
   <div class="footer__bar">
-    <p>© {year} {siteData.name}. All rights reserved.</p>
-    <button
-      type="button"
-      class="cursor-pointer bg-transparent text-subtle transition-colors hover:text-accent"
-      data-consent-reopen
-    >
-      Cookie settings
-    </button>
-    <p>{siteData.address.city}, {siteData.address.country}</p>
+    <p class="footer__copy">© {year} {siteData.name}. All rights reserved.</p>
+    <div class="footer__meta">
+      <span class="footer__loc">
+        <Icon name="mdi:map-marker-outline" aria-hidden="true" />
+        {location}
+      </span>
+      <a
+        href="/legal/privacy-policy/"
+        class="footer__pill"
+        aria-label="PDPL compliant — view our Privacy Policy"
+      >
+        <Icon name="mdi:shield-check" aria-hidden="true" />
+        PDPL Compliant
+      </a>
+      <button type="button" class="footer__pill footer__pill--button" data-consent-reopen>
+        <Icon name="mdi:tune" aria-hidden="true" />
+        Cookie settings
+      </button>
+    </div>
   </div>
 </footer>

@@ -10,12 +10,11 @@ interface Props {
   hero: ServicePageDetail["hero"];
 }
 
-const { category, hero } = Astro.props;
+const { hero } = Astro.props;
 ---
 
 <Section padding="xl" decoration="aurora" width="6xl" class="text-center">
-  <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{category}</p>
-  <h1 class="mx-auto mt-5 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+  <h1 class="mx-auto max-w-4xl text-5xl font-bold leading-[1.05] tracking-tight">
     {hero.title}
   </h1>
   <p class="mx-auto mt-6 max-w-2xl text-lg text-muted">
