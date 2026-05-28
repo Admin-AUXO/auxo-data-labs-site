@@ -1,0 +1,63 @@
+---
+---
+
+<div class="consent" data-consent-banner hidden role="region" aria-label="Cookie consent">
+  <p class="consent__text">
+    We use privacy-friendly analytics to understand how the site is used. See our
+    <a href="/legal/cookie-policy/">Cookie Policy</a>.
+  </p>
+  <div class="consent__actions">
+    <button type="button" class="btn" data-variant="ghost" data-size="sm" data-consent-decline>
+      Decline
+    </button>
+    <button type="button" class="btn" data-variant="primary" data-size="sm" data-consent-accept>
+      Accept
+    </button>
+  </div>
+</div>
+
+<style>
+  .consent {
+    align-items: center;
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 24px 60px -20px rgb(0 0 0 / 50%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    inset-block-end: 1rem;
+    inset-inline: 1rem;
+    margin-inline: auto;
+    max-inline-size: 42rem;
+    padding: 1rem 1.25rem;
+    position: fixed;
+    z-index: var(--z-toast);
+  }
+
+  .consent[hidden] {
+    display: none;
+  }
+
+  .consent__text {
+    color: var(--muted);
+    flex: 1 1 18rem;
+    font-size: 0.875rem;
+  }
+
+  .consent__text a {
+    color: var(--accent);
+  }
+
+  .consent__actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-inline-start: auto;
+  }
+</style>
+
+<script>
+  import { initConsent } from "../../scripts/analytics/consent";
+  initConsent();
+  document.addEventListener("astro:page-load", initConsent);
+</script>

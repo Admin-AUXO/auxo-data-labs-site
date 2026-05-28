@@ -43,6 +43,13 @@ const year = new Date().getFullYear();
 
   <div class="footer__bar">
     <p>© {year} {siteData.name}. All rights reserved.</p>
+    <button
+      type="button"
+      class="cursor-pointer bg-transparent text-subtle transition-colors hover:text-accent"
+      data-consent-reopen
+    >
+      Cookie settings
+    </button>
     <p>{siteData.address.city}, {siteData.address.country}</p>
   </div>
 </footer>
