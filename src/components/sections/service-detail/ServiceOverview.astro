@@ -1,0 +1,68 @@
+---
+import { Icon } from "astro-icon/components";
+import Section from "../../layout/Section.astro";
+import SectionHeader from "../../ui/SectionHeader.astro";
+import Card from "../../ui/Card.astro";
+import HighlightText from "../../ui/HighlightText.astro";
+import type { ServicePageDetail } from "../../../data/services";
+
+interface Props {
+  overview: ServicePageDetail["overview"];
+}
+
+const { overview } = Astro.props;
+---
+
+<Section padding="lg" decoration="grid">
+  <SectionHeader title={overview.title} />
+  <p class="mx-auto mt-4 max-w-3xl text-center text-lg text-muted">
+    <HighlightText text={overview.description} highlight={overview.descriptionHighlight} />
+  </p>
+  <div class="mt-12 grid gap-6 md:grid-cols-2">
+    <Card class="flex flex-col gap-4">
+      <div class="flex items-center gap-3">
+        <span class="icon-badge">
+          <Icon name="mdi:alert-circle-outline" aria-hidden="true" />
+        </span>
+        <h3 class="card__title">The challenges</h3>
+      </div>
+      <ul class="flex flex-col gap-3">
+        {
+          overview.challenges.map((challenge) => (
+            <li class="flex items-start gap-3 text-sm text-muted">
+              <Icon
+                name="mdi:close-circle-outline"
+                class="mt-0.5 shrink-0 text-base text-subtle"
+                aria-hidden="true"
+              />
+              <span>{challenge}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </Card>
+
+    <Card class="flex flex-col gap-4">
+      <div class="flex items-center gap-3">
+        <span class="icon-badge">
+          <Icon name="mdi:check-decagram-outline" aria-hidden="true" />
+        </span>
+        <h3 class="card__title">How we fix it</h3>
+      </div>
+      <ul class="flex flex-col gap-3">
+        {
+          overview.solutions.map((solution) => (
+            <li class="flex items-start gap-3 text-sm text-muted">
+              <Icon
+                name="mdi:check-circle-outline"
+                class="mt-0.5 shrink-0 text-base text-accent"
+                aria-hidden="true"
+              />
+              <span>{solution}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </Card>
+  </div>
+</Section>

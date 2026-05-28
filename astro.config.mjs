@@ -121,6 +121,7 @@ export default defineConfig({
           'clock-check-outline',
           'clock-outline',
           'close',
+          'close-circle-outline',
           'cog-play',
           'cog-sync',
           'cog-transfer-outline',

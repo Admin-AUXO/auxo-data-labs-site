@@ -1,0 +1,143 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/layout/Section.astro";
+import CtaSection from "../../components/sections/shared/CtaSection.astro";
+import {
+  sortByPublishDate,
+  formatBlogDate,
+  getReadingTimeMinutes,
+} from "../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const readingTime = getReadingTimeMinutes(post.body ?? "");
+const formattedDate = formatBlogDate(post.data.publishDate);
+
+// Prev/next within the chronological (newest-first) ordering.
+const ordered = sortByPublishDate(await getCollection("blog"));
+const index = ordered.findIndex((p) => p.id === post.id);
+const newer = index > 0 ? ordered[index - 1] : undefined;
+const older = index < ordered.length - 1 ? ordered[index + 1] : undefined;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  ogImage={post.data.heroImage}
+>
+  <Section padding="lg" width="prose">
+    <article>
+      <header class="flex flex-col gap-5">
+        <a
+          href="/blog/"
+          class="text-sm font-semibold text-accent hover:underline"
+        >
+          ← All insights
+        </a>
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+          {post.data.title}
+        </h1>
+        <p class="text-lg text-muted">{post.data.description}</p>
+        <div
+          class="flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-border py-4 text-sm text-subtle"
+        >
+          <span>{formattedDate}</span>
+          <span aria-hidden="true">·</span>
+          <span>{readingTime} min read</span>
+          {
+            post.data.tags.length > 0 && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span class="flex flex-wrap gap-2">
+                  {post.data.tags.map((tag) => (
+                    <span class="rounded-full border border-border bg-surface-sunken px-2.5 py-0.5 text-xs font-medium text-muted">
+                      {tag}
+                    </span>
+                  ))}
+                </span>
+              </>
+            )
+          }
+        </div>
+      </header>
+
+      {
+        post.data.heroImage && (
+          <img
+            src={post.data.heroImage}
+            alt=""
+            loading="eager"
+            class="mt-8 aspect-[16/9] w-full rounded-xl border border-border object-cover"
+          />
+        )
+      }
+
+      <div class="prose-auxo mt-10">
+        <Content />
+      </div>
+    </article>
+
+    {
+      (newer || older) && (
+        <nav
+          class="mt-14 grid gap-4 border-t border-border pt-8 sm:grid-cols-2"
+          aria-label="More articles"
+        >
+          {older ? (
+            <a
+              href={`/blog/${older.id}/`}
+              class="card group flex flex-col gap-1"
+              data-interactive
+            >
+              <span class="text-sm font-semibold text-subtle">
+                ← Previous
+              </span>
+              <span class="font-semibold text-foreground">
+                {older.data.title}
+              </span>
+            </a>
+          ) : (
+            <span />
+          )}
+          {newer && (
+            <a
+              href={`/blog/${newer.id}/`}
+              class="card group flex flex-col gap-1 sm:items-end sm:text-right"
+              data-interactive
+            >
+              <span class="text-sm font-semibold text-subtle">Next →</span>
+              <span class="font-semibold text-foreground">
+                {newer.data.title}
+              </span>
+            </a>
+          )}
+        </nav>
+      )
+    }
+  </Section>
+
+  <CtaSection
+    eyebrow="Talk to us"
+    title="Think your decision layer is the bottleneck?"
+    titleHighlight="decision layer"
+    description="We help GCC teams turn analytics investment into faster, clearer decisions. Let's pressure-test where yours breaks down."
+    ctaText="Start a conversation"
+    ctaHref="/contact/"
+  />
+</BaseLayout>
