@@ -14,7 +14,7 @@ const { hero } = Astro.props;
 <Section padding="xl" decoration="glow" width="6xl" class="text-center">
   <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{hero.eyebrow}</p>
   <h1 class="mx-auto mt-5 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
-    <HighlightText text={hero.title} highlight={hero.titleHighlight} />
+    <HighlightText text={hero.title} highlight={hero.titleHighlight} class="text-gradient-accent" />
   </h1>
   <p class="mx-auto mt-6 max-w-2xl text-lg text-muted">{hero.description}</p>
   <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

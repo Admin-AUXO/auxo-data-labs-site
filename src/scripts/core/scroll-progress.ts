@@ -4,9 +4,12 @@ export function initScrollProgress(): void {
   if (root.dataset.scrollProgressBound) return;
   root.dataset.scrollProgressBound = "true";
 
+  const nav = document.querySelector("[data-nav]");
+
   const update = (): void => {
     const max = root.scrollHeight - root.clientHeight;
     root.style.setProperty("--scroll-progress", String(max > 0 ? root.scrollTop / max : 0));
+    nav?.toggleAttribute("data-scrolled", root.scrollTop > 8);
   };
 
   update();

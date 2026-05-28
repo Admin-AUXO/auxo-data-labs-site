@@ -69,6 +69,14 @@
     margin-inline: auto;
     max-inline-size: 80rem;
     padding: 0.75rem clamp(1rem, 0.5rem + 3vw, 2.5rem);
+    transition:
+      background-color var(--dur-base) var(--ease-standard),
+      box-shadow var(--dur-base) var(--ease-standard);
+  }
+
+  .nav[data-scrolled] .nav__inner {
+    background: color-mix(in oklch, var(--background) 94%, transparent);
+    box-shadow: 0 14px 34px -22px rgb(0 0 0 / 70%);
   }
 
   .nav__links {

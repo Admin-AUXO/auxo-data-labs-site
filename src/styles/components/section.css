@@ -83,13 +83,32 @@
   }
 
   .section-decoration[data-variant="glow"]::before {
-    background: radial-gradient(circle, color-mix(in oklch, var(--accent) 22%, transparent), transparent 70%);
-    block-size: 40rem;
+    background: radial-gradient(circle, color-mix(in oklch, var(--accent) 24%, transparent), transparent 70%);
+    block-size: 44rem;
     content: "";
-    inline-size: 40rem;
-    inset-block-start: -16rem;
+    inline-size: 44rem;
+    inset-block-start: -18rem;
     inset-inline-start: 50%;
     position: absolute;
     translate: -50% 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .section-decoration[data-variant="glow"]::before {
+      animation: glow-pulse 9s var(--ease-standard) infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%,
+      100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
   }
 }
