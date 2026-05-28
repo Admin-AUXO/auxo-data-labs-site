@@ -15,11 +15,6 @@
     "lint:css": "stylelint \"src/styles/**/*.css\" --allow-empty-input",
     "lint:css:fix": "stylelint \"src/styles/**/*.css\" --fix --allow-empty-input",
     "lint": "npm run type-check && npm run lint:css",
-    "audit:astro": "node scripts/audit/check-astro.mjs",
-    "audit:stacking": "node scripts/audit/check-stacking.mjs",
-    "audit:public": "node scripts/audit/check-public.mjs",
-    "audit:deps": "node scripts/audit/check-deps.mjs",
-    "audit": "npm run lint && npm run audit:astro && npm run audit:stacking && npm run audit:public && npm run audit:deps",
     "validate": "npm run lint && npm run build",
     "test": "playwright test",
     "test:ui": "playwright test --ui"
@@ -33,9 +28,7 @@
     "astro": "^6.3.8",
     "astro-icon": "^1.1.5",
     "embla-carousel": "^8.6.0",
-    "embla-carousel-autoplay": "^8.6.0",
-    "lenis": "^1.3.23",
-    "web-vitals": "^5.1.0"
+    "embla-carousel-autoplay": "^8.6.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",

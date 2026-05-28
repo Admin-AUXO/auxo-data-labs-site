@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/layout/Section.astro";
-import SectionHeader from "../../components/ui/SectionHeader.astro";
+import HighlightText from "../../components/ui/HighlightText.astro";
 import Card from "../../components/ui/Card.astro";
 import {
   sortByPublishDate,
@@ -25,12 +25,15 @@ const meta = (post: (typeof posts)[number]) => ({
   description="Field notes on decision intelligence, operating models, and analytics from the AUXO team."
 >
   <Section padding="lg" decoration="grid">
-    <SectionHeader
-      eyebrow="Insights"
-      title="Notes on the decision layer"
-      subtitle="Essays on why analytics investment hasn't moved decision speed — and what actually fixes it."
-      highlight="decision layer"
-    />
+    <div class="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.14em] text-accent">Insights</p>
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        <HighlightText text="Notes on the decision layer" highlight="decision layer" />
+      </h1>
+      <p class="text-lg text-muted">
+        Essays on why analytics investment hasn't moved decision speed — and what actually fixes it.
+      </p>
+    </div>
 
     {
       featured && (

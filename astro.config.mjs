@@ -20,7 +20,6 @@ export default defineConfig({
               if (id.includes('embla-carousel')) return 'ui-vendor';
               if (id.includes('astro-icon') || id.includes('@iconify')) return 'icons';
               if (id.includes('@emailjs')) return 'emailjs';
-              if (id.includes('lenis')) return 'lenis';
             }
           },
         },
