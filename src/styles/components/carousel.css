@@ -1,0 +1,59 @@
+@layer components {
+  .carousel {
+    position: relative;
+  }
+
+  .carousel__viewport {
+    overflow: hidden;
+  }
+
+  .carousel__track {
+    display: flex;
+    gap: clamp(1rem, 0.5rem + 1.5vw, 1.75rem);
+  }
+
+  .carousel__slide {
+    flex: 0 0 auto;
+    inline-size: min(85%, 22rem);
+  }
+
+  @media (width >= 48rem) {
+    .carousel__slide {
+      inline-size: min(46%, 24rem);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .carousel__slide {
+      inline-size: min(31%, 26rem);
+    }
+  }
+
+  .carousel__controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-block-start: 1.25rem;
+  }
+
+  .carousel__btn {
+    align-items: center;
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--foreground);
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    block-size: 2.75rem;
+    inline-size: 2.75rem;
+    transition:
+      border-color var(--dur-fast) var(--ease-standard),
+      color var(--dur-fast) var(--ease-standard);
+  }
+
+  .carousel__btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}

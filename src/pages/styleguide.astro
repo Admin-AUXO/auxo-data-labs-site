@@ -4,6 +4,10 @@ import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
 import Card from "../components/ui/Card.astro";
+import Accordion from "../components/ui/Accordion.astro";
+import Carousel from "../components/ui/Carousel.astro";
+import Dialog from "../components/ui/Dialog.astro";
+import ThemeToggle from "../components/ui/ThemeToggle.astro";
 
 const accent = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 const neutral = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950];
@@ -13,6 +17,12 @@ const cards = [
   { icon: "mdi:chart-timeline-variant", title: "Decision velocity", description: "Turn data into decisions your teams can act on within the quarter.", link: "#" },
   { icon: "mdi:database-cog", title: "Data foundations", description: "Pipelines and models that stay reliable after the builder leaves.", link: "#" },
   { icon: "mdi:radar", title: "Signal clarity", description: "Cut noise so the metrics that move revenue stay visible.", metric: "3.2x" },
+  { icon: "mdi:shield-check", title: "Trusted delivery", description: "Documented, owned systems handed back to your team.", link: "#" },
+];
+const faqs = [
+  { title: "How fast can we see impact?", body: "Most engagements surface a usable decision within the first <strong>30 days</strong>." },
+  { title: "Do you work with our existing stack?", body: "Yes — we build on your warehouse, BI, and pipelines rather than replacing them." },
+  { title: "What happens after the build?", body: "We hand over documented, owned systems so they keep working after we leave." },
 ];
 ---
 
@@ -37,12 +47,7 @@ const cards = [
           <h1 class="text-3xl font-bold">Design system</h1>
           <p class="text-muted">OKLCH refresh · dark + light · Tailwind 4</p>
         </div>
-        <button
-          id="theme-toggle"
-          class="btn"
-          data-variant="secondary"
-          data-size="sm"
-        >Toggle theme</button>
+        <ThemeToggle />
       </header>
 
       <div class="mt-10 space-y-3">
@@ -51,18 +56,6 @@ const cards = [
           {accent.map((n) => (
             <div class="space-y-1">
               <div class="h-12 rounded-md border border-border" style={`background:var(--color-accent-${n})`} />
-              <p class="text-center text-xs text-muted">{n}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div class="mt-8 space-y-3">
-        <h2 class="text-xl font-semibold">Neutral ramp</h2>
-        <div class="grid grid-cols-7 gap-2 sm:grid-cols-13">
-          {neutral.map((n) => (
-            <div class="space-y-1">
-              <div class="h-12 rounded-md border border-border" style={`background:var(--color-neutral-${n})`} />
               <p class="text-center text-xs text-muted">{n}</p>
             </div>
           ))}
@@ -87,49 +80,42 @@ const cards = [
       />
 
       <div class="mt-12 space-y-4">
-        <h3 class="text-lg font-semibold">Buttons — variants</h3>
+        <h3 class="text-lg font-semibold">Buttons</h3>
         <div class="flex flex-wrap items-center gap-3">
           {variants.map((v) => <Button variant={v}>{v}</Button>)}
           <Button variant="primary" icon>With icon</Button>
           <Button variant="primary" disabled>Disabled</Button>
+          <button class="btn" data-variant="secondary" data-size="md" data-dialog-open="demo-dialog">Open dialog</button>
           <Button variant="outline" calendar>Book a call</Button>
-        </div>
-        <h3 class="mt-6 text-lg font-semibold">Buttons — sizes</h3>
-        <div class="flex flex-wrap items-center gap-3">
-          <Button size="sm">Small</Button>
-          <Button size="md">Medium</Button>
-          <Button size="lg" icon>Large</Button>
         </div>
       </div>
 
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {cards.map((c) => (
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {cards.slice(0, 4).map((c) => (
           <Card icon={c.icon} title={c.title} description={c.description} link={c.link} metric={c.metric} interactive />
         ))}
       </div>
     </Section>
 
-    <Section padding="lg" width="6xl">
-      <h2 class="text-xl font-semibold">Type scale (fluid)</h2>
-      <div class="mt-4 space-y-2">
-        <p class="text-5xl font-bold tracking-tight">Display 5xl</p>
-        <p class="text-4xl font-bold tracking-tight">Heading 4xl</p>
-        <p class="text-3xl font-bold tracking-tight">Heading 3xl</p>
-        <p class="text-2xl font-semibold">Heading 2xl</p>
-        <p class="text-xl font-semibold">Heading xl</p>
-        <p class="text-lg">Body large — measured, decisive analytics.</p>
-        <p class="text-base">Body base — measured, decisive analytics.</p>
-        <p class="text-sm text-muted">Small — supporting detail.</p>
-        <p class="text-xs text-subtle">Caption — fine print.</p>
-      </div>
+    <Section padding="lg" width="7xl">
+      <h3 class="text-lg font-semibold">Carousel</h3>
+      <Carousel id="demo-carousel" class="mt-4" autoplay={false} align="start">
+        {cards.map((c) => (
+          <div class="carousel__slide">
+            <Card icon={c.icon} title={c.title} description={c.description} metric={c.metric} interactive class="h-full" />
+          </div>
+        ))}
+      </Carousel>
+
+      <h3 class="mt-12 text-lg font-semibold">Accordion</h3>
+      <Accordion class="mt-4 max-w-2xl" items={faqs} single openFirst />
     </Section>
 
-    <script is:inline>
-      document.getElementById("theme-toggle")?.addEventListener("click", () => {
-        const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
-        document.documentElement.dataset.theme = next;
-        localStorage.setItem("theme", next);
-      });
-    </script>
+    <Dialog id="demo-dialog" title="Demo dialog" size="md">
+      <div class="space-y-4 p-6">
+        <p class="text-muted">Native <code>&lt;dialog&gt;</code> — focus trap, Escape, and backdrop come for free. Click outside or press Escape to close.</p>
+        <button class="btn" data-variant="primary" data-size="md" data-dialog-close>Got it</button>
+      </div>
+    </Dialog>
   </body>
 </html>

@@ -101,4 +101,43 @@
   .btn:hover .btn__icon {
     transform: translateX(0.25rem);
   }
+
+  /* Theme toggle — icon button that swaps moon/sun by data-theme */
+  .theme-toggle {
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--foreground);
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    block-size: 2.75rem;
+    inline-size: 2.75rem;
+    transition:
+      border-color var(--dur-fast) var(--ease-standard),
+      color var(--dur-fast) var(--ease-standard);
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle__sun {
+    display: none;
+  }
+
+  [data-theme="light"] .theme-toggle__sun {
+    display: inline-flex;
+  }
+
+  [data-theme="light"] .theme-toggle__moon {
+    display: none;
+  }
 }
