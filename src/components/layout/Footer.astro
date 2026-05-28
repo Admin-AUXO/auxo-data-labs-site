@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+import Logo from "./Logo.astro";
+import SocialLinks from "./SocialLinks.astro";
+import { footerContent } from "../../data/footer";
+import { siteData } from "../../data/site";
+
+const { sections } = footerContent;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <Logo />
+      <p class="footer__tagline">{siteData.tagline}. {siteData.description}</p>
+      <a href={`mailto:${siteData.email}`} class="footer__email">{siteData.email}</a>
+      <SocialLinks class="footer__social" />
+    </div>
+
+    <div class="footer__cols">
+      {
+        sections.map((s) => (
+          <div class="footer__col">
+            <p class="footer__col-title">
+              <Icon name={s.icon} aria-hidden="true" />
+              {s.title}
+            </p>
+            <ul class="footer__list">
+              {s.links.map((l) => (
+                <li>
+                  <a href={l.href} class="footer__link">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <p>© {year} {siteData.name}. All rights reserved.</p>
+    <p>{siteData.address.city}, {siteData.address.country}</p>
+  </div>
+</footer>

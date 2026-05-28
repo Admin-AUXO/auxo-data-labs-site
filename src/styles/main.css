@@ -5,6 +5,7 @@
   (@theme / @theme inline), then authored base styles in @layer base.
 */
 @import "tailwindcss";
+@import "./base/fonts.css";
 @import "./tokens.css";
 @import "./base/base.css";
 @import "./base/typography.css";
@@ -15,3 +16,4 @@
 @import "./components/overlay.css";
 @import "./components/accordion.css";
 @import "./components/carousel.css";
+@import "./components/navigation.css";

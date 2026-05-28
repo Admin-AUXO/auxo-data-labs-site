@@ -1,20 +1,25 @@
 ---
-import "../styles/main.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/layout/Section.astro";
+import Button from "../components/ui/Button.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AUXO — Rebuild Scaffold</title>
-  </head>
-  <body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
-    <main class="mx-auto flex min-h-screen max-w-2xl flex-col justify-center gap-4 p-8">
-      <h1 class="text-4xl font-bold tracking-tight">AUXO rebuild</h1>
-      <p class="text-neutral-400">
-        Astro 6 + Tailwind 4 foundation is live. The design system lands in Phase 1.
-      </p>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  title="Decision intelligence for the GCC"
+  description="AUXO is a Dubai-based decision intelligence partner. We turn data into decisions your teams can act on."
+>
+  <Section padding="xl" decoration="glow" width="6xl" class="text-center">
+    <p class="text-sm font-semibold uppercase tracking-[0.14em] text-accent">AUXO Data Labs</p>
+    <h1 class="mx-auto mt-4 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl">
+      Look beyond data.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-muted">
+      Shell scaffolding for Phase 3 — navigation, footer, theme, view transitions and SEO are
+      live. Real page content lands in Phase 4.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <Button variant="primary" calendar icon>Book a call</Button>
+      <Button variant="outline" href="/services/">Explore services</Button>
+    </div>
+  </Section>
+</BaseLayout>

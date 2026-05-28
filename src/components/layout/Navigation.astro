@@ -1,0 +1,83 @@
+---
+import { Icon } from "astro-icon/components";
+import Logo from "./Logo.astro";
+import NavDropdown from "./NavDropdown.astro";
+import ThemeToggle from "../ui/ThemeToggle.astro";
+import Dialog from "../ui/Dialog.astro";
+import { navigationContent } from "../../data/navigation";
+
+const { items } = navigationContent;
+---
+
+<header class="nav" data-nav transition:persist>
+  <div class="nav__inner">
+    <Logo />
+
+    <nav class="nav__links" aria-label="Primary">
+      {
+        items.map((item) =>
+          item.hasDropdown ? (
+            <div class="nav__item nav__item--dropdown">
+              <a href={item.href} class="nav__link" aria-haspopup="true">
+                {item.name}
+                <Icon name="mdi:chevron-down" class="nav__chevron" aria-hidden="true" />
+              </a>
+              <div class="nav__panel">
+                <div class="nav__panel-inner">
+                  <NavDropdown items={item.dropdown ?? []} />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a href={item.href} class="nav__link">
+              {item.name}
+            </a>
+          )
+        )
+      }
+    </nav>
+
+    <div class="nav__actions">
+      <ThemeToggle />
+      <a href="/contact/" class="btn nav__cta" data-variant="primary" data-size="sm">Let's talk</a>
+      <button type="button" class="nav__burger" data-dialog-open="mobile-nav" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<Dialog id="mobile-nav" title="Menu" size="full" class="mobile-nav">
+  <nav class="mobile-nav__links" aria-label="Mobile">
+    {
+      items.map((item) =>
+        item.hasDropdown ? (
+          <details class="mobile-nav__group">
+            <summary class="mobile-nav__summary">
+              {item.name}
+              <Icon name="mdi:chevron-down" class="accordion__chevron" aria-hidden="true" />
+            </summary>
+            <ul class="mobile-nav__sublist">
+              {(item.dropdown ?? []).map((s) => (
+                <li>
+                  <a href={s.href} class="mobile-nav__sublink" data-dialog-close>
+                    {s.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ) : (
+          <a href={item.href} class="mobile-nav__link" data-dialog-close>
+            {item.name}
+          </a>
+        )
+      )
+    }
+    <a href="/contact/" class="btn" data-variant="primary" data-size="lg" data-dialog-close>Let's talk</a>
+  </nav>
+</Dialog>

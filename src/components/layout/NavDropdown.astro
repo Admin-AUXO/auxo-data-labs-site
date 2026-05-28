@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+import type { DropdownItem } from "../../data/navigation";
+
+interface Props {
+  items: DropdownItem[];
+}
+
+const { items } = Astro.props;
+const order = ["Stabilize", "Optimize", "Scale"];
+const grouped = order
+  .map((group) => ({ group, items: items.filter((i) => i.group === group) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<div class="navdrop">
+  {
+    grouped.map((g) => (
+      <div class="navdrop__group">
+        <p class="navdrop__group-title">{g.group}</p>
+        <ul class="navdrop__list">
+          {g.items.map((it) => (
+            <li>
+              <a href={it.href} class="navdrop__item">
+                <span class="navdrop__icon">
+                  <Icon name={it.icon} aria-hidden="true" />
+                </span>
+                <span class="navdrop__text">
+                  <span class="navdrop__name">{it.name}</span>
+                  {it.description && <span class="navdrop__desc">{it.description}</span>}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>
