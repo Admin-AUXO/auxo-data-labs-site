@@ -20,8 +20,8 @@ export const insightsContent: InsightsContent = {
   hero: {
     title: "Short reads for people who move fast.",
     titleHighlight: "move fast",
-    lead: "No long essays. A handful of sharp positions on data, AI, and decisions in Gulf real estate — each in under a minute.",
-    framing: "Swipe the cards, or read the full list below.",
+    lead: "No long essays. A growing library of sharp positions on data, AI, and decisions in Gulf real estate — each in under a minute.",
+    framing: "Start with the featured picks, filter by topic, or open the full set.",
   },
   cta: {
     title: "See one that fits your desk?",

@@ -14,6 +14,8 @@ const items = entries.map((e, i) => ({ ...e.data, slug: slugify(e.data.title) ||
 const topics = [...new Set(items.map((i) => i.topic))];
 const readCount = items.length;
 const topicCount = topics.length;
+const featuredIndex = new Map(items.filter((i) => i.featured).map((i, idx) => [i.slug, idx + 1]));
+const pad2 = (n: number): string => String(n).padStart(2, "0");
 
 const GOVERN = new Set(["Reporting", "Compliance", "Ownership"]);
 const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "govern" : "build");
@@ -38,7 +40,7 @@ const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "go
 
   <Section padding="lg" width="6xl">
     <div class="deck-filter" role="group" aria-label="Filter insights by topic">
-      <button type="button" class="deck__chip" data-deck-filter="" aria-pressed="true">All</button>
+      <button type="button" class="deck__chip" data-deck-filter="featured" aria-pressed="true">Featured</button>
       {
         topics.map((t) => (
           <button type="button" class="deck__chip" data-deck-filter={t} aria-pressed="false">
@@ -46,8 +48,9 @@ const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "go
           </button>
         ))
       }
+      <button type="button" class="deck__chip" data-deck-filter="" aria-pressed="false">All</button>
     </div>
-    <div class="deck" data-deck>
+    <div class="deck" data-deck data-view="featured">
       <div
         class="deck__viewport"
         data-deck-viewport
@@ -64,8 +67,13 @@ const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "go
                 data-deck-card
                 data-topic={item.topic}
                 data-family={familyOf(item.topic)}
+                data-featured={String(item.featured)}
+                data-hide={item.featured ? undefined : true}
               >
                 <div class="deck__card-inner">
+                  {item.featured && (
+                    <span class="deck__index" aria-hidden="true">{pad2(featuredIndex.get(item.slug) ?? 0)}</span>
+                  )}
                   <div class="deck__meta">
                     <span class="deck__topic">{item.topic}</span>
                     <button

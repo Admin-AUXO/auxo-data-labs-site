@@ -16,10 +16,20 @@ function setupDeck(deck: HTMLElement): void {
 
   const chips = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-deck-filter]"));
 
-  let activeTopic = "";
+  let activeTopic = "featured";
   let order: HTMLElement[] = allCards.slice();
   let index = 0;
   let swipeOn = false;
+
+  function matches(card: HTMLElement): boolean {
+    if (activeTopic === "") return true;
+    if (activeTopic === "featured") return card.dataset.featured === "true";
+    return card.dataset.topic === activeTopic;
+  }
+
+  function syncView(): void {
+    deck.dataset.view = activeTopic === "featured" ? "featured" : "default";
+  }
 
   async function shareCard(card: HTMLElement, btn: HTMLButtonElement): Promise<void> {
     const url = `${window.location.origin}${window.location.pathname}#${card.id}`;
@@ -43,7 +53,7 @@ function setupDeck(deck: HTMLElement): void {
   }
 
   function recompute(): void {
-    order = allCards.filter((c) => activeTopic === "" || c.dataset.topic === activeTopic);
+    order = allCards.filter(matches);
   }
 
   function syncChips(): void {
@@ -90,8 +100,9 @@ function setupDeck(deck: HTMLElement): void {
   function applyFilter(topic: string): void {
     activeTopic = topic;
     for (const c of allCards) {
-      c.toggleAttribute("data-hide", topic !== "" && c.dataset.topic !== topic);
+      c.toggleAttribute("data-hide", !matches(c));
     }
+    syncView();
     syncChips();
     recompute();
     index = 0;
@@ -178,6 +189,7 @@ function setupDeck(deck: HTMLElement): void {
     if (!id) return;
     const card = allCards.find((c) => c.id === id);
     if (!card) return;
+    if (!matches(card)) applyFilter(card.dataset.topic ?? "");
     if (swipeOn) {
       const pos = order.indexOf(card);
       if (pos >= 0) go(pos);
@@ -188,8 +200,7 @@ function setupDeck(deck: HTMLElement): void {
     window.setTimeout(() => card.removeAttribute("data-flash"), 1800);
   }
 
-  syncChips();
-  recompute();
+  applyFilter(activeTopic);
   if (window.matchMedia(MOBILE_Q).matches) enableSwipe();
   openHash();
 }

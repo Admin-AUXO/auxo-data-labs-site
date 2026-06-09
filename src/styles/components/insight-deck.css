@@ -253,6 +253,56 @@
     }
   }
 
+  .deck__index {
+    display: none;
+  }
+
+  .deck[data-view="featured"] .deck__index {
+    color: var(--accent);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: var(--tracking-mono);
+  }
+
+  .deck[data-view="featured"] .deck__card {
+    transition:
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  @media (width >= 48rem) {
+    .deck[data-view="featured"] .deck__list {
+      gap: 1.25rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .deck[data-view="featured"] .deck__card-inner {
+      gap: 1.1rem;
+      padding: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
+    }
+
+    .deck[data-view="featured"] .deck__title {
+      font-size: var(--text-3xl);
+    }
+
+    .deck[data-view="featured"] .deck__takeaway {
+      font-size: var(--text-lg);
+    }
+
+    .deck[data-view="featured"] .deck__link {
+      margin-block-start: auto;
+    }
+
+    .deck[data-view="featured"] .deck__card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+  }
+
   .deck__controls,
   .deck__hint {
     display: none;

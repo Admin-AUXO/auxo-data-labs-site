@@ -8,6 +8,7 @@ const insights = defineCollection({
     title: z.string(),
     takeaway: z.string(),
     order: z.number(),
+    featured: z.boolean().default(false),
     link: z.object({ label: z.string(), href: z.string().url() }).optional(),
   }),
 });
