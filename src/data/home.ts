@@ -41,6 +41,7 @@ export interface HomeContent {
   };
   how: {
     title: string;
+    titleHighlight?: string | string[];
     subtitle: string;
     steps: HomeStep[];
   };
@@ -73,6 +74,7 @@ export const homeContent: HomeContent = {
   },
   capabilities: {
     title: "What we do",
+    titleHighlight: "do",
     subtitle: "Four ways we help property leaders act on numbers they trust.",
     items: [
       { name: "Trusted data", icon: "mdi:database-check-outline", desc: "One source the whole business agrees on, built from the systems you already run." },
@@ -93,6 +95,7 @@ export const homeContent: HomeContent = {
   },
   how: {
     title: "How we work",
+    titleHighlight: "work",
     subtitle: "A short path from a real problem to a system your team owns.",
     steps: [
       { title: "Understand", icon: "mdi:magnify-scan", desc: "We learn how your business actually runs, and where the drag really is." },

@@ -106,7 +106,7 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: item.a
   </Section>
 
   <Section padding="lg" width="5xl">
-    <SectionHeader title={c.faq.title} subtitle={c.faq.description} />
+    <SectionHeader title={c.faq.title} highlight={c.faq.titleHighlight} subtitle={c.faq.description} />
     <div class="mt-10" data-reveal>
       <Accordion items={faqItems} openFirst />
     </div>

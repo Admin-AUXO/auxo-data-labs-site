@@ -55,6 +55,7 @@ export interface ContactContent {
   };
   faq: {
     title: string;
+    titleHighlight?: string | string[];
     description: string;
     items: { question: string; answer: string }[];
   };
@@ -168,6 +169,7 @@ export const contactContent: ContactContent = {
   },
   faq: {
     title: "Before you reach out",
+    titleHighlight: "reach out",
     description: "The questions property leaders ask us first.",
     items: [
       {

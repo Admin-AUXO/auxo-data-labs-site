@@ -154,8 +154,8 @@ export const aboutContent: AboutContent = {
   },
   cta: {
     title: "Let's talk.",
+    titleHighlight: "talk",
     description: "Tell us what's slowing you down, and we'll show you where to start.",
-    descriptionHighlight: "where to start",
     ctaText: "Start a conversation",
     ctaHref: "/contact/",
     secondaryText: "Read our thinking",

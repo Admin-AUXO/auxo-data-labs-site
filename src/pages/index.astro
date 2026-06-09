@@ -30,7 +30,11 @@ import { homeContent as c } from "../data/home";
   </Section>
 
   <Section padding="lg" width="7xl">
-    <SectionHeader title={c.capabilities.title} subtitle={c.capabilities.subtitle} />
+    <SectionHeader
+      title={c.capabilities.title}
+      highlight={c.capabilities.titleHighlight}
+      subtitle={c.capabilities.subtitle}
+    />
     <div class="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
       {
         c.capabilities.items.map((item) => (
@@ -68,7 +72,7 @@ import { homeContent as c } from "../data/home";
   </Section>
 
   <Section padding="lg" width="7xl">
-    <SectionHeader title={c.how.title} subtitle={c.how.subtitle} />
+    <SectionHeader title={c.how.title} highlight={c.how.titleHighlight} subtitle={c.how.subtitle} />
     <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-3">
       {
         c.how.steps.map((step, i) => (

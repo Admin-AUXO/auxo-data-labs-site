@@ -84,7 +84,6 @@ export const servicesContent: ServicesContent = {
       },
       {
         name: "Clear reporting",
-        nameHighlight: "Clear",
         label: "Visibility",
         icon: "mdi:chart-box-outline",
         description:
@@ -109,7 +108,6 @@ export const servicesContent: ServicesContent = {
       },
       {
         name: "Confident compliance",
-        nameHighlight: "Confident",
         label: "Assurance",
         icon: "mdi:shield-check-outline",
         description:
@@ -176,7 +174,6 @@ export const servicesContent: ServicesContent = {
     titleHighlight: "fits",
     description:
       "Tell us what's slowing you down, and we'll point you to the right first move — even if it isn't us.",
-    descriptionHighlight: "the right first move",
     ctaText: "Start a conversation",
     ctaHref: "/contact/",
     secondaryText: "Read our thinking",

@@ -1,9 +1,17 @@
-import { actions } from "astro:actions";
+import emailjs from "@emailjs/browser";
 import { contactContent } from "../../data/contact";
-import { EMAIL_RE, actionErrorMessage, renderStatus, type StatusState } from "./_status";
+import { EMAIL_RE, renderStatus, type StatusState } from "./_status";
 
 const FORM_ID = "contact-form";
 const status = contactContent.form.status;
+
+const EMAILJS = {
+  serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? "",
+  templateId: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? "",
+  publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? "",
+};
+
+const isConfigured = Boolean(EMAILJS.serviceId && EMAILJS.templateId && EMAILJS.publicKey);
 
 type Validator = (value: string) => string | null;
 
@@ -92,33 +100,45 @@ function initContactForm() {
 
     const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     const data = new FormData(form);
+
+    if ((honeypotInput?.value ?? "").trim()) {
+      setStatus(statusRegion, "success", status.success);
+      form.reset();
+      return;
+    }
+
+    if (!isConfigured) {
+      setStatus(statusRegion, "error", status.notConfigured);
+      return;
+    }
+
     if (submit) submit.disabled = true;
     setStatus(statusRegion, "info", status.sending);
 
     try {
-      const { data: result, error } = await actions.contactEnquiry({
-        name: String(data.get("name") ?? ""),
-        email: String(data.get("email") ?? ""),
-        company: String(data.get("company") ?? ""),
-        topic: String(data.get("topic") ?? ""),
-        message: String(data.get("message") ?? ""),
-        consent: consentInput.checked,
-        company_url: honeypotInput?.value ?? "",
-      });
+      const response = await emailjs.send(
+        EMAILJS.serviceId,
+        EMAILJS.templateId,
+        {
+          from_name: String(data.get("name") ?? ""),
+          from_email: String(data.get("email") ?? ""),
+          reply_to: String(data.get("email") ?? ""),
+          company: String(data.get("company") ?? "") || "Not provided",
+          topic: String(data.get("topic") ?? "") || "Not specified",
+          subject: String(data.get("topic") ?? "") || "Website enquiry",
+          message: String(data.get("message") ?? ""),
+        },
+        { publicKey: EMAILJS.publicKey },
+      );
 
-      if (error) {
-        setStatus(statusRegion, "error", actionErrorMessage(error, status.error));
-        return;
-      }
+      if (response.status !== 200) throw new Error("send failed");
 
-      if (result?.ok) {
-        setStatus(statusRegion, "success", status.success);
-        form.reset();
-        controls.forEach((c) => c.setAttribute("aria-invalid", "false"));
-        if (counter && message) {
-          counter.textContent = `0/${message.getAttribute("maxlength") || 500}`;
-          counter.dataset.near = "false";
-        }
+      setStatus(statusRegion, "success", status.success);
+      form.reset();
+      controls.forEach((c) => c.setAttribute("aria-invalid", "false"));
+      if (counter && message) {
+        counter.textContent = `0/${message.getAttribute("maxlength") || 500}`;
+        counter.dataset.near = "false";
       }
     } catch {
       setStatus(statusRegion, "error", status.error);
