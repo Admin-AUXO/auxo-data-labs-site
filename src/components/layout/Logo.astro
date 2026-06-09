@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../../lib/url";
+
 interface Props {
   href?: string;
   showText?: boolean;
@@ -15,7 +17,7 @@ const tiles = [
 ];
 ---
 
-<a href={href} class={`logo ${cls}`.trim()} aria-label="AUXO Data Labs home">
+<a href={withBase(href)} class={`logo ${cls}`.trim()} aria-label="AUXO Data Labs home">
   <svg viewBox="0 0 40 40" class="logo__mark" role="img" aria-hidden="true">
     {tiles.map((t) => <rect x={t.x} y={t.y} width="18.7" height="18.7" fill="var(--accent)" />)}
     <g class="logo__letters" fill="var(--accent-foreground)">

@@ -2,6 +2,7 @@
 import LegalLayout from "../../layouts/LegalLayout.astro";
 import { LEGAL_LAST_UPDATED } from "../../data/legal";
 import { siteData } from "../../data/site";
+import { withBase } from "../../lib/url";
 ---
 
 <LegalLayout
@@ -115,7 +116,7 @@ import { siteData } from "../../data/site";
   <p>
     You can accept or reject non-essential cookies through the consent banner or
     the <strong>Cookie Settings</strong> control in the footer. More detail
-    appears in our <a href="/legal/cookie-policy/">Cookie Policy</a>.
+    appears in our <a href={withBase("/legal/cookie-policy/")}>Cookie Policy</a>.
   </p>
 
   <h2>5. When We Share Data</h2>

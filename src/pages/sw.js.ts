@@ -1,8 +1,14 @@
-const VERSION = 'auxo-v1';
+import type { APIRoute } from "astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const OFFLINE = `${base}/offline/`;
+
+const body = `const VERSION = 'auxo-v1';
 const CACHE = VERSION;
+const OFFLINE = '${OFFLINE}';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(['/offline'])));
+  event.waitUntil(caches.open(CACHE).then((c) => c.addAll([OFFLINE])));
   self.skipWaiting();
 });
 
@@ -34,7 +40,7 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() =>
-          caches.match(request).then((cached) => cached || caches.match('/offline'))
+          caches.match(request).then((cached) => cached || caches.match(OFFLINE))
         )
     );
     return;
@@ -61,3 +67,14 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(fetch(request));
 });
+`;
+
+export const prerender = true;
+
+export const GET: APIRoute = () =>
+  new Response(body, {
+    headers: {
+      "content-type": "text/javascript; charset=utf-8",
+      "cache-control": "no-cache",
+    },
+  });

@@ -2,6 +2,7 @@
 import LegalLayout from "../../layouts/LegalLayout.astro";
 import { LEGAL_LAST_UPDATED } from "../../data/legal";
 import { siteData } from "../../data/site";
+import { withBase } from "../../lib/url";
 ---
 
 <LegalLayout
@@ -22,8 +23,8 @@ import { siteData } from "../../data/site";
     These Terms of Use govern your access to and use of
     <strong>auxodata.com</strong> and related public content made available by
     AUXO Data Labs. By using the site, you agree to these Terms and to the
-    related <a href="/legal/privacy-policy/">Privacy Policy</a> and
-    <a href="/legal/cookie-policy/">Cookie Policy</a>.
+    related <a href={withBase("/legal/privacy-policy/")}>Privacy Policy</a> and
+    <a href={withBase("/legal/cookie-policy/")}>Cookie Policy</a>.
   </p>
   <p>
     If you do not agree, do not use the site.

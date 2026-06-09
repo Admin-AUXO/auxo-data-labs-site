@@ -1,5 +1,6 @@
 ---
 import { siteData } from "../../data/site";
+import { withBase } from "../../lib/url";
 
 interface Props {
   title?: string;
@@ -24,9 +25,11 @@ const {
 } = Astro.props;
 
 const fullTitle = title ? `${title} | ${siteData.name}` : `${siteData.name} — ${siteData.tagline}`;
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+const relPath = path.startsWith(basePath) ? path.slice(basePath.length) || "/" : path;
 const canonical = new URL(path, siteData.url).href;
-const ogSlug = path === "/" ? "index" : path.replace(/^\/+|\/+$/g, "").replace(/\//g, "-");
-const ogImageUrl = new URL(ogImage ?? `/og/${ogSlug}.png`, siteData.url).href;
+const ogSlug = relPath === "/" ? "index" : relPath.replace(/^\/+|\/+$/g, "").replace(/\//g, "-");
+const ogImageUrl = new URL(withBase(ogImage ?? `/og/${ogSlug}.png`), siteData.url).href;
 const robots = noindex
   ? "noindex, nofollow"
   : "index, follow, max-image-preview:large, max-snippet:-1";
@@ -43,14 +46,14 @@ const robots = noindex
 <meta name="color-scheme" content="dark" />
 <meta name="theme-color" content="#0d0d0d" />
 
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
-<link rel="manifest" href="/manifest.json" />
+<link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={withBase("/apple-touch-icon.svg")} />
+<link rel="manifest" href={withBase("/manifest.json")} />
 
-<link rel="preload" href="/fonts/Sora-Variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={withBase("/fonts/Sora-Variable.woff2")} as="font" type="font/woff2" crossorigin />
 <link
   rel="preload"
-  href="/fonts/PlusJakartaSans-VariableFont_wght.woff2"
+  href={withBase("/fonts/PlusJakartaSans-VariableFont_wght.woff2")}
   as="font"
   type="font/woff2"
   crossorigin

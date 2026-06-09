@@ -5,6 +5,7 @@ import SocialLinks from "./SocialLinks.astro";
 import HighlightText from "../ui/HighlightText.astro";
 import { footerContent } from "../../data/footer";
 import { siteData } from "../../data/site";
+import { withBase } from "../../lib/url";
 
 const { statement, statementHighlight, tagline, sections, note } = footerContent;
 const year = new Date().getFullYear();
@@ -34,7 +35,7 @@ const location = `${siteData.address.city}, ${siteData.address.country}`;
             <ul class="footer__list">
               {s.links.map((l) => (
                 <li>
-                  <a href={l.href} class="footer__link">
+                  <a href={withBase(l.href)} class="footer__link">
                     {l.label}
                   </a>
                 </li>

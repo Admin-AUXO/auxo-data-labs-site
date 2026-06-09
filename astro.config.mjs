@@ -11,9 +11,12 @@ import { remarkReadingTime } from './src/lib/remark-reading-time.mjs';
 
 const srcDir = fileURLToPath(new URL('./src', import.meta.url));
 
+const isPages = process.env.GITHUB_PAGES === 'true';
+
 export default defineConfig({
-  site: 'https://auxodata.com',
-  adapter: vercel({ webAnalytics: { enabled: false } }),
+  site: isPages ? 'https://admin-auxo.github.io' : 'https://auxodata.com',
+  base: isPages ? '/auxo-data-labs-site' : undefined,
+  ...(isPages ? {} : { adapter: vercel({ webAnalytics: { enabled: false } }) }),
   devToolbar: { enabled: false },
   redirects: {
     '/self-check/': '/services/',

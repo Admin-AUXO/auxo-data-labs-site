@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { withBase } from "../../lib/url";
 
 interface Props {
   variant?: "primary" | "secondary" | "outline" | "ghost";
@@ -38,7 +39,7 @@ const Tag = isLink ? "a" : "button";
 
 const tagProps = isLink
   ? {
-      href: disabled ? undefined : href,
+      href: disabled || !href ? undefined : withBase(href),
       target,
       rel: target === "_blank" ? "noopener noreferrer" : rel,
       "aria-disabled": disabled ? "true" : undefined,

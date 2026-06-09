@@ -1,4 +1,8 @@
 import { siteData } from "../data/site";
+import { absoluteUrl } from "./url";
+
+const home = absoluteUrl("/");
+const abs = (p: string) => (p.startsWith("http") ? p : absoluteUrl(p));
 
 const serviceOffers = [
   { name: "Trusted data", description: "One source the whole business agrees on, built from the systems you already run." },
@@ -11,8 +15,8 @@ export function organizationSchema() {
   return {
     name: siteData.name,
     alternateName: "AUXO",
-    url: siteData.url,
-    logo: `${siteData.url}/favicon.svg`,
+    url: home,
+    logo: `${abs("/favicon.svg")}`,
     description: siteData.description,
     email: siteData.email,
     foundingDate: String(siteData.founded),
@@ -41,7 +45,7 @@ export function organizationSchema() {
         name: s.name,
         description: s.description,
         serviceType: "Real-estate data & AI",
-        provider: { "@type": "Organization", name: siteData.name, url: siteData.url },
+        provider: { "@type": "Organization", name: siteData.name, url: home },
       },
     })),
     sameAs: [siteData.social.linkedin, siteData.social.twitter],
@@ -50,10 +54,10 @@ export function organizationSchema() {
 
 export function localBusinessSchema() {
   return {
-    "@id": `${siteData.url}#localbusiness`,
+    "@id": `${home}#localbusiness`,
     name: siteData.name,
-    image: `${siteData.url}/favicon.svg`,
-    url: siteData.url,
+    image: `${abs("/favicon.svg")}`,
+    url: home,
     email: siteData.email,
     description: siteData.description,
     priceRange: "$$$",
@@ -79,7 +83,7 @@ export function localBusinessSchema() {
 export function websiteSchema() {
   return {
     name: siteData.name,
-    url: siteData.url,
+    url: home,
     description: siteData.description,
     inLanguage: "en",
   };
@@ -89,10 +93,10 @@ export function webPageSchema(opts: { title: string; description: string; path: 
   return {
     name: opts.title,
     description: opts.description,
-    url: `${siteData.url}${opts.path}`,
+    url: abs(opts.path),
     inLanguage: "en",
-    isPartOf: { "@type": "WebSite", name: siteData.name, url: siteData.url },
-    about: { "@type": "Organization", name: siteData.name, url: siteData.url },
+    isPartOf: { "@type": "WebSite", name: siteData.name, url: home },
+    about: { "@type": "Organization", name: siteData.name, url: home },
   };
 }
 
@@ -104,35 +108,34 @@ export function articleSchema(opts: {
   image?: string;
   tags?: string[];
 }) {
-  const absolute = (p: string) => (p.startsWith("http") ? p : `${siteData.url}${p}`);
   return {
     headline: opts.title,
     description: opts.description,
-    url: `${siteData.url}${opts.path}`,
+    url: abs(opts.path),
     inLanguage: "en",
     datePublished: opts.datePublished,
-    ...(opts.image ? { image: absolute(opts.image) } : {}),
+    ...(opts.image ? { image: abs(opts.image) } : {}),
     ...(opts.tags && opts.tags.length ? { keywords: opts.tags.join(", ") } : {}),
-    author: { "@type": "Organization", name: siteData.name, url: siteData.url },
+    author: { "@type": "Organization", name: siteData.name, url: home },
     publisher: {
       "@type": "Organization",
       name: siteData.name,
-      url: siteData.url,
-      logo: { "@type": "ImageObject", url: `${siteData.url}/favicon.svg` },
+      url: home,
+      logo: { "@type": "ImageObject", url: `${abs("/favicon.svg")}` },
     },
-    mainEntityOfPage: { "@type": "WebPage", "@id": `${siteData.url}${opts.path}` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": abs(opts.path) },
   };
 }
 
 export function breadcrumbSchema(crumbs: { name: string; path: string }[]) {
   return {
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: siteData.url },
+      { "@type": "ListItem", position: 1, name: "Home", item: home },
       ...crumbs.map((c, i) => ({
         "@type": "ListItem",
         position: i + 2,
         name: c.name,
-        item: `${siteData.url}${c.path}`,
+        item: abs(c.path),
       })),
     ],
   };
@@ -151,7 +154,7 @@ export function faqSchema(items: { question: string; answer: string }[]) {
 export function serviceSchema() {
   return {
     serviceType: "Real-estate data & AI studio",
-    provider: { "@type": "Organization", name: siteData.name, url: siteData.url },
+    provider: { "@type": "Organization", name: siteData.name, url: home },
     areaServed: [
       { "@type": "Country", name: siteData.address.country },
       {

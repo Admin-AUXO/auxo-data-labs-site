@@ -29,7 +29,7 @@ export const siteData: SiteData = {
   tagline: "Look Beyond Data",
   description:
     "AUXO is a data and AI studio for Dubai real estate. We turn the data you already have into reporting, forecasts, and automation you can trust — built on your systems, and yours to keep.",
-  url: "https://auxodata.com",
+  url: import.meta.env.SITE ?? "https://auxodata.com",
   email: "hello@auxodata.com",
   privacyEmail: "privacy@auxodata.com",
   address: {

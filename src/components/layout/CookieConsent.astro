@@ -1,10 +1,11 @@
 ---
+import { withBase } from "../../lib/url";
 ---
 
 <div class="consent is-hidden" data-consent-banner role="region" aria-label="Cookie consent">
   <p class="consent__text">
     We use privacy-friendly analytics to understand how the site is used. See our
-    <a href="/legal/cookie-policy/">Cookie Policy</a>.
+    <a href={withBase("/legal/cookie-policy/")}>Cookie Policy</a>.
   </p>
   <div class="consent__actions">
     <button type="button" class="btn" data-variant="ghost" data-size="sm" data-consent-decline>

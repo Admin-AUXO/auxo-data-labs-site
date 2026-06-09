@@ -5,10 +5,14 @@ import SocialLinks from "./SocialLinks.astro";
 import Dialog from "../ui/Dialog.astro";
 import { navigationContent } from "../../data/navigation";
 import { siteData } from "../../data/site";
+import { withBase } from "../../lib/url";
 
 const { items, cta } = navigationContent;
 const here = Astro.url.pathname;
-const isActive = (href: string) => here === href || (href !== "/" && here.startsWith(href));
+const isActive = (href: string) => {
+  const target = withBase(href);
+  return here === target || (href !== "/" && here.startsWith(target));
+};
 ---
 
 <header class="nav" data-nav data-pagefind-ignore>
@@ -19,7 +23,7 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
       {
         items.map((item) => (
           <a
-            href={item.href}
+            href={withBase(item.href)}
             class="nav__link"
             aria-current={isActive(item.href) ? "page" : undefined}
           >
@@ -33,7 +37,7 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
       <button type="button" class="icon-btn" data-dialog-open="site-search" data-search-open aria-label="Search the site">
         <Icon name="mdi:magnify" aria-hidden="true" />
       </button>
-      <a href={cta.href} class="btn nav__cta" data-variant="primary" data-size="sm">
+      <a href={withBase(cta.href)} class="btn nav__cta" data-variant="primary" data-size="sm">
         {cta.label}
       </a>
       <button type="button" class="icon-btn nav__burger" data-dialog-open="mobile-nav" aria-label="Open menu">
@@ -51,7 +55,7 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
     {
       items.map((item) => (
         <a
-          href={item.href}
+          href={withBase(item.href)}
           class="mobile-nav__link"
           aria-current={isActive(item.href) ? "page" : undefined}
           data-dialog-close
@@ -64,7 +68,7 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
   </nav>
 
   <div class="mobile-nav__foot">
-    <a href={cta.href} class="btn mobile-nav__cta" data-variant="primary" data-size="lg" data-dialog-close>
+    <a href={withBase(cta.href)} class="btn mobile-nav__cta" data-variant="primary" data-size="lg" data-dialog-close>
       {cta.label}
     </a>
     <div class="mobile-nav__meta">
@@ -82,6 +86,7 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
 </Dialog>
 
 <script>
+  const PAGEFIND_BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
   let prefetched = false;
   let initPromise: Promise<void> | null = null;
 
@@ -90,12 +95,12 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
     prefetched = true;
     const css = document.createElement("link");
     css.rel = "stylesheet";
-    css.href = "/pagefind/pagefind-ui.css";
+    css.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.css`;
     document.head.appendChild(css);
     const js = document.createElement("link");
     js.rel = "prefetch";
     js.as = "script";
-    js.href = "/pagefind/pagefind-ui.js";
+    js.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.js`;
     document.head.appendChild(js);
   }
 
@@ -115,7 +120,7 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
       try {
         await new Promise<void>((resolve, reject) => {
           const s = document.createElement("script");
-          s.src = "/pagefind/pagefind-ui.js";
+          s.src = `${PAGEFIND_BASE}/pagefind/pagefind-ui.js`;
           s.onload = () => resolve();
           s.onerror = () => reject(new Error("pagefind"));
           document.head.appendChild(s);
@@ -124,6 +129,7 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
         if (w.PagefindUI) {
           new w.PagefindUI({
             element: "#pagefind-search",
+            bundlePath: `${PAGEFIND_BASE}/pagefind/`,
             showSubResults: true,
             showImages: false,
             resetStyles: false,
