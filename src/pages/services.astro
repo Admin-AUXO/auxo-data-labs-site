@@ -126,14 +126,17 @@ import { servicesContent as c } from "../data/services-overview";
 
   <Section padding="lg" width="7xl">
     <div
-      class="flex flex-col gap-10 rounded-2xl border border-border bg-surface px-6 py-10 lg:px-10 lg:py-12"
+      class="flex flex-col gap-8 rounded-2xl border border-border bg-surface px-6 py-9 lg:px-10 lg:py-11"
       style="box-shadow: var(--shadow-sm);"
       data-reveal
     >
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
         <div class="flex max-w-2xl flex-col gap-3">
-          <SectionHeader title={c.process.title} highlight={c.process.titleHighlight} />
-          <p class="text-muted text-lg max-w-prose">{c.process.subtitle}</p>
+          <span class="block h-0.5 w-14 bg-accent-2" aria-hidden="true" data-anim="draw"></span>
+          <h2 class="text-2xl font-bold sm:text-3xl" data-anim="clip-up">
+            <HighlightText text={c.process.title} highlight={c.process.titleHighlight} />
+          </h2>
+          <p class="text-muted max-w-prose">{c.process.subtitle}</p>
         </div>
         <Button variant="secondary" size="md" href={c.process.summaryHref} class="w-full shrink-0 sm:w-auto">
           See how we work
