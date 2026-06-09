@@ -108,27 +108,30 @@ const stepAnim = ["slide-right", "rise", "slide-left"] as const;
   </Section>
 
   <Section padding="lg" width="7xl">
-    <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-      <div data-reveal>
-        <SectionHeader title={c.engagement.title} highlight={c.engagement.titleHighlight} />
-        <p class="mt-5 max-w-sm text-lg text-muted">{c.engagement.lead}</p>
-        <p class="mt-6 flex items-start gap-3 text-sm text-subtle">
-          <span class="mt-2 h-px w-6 shrink-0 bg-accent" aria-hidden="true"></span>
-          {c.engagement.reassurance}
-        </p>
-      </div>
-      <ul class="grid grid-cols-1 gap-px border border-border bg-border min-[34rem]:grid-cols-2" data-reveal>
-        {
-          c.engagement.principles.map((principle, i) => (
-            <li class="flex flex-col gap-3 bg-surface p-6 sm:p-8" data-anim={i % 2 === 0 ? "slide-right" : "slide-left"}>
-              <span class="block h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+    <div class="flex max-w-3xl flex-col gap-4" data-reveal>
+      <SectionHeader title={c.engagement.title} highlight={c.engagement.titleHighlight} />
+      <p class="max-w-xl text-lg text-muted">{c.engagement.lead}</p>
+      <p class="flex items-start gap-3 text-sm text-subtle">
+        <span class="mt-2 h-px w-6 shrink-0 bg-accent" aria-hidden="true"></span>
+        {c.engagement.reassurance}
+      </p>
+    </div>
+    <ol class="mt-12 grid gap-x-12 sm:mt-16 lg:grid-cols-2 lg:gap-x-20">
+      {
+        c.engagement.principles.map((principle, i) => (
+          <li
+            class="flex gap-5 border-t border-border py-7"
+            data-anim={i % 2 === 0 ? "slide-right" : "slide-left"}
+          >
+            <span class="mono-datum pt-1">{String(i + 1).padStart(2, "0")}</span>
+            <div class="flex flex-col gap-2">
               <h3 class="text-xl font-bold text-balance">{principle.title}</h3>
               <p class="text-muted">{principle.desc}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </Section>
 
   <CtaSection

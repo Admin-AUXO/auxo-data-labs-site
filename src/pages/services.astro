@@ -107,32 +107,56 @@ import { servicesContent as c } from "../data/services-overview";
       </Button>
     </div>
 
-    <div class="mt-12 border-t border-border pt-10 sm:mt-16 sm:pt-12">
-      <div class="grid gap-4 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
-        <h3 class="text-2xl font-bold sm:text-3xl">
-          <HighlightText text={c.models.standards.title} highlight="standards" />
-        </h3>
-        <p class="text-muted text-lg max-w-prose">{c.models.standards.line}</p>
-      </div>
+    <div class="mt-12 flex flex-col gap-6 border-t border-border pt-10 sm:mt-16 sm:pt-12" data-reveal>
+      <h3 class="text-2xl font-bold sm:text-3xl">
+        <HighlightText text={c.models.standards.title} highlight="standards" />
+      </h3>
+      <ul class="flex flex-wrap gap-3">
+        {
+          c.models.standards.frameworks.map((framework) => (
+            <li class="mono-datum rounded-full border border-border-strong px-4 py-2 text-foreground">
+              {framework}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-subtle text-sm max-w-prose">{c.models.standards.caveat}</p>
     </div>
   </Section>
 
   <Section padding="lg" width="7xl">
     <div
-      class="grid gap-6 rounded-2xl border border-border bg-surface px-6 py-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10 lg:px-10 lg:py-12"
+      class="flex flex-col gap-10 rounded-2xl border border-border bg-surface px-6 py-10 lg:px-10 lg:py-12"
       style="box-shadow: var(--shadow-sm);"
       data-reveal
     >
-      <SectionHeader
-        title={c.process.title}
-        highlight={c.process.titleHighlight}
-      />
-      <div class="flex flex-col gap-5">
-        <p class="text-muted text-lg max-w-prose">{c.process.subtitle}</p>
-        <Button variant="secondary" size="md" href={c.process.summaryHref} class="w-full sm:w-auto sm:self-start">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+        <div class="flex max-w-2xl flex-col gap-3">
+          <SectionHeader title={c.process.title} highlight={c.process.titleHighlight} />
+          <p class="text-muted text-lg max-w-prose">{c.process.subtitle}</p>
+        </div>
+        <Button variant="secondary" size="md" href={c.process.summaryHref} class="w-full shrink-0 sm:w-auto">
           See how we work
         </Button>
       </div>
+      <ol class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          c.process.steps.map((step, i) => (
+            <li class="relative flex flex-col gap-3 border-t-2 border-foreground pt-5" data-anim="rise">
+              <span class="mono-datum">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="text-lg font-bold">{step.name}</h3>
+              <p class="text-muted text-sm leading-relaxed">{step.desc}</p>
+              {i < c.process.steps.length - 1 && (
+                <Icon
+                  name="mdi:arrow-right"
+                  class="absolute -right-6 top-4 hidden text-xl text-subtle lg:block"
+                  aria-hidden="true"
+                />
+              )}
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </Section>
 

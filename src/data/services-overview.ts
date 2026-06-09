@@ -37,13 +37,14 @@ export interface ServicesContent {
     subtitle: string;
     items: ServiceModel[];
     priceNote: string;
-    standards: { title: string; line: string };
+    standards: { title: string; frameworks: string[]; caveat: string };
   };
   process: {
     title: string;
     titleHighlight?: string | string[];
     subtitle: string;
     summaryHref: string;
+    steps: { name: string; desc: string }[];
   };
   cta: {
     title: string;
@@ -131,7 +132,9 @@ export const servicesContent: ServicesContent = {
       "These are starting figures, shown up front — no opaque quotes. We set the final scope and price together once we understand what you need, so book a call and we'll talk it through.",
     standards: {
       title: "Built to standards you answer to.",
-      line: "Every engagement is shaped to align with the frameworks institutional buyers are held to — DFSA and DIFC governance, FATF and AML practice, and IFRS reporting. We build the work to support those standards; formal certification and legal sign-off stay with your advisors.",
+      frameworks: ["DFSA & DIFC governance", "FATF & AML practice", "IFRS reporting"],
+      caveat:
+        "Every engagement is shaped to align with the frameworks institutional buyers are held to. We build the work to support those standards; formal certification and legal sign-off stay with your advisors.",
     },
     items: [
       {
@@ -174,8 +177,14 @@ export const servicesContent: ServicesContent = {
     title: "How an engagement runs.",
     titleHighlight: "runs",
     subtitle:
-      "However you choose to work with us, the path is the same: we scope it with you, build in short visible steps, embed it in your day-to-day, then hand it over for your team to own. A fuller walk-through lives on the Studio page.",
+      "However you choose to work with us, the path is the same — four steps from a real problem to a system your team owns.",
     summaryHref: "/about/",
+    steps: [
+      { name: "Scope", desc: "We get the problem and the first move clear, together." },
+      { name: "Build", desc: "We build in short, visible steps you can see working." },
+      { name: "Embed", desc: "We put it into your day-to-day, on your own systems." },
+      { name: "Hand over", desc: "Your team owns and runs it — no retainer to renew." },
+    ],
   },
   cta: {
     title: "Not sure which fits?",
