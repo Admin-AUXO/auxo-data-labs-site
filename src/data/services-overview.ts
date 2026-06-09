@@ -9,10 +9,12 @@ export interface ServiceCapability {
 
 export interface ServiceModel {
   name: string;
+  kicker: string;
   price: string;
+  unit?: string;
   timeframe: string;
-  line: string;
-  rationale: string;
+  hook: string;
+  bestFor: string;
 }
 
 export interface ServicesContent {
@@ -124,9 +126,9 @@ export const servicesContent: ServicesContent = {
     title: "Ways to work.",
     titleHighlight: "work",
     subtitle:
-      "Packaged engagements, not open-ended consulting. Take an honest read, have one capability built, bring on a standing team, or keep a senior hand at the top table.",
+      "Four ways in, all packaged and priced up front — never open-ended consulting. Start with an honest read, have one capability built, bring on a standing team, or keep a senior hand at the top table.",
     priceNote:
-      "Indicative pricing is open below. Final scope and figures are set together once we understand what you need — so book a call and we'll talk it through.",
+      "These are starting figures, shown up front — no opaque quotes. We set the final scope and price together once we understand what you need, so book a call and we'll talk it through.",
     standards: {
       title: "Built to standards you answer to.",
       line: "Every engagement is shaped to align with the frameworks institutional buyers are held to — DFSA and DIFC governance, FATF and AML practice, and IFRS reporting. We build the work to support those standards; formal certification and legal sign-off stay with your advisors.",
@@ -134,31 +136,37 @@ export const servicesContent: ServicesContent = {
     items: [
       {
         name: "Pulse",
+        kicker: "Diagnostic",
         price: "AED 45,000",
         timeframe: "2–3 weeks",
-        line: "An honest read on your data and compliance, with a clear plan for what to build first.",
-        rationale: "A fixed-scope diagnostic. For teams who want a clear-eyed read and a priced plan before committing to a build.",
+        hook: "Two to three weeks to a clear-eyed read on your data and compliance — and a priced plan for exactly what to build first.",
+        bestFor: "For teams who want the truth and a plan before committing to a build.",
       },
       {
         name: "Build",
+        kicker: "Fixed project",
         price: "From AED 90,000",
         timeframe: "4–12 weeks",
-        line: "One capability built end to end, at a fixed price and timeline, shipped live and owned by your team.",
-        rationale: "One capability delivered at a fixed price and date. For teams with a defined problem ready to be solved end to end.",
+        hook: "One capability, built end to end at a fixed price and date — shipped live, in production, and yours to keep.",
+        bestFor: "For teams with a defined problem, ready to be solved.",
       },
       {
         name: "Embedded",
-        price: "From AED 70,000 / mo",
+        kicker: "Standing team",
+        price: "From AED 70,000",
+        unit: "/ mo",
         timeframe: "3-month minimum",
-        line: "A dedicated team working through your backlog, without standing up a whole in-house function.",
-        rationale: "A standing team on a monthly retainer. For teams with an ongoing backlog who don't want to hire a full function.",
+        hook: "A dedicated team working through your backlog week after week — the output of a department, without the headcount.",
+        bestFor: "For teams with an ongoing backlog and no appetite to hire a full function.",
       },
       {
         name: "Advisory",
-        price: "From AED 30,000 / mo",
+        kicker: "On call",
+        price: "From AED 30,000",
+        unit: "/ mo",
         timeframe: "Ongoing",
-        line: "Direct access to a senior data and AI leader for the big calls, without the full-time hire.",
-        rationale: "Senior guidance on call, monthly. For leaders who need a steady hand on the big data and AI decisions, not a full-time hire.",
+        hook: "A senior data and AI leader in your corner for the calls that matter — strategy, hires, vendors, models — minus the full-time salary.",
+        bestFor: "For leaders who need a steady hand at the top table, not another headcount.",
       },
     ],
   },
