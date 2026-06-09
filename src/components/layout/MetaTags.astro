@@ -4,7 +4,6 @@ import { siteData } from "../../data/site";
 interface Props {
   title?: string;
   description?: string;
-  /** Path for the canonical URL; defaults to the current pathname. */
   path?: string;
   ogImage?: string;
   type?: "website" | "article";
@@ -17,7 +16,7 @@ const {
   title,
   description = siteData.description,
   path = Astro.url.pathname,
-  ogImage = "/og-image.svg",
+  ogImage,
   type = "website",
   publishedTime,
   modifiedTime,
@@ -26,7 +25,8 @@ const {
 
 const fullTitle = title ? `${title} | ${siteData.name}` : `${siteData.name} — ${siteData.tagline}`;
 const canonical = new URL(path, siteData.url).href;
-const ogImageUrl = new URL(ogImage, siteData.url).href;
+const ogSlug = path === "/" ? "index" : path.replace(/^\/+|\/+$/g, "").replace(/\//g, "-");
+const ogImageUrl = new URL(ogImage ?? `/og/${ogSlug}.png`, siteData.url).href;
 const robots = noindex
   ? "noindex, nofollow"
   : "index, follow, max-image-preview:large, max-snippet:-1";
@@ -40,14 +40,14 @@ const robots = noindex
 <link rel="canonical" href={canonical} />
 <meta name="robots" content={robots} />
 
-<meta name="color-scheme" content="dark light" />
-<meta name="theme-color" content="#0b0c0a" media="(prefers-color-scheme: dark)" />
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#0d0d0d" />
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
 <link rel="manifest" href="/manifest.json" />
 
+<link rel="preload" href="/fonts/Sora-Variable.woff2" as="font" type="font/woff2" crossorigin />
 <link
   rel="preload"
   href="/fonts/PlusJakartaSans-VariableFont_wght.woff2"

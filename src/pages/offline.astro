@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/layout/Section.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<BaseLayout title="Offline" noindex>
+  <Section padding="xl" width="5xl" class="text-center">
+    <div class="flex flex-col items-center gap-6">
+      <h1 class="text-display text-display--5xl max-w-[16ch]">You're offline.</h1>
+      <p class="lead mx-auto">This page isn't cached yet. Reconnect and try again.</p>
+      <Button variant="primary" size="lg" href="/" icon>Back to home</Button>
+    </div>
+  </Section>
+</BaseLayout>

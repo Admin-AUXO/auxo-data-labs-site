@@ -12,6 +12,8 @@ interface Props {
   ctaText: string;
   ctaHref: string;
   reassurance?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
 }
 
 const {
@@ -22,24 +24,37 @@ const {
   ctaText,
   ctaHref,
   reassurance,
+  secondaryText,
+  secondaryHref,
 } = Astro.props;
 ---
 
-<Section padding="lg" width="5xl">
-  <div class="rounded-2xl border border-border bg-surface p-8 text-center sm:p-12">
-    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+<Section padding="xl" width="6xl">
+  <div
+    class="mx-auto flex max-w-3xl flex-col items-center gap-7 rounded-2xl border border-border bg-surface px-6 py-14 text-center sm:px-12 sm:py-16"
+    style="box-shadow: var(--shadow-md);"
+    data-reveal
+  >
+    <h2 class="text-display text-display--5xl" data-anim="blur-in">
       <HighlightText text={title} highlight={titleHighlight} />
     </h2>
     {
       description && (
-        <p class="mx-auto mt-5 max-w-2xl text-lg text-muted">
+        <p class="lead mx-auto text-balance">
           <HighlightText text={description} highlight={descriptionHighlight} />
         </p>
       )
     }
-    <div class="mt-8 flex justify-center">
-      <Button variant="primary" href={ctaHref} icon>{ctaText}</Button>
+    <div class="flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+      <Button variant="primary" size="lg" href={ctaHref} icon class="w-full sm:w-auto">{ctaText}</Button>
+      {
+        secondaryText && secondaryHref && (
+          <Button variant="secondary" size="lg" href={secondaryHref} class="w-full sm:w-auto">
+            {secondaryText}
+          </Button>
+        )
+      }
     </div>
-    {reassurance && <p class="mt-4 text-sm text-subtle">{reassurance}</p>}
+    {reassurance && <p class="text-sm text-subtle">{reassurance}</p>}
   </div>
 </Section>

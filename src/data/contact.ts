@@ -7,11 +7,8 @@ export interface ContactField {
   placeholder?: string;
   required?: boolean;
   optional?: boolean;
-  /** For select fields. */
   options?: string[];
-  /** For textarea — drives the character counter and validation. */
   maxLength?: number;
-  /** Minimum length for inline validation. */
   minLength?: number;
 }
 
@@ -25,29 +22,36 @@ export interface ContactDetail {
 
 export interface ContactContent {
   hero: {
-    eyebrow: string;
     title: string;
     titleHighlight: string | string[];
-    description: string;
-    pills: string[];
+    lead: string;
   };
   details: {
     title: string;
     items: ContactDetail[];
+    responseTime: string;
     cta: { text: string };
   };
   form: {
     title: string;
     description: string;
     fields: ContactField[];
+    consentNote: string;
     submitText: string;
     note: string;
     status: {
       sending: string;
       success: string;
       error: string;
+      consentRequired: string;
       notConfigured: string;
     };
+  };
+  nextSteps: {
+    title: string;
+    titleHighlight?: string | string[];
+    subtitle: string;
+    steps: { title: string; desc: string }[];
   };
   faq: {
     title: string;
@@ -58,19 +62,12 @@ export interface ContactContent {
 
 export const contactContent: ContactContent = {
   hero: {
-    eyebrow: "Contact AUXO",
-    title: "Bring the problem, not a polished brief",
-    titleHighlight: ["problem", "not a polished brief"],
-    description:
-      "If reporting is messy, decisions are slow, or an analytics initiative is stuck, use this page. A short, honest summary is enough to start.",
-    pills: [
-      "Response within 1 business day",
-      "Dubai-based, global delivery",
-      "Form or direct email both work",
-    ],
+    title: "Let's talk.",
+    titleHighlight: "talk",
+    lead: "Tell us what's slowing your decisions down. A real person reads your note and replies — within one business day.",
   },
   details: {
-    title: "Reach us directly",
+    title: "Reach us",
     items: [
       {
         icon: "mdi:email-outline",
@@ -81,7 +78,7 @@ export const contactContent: ContactContent = {
       {
         icon: "mdi:map-marker-outline",
         label: "Location",
-        value: `${siteData.address.street}, ${siteData.address.city}, ${siteData.address.country}`,
+        value: `${siteData.address.city}, ${siteData.address.country}`,
       },
       {
         icon: "mdi:linkedin",
@@ -91,12 +88,12 @@ export const contactContent: ContactContent = {
         external: true,
       },
     ],
+    responseTime: "Replies within one business day.",
     cta: { text: "Book a call" },
   },
   form: {
-    title: "What to send us",
-    description:
-      "A useful first message usually answers three things. If you only have fragments, send the fragments.",
+    title: "Send a message",
+    description: "A few plain lines is enough — what's not working, and the timeline that matters.",
     fields: [
       {
         name: "name",
@@ -125,13 +122,14 @@ export const contactContent: ContactContent = {
       },
       {
         name: "topic",
-        label: "Topic",
+        label: "What's it about?",
         type: "select",
         options: [
           "Not sure where to start",
-          "Reporting & dashboards",
-          "Forecasting & planning",
-          "Automation & applied AI",
+          "Trusted data",
+          "Clear reporting",
+          "Reliable automation",
+          "Confident compliance",
           "Something else",
         ],
       },
@@ -139,45 +137,68 @@ export const contactContent: ContactContent = {
         name: "message",
         label: "Message",
         type: "textarea",
-        placeholder: "What is breaking or slowing decisions right now? What systems or teams are involved? What timeline matters most?",
+        placeholder: "What's slowing your decisions down? Which systems does it touch? And what timeline matters most?",
         required: true,
         minLength: 20,
         maxLength: 500,
       },
     ],
+    consentNote:
+      "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply — never for marketing without separate opt-in.",
     submitText: "Send message",
-    note: "Messy context is fine. The point of the first conversation is to make the problem clearer, not to grade the brief.",
+    note: "The first conversation is about getting the problem clear. No prep needed.",
     status: {
-      sending: "Sending your message...",
-      success: "Message sent. You will hear back within one business day.",
+      sending: "Sending your message…",
+      success:
+        "Thank you — your message is on its way. We'll reply within one business day.",
       error: `Something went wrong. Please try again or email us at ${siteData.email}.`,
+      consentRequired: "Please tick the consent box so we can hold your details to reply.",
       notConfigured: `The form is not connected yet. Please email us directly at ${siteData.email}.`,
     },
   },
+  nextSteps: {
+    title: "What happens next",
+    titleHighlight: "next",
+    subtitle: "No drawn-out process. Three steps from your note to a clear first move.",
+    steps: [
+      { title: "You send a note", desc: "A few plain lines about what's slowing you down. No formal brief needed." },
+      { title: "We reply within a day", desc: "A real person who does the work reads it and responds within one business day." },
+      { title: "A focused call", desc: "Thirty minutes to get the problem clear and agree the first step. No hard sell." },
+    ],
+  },
   faq: {
     title: "Before you reach out",
-    description:
-      "These are the questions buyers usually ask before booking time or filling out the form.",
+    description: "The questions property leaders ask us first.",
     items: [
       {
-        question: "Do I need a full brief before contacting AUXO?",
+        question: "What does working together cost?",
         answer:
-          "No. A clear description of the problem, the pressure around it, and the systems involved is enough for the first conversation.",
+          "Every engagement is fixed-scope and priced up front — you'll find the full range on the Work page. We agree the exact scope and price together before anything starts, so there are no open-ended retainers and no surprises on the invoice.",
       },
       {
-        question: "Should I book a meeting or use the form?",
+        question: "Is this confidential? Can we sign an NDA first?",
         answer:
-          "Either works. Use the form for a detailed written summary. Book a meeting if the issue is easier to explain live or timing is tight.",
+          "Yes. We keep client relationships and details to ourselves, and we're glad to sign your NDA before any detailed conversation. Just mention it in your message and we'll send ours, or work from yours.",
+      },
+      {
+        question: "What if our data is messy, scattered, or incomplete?",
+        answer:
+          "That's the normal starting point, not a blocker. Most of the early work is making sense of what you already have across spreadsheets, systems, and inboxes. You don't need to clean anything up before we talk.",
+      },
+      {
+        question: "Do we have to replace the tools we already use?",
+        answer:
+          "No. We build on the systems you already run — your CRM, your finance stack, your spreadsheets. The aim is to make what you have work harder, not to sell you another platform.",
+      },
+      {
+        question: "What happens after you hand over — are we stuck with you?",
+        answer:
+          "The opposite. Every engagement ends with a working system your team owns, plain documentation, and the training to run it. No lock-in, no licence to keep paying. We stay reachable if you want us, but you're never dependent on us.",
       },
       {
         question: "Do you only work with teams in Dubai?",
         answer:
-          "No. AUXO is based in Dubai, but engagements can run remotely, hybrid, or with targeted on-site time depending on the phase.",
-      },
-      {
-        question: "What happens after I send a message?",
-        answer:
-          "You get a response within one business day. From there, AUXO will usually recommend a short call, a more scoped follow-up, or a direct answer on fit.",
+          "We're Dubai-based and work with property leaders across the UAE and the wider Gulf — remote, hybrid, or on-site, depending on the phase of the work.",
       },
     ],
   },

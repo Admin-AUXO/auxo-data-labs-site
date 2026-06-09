@@ -1,4 +1,5 @@
 User-agent: *
+Allow: /
 
 Sitemap: https://auxodata.com/sitemap-index.xml
 

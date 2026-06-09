@@ -1,0 +1,135 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/layout/Section.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
+import { insightsContent as c } from "../data/insights";
+import { getCollection } from "astro:content";
+
+const entries = (await getCollection("insights")).sort((a, b) => a.data.order - b.data.order);
+const slugify = (s: string): string =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 56);
+const items = entries.map((e, i) => ({ ...e.data, slug: slugify(e.data.title) || `insight-${i + 1}` }));
+const topics = [...new Set(items.map((i) => i.topic))];
+const readCount = items.length;
+const topicCount = topics.length;
+
+const GOVERN = new Set(["Reporting", "Compliance", "Ownership"]);
+const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "govern" : "build");
+---
+
+<BaseLayout
+  title="Insights — short reads on data & AI in Gulf real estate"
+  description="Sharp, quick-read positions on data, AI, reporting, and compliance for Gulf real estate leaders. Each one under a minute."
+>
+  <Section padding="xl" width="7xl">
+    <div class="flex max-w-3xl flex-col gap-6">
+      <span class="mono-label mono-label--accent" data-enter>
+        {readCount} short reads · {topicCount} topics
+      </span>
+      <h1 class="text-display text-display--5xl" data-enter="headline">
+        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
+      </h1>
+      <p class="lead text-xl" data-enter>{c.hero.lead}</p>
+      <p class="text-subtle text-sm" data-enter>{c.hero.framing}</p>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="6xl">
+    <div class="deck-filter" role="group" aria-label="Filter insights by topic">
+      <button type="button" class="deck__chip" data-deck-filter="" aria-pressed="true">All</button>
+      {
+        topics.map((t) => (
+          <button type="button" class="deck__chip" data-deck-filter={t} aria-pressed="false">
+            {t}
+          </button>
+        ))
+      }
+    </div>
+    <div class="deck" data-deck>
+      <div
+        class="deck__viewport"
+        data-deck-viewport
+        role="group"
+        aria-roledescription="carousel"
+        aria-label="Insight cards — swipe or use the controls"
+      >
+        <ol class="deck__list" data-deck-list>
+          {
+            items.map((item) => (
+              <li
+                class="deck__card"
+                id={item.slug}
+                data-deck-card
+                data-topic={item.topic}
+                data-family={familyOf(item.topic)}
+              >
+                <div class="deck__card-inner">
+                  <div class="deck__meta">
+                    <span class="deck__topic">{item.topic}</span>
+                    <button
+                      type="button"
+                      class="deck__share"
+                      data-deck-share
+                      aria-label={`Copy link to: ${item.title}`}
+                    >
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                      </svg>
+                    </button>
+                  </div>
+                  <h3 class="deck__title">{item.title}</h3>
+                  <p class="deck__takeaway">{item.takeaway}</p>
+                  {item.link && (
+                    <a
+                      class="deck__link"
+                      href={item.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.link.label}
+                      <span aria-hidden="true">&#8599;</span>
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="deck__controls" data-deck-controls hidden>
+        <button type="button" class="deck__nav" data-deck-prev aria-label="Previous insight">
+          <Icon name="mdi:arrow-left" aria-hidden="true" />
+        </button>
+        <div class="deck__progress">
+          <div class="deck__dots" data-deck-dots aria-hidden="true"></div>
+          <span class="deck__count mono-datum" data-deck-count aria-live="polite"></span>
+        </div>
+        <button type="button" class="deck__nav" data-deck-next aria-label="Next insight">
+          <Icon name="mdi:arrow-right" aria-hidden="true" />
+        </button>
+      </div>
+
+      <p class="deck__hint" data-deck-hint hidden>Swipe, use the arrows, or your keyboard.</p>
+    </div>
+  </Section>
+
+  <CtaSection
+    title={c.cta.title}
+    titleHighlight={c.cta.titleHighlight}
+    description={c.cta.description}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+    secondaryText={c.cta.secondaryText}
+    secondaryHref={c.cta.secondaryHref}
+  />
+</BaseLayout>
+
+<script>
+  import { initInsightDeck } from "../scripts/ui/insight-deck";
+  initInsightDeck();
+  document.addEventListener("astro:page-load", initInsightDeck);
+</script>

@@ -1,6 +1,6 @@
 ---
 name: performance-and-motion
-description: Use when adding or changing animations, smooth scrolling, carousel behavior, lazy loading, service worker behavior, hydration strategy, or other performance-sensitive front-end behavior in this Astro site. Trigger for Lenis, Embla, reveal effects, runtime media loading, and interaction code that can affect responsiveness.
+description: Use when adding or changing animations, scroll-driven behavior, carousel behavior, lazy loading, service worker behavior, hydration strategy, or other performance-sensitive front-end behavior in this Astro site. Trigger for motion (motion.dev), Embla, reveal effects, runtime media loading, and interaction code that can affect responsiveness.
 ---
 
 # Performance and Motion
@@ -21,7 +21,7 @@ Fast first. Fancy second.
 - Avoid stacked scroll listeners when CSS or existing observers can do the job.
 - Re-test page transitions and re-initialization after motion changes.
 - Do not fight existing transforms with extra animation layers.
-- Protect nested scroll regions with the appropriate Lenis escape hatch.
+- Protect nested scroll regions; keep menus, drawers, and dialogs scrollable on their own without the page fighting them.
 - Keep carousel content light and avoid heavy first-frame assets.
 - Use Embla where horizontal comparison helps. Do not turn essential navigation or core reading flows into swipe traps.
 - Prefer mobile-only carousel activation for dense card collections when desktop already has enough width.

@@ -1,5 +1,4 @@
 @layer components {
-  /* Field = label + control + (optional) error/counter, stacked. */
   .field {
     display: flex;
     flex-direction: column;
@@ -22,7 +21,6 @@
     margin-inline-start: 0.125rem;
   }
 
-  /* Header row for fields that pair a label with a counter (e.g. message). */
   .field__head {
     align-items: baseline;
     display: flex;
@@ -30,7 +28,6 @@
     justify-content: space-between;
   }
 
-  /* Shared control surface. */
   .input,
   .textarea,
   .select {
@@ -74,7 +71,6 @@
     resize: vertical;
   }
 
-  /* Native select chevron (semantic-token stroke, no external asset). */
   .select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-position: right 1rem center;
@@ -84,7 +80,6 @@
     padding-inline-end: 2.75rem;
   }
 
-  /* Invalid state — set by the client script via aria-invalid. */
   .input[aria-invalid="true"],
   .textarea[aria-invalid="true"],
   .select[aria-invalid="true"] {
@@ -119,15 +114,14 @@
     font-weight: 600;
   }
 
-  /* Status region — success / error feedback after submit. */
   .form-status {
+    align-items: flex-start;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     color: var(--muted);
     display: flex;
-    align-items: flex-start;
-    gap: 0.625rem;
     font-size: var(--text-sm);
+    gap: 0.625rem;
     padding: 0.875rem 1rem;
   }
 

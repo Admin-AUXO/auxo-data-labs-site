@@ -15,13 +15,11 @@ export interface SiteData {
   social: { linkedin: string; twitter: string };
   founded: number;
   stats: {
-    yearsExperience: string;
-    technologiesMastered: string;
-    industriesServed: string;
-    foundingClients: string;
-    responseTime: string;
+    practitionerExperience: { value: string; label: string };
+    production: { value: string; label: string };
+    primaryFocus: { value: string; label: string };
+    responseTime: { value: string; label: string };
   };
-  /** Google Calendar booking link used by the booking dialog + calendar CTAs. */
   bookingUrl: string;
 }
 
@@ -30,7 +28,7 @@ export const siteData: SiteData = {
   author: "AUXO Data Labs",
   tagline: "Look Beyond Data",
   description:
-    "AUXO is a Dubai-based decision intelligence partner serving sophisticated clients across the GCC, Europe, and global markets. We deliver enterprise-grade expertise with the efficiency and direct access of a modern, agile firm.",
+    "AUXO is a data and AI studio for Dubai real estate. We turn the data you already have into reporting, forecasts, and automation you can trust — built on your systems, and yours to keep.",
   url: "https://auxodata.com",
   email: "hello@auxodata.com",
   privacyEmail: "privacy@auxodata.com",
@@ -46,11 +44,22 @@ export const siteData: SiteData = {
   },
   founded: 2025,
   stats: {
-    yearsExperience: "15+",
-    technologiesMastered: "15+",
-    industriesServed: "8+",
-    foundingClients: "10",
-    responseTime: "<24hrs",
+    practitionerExperience: {
+      value: "Real estate only",
+      label: "We build for property and nothing else, so we start inside your business.",
+    },
+    production: {
+      value: "Live systems",
+      label: "Working systems in daily use — not slideware.",
+    },
+    primaryFocus: {
+      value: "Yours to keep",
+      label: "Every project ends with a system your team owns. No lock-in.",
+    },
+    responseTime: {
+      value: "Reply within 1 business day",
+      label: "A real person reads your note and replies.",
+    },
   },
   bookingUrl: "https://calendar.app.google/aJmnvMS2uBbYPCgC7",
 };

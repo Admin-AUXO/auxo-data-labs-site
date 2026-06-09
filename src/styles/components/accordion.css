@@ -2,29 +2,40 @@
   .accordion {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
   }
 
   .accordion__item {
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+    border-block-end: 1px solid var(--border);
+    position: relative;
   }
 
-  .accordion__item[open] {
-    border-color: color-mix(in oklch, var(--accent) 40%, var(--border));
+  .accordion__item:first-child {
+    border-block-start: 1px solid var(--border);
+  }
+
+  .accordion__item::before {
+    background-color: var(--accent);
+    content: "";
+    inline-size: 2px;
+    inset-block: 0;
+    inset-inline-start: 0;
+    position: absolute;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--dur-base) var(--ease-glide);
+  }
+
+  .accordion__item[open]::before {
+    transform: scaleY(1);
   }
 
   .accordion__summary {
     align-items: center;
     cursor: pointer;
     display: flex;
-    font-weight: 600;
     gap: 1rem;
-    justify-content: space-between;
     list-style: none;
-    padding: 1rem 1.25rem;
+    padding: 1.4rem 1.25rem;
   }
 
   .accordion__summary::-webkit-details-marker {
@@ -36,14 +47,76 @@
     outline-offset: -2px;
   }
 
-  .accordion__chevron {
-    color: var(--muted);
+  .accordion__index {
+    color: var(--subtle);
     flex: none;
-    transition: transform var(--dur-base) var(--ease-standard);
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1, "zero" 1;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: var(--tracking-mono);
+    transition: color var(--dur-base) var(--ease-out);
   }
 
-  .accordion__item[open] .accordion__chevron {
-    transform: rotate(180deg);
+  .accordion__question {
+    color: var(--foreground);
+    flex: 1;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.3;
+    transition: color var(--dur-fast) var(--ease-standard);
+  }
+
+  .accordion__item[open] .accordion__index,
+  .accordion__summary:hover .accordion__index {
+    color: var(--accent);
+  }
+
+  .accordion__summary:hover .accordion__question {
+    color: var(--accent);
+  }
+
+  .accordion__toggle {
+    block-size: 1.2rem;
+    flex: none;
+    inline-size: 1.2rem;
+    position: relative;
+  }
+
+  .accordion__toggle::before,
+  .accordion__toggle::after {
+    background-color: var(--muted);
+    content: "";
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    position: absolute;
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      background-color var(--dur-base) var(--ease-out);
+  }
+
+  .accordion__toggle::before {
+    block-size: 1.5px;
+    inline-size: 100%;
+    transform: translate(-50%, -50%);
+  }
+
+  .accordion__toggle::after {
+    block-size: 100%;
+    inline-size: 1.5px;
+    transform: translate(-50%, -50%);
+  }
+
+  .accordion__item[open] .accordion__toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .accordion__item[open] .accordion__toggle::before,
+  .accordion__item[open] .accordion__toggle::after,
+  .accordion__summary:hover .accordion__toggle::before,
+  .accordion__summary:hover .accordion__toggle::after {
+    background-color: var(--accent);
   }
 
   .accordion__content {
@@ -51,19 +124,30 @@
   }
 
   .accordion__content-inner {
-    padding: 0 1.25rem 1.25rem;
+    font-size: var(--text-base);
+    line-height: 1.65;
+    max-inline-size: 62ch;
+    padding: 0 1.25rem 1.5rem 3.4rem;
   }
 
-  /* Smooth expand where supported (needs interpolate-size: allow-keywords) */
+  .accordion__content-inner a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
   .accordion__item::details-content {
     block-size: 0;
+    opacity: 0;
     overflow: hidden;
     transition:
-      block-size var(--dur-base) var(--ease-standard),
+      block-size var(--dur-base) var(--ease-out),
+      opacity var(--dur-base) var(--ease-out),
       content-visibility var(--dur-base) allow-discrete;
   }
 
   .accordion__item[open]::details-content {
     block-size: auto;
+    opacity: 1;
   }
 }

@@ -2,58 +2,35 @@
 import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
 import SocialLinks from "./SocialLinks.astro";
+import HighlightText from "../ui/HighlightText.astro";
 import { footerContent } from "../../data/footer";
 import { siteData } from "../../data/site";
 
-const { sections } = footerContent;
+const { statement, statementHighlight, tagline, sections, note } = footerContent;
 const year = new Date().getFullYear();
 const location = `${siteData.address.city}, ${siteData.address.country}`;
 ---
 
-<footer class="footer">
+<footer class="footer" data-pagefind-ignore>
   <div class="footer__inner">
-    <div class="footer__brand">
-      <Logo />
-
-      <ul class="footer__contact">
-        <li>
-          <a href={`mailto:${siteData.email}`} class="footer__contact-item">
-            <span class="footer__contact-icon">
-              <Icon name="mdi:email-outline" aria-hidden="true" />
-            </span>
-            <span class="footer__contact-text">
-              <span class="footer__contact-value">{siteData.email}</span>
-              <span class="footer__contact-note">
-                <Icon name="mdi:clock-outline" aria-hidden="true" />
-                Response within <strong>24 hours</strong>
-              </span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <span class="footer__contact-item">
-            <span class="footer__contact-icon">
-              <Icon name="mdi:map-marker-outline" aria-hidden="true" />
-            </span>
-            <span class="footer__contact-value">{location}</span>
-          </span>
-        </li>
-      </ul>
-
-      <div class="footer__social-block">
-        <p class="footer__social-label">Follow us</p>
-        <SocialLinks />
-      </div>
+    <div class="footer__lead">
+      <p class="footer__statement" data-anim="type">
+        <HighlightText text={statement} highlight={statementHighlight} />
+      </p>
     </div>
 
-    <nav class="footer__cols" aria-label="Footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <Logo />
+        <p class="footer__tagline">{tagline}</p>
+        <p class="footer__note">{note}</p>
+        <SocialLinks />
+      </div>
+
       {
         sections.map((s) => (
-          <div class="footer__col">
-            <p class="footer__col-title">
-              <Icon name={s.icon} aria-hidden="true" />
-              {s.title}
-            </p>
+          <nav class="footer__col" aria-label={s.title}>
+            <p class="footer__col-title">{s.title}</p>
             <ul class="footer__list">
               {s.links.map((l) => (
                 <li>
@@ -63,31 +40,38 @@ const location = `${siteData.address.city}, ${siteData.address.country}`;
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         ))
       }
-    </nav>
-  </div>
 
-  <div class="footer__bar">
-    <p class="footer__copy">© {year} {siteData.name}. All rights reserved.</p>
-    <div class="footer__meta">
-      <span class="footer__loc">
-        <Icon name="mdi:map-marker-outline" aria-hidden="true" />
-        {location}
-      </span>
-      <a
-        href="/legal/privacy-policy/"
-        class="footer__pill"
-        aria-label="PDPL compliant — view our Privacy Policy"
-      >
-        <Icon name="mdi:shield-check" aria-hidden="true" />
-        PDPL Compliant
-      </a>
-      <button type="button" class="footer__pill footer__pill--button" data-consent-reopen>
-        <Icon name="mdi:tune" aria-hidden="true" />
-        Cookie settings
-      </button>
+      <div class="footer__col">
+        <p class="footer__col-title">Connect</p>
+        <ul class="footer__contact">
+          <li>
+            <Icon name="mdi:email-outline" aria-hidden="true" />
+            <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
+          </li>
+          <li>
+            <Icon name="mdi:map-marker-outline" aria-hidden="true" />
+            <span>{location}</span>
+          </li>
+          <li>
+            <Icon name="mdi:clock-check-outline" aria-hidden="true" />
+            <span>{siteData.stats.responseTime.value}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <p class="footer__copy">© {year} {siteData.name}</p>
+      <div class="footer__meta">
+        <button type="button" class="footer__pill" data-consent-reopen>Cookie settings</button>
+        <a href="#main" class="footer__pill footer__top">
+          Back to top
+          <Icon name="mdi:arrow-up" aria-hidden="true" />
+        </a>
+      </div>
     </div>
   </div>
 </footer>

@@ -32,24 +32,24 @@ import { siteData } from "../../data/site";
   <h2>2. What We Mean by Cookies and Similar Technologies</h2>
   <p>
     We use more than traditional browser cookies. Depending on the feature,
-    data may be stored in a first-party cookie, in local storage, or handled
-    through a consent-aware tag manager. In this policy, we refer to those
-    together where that is the clearest explanation.
+    data may be stored in a first-party cookie or in local storage. In this
+    policy, we refer to those together where that is the clearest explanation.
   </p>
 
   <h2>3. How Consent Works on This Site</h2>
   <p>
-    AUXO uses Google Tag Manager with consent defaults that keep analytics and
-    advertising storage denied until you make a choice. Essential functionality
-    needed for security or core preferences can still operate.
+    By default, no analytics storage or analytics scripts load. Google
+    Analytics (GA4) is loaded directly by the site only after you give explicit
+    consent through the cookie banner. We do not use a Google Tag Manager
+    container. Essential functionality needed for security or core preferences
+    can still operate without consent.
   </p>
   <ul>
-    <li><strong>Accept All:</strong> enables optional analytics and preference storage categories.</li>
-    <li><strong>Reject All:</strong> keeps non-essential categories off.</li>
-    <li><strong>Manage Preferences:</strong> lets you choose categories individually.</li>
+    <li><strong>Accept:</strong> records your consent and loads analytics.</li>
+    <li><strong>Reject:</strong> records your choice and keeps analytics off.</li>
   </ul>
   <p>
-    You can reopen those controls through the
+    You can reopen these controls through the
     <strong>Cookie Settings</strong> button in the footer.
   </p>
 
@@ -104,7 +104,7 @@ import { siteData } from "../../data/site";
         <td><code>auxo_consent_*</code></td>
         <td>AUXO Data Labs</td>
         <td>Cookie</td>
-        <td>Stores granted or denied states for analytics, marketing, and preference categories so GTM can apply consent before tags run.</td>
+        <td>Stores your granted or denied analytics consent so the site knows whether to load Google Analytics on later visits.</td>
         <td>Up to 12 months</td>
         <td>Strictly necessary</td>
       </tr>
@@ -166,8 +166,8 @@ import { siteData } from "../../data/site";
 
   <h2>7. Third-Party Tools and Cross-Border Processing</h2>
   <p>
-    Some site functions rely on third-party services such as Google Tag
-    Manager, Google Analytics, or Google Calendar booking flows. Those services
+    Some site functions rely on third-party services such as Google Analytics
+    (loaded only after consent) or Google Calendar booking flows. Those services
     may process technical request data outside your country.
   </p>
 

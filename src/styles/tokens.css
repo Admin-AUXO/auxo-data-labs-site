@@ -1,99 +1,96 @@
-/* ============================================================
-   AUXO design tokens — Tailwind 4 (@theme) + semantic theming
-   - Primitives (@theme): theme-agnostic ramps & scales -> also
-     emit Tailwind utilities (bg-accent-400, text-3xl, ...).
-   - Semantic channels (:root / [data-theme]): swap per theme.
-   - @theme inline: map channels -> color utilities so
-     bg-surface / text-muted / ring-ring track the live theme.
-   ============================================================ */
-
-/* data-theme drives color mode (toggle-based, not OS-based) */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 @theme {
-  /* --- Accent ramp: OKLCH from #A3E635 (hue ~124) --- */
-  --color-accent-50: oklch(0.971 0.045 124);
-  --color-accent-100: oklch(0.945 0.085 124);
-  --color-accent-200: oklch(0.915 0.130 124);
-  --color-accent-300: oklch(0.895 0.170 124);
-  --color-accent-400: oklch(0.880 0.200 124); /* ~ #A3E635 (dark accent) */
-  --color-accent-500: oklch(0.800 0.196 124);
-  --color-accent-600: oklch(0.685 0.165 124); /* ~ #6F9E2D (light accent) */
-  --color-accent-700: oklch(0.560 0.135 125);
-  --color-accent-800: oklch(0.435 0.100 125);
-  --color-accent-900: oklch(0.335 0.072 126);
-  --color-accent-950: oklch(0.235 0.050 126);
-
-  /* --- Neutral ramp: faint green drift (hue 124), low chroma --- */
-  --color-neutral-0: oklch(1 0 0);
-  --color-neutral-50: oklch(0.985 0.002 124);
-  --color-neutral-100: oklch(0.966 0.004 124);
-  --color-neutral-200: oklch(0.922 0.005 124);
-  --color-neutral-300: oklch(0.874 0.006 124);
-  --color-neutral-400: oklch(0.715 0.007 124);
-  --color-neutral-500: oklch(0.560 0.007 124);
-  --color-neutral-600: oklch(0.448 0.007 124);
-  --color-neutral-700: oklch(0.350 0.008 124);
-  --color-neutral-800: oklch(0.268 0.008 124);
-  --color-neutral-850: oklch(0.205 0.008 124);
-  --color-neutral-900: oklch(0.162 0.008 124);
-  --color-neutral-950: oklch(0.110 0.007 124);
-
-  /* --- Status --- */
-  --color-danger: oklch(0.640 0.205 25);
-  --color-warning: oklch(0.800 0.150 78);
-  --color-info: oklch(0.680 0.140 240);
-  --color-success: oklch(0.720 0.165 150);
-
-  /* --- Typography: families + fluid scale (no breakpoint overrides) --- */
+  --color-accent-50: oklch(97.5% 0.016 150deg);
+  --color-accent-100: oklch(94.5% 0.038 150deg);
+  --color-accent-200: oklch(89.5% 0.070 150deg);
+  --color-accent-300: oklch(82.5% 0.108 150deg);
+  --color-accent-400: oklch(75% 0.145 150deg);
+  --color-accent-500: oklch(65% 0.150 151deg);
+  --color-accent-600: oklch(55% 0.138 151deg);
+  --color-accent-700: oklch(47% 0.118 152deg);
+  --color-accent-750: oklch(44% 0.106 152deg);
+  --color-accent-800: oklch(40% 0.092 152deg);
+  --color-accent-900: oklch(31% 0.070 153deg);
+  --color-accent-950: oklch(22% 0.050 153deg);
+  --color-clay-400: oklch(73% 0.105 42deg);
+  --color-clay-600: oklch(56% 0.122 39deg);
+  --color-clay-700: oklch(48% 0.115 38deg);
+  --color-neutral-0: oklch(100% 0 0deg);
+  --color-neutral-50: oklch(98.6% 0 0deg);
+  --color-neutral-100: oklch(96.8% 0 0deg);
+  --color-neutral-200: oklch(92.6% 0 0deg);
+  --color-neutral-300: oklch(87.6% 0 0deg);
+  --color-neutral-400: oklch(71.5% 0 0deg);
+  --color-neutral-450: oklch(64% 0 0deg);
+  --color-neutral-500: oklch(56% 0 0deg);
+  --color-neutral-550: oklch(50% 0 0deg);
+  --color-neutral-600: oklch(44.8% 0 0deg);
+  --color-neutral-700: oklch(35% 0 0deg);
+  --color-neutral-800: oklch(26.5% 0 0deg);
+  --color-neutral-850: oklch(19.5% 0 0deg);
+  --color-neutral-900: oklch(14.5% 0 0deg);
+  --color-neutral-925: oklch(11.5% 0 0deg);
+  --color-neutral-950: oklch(8.5% 0 0deg);
+  --color-danger: oklch(64% 0.205 25deg);
+  --color-success: oklch(62% 0.140 150deg);
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  --font-brand: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-
-  --text-xs: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --font-brand: "Sora", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", "Consolas", ui-monospace, monospace;
+  --font-weight-display: 600;
+  --font-weight-display-strong: 700;
+  --tracking-mono: 0.08em;
+  --tracking-mono-wide: 0.18em;
+  --tracking-display-6xl: -0.03em;
+  --tracking-display-5xl: -0.026em;
+  --tracking-display-4xl: -0.022em;
+  --tracking-display-3xl: -0.018em;
+  --tracking-display-2xl: -0.014em;
+  --tracking-display-xl: -0.009em;
+  --tracking-tight: -0.003em;
+  --text-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.82rem);
   --text-xs--line-height: 1.5;
-  --text-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.95rem);
+  --text-sm: clamp(0.84rem, 0.8rem + 0.2vw, 0.95rem);
   --text-sm--line-height: 1.55;
-  --text-base: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
-  --text-base--line-height: 1.7;
-  --text-lg: clamp(1.15rem, 1.08rem + 0.35vw, 1.35rem);
-  --text-lg--line-height: 1.6;
-  --text-xl: clamp(1.35rem, 1.2rem + 0.7vw, 1.7rem);
-  --text-xl--line-height: 1.4;
-  --text-2xl: clamp(1.7rem, 1.45rem + 1.2vw, 2.3rem);
-  --text-2xl--line-height: 1.25;
-  --text-3xl: clamp(2.1rem, 1.7rem + 2vw, 3.25rem);
-  --text-3xl--line-height: 1.15;
-  --text-4xl: clamp(2.6rem, 2rem + 3vw, 4.5rem);
-  --text-4xl--line-height: 1.08;
-  --text-5xl: clamp(3.2rem, 2.4rem + 4vw, 6rem);
-  --text-5xl--line-height: 1.03;
-
-  /* --- Radii --- */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-
-  /* --- Accent glow (dark-theme depth without heavy drop shadows) --- */
-  --shadow-accent: 0 10px 40px -12px color-mix(in oklch, var(--color-accent-400) 45%, transparent);
-
-  /* --- Ultra-wide breakpoint --- */
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-base--line-height: 1.65;
+  --text-lg: clamp(1.12rem, 1.02rem + 0.5vw, 1.4rem);
+  --text-lg--line-height: 1.5;
+  --text-xl: clamp(1.3rem, 1.1rem + 0.9vw, 1.85rem);
+  --text-xl--line-height: 1.35;
+  --text-2xl: clamp(1.6rem, 1.2rem + 1.7vw, 2.6rem);
+  --text-2xl--line-height: 1.2;
+  --text-3xl: clamp(2rem, 1.4rem + 2.7vw, 3.6rem);
+  --text-3xl--line-height: 1.1;
+  --text-4xl: clamp(2.5rem, 1.5rem + 4.6vw, 5rem);
+  --text-4xl--line-height: 1.04;
+  --text-5xl: clamp(3rem, 1.3rem + 7.4vw, 6.5rem);
+  --text-5xl--line-height: 1;
+  --text-6xl: clamp(3.4rem, 0.4rem + 11vw, 9rem);
+  --text-6xl--line-height: 0.95;
+  --radius-sm: 0.1875rem;
+  --radius-md: 0.3125rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1.25rem;
+  --radius-full: 9999px;
   --breakpoint-3xl: 120rem;
-
-  /* --- Motion --- */
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+  --ease-glide: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.32, 0.08, 0.24, 1);
 }
 
-/* Non-Tailwind primitives consumed by authored component CSS */
 :root {
-  --dur-fast: 150ms;
-  --dur-base: 220ms;
-  --dur-slow: 320ms;
-
+  --measure: 66ch;
+  --measure-lead: 54ch;
+  --dur-fast: 190ms;
+  --dur-base: 320ms;
+  --dur-slow: 480ms;
+  --dur-slower: 720ms;
+  --gutter: clamp(1.25rem, 0.6rem + 3.2vw, 3rem);
   --z-base: 0;
   --z-raised: 10;
   --z-sticky: 100;
@@ -102,46 +99,71 @@
   --z-toast: 1200;
 }
 
-/* --- Semantic channels: DARK (default) --- */
 :root,
-[data-theme="dark"] {
-  color-scheme: dark;
-  --background: var(--color-neutral-950);
-  --surface: var(--color-neutral-900);
-  --surface-raised: var(--color-neutral-850);
-  --surface-sunken: var(--color-neutral-950);
-  --foreground: var(--color-neutral-50);
-  --muted: var(--color-neutral-400);
-  --subtle: var(--color-neutral-500);
-  --border: var(--color-neutral-800);
-  --border-strong: var(--color-neutral-700);
-  --accent: var(--color-accent-400);
-  --accent-hover: var(--color-accent-300);
-  --accent-foreground: var(--color-neutral-950);
-  --ring: var(--color-accent-400);
-  --overlay: color-mix(in oklch, var(--color-neutral-950) 72%, transparent);
-}
-
-/* --- Semantic channels: LIGHT --- */
 [data-theme="light"] {
   color-scheme: light;
-  --background: var(--color-neutral-0);
-  --surface: var(--color-neutral-50);
+
+  --background: oklch(97.6% 0.008 70deg);
+  --surface: oklch(99.4% 0.004 70deg);
   --surface-raised: var(--color-neutral-0);
-  --surface-sunken: var(--color-neutral-100);
-  --foreground: var(--color-neutral-900);
+  --surface-sunken: oklch(95.6% 0.012 68deg);
+  --foreground: var(--color-neutral-950);
   --muted: var(--color-neutral-600);
-  --subtle: var(--color-neutral-500);
+  --subtle: var(--color-neutral-550);
   --border: var(--color-neutral-200);
   --border-strong: var(--color-neutral-300);
-  --accent: var(--color-accent-600);
-  --accent-hover: var(--color-accent-700);
+  --hairline: color-mix(in oklch, var(--color-neutral-950) 11%, transparent);
+  --accent: #6f9e2d;
+  --accent-hover: color-mix(in oklch, #6f9e2d 85%, var(--color-neutral-950));
   --accent-foreground: var(--color-neutral-0);
-  --ring: var(--color-accent-600);
-  --overlay: color-mix(in oklch, var(--color-neutral-900) 45%, transparent);
+  --accent-soft: color-mix(in oklch, #6f9e2d 12%, transparent);
+  --accent-2: #b4531f;
+  --accent-2-soft: color-mix(in oklch, #b4531f 12%, transparent);
+  --ink-bg: var(--color-neutral-950);
+  --ink-foreground: var(--color-neutral-50);
+  --ink-muted: var(--color-neutral-400);
+  --ink-border: color-mix(in oklch, var(--color-neutral-50) 16%, transparent);
+  --ink-accent: #a3e635;
+  --ink-accent-foreground: var(--color-neutral-950);
+  --ring: #6f9e2d;
+  --overlay: color-mix(in oklch, var(--color-neutral-950) 40%, transparent);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-md: 0 6px 20px -6px rgb(0 0 0 / 12%), 0 2px 6px -2px rgb(0 0 0 / 6%);
+  --shadow-lg: 0 22px 50px -14px rgb(0 0 0 / 16%), 0 6px 16px -6px rgb(0 0 0 / 8%);
 }
 
-/* Map semantic channels -> Tailwind color utilities (live, theme-aware) */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --background: var(--color-neutral-950);
+  --surface: var(--color-neutral-850);
+  --surface-raised: var(--color-neutral-800);
+  --surface-sunken: var(--color-neutral-900);
+  --foreground: var(--color-neutral-50);
+  --muted: var(--color-neutral-400);
+  --subtle: var(--color-neutral-450);
+  --border: color-mix(in oklch, var(--color-neutral-50) 15%, transparent);
+  --border-strong: color-mix(in oklch, var(--color-neutral-50) 24%, transparent);
+  --hairline: color-mix(in oklch, var(--color-neutral-50) 11%, transparent);
+  --accent: #a3e635;
+  --accent-hover: color-mix(in oklch, #a3e635 82%, var(--color-neutral-50));
+  --accent-foreground: var(--color-neutral-950);
+  --accent-soft: color-mix(in oklch, #a3e635 14%, transparent);
+  --accent-2: #e8995c;
+  --accent-2-soft: color-mix(in oklch, #e8995c 16%, transparent);
+  --ink-bg: var(--color-neutral-50);
+  --ink-foreground: var(--color-neutral-950);
+  --ink-muted: var(--color-neutral-600);
+  --ink-border: color-mix(in oklch, var(--color-neutral-950) 14%, transparent);
+  --ink-accent: #6f9e2d;
+  --ink-accent-foreground: var(--color-neutral-50);
+  --ring: #a3e635;
+  --overlay: color-mix(in oklch, var(--color-neutral-950) 72%, transparent);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-md: 0 8px 24px -8px rgb(0 0 0 / 55%), 0 2px 8px -2px rgb(0 0 0 / 40%);
+  --shadow-lg: 0 26px 58px -16px rgb(0 0 0 / 66%), 0 8px 20px -8px rgb(0 0 0 / 45%);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
@@ -152,9 +174,13 @@
   --color-subtle: var(--subtle);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
+  --color-hairline: var(--hairline);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-soft: var(--accent-2-soft);
   --color-ring: var(--ring);
   --color-overlay: var(--overlay);
 }

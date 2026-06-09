@@ -1,50 +1,45 @@
 ---
 import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
-import NavDropdown from "./NavDropdown.astro";
-import ThemeToggle from "../ui/ThemeToggle.astro";
+import SocialLinks from "./SocialLinks.astro";
 import Dialog from "../ui/Dialog.astro";
 import { navigationContent } from "../../data/navigation";
+import { siteData } from "../../data/site";
 
-const { items } = navigationContent;
+const { items, cta } = navigationContent;
+const here = Astro.url.pathname;
+const isActive = (href: string) => here === href || (href !== "/" && here.startsWith(href));
 ---
 
-<header class="nav" data-nav transition:persist>
+<header class="nav" data-nav data-pagefind-ignore>
   <div class="nav__inner">
     <Logo />
 
     <nav class="nav__links" aria-label="Primary">
       {
-        items.map((item) =>
-          item.hasDropdown ? (
-            <div class="nav__item nav__item--dropdown">
-              <a href={item.href} class="nav__link" aria-haspopup="true">
-                {item.name}
-                <Icon name="mdi:chevron-down" class="nav__chevron" aria-hidden="true" />
-              </a>
-              <div class="nav__panel">
-                <div class="nav__panel-inner">
-                  <NavDropdown items={item.dropdown ?? []} />
-                </div>
-              </div>
-            </div>
-          ) : (
-            <a href={item.href} class="nav__link">
-              {item.name}
-            </a>
-          )
-        )
+        items.map((item) => (
+          <a
+            href={item.href}
+            class="nav__link"
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.name}
+          </a>
+        ))
       }
     </nav>
 
     <div class="nav__actions">
-      <ThemeToggle />
-      <a href="/contact/" class="btn nav__cta" data-variant="primary" data-size="sm">Let's talk</a>
-      <button type="button" class="nav__burger" data-dialog-open="mobile-nav" aria-label="Open menu">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
+      <button type="button" class="icon-btn" data-dialog-open="site-search" data-search-open aria-label="Search the site">
+        <Icon name="mdi:magnify" aria-hidden="true" />
+      </button>
+      <a href={cta.href} class="btn nav__cta" data-variant="primary" data-size="sm">
+        {cta.label}
+      </a>
+      <button type="button" class="icon-btn nav__burger" data-dialog-open="mobile-nav" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="7" x2="21" y2="7"></line>
+          <line x1="3" y1="17" x2="21" y2="17"></line>
         </svg>
       </button>
     </div>
@@ -54,30 +49,109 @@ const { items } = navigationContent;
 <Dialog id="mobile-nav" title="Menu" size="full" class="mobile-nav">
   <nav class="mobile-nav__links" aria-label="Mobile">
     {
-      items.map((item) =>
-        item.hasDropdown ? (
-          <details class="mobile-nav__group">
-            <summary class="mobile-nav__summary">
-              {item.name}
-              <Icon name="mdi:chevron-down" class="accordion__chevron" aria-hidden="true" />
-            </summary>
-            <ul class="mobile-nav__sublist">
-              {(item.dropdown ?? []).map((s) => (
-                <li>
-                  <a href={s.href} class="mobile-nav__sublink" data-dialog-close>
-                    {s.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </details>
-        ) : (
-          <a href={item.href} class="mobile-nav__link" data-dialog-close>
-            {item.name}
-          </a>
-        )
-      )
+      items.map((item) => (
+        <a
+          href={item.href}
+          class="mobile-nav__link"
+          aria-current={isActive(item.href) ? "page" : undefined}
+          data-dialog-close
+        >
+          <span>{item.name}</span>
+          <Icon name="mdi:arrow-right" class="mobile-nav__link-icon" aria-hidden="true" />
+        </a>
+      ))
     }
-    <a href="/contact/" class="btn" data-variant="primary" data-size="lg" data-dialog-close>Let's talk</a>
   </nav>
+
+  <div class="mobile-nav__foot">
+    <a href={cta.href} class="btn mobile-nav__cta" data-variant="primary" data-size="lg" data-dialog-close>
+      {cta.label}
+    </a>
+    <div class="mobile-nav__meta">
+      <a href={`mailto:${siteData.email}`} class="mobile-nav__email">{siteData.email}</a>
+      <SocialLinks />
+    </div>
+  </div>
 </Dialog>
+
+<Dialog id="site-search" title="Search" size="lg" class="search-dialog">
+  <div id="pagefind-search" class="search-dialog__ui" data-search-status="idle">
+    <p class="search-dialog__loading" hidden>Loading search…</p>
+  </div>
+  <p class="search-dialog__hint">Search insights and pages across the site.</p>
+</Dialog>
+
+<script>
+  let prefetched = false;
+  let initPromise: Promise<void> | null = null;
+
+  function prefetchSearch() {
+    if (prefetched) return;
+    prefetched = true;
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "/pagefind/pagefind-ui.css";
+    document.head.appendChild(css);
+    const js = document.createElement("link");
+    js.rel = "prefetch";
+    js.as = "script";
+    js.href = "/pagefind/pagefind-ui.js";
+    document.head.appendChild(js);
+  }
+
+  function setStatus(status: string) {
+    const el = document.getElementById("pagefind-search");
+    if (!el) return;
+    el.dataset.searchStatus = status;
+    const loading = el.querySelector<HTMLElement>(".search-dialog__loading");
+    if (loading) loading.hidden = status !== "loading";
+  }
+
+  function loadSearch() {
+    if (initPromise) return initPromise;
+    prefetchSearch();
+    setStatus("loading");
+    initPromise = (async () => {
+      try {
+        await new Promise<void>((resolve, reject) => {
+          const s = document.createElement("script");
+          s.src = "/pagefind/pagefind-ui.js";
+          s.onload = () => resolve();
+          s.onerror = () => reject(new Error("pagefind"));
+          document.head.appendChild(s);
+        });
+        const w = window as unknown as { PagefindUI?: new (o: unknown) => void };
+        if (w.PagefindUI) {
+          new w.PagefindUI({
+            element: "#pagefind-search",
+            showSubResults: true,
+            showImages: false,
+            resetStyles: false,
+            translations: { placeholder: "Search AUXO…" },
+          });
+        }
+        setStatus("ready");
+      } catch {
+        const el = document.getElementById("pagefind-search");
+        if (el) el.textContent = "Search is available on the published site.";
+        setStatus("error");
+        initPromise = null;
+      }
+    })();
+    return initPromise;
+  }
+
+  function bind() {
+    document.querySelectorAll<HTMLElement>("[data-search-open]").forEach((btn) => {
+      if (btn.dataset.searchBound) return;
+      btn.dataset.searchBound = "true";
+      btn.addEventListener("pointerenter", prefetchSearch);
+      btn.addEventListener("mouseenter", prefetchSearch);
+      btn.addEventListener("focus", prefetchSearch);
+      btn.addEventListener("click", loadSearch);
+    });
+  }
+
+  bind();
+  document.addEventListener("astro:page-load", bind);
+</script>

@@ -1,26 +1,123 @@
 ---
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { homepageContent as c } from "../data/home";
-import HeroSection from "../components/sections/home/HeroSection.astro";
-import ProblemSolutionSection from "../components/sections/home/ProblemSolutionSection.astro";
-import DecisionFitSection from "../components/sections/home/DecisionFitSection.astro";
-import CapabilitiesSection from "../components/sections/home/CapabilitiesSection.astro";
-import ServicesIntroSection from "../components/sections/home/ServicesIntroSection.astro";
-import MethodologySection from "../components/sections/home/MethodologySection.astro";
-import TechStackSection from "../components/sections/home/TechStackSection.astro";
-import FinalCta from "../components/sections/home/FinalCta.astro";
+import Section from "../components/layout/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import Button from "../components/ui/Button.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
+import { homeContent as c } from "../data/home";
 ---
 
 <BaseLayout
-  title="Decision intelligence for the GCC"
-  description="AUXO is a Dubai-based decision intelligence partner. We fix the reporting, planning, and analytics workflows underneath so data changes how your teams decide."
+  title="Data & AI studio for Gulf real estate"
+  description="AUXO Data Labs turns the data Gulf developers, funds, and family offices already hold into reporting, forecasts, and automation they can trust — built on your systems, and yours to keep."
 >
-  <HeroSection hero={c.hero} />
-  <ProblemSolutionSection content={c.valueProposition} />
-  <DecisionFitSection content={c.decisionFit} />
-  <CapabilitiesSection content={c.capabilities} />
-  <ServicesIntroSection content={c.featuredServices} />
-  <MethodologySection content={c.methodology} />
-  <TechStackSection content={c.techStack} />
-  <FinalCta content={c.finalCta} />
+  <Section padding="xl" width="7xl">    <div class="flex flex-col gap-8">
+      <h1 class="text-display max-w-[15ch]" data-enter="headline">
+        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
+      </h1>
+      <p class="lead max-w-xl text-xl" data-enter>{c.hero.subtitle}</p>
+      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" data-enter>
+        <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
+          {c.hero.primaryCta.text}
+        </Button>
+        <Button variant="secondary" size="lg" href={c.hero.secondaryCta.href} class="w-full sm:w-auto">
+          {c.hero.secondaryCta.text}
+        </Button>
+      </div>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <SectionHeader title={c.capabilities.title} subtitle={c.capabilities.subtitle} />
+    <div class="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+      {
+        c.capabilities.items.map((item) => (
+          <article class="group flex flex-col bg-surface p-8" data-reveal>
+            <div class="mb-6 flex size-12 items-center justify-center rounded-lg bg-accent-soft text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-accent-foreground">
+              <Icon name={item.icon} class="size-6" aria-hidden="true" />
+            </div>
+            <h3 class="text-xl font-bold">{item.name}</h3>
+            <p class="mt-2 text-muted">{item.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <SectionHeader title={c.why.title} highlight={c.why.titleHighlight} />
+      <ul class="flex flex-col" data-reveal>
+        {
+          c.why.items.map((item, i) => (
+            <li
+              class:list={[
+                "flex flex-col gap-1 py-6 sm:flex-row sm:gap-8",
+                i > 0 && "border-t border-border",
+              ]}
+            >
+              <h3 class="text-lg font-bold sm:w-56 sm:shrink-0">{item.title}</h3>
+              <p class="text-muted">{item.desc}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <SectionHeader title={c.how.title} subtitle={c.how.subtitle} />
+    <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-3">
+      {
+        c.how.steps.map((step, i) => (
+          <div
+            class="flex flex-col gap-3 border-t-2 border-foreground pt-5"
+            data-anim={i === 0 ? "rise" : i === 1 ? "slide-right" : "slide-left"}
+          >
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-sm font-semibold tabular-nums text-accent-2">0{i + 1}</span>
+              <Icon name={step.icon} class="size-6 text-accent-2" aria-hidden="true" />
+            </div>
+            <h3 class="text-2xl font-bold">{step.title}</h3>
+            <p class="text-muted">{step.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+      <div class="flex flex-col" data-reveal>
+        <SectionHeader title={c.outcomes.title} highlight={c.outcomes.titleHighlight} />
+        <p class="lead mt-5 max-w-md">{c.outcomes.lead}</p>
+      </div>
+      <ul class="flex flex-col border-t border-border" data-reveal>
+        {
+          c.outcomes.items.map((item) => (
+            <li class="flex items-start gap-5 border-b border-border py-6">
+              <span class="mt-2.5 block h-px w-6 shrink-0 bg-accent"></span>
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6">
+                <h3 class="text-lg font-bold sm:w-44 sm:shrink-0">{item.title}</h3>
+                <p class="text-muted">{item.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <CtaSection
+    title={c.cta.title}
+    titleHighlight={c.cta.titleHighlight}
+    description={c.cta.description}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+    secondaryText={c.cta.secondaryText}
+    secondaryHref={c.cta.secondaryHref}
+    reassurance={c.cta.reassurance}
+  />
 </BaseLayout>

@@ -19,17 +19,16 @@ const {
   noindex,
 } = Astro.props;
 
-// Match the meta record on the current route (strip leading/trailing slashes).
 const currentPath = Astro.url.pathname.replace(/^\//, "").replace(/\/$/, "");
 const meta = LEGAL_PAGE_META[currentPath];
 ---
 
 <BaseLayout
-  title={`${title} | ${siteData.name}`}
+  title={title}
   description={description ?? `${title} for ${siteData.name}`}
   noindex={noindex}
 >
-  <Section padding="lg" width="4xl" background="surface">
+  <Section padding="lg" width="4xl">
     <header class="legal-header">
       {meta?.eyebrow && (
         <p class="legal-header__eyebrow">
@@ -81,8 +80,6 @@ const meta = LEGAL_PAGE_META[currentPath];
     margin: 0;
     font-size: var(--text-sm);
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
     color: var(--accent);
   }
 

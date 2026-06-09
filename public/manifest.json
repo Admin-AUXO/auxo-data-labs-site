@@ -2,11 +2,11 @@
   "name": "AUXO Data Labs",
   "short_name": "AUXO",
   "id": "/",
-  "description": "AUXO is a Dubai-based data analytics consultancy serving sophisticated clients across the GCC, Europe, and global markets.",
+  "description": "AUXO Data Labs is a compliance-native data & AI studio in Dubai for real-estate and portfolio teams — turning stalled dashboards and AI pilots into reporting, forecasting, and automation that reaches production.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#121212",
-  "theme_color": "#121212",
+  "background_color": "#0b0c0e",
+  "theme_color": "#0b0c0e",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -30,7 +30,7 @@
     {
       "name": "Services",
       "short_name": "Services",
-      "description": "Explore our data analytics services",
+      "description": "Reporting, forecasting, automation, and applied AI",
       "url": "/services",
       "icons": [
         {
@@ -43,7 +43,7 @@
     {
       "name": "Contact",
       "short_name": "Contact",
-      "description": "Get in touch with our team",
+      "description": "Book a working call with AUXO",
       "url": "/contact",
       "icons": [
         {
@@ -60,4 +60,3 @@
   "scope": "/",
   "display_override": ["standalone", "browser"]
 }
-

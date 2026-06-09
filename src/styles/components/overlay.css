@@ -15,15 +15,23 @@
   }
 
   .dialog__panel {
-    background-color: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-2xl);
+    background-color: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
     inline-size: min(100vw - 2rem, 40rem);
     margin: auto;
     max-block-size: min(100dvh - 2rem, 46rem);
     overflow: hidden;
+    transition: transform var(--dur-slow) var(--ease-glide);
+  }
+
+  @starting-style {
+    .dialog[open] .dialog__panel {
+      transform: translateY(16px) scale(0.97);
+    }
   }
 
   .dialog[data-size="lg"] .dialog__panel {
@@ -41,24 +49,36 @@
     display: flex;
     gap: 1rem;
     justify-content: space-between;
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 1.5rem;
   }
 
   .dialog__title {
+    align-items: center;
+    display: flex;
     font-size: var(--text-lg);
     font-weight: 700;
+    gap: 0.6rem;
+  }
+
+  .dialog__title::before {
+    background-color: var(--accent-2);
+    block-size: 1.05em;
+    border-radius: 1px;
+    content: "";
+    flex: none;
+    inline-size: 0.2rem;
   }
 
   .dialog__close {
     align-items: center;
+    block-size: 2.25rem;
     border-radius: var(--radius-md);
     color: var(--muted);
     cursor: pointer;
     display: inline-flex;
     font-size: 1.25rem;
-    justify-content: center;
-    block-size: 2.25rem;
     inline-size: 2.25rem;
+    justify-content: center;
     transition:
       background-color var(--dur-fast) var(--ease-standard),
       color var(--dur-fast) var(--ease-standard);
@@ -69,18 +89,34 @@
     color: var(--foreground);
   }
 
-  .dialog__body {
-    overflow: auto;
+  .dialog__close:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 
-  /* Enter/exit transition (progressive enhancement) */
+  .dialog__body {
+    overflow: auto;
+    padding: 1.5rem;
+  }
+
+  .calendar-dialog .dialog__body {
+    padding: 0;
+  }
+
+  .calendar-dialog__iframe {
+    block-size: min(70dvh, 38rem);
+    border: 0;
+    display: block;
+    inline-size: 100%;
+  }
+
   .dialog,
   .dialog::backdrop {
     opacity: 0;
     transition:
-      display var(--dur-base) allow-discrete,
-      opacity var(--dur-base) var(--ease-out),
-      overlay var(--dur-base) allow-discrete;
+      display var(--dur-slow) allow-discrete,
+      opacity var(--dur-slow) var(--ease-out),
+      overlay var(--dur-slow) allow-discrete;
   }
 
   .dialog[open],
@@ -96,7 +132,6 @@
   }
 }
 
-/* Lock background scroll while any modal dialog is open */
 html:has(dialog[open]) {
   overflow: hidden;
 }

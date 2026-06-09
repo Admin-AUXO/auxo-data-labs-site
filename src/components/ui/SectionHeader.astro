@@ -1,14 +1,11 @@
 ---
-import { Icon } from "astro-icon/components";
 import HighlightText from "./HighlightText.astro";
 
 interface Props {
-  eyebrow?: string;
   title: string;
   subtitle?: string;
   highlight?: string | string[];
   align?: "left" | "center";
-  icon?: string;
   class?: string;
 }
 
@@ -16,21 +13,20 @@ const {
   title,
   subtitle,
   highlight,
-  align = "center",
-  icon,
+  align = "left",
   class: className = "",
 } = Astro.props;
 
-const alignment =
-  align === "center" ? "items-center text-center mx-auto max-w-3xl" : "items-start text-left";
+const wrap =
+  align === "center"
+    ? "items-center text-center mx-auto max-w-2xl"
+    : "items-start text-left max-w-3xl";
 ---
 
-<div class={`flex flex-col gap-4 ${alignment} ${className}`.trim()} data-reveal>
-  {icon && (
-    <span class="card__icon"><Icon name={icon} aria-hidden="true" /></span>
-  )}
-  <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+<div class={`flex flex-col gap-5 ${wrap} ${className}`.trim()} data-reveal>
+  {align === "left" && <span class="block h-0.5 w-14 bg-accent-2" aria-hidden="true" data-anim="draw"></span>}
+  <h2 class="text-3xl font-bold sm:text-4xl" data-anim="clip-up">
     <HighlightText text={title} highlight={highlight} />
   </h2>
-  {subtitle && <p class="text-lg text-muted">{subtitle}</p>}
+  {subtitle && <p class="lead max-w-2xl text-balance">{subtitle}</p>}
 </div>

@@ -1,12 +1,8 @@
-/**
- * Contact form client logic: inline validation, char counter, and EmailJS
- * submission with graceful degradation when EmailJS is not configured.
- */
-import { env, emailjsConfigured } from "../../config/env";
+import { actions } from "astro:actions";
 import { contactContent } from "../../data/contact";
+import { EMAIL_RE, actionErrorMessage, renderStatus, type StatusState } from "./_status";
 
 const FORM_ID = "contact-form";
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const status = contactContent.form.status;
 
 type Validator = (value: string) => string | null;
@@ -40,11 +36,8 @@ function validateControl(control: HTMLInputElement | HTMLTextAreaElement): boole
   return setError(field, control, validate(control.value.trim()));
 }
 
-function setStatus(region: HTMLElement, state: "success" | "error" | "info", message: string) {
-  region.dataset.state = state;
-  const icon =
-    state === "success" ? "M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" : "M11 15h2v2h-2zm0-8h2v6h-2z";
-  region.innerHTML = `<svg class="form-status__icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${icon}"/></svg><span>${message}</span>`;
+function setStatus(region: HTMLElement, state: StatusState, message: string) {
+  renderStatus(region, state, message, { iconClass: "form-status__icon", iconSize: 20 });
 }
 
 function initContactForm() {
@@ -53,11 +46,14 @@ function initContactForm() {
   form.dataset.bound = "true";
 
   const controls = Array.from(
-    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea, select"),
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+      'input:not([type="checkbox"]):not([data-honeypot]), textarea, select',
+    ),
   );
+  const consentInput = form.querySelector<HTMLInputElement>('input[name="consent"]');
+  const honeypotInput = form.querySelector<HTMLInputElement>('input[data-honeypot]');
   const statusRegion = form.querySelector<HTMLElement>(".form-status");
 
-  // Character counter for the message field.
   const message = form.querySelector<HTMLTextAreaElement>("#message");
   const counter = form.querySelector<HTMLElement>('[data-counter="message"]');
   if (message && counter) {
@@ -70,7 +66,6 @@ function initContactForm() {
     message.addEventListener("input", update);
   }
 
-  // Inline validation: validate on blur, clear errors on input.
   controls.forEach((control) => {
     if (control instanceof HTMLSelectElement) return;
     control.addEventListener("blur", () => validateControl(control));
@@ -89,8 +84,9 @@ function initContactForm() {
       return;
     }
 
-    if (!emailjsConfigured()) {
-      setStatus(statusRegion, "info", status.notConfigured);
+    if (!consentInput?.checked) {
+      setStatus(statusRegion, "error", status.consentRequired);
+      consentInput?.focus();
       return;
     }
 
@@ -100,26 +96,29 @@ function initContactForm() {
     setStatus(statusRegion, "info", status.sending);
 
     try {
-      const { default: emailjs } = await import("@emailjs/browser");
-      emailjs.init(env.emailjs.publicKey);
-      await emailjs.send(
-        env.emailjs.serviceId,
-        env.emailjs.templateId,
-        {
-          from_name: data.get("name"),
-          from_email: data.get("email"),
-          company: data.get("company") || "Not provided",
-          topic: data.get("topic") || "Not specified",
-          message: data.get("message"),
-        },
-        env.emailjs.publicKey,
-      );
-      setStatus(statusRegion, "success", status.success);
-      form.reset();
-      controls.forEach((c) => c.setAttribute("aria-invalid", "false"));
-      if (counter && message) {
-        counter.textContent = `0/${message.getAttribute("maxlength") || 500}`;
-        counter.dataset.near = "false";
+      const { data: result, error } = await actions.contactEnquiry({
+        name: String(data.get("name") ?? ""),
+        email: String(data.get("email") ?? ""),
+        company: String(data.get("company") ?? ""),
+        topic: String(data.get("topic") ?? ""),
+        message: String(data.get("message") ?? ""),
+        consent: consentInput.checked,
+        company_url: honeypotInput?.value ?? "",
+      });
+
+      if (error) {
+        setStatus(statusRegion, "error", actionErrorMessage(error, status.error));
+        return;
+      }
+
+      if (result?.ok) {
+        setStatus(statusRegion, "success", status.success);
+        form.reset();
+        controls.forEach((c) => c.setAttribute("aria-invalid", "false"));
+        if (counter && message) {
+          counter.textContent = `0/${message.getAttribute("maxlength") || 500}`;
+          counter.dataset.near = "false";
+        }
       }
     } catch {
       setStatus(statusRegion, "error", status.error);
@@ -131,13 +130,4 @@ function initContactForm() {
 
 export function init() {
   initContactForm();
-}
-
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
-  document.addEventListener("astro:page-load", init);
 }

@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="consent" data-consent-banner hidden role="region" aria-label="Cookie consent">
+<div class="consent is-hidden" data-consent-banner role="region" aria-label="Cookie consent">
   <p class="consent__text">
     We use privacy-friendly analytics to understand how the site is used. See our
     <a href="/legal/cookie-policy/">Cookie Policy</a>.
@@ -35,7 +35,7 @@
     z-index: var(--z-toast);
   }
 
-  .consent[hidden] {
+  .consent.is-hidden {
     display: none;
   }
 
@@ -47,6 +47,8 @@
 
   .consent__text a {
     color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .consent__actions {

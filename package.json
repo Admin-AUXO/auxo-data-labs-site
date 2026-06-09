@@ -14,33 +14,47 @@
     "type-check": "astro sync && tsc --noEmit",
     "lint:css": "stylelint \"src/styles/**/*.css\" --allow-empty-input",
     "lint:css:fix": "stylelint \"src/styles/**/*.css\" --fix --allow-empty-input",
-    "lint": "npm run type-check && npm run lint:css",
+    "lint:js": "eslint .",
+    "lint": "npm run type-check && npm run lint:css && npm run lint:js",
     "validate": "npm run lint && npm run build",
     "test": "playwright test",
     "test:ui": "playwright test --ui"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/markdown-remark": "^7.2.0",
+    "@astrojs/mdx": "^6.0.1",
+    "@astrojs/partytown": "^2.1.7",
     "@astrojs/sitemap": "^3.7.3",
-    "@emailjs/browser": "^4.4.1",
+    "@astrojs/vercel": "^10.0.8",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.63",
-    "astro": "^6.3.8",
+    "astro": "^6.4.2",
     "astro-icon": "^1.1.5",
-    "embla-carousel": "^8.6.0",
-    "embla-carousel-autoplay": "^8.6.0"
+    "astro-og-canvas": "^0.11.1",
+    "astro-pagefind": "^2.0.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@iconify-json/simple-icons": "^1.2.84",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4.3.0",
+    "@typescript-eslint/parser": "^8.60.0",
+    "astro-eslint-parser": "^1.4.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "globals": "^17.6.0",
+    "mdast-util-to-string": "^4.0.0",
+    "pagefind": "^1.5.2",
+    "reading-time": "^1.5.0",
     "sharp": "^0.34.5",
-    "stylelint": "^16.26.1",
-    "stylelint-config-standard": "^39.0.1",
-    "stylelint-order": "^6.0.4",
+    "stylelint": "^17.12.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^8.1.1",
     "tailwindcss": "^4.3.0",
     "typescript": "^5.9.3"
   },
   "overrides": {
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "path-to-regexp": "^6.3.0"
   }
 }

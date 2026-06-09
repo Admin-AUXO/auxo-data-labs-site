@@ -1,8 +1,23 @@
-/* Self-hosted variable font (public/fonts). One family for body + brand. */
 @font-face {
   font-display: swap;
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 200 800;
   src: url("/fonts/PlusJakartaSans-VariableFont_wght.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Sora;
+  font-style: normal;
+  font-weight: 100 800;
+  src: url("/fonts/Sora-Variable.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 700;
+  src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations");
 }

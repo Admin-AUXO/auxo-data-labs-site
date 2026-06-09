@@ -1,32 +1,145 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { aboutContent as c } from "../data/about";
-import HeroSection from "../components/sections/about/HeroSection.astro";
-import PurposeSection from "../components/sections/about/PurposeSection.astro";
-import ApproachSection from "../components/sections/about/ApproachSection.astro";
-import PartnershipSection from "../components/sections/about/PartnershipSection.astro";
-import TeamSection from "../components/sections/about/TeamSection.astro";
-import MissionVisionSection from "../components/sections/about/MissionVisionSection.astro";
-import GlobalSection from "../components/sections/about/GlobalSection.astro";
+import Section from "../components/layout/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import Button from "../components/ui/Button.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
+import { aboutContent as c } from "../data/about";
+
+const stepAnim = ["slide-right", "rise", "slide-left"] as const;
 ---
 
 <BaseLayout
-  title="About AUXO"
-  description="AUXO Data Labs is a Dubai-based decision intelligence partner. We work between business context and technical delivery so analytics changes how the business actually runs."
+  title="Studio — Dubai data & AI for real estate"
+  description="AUXO is a small data and AI studio for real estate, based in Dubai and working across the UAE and the wider Gulf. We turn the data you already hold into reporting, forecasts, and automation you can trust — built on your systems, and yours to keep."
 >
-  <HeroSection hero={c.hero} />
-  <PurposeSection content={c.purpose} />
-  <ApproachSection content={c.approach} />
-  <PartnershipSection content={c.partnership} />
-  <TeamSection content={c.team} />
-  <MissionVisionSection content={c.mission} />
-  <GlobalSection content={c.global} />
+
+  <Section padding="xl" width="7xl">    <div class="flex max-w-3xl flex-col gap-7">
+      <h1 class="text-display text-display--5xl max-w-[14ch]" data-enter="headline">
+        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
+      </h1>
+      <p class="lead max-w-xl text-xl" data-enter>{c.hero.lead}</p>
+      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" data-enter>
+        <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
+          {c.hero.primaryCta.text}
+        </Button>
+        <Button variant="secondary" size="lg" href={c.hero.secondaryCta.href} class="w-full sm:w-auto">
+          {c.hero.secondaryCta.text}
+        </Button>
+      </div>
+    </div>
+  </Section>
+
+
+  <Section padding="lg" width="7xl">
+    <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <SectionHeader title={c.beliefs.title} highlight={c.beliefs.titleHighlight} />
+        <p class="mt-5 max-w-xs text-muted">{c.beliefs.lead}</p>
+      </div>
+      <div class="flex flex-col border-t border-border" data-reveal>
+        {
+          c.beliefs.items.map((item) => (
+            <article class="flex flex-col gap-3 border-b border-border py-6 sm:py-8 md:flex-row md:items-baseline md:gap-10">
+              <span class="block h-px w-10 shrink-0 bg-accent md:mt-3.5" />
+              <div class="max-w-2xl">
+                <h3 class="text-2xl font-bold">{item.title}</h3>
+                <p class="mt-2 text-lg text-muted">{item.desc}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+
+  <Section padding="lg" width="7xl">
+    <SectionHeader
+      title={c.how.title}
+      highlight={c.how.titleHighlight}
+      subtitle={c.how.subtitle}
+    />
+    <ol class="mt-10 grid gap-x-10 gap-y-8 sm:gap-y-12 md:mt-12 md:grid-cols-3">
+      {
+        c.how.steps.map((step, i) => (
+          <li class="relative flex flex-col gap-3 pt-6" data-anim={stepAnim[i]}>
+            <span class="absolute inset-x-0 top-0 h-0.5 bg-foreground" />
+            <span class="eyebrow text-accent-2">{step.label}</span>
+            <h3 class="text-2xl font-bold">{step.title}</h3>
+            <p class="text-muted">{step.desc}</p>
+            {i < c.how.steps.length - 1 && (
+              <span
+                class="pointer-events-none absolute -right-7 top-7 hidden text-2xl leading-none text-subtle md:block"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+
+  <Section padding="lg" width="7xl">
+    <div class="flex flex-col gap-10">
+      <div data-reveal>
+        <span class="eyebrow text-accent">
+          <HighlightText text={c.where.title} highlight={c.where.titleHighlight} />
+        </span>
+        <p class="mt-5 max-w-6xl text-2xl font-medium sm:text-3xl" data-anim="rise-in">
+          {c.where.body}
+        </p>
+      </div>
+      <dl class="grid gap-px border border-border bg-border sm:grid-cols-3" data-reveal>
+        {
+          c.where.points.map((point) => (
+            <div class="flex flex-col gap-2 bg-surface p-6 sm:p-8">
+              <dt class="mono-datum">{point.label}</dt>
+              <dd class="text-xl font-bold">{point.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+      <div data-reveal>
+        <SectionHeader title={c.engagement.title} highlight={c.engagement.titleHighlight} />
+        <p class="mt-5 max-w-sm text-lg text-muted">{c.engagement.lead}</p>
+        <p class="mt-6 flex items-start gap-3 text-sm text-subtle">
+          <span class="mt-2 h-px w-6 shrink-0 bg-accent" aria-hidden="true"></span>
+          {c.engagement.reassurance}
+        </p>
+      </div>
+      <ul class="grid grid-cols-1 gap-px border border-border bg-border min-[34rem]:grid-cols-2" data-reveal>
+        {
+          c.engagement.principles.map((principle, i) => (
+            <li class="flex flex-col gap-3 bg-surface p-6 sm:p-8" data-anim={i % 2 === 0 ? "slide-right" : "slide-left"}>
+              <span class="block h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+              <h3 class="text-xl font-bold text-balance">{principle.title}</h3>
+              <p class="text-muted">{principle.desc}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
   <CtaSection
     title={c.cta.title}
+    titleHighlight={c.cta.titleHighlight}
     description={c.cta.description}
     descriptionHighlight={c.cta.descriptionHighlight}
     ctaText={c.cta.ctaText}
     ctaHref={c.cta.ctaHref}
+    secondaryText={c.cta.secondaryText}
+    secondaryHref={c.cta.secondaryHref}
+    reassurance={c.cta.reassurance}
   />
 </BaseLayout>

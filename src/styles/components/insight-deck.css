@@ -1,0 +1,401 @@
+@layer components {
+  .deck {
+    margin-inline: auto;
+    max-inline-size: 100%;
+  }
+
+  .deck--ready {
+    max-inline-size: 40rem;
+  }
+
+  .deck-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-end: 1.75rem;
+  }
+
+  .deck__chip {
+    background-color: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-full);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    min-block-size: 2.4rem;
+    padding-block: 0.4rem;
+    padding-inline: 0.95rem;
+    text-transform: uppercase;
+    transition:
+      background-color var(--dur-fast) var(--ease-standard),
+      border-color var(--dur-fast) var(--ease-standard),
+      color var(--dur-fast) var(--ease-standard);
+  }
+
+  .deck__chip:hover {
+    border-color: var(--accent);
+    color: var(--foreground);
+  }
+
+  .deck__chip[aria-pressed="true"] {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .deck__chip:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .deck__viewport {
+    position: relative;
+  }
+
+  .deck__viewport:focus-visible {
+    border-radius: var(--radius-lg);
+    outline: 2px solid var(--ring);
+    outline-offset: 6px;
+  }
+
+  .deck__list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (width >= 48rem) {
+    .deck__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .deck__list {
+      gap: 1.25rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .deck__card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  .deck__card[data-hide] {
+    display: none;
+  }
+
+  .deck__card[data-flash] {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+  }
+
+  .deck__card-inner {
+    block-size: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  }
+
+  .deck__meta {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .deck__topic {
+    align-items: center;
+    color: var(--accent);
+    display: inline-flex;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    gap: 0.5rem;
+  }
+
+  .deck__topic::before {
+    background-color: currentcolor;
+    block-size: 0.5rem;
+    content: "";
+    flex: none;
+    inline-size: 0.5rem;
+  }
+
+  .deck__card[data-family="govern"] .deck__topic {
+    color: var(--accent-2);
+  }
+
+  .deck__share {
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    border-radius: var(--radius-sm);
+    color: var(--subtle);
+    cursor: pointer;
+    display: inline-flex;
+    flex: none;
+    justify-content: center;
+    padding: 0.35rem;
+    position: relative;
+    transition: color var(--dur-fast) var(--ease-standard);
+  }
+
+  .deck__share:hover,
+  .deck__share:focus-visible {
+    color: var(--accent);
+  }
+
+  .deck__share[data-copied] {
+    color: var(--accent);
+  }
+
+  .deck__share::after {
+    background-color: var(--ink-bg);
+    border-radius: var(--radius-sm);
+    color: var(--ink-foreground);
+    content: "Copied";
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    inset-block-end: calc(100% + 0.35rem);
+    inset-inline-end: 0;
+    opacity: 0;
+    padding-block: 0.2rem;
+    padding-inline: 0.45rem;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity var(--dur-fast) var(--ease-standard);
+    white-space: nowrap;
+  }
+
+  .deck__share[data-copied]::after {
+    opacity: 1;
+  }
+
+  .deck__share svg {
+    block-size: 1rem;
+    inline-size: 1rem;
+  }
+
+  .deck__title {
+    font-family: var(--font-brand);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    letter-spacing: var(--tracking-display-2xl);
+    line-height: 1.15;
+  }
+
+  .deck__takeaway {
+    color: var(--muted);
+    font-size: var(--text-lg);
+    line-height: 1.5;
+  }
+
+  .deck__link {
+    align-items: center;
+    align-self: flex-start;
+    background-image: linear-gradient(currentcolor, currentcolor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1.5px;
+    color: var(--accent-2);
+    display: inline-flex;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    gap: 0.35rem;
+    margin-block-start: 0.25rem;
+    text-decoration: none;
+    transition: background-size var(--dur-base) var(--ease-out);
+  }
+
+  .deck__link span {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .deck__link:hover,
+  .deck__link:focus-visible {
+    background-size: 100% 1.5px;
+  }
+
+  .deck__link:hover span,
+  .deck__link:focus-visible span {
+    transform: translate(2px, -2px);
+  }
+
+  @media (width >= 48rem) {
+    .deck__card-inner {
+      gap: 0.8rem;
+      padding: clamp(1.5rem, 1.1rem + 1vw, 2rem);
+    }
+
+    .deck__title {
+      font-size: var(--text-xl);
+    }
+
+    .deck__takeaway {
+      font-size: var(--text-base);
+    }
+
+    .deck__link {
+      margin-block-start: auto;
+      padding-block-start: 0.65rem;
+    }
+  }
+
+  .deck__controls,
+  .deck__hint {
+    display: none;
+  }
+
+  .deck--ready .deck__viewport {
+    min-block-size: var(--deck-h, 22rem);
+    touch-action: pan-y;
+  }
+
+  .deck--ready .deck__list {
+    block-size: var(--deck-h, 22rem);
+    display: block;
+    position: relative;
+  }
+
+  .deck--ready .deck__card {
+    cursor: default;
+    inset: 0;
+    position: absolute;
+    transition:
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+    will-change: transform, opacity;
+  }
+
+  .deck--ready .deck__card[data-state="active"] {
+    cursor: grab;
+    opacity: 1;
+    transform: none;
+    z-index: 3;
+  }
+
+  .deck--ready .deck__card[data-state="next"] {
+    opacity: 0.5;
+    transform: translateY(0.85rem) scale(0.955);
+    z-index: 2;
+  }
+
+  .deck--ready .deck__card[data-state="upcoming"] {
+    opacity: 0;
+    transform: translateY(1.7rem) scale(0.92);
+    z-index: 1;
+  }
+
+  .deck--ready .deck__card[data-state="gone"] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-115%) rotate(-7deg);
+    z-index: 0;
+  }
+
+  .deck--ready .deck__card.is-dragging {
+    cursor: grabbing;
+    transition: none;
+    user-select: none;
+  }
+
+  .deck--ready .deck__card-inner {
+    block-size: 100%;
+  }
+
+  .deck--ready .deck__controls {
+    align-items: center;
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    margin-block-start: 1.75rem;
+  }
+
+  .deck__nav {
+    align-items: center;
+    background-color: transparent;
+    block-size: 2.75rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-full);
+    color: var(--foreground);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.25rem;
+    inline-size: 2.75rem;
+    justify-content: center;
+    transition:
+      border-color var(--dur-fast) var(--ease-standard),
+      color var(--dur-fast) var(--ease-standard),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  .deck__nav:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .deck__nav:active {
+    transform: scale(0.92);
+  }
+
+  .deck__nav:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .deck__nav:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .deck__progress {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-inline-size: 7rem;
+  }
+
+  .deck__dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .deck__dot {
+    background-color: var(--border-strong);
+    block-size: 0.4rem;
+    border: 0;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    inline-size: 0.4rem;
+    padding: 0;
+    transition:
+      background-color var(--dur-fast) var(--ease-standard),
+      inline-size var(--dur-fast) var(--ease-standard);
+  }
+
+  .deck__dot[aria-current="true"] {
+    background-color: var(--accent);
+    inline-size: 1.1rem;
+  }
+
+  .deck--ready .deck__hint {
+    color: var(--subtle);
+    display: block;
+    font-size: var(--text-xs);
+    margin-block-start: 0.85rem;
+    text-align: center;
+  }
+}

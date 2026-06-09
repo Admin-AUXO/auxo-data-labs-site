@@ -1,9 +1,8 @@
 @layer base {
-  /* Single focus-ring system for the whole site. */
   :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    border-radius: var(--radius-sm);
     outline: 2px solid var(--ring);
     outline-offset: 2px;
-    border-radius: var(--radius-sm);
   }
 
   .skip-link {
@@ -22,18 +21,5 @@
 
   .skip-link:focus {
     transform: translateY(0);
-  }
-}
-
-/* Respect reduced-motion globally (intentional !important: accessibility
-   override must beat utility-layer animations/transitions). */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
   }
 }

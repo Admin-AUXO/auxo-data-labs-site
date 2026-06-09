@@ -1,65 +1,190 @@
-/* Motion & emphasis: gradient accent text + scroll-driven reveal.
-   Reveal is a progressive enhancement — content is fully visible without
-   `animation-timeline` support or when reduced motion is preferred. */
+@layer base {
+  @keyframes m-rise {
+    from {
+      opacity: 0;
+      translate: 0 1.5rem;
+    }
 
-@layer components {
-  .text-gradient-accent {
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-image: linear-gradient(
-      110deg,
-      var(--color-accent-300),
-      var(--color-accent-500) 55%,
-      var(--color-accent-300)
-    );
-    color: transparent;
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 
-  [data-theme="light"] .text-gradient-accent {
-    background-image: linear-gradient(110deg, var(--color-accent-700), var(--color-accent-500));
-  }
-}
+  @keyframes m-rise-sm {
+    from {
+      opacity: 0;
+      translate: 0 1rem;
+    }
 
-@media (prefers-reduced-motion: no-preference) {
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes m-blur {
+    from {
+      opacity: 0;
+      scale: 0.97;
+      translate: 0 0.6rem;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes m-right {
+    from {
+      opacity: 0;
+      translate: -1.8rem 0;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes m-left {
+    from {
+      opacity: 0;
+      translate: 1.8rem 0;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes m-reveal-x {
+    from { clip-path: inset(-12% 100% -16% 0); }
+    to { clip-path: inset(-12% -2% -16% 0); }
+  }
+
+  @keyframes m-wand {
+    0% {
+      opacity: 0;
+      transform: translateX(-0.05em);
+    }
+
+    14% { opacity: 1; }
+    86% { opacity: 1; }
+
+    100% {
+      opacity: 0;
+      transform: translateX(calc(100% + 0.05em));
+    }
+  }
+
+  @keyframes m-draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes m-type {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 -2% 0 0); }
+  }
+
+  @keyframes m-word {
+    from {
+      transform: translateY(110%);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  [data-enter]:not([data-enter="headline"]) {
+    animation: m-rise-sm 1.4s cubic-bezier(0.22, 0.68, 0.24, 1) 0.2s both;
+  }
+
+  [data-anim="clip-up"] {
+    position: relative;
+  }
+
+  [data-js] [data-enter="headline"]:not([data-split]) {
+    opacity: 0;
+  }
+
+  [data-enter="headline"] .m-word {
+    display: inline-block;
+    margin-block: -0.14em;
+    overflow: clip;
+    padding-block: 0.14em;
+    vertical-align: top;
+  }
+
+  [data-enter="headline"] .m-word-i {
+    animation: m-word 1s cubic-bezier(0.22, 0.68, 0.24, 1) both;
+    animation-delay: calc(var(--i) * 0.06s + 0.1s);
+    display: inline-block;
+    will-change: transform;
+  }
+
+  [data-anim="draw"] {
+    transform-origin: left center;
+  }
+
   @supports (animation-timeline: view()) {
-    [data-reveal] {
-      animation: reveal-rise linear both;
-      animation-range: entry 0% cover 20%;
+    [data-reveal],
+    [data-anim] {
+      animation-fill-mode: both;
+      animation-name: m-rise;
+      animation-range: entry 0% entry 80%;
       animation-timeline: view();
+      animation-timing-function: cubic-bezier(0.22, 0.68, 0.24, 1);
     }
 
-    @keyframes reveal-rise {
-      from {
-        opacity: 0;
-        transform: translateY(1.75rem);
-      }
+    [data-anim="blur-in"] { animation-name: m-blur; }
+
+    [data-anim="rise"],
+    [data-anim="rise-in"] { animation-name: m-rise; }
+    [data-anim="slide-right"] { animation-name: m-right; }
+    [data-anim="slide-left"] { animation-name: m-left; }
+    [data-anim="type"] { animation-name: m-type; }
+
+    [data-anim="clip-up"] {
+      animation-name: m-reveal-x;
+      animation-range: entry 4% entry 64%;
+      clip-path: inset(-12% 100% -16% 0);
     }
 
-    /* Stagger siblings (card grids) so they cascade in rather than pop together. */
-    [data-reveal]:nth-child(2) {
-      animation-range: entry 4% cover 24%;
+    [data-anim="clip-up"]::after {
+      animation-fill-mode: both;
+      animation-name: m-wand;
+      animation-range: entry 4% entry 72%;
+      animation-timeline: view();
+      animation-timing-function: cubic-bezier(0.22, 0.68, 0.24, 1);
+      background: var(--accent-2);
+      content: "";
+      inline-size: 0.14em;
+      inset-block: -0.06em -0.1em;
+      inset-inline-start: 0;
+      pointer-events: none;
+      position: absolute;
     }
 
-    [data-reveal]:nth-child(3) {
-      animation-range: entry 8% cover 28%;
-    }
-
-    [data-reveal]:nth-child(4) {
-      animation-range: entry 12% cover 32%;
+    [data-anim="draw"] {
+      animation-name: m-draw;
+      animation-range: entry 0% entry 34%;
+      transform: scaleX(0);
     }
   }
-}
 
-/* Fine grain overlay — reduces gradient banding and adds a premium texture.
-   Static (no motion), pointer-transparent; modals render in the top layer above it. */
-body::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  content: "";
-  inset: 0;
-  mix-blend-mode: overlay;
-  opacity: 0.04;
-  pointer-events: none;
-  position: fixed;
-  z-index: 100;
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible,
+  [role="button"]:focus-visible {
+    transition: outline-color 160ms ease, outline-offset 160ms ease, box-shadow 160ms ease;
+  }
 }
-

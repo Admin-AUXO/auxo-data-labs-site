@@ -1,13 +1,19 @@
 ---
 import "../styles/main.css";
-import { ClientRouter } from "astro:transitions";
 import MetaTags from "../components/layout/MetaTags.astro";
 import StructuredData from "../components/layout/StructuredData.astro";
 import Navigation from "../components/layout/Navigation.astro";
 import Footer from "../components/layout/Footer.astro";
 import CalendarDialog from "../components/layout/CalendarDialog.astro";
 import CookieConsent from "../components/layout/CookieConsent.astro";
-import { organizationSchema, websiteSchema, webPageSchema } from "../lib/structured-data";
+import { ClientRouter } from "astro:transitions";
+import {
+  organizationSchema,
+  localBusinessSchema,
+  websiteSchema,
+  webPageSchema,
+} from "../lib/structured-data";
+import { siteData } from "../data/site";
 
 interface Props {
   title?: string;
@@ -21,11 +27,11 @@ interface Props {
 const { title, description, path, ogImage, type, noindex } = Astro.props;
 const pagePath = path ?? Astro.url.pathname;
 const pageTitle = title ?? "AUXO Data Labs";
-const pageDesc = description ?? "";
+const pageDesc = description ?? siteData.description;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <MetaTags
       title={title}
@@ -35,35 +41,63 @@ const pageDesc = description ?? "";
       type={type}
       noindex={noindex}
     />
+    <ClientRouter />
     <script is:inline>
-      const t =
-        localStorage.getItem("theme") ??
-        (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      document.documentElement.dataset.theme = t;
+      (() => {
+        document.documentElement.dataset.js = "1";
+        setTimeout(() => {
+          document
+            .querySelectorAll('[data-enter="headline"]:not([data-split])')
+            .forEach((h) => {
+              h.dataset.split = "";
+            });
+        }, 2000);
+      })();
     </script>
+    <noscript>
+      <style>
+        [data-enter="headline"] { opacity: 1 !important; }
+      </style>
+    </noscript>
     <StructuredData type="Organization" data={organizationSchema()} />
+    <StructuredData type="LocalBusiness" data={localBusinessSchema()} />
     <StructuredData type="WebSite" data={websiteSchema()} />
     <StructuredData
       type="WebPage"
       data={webPageSchema({ title: pageTitle, description: pageDesc, path: pagePath })}
     />
-    <ClientRouter />
   </head>
   <body>
+    <canvas id="particle-field" class="particle-field" aria-hidden="true" transition:persist></canvas>
+    <div class="scroll-progress" aria-hidden="true" transition:persist><span data-scroll-progress></span></div>
     <a href="#main" class="skip-link">Skip to content</a>
-    <div class="scroll-progress" aria-hidden="true"></div>
     <Navigation />
-    <main id="main">
+    <main id="main" data-pagefind-body>
       <slot />
     </main>
     <Footer />
     <CalendarDialog />
     <CookieConsent />
-
+    <button type="button" class="to-top" data-to-top aria-label="Back to top" transition:persist>
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5M5 12l7-7 7 7"></path>
+      </svg>
+    </button>
     <script>
-      import { initRuntime } from "../scripts/core/runtime";
-      initRuntime();
-      document.addEventListener("astro:page-load", initRuntime);
+      import { initHeroText } from "../scripts/core/hero-text";
+      import { initParticleField } from "../scripts/core/particle-field";
+      import { initScrollUI } from "../scripts/core/scroll-ui";
+      import { initPWA } from "../scripts/core/pwa";
+
+      function boot() {
+        initHeroText();
+        initParticleField();
+        initScrollUI();
+        initPWA();
+      }
+
+      boot();
+      document.addEventListener("astro:page-load", boot);
     </script>
   </body>
 </html>

@@ -27,6 +27,7 @@
       { "ignore": ["consecutive-duplicates-with-different-values"] }
     ],
     "no-descending-specificity": null,
+    "custom-property-pattern": "^-?[a-z][a-z0-9]*(-{1,2}[a-z0-9]+)*$",
     "order/properties-alphabetical-order": true,
     "selector-class-pattern": null,
     "property-no-vendor-prefix": null

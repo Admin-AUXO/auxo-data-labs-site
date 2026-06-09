@@ -1,6 +1,6 @@
 # Repository Expectations
 
-- Stack: Astro 5, TypeScript, Tailwind CSS, Lenis, Embla, Playwright.
+- Stack: Astro 6 (6.4.x), TypeScript, Tailwind CSS v4 (CSS-first via `@import "tailwindcss"`; tokens in `src/styles/tokens.css`), Embla, Playwright. `motion` (motion.dev) is used, scoped to the Readiness Diagnostic. `pagefind` is available for site search.
 - Primary goal: build a sharp, high-trust marketing site without trading clarity for animation noise or hydration bloat.
 - Default audience: skeptical B2B buyers. They skim first, compare second, and contact only after the page earns trust.
 
@@ -20,7 +20,7 @@
 - Keep performance, reduced motion, and mobile layout intact when changing UI.
 - Research current best practices before changing page-level structure, navigation patterns, or buyer-facing copy direction.
 - `public/` files bypass the app CSS/tooling pipeline. Keep them standards-based, self-contained, and compatible with static hosting.
-- This repo deploys as a static GitHub Pages build. Do not add host-specific files or headers unless the deployment model changes.
+- This repo deploys as a Vercel hybrid SSR build via the `@astrojs/vercel` adapter (`vercel.json` pins the EU region `fra1`). Pages prerender by default; only the Astro Actions endpoints in `src/actions/index.ts` (and any route that opts out via `export const prerender = false`) render on-demand. CI is `.github/workflows/ci.yml` running `npm run validate`. Do not reintroduce pure-static assumptions or add host-specific files unless the deployment model changes.
 - Use the repo skills in `.agents/skills` for design system work, landing page composition, Astro section implementation, performance-sensitive motion changes, and public metadata/static asset work.
 - Use the repo subagents in `.codex/agents` when bounded exploration, design review, docs verification, or perf review would help.
 
@@ -49,24 +49,26 @@
 - Model semantic content explicitly. Do not depend on array order, magic indexes, or label text when other components need the data.
 - Keep section contracts typed and readable. Shared content belongs in data files or focused helpers, not repeated template branches.
 - If a component rewrite makes selectors obsolete, remove the dead CSS in the same pass.
-- Preserve reduced-motion behavior and re-initialization paths whenever changing Embla, Lenis, reveals, or dropdown runtime logic.
+- Motion is CSS-first: scroll-driven reveals use `animation-timeline: view()`, and `runtime.ts` stamps `[data-inview]` on above-fold nodes so nothing starts hidden. Keep that force-visible guard and the `astro:page-load` re-init paths intact when changing reveals or the custom Insights deck. The site intentionally ships no `prefers-reduced-motion` blocks.
 
 ## Commands
 
-- `npm run type-check`
-- `npm run lint`
-- `npm run audit`
-- `npm run audit:full`
-- `npm run audit:astro`
-- `npm run audit:embla`
+- `npm run dev`
 - `npm run build`
+- `npm run preview`
+- `npm run sync`
+- `npm run type-check`
+- `npm run lint:css`
+- `npm run lint`
+- `npm run validate`
 - `npm run test`
+- `npm run test:ui`
 
 ## Done means
 
 - Run the narrowest command that proves the change.
-- Run `npm run lint` for Astro, TypeScript, or CSS edits.
-- Run `npm run audit` for repo-wide refactors, Astro file cleanup, Embla carousel changes, `public/` cleanup, dependency cleanup, or stacking/layering changes that benefit from targeted static checks.
+- Run `npm run lint` for Astro, TypeScript, or CSS edits (it runs `type-check` then `lint:css`).
+- Run `npm run validate` (lint + build) for repo-wide refactors, Astro file cleanup, Embla carousel changes, `public/` cleanup, dependency cleanup, or stacking/layering changes that benefit from a full check.
 - Run `npm run build` when layouts, routing, shared UI behavior, or `public/` metadata/service worker/style files change.
 - For navigation, layout, carousel, or major page-composition changes, do not stop at static checks. Also do a browser pass at representative desktop and mobile breakpoints when feasible.
 - State what you verified and what you could not verify.

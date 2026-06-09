@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 interface Item {
   title: string;
   body: string;
@@ -8,14 +6,20 @@ interface Item {
 
 interface Props {
   items: Item[];
-  /** Exclusive (one open at a time) via native <details name>. */
   single?: boolean;
   openFirst?: boolean;
   class?: string;
 }
 
+let accordionCounter = 0;
+function nextAccordionId(): number {
+  accordionCounter += 1;
+  return accordionCounter;
+}
+
 const { items, single = true, openFirst = false, class: cls = "" } = Astro.props;
-const name = single ? `acc-${Math.random().toString(36).slice(2, 9)}` : undefined;
+const accordionId = nextAccordionId();
+const name = single ? `acc-${accordionId}` : undefined;
 ---
 
 <div class={`accordion ${cls}`.trim()}>
@@ -23,8 +27,9 @@ const name = single ? `acc-${Math.random().toString(36).slice(2, 9)}` : undefine
     items.map((it, i) => (
       <details class="accordion__item" name={name} open={openFirst && i === 0 ? true : undefined}>
         <summary class="accordion__summary">
-          <span>{it.title}</span>
-          <Icon name="mdi:chevron-down" class="accordion__chevron" aria-hidden="true" />
+          <span class="accordion__index" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          <span class="accordion__question">{it.title}</span>
+          <span class="accordion__toggle" aria-hidden="true"></span>
         </summary>
         <div class="accordion__content">
           <div class="accordion__content-inner" set:html={it.body} />

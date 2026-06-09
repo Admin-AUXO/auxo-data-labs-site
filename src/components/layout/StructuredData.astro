@@ -2,11 +2,13 @@
 interface Props {
   type:
     | "Organization"
+    | "LocalBusiness"
     | "WebSite"
     | "WebPage"
     | "BreadcrumbList"
     | "Service"
     | "Article"
+    | "BlogPosting"
     | "FAQPage";
   data: Record<string, unknown>;
 }

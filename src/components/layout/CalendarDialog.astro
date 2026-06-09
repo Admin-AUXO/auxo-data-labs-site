@@ -3,10 +3,12 @@ import Dialog from "../ui/Dialog.astro";
 import { siteData } from "../../data/site";
 ---
 
-<Dialog id="calendar-dialog" title="Book a call" size="lg" class="calendar-dialog">
+<Dialog id="calendar-dialog" title="Book a free call" size="lg" class="calendar-dialog">
   <iframe
     title="Schedule a meeting with AUXO"
     data-src={siteData.bookingUrl}
     class="calendar-dialog__iframe"
-    loading="lazy"></iframe>
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
 </Dialog>

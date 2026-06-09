@@ -1,141 +1,67 @@
 @layer components {
   .section {
-    padding-block: var(--section-py, clamp(3rem, 1.5rem + 6vw, 7rem));
+    background-color: transparent;
+    padding-block: var(--section-py, clamp(2.5rem, 1.5rem + 5vw, 6rem));
     position: relative;
   }
 
   .section[data-pad="sm"] {
-    --section-py: clamp(2rem, 1rem + 4vw, 4rem);
+    --section-py: clamp(2rem, 1.25rem + 3vw, 3.5rem);
   }
 
   .section[data-pad="lg"] {
-    --section-py: clamp(4rem, 2rem + 8vw, 9rem);
+    --section-py: clamp(3rem, 2rem + 5.5vw, 7.5rem);
   }
 
   .section[data-pad="xl"] {
-    --section-py: clamp(5rem, 2.5rem + 10vw, 11rem);
-  }
-
-  .section[data-bg="surface"] {
-    background-color: var(--surface);
-  }
-
-  .section[data-bg="raised"] {
-    background-color: var(--surface-raised);
-  }
-
-  .section[data-bg="sunken"] {
-    background-color: var(--surface-sunken);
+    --section-py: clamp(3.5rem, 2.25rem + 6.5vw, 9rem);
   }
 
   .section[data-bg="accent"] {
+    --foreground: var(--accent-foreground);
+    --muted: color-mix(in oklch, var(--accent-foreground) 78%, var(--accent));
+
     background-color: var(--accent);
     color: var(--accent-foreground);
   }
 
+  .section[data-bg="ink"] {
+    --accent: var(--ink-accent);
+    --accent-foreground: var(--ink-accent-foreground);
+    --background: var(--ink-bg);
+    --border: var(--ink-border);
+    --border-strong: var(--ink-border);
+    --foreground: var(--ink-foreground);
+    --hairline: var(--ink-border);
+    --muted: var(--ink-muted);
+    --subtle: var(--ink-muted);
+    --surface: color-mix(in oklch, var(--ink-bg) 90%, var(--ink-foreground));
+    --surface-raised: color-mix(in oklch, var(--ink-bg) 85%, var(--ink-foreground));
+
+    background-color: var(--ink-bg);
+    color: var(--ink-foreground);
+  }
+
   .section__container {
     margin-inline: auto;
-    padding-inline: clamp(1rem, 0.5rem + 3vw, 2.5rem);
+    max-width: var(--container-max, 80rem);
+    padding-inline: var(--gutter);
     position: relative;
     width: 100%;
     z-index: var(--z-raised);
   }
 
-  .section__container[data-w="prose"] {
-    max-width: 68ch;
-  }
+  .section__container[data-w="prose"] { --container-max: 68ch; }
+  .section__container[data-w="4xl"] { --container-max: 56rem; }
+  .section__container[data-w="5xl"] { --container-max: 64rem; }
+  .section__container[data-w="6xl"] { --container-max: 72rem; }
+  .section__container[data-w="7xl"] { --container-max: 82rem; }
+  .section__container[data-w="full"] { --container-max: none; }
 
-  .section__container[data-w="4xl"] {
-    max-width: 56rem;
-  }
-
-  .section__container[data-w="5xl"] {
-    max-width: 64rem;
-  }
-
-  .section__container[data-w="6xl"] {
-    max-width: 72rem;
-  }
-
-  .section__container[data-w="7xl"] {
-    max-width: 80rem;
-  }
-
-  .section__container[data-w="full"] {
-    max-width: none;
-  }
-
-  /* Decorative backdrops (pointer-events-none, behind content) */
-  .section-decoration {
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    position: absolute;
-    z-index: var(--z-base);
-  }
-
-  .section-decoration[data-variant="grid"] {
-    background-image:
-      linear-gradient(to right, color-mix(in oklch, var(--border) 60%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in oklch, var(--border) 60%, transparent) 1px, transparent 1px);
-    background-size: 3.5rem 3.5rem;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-  }
-
-  .section-decoration[data-variant="aurora"] {
-    -webkit-mask: linear-gradient(to bottom, #000 55%, transparent);
-    background:
-      radial-gradient(42% 50% at 18% 8%, color-mix(in oklch, var(--accent) 20%, transparent), transparent 70%),
-      radial-gradient(46% 56% at 82% 0%, color-mix(in oklch, var(--color-accent-600) 18%, transparent), transparent 72%),
-      radial-gradient(64% 60% at 50% -12%, color-mix(in oklch, var(--accent) 12%, transparent), transparent 76%);
-    background-position: 0% 0%;
-    background-size: 180% 180%;
-    mask: linear-gradient(to bottom, #000 55%, transparent);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .section-decoration[data-variant="aurora"] {
-      animation: aurora-drift 26s ease-in-out infinite alternate;
-    }
-
-    @keyframes aurora-drift {
-      from {
-        background-position: 0% 0%;
-      }
-
-      to {
-        background-position: 100% 60%;
-      }
-    }
-  }
-
-  .section-decoration[data-variant="glow"]::before {
-    background: radial-gradient(circle, color-mix(in oklch, var(--accent) 24%, transparent), transparent 70%);
-    block-size: 44rem;
-    content: "";
-    inline-size: 44rem;
-    inset-block-start: -18rem;
-    inset-inline-start: 50%;
-    position: absolute;
-    translate: -50% 0;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .section-decoration[data-variant="glow"]::before {
-      animation: glow-pulse 9s var(--ease-standard) infinite;
-    }
-
-    @keyframes glow-pulse {
-      0%,
-      100% {
-        opacity: 0.6;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.08);
-      }
-    }
+  .rule {
+    background-color: var(--hairline);
+    block-size: 1px;
+    border: 0;
+    inline-size: 100%;
   }
 }

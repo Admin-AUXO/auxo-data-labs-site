@@ -1,8 +1,3 @@
-/** Native <dialog> orchestration. showModal() gives focus-trap, Escape,
- *  ::backdrop and background inerting for free — no focus-trap dep.
- *  Handles generic [data-dialog-open] triggers and the Google Calendar
- *  booking dialog (lazy-loads its iframe on first open). */
-
 const CALENDAR_URL = "https://calendar.app.google/aJmnvMS2uBbYPCgC7";
 
 function open(d: HTMLDialogElement): void {
@@ -20,7 +15,6 @@ function openCalendar(): void {
 }
 
 export function initDialogs(): void {
-  // Generic openers: <button data-dialog-open="dialog-id">
   for (const btn of document.querySelectorAll<HTMLElement>("[data-dialog-open]")) {
     if (btn.dataset.dialogBound) continue;
     btn.dataset.dialogBound = "true";
@@ -31,7 +25,6 @@ export function initDialogs(): void {
     });
   }
 
-  // Calendar booking triggers
   for (const btn of document.querySelectorAll<HTMLElement>(
     '[data-google-calendar-open], a[href*="calendar.app.google"]'
   )) {
@@ -44,7 +37,6 @@ export function initDialogs(): void {
     });
   }
 
-  // Close buttons + click-outside, per dialog
   for (const d of document.querySelectorAll<HTMLDialogElement>("dialog.dialog")) {
     if (d.dataset.dialogInit) continue;
     d.dataset.dialogInit = "true";

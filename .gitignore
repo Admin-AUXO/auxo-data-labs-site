@@ -1,6 +1,7 @@
 # Build output
 dist/
 .astro/
+.vercel/
 
 # Dependencies
 node_modules/
@@ -45,6 +46,8 @@ tmpclaude-*
 # Local tooling
 .mcp.json
 .serena/
+.claude/
+.playwright-mcp/
 
 # IDE files
 .vscode/

@@ -61,6 +61,23 @@ const { form } = contactContent;
     })
   }
 
+  <div class="field-honeypot" aria-hidden="true">
+    <label for="contact-company-url">Company URL (leave this field empty)</label>
+    <input
+      type="text"
+      id="contact-company-url"
+      name="company_url"
+      data-honeypot
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+
+  <label class="field-consent">
+    <input type="checkbox" name="consent" class="field-consent__checkbox" required />
+    <span class="field-consent__text">{form.consentNote}</span>
+  </label>
+
   <div class="form-status" role="status" aria-live="polite" />
 
   <Button type="submit" variant="primary" size="lg" icon iconName="mdi:send">
@@ -68,6 +85,12 @@ const { form } = contactContent;
   </Button>
 
   <p class="text-sm text-subtle">{form.note}</p>
+
+  <noscript>
+    <p class="text-sm text-subtle">
+      This form needs JavaScript. You can email us directly and we'll reply within one business day.
+    </p>
+  </noscript>
 </form>
 
 <script>
@@ -75,3 +98,34 @@ const { form } = contactContent;
   init();
   document.addEventListener("astro:page-load", init);
 </script>
+
+<style>
+  .field-honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .field-consent {
+    align-items: flex-start;
+    color: var(--subtle);
+    display: flex;
+    font-size: var(--text-sm);
+    gap: 0.6rem;
+    line-height: 1.45;
+  }
+
+  .field-consent__checkbox {
+    accent-color: var(--accent);
+    block-size: 1.05rem;
+    flex: none;
+    inline-size: 1.05rem;
+    margin-block-start: 0.15rem;
+  }
+</style>

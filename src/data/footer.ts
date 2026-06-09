@@ -5,38 +5,39 @@ export interface FooterLink {
 
 export interface FooterSection {
   title: string;
-  icon: string;
   links: FooterLink[];
 }
 
 export interface FooterContent {
+  statement: string;
+  statementHighlight?: string | string[];
+  tagline: string;
   sections: FooterSection[];
+  note: string;
 }
 
 export const footerContent: FooterContent = {
+  statement: "The data you hold, turned into decisions.",
+  statementHighlight: "decisions",
+  tagline: "Data and AI for Dubai real estate.",
   sections: [
     {
-      title: "Learn",
-      icon: "mdi:book-open",
+      title: "Explore",
       links: [
-        { label: "About Us", href: "/about/" },
-        { label: "Services", href: "/services/" },
-        { label: "Insights", href: "/blog/" },
+        { label: "Work", href: "/services/" },
+        { label: "Studio", href: "/about/" },
+        { label: "Insights", href: "/insights/" },
+        { label: "Contact", href: "/contact/" },
       ],
-    },
-    {
-      title: "Engage",
-      icon: "mdi:handshake",
-      links: [{ label: "Contact Us", href: "/contact/" }],
     },
     {
       title: "Legal",
-      icon: "mdi:shield-check",
       links: [
-        { label: "Privacy Policy", href: "/legal/privacy-policy/" },
-        { label: "Terms of Use", href: "/legal/terms/" },
-        { label: "Cookie Policy", href: "/legal/cookie-policy/" },
+        { label: "Privacy", href: "/legal/privacy-policy/" },
+        { label: "Terms", href: "/legal/terms/" },
+        { label: "Cookies", href: "/legal/cookie-policy/" },
       ],
     },
   ],
+  note: "Built on the systems you already run. Your data stays yours.",
 };

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AUXO — colour palette & use cases</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --sans: "Plus Jakarta Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --sora: "Sora", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--sans); background: #f4f4f4; color: #0a0a0a; -webkit-font-smoothing: antialiased; padding: 3rem clamp(1rem,4vw,4rem) 5rem; }
+  h1 { font-family: var(--sora); font-weight: 800; letter-spacing: -0.02em; font-size: 1.7rem; margin: 0 0 0.3rem; }
+  .lead { color: #555; max-width: 70ch; line-height: 1.6; margin: 0 0 2.5rem; }
+  .themes { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); }
+  .panel { border-radius: 16px; overflow: hidden; border: 1px solid rgba(0,0,0,.08); }
+  .panel--light { background: #fafafa; color: #0a0a0a; }
+  .panel--dark { background: #0a0a0a; color: #fafafa; }
+  .panel__head { padding: 1.1rem 1.4rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; padding: 0 1.4rem; }
+  .sw { border-radius: 10px; overflow: hidden; border: 1px solid rgba(128,128,128,.25); }
+  .sw__chip { height: 76px; }
+  .sw__meta { padding: .55rem .6rem .7rem; }
+  .sw__name { font-weight: 700; font-size: .82rem; }
+  .sw__hex { font-family: var(--mono); font-size: .68rem; opacity: .6; }
+  .block { padding: 1.4rem; }
+  .block h3 { font-family: var(--sora); font-size: .95rem; margin: 1.4rem 0 .7rem; letter-spacing: -.01em; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-bottom: .55rem; }
+  .btn { font-family: var(--sans); font-weight: 700; font-size: .82rem; padding: .6rem 1.1rem; border-radius: 999px; border: 0; cursor: default; }
+  .btn--ghost { background: transparent; border: 1.5px solid currentColor; }
+  .tag { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .28rem .55rem; border-radius: 5px; }
+  .num { font-family: var(--mono); font-weight: 600; font-size: .9rem; }
+  .rule { height: 2px; width: 44px; border-radius: 2px; }
+  .dot { width: 9px; height: 9px; border-radius: 999px; display: inline-block; }
+  .ink-demo { border-radius: 12px; padding: 1.3rem 1.4rem; margin-top: .6rem; }
+  .ink-demo h4 { font-family: var(--sora); font-weight: 800; font-size: 1.2rem; margin: 0 0 .5rem; letter-spacing: -.02em; }
+  .cap { font-size: .75rem; opacity: .65; margin-top: .35rem; }
+  table.uses { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: .85rem; }
+  table.uses td { padding: .5rem .6rem; border-top: 1px solid rgba(128,128,128,.2); vertical-align: top; }
+  table.uses td:first-child { font-weight: 700; white-space: nowrap; }
+  .key { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:.4rem; vertical-align:middle; }
+</style>
+</head>
+<body>
+  <h1>AUXO — four-colour palette</h1>
+  <p class="lead">One vivid primary (green), one warm secondary used sparingly (clay), plus near-black and off-white. Bold minimalism: the green carries almost every accent; clay appears for ~10% — process/step numerals, one warm emphasis per page, the inverted-band accent. Each theme tuned separately.</p>
+
+  <div class="themes">
+
+    <!-- LIGHT -->
+    <section class="panel panel--light">
+      <div class="panel__head">Light mode</div>
+      <div class="swatches">
+        <div class="sw"><div class="sw__chip" style="background:#6f9e2d"></div><div class="sw__meta"><div class="sw__name">Green</div><div class="sw__hex">#6F9E2D</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#b4531f"></div><div class="sw__meta"><div class="sw__name">Clay</div><div class="sw__hex">#B4531F</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#0a0a0a"></div><div class="sw__meta"><div class="sw__name">Ink</div><div class="sw__hex">#0A0A0A</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#fafafa;border-bottom:1px solid #e5e5e5"></div><div class="sw__meta"><div class="sw__name">Paper</div><div class="sw__hex">#FAFAFA</div></div></div>
+      </div>
+      <div class="block">
+        <h3>In use</h3>
+        <div class="row">
+          <button class="btn" style="background:#6f9e2d;color:#fff">Start a conversation</button>
+          <button class="btn btn--ghost" style="color:#0a0a0a">See our work</button>
+        </div>
+        <div class="row">
+          <span class="rule" style="background:#6f9e2d"></span>
+          <span>Data and AI for <strong style="color:#6f9e2d">Gulf real estate</strong></span>
+        </div>
+        <div class="row">
+          <span class="num" style="color:#b4531f">01</span>
+          <span class="num" style="color:#b4531f">02</span>
+          <span class="num" style="color:#b4531f">03</span>
+          <span class="cap" style="margin:0">— process / step numerals (clay)</span>
+        </div>
+        <div class="row">
+          <span class="dot" style="background:#6f9e2d"></span><span class="cap" style="margin:0">capability marks (green)</span>
+          <span class="tag" style="background:rgba(180,83,31,.12);color:#b4531f">Assurance</span>
+        </div>
+        <div class="ink-demo" style="background:#0a0a0a;color:#fafafa">
+          <h4>Let's <span style="color:#a3e635">talk</span>.</h4>
+          <button class="btn" style="background:#a3e635;color:#0a0a0a">Book a call</button>
+          <div class="cap">Inverted CTA band — accent brightens to #A3E635 on dark</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DARK -->
+    <section class="panel panel--dark">
+      <div class="panel__head">Dark mode</div>
+      <div class="swatches">
+        <div class="sw"><div class="sw__chip" style="background:#a3e635"></div><div class="sw__meta"><div class="sw__name">Green</div><div class="sw__hex">#A3E635</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#e8995c"></div><div class="sw__meta"><div class="sw__name">Clay</div><div class="sw__hex">#E8995C</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#0a0a0a;border:1px solid #333"></div><div class="sw__meta"><div class="sw__name">Ink</div><div class="sw__hex">#0A0A0A</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#fafafa"></div><div class="sw__meta"><div class="sw__name">Paper</div><div class="sw__hex">#FAFAFA</div></div></div>
+      </div>
+      <div class="block">
+        <h3>In use</h3>
+        <div class="row">
+          <button class="btn" style="background:#a3e635;color:#0a0a0a">Start a conversation</button>
+          <button class="btn btn--ghost" style="color:#fafafa">See our work</button>
+        </div>
+        <div class="row">
+          <span class="rule" style="background:#a3e635"></span>
+          <span>Data and AI for <strong style="color:#a3e635">Gulf real estate</strong></span>
+        </div>
+        <div class="row">
+          <span class="num" style="color:#e8995c">01</span>
+          <span class="num" style="color:#e8995c">02</span>
+          <span class="num" style="color:#e8995c">03</span>
+          <span class="cap" style="margin:0">— process / step numerals (clay)</span>
+        </div>
+        <div class="row">
+          <span class="dot" style="background:#a3e635"></span><span class="cap" style="margin:0">capability marks (green)</span>
+          <span class="tag" style="background:rgba(232,153,92,.18);color:#e8995c">Assurance</span>
+        </div>
+        <div class="ink-demo" style="background:#fafafa;color:#0a0a0a">
+          <h4>Let's <span style="color:#6f9e2d">talk</span>.</h4>
+          <button class="btn" style="background:#6f9e2d;color:#fff">Book a call</button>
+          <div class="cap">Inverted CTA band — flips to light, accent deepens to #6F9E2D</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <table class="uses">
+    <tr><td><span class="key" style="background:#6f9e2d"></span>Green</td><td>Primary. Buttons, links, focus rings, hero highlight word, capability & outcome marks, the logo. ~80% of all accent usage.</td></tr>
+    <tr><td><span class="key" style="background:#b4531f"></span>Clay</td><td>Secondary, sparing (~10%). Process / "how it works" / next-step numerals & kickers, one warm categorical tag, a single emphasis per page. Never competes with green in the same spot.</td></tr>
+    <tr><td><span class="key" style="background:#0a0a0a"></span>Ink</td><td>Body text, headings, the inverted CTA band (light theme), 2px top rules on step cards.</td></tr>
+    <tr><td><span class="key" style="background:#fafafa;outline:1px solid #ccc"></span>Paper</td><td>Page background, card surfaces, text on dark/ink, the inverted band (dark theme).</td></tr>
+  </table>
+  <p class="cap" style="margin-top:1.5rem">⚠️ Light green #6F9E2D ≈ 3.1:1 on white — great for fills, logo, large text & UI marks; below AA 4.5 for small green body text/links. Clay #B4531F ≈ 4.6:1 on white (AA pass). Both bright dark-mode tones pass comfortably on #0A0A0A.</p>
+</body>
+</html>

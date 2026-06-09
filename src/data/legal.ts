@@ -1,13 +1,9 @@
 export const LEGAL_LAST_UPDATED = "April 3, 2026";
 
 export interface LegalPageMeta {
-  /** Short kicker shown above the page title. */
   eyebrow: string;
-  /** astro-icon name (mdi:*) associated with the document. */
   icon: string;
-  /** One-line plain-language summary of the document. */
   summary: string;
-  /** Three scannable takeaways for the document header. */
   highlights: [string, string, string];
 }
 
