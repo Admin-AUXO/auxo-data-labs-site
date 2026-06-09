@@ -279,19 +279,6 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .deck[data-view="featured"] .deck__card-inner {
-      gap: 1.1rem;
-      padding: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
-    }
-
-    .deck[data-view="featured"] .deck__title {
-      font-size: var(--text-3xl);
-    }
-
-    .deck[data-view="featured"] .deck__takeaway {
-      font-size: var(--text-lg);
-    }
-
     .deck[data-view="featured"] .deck__link {
       margin-block-start: auto;
     }
