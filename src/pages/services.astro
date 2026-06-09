@@ -89,8 +89,8 @@ import { servicesContent as c } from "../data/services-overview";
           <article class="group flex flex-col gap-4 bg-surface p-7 sm:p-8" data-reveal data-anim="rise">
             <span class="mono-label transition-colors duration-300 group-hover:text-accent">{model.kicker}</span>
             <h3 class="text-2xl font-bold">{model.name}</h3>
-            <div class="flex items-baseline gap-1.5">
-              <span class="font-mono text-xl font-semibold text-foreground">{model.price}</span>
+            <div class="flex flex-wrap items-baseline gap-x-1.5">
+              <span class="font-mono text-lg font-semibold whitespace-nowrap text-foreground">{model.price}</span>
               {model.unit && <span class="font-mono text-sm text-subtle">{model.unit}</span>}
             </div>
             <span class="mono-datum">{model.timeframe}</span>
