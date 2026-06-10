@@ -29,7 +29,7 @@ export const insightsContent: InsightsContent = {
   cta: {
     title: "See one that fits your desk?",
     titleHighlight: "fits your desk",
-    description: "If a point here matches what you're working through, that's a good place to start a conversation.",
+    description: "See a problem you recognise? That's a good place to start a conversation.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
     secondaryText: "See how we work",
