@@ -107,8 +107,8 @@
     [data-reveal],
     [data-enter="headline"] {
       animation: none !important;
-      opacity: 1 !important;
       clip-path: none !important;
+      opacity: 1 !important;
     }
   }
 
