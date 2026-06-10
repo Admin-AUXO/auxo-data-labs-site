@@ -153,7 +153,7 @@ export function faqSchema(items: { question: string; answer: string }[]) {
 
 export function serviceSchema() {
   return {
-    serviceType: "Real-estate analytics & AI studio",
+    serviceType: "Real-estate analytics & AI lab",
     provider: { "@type": "Organization", name: siteData.name, url: home },
     areaServed: [
       { "@type": "Country", name: siteData.address.country },

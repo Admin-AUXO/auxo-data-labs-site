@@ -16,7 +16,7 @@ export interface NavigationContent {
 export const navigationContent: NavigationContent = {
   items: [
     { name: "Services", href: "/services/" },
-    { name: "Studio", href: "/about/" },
+    { name: "Lab", href: "/about/" },
     { name: "Insights", href: "/insights/" },
     { name: "Contact", href: "/contact/" },
   ],

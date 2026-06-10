@@ -28,7 +28,7 @@ export const siteData: SiteData = {
   author: "AUXO Data Labs",
   tagline: "Analytics and AI for decisions that hold.",
   description:
-    "AUXO is an analytics and AI studio for Gulf real estate. We turn the data you already have into reporting, forecasts, and automation you can trust — built to last, and yours to keep.",
+    "AUXO is an analytics and AI lab for Gulf real estate. We turn the data you already have into reporting, forecasts, and automation you can trust — built to last, and yours to keep.",
   url: import.meta.env.SITE ?? "https://auxodata.com",
   email: "hello@auxodata.com",
   privacyEmail: "privacy@auxodata.com",

@@ -12,8 +12,8 @@ const pages = {
       "Trusted data, clear reporting, reliable automation, and confident compliance for Gulf property teams.",
   },
   about: {
-    title: "Studio — the team behind AUXO",
-    description: "A small analytics and AI studio for real estate, based in Dubai and working across the Gulf.",
+    title: "Lab — the team behind AUXO",
+    description: "A small analytics and AI lab for real estate, based in Dubai and working across the Gulf.",
   },
   insights: {
     title: "Insights — short reads",
