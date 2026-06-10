@@ -27,7 +27,7 @@ const purpose = [
 
 <BaseLayout
   title="Studio — Dubai data & AI for real estate"
-  description="AUXO is a specialist data and AI studio for real estate, based in Dubai and working across the UAE and the wider Gulf. We turn the data you already hold into reporting, forecasts, and automation you can trust — built on your systems, and yours to keep."
+  description="AUXO is a specialist data and AI studio for real estate, based in Dubai and working across the UAE and the wider Gulf. We turn the data you already hold into reporting, forecasts, and automation you can trust — built to last, and yours to keep."
 >
 
   <Section padding="xl" width="7xl">    <div class="flex max-w-3xl flex-col gap-7">
@@ -43,6 +43,29 @@ const purpose = [
           {c.hero.secondaryCta.text}
         </Button>
       </div>
+    </div>
+  </Section>
+
+
+  <Section padding="lg" width="7xl">
+    <SectionHeader
+      title="Why AUXO exists"
+      highlight="exists"
+      subtitle="Two things hold steady behind everything we build — the work we do today, and the world we are working toward."
+    />
+    <div class="purpose mt-10 md:mt-12">
+      {
+        purpose.map((p) => (
+          <article class="purpose__card" data-reveal>
+            <div class="purpose__head">
+              <span class="purpose__rule" aria-hidden="true" data-anim="draw" />
+              <span class="eyebrow text-accent-2">{p.label}</span>
+            </div>
+            <p class="purpose__statement">{p.statement}</p>
+            <p class="purpose__support text-muted">{p.support}</p>
+          </article>
+        ))
+      }
     </div>
   </Section>
 
@@ -147,28 +170,6 @@ const purpose = [
         ))
       }
     </ol>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <SectionHeader
-      title="Why AUXO exists"
-      highlight="exists"
-      subtitle="Two things hold steady behind everything we build — the work we do today, and the world we are working toward."
-    />
-    <div class="purpose mt-10 md:mt-12">
-      {
-        purpose.map((p) => (
-          <article class="purpose__card" data-reveal>
-            <div class="purpose__head">
-              <span class="purpose__rule" aria-hidden="true" data-anim="draw" />
-              <span class="eyebrow text-accent-2">{p.label}</span>
-            </div>
-            <p class="purpose__statement">{p.statement}</p>
-            <p class="purpose__support text-muted">{p.support}</p>
-          </article>
-        ))
-      }
-    </div>
   </Section>
 
   <CtaSection

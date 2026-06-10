@@ -15,6 +15,7 @@ export interface InsightsContent {
     ctaHref: string;
     secondaryText?: string;
     secondaryHref?: string;
+    reassurance?: string;
   };
 }
 
@@ -33,5 +34,6 @@ export const insightsContent: InsightsContent = {
     ctaHref: siteData.bookingUrl,
     secondaryText: "See how we work",
     secondaryHref: "/services/",
+    reassurance: "A real person replies within one business day.",
   },
 };

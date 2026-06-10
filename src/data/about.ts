@@ -90,11 +90,11 @@ export const aboutContent: AboutContent = {
       },
       {
         title: "Yours to keep",
-        desc: "You own everything we build, on your own systems. The knowledge stays in-house and passes to whoever runs it next. No lock-in, no black box.",
+        desc: "You own everything we build. The knowledge stays in-house and passes to whoever runs it next. No lock-in, no black box.",
       },
       {
         title: "Plain and honest",
-        desc: "We are clear about the trade-offs and clear about fit. We will tell you when not to build. Your name stays private.",
+        desc: "We are clear about the trade-offs and clear about fit. We will tell you when not to build.",
       },
     ],
   },
@@ -111,7 +111,7 @@ export const aboutContent: AboutContent = {
       {
         label: "Then",
         title: "Build",
-        desc: "We build on your own data in short, visible steps you can see working.",
+        desc: "We build in short, visible steps you can see working.",
       },
       {
         label: "Next",
@@ -128,7 +128,7 @@ export const aboutContent: AboutContent = {
   where: {
     title: "Where we work",
     titleHighlight: "work",
-    body: "We are based in Dubai and work with property teams across the UAE and the wider Gulf — fluent in the governance and AML expectations regional institutions answer to. Your data stays where you want it, on the terms you set.",
+    body: "We are based in Dubai and work with property teams across the UAE and the wider Gulf — fluent in the governance and AML expectations regional institutions answer to. We handle your data on the terms you set, taking only what the work needs.",
     points: [
       { label: "Based in", value: "Dubai" },
       { label: "Serving", value: "The UAE and the Gulf" },
@@ -142,16 +142,16 @@ export const aboutContent: AboutContent = {
     reassurance: "We are happy to sign an NDA before we begin.",
     principles: [
       {
-        title: "Discreet and confidential",
-        desc: "We work quietly in the background. Your name, your numbers, and your plans stay between us.",
+        title: "Confidential by default",
+        desc: "We're glad to sign an NDA before the first detailed conversation, and your name, your numbers, and your plans stay between us.",
       },
       {
-        title: "On your own systems",
-        desc: "Everything runs inside your environment, under your own access. Your data never leaves your control.",
+        title: "Careful with your data",
+        desc: "We take only the data the work needs — sampled, anonymised, or hashed wherever we can — handle it under NDA, and never reuse it for anything else.",
       },
       {
-        title: "Your team owns the result",
-        desc: "What we build is yours to keep and run. There is no lock-in and nothing to renew to stay switched on.",
+        title: "No dependency on us",
+        desc: "Every engagement ends with your team trained and running it without us. We stay reachable if you want us — you're never reliant on us.",
       },
       {
         title: "A person, not a process",
@@ -160,9 +160,9 @@ export const aboutContent: AboutContent = {
     ],
   },
   cta: {
-    title: "Ready when you are.",
-    titleHighlight: "Ready",
-    description: "Tell us what's slowing you down, and we'll show you where to start.",
+    title: "Start with the problem, not a pitch.",
+    titleHighlight: "not a pitch",
+    description: "Now you know how we work. The next move is a short conversation — no pitch, no obligation.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
     secondaryText: "Read our thinking",

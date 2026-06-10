@@ -91,8 +91,8 @@ export const homeContent: HomeContent = {
     items: [
       { title: "Property is all we do", desc: "We work in real estate and nowhere else, so we start inside your business, not a template borrowed from another sector." },
       { title: "We ship working systems", desc: "Your team uses what we build on Monday, not a deck or a pilot that quietly stalls after the kickoff meeting." },
-      { title: "Yours to keep for good", desc: "You own the system outright, with no retainer to renew. It stays with the business and passes cleanly to the next generation." },
-      { title: "Discreet by default", desc: "We work quietly under your own credentials, so your data, your relationships, and your name stay private throughout." },
+      { title: "Yours to keep for good", desc: "You own the system outright. It stays with the business and passes cleanly to the next generation." },
+      { title: "We'll tell you when not to build", desc: "If software isn't the answer, we say so. You get an honest call on fit before a budget is spent, not a sales pitch." },
     ],
   },
   how: {
@@ -102,7 +102,7 @@ export const homeContent: HomeContent = {
     steps: [
       { title: "Scope", icon: "mdi:magnify-scan", desc: "We get the problem and the first move clear, together." },
       { title: "Build", icon: "mdi:cube-outline", desc: "We build in short, visible steps you can see working." },
-      { title: "Embed", icon: "mdi:account-sync-outline", desc: "We put it into your day-to-day, on your own systems." },
+      { title: "Embed", icon: "mdi:account-sync-outline", desc: "We put it into your day-to-day, alongside the people who use it." },
       { title: "Hand over", icon: "mdi:handshake", desc: "Your team owns and runs it — no retainer to renew." },
     ],
   },
@@ -111,7 +111,7 @@ export const homeContent: HomeContent = {
     titleHighlight: "walk away with",
     lead: "When the work is done, you are not left with a dependency. You are left with something your business owns and your team can run.",
     items: [
-      { title: "A working system", desc: "Live and in production, doing real work on your systems from day one." },
+      { title: "A working system", desc: "Live in production and doing real work from day one." },
       { title: "A trained team", desc: "Your people know how to run it and where to take it next." },
       { title: "Full ownership", desc: "The system is yours to keep, with no lock-in and no licence to renew." },
       { title: "Plain documentation", desc: "Written so anyone on your team can follow it, not just engineers." },

@@ -66,7 +66,7 @@ export const servicesContent: ServicesContent = {
   hero: {
     title: "What we do.",
     titleHighlight: "do",
-    lead: "Four fixes for Gulf property teams: data you can trust, reporting that's clear, automation that's reliable, and compliance you're confident in. Each runs on the systems you already own, and each stands on its own.",
+    lead: "Four fixes for Gulf property teams: data you can trust, reporting that's clear, automation that's reliable, and compliance you're confident in. Take one on its own, or build them in sequence.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "View engagement models", href: "#ways-to-work" },
   },
@@ -137,7 +137,7 @@ export const servicesContent: ServicesContent = {
       title: "Built to standards you answer to.",
       frameworks: ["DFSA & DIFC governance", "FATF & AML practice", "IFRS reporting"],
       caveat:
-        "Every engagement is shaped to align with the frameworks institutional buyers are held to. Everything runs inside your own environment, under your own credentials — your data never enters AUXO systems, and the audit trails and access logs stay yours. We build the work to support those standards; formal certification and legal sign-off stay with your advisors.",
+        "Every engagement is shaped to align with the frameworks institutional buyers are held to. We work to the access and data-handling rules you set, take only the data the work needs — sampled or anonymised wherever we can — and keep the audit trails and access logs yours. We build the work to support those standards; formal certification and legal sign-off stay with your advisors.",
     },
     items: [
       {
@@ -186,8 +186,8 @@ export const servicesContent: ServicesContent = {
     steps: [
       { name: "Scope", desc: "We get the problem and the first move clear, together." },
       { name: "Build", desc: "We build in short, visible steps you can see working." },
-      { name: "Embed", desc: "We put it into your day-to-day, on your own systems." },
-      { name: "Hand over", desc: "Your team owns and runs it — no retainer to renew." },
+      { name: "Embed", desc: "We put it into your day-to-day, alongside the people who use it." },
+      { name: "Hand over", desc: "Your team owns and runs it." },
     ],
   },
   cta: {

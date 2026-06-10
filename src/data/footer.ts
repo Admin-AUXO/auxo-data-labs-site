@@ -39,5 +39,5 @@ export const footerContent: FooterContent = {
       ],
     },
   ],
-  note: "Built on the systems you already run. Your data stays yours.",
+  note: "Made to last, and yours to keep. Built in Dubai.",
 };

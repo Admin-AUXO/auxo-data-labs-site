@@ -146,7 +146,7 @@ export const contactContent: ContactContent = {
       },
     ],
     consentNote:
-      "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply — never for marketing without separate opt-in. Your data stays with us and isn't shared with third parties.",
+      "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply — never for marketing without separate opt-in, and we don't sell or rent your details. Any service we use to handle your message is bound to do the same.",
     submitText: "Send message",
     note: "The first conversation is about getting the problem clear. No prep needed.",
     status: {
@@ -184,6 +184,11 @@ export const contactContent: ContactContent = {
           "Yes. We keep client relationships and details to ourselves, and we're glad to sign an NDA before any detailed conversation. Mention it in your message and we'll send ours within a day, or work from the document your legal team prefers.",
       },
       {
+        question: "What happens to our data — do you take copies of it?",
+        answer:
+          "We take only the data a piece of work actually needs, and wherever we can we use a sample, or anonymise or hash it first. Everything is handled under NDA and to the access rules you set, never reused for anything else, and returned or removed when the work is done. The systems we build run on your data; we don't build a business on holding it.",
+      },
+      {
         question: "What if our data is messy, scattered, or incomplete?",
         answer:
           "That's the normal starting point, not a blocker. Most of the early work is making sense of what you already hold across spreadsheets, systems, and inboxes. You don't need to tidy or reconcile anything before we talk; that's part of the job.",
@@ -192,6 +197,11 @@ export const contactContent: ContactContent = {
         question: "Do we have to replace the tools we already use?",
         answer:
           "No. We build on the systems you already run: your CRM, your finance stack, your spreadsheets. The aim is to make what you have work harder and connect properly, not to sell you another platform or add another licence to manage.",
+      },
+      {
+        question: "How quickly do we see something real?",
+        answer:
+          "Fast. A diagnostic takes two to three weeks; a first build ships in weeks, not quarters, in short visible steps you can see working. You won't wait months for a big-bang reveal — you'll see progress early and often, and can course-correct as we go.",
       },
       {
         question: "What happens after you hand over — are we stuck with you?",
