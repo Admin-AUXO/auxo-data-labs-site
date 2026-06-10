@@ -70,7 +70,7 @@ export const homeContent: HomeContent = {
     title: "Data and AI for Gulf real estate.",
     titleHighlight: "Gulf real estate",
     subtitle:
-      "Developers, funds, and family offices: you already hold the data you need — it's just scattered across systems that rarely agree. We turn it into decisions you can stand behind.",
+      "You're not short of data. You're short of what analytics and AI can pull from it. We close that gap, and hand back decisions that hold up in any room.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "Explore services", href: "/services/" },
   },
