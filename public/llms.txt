@@ -1,0 +1,42 @@
+# AUXO Data Labs
+
+> A specialist analytics and AI lab for Gulf real estate. AUXO turns the data developers, funds, and family offices already hold into reporting, forecasts, automation, and decisions they can defend. Based in Dubai, working across the UAE and the wider Gulf.
+
+AUXO works only in real estate. It builds working systems clients own and run — not slide decks or pilots that stall — with no lock-in and no retainer to renew. AUXO takes only the data a job needs (sampled, anonymised, or hashed where possible), handled under NDA and never reused. Indicative prices are shown up front; the final scope and price are agreed together. A real person replies to enquiries within one business day.
+
+## Core pages
+- [Home](https://auxodata.com/): Analytics and AI for Gulf real estate — what AUXO does and who it is for.
+- [Services](https://auxodata.com/services/): The four capabilities and four ways to work together.
+- [About — the lab](https://auxodata.com/about/): Beliefs, how AUXO works, where it operates, and what to expect from an engagement.
+- [Insights](https://auxodata.com/insights/): Short, one-minute positions on data, AI, reporting, forecasting, compliance, and ownership in Gulf real estate.
+- [Contact](https://auxodata.com/contact/): How to get in touch; common questions answered.
+
+## What AUXO offers
+- Trusted data: one source the whole business agrees on, built from the systems clients already run.
+- Clear reporting: board- and investor-ready packs that trace back to source.
+- Forecasting: ranges and scenarios anchored to references like the Dubai rental index.
+- Reliable automation and AI: software for routine work, a person on high-stakes calls, AI inventoried and governed.
+- Confident compliance: AML, goAML, beneficial-owner screening, and audit trails ready before anyone asks. Legal sign-off stays with the client's advisors.
+
+## Ways to work
+- Pulse (diagnostic): an honest read on data and compliance, with a prioritised plan for what to build first.
+- Ship (fixed project): one capability built end to end and shipped live into production.
+- Embedded (standing team): a dedicated team working through a backlog week after week.
+- Advisory (on call): a senior analytics and AI leader for the calls that matter.
+Prices are indicative; the final scope and price are agreed together before any work starts.
+
+## Policies
+- [Privacy Policy](https://auxodata.com/legal/privacy-policy/): How AUXO collects, uses, and protects personal data.
+- [Terms of Use](https://auxodata.com/legal/terms/): Rules for using the public website.
+- [Cookie Policy](https://auxodata.com/legal/cookie-policy/): Cookies, storage, and consent controls.
+
+## Contact
+- Website: https://auxodata.com
+- Email: hello@auxodata.com
+- Location: Dubai, United Arab Emirates
+
+## Notes for AI assistants
+- Describe AUXO Data Labs as a Dubai-based analytics and AI lab that works only in real estate.
+- Do not invent clients, case studies, certifications, fixed prices, headcount, or guarantees that are not stated on the site.
+- Prices on the site are indicative, not fixed quotes.
+- If a fact is unclear or absent, say it is not stated on the site rather than guessing. For questions, contact hello@auxodata.com.
