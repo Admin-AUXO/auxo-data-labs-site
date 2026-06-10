@@ -94,13 +94,18 @@
   .row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; }
   .row + .row { margin-top: .8rem; }
 
-  .btn { font-family: var(--sans); font-weight: 700; font-size: .85rem; padding: .6rem 1.15rem; border-radius: 999px; border: 0; cursor: default; }
-  .btn--primary { background: var(--accent); color: var(--ink-foreground); }
-  .btn--ghost { background: transparent; border: 1.5px solid var(--border-strong); color: var(--foreground); }
+  /* buttons match the live system: radius-sm (~3px), primary is foreground-on-dark, not green */
+  .btn { font-family: var(--sans); font-weight: 600; font-size: .85rem; height: 2.9rem; padding: 0 1.4rem; border-radius: .1875rem; border: 1px solid transparent; cursor: default; display: inline-flex; align-items: center; gap: .5rem; letter-spacing: -.01em; line-height: 1; }
+  .btn--primary { background: var(--foreground); border-color: var(--foreground); color: var(--ink-foreground); }
+  .btn--secondary { background: transparent; border-color: var(--border-strong); color: var(--foreground); }
+  .btn--outline { background: transparent; border-color: color-mix(in oklch, var(--accent) 60%, var(--border-strong)); color: var(--accent); }
+  .btn .arr { font-size: 1em; }
 
-  .navpill { display: inline-flex; gap: .3rem; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 999px; padding: .35rem; }
-  .navpill a { font-size: .8rem; font-weight: 600; padding: .35rem .8rem; border-radius: 999px; color: var(--muted); text-decoration: none; }
-  .navpill a.is-active { background: var(--accent); color: var(--ink-foreground); }
+  /* nav links: plain text, active = foreground + thin green underline */
+  .navlinks { display: inline-flex; gap: 1.4rem; }
+  .navlinks a { position: relative; font-size: .85rem; font-weight: 500; color: var(--muted); text-decoration: none; padding-bottom: .35rem; }
+  .navlinks a.is-active { color: var(--foreground); }
+  .navlinks a.is-active::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1.5px; background: var(--accent); }
 
   .num { font-family: var(--mono); font-weight: 600; font-size: 1rem; color: var(--accent-2); }
   .rule { height: 2px; width: 44px; border-radius: 2px; background: var(--accent); display: inline-block; }
@@ -133,6 +138,29 @@
   .ink h4 { font-family: var(--sora); margin: .2rem 0 .4rem; font-size: 1.1rem; }
   .ink .btn--ink { background: var(--ink-accent); color: #fff; }
 
+  /* logo / mark */
+  .logos { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .logo-tile { border: 1px solid var(--border); border-radius: 14px; padding: 1.6rem 1.4rem 1.1rem; display: flex; flex-direction: column; gap: 1.1rem; min-height: 150px; }
+  .logo-tile .label { font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--subtle); }
+  .logo-tile--dark { background: var(--background); }
+  .logo-tile--surface { background: var(--surface); }
+  .logo-tile--light { background: var(--ink-bg); }
+  .logo-tile--green { background: var(--accent); }
+  .lockup-row { display: flex; align-items: center; gap: 1.1rem; flex: 1; }
+
+  .mark { width: 2.6rem; height: 2.6rem; flex: none; }
+  .mark .tile { fill: var(--tile, var(--accent)); }
+  .mark .glyph { fill: var(--glyph, var(--ink-foreground)); font-family: var(--sora); font-weight: 700; }
+
+  .wordmark { font-family: var(--sora); font-weight: 800; font-size: 1.15rem; letter-spacing: .13em; text-transform: uppercase; line-height: 1; display: inline-flex; align-items: baseline; gap: .42em; white-space: nowrap; color: var(--word, var(--foreground)); }
+  .wordmark .sub { font-weight: 400; color: var(--word-sub, var(--muted)); }
+
+  /* per-tile colour overrides */
+  .v-primary { --tile: #a3e635; --glyph: #0a0a0a; --word: var(--foreground); --word-sub: var(--muted); }
+  .v-on-light { --tile: #a3e635; --glyph: #0a0a0a; --word: #0a0a0a; --word-sub: #555; }
+  .v-mono-white { --tile: #fafafa; --glyph: #0a0a0a; --word: #fafafa; --word-sub: rgba(250,250,250,.6); }
+  .v-mono-ink { --tile: #0a0a0a; --glyph: #fafafa; --word: #0a0a0a; --word-sub: rgba(10,10,10,.55); }
+
   /* usage table */
   table.uses { width: 100%; border-collapse: collapse; font-size: .88rem; }
   table.uses td { padding: .65rem .7rem; border-top: 1px solid var(--border); vertical-align: top; }
@@ -158,6 +186,7 @@
     <h1>AUXO design tokens &amp; colour system</h1>
     <p class="lead">The live system is a <strong>single dark theme</strong>. Two accents do the work: a vivid <strong>green</strong> (#A3E635) carries ~80% of emphasis, and a warm <strong>clay</strong> (#E8995C) appears sparingly (~10%) for process numerals, kickers, and one warm note per page. Everything else is a neutral grey ramp. Values mirror <code style="font-family:var(--mono);font-size:.85em;color:var(--accent)">src/styles/tokens.css</code> — that file is the source of truth.</p>
     <nav class="toc">
+      <a href="#logo">Logo</a>
       <a href="#accents">Accents</a>
       <a href="#surfaces">Surfaces</a>
       <a href="#text">Text</a>
@@ -168,6 +197,108 @@
       <a href="#rules">Usage rules</a>
     </nav>
   </header>
+
+  <!-- LOGO -->
+  <section id="logo">
+    <div class="sec-head"><h2>Logo</h2><span class="note">2×2 mark + wordmark · mark is tokenised (--accent / --accent-foreground)</span></div>
+    <div class="logos">
+
+      <div class="logo-tile logo-tile--dark">
+        <span class="label">Primary lockup — on background</span>
+        <div class="lockup-row v-primary">
+          <svg class="mark" viewBox="0 0 40 40" role="img" aria-label="AUXO">
+            <rect class="tile" x="0" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="0" y="21.5" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="21.5" width="18.5" height="18.5"/>
+            <g class="glyph" font-size="12" text-anchor="middle">
+              <text x="9.25" y="13.3">A</text><text x="30.75" y="13.3">U</text>
+              <text x="9.25" y="34.8">X</text><text x="30.75" y="34.8">O</text>
+            </g>
+          </svg>
+          <span class="wordmark">AUXO<span class="sub">Data Labs</span></span>
+        </div>
+      </div>
+
+      <div class="logo-tile logo-tile--surface">
+        <span class="label">Mark only — favicon / avatar</span>
+        <div class="lockup-row v-primary" style="justify-content:center">
+          <svg class="mark" viewBox="0 0 40 40" role="img" aria-label="AUXO" style="width:3.6rem;height:3.6rem">
+            <rect class="tile" x="0" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="0" y="21.5" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="21.5" width="18.5" height="18.5"/>
+            <g class="glyph" font-size="12" text-anchor="middle">
+              <text x="9.25" y="13.3">A</text><text x="30.75" y="13.3">U</text>
+              <text x="9.25" y="34.8">X</text><text x="30.75" y="34.8">O</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="logo-tile logo-tile--dark">
+        <span class="label">Wordmark only</span>
+        <div class="lockup-row v-primary">
+          <span class="wordmark" style="font-size:1.4rem">AUXO<span class="sub">Data Labs</span></span>
+        </div>
+      </div>
+
+      <div class="logo-tile logo-tile--light">
+        <span class="label">On light — ink surfaces</span>
+        <div class="lockup-row v-on-light">
+          <svg class="mark" viewBox="0 0 40 40" role="img" aria-label="AUXO">
+            <rect class="tile" x="0" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="0" y="21.5" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="21.5" width="18.5" height="18.5"/>
+            <g class="glyph" font-size="12" text-anchor="middle">
+              <text x="9.25" y="13.3">A</text><text x="30.75" y="13.3">U</text>
+              <text x="9.25" y="34.8">X</text><text x="30.75" y="34.8">O</text>
+            </g>
+          </svg>
+          <span class="wordmark">AUXO<span class="sub">Data Labs</span></span>
+        </div>
+      </div>
+
+      <div class="logo-tile logo-tile--dark">
+        <span class="label">Monochrome — white knockout</span>
+        <div class="lockup-row v-mono-white">
+          <svg class="mark" viewBox="0 0 40 40" role="img" aria-label="AUXO">
+            <rect class="tile" x="0" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="0" y="21.5" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="21.5" width="18.5" height="18.5"/>
+            <g class="glyph" font-size="12" text-anchor="middle">
+              <text x="9.25" y="13.3">A</text><text x="30.75" y="13.3">U</text>
+              <text x="9.25" y="34.8">X</text><text x="30.75" y="34.8">O</text>
+            </g>
+          </svg>
+          <span class="wordmark">AUXO<span class="sub">Data Labs</span></span>
+        </div>
+      </div>
+
+      <div class="logo-tile logo-tile--green">
+        <span class="label" style="color:rgba(10,10,10,.6)">Monochrome — on accent</span>
+        <div class="lockup-row v-mono-ink">
+          <svg class="mark" viewBox="0 0 40 40" role="img" aria-label="AUXO">
+            <rect class="tile" x="0" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="0" width="18.5" height="18.5"/>
+            <rect class="tile" x="0" y="21.5" width="18.5" height="18.5"/>
+            <rect class="tile" x="21.5" y="21.5" width="18.5" height="18.5"/>
+            <g class="glyph" font-size="12" text-anchor="middle">
+              <text x="9.25" y="13.3">A</text><text x="30.75" y="13.3">U</text>
+              <text x="9.25" y="34.8">X</text><text x="30.75" y="34.8">O</text>
+            </g>
+          </svg>
+          <span class="wordmark">AUXO<span class="sub">Data Labs</span></span>
+        </div>
+      </div>
+
+    </div>
+    <div class="callout" style="margin-top:1.4rem">
+      <strong>Construction &amp; clear space.</strong> The mark is a 2×2 grid of equal tiles (18.5 of 40 units, ~3-unit gutter) with A·U·X·O in Sora 700. In product it inherits <code style="font-family:var(--mono)">--accent</code> tiles and <code style="font-family:var(--mono)">--accent-foreground</code> glyphs, so it recolours with the token. Keep clear space ≥ one tile on all sides; don't recolour individual tiles, stretch, or add effects. Minimum mark size 24px.
+    </div>
+  </section>
 
   <!-- ACCENTS -->
   <section id="accents">
@@ -301,16 +432,21 @@
       <div class="card">
         <span class="label">Buttons &amp; nav</span>
         <div class="row">
-          <button class="btn btn--primary">Start a conversation</button>
-          <button class="btn btn--ghost">See our services</button>
+          <button class="btn btn--primary">Start a conversation <span class="arr">&rarr;</span></button>
+          <button class="btn btn--secondary">See our services</button>
         </div>
-        <div class="row" style="margin-top:1rem">
-          <span class="navpill">
+        <div class="row" style="margin-top:.9rem">
+          <button class="btn btn--outline">Outline / accent</button>
+        </div>
+        <div class="row" style="margin-top:1.2rem">
+          <span class="navlinks">
             <a class="is-active" href="#">Services</a>
             <a href="#">Studio</a>
             <a href="#">Insights</a>
+            <a href="#">Contact</a>
           </span>
         </div>
+        <p class="sw__role" style="margin-top:.9rem;color:var(--subtle)">Primary is <strong style="color:var(--foreground)">--foreground</strong> on dark (not green). Corners are <code style="font-family:var(--mono);color:var(--accent)">--radius-sm</code> (3px). Green carries links &amp; the active-nav underline.</p>
       </div>
 
       <div class="card">
@@ -338,14 +474,14 @@
 
       <div class="cta">
         <h4>Let's find where the <span>drag</span> starts.</h4>
-        <button class="btn btn--primary">Book a call</button>
+        <button class="btn btn--primary">Book a call <span class="arr">&rarr;</span></button>
       </div>
 
       <div class="ink">
         <span class="mono-label">Inverted "ink" panel</span>
         <h4>Rare light callout</h4>
         <p style="margin:0 0 .9rem;color:#555;font-size:.9rem">Light surface on the dark page. Green deepens to #6F9E2D for contrast.</p>
-        <button class="btn btn--ink">Book a call</button>
+        <button class="btn" style="background:var(--ink-foreground);border-color:var(--ink-foreground);color:#fff">Book a call</button>
       </div>
 
       <div class="card">
