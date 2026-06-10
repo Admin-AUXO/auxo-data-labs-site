@@ -67,7 +67,7 @@ export interface HomeContent {
 
 export const homeContent: HomeContent = {
   hero: {
-    title: "Data and AI for Gulf real estate.",
+    title: "Analytics and AI for Gulf real estate.",
     titleHighlight: "Gulf real estate",
     subtitle:
       "You're not short of data. You're short of what analytics and AI can pull from it. We close that gap, and hand back decisions that hold up in any room.",
