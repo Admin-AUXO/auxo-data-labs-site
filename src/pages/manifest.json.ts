@@ -13,9 +13,11 @@ const manifest = {
   theme_color: "#0b0c0e",
   orientation: "portrait-primary",
   icons: [
-    { src: withBase("/favicon.svg"), sizes: "any", type: "image/svg+xml", purpose: "any maskable" },
-    { src: withBase("/apple-touch-icon.svg"), sizes: "180x180", type: "image/svg+xml" },
-    { src: withBase("/logo.svg"), sizes: "512x512", type: "image/svg+xml" },
+    { src: withBase("/favicon.svg"), sizes: "any", type: "image/svg+xml", purpose: "any" },
+    { src: withBase("/icon-192.png"), sizes: "192x192", type: "image/png", purpose: "any" },
+    { src: withBase("/icon-512.png"), sizes: "512x512", type: "image/png", purpose: "any" },
+    { src: withBase("/maskable-512.png"), sizes: "512x512", type: "image/png", purpose: "maskable" },
+    { src: withBase("/apple-touch-icon.png"), sizes: "180x180", type: "image/png", purpose: "any" },
   ],
   shortcuts: [
     {
