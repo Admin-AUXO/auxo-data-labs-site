@@ -1,3 +1,5 @@
+import { siteData } from "./site";
+
 export interface ServiceCapability {
   name: string;
   nameHighlight?: string | string[];
@@ -65,8 +67,8 @@ export const servicesContent: ServicesContent = {
     title: "What we do.",
     titleHighlight: "do",
     lead: "Four fixes for Gulf property teams: data you can trust, reporting that's clear, automation that's reliable, and compliance you're confident in. Each runs on the systems you already own, and each stands on its own.",
-    primaryCta: { text: "Start a conversation", href: "/contact/" },
-    secondaryCta: { text: "See ways to work", href: "#ways-to-work" },
+    primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
+    secondaryCta: { text: "View engagement models", href: "#ways-to-work" },
   },
   capabilities: {
     title: "The four things we fix.",
@@ -130,12 +132,12 @@ export const servicesContent: ServicesContent = {
     subtitle:
       "Four ways in, all packaged and priced up front — never open-ended consulting. Start with an honest read, have one capability built, bring on a standing team, or keep a senior hand at the top table.",
     priceNote:
-      "These are starting figures, shown up front — no opaque quotes. We set the final scope and price together once we understand what you need, so book a call and we'll talk it through.",
+      "These are starting figures, shown up front — no opaque quotes. We set the final scope and price together once we understand what you need, so book a meeting and we'll talk it through.",
     standards: {
       title: "Built to standards you answer to.",
       frameworks: ["DFSA & DIFC governance", "FATF & AML practice", "IFRS reporting"],
       caveat:
-        "Every engagement is shaped to align with the frameworks institutional buyers are held to. We build the work to support those standards; formal certification and legal sign-off stay with your advisors.",
+        "Every engagement is shaped to align with the frameworks institutional buyers are held to. Everything runs inside your own environment, under your own credentials — your data never enters AUXO systems, and the audit trails and access logs stay yours. We build the work to support those standards; formal certification and legal sign-off stay with your advisors.",
     },
     items: [
       {
@@ -143,8 +145,8 @@ export const servicesContent: ServicesContent = {
         kicker: "Diagnostic",
         price: "AED 45,000",
         timeframe: "2–3 weeks",
-        hook: "Two to three weeks to a clear-eyed read on your data and compliance — and a priced plan for exactly what to build first.",
-        bestFor: "For teams who want the truth and a plan before committing to a build.",
+        hook: "A clear read on your data and compliance, delivered as a written assessment and a priced, prioritised plan for what to build first.",
+        bestFor: "For teams who want an honest read and a plan before they commit to a build.",
         featured: true,
       },
       {
@@ -152,8 +154,8 @@ export const servicesContent: ServicesContent = {
         kicker: "Fixed project",
         price: "From AED 90,000",
         timeframe: "4–12 weeks",
-        hook: "One capability, built end to end at a fixed price and date — shipped live, in production, and yours to keep.",
-        bestFor: "For teams with a defined problem, ready to be solved.",
+        hook: "One capability built end to end at a fixed price and date, shipped live into production and yours to keep, with no surprises.",
+        bestFor: "For teams with a defined problem that is ready to be solved.",
       },
       {
         name: "Embedded",
@@ -161,8 +163,8 @@ export const servicesContent: ServicesContent = {
         price: "From AED 70,000",
         unit: "/ mo",
         timeframe: "3-month minimum",
-        hook: "A dedicated team working through your backlog week after week — the output of a department, without the headcount.",
-        bestFor: "For teams with an ongoing backlog and no appetite to hire a full function.",
+        hook: "A dedicated team working through your backlog week after week, giving you the output of a department without the headcount or hiring.",
+        bestFor: "For teams with an ongoing backlog and no appetite to hire a function.",
       },
       {
         name: "Advisory",
@@ -170,8 +172,8 @@ export const servicesContent: ServicesContent = {
         price: "From AED 30,000",
         unit: "/ mo",
         timeframe: "Ongoing",
-        hook: "A senior data and AI leader in your corner for the calls that matter — strategy, hires, vendors, models — minus the full-time salary.",
-        bestFor: "For leaders who need a steady hand at the top table, not another headcount.",
+        hook: "A senior data and AI leader in your corner for the calls that matter, from strategy to hires to vendors, minus the full-time salary.",
+        bestFor: "For leaders who need a steady hand at the top table, not a new hire.",
       },
     ],
   },
@@ -193,8 +195,8 @@ export const servicesContent: ServicesContent = {
     titleHighlight: "fits",
     description:
       "Tell us what's slowing you down, and we'll point you to the right first move — even if it isn't us.",
-    ctaText: "Start a conversation",
-    ctaHref: "/contact/",
+    ctaText: "Book a meeting",
+    ctaHref: siteData.bookingUrl,
     secondaryText: "Read our thinking",
     secondaryHref: "/insights/",
     reassurance: "A real person replies within one business day.",

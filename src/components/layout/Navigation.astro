@@ -90,11 +90,14 @@ const isActive = (href: string) => {
   let prefetched = false;
   let initPromise: Promise<void> | null = null;
 
+  let cssApplied = false;
+
   function prefetchSearch() {
     if (prefetched) return;
     prefetched = true;
     const css = document.createElement("link");
-    css.rel = "stylesheet";
+    css.rel = "prefetch";
+    css.as = "style";
     css.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.css`;
     document.head.appendChild(css);
     const js = document.createElement("link");
@@ -102,6 +105,15 @@ const isActive = (href: string) => {
     js.as = "script";
     js.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.js`;
     document.head.appendChild(js);
+  }
+
+  function applySearchCss() {
+    if (cssApplied) return;
+    cssApplied = true;
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.css`;
+    document.head.appendChild(css);
   }
 
   function setStatus(status: string) {
@@ -114,7 +126,7 @@ const isActive = (href: string) => {
 
   function loadSearch() {
     if (initPromise) return initPromise;
-    prefetchSearch();
+    applySearchCss();
     setStatus("loading");
     initPromise = (async () => {
       try {

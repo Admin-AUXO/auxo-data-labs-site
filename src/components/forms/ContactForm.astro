@@ -39,6 +39,11 @@ const { form } = contactContent;
             />
           ) : field.type === "select" ? (
             <select id={field.name} name={field.name} class="select" aria-describedby={errorId}>
+              {field.placeholder && (
+                <option value="" disabled selected>
+                  {field.placeholder}
+                </option>
+              )}
               {field.options?.map((option) => <option value={option}>{option}</option>)}
             </select>
           ) : (

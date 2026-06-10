@@ -17,7 +17,7 @@ import { homeContent as c } from "../data/home";
       <h1 class="text-display max-w-[15ch]" data-enter="headline">
         <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
       </h1>
-      <p class="lead max-w-xl text-xl" data-enter>{c.hero.subtitle}</p>
+      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.subtitle}</p>
       <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" data-enter>
         <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
           {c.hero.primaryCta.text}
@@ -42,7 +42,7 @@ import { homeContent as c } from "../data/home";
             <div class="mb-6 flex size-12 items-center justify-center rounded-lg bg-accent-soft text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-accent-foreground">
               <Icon name={item.icon} class="size-6" aria-hidden="true" />
             </div>
-            <h3 class="text-xl font-bold">{item.name}</h3>
+            <h3 class="text-xl font-bold sm:min-h-[2.8em]">{item.name}</h3>
             <p class="mt-2 text-muted">{item.desc}</p>
           </article>
         ))
@@ -95,7 +95,7 @@ import { homeContent as c } from "../data/home";
   <Section padding="lg" width="7xl">
     <div class="flex max-w-3xl flex-col gap-4" data-reveal>
       <SectionHeader title={c.outcomes.title} highlight={c.outcomes.titleHighlight} />
-      <p class="lead max-w-xl">{c.outcomes.lead}</p>
+      <p class="lead max-w-2xl">{c.outcomes.lead}</p>
     </div>
     <ol class="mt-10 grid gap-x-16 gap-y-8 sm:mt-12 sm:grid-cols-2">
       {

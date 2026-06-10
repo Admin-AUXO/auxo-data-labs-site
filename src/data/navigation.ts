@@ -1,3 +1,5 @@
+import { siteData } from "./site";
+
 export interface NavItem {
   name: string;
   href: string;
@@ -19,7 +21,7 @@ export const navigationContent: NavigationContent = {
     { name: "Contact", href: "/contact/" },
   ],
   cta: {
-    label: "Start a conversation",
-    href: "/contact/",
+    label: "Book a meeting",
+    href: siteData.bookingUrl,
   },
 };

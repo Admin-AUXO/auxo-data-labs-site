@@ -58,6 +58,18 @@ export function initParticleField(): void {
     accentAlpha: 0.6,
   };
 
+  const BRAND_GREEN = [163, 230, 53];
+  const BRAND_WARM = [232, 153, 92];
+  function jitter(rgb: number[], amt: number): string {
+    return rgb
+      .map((c) => Math.max(0, Math.min(255, Math.round(c + (Math.random() * 2 - 1) * amt))))
+      .join(",");
+  }
+  const warmForward = Math.random() < 0.5;
+  const variantAccent = jitter(warmForward ? BRAND_WARM : BRAND_GREEN, 14);
+  const variantAccent2 = jitter(warmForward ? BRAND_GREEN : BRAND_WARM, 14);
+  const densityMul = 0.82 + Math.random() * 0.42;
+
   function triplet(name: string, fallback: string): string {
     const raw = getComputedStyle(root).getPropertyValue(name).trim();
     return raw ? raw.replace(/\s+/g, ",") : fallback;
@@ -65,8 +77,8 @@ export function initParticleField(): void {
 
   function readPalette(): void {
     palette.node = triplet("--pf-node", "24,24,27");
-    palette.accent = triplet("--pf-accent", "111,158,45");
-    palette.accent2 = triplet("--pf-accent-2", "180,83,31");
+    palette.accent = variantAccent;
+    palette.accent2 = variantAccent2;
     const dark = root.dataset.theme === "dark";
     palette.nodeAlpha = dark ? 0.36 : 0.24;
     palette.linkAlpha = dark ? 0.17 : 0.12;
@@ -92,7 +104,7 @@ export function initParticleField(): void {
 
   function build(): void {
     const small = w < 640;
-    const target = Math.floor((w * h) / 17000);
+    const target = Math.floor(((w * h) / 17000) * densityMul);
     const count = Math.max(small ? 24 : 42, Math.min(small ? 44 : 112, target));
     nodes = [];
     for (let i = 0; i < count; i += 1) {
@@ -239,6 +251,7 @@ export function initParticleField(): void {
 
   function play(): void {
     if (raf) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     raf = requestAnimationFrame(loop);
   }
 
@@ -283,7 +296,22 @@ export function initParticleField(): void {
   });
   observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
   readPalette();
   resize();
-  play();
+  if (reduceMotion.matches) {
+    frame();
+  } else {
+    play();
+  }
+
+  reduceMotion.addEventListener("change", (e) => {
+    if (e.matches) {
+      stop();
+      frame();
+    } else {
+      play();
+    }
+  });
 }

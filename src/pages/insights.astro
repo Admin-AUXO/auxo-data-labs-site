@@ -6,6 +6,7 @@ import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import { insightsContent as c } from "../data/insights";
 import { getCollection } from "astro:content";
+import "../styles/components/insight-deck.css";
 
 const entries = (await getCollection("insights")).sort((a, b) => a.data.order - b.data.order);
 const slugify = (s: string): string =>

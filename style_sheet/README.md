@@ -86,8 +86,10 @@ Variable fonts in [`fonts/`](./fonts). Self-host as `woff2` with `font-display: 
 | Role | Family | File | Weights |
 |---|---|---|---|
 | Body / UI | **Plus Jakarta Sans** | `PlusJakartaSans-VariableFont_wght.woff2` | 200–800 |
-| Brand / display (h1–h3, logo) | **Sora** | `Sora-Variable.woff2` | 100–800 |
+| Brand / display (h1–h3, logo) | **Sora** | `Sora-Variable.woff2` | 600–800 |
 | Mono / data / labels | **JetBrains Mono** | `JetBrainsMono-Variable.woff2` | 400–700 |
+
+Fonts are subset to a Latin charset and the weight ranges above to keep payload small.
 
 - Headings: Sora, weight 700, tight tracking (`-0.02em` to `-0.03em`), `text-wrap: balance`.
 - Display weight tokens: `--font-weight-display: 600`, `--font-weight-display-strong: 700`.

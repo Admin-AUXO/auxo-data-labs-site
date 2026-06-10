@@ -1,3 +1,5 @@
+import { siteData } from "./site";
+
 export interface AboutBelief {
   title: string;
   desc: string;
@@ -69,9 +71,9 @@ export const aboutContent: AboutContent = {
   hero: {
     title: "The studio.",
     titleHighlight: "studio",
-    lead: "AUXO is a small data and AI studio for real estate. We turn the information you already hold into reporting, forecasts, and automation your team can trust — and run on its own.",
-    primaryCta: { text: "Start a conversation", href: "/contact/" },
-    secondaryCta: { text: "See what we do", href: "/services/" },
+    lead: "AUXO is a specialist data and AI studio for real estate. We turn the information you already hold into reporting, forecasts, and automation your team can trust — and run on its own.",
+    primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
+    secondaryCta: { text: "See how we work", href: "/services/" },
   },
   beliefs: {
     title: "What we believe",
@@ -80,19 +82,19 @@ export const aboutContent: AboutContent = {
     items: [
       {
         title: "Real estate, nothing else",
-        desc: "Property is the only sector we work in. The work is sharper for the focus.",
+        desc: "Property is the only sector we work in, so we start fluent in Gulf deal structures, registration, and AML — not learning them on your time.",
       },
       {
         title: "Built to run",
-        desc: "We deliver systems in daily use — not a deck, and not a pilot that stalls.",
+        desc: "We deliver systems in daily use, not a deck and not a pilot that stalls. Production from the first build, not a someday promise.",
       },
       {
         title: "Yours to keep",
-        desc: "You own everything we build, on your own systems. The knowledge stays in-house and passes to the next generation that runs it. No lock-in, no black box.",
+        desc: "You own everything we build, on your own systems. The knowledge stays in-house and passes to whoever runs it next. No lock-in, no black box.",
       },
       {
         title: "Plain and honest",
-        desc: "We are clear about the trade-offs and clear about fit. Your name stays private.",
+        desc: "We are clear about the trade-offs and clear about fit. We will tell you when not to build. Your name stays private.",
       },
     ],
   },
@@ -104,7 +106,7 @@ export const aboutContent: AboutContent = {
       {
         label: "First",
         title: "Scope",
-        desc: "We sit with your team and get the problem and the first move clear, together.",
+        desc: "We sit with your team and get the problem, and the first move, clear together.",
       },
       {
         label: "Then",
@@ -126,7 +128,7 @@ export const aboutContent: AboutContent = {
   where: {
     title: "Where we work",
     titleHighlight: "work",
-    body: "We are based in Dubai and work with property teams across the UAE and the wider Gulf. Your data stays where you want it, on the terms you set.",
+    body: "We are based in Dubai and work with property teams across the UAE and the wider Gulf — fluent in the governance and AML expectations regional institutions answer to. Your data stays where you want it, on the terms you set.",
     points: [
       { label: "Based in", value: "Dubai" },
       { label: "Serving", value: "The UAE and the Gulf" },
@@ -152,8 +154,8 @@ export const aboutContent: AboutContent = {
         desc: "What we build is yours to keep and run. There is no lock-in and nothing to renew to stay switched on.",
       },
       {
-        title: "Plain communication",
-        desc: "You hear from us in clear language, with the trade-offs spelled out. No jargon, and no black box.",
+        title: "A person, not a process",
+        desc: "You work directly with the team doing the build, not an account manager relaying messages. Clear language, no black box.",
       },
     ],
   },
@@ -161,8 +163,8 @@ export const aboutContent: AboutContent = {
     title: "Ready when you are.",
     titleHighlight: "Ready",
     description: "Tell us what's slowing you down, and we'll show you where to start.",
-    ctaText: "Start a conversation",
-    ctaHref: "/contact/",
+    ctaText: "Book a meeting",
+    ctaHref: siteData.bookingUrl,
     secondaryText: "Read our thinking",
     secondaryHref: "/insights/",
     reassurance: "A real person replies within one business day.",

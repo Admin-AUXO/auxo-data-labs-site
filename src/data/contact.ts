@@ -90,7 +90,7 @@ export const contactContent: ContactContent = {
       },
     ],
     responseTime: "Replies within one business day.",
-    cta: { text: "Book a call" },
+    cta: { text: "Book a meeting" },
   },
   form: {
     title: "Send a message",
@@ -125,6 +125,7 @@ export const contactContent: ContactContent = {
         name: "topic",
         label: "What's it about?",
         type: "select",
+        placeholder: "Select a topic…",
         options: [
           "Not sure where to start",
           "Trusted data",
@@ -145,14 +146,14 @@ export const contactContent: ContactContent = {
       },
     ],
     consentNote:
-      "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply — never for marketing without separate opt-in.",
+      "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply — never for marketing without separate opt-in. Your data stays with us and isn't shared with third parties.",
     submitText: "Send message",
     note: "The first conversation is about getting the problem clear. No prep needed.",
     status: {
       sending: "Sending your message…",
       success:
         "Thank you — your message is on its way. We'll reply within one business day.",
-      error: `Something went wrong. Please try again or email us at ${siteData.email}.`,
+      error: `That didn't go through. Please try again, or email us directly at ${siteData.email} — we'll reply within one business day.`,
       consentRequired: "Please tick the consent box so we can hold your details to reply.",
       notConfigured: `The form is not connected yet. Please email us directly at ${siteData.email}.`,
     },
@@ -162,9 +163,9 @@ export const contactContent: ContactContent = {
     titleHighlight: "next",
     subtitle: "No drawn-out process. Three steps from your note to a clear first move.",
     steps: [
-      { title: "You send a note", desc: "A few plain lines about what's slowing you down. No formal brief needed." },
-      { title: "We reply within a day", desc: "A real person who does the work reads it and responds within one business day." },
-      { title: "A focused call", desc: "Thirty minutes to get the problem clear and agree the first step. No hard sell." },
+      { title: "You send a note", desc: "A few plain lines about what's slowing you down and the timeline that matters. No formal brief needed." },
+      { title: "We reply within a day", desc: "A real person who does the work reads it and responds within one business day, not a sales inbox." },
+      { title: "A focused call", desc: "Thirty minutes to get the problem clear and agree the first concrete step together. No hard sell." },
     ],
   },
   faq: {
@@ -175,32 +176,32 @@ export const contactContent: ContactContent = {
       {
         question: "What does working together cost?",
         answer:
-          "Every engagement is fixed-scope and priced up front — you'll find the full range on the Services page. We agree the exact scope and price together before anything starts, so there are no open-ended retainers and no surprises on the invoice.",
+          "Every engagement is fixed-scope and priced up front; the full range sits on the Services page. We agree exact scope and price together before any work starts, so there are no open-ended retainers and no surprises on the invoice.",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",
         answer:
-          "Yes. We keep client relationships and details to ourselves, and we're glad to sign your NDA before any detailed conversation. Just mention it in your message and we'll send ours, or work from yours.",
+          "Yes. We keep client relationships and details to ourselves, and we're glad to sign an NDA before any detailed conversation. Mention it in your message and we'll send ours within a day, or work from the document your legal team prefers.",
       },
       {
         question: "What if our data is messy, scattered, or incomplete?",
         answer:
-          "That's the normal starting point, not a blocker. Most of the early work is making sense of what you already have across spreadsheets, systems, and inboxes. You don't need to clean anything up before we talk.",
+          "That's the normal starting point, not a blocker. Most of the early work is making sense of what you already hold across spreadsheets, systems, and inboxes. You don't need to tidy or reconcile anything before we talk; that's part of the job.",
       },
       {
         question: "Do we have to replace the tools we already use?",
         answer:
-          "No. We build on the systems you already run — your CRM, your finance stack, your spreadsheets. The aim is to make what you have work harder, not to sell you another platform.",
+          "No. We build on the systems you already run: your CRM, your finance stack, your spreadsheets. The aim is to make what you have work harder and connect properly, not to sell you another platform or add another licence to manage.",
       },
       {
         question: "What happens after you hand over — are we stuck with you?",
         answer:
-          "The opposite. Every engagement ends with a working system your team owns, plain documentation, and the training to run it. No lock-in, no licence to keep paying. We stay reachable if you want us, but you're never dependent on us.",
+          "The opposite. Every engagement ends with a working system your team owns, plain documentation, and the training to run it. No lock-in and no licence to keep paying. We stay reachable if you want us, but you're never dependent on us.",
       },
       {
         question: "Do you only work with teams in Dubai?",
         answer:
-          "We're Dubai-based and work with property leaders across the UAE and the wider Gulf — remote, hybrid, or on-site, depending on the phase of the work.",
+          "No. We're Dubai-based and work with property leaders and family offices across the UAE and the wider Gulf. We run remote, hybrid, or on-site depending on the phase of the work and what your team prefers.",
       },
     ],
   },

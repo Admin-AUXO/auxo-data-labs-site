@@ -12,29 +12,29 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
 const purpose = [
   {
     label: "Our mission",
-    statement: "Turn complex decisions into clear, fast ones your team can stand behind.",
+    statement: "Turn the data you already hold into decisions you can defend: clear, traceable, and fast enough to act on.",
     support:
-      "We take the data you already hold and make the next move obvious — and easy to prove.",
+      "We make the next move obvious and easy to prove, with the working shown at every step.",
   },
   {
     label: "Our vision",
-    statement: "A world where every decision is backed by data worth trusting.",
+    statement: "A region where every decision is backed by data worth trusting.",
     support:
-      "Intelligence that is quiet, dependable, and always within reach — not a project, just how the work runs.",
+      "Intelligence that is quiet, dependable, and always within reach: not a project, just how the work runs.",
   },
 ];
 ---
 
 <BaseLayout
   title="Studio — Dubai data & AI for real estate"
-  description="AUXO is a small data and AI studio for real estate, based in Dubai and working across the UAE and the wider Gulf. We turn the data you already hold into reporting, forecasts, and automation you can trust — built on your systems, and yours to keep."
+  description="AUXO is a specialist data and AI studio for real estate, based in Dubai and working across the UAE and the wider Gulf. We turn the data you already hold into reporting, forecasts, and automation you can trust — built on your systems, and yours to keep."
 >
 
   <Section padding="xl" width="7xl">    <div class="flex max-w-3xl flex-col gap-7">
       <h1 class="text-display text-display--5xl max-w-[14ch]" data-enter="headline">
         <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
       </h1>
-      <p class="lead max-w-xl text-xl" data-enter>{c.hero.lead}</p>
+      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
       <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" data-enter>
         <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
           {c.hero.primaryCta.text}
@@ -105,7 +105,7 @@ const purpose = [
         <span class="eyebrow text-accent">
           <HighlightText text={c.where.title} highlight={c.where.titleHighlight} />
         </span>
-        <p class="mt-5 max-w-6xl text-2xl font-medium sm:text-3xl" data-anim="rise-in">
+        <p class="mt-5 max-w-3xl text-lg font-medium sm:text-xl" data-anim="rise-in">
           {c.where.body}
         </p>
       </div>
@@ -125,7 +125,7 @@ const purpose = [
   <Section padding="lg" width="7xl">
     <div class="flex max-w-3xl flex-col gap-4" data-reveal>
       <SectionHeader title={c.engagement.title} highlight={c.engagement.titleHighlight} />
-      <p class="max-w-xl text-lg text-muted">{c.engagement.lead}</p>
+      <p class="max-w-2xl text-lg text-muted">{c.engagement.lead}</p>
       <p class="flex items-start gap-3 text-sm text-subtle">
         <span class="mt-2 h-px w-6 shrink-0 bg-accent" aria-hidden="true"></span>
         {c.engagement.reassurance}

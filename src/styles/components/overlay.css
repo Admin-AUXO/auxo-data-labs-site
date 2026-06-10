@@ -110,6 +110,17 @@
     inline-size: 100%;
   }
 
+  @media (width >= 1024px) {
+    .calendar-dialog[data-size="lg"] .dialog__panel {
+      inline-size: min(100vw - 3rem, 72rem);
+      max-block-size: min(100dvh - 2rem, 54rem);
+    }
+
+    .calendar-dialog__iframe {
+      block-size: min(82dvh, 48rem);
+    }
+  }
+
   .dialog,
   .dialog::backdrop {
     opacity: 0;

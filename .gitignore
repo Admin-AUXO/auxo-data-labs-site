@@ -82,3 +82,4 @@ gtm.json
 
 # Local data exploration — not part of the site
 data_analysis/
+.font-originals/

@@ -63,6 +63,12 @@
     line-height: var(--text-5xl--line-height);
   }
 
+  .text-display--4xl {
+    font-size: var(--text-4xl);
+    letter-spacing: var(--tracking-display-4xl);
+    line-height: var(--text-4xl--line-height);
+  }
+
   .eyebrow {
     color: var(--muted);
     display: inline-block;

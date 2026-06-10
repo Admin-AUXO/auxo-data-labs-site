@@ -1,74 +1,49 @@
-# Repository Expectations
+# Working in this repo
 
-- Stack: Astro 6 (6.4.x), TypeScript, Tailwind CSS v4 (CSS-first via `@import "tailwindcss"`; tokens in `src/styles/tokens.css`), Embla, Playwright. `motion` (motion.dev) is used, scoped to the Readiness Diagnostic. `pagefind` is available for site search.
-- Primary goal: build a sharp, high-trust marketing site without trading clarity for animation noise or hydration bloat.
-- Default audience: skeptical B2B buyers. They skim first, compare second, and contact only after the page earns trust.
+Marketing site for AUXO Data Labs. Astro 6 + TypeScript + Tailwind v4, deployed to Vercel.
 
-## Repo layout
+Audience: skeptical B2B buyers in Gulf real estate and family offices. They skim, compare, then contact only once the page earns trust. Build for clarity, not animation noise or hydration bloat.
 
-- `src/pages`, `src/layouts`, `src/components`: routes and page composition
-- `src/scripts`: browser behavior and interaction logic
-- `src/styles`: shared styling layers and section styles
-- `public`: raw static files shipped as-is, including crawler metadata, PWA files, icons, service worker, and runtime-loaded public stylesheets
-- `.codex/agents`: TOML subagents for repo-specific delegation
-- `.agents/skills`: repo-scoped Codex skills
+## Stack
 
-## How to work here
+- **Astro 6**, static output (`output: 'static'`). Pages prerender; only the Astro Actions in `src/actions/` run server-side.
+- **Tailwind v4**, CSS-first (`@import "tailwindcss"`). Tokens in `src/styles/tokens.css` are the source of truth.
+- **Pagefind** search (lazy-loaded), **Partytown** for GTM, **astro-icon**, **MDX** for Insights, **astro-og-canvas** for OG images.
+- Single dark theme. Self-hosted, subset `woff2` fonts in `public/fonts/`.
 
-- Default to static Astro markup. Hydrate only where the interaction is real.
-- Follow the existing structure before inventing new abstractions.
-- Keep performance, reduced motion, and mobile layout intact when changing UI.
-- Research current best practices before changing page-level structure, navigation patterns, or buyer-facing copy direction.
-- `public/` files bypass the app CSS/tooling pipeline. Keep them standards-based, self-contained, and compatible with static hosting.
-- This repo deploys as a Vercel hybrid SSR build via the `@astrojs/vercel` adapter (`vercel.json` pins the EU region `fra1`). Pages prerender by default; only the Astro Actions endpoints in `src/actions/index.ts` (and any route that opts out via `export const prerender = false`) render on-demand. CI is `.github/workflows/ci.yml` running `npm run validate`. Do not reintroduce pure-static assumptions or add host-specific files unless the deployment model changes.
-- Use the repo skills in `.agents/skills` for design system work, landing page composition, Astro section implementation, performance-sensitive motion changes, and public metadata/static asset work.
-- Use the repo subagents in `.codex/agents` when bounded exploration, design review, docs verification, or perf review would help.
+## Layout
 
-## Page And Content Rules
+- `src/pages`, `src/layouts`, `src/components` — routes and composition
+- `src/data` — page copy (edit content here, not in templates)
+- `src/scripts` — browser behaviour
+- `src/styles` — tokens + layered CSS via `main.css`
+- `src/content/insights` — MDX articles
+- `public` — static files shipped as-is (icons, manifest, service worker, fonts)
+- `style_sheet` — brand reference
 
-- Every page needs one job. Do not let sections drift into generic awareness copy.
-- Service pages must answer this sequence fast: what the service is, who it fits, what changes, how it works, why AUXO is credible, what happens next.
-- Put fit criteria, deliverables, proof, or objection-handling ahead of fluffy vision language.
-- Keep buyer-facing copy concrete. Prefer named problems, stakeholders, outputs, and decision scenarios over abstract transformation language.
-- Write for skimmers. Headings, labels, cards, and the first sentence of each paragraph must carry the argument on their own.
-- Use the buyer’s language, not internal consulting language. Cut hedging, filler, and empty intensifiers.
-- Relevance sections such as industries, use cases, and FAQs must help buyers self-qualify. If they do not affect the buying decision, they are clutter.
-- CTA strategy should progress with commitment. One strong primary action, with lighter assistive CTAs only where a longer page actually needs them.
+## Rules
 
-## Navigation And Mobile Rules
+- Default to static markup. Hydrate only where the interaction is real.
+- Follow the existing structure before adding abstractions. Edit copy in `src/data/*.ts`.
+- The `astro-icon` allowlist in `astro.config.mjs` is exact — add an icon name there before using it, or the build fails.
+- Page-only CSS belongs in that page's frontmatter import, not global `main.css`.
+- Motion is CSS-first and respects `prefers-reduced-motion`. Keep that intact.
+- `public/` bypasses the build pipeline — keep it standards-based and self-contained.
 
-- Desktop dropdowns and mega menus must fit inside the viewport and keep their own scroll region when needed. Never rely on the page behind the menu to bail you out.
-- Group navigation options by user intent or buying stage, not by arbitrary internal taxonomy.
-- Keep navigation copy compact. Use labels plus one short line of guidance, not mini landing pages stuffed into a menu.
-- Mobile is not a shrunk desktop. Dense comparison content should become accordions or carousels only when that reduces cognitive load.
-- Use accordions for stacked detail and category disclosure. Use carousels for side-by-side browsing of repeated cards. Do not use both when one pattern is enough.
-- Keep tap targets, focus states, and keyboard behavior usable across nav, accordions, and carousel controls.
+## Content
 
-## Data And Implementation Rules
-
-- Model semantic content explicitly. Do not depend on array order, magic indexes, or label text when other components need the data.
-- Keep section contracts typed and readable. Shared content belongs in data files or focused helpers, not repeated template branches.
-- If a component rewrite makes selectors obsolete, remove the dead CSS in the same pass.
-- Motion is CSS-first: scroll-driven reveals use `animation-timeline: view()`, and `runtime.ts` stamps `[data-inview]` on above-fold nodes so nothing starts hidden. Keep that force-visible guard and the `astro:page-load` re-init paths intact when changing reveals or the custom Insights deck. The site intentionally ships no `prefers-reduced-motion` blocks.
+- One job per page. No generic awareness copy.
+- Lead with the buyer's problem, deliverables, and proof — not vision language.
+- Write for skimmers: headings and first sentences carry the argument.
+- Plain language, no jargon, no invented metrics.
+- One primary CTA ("Book a meeting", opens the booking modal); secondary CTAs only where a long page needs them.
 
 ## Commands
 
-- `npm run dev`
-- `npm run build`
-- `npm run preview`
-- `npm run sync`
-- `npm run type-check`
-- `npm run lint:css`
-- `npm run lint`
-- `npm run validate`
-- `npm run test`
-- `npm run test:ui`
+`npm run dev` · `build` · `preview` · `type-check` · `lint` (type-check + CSS + JS) · `validate` (lint + build) · `test`
 
 ## Done means
 
-- Run the narrowest command that proves the change.
-- Run `npm run lint` for Astro, TypeScript, or CSS edits (it runs `type-check` then `lint:css`).
-- Run `npm run validate` (lint + build) for repo-wide refactors, Astro file cleanup, Embla carousel changes, `public/` cleanup, dependency cleanup, or stacking/layering changes that benefit from a full check.
-- Run `npm run build` when layouts, routing, shared UI behavior, or `public/` metadata/service worker/style files change.
-- For navigation, layout, carousel, or major page-composition changes, do not stop at static checks. Also do a browser pass at representative desktop and mobile breakpoints when feasible.
-- State what you verified and what you could not verify.
+- Run the narrowest check that proves the change: `npm run lint` for code edits, `npm run build` for layout/routing/`public/` changes, `npm run validate` for repo-wide work.
+- For layout or page-composition changes, also check desktop and mobile in the browser.
+- State what you verified and what you did not.
