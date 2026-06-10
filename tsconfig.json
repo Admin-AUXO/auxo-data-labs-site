@@ -6,9 +6,8 @@
     "moduleResolution": "bundler",
     "verbatimModuleSyntax": true,
     "jsx": "preserve",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [".astro/types.d.ts", "src/**/*"],
