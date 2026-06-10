@@ -130,9 +130,9 @@ export const servicesContent: ServicesContent = {
     title: "Ways to work.",
     titleHighlight: "work",
     subtitle:
-      "Four ways in, all packaged and priced up front — never open-ended consulting. Start with an honest read, have one capability built, bring on a standing team, or keep a senior hand at the top table.",
+      "Four ways in, each packaged and priced up front — never open-ended consulting. Start with an honest read, have one capability built, bring on a standing team, or keep a senior hand at the top table.",
     priceNote:
-      "These are starting figures, shown up front — no opaque quotes. We set the final scope and price together once we understand what you need, so book a meeting and we'll talk it through.",
+      "The prices shown are indicative — we finalise the exact scope and price together once we understand what you need. No opaque quotes, no surprises on the invoice. Book a meeting and we'll talk it through.",
     standards: {
       title: "Built to standards you answer to.",
       frameworks: ["DFSA & DIFC governance", "FATF & AML practice", "IFRS reporting"],
