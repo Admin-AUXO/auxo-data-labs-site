@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /color-palette.html
 
 Sitemap: https://auxodata.com/sitemap-index.xml
 

@@ -3,6 +3,7 @@
 
 [identity]
 name: AUXO Data Labs
+description: Analytics and AI studio for Gulf real estate, based in Dubai.
 url: https://auxodata.com
 contact: mailto:hello@auxodata.com
 
@@ -11,7 +12,7 @@ contact: mailto:hello@auxodata.com
 - Services hub: https://auxodata.com/services/
 - Service detail pages: https://auxodata.com/services/
 - About: https://auxodata.com/about/
-- Insights: https://auxodata.com/blog/
+- Insights: https://auxodata.com/insights/
 - Contact: https://auxodata.com/contact/
 - Legal policies: https://auxodata.com/legal/
 
