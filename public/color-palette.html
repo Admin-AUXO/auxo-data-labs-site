@@ -94,13 +94,18 @@
   .row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; }
   .row + .row { margin-top: .8rem; }
 
-  .btn { font-family: var(--sans); font-weight: 700; font-size: .85rem; padding: .6rem 1.15rem; border-radius: 999px; border: 0; cursor: default; }
-  .btn--primary { background: var(--accent); color: var(--ink-foreground); }
-  .btn--ghost { background: transparent; border: 1.5px solid var(--border-strong); color: var(--foreground); }
+  /* buttons match the live system: radius-sm (~3px), primary is foreground-on-dark, not green */
+  .btn { font-family: var(--sans); font-weight: 600; font-size: .85rem; height: 2.9rem; padding: 0 1.4rem; border-radius: .1875rem; border: 1px solid transparent; cursor: default; display: inline-flex; align-items: center; gap: .5rem; letter-spacing: -.01em; line-height: 1; }
+  .btn--primary { background: var(--foreground); border-color: var(--foreground); color: var(--ink-foreground); }
+  .btn--secondary { background: transparent; border-color: var(--border-strong); color: var(--foreground); }
+  .btn--outline { background: transparent; border-color: color-mix(in oklch, var(--accent) 60%, var(--border-strong)); color: var(--accent); }
+  .btn .arr { font-size: 1em; }
 
-  .navpill { display: inline-flex; gap: .3rem; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 999px; padding: .35rem; }
-  .navpill a { font-size: .8rem; font-weight: 600; padding: .35rem .8rem; border-radius: 999px; color: var(--muted); text-decoration: none; }
-  .navpill a.is-active { background: var(--accent); color: var(--ink-foreground); }
+  /* nav links: plain text, active = foreground + thin green underline */
+  .navlinks { display: inline-flex; gap: 1.4rem; }
+  .navlinks a { position: relative; font-size: .85rem; font-weight: 500; color: var(--muted); text-decoration: none; padding-bottom: .35rem; }
+  .navlinks a.is-active { color: var(--foreground); }
+  .navlinks a.is-active::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1.5px; background: var(--accent); }
 
   .num { font-family: var(--mono); font-weight: 600; font-size: 1rem; color: var(--accent-2); }
   .rule { height: 2px; width: 44px; border-radius: 2px; background: var(--accent); display: inline-block; }
@@ -131,7 +136,6 @@
   .ink { background: var(--ink-bg); color: var(--ink-foreground); border-radius: 14px; padding: 1.4rem; }
   .ink .mono-label { color: #555; }
   .ink h4 { font-family: var(--sora); margin: .2rem 0 .4rem; font-size: 1.1rem; }
-  .ink .btn--ink { background: var(--ink-accent); color: #fff; }
 
   /* usage table */
   table.uses { width: 100%; border-collapse: collapse; font-size: .88rem; }
@@ -301,16 +305,21 @@
       <div class="card">
         <span class="label">Buttons &amp; nav</span>
         <div class="row">
-          <button class="btn btn--primary">Start a conversation</button>
-          <button class="btn btn--ghost">See our services</button>
+          <button class="btn btn--primary">Start a conversation <span class="arr">&rarr;</span></button>
+          <button class="btn btn--secondary">See our services</button>
         </div>
-        <div class="row" style="margin-top:1rem">
-          <span class="navpill">
+        <div class="row" style="margin-top:.9rem">
+          <button class="btn btn--outline">Outline / accent</button>
+        </div>
+        <div class="row" style="margin-top:1.2rem">
+          <span class="navlinks">
             <a class="is-active" href="#">Services</a>
             <a href="#">Studio</a>
             <a href="#">Insights</a>
+            <a href="#">Contact</a>
           </span>
         </div>
+        <p class="sw__role" style="margin-top:.9rem;color:var(--subtle)">Primary is <strong style="color:var(--foreground)">--foreground</strong> on dark (not green). Corners are <code style="font-family:var(--mono);color:var(--accent)">--radius-sm</code> (3px). Green carries links &amp; the active-nav underline.</p>
       </div>
 
       <div class="card">
@@ -338,14 +347,14 @@
 
       <div class="cta">
         <h4>Let's find where the <span>drag</span> starts.</h4>
-        <button class="btn btn--primary">Book a call</button>
+        <button class="btn btn--primary">Book a call <span class="arr">&rarr;</span></button>
       </div>
 
       <div class="ink">
         <span class="mono-label">Inverted "ink" panel</span>
         <h4>Rare light callout</h4>
         <p style="margin:0 0 .9rem;color:#555;font-size:.9rem">Light surface on the dark page. Green deepens to #6F9E2D for contrast.</p>
-        <button class="btn btn--ink">Book a call</button>
+        <button class="btn" style="background:var(--ink-foreground);border-color:var(--ink-foreground);color:#fff">Book a call</button>
       </div>
 
       <div class="card">
