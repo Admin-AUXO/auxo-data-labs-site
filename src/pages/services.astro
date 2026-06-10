@@ -86,10 +86,15 @@ import { servicesContent as c } from "../data/services-overview";
     <div class="ways mt-10 sm:mt-16">
       {
         c.models.items.map((model) => (
-          <article class="ways__card group" data-reveal data-anim="rise">
+          <article
+            class:list={["ways__card group", model.featured && "ways__card--featured"]}
+            data-reveal
+            data-anim="rise"
+          >
             <span class="mono-label ways__kicker transition-colors duration-300 group-hover:text-accent">
               {model.kicker}
             </span>
+            {model.featured && <span class="mono-label ways__badge">Start here</span>}
             <h3 class="ways__name">{model.name}</h3>
             <div class="ways__price">
               <span class="font-mono font-semibold whitespace-nowrap text-foreground">{model.price}</span>
@@ -193,6 +198,18 @@ import { servicesContent as c } from "../data/services-overview";
     display: grid;
     gap: 0.65rem;
     padding: 1.4rem 1.5rem;
+    position: relative;
+  }
+
+  .ways__card--featured {
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+
+  .ways__badge {
+    color: var(--accent);
+    inset-block-start: 1.4rem;
+    inset-inline-end: 1.5rem;
+    position: absolute;
   }
 
   .ways__name {

@@ -101,8 +101,20 @@
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    [data-enter],
+    [data-anim],
+    [data-reveal],
+    [data-enter="headline"] {
+      animation: none !important;
+      opacity: 1 !important;
+      clip-path: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
   [data-enter]:not([data-enter="headline"]) {
-    animation: m-rise-sm 1.4s var(--ease-asmr) 0.2s both;
+    animation: m-rise-sm 0.8s var(--ease-asmr) 0.1s both;
   }
 
   [data-anim="clip-up"] {
@@ -122,8 +134,8 @@
   }
 
   [data-enter="headline"] .m-word-i {
-    animation: m-word 1s var(--ease-asmr) both;
-    animation-delay: calc(var(--i) * 0.06s + 0.1s);
+    animation: m-word 0.6s var(--ease-asmr) both;
+    animation-delay: calc(var(--i) * 0.035s);
     display: inline-block;
   }
 
@@ -175,6 +187,7 @@
       animation-range: entry 0% entry 34%;
       transform: scaleX(0);
     }
+  }
   }
 
   a:focus-visible,

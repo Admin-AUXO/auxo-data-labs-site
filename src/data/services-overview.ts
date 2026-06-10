@@ -15,6 +15,7 @@ export interface ServiceModel {
   timeframe: string;
   hook: string;
   bestFor: string;
+  featured?: boolean;
 }
 
 export interface ServicesContent {
@@ -144,9 +145,10 @@ export const servicesContent: ServicesContent = {
         timeframe: "2–3 weeks",
         hook: "Two to three weeks to a clear-eyed read on your data and compliance — and a priced plan for exactly what to build first.",
         bestFor: "For teams who want the truth and a plan before committing to a build.",
+        featured: true,
       },
       {
-        name: "Build",
+        name: "Ship",
         kicker: "Fixed project",
         price: "From AED 90,000",
         timeframe: "4–12 weeks",

@@ -175,7 +175,7 @@ export const contactContent: ContactContent = {
       {
         question: "What does working together cost?",
         answer:
-          "Every engagement is fixed-scope and priced up front — you'll find the full range on the Work page. We agree the exact scope and price together before anything starts, so there are no open-ended retainers and no surprises on the invoice.",
+          "Every engagement is fixed-scope and priced up front — you'll find the full range on the Services page. We agree the exact scope and price together before anything starts, so there are no open-ended retainers and no surprises on the invoice.",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",

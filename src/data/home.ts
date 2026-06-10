@@ -96,11 +96,12 @@ export const homeContent: HomeContent = {
   how: {
     title: "How we work",
     titleHighlight: "work",
-    subtitle: "A short path from a real problem to a system your team owns.",
+    subtitle: "Four steps from a real problem to a system your team owns.",
     steps: [
-      { title: "Understand", icon: "mdi:magnify-scan", desc: "We learn how your business actually runs, and where the drag really is." },
-      { title: "Build", icon: "mdi:cube-outline", desc: "We build it on your own data and put it to work, quietly and in production." },
-      { title: "Hand over", icon: "mdi:handshake", desc: "Your team owns and runs it, with the confidence to keep going alone." },
+      { title: "Scope", icon: "mdi:magnify-scan", desc: "We get the problem and the first move clear, together." },
+      { title: "Build", icon: "mdi:cube-outline", desc: "We build in short, visible steps you can see working." },
+      { title: "Embed", icon: "mdi:account-sync-outline", desc: "We put it into your day-to-day, on your own systems." },
+      { title: "Hand over", icon: "mdi:handshake", desc: "Your team owns and runs it — no retainer to renew." },
     ],
   },
   outcomes: {

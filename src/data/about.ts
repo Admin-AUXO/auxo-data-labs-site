@@ -99,22 +99,27 @@ export const aboutContent: AboutContent = {
   how: {
     title: "How we build",
     titleHighlight: "build",
-    subtitle: "Three steps, no drama. We move from a real problem to a system your team owns.",
+    subtitle: "Four steps, no drama. We move from a real problem to a system your team owns.",
     steps: [
       {
         label: "First",
-        title: "Understand",
-        desc: "We sit with your team and learn how the business actually runs, and where the drag really is.",
+        title: "Scope",
+        desc: "We sit with your team and get the problem and the first move clear, together.",
       },
       {
         label: "Then",
         title: "Build",
-        desc: "We build on your own data and put it to work quietly, in production, alongside the people who use it.",
+        desc: "We build on your own data in short, visible steps you can see working.",
+      },
+      {
+        label: "Next",
+        title: "Embed",
+        desc: "We put it into your day-to-day, in production, alongside the people who use it.",
       },
       {
         label: "Finally",
         title: "Hand over",
-        desc: "Your team takes the controls and runs it with confidence. We step back when you no longer need us.",
+        desc: "Your team takes the controls and runs it with confidence — no retainer to renew.",
       },
     ],
   },

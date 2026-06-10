@@ -80,6 +80,7 @@ export default defineConfig({
           'mongodb',
           'docker',
           'kubernetes',
+          'x',
         ],
         mdi: [
           'account-check-outline',
@@ -87,6 +88,7 @@ export default defineConfig({
           'account-group-outline',
           'account-search-outline',
           'account-switch-outline',
+          'account-sync-outline',
           'alarm-light-outline',
           'alert-circle-outline',
           'alert-decagram-outline',

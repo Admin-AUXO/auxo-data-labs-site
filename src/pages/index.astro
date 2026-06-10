@@ -50,7 +50,7 @@ import { homeContent as c } from "../data/home";
     </div>
   </Section>
 
-  <Section padding="lg" width="7xl">
+  <Section padding="md" width="7xl">
     <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
       <SectionHeader title={c.why.title} highlight={c.why.titleHighlight} />
       <ul class="flex flex-col" data-reveal>
@@ -73,12 +73,12 @@ import { homeContent as c } from "../data/home";
 
   <Section padding="lg" width="7xl">
     <SectionHeader title={c.how.title} highlight={c.how.titleHighlight} subtitle={c.how.subtitle} />
-    <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-3">
+    <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
       {
         c.how.steps.map((step, i) => (
           <div
             class="flex flex-col gap-3 border-t-2 border-foreground pt-5"
-            data-anim={i === 0 ? "rise" : i === 1 ? "slide-right" : "slide-left"}
+            data-anim="rise"
           >
             <div class="flex items-center justify-between">
               <span class="font-mono text-sm font-semibold tabular-nums text-accent-2">0{i + 1}</span>

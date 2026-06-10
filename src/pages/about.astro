@@ -7,7 +7,7 @@ import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import { aboutContent as c } from "../data/about";
 
-const stepAnim = ["slide-right", "rise", "slide-left"] as const;
+const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
 
 const purpose = [
   {
@@ -49,7 +49,7 @@ const purpose = [
 
   <Section padding="lg" width="7xl">
     <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-      <div class="lg:sticky lg:top-28 lg:self-start">
+      <div class="lg:self-start">
         <SectionHeader title={c.beliefs.title} highlight={c.beliefs.titleHighlight} />
         <p class="mt-5 max-w-xs text-muted">{c.beliefs.lead}</p>
       </div>
@@ -76,7 +76,7 @@ const purpose = [
       highlight={c.how.titleHighlight}
       subtitle={c.how.subtitle}
     />
-    <ol class="mt-10 grid gap-x-10 gap-y-8 sm:gap-y-12 md:mt-12 md:grid-cols-3">
+    <ol class="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 sm:gap-y-12 md:mt-12 md:grid-cols-4">
       {
         c.how.steps.map((step, i) => (
           <li class="relative flex flex-col gap-3 pt-6" data-anim={stepAnim[i]}>

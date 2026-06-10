@@ -13,7 +13,7 @@ export interface NavigationContent {
 
 export const navigationContent: NavigationContent = {
   items: [
-    { name: "Work", href: "/services/" },
+    { name: "Services", href: "/services/" },
     { name: "Studio", href: "/about/" },
     { name: "Insights", href: "/insights/" },
     { name: "Contact", href: "/contact/" },

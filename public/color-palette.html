@@ -3,136 +3,382 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AUXO — colour palette & use cases</title>
+<meta name="robots" content="noindex, nofollow" />
+<title>AUXO — design tokens & colour system</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
+  /* ---- tokens mirrored from src/styles/tokens.css (single dark theme) ---- */
   :root {
     --sans: "Plus Jakarta Sans", system-ui, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, monospace;
     --sora: "Sora", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+
+    --background: oklch(8.5% 0 0deg);
+    --surface-sunken: oklch(14.5% 0 0deg);
+    --surface: oklch(19.5% 0 0deg);
+    --surface-raised: oklch(26.5% 0 0deg);
+    --foreground: oklch(98.6% 0 0deg);
+    --muted: oklch(71.5% 0 0deg);
+    --subtle: oklch(64% 0 0deg);
+    --border: color-mix(in oklch, oklch(98.6% 0 0deg) 15%, transparent);
+    --border-strong: color-mix(in oklch, oklch(98.6% 0 0deg) 24%, transparent);
+    --hairline: color-mix(in oklch, oklch(98.6% 0 0deg) 11%, transparent);
+
+    --accent: #a3e635;
+    --accent-soft: color-mix(in oklch, #a3e635 14%, transparent);
+    --accent-2: #e8995c;
+    --accent-2-soft: color-mix(in oklch, #e8995c 16%, transparent);
+
+    --ink-bg: oklch(98.6% 0 0deg);
+    --ink-foreground: oklch(8.5% 0 0deg);
+    --ink-accent: #6f9e2d;
+
+    --danger: oklch(64% 0.205 25deg);
+    --success: oklch(62% 0.140 150deg);
   }
+
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: var(--sans); background: #f4f4f4; color: #0a0a0a; -webkit-font-smoothing: antialiased; padding: 3rem clamp(1rem,4vw,4rem) 5rem; }
-  h1 { font-family: var(--sora); font-weight: 800; letter-spacing: -0.02em; font-size: 1.7rem; margin: 0 0 0.3rem; }
-  .lead { color: #555; max-width: 70ch; line-height: 1.6; margin: 0 0 2.5rem; }
-  .themes { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); }
-  .panel { border-radius: 16px; overflow: hidden; border: 1px solid rgba(0,0,0,.08); }
-  .panel--light { background: #fafafa; color: #0a0a0a; }
-  .panel--dark { background: #0a0a0a; color: #fafafa; }
-  .panel__head { padding: 1.1rem 1.4rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
-  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; padding: 0 1.4rem; }
-  .sw { border-radius: 10px; overflow: hidden; border: 1px solid rgba(128,128,128,.25); }
-  .sw__chip { height: 76px; }
-  .sw__meta { padding: .55rem .6rem .7rem; }
-  .sw__name { font-weight: 700; font-size: .82rem; }
-  .sw__hex { font-family: var(--mono); font-size: .68rem; opacity: .6; }
-  .block { padding: 1.4rem; }
-  .block h3 { font-family: var(--sora); font-size: .95rem; margin: 1.4rem 0 .7rem; letter-spacing: -.01em; }
-  .row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-bottom: .55rem; }
-  .btn { font-family: var(--sans); font-weight: 700; font-size: .82rem; padding: .6rem 1.1rem; border-radius: 999px; border: 0; cursor: default; }
-  .btn--ghost { background: transparent; border: 1.5px solid currentColor; }
-  .tag { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .28rem .55rem; border-radius: 5px; }
-  .num { font-family: var(--mono); font-weight: 600; font-size: .9rem; }
-  .rule { height: 2px; width: 44px; border-radius: 2px; }
-  .dot { width: 9px; height: 9px; border-radius: 999px; display: inline-block; }
-  .ink-demo { border-radius: 12px; padding: 1.3rem 1.4rem; margin-top: .6rem; }
-  .ink-demo h4 { font-family: var(--sora); font-weight: 800; font-size: 1.2rem; margin: 0 0 .5rem; letter-spacing: -.02em; }
-  .cap { font-size: .75rem; opacity: .65; margin-top: .35rem; }
-  table.uses { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: .85rem; }
-  table.uses td { padding: .5rem .6rem; border-top: 1px solid rgba(128,128,128,.2); vertical-align: top; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    padding: clamp(2rem, 4vw, 4rem) clamp(1.1rem, 4vw, 4rem) 6rem;
+  }
+
+  /* layout */
+  .wrap { max-width: 1080px; margin-inline: auto; }
+  header { margin-bottom: 3rem; }
+  .eyebrow { font-family: var(--mono); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: var(--sora); font-weight: 800; letter-spacing: -.03em; font-size: clamp(1.9rem, 1rem + 3vw, 2.8rem); margin: .5rem 0 .6rem; line-height: 1.05; }
+  .lead { color: var(--muted); max-width: 64ch; margin: 0; }
+  .lead strong { color: var(--foreground); font-weight: 600; }
+
+  section { margin-top: 3.25rem; scroll-margin-top: 2rem; }
+  .sec-head { display: flex; align-items: baseline; gap: .9rem; border-bottom: 1px solid var(--border); padding-bottom: .7rem; margin-bottom: 1.4rem; }
+  h2 { font-family: var(--sora); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; margin: 0; }
+  .sec-head .note { font-size: .8rem; color: var(--subtle); }
+
+  /* swatch grid */
+  .grid { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .sw { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--surface-sunken); }
+  .sw__chip { height: 72px; border-bottom: 1px solid var(--border); }
+  .sw__meta { padding: .65rem .75rem .8rem; }
+  .sw__name { font-weight: 700; font-size: .85rem; }
+  .sw__var { font-family: var(--mono); font-size: .68rem; color: var(--accent); margin-top: .15rem; }
+  .sw__val { font-family: var(--mono); font-size: .66rem; color: var(--subtle); margin-top: .25rem; line-height: 1.4; }
+  .sw__role { font-size: .72rem; color: var(--muted); margin-top: .4rem; }
+
+  /* ramp (horizontal strip) */
+  .ramp { display: flex; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .ramp > div { flex: 1; padding: 1.1rem .7rem; min-height: 96px; display: flex; flex-direction: column; justify-content: flex-end; gap: .15rem; }
+  .ramp .l { font-family: var(--mono); font-size: .64rem; }
+  .ramp .h { font-family: var(--mono); font-size: .6rem; opacity: .7; }
+
+  /* typography */
+  .type-row { border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.3rem; margin-bottom: .8rem; background: var(--surface-sunken); }
+  .type-row .meta { font-family: var(--mono); font-size: .68rem; color: var(--subtle); margin-bottom: .5rem; letter-spacing: .04em; }
+  .specimen-brand { font-family: var(--sora); font-weight: 700; letter-spacing: -.03em; line-height: 1; font-size: clamp(2rem, 1rem + 4vw, 3.4rem); }
+  .specimen-sans { font-family: var(--sans); font-size: 1.05rem; color: var(--muted); }
+  .specimen-mono { font-family: var(--mono); font-size: .85rem; letter-spacing: .04em; color: var(--accent); }
+
+  /* component demos */
+  .demos { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .card { border: 1px solid var(--border); border-radius: 14px; padding: 1.3rem 1.4rem; background: var(--surface); }
+  .card > .label { font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--subtle); display: block; margin-bottom: .9rem; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; }
+  .row + .row { margin-top: .8rem; }
+
+  .btn { font-family: var(--sans); font-weight: 700; font-size: .85rem; padding: .6rem 1.15rem; border-radius: 999px; border: 0; cursor: default; }
+  .btn--primary { background: var(--accent); color: var(--ink-foreground); }
+  .btn--ghost { background: transparent; border: 1.5px solid var(--border-strong); color: var(--foreground); }
+
+  .navpill { display: inline-flex; gap: .3rem; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 999px; padding: .35rem; }
+  .navpill a { font-size: .8rem; font-weight: 600; padding: .35rem .8rem; border-radius: 999px; color: var(--muted); text-decoration: none; }
+  .navpill a.is-active { background: var(--accent); color: var(--ink-foreground); }
+
+  .num { font-family: var(--mono); font-weight: 600; font-size: 1rem; color: var(--accent-2); }
+  .rule { height: 2px; width: 44px; border-radius: 2px; background: var(--accent); display: inline-block; }
+  .dot { width: 9px; height: 9px; border-radius: 999px; display: inline-block; background: var(--accent); }
+
+  .mono-label { font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; }
+  .tag { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .6rem; border-radius: 6px; }
+  .tag--green { background: var(--accent-soft); color: var(--accent); }
+  .tag--clay { background: var(--accent-2-soft); color: var(--accent-2); }
+
+  .badge { display: inline-flex; align-items: center; gap: .45rem; font-size: .78rem; font-weight: 600; }
+  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 999px; }
+  .badge--ok::before { background: var(--success); }
+  .badge--err::before { background: var(--danger); }
+
+  /* capability card demo */
+  .cap-card { border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; background: var(--surface); }
+  .cap-mark { width: 44px; height: 44px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-family: var(--mono); font-weight: 600; margin-bottom: .9rem; }
+  .cap-card h4 { font-family: var(--sora); font-size: 1.1rem; margin: 0 0 .35rem; }
+  .cap-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+  /* CTA band demo */
+  .cta { border: 1px solid var(--border); border-radius: 16px; padding: 2rem 1.6rem; text-align: center; background: var(--surface); box-shadow: 0 8px 24px -8px rgb(0 0 0 / 55%); }
+  .cta h4 { font-family: var(--sora); font-weight: 800; font-size: 1.5rem; letter-spacing: -.025em; margin: 0 0 1rem; }
+  .cta h4 span { color: var(--accent); }
+
+  /* ink (inverted light) demo */
+  .ink { background: var(--ink-bg); color: var(--ink-foreground); border-radius: 14px; padding: 1.4rem; }
+  .ink .mono-label { color: #555; }
+  .ink h4 { font-family: var(--sora); margin: .2rem 0 .4rem; font-size: 1.1rem; }
+  .ink .btn--ink { background: var(--ink-accent); color: #fff; }
+
+  /* usage table */
+  table.uses { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  table.uses td { padding: .65rem .7rem; border-top: 1px solid var(--border); vertical-align: top; }
+  table.uses tr:first-child td { border-top: 0; }
   table.uses td:first-child { font-weight: 700; white-space: nowrap; }
-  .key { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:.4rem; vertical-align:middle; }
+  .key { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: .5rem; vertical-align: middle; }
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: 8px; padding: .9rem 1.1rem; font-size: .85rem; color: var(--muted); }
+  .callout strong { color: var(--foreground); }
+
+  footer { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); font-size: .78rem; color: var(--subtle); }
+  a.anchor { color: var(--muted); text-decoration: none; font-size: .8rem; }
+  nav.toc { display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; margin-top: 1.4rem; }
+  nav.toc a { font-family: var(--mono); font-size: .72rem; color: var(--subtle); text-decoration: none; }
+  nav.toc a:hover { color: var(--accent); }
 </style>
 </head>
 <body>
-  <h1>AUXO — four-colour palette</h1>
-  <p class="lead">One vivid primary (green), one warm secondary used sparingly (clay), plus near-black and off-white. Bold minimalism: the green carries almost every accent; clay appears for ~10% — process/step numerals, one warm emphasis per page, the inverted-band accent. Each theme tuned separately.</p>
+<div class="wrap">
 
-  <div class="themes">
+  <header>
+    <span class="eyebrow">Internal reference</span>
+    <h1>AUXO design tokens &amp; colour system</h1>
+    <p class="lead">The live system is a <strong>single dark theme</strong>. Two accents do the work: a vivid <strong>green</strong> (#A3E635) carries ~80% of emphasis, and a warm <strong>clay</strong> (#E8995C) appears sparingly (~10%) for process numerals, kickers, and one warm note per page. Everything else is a neutral grey ramp. Values mirror <code style="font-family:var(--mono);font-size:.85em;color:var(--accent)">src/styles/tokens.css</code> — that file is the source of truth.</p>
+    <nav class="toc">
+      <a href="#accents">Accents</a>
+      <a href="#surfaces">Surfaces</a>
+      <a href="#text">Text</a>
+      <a href="#borders">Borders</a>
+      <a href="#status">Status</a>
+      <a href="#type">Typography</a>
+      <a href="#components">Components</a>
+      <a href="#rules">Usage rules</a>
+    </nav>
+  </header>
 
-    <!-- LIGHT -->
-    <section class="panel panel--light">
-      <div class="panel__head">Light mode</div>
-      <div class="swatches">
-        <div class="sw"><div class="sw__chip" style="background:#6f9e2d"></div><div class="sw__meta"><div class="sw__name">Green</div><div class="sw__hex">#6F9E2D</div></div></div>
-        <div class="sw"><div class="sw__chip" style="background:#b4531f"></div><div class="sw__meta"><div class="sw__name">Clay</div><div class="sw__hex">#B4531F</div></div></div>
-        <div class="sw"><div class="sw__chip" style="background:#0a0a0a"></div><div class="sw__meta"><div class="sw__name">Ink</div><div class="sw__hex">#0A0A0A</div></div></div>
-        <div class="sw"><div class="sw__chip" style="background:#fafafa;border-bottom:1px solid #e5e5e5"></div><div class="sw__meta"><div class="sw__name">Paper</div><div class="sw__hex">#FAFAFA</div></div></div>
-      </div>
-      <div class="block">
-        <h3>In use</h3>
-        <div class="row">
-          <button class="btn" style="background:#6f9e2d;color:#fff">Start a conversation</button>
-          <button class="btn btn--ghost" style="color:#0a0a0a">See our work</button>
-        </div>
-        <div class="row">
-          <span class="rule" style="background:#6f9e2d"></span>
-          <span>Data and AI for <strong style="color:#6f9e2d">Gulf real estate</strong></span>
-        </div>
-        <div class="row">
-          <span class="num" style="color:#b4531f">01</span>
-          <span class="num" style="color:#b4531f">02</span>
-          <span class="num" style="color:#b4531f">03</span>
-          <span class="cap" style="margin:0">— process / step numerals (clay)</span>
-        </div>
-        <div class="row">
-          <span class="dot" style="background:#6f9e2d"></span><span class="cap" style="margin:0">capability marks (green)</span>
-          <span class="tag" style="background:rgba(180,83,31,.12);color:#b4531f">Assurance</span>
-        </div>
-        <div class="ink-demo" style="background:#0a0a0a;color:#fafafa">
-          <h4>Let's <span style="color:#a3e635">talk</span>.</h4>
-          <button class="btn" style="background:#a3e635;color:#0a0a0a">Book a call</button>
-          <div class="cap">Inverted CTA band — accent brightens to #A3E635 on dark</div>
+  <!-- ACCENTS -->
+  <section id="accents">
+    <div class="sec-head"><h2>Accents</h2><span class="note">green primary · clay secondary, used sparingly</span></div>
+    <div class="grid">
+      <div class="sw">
+        <div class="sw__chip" style="background:#a3e635"></div>
+        <div class="sw__meta">
+          <div class="sw__name">Green</div>
+          <div class="sw__var">--accent</div>
+          <div class="sw__val">#A3E635</div>
+          <div class="sw__role">Buttons, links, focus rings, hero highlight word, capability &amp; outcome marks, logo.</div>
         </div>
       </div>
-    </section>
-
-    <!-- DARK -->
-    <section class="panel panel--dark">
-      <div class="panel__head">Dark mode</div>
-      <div class="swatches">
-        <div class="sw"><div class="sw__chip" style="background:#a3e635"></div><div class="sw__meta"><div class="sw__name">Green</div><div class="sw__hex">#A3E635</div></div></div>
-        <div class="sw"><div class="sw__chip" style="background:#e8995c"></div><div class="sw__meta"><div class="sw__name">Clay</div><div class="sw__hex">#E8995C</div></div></div>
-        <div class="sw"><div class="sw__chip" style="background:#0a0a0a;border:1px solid #333"></div><div class="sw__meta"><div class="sw__name">Ink</div><div class="sw__hex">#0A0A0A</div></div></div>
-        <div class="sw"><div class="sw__chip" style="background:#fafafa"></div><div class="sw__meta"><div class="sw__name">Paper</div><div class="sw__hex">#FAFAFA</div></div></div>
-      </div>
-      <div class="block">
-        <h3>In use</h3>
-        <div class="row">
-          <button class="btn" style="background:#a3e635;color:#0a0a0a">Start a conversation</button>
-          <button class="btn btn--ghost" style="color:#fafafa">See our work</button>
-        </div>
-        <div class="row">
-          <span class="rule" style="background:#a3e635"></span>
-          <span>Data and AI for <strong style="color:#a3e635">Gulf real estate</strong></span>
-        </div>
-        <div class="row">
-          <span class="num" style="color:#e8995c">01</span>
-          <span class="num" style="color:#e8995c">02</span>
-          <span class="num" style="color:#e8995c">03</span>
-          <span class="cap" style="margin:0">— process / step numerals (clay)</span>
-        </div>
-        <div class="row">
-          <span class="dot" style="background:#a3e635"></span><span class="cap" style="margin:0">capability marks (green)</span>
-          <span class="tag" style="background:rgba(232,153,92,.18);color:#e8995c">Assurance</span>
-        </div>
-        <div class="ink-demo" style="background:#fafafa;color:#0a0a0a">
-          <h4>Let's <span style="color:#6f9e2d">talk</span>.</h4>
-          <button class="btn" style="background:#6f9e2d;color:#fff">Book a call</button>
-          <div class="cap">Inverted CTA band — flips to light, accent deepens to #6F9E2D</div>
+      <div class="sw">
+        <div class="sw__chip" style="background:var(--accent-soft)"></div>
+        <div class="sw__meta">
+          <div class="sw__name">Green soft</div>
+          <div class="sw__var">--accent-soft</div>
+          <div class="sw__val">green @ 14%</div>
+          <div class="sw__role">Capability mark backgrounds, soft tags, hover wash.</div>
         </div>
       </div>
-    </section>
-  </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#e8995c"></div>
+        <div class="sw__meta">
+          <div class="sw__name">Clay</div>
+          <div class="sw__var">--accent-2</div>
+          <div class="sw__val">#E8995C</div>
+          <div class="sw__role">Process/step numerals &amp; kickers, one warm emphasis per page. Never competes with green in the same spot.</div>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:var(--accent-2-soft)"></div>
+        <div class="sw__meta">
+          <div class="sw__name">Clay soft</div>
+          <div class="sw__var">--accent-2-soft</div>
+          <div class="sw__val">clay @ 16%</div>
+          <div class="sw__role">Warm categorical tags.</div>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#6f9e2d"></div>
+        <div class="sw__meta">
+          <div class="sw__name">Green deep</div>
+          <div class="sw__var">--ink-accent</div>
+          <div class="sw__val">#6F9E2D</div>
+          <div class="sw__role">Green on light "ink" surfaces, where #A3E635 lacks contrast.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <table class="uses">
-    <tr><td><span class="key" style="background:#6f9e2d"></span>Green</td><td>Primary. Buttons, links, focus rings, hero highlight word, capability & outcome marks, the logo. ~80% of all accent usage.</td></tr>
-    <tr><td><span class="key" style="background:#b4531f"></span>Clay</td><td>Secondary, sparing (~10%). Process / "how it works" / next-step numerals & kickers, one warm categorical tag, a single emphasis per page. Never competes with green in the same spot.</td></tr>
-    <tr><td><span class="key" style="background:#0a0a0a"></span>Ink</td><td>Body text, headings, the inverted CTA band (light theme), 2px top rules on step cards.</td></tr>
-    <tr><td><span class="key" style="background:#fafafa;outline:1px solid #ccc"></span>Paper</td><td>Page background, card surfaces, text on dark/ink, the inverted band (dark theme).</td></tr>
-  </table>
-  <p class="cap" style="margin-top:1.5rem">⚠️ Light green #6F9E2D ≈ 3.1:1 on white — great for fills, logo, large text & UI marks; below AA 4.5 for small green body text/links. Clay #B4531F ≈ 4.6:1 on white (AA pass). Both bright dark-mode tones pass comfortably on #0A0A0A.</p>
+  <!-- SURFACES -->
+  <section id="surfaces">
+    <div class="sec-head"><h2>Surfaces</h2><span class="note">neutral ramp, darkest → raised</span></div>
+    <div class="ramp">
+      <div style="background:oklch(8.5% 0 0);color:#fafafa"><span class="l">--background</span><span class="h">neutral-950</span></div>
+      <div style="background:oklch(14.5% 0 0);color:#fafafa"><span class="l">--surface-sunken</span><span class="h">neutral-900</span></div>
+      <div style="background:oklch(19.5% 0 0);color:#fafafa"><span class="l">--surface</span><span class="h">neutral-850</span></div>
+      <div style="background:oklch(26.5% 0 0);color:#fafafa"><span class="l">--surface-raised</span><span class="h">neutral-800</span></div>
+      <div style="background:oklch(98.6% 0 0);color:#0a0a0a"><span class="l">--ink-bg</span><span class="h">neutral-50</span></div>
+    </div>
+    <p class="sw__role" style="margin-top:.8rem;color:var(--subtle)">Page sits on <code style="font-family:var(--mono);color:var(--accent)">--background</code>. Cards and the CTA band use <code style="font-family:var(--mono);color:var(--accent)">--surface</code>. <code style="font-family:var(--mono);color:var(--accent)">--ink-bg</code> is the rare inverted light panel.</p>
+  </section>
+
+  <!-- TEXT -->
+  <section id="text">
+    <div class="sec-head"><h2>Text</h2><span class="note">foreground → subtle</span></div>
+    <div class="grid">
+      <div class="sw">
+        <div class="sw__chip" style="background:oklch(98.6% 0 0)"></div>
+        <div class="sw__meta"><div class="sw__name">Foreground</div><div class="sw__var">--foreground</div><div class="sw__val">neutral-50</div><div class="sw__role">Headings, body text.</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:oklch(71.5% 0 0)"></div>
+        <div class="sw__meta"><div class="sw__name">Muted</div><div class="sw__var">--muted</div><div class="sw__val">neutral-400</div><div class="sw__role">Supporting copy, descriptions.</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:oklch(64% 0 0)"></div>
+        <div class="sw__meta"><div class="sw__name">Subtle</div><div class="sw__var">--subtle</div><div class="sw__val">neutral-450</div><div class="sw__role">Captions, notes, mono data.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BORDERS -->
+  <section id="borders">
+    <div class="sec-head"><h2>Borders</h2><span class="note">white at low opacity</span></div>
+    <div class="grid">
+      <div class="sw"><div class="sw__chip" style="background:var(--surface);border-bottom:1px solid var(--hairline)"></div><div class="sw__meta"><div class="sw__name">Hairline</div><div class="sw__var">--hairline</div><div class="sw__val">white @ 11%</div><div class="sw__role">Faint dividers.</div></div></div>
+      <div class="sw"><div class="sw__chip" style="background:var(--surface);border-bottom:1px solid var(--border)"></div><div class="sw__meta"><div class="sw__name">Border</div><div class="sw__var">--border</div><div class="sw__val">white @ 15%</div><div class="sw__role">Default card &amp; section borders.</div></div></div>
+      <div class="sw"><div class="sw__chip" style="background:var(--surface);border-bottom:1px solid var(--border-strong)"></div><div class="sw__meta"><div class="sw__name">Border strong</div><div class="sw__var">--border-strong</div><div class="sw__val">white @ 24%</div><div class="sw__role">Pills, framework chips, ghost buttons.</div></div></div>
+    </div>
+  </section>
+
+  <!-- STATUS -->
+  <section id="status">
+    <div class="sec-head"><h2>Status</h2><span class="note">used only in UI states, never as brand accents</span></div>
+    <div class="grid">
+      <div class="sw"><div class="sw__chip" style="background:oklch(62% 0.140 150)"></div><div class="sw__meta"><div class="sw__name">Success</div><div class="sw__var">--color-success</div><div class="sw__val">oklch(62% 0.140 150)</div><div class="sw__role">Form success, valid states.</div></div></div>
+      <div class="sw"><div class="sw__chip" style="background:oklch(64% 0.205 25)"></div><div class="sw__meta"><div class="sw__name">Danger</div><div class="sw__var">--color-danger</div><div class="sw__val">oklch(64% 0.205 25)</div><div class="sw__role">Errors, destructive actions.</div></div></div>
+    </div>
+    <div class="row" style="margin-top:1rem">
+      <span class="badge badge--ok">Saved</span>
+      <span class="badge badge--err">Couldn't send — try again</span>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section id="type">
+    <div class="sec-head"><h2>Typography</h2><span class="note">three families</span></div>
+    <div class="type-row">
+      <div class="meta">--font-brand · Sora 600/700/800 · display headings, names</div>
+      <div class="specimen-brand">Look beyond data.</div>
+    </div>
+    <div class="type-row">
+      <div class="meta">--font-sans · Plus Jakarta Sans 400–800 · body &amp; UI</div>
+      <div class="specimen-sans">We turn the data you already hold into reporting, forecasts, and automation you can trust — built on your systems, and yours to keep.</div>
+    </div>
+    <div class="type-row">
+      <div class="meta">--font-mono · JetBrains Mono · labels, kickers, numerals, data</div>
+      <div class="specimen-mono">01 · DIAGNOSTIC · AED 45,000 · 2–3 WEEKS</div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section id="components">
+    <div class="sec-head"><h2>Components in context</h2><span class="note">rendered on the live dark surfaces</span></div>
+    <div class="demos">
+
+      <div class="card">
+        <span class="label">Buttons &amp; nav</span>
+        <div class="row">
+          <button class="btn btn--primary">Start a conversation</button>
+          <button class="btn btn--ghost">See our services</button>
+        </div>
+        <div class="row" style="margin-top:1rem">
+          <span class="navpill">
+            <a class="is-active" href="#">Services</a>
+            <a href="#">Studio</a>
+            <a href="#">Insights</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="label">Marks, rules &amp; numerals</span>
+        <div class="row">
+          <span class="rule"></span>
+          <span>Data and AI for <strong style="color:var(--accent)">Gulf real estate</strong></span>
+        </div>
+        <div class="row" style="margin-top:1rem">
+          <span class="num">01</span><span class="num">02</span><span class="num">03</span><span class="num">04</span>
+          <span class="sw__role" style="margin:0">process numerals (clay)</span>
+        </div>
+        <div class="row" style="margin-top:1rem">
+          <span class="dot"></span><span class="sw__role" style="margin:0">capability mark</span>
+          <span class="tag tag--green">Foundation</span>
+          <span class="tag tag--clay">Assurance</span>
+        </div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-mark">◆</div>
+        <h4>Clear reporting</h4>
+        <p>Board- and investor-ready reporting that traces to source and holds up under questions.</p>
+      </div>
+
+      <div class="cta">
+        <h4>Let's find where the <span>drag</span> starts.</h4>
+        <button class="btn btn--primary">Book a call</button>
+      </div>
+
+      <div class="ink">
+        <span class="mono-label">Inverted "ink" panel</span>
+        <h4>Rare light callout</h4>
+        <p style="margin:0 0 .9rem;color:#555;font-size:.9rem">Light surface on the dark page. Green deepens to #6F9E2D for contrast.</p>
+        <button class="btn btn--ink">Book a call</button>
+      </div>
+
+      <div class="card">
+        <span class="label">Pricing tier — featured</span>
+        <div style="border:1px solid var(--accent);border-radius:10px;padding:1.1rem;position:relative">
+          <span class="mono-label" style="color:var(--accent);position:absolute;top:1rem;right:1.1rem">Start here</span>
+          <span class="mono-label" style="color:var(--subtle)">Diagnostic</span>
+          <div style="font-family:var(--sora);font-weight:700;font-size:1.2rem;margin:.4rem 0">Pulse</div>
+          <div style="font-family:var(--mono);font-weight:600">AED 45,000</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section id="rules">
+    <div class="sec-head"><h2>Usage rules</h2></div>
+    <table class="uses">
+      <tr><td><span class="key" style="background:#a3e635"></span>Green</td><td>Primary, ~80% of accent usage. Buttons, links, focus rings, hero highlight word, capability &amp; outcome marks, the logo, active nav.</td></tr>
+      <tr><td><span class="key" style="background:#e8995c"></span>Clay</td><td>Secondary, sparing (~10%). Process / "how it works" / step numerals &amp; kickers, one warm categorical tag, a single warm emphasis per page. Never competes with green in the same spot.</td></tr>
+      <tr><td><span class="key" style="background:oklch(19.5% 0 0);outline:1px solid #444"></span>Surfaces</td><td>Neutral grey ramp. Page on <code style="font-family:var(--mono)">--background</code>; cards &amp; the CTA band on <code style="font-family:var(--mono)">--surface</code>; raised chrome on <code style="font-family:var(--mono)">--surface-raised</code>.</td></tr>
+      <tr><td><span class="key" style="background:#fafafa;outline:1px solid #ccc"></span>Ink</td><td>Inverted light family (<code style="font-family:var(--mono)">--ink-*</code>) for the rare light panel and for text sitting on a green fill.</td></tr>
+    </table>
+    <div class="callout" style="margin-top:1.4rem">
+      <strong>Contrast.</strong> #A3E635 sits on dark surfaces and passes AA comfortably. On light/green fills, switch to <strong>#6F9E2D</strong> (--ink-accent). Clay #E8995C is for marks and large/mono text, not small body copy. Status colours are for UI states only — keep them out of brand layouts.
+    </div>
+  </section>
+
+  <footer>
+    Internal design reference · not linked from the site · <code style="font-family:var(--mono)">noindex</code>. Source of truth: <code style="font-family:var(--mono);color:var(--accent)">src/styles/tokens.css</code>.
+  </footer>
+
+</div>
 </body>
 </html>
