@@ -83,19 +83,21 @@ import { servicesContent as c } from "../data/services-overview";
       highlight={c.models.titleHighlight}
       subtitle={c.models.subtitle}
     />
-    <div class="mt-10 grid gap-px border border-border bg-border sm:mt-16 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="ways mt-10 sm:mt-16">
       {
         c.models.items.map((model) => (
-          <article class="group flex flex-col gap-4 bg-surface p-6 sm:p-7" data-reveal data-anim="rise">
-            <span class="mono-label transition-colors duration-300 group-hover:text-accent">{model.kicker}</span>
-            <h3 class="text-2xl font-bold">{model.name}</h3>
-            <div class="flex flex-wrap items-baseline gap-x-1.5">
-              <span class="font-mono text-lg font-semibold whitespace-nowrap text-foreground">{model.price}</span>
+          <article class="ways__card group" data-reveal data-anim="rise">
+            <span class="mono-label ways__kicker transition-colors duration-300 group-hover:text-accent">
+              {model.kicker}
+            </span>
+            <h3 class="ways__name">{model.name}</h3>
+            <div class="ways__price">
+              <span class="font-mono font-semibold whitespace-nowrap text-foreground">{model.price}</span>
               {model.unit && <span class="font-mono text-sm text-subtle">{model.unit}</span>}
             </div>
             <span class="mono-datum">{model.timeframe}</span>
-            <p class="text-muted leading-relaxed">{model.hook}</p>
-            <p class="mt-auto border-t border-border pt-4 text-subtle text-sm leading-relaxed">{model.bestFor}</p>
+            <p class="ways__hook">{model.hook}</p>
+            <p class="ways__best">{model.bestFor}</p>
           </article>
         ))
       }
@@ -175,3 +177,71 @@ import { servicesContent as c } from "../data/services-overview";
     reassurance={c.cta.reassurance}
   />
 </BaseLayout>
+
+<style>
+  .ways {
+    border-block-start: 1px solid var(--border);
+    border-inline-start: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .ways__card {
+    background: var(--surface);
+    border-block-end: 1px solid var(--border);
+    border-inline-end: 1px solid var(--border);
+    display: grid;
+    gap: 0.65rem;
+    padding: 1.4rem 1.5rem;
+  }
+
+  .ways__name {
+    font-family: var(--font-brand);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .ways__price {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.4rem;
+  }
+
+  .ways__price span:first-child {
+    font-size: var(--text-base);
+  }
+
+  .ways__hook {
+    color: var(--muted);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  .ways__best {
+    border-block-start: 1px solid var(--border);
+    color: var(--subtle);
+    font-size: var(--text-xs);
+    line-height: 1.55;
+    margin-block-start: 0.3rem;
+    padding-block-start: 0.85rem;
+  }
+
+  @media (width >= 40rem) {
+    .ways {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .ways {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .ways__card {
+      grid-row: span 6;
+      grid-template-rows: subgrid;
+    }
+  }
+</style>

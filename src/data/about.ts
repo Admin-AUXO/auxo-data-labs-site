@@ -97,8 +97,8 @@ export const aboutContent: AboutContent = {
     ],
   },
   how: {
-    title: "How we work",
-    titleHighlight: "work",
+    title: "How we build",
+    titleHighlight: "build",
     subtitle: "Three steps, no drama. We move from a real problem to a system your team owns.",
     steps: [
       {
@@ -129,8 +129,8 @@ export const aboutContent: AboutContent = {
     ],
   },
   engagement: {
-    title: "How we work with you",
-    titleHighlight: "with you",
+    title: "What to expect",
+    titleHighlight: "expect",
     lead: "Working with an outside team should feel safe. Here is what you can expect from the first conversation onward.",
     reassurance: "We are happy to sign an NDA before we begin.",
     principles: [
@@ -153,8 +153,8 @@ export const aboutContent: AboutContent = {
     ],
   },
   cta: {
-    title: "Let's talk.",
-    titleHighlight: "talk",
+    title: "Ready when you are.",
+    titleHighlight: "Ready",
     description: "Tell us what's slowing you down, and we'll show you where to start.",
     ctaText: "Start a conversation",
     ctaHref: "/contact/",

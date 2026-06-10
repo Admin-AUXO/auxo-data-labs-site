@@ -1,14 +1,5 @@
 @layer base {
-  :root,
-  [data-theme="light"] {
-    --pf-node: 24 24 27;
-    --pf-accent: 111 158 45;
-    --pf-accent-2: 180 83 31;
-    --atmo-grain: 0.045;
-    --atmo-grain-blend: multiply;
-  }
-
-  [data-theme="dark"] {
+  :root {
     --pf-node: 244 244 245;
     --pf-accent: 163 230 53;
     --pf-accent-2: 232 153 92;

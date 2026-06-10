@@ -1,0 +1,31 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: cls = "" } = Astro.props;
+
+const tiles = [
+  { x: 0, y: 0, cx: 9.25, by: 13.3, label: "A" },
+  { x: 21.5, y: 0, cx: 30.75, by: 13.3, label: "U" },
+  { x: 0, y: 21.5, cx: 9.25, by: 34.8, label: "X" },
+  { x: 21.5, y: 21.5, cx: 30.75, by: 34.8, label: "O" },
+];
+---
+
+<svg viewBox="0 0 40 40" class={`mark ${cls}`.trim()} role="img" aria-label="AUXO">
+  {tiles.map((t) => <rect x={t.x} y={t.y} width="18.5" height="18.5" fill="var(--accent)" />)}
+  <g
+    fill="var(--accent-foreground)"
+    font-family="var(--font-brand)"
+    font-weight="700"
+    font-size="12"
+    text-anchor="middle"
+  >
+    {tiles.map((t) => (
+      <text x={t.cx} y={t.by}>
+        {t.label}
+      </text>
+    ))}
+  </g>
+</svg>

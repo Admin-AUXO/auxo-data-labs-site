@@ -1,5 +1,3 @@
-import { env } from "../../config/env";
-
 type Consent = "granted" | "denied";
 const COOKIE = "auxo_consent";
 
@@ -12,24 +10,18 @@ function writeConsent(value: Consent): void {
   document.cookie = `${COOKIE}=${value}; max-age=31536000; path=/; samesite=lax`;
 }
 
-let analyticsLoaded = false;
-function loadAnalytics(): void {
-  if (analyticsLoaded || !env.ga4.measurementId) return;
-  analyticsLoaded = true;
-  const id = env.ga4.measurementId;
-  const loader = document.createElement("script");
-  loader.type = "text/partytown";
-  loader.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
-  document.head.appendChild(loader);
-
-  const init = document.createElement("script");
-  init.type = "text/partytown";
-  init.textContent =
-    "window.dataLayer=window.dataLayer||[];" +
-    "function gtag(){dataLayer.push(arguments);}" +
-    "gtag('js',new Date());" +
-    `gtag('config','${id}',{anonymize_ip:true});`;
-  document.head.appendChild(init);
+function updateConsent(value: Consent): void {
+  const w = window as unknown as {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  };
+  const dl = (w.dataLayer ??= []);
+  if (typeof w.gtag === "function") {
+    w.gtag("consent", "update", { analytics_storage: value });
+  } else {
+    dl.push(["consent", "update", { analytics_storage: value }]);
+  }
+  dl.push({ event: "auxo_consent_update", consent_state: value });
 }
 
 function bannerEl(): HTMLElement | null {
@@ -45,8 +37,14 @@ function show(): void {
 function hide(): void {
   bannerEl()?.classList.add("is-hidden");
 }
-function dismiss(): void {
+function accept(): void {
+  writeConsent("granted");
+  updateConsent("granted");
+  hide();
+}
+function decline(): void {
   writeConsent("denied");
+  updateConsent("denied");
   hide();
 }
 
@@ -54,15 +52,11 @@ export function initConsent(): void {
   const banner = bannerEl();
   if (banner && !banner.dataset.bound) {
     banner.dataset.bound = "true";
-    banner.querySelector("[data-consent-accept]")?.addEventListener("click", () => {
-      writeConsent("granted");
-      hide();
-      loadAnalytics();
-    });
-    banner.querySelector("[data-consent-decline]")?.addEventListener("click", dismiss);
+    banner.querySelector("[data-consent-accept]")?.addEventListener("click", accept);
+    banner.querySelector("[data-consent-decline]")?.addEventListener("click", decline);
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !banner.classList.contains("is-hidden")) dismiss();
+      if (e.key === "Escape" && !banner.classList.contains("is-hidden")) decline();
     });
   }
 
@@ -72,7 +66,5 @@ export function initConsent(): void {
     el.addEventListener("click", show);
   }
 
-  const choice = readConsent();
-  if (choice === "granted") loadAnalytics();
-  else if (choice === null) show();
+  if (readConsent() === null) show();
 }

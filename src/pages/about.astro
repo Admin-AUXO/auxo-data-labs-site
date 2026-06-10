@@ -8,6 +8,21 @@ import CtaSection from "../components/sections/shared/CtaSection.astro";
 import { aboutContent as c } from "../data/about";
 
 const stepAnim = ["slide-right", "rise", "slide-left"] as const;
+
+const purpose = [
+  {
+    label: "Our mission",
+    statement: "Turn complex decisions into clear, fast ones your team can stand behind.",
+    support:
+      "We take the data you already hold and make the next move obvious — and easy to prove.",
+  },
+  {
+    label: "Our vision",
+    statement: "A world where every decision is backed by data worth trusting.",
+    support:
+      "Intelligence that is quiet, dependable, and always within reach — not a project, just how the work runs.",
+  },
+];
 ---
 
 <BaseLayout
@@ -134,6 +149,28 @@ const stepAnim = ["slide-right", "rise", "slide-left"] as const;
     </ol>
   </Section>
 
+  <Section padding="lg" width="7xl">
+    <SectionHeader
+      title="Why AUXO exists"
+      highlight="exists"
+      subtitle="Two things hold steady behind everything we build — the work we do today, and the world we are working toward."
+    />
+    <div class="purpose mt-10 md:mt-12">
+      {
+        purpose.map((p) => (
+          <article class="purpose__card" data-reveal>
+            <div class="purpose__head">
+              <span class="purpose__rule" aria-hidden="true" data-anim="draw" />
+              <span class="eyebrow text-accent-2">{p.label}</span>
+            </div>
+            <p class="purpose__statement">{p.statement}</p>
+            <p class="purpose__support text-muted">{p.support}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
   <CtaSection
     title={c.cta.title}
     titleHighlight={c.cta.titleHighlight}
@@ -146,3 +183,57 @@ const stepAnim = ["slide-right", "rise", "slide-left"] as const;
     reassurance={c.cta.reassurance}
   />
 </BaseLayout>
+
+<style>
+  .purpose {
+    background: var(--border);
+    border: 1px solid var(--border);
+    display: grid;
+    gap: 1px;
+    grid-template-columns: 1fr;
+  }
+
+  .purpose__card {
+    background: var(--background);
+    display: grid;
+    gap: 1.1rem;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  }
+
+  .purpose__head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .purpose__rule {
+    background: var(--accent-2);
+    block-size: 0.125rem;
+    inline-size: 2.5rem;
+  }
+
+  .purpose__statement {
+    font-family: var(--font-brand);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: var(--tracking-display-xl);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .purpose__support {
+    font-size: var(--text-base);
+  }
+
+  @media (width >= 48rem) {
+    .purpose {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+    }
+
+    .purpose__card {
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+    }
+  }
+</style>

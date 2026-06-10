@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" role="img" aria-label="AUXO">
+  <rect x="0" y="0" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="21.5" y="0" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="0" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="21.5" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
+  <g fill="#080808" font-family="Sora, system-ui, Arial, sans-serif" font-weight="700" font-size="12" text-anchor="middle">
+    <text x="9.25" y="13.3">A</text>
+    <text x="30.75" y="13.3">U</text>
+    <text x="9.25" y="34.8">X</text>
+    <text x="30.75" y="34.8">O</text>
+  </g>
+</svg>

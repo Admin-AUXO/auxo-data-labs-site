@@ -44,7 +44,7 @@
 
   .section__container {
     margin-inline: auto;
-    max-width: var(--container-max, 80rem);
+    max-width: var(--container-max, var(--container));
     padding-inline: var(--gutter);
     position: relative;
     width: 100%;

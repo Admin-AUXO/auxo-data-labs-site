@@ -1,4 +1,4 @@
-export const LEGAL_LAST_UPDATED = "April 3, 2026";
+export const LEGAL_LAST_UPDATED = "June 10, 2026";
 
 export interface LegalPageMeta {
   eyebrow: string;

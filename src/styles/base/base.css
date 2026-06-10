@@ -2,7 +2,7 @@
   html {
     background-color: var(--background);
     interpolate-size: allow-keywords;
-    scroll-padding-top: var(--scroll-padding, 5rem);
+    scroll-padding-top: var(--scroll-padding, 4.5rem);
     scrollbar-color: var(--border-strong) transparent;
     scrollbar-width: thin;
     -webkit-text-size-adjust: 100%;
@@ -19,7 +19,7 @@
     -webkit-font-smoothing: antialiased;
     font-variant-ligatures: common-ligatures contextual;
     min-height: 100svh;
-    text-rendering: optimizelegibility;
+    text-rendering: auto;
   }
 
   ::selection {

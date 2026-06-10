@@ -73,8 +73,8 @@ export const homeContent: HomeContent = {
     secondaryCta: { text: "See our work", href: "/services/" },
   },
   capabilities: {
-    title: "What we do",
-    titleHighlight: "do",
+    title: "How we help",
+    titleHighlight: "help",
     subtitle: "Four ways we help property leaders act on numbers they trust.",
     items: [
       { name: "Trusted data", icon: "mdi:database-check-outline", desc: "One source the whole business agrees on, built from the systems you already run." },

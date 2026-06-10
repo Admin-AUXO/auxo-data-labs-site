@@ -1,40 +1,25 @@
 ---
 import { withBase } from "../../lib/url";
+import Mark from "./Mark.astro";
 
 interface Props {
   href?: string;
-  showText?: boolean;
+  markOnly?: boolean;
+  responsive?: boolean;
   class?: string;
 }
 
-const { href = "/", showText = true, class: cls = "" } = Astro.props;
+const { href = "/", markOnly = false, responsive = false, class: cls = "" } = Astro.props;
 
-const tiles = [
-  { x: 0, y: 0, cx: 9.35, label: "A" },
-  { x: 21.3, y: 0, cx: 30.65, label: "U" },
-  { x: 0, y: 21.3, cx: 9.35, label: "X" },
-  { x: 21.3, y: 21.3, cx: 30.65, label: "O" },
-];
+const wordClass = ["logo__word", responsive && "logo__word--responsive"].filter(Boolean).join(" ");
 ---
 
 <a href={withBase(href)} class={`logo ${cls}`.trim()} aria-label="AUXO Data Labs home">
-  <svg viewBox="0 0 40 40" class="logo__mark" role="img" aria-hidden="true">
-    {tiles.map((t) => <rect x={t.x} y={t.y} width="18.7" height="18.7" fill="var(--accent)" />)}
-    <g class="logo__letters" fill="var(--accent-foreground)">
-      {
-        tiles.map((t) => (
-          <text x={t.cx} y={t.y === 0 ? 13.7 : 35} text-anchor="middle">
-            {t.label}
-          </text>
-        ))
-      }
-    </g>
-  </svg>
+  <Mark class="logo__mark" />
   {
-    showText && (
-      <span class="logo__text">
-        <span class="logo__name">Data Labs</span>
-        <span class="logo__sub">Look Beyond Data</span>
+    !markOnly && (
+      <span class={wordClass}>
+        AUXO<span class="logo__word-sub">Data Labs</span>
       </span>
     )
   }

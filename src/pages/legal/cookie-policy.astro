@@ -32,18 +32,18 @@ import { withBase } from "../../lib/url";
 
   <h2>2. What We Mean by Cookies and Similar Technologies</h2>
   <p>
-    We use more than traditional browser cookies. Depending on the feature,
-    data may be stored in a first-party cookie or in local storage. In this
-    policy, we refer to those together where that is the clearest explanation.
+    We use first-party cookies to run the site and, where similar browser-side
+    storage is involved, we refer to these technologies together where that is
+    the clearest explanation.
   </p>
 
   <h2>3. How Consent Works on This Site</h2>
   <p>
-    By default, no analytics storage or analytics scripts load. Google
-    Analytics (GA4) is loaded directly by the site only after you give explicit
-    consent through the cookie banner. We do not use a Google Tag Manager
-    container. Essential functionality needed for security or core preferences
-    can still operate without consent.
+    We use Google Tag Manager to manage Google Analytics (GA4). With Google
+    Consent Mode, analytics and advertising storage are <strong>denied by
+    default</strong>: GA4 sets no analytics cookies until you accept through the
+    cookie banner. Essential functionality needed for security or core
+    preferences can still operate without consent.
   </p>
   <ul>
     <li><strong>Accept:</strong> records your consent and loads analytics.</li>
@@ -63,8 +63,8 @@ import { withBase } from "../../lib/url";
 
   <h3>4.2 Preferences</h3>
   <p>
-    These remember choices such as your theme and can help restore an unfinished
-    contact-form draft on the same device.
+    These remember choices you make on the site, such as your saved consent
+    selection, so the site behaves consistently on your next visit.
   </p>
 
   <h3>4.3 Analytics</h3>
@@ -77,7 +77,7 @@ import { withBase } from "../../lib/url";
   <p>
     We keep a marketing category in the consent interface for future expansion,
     but we do not knowingly activate marketing or advertising cookies on the
-    public site as of <strong>April 3, 2026</strong>.
+    public site as of <strong>June 10, 2026</strong>.
   </p>
 
   <h2>5. Current Cookie and Storage Declaration</h2>
@@ -94,36 +94,12 @@ import { withBase } from "../../lib/url";
     </thead>
     <tbody>
       <tr>
-        <td><code>auxo_consent_choice</code></td>
+        <td><code>auxo_consent</code></td>
         <td>AUXO Data Labs</td>
         <td>Cookie</td>
-        <td>Stores whether you have made a consent choice.</td>
+        <td>Stores your granted or denied analytics consent so the site knows whether to enable Google Analytics on later visits.</td>
         <td>Up to 12 months</td>
         <td>Strictly necessary</td>
-      </tr>
-      <tr>
-        <td><code>auxo_consent_*</code></td>
-        <td>AUXO Data Labs</td>
-        <td>Cookie</td>
-        <td>Stores your granted or denied analytics consent so the site knows whether to load Google Analytics on later visits.</td>
-        <td>Up to 12 months</td>
-        <td>Strictly necessary</td>
-      </tr>
-      <tr>
-        <td><code>theme</code></td>
-        <td>AUXO Data Labs</td>
-        <td>Local storage</td>
-        <td>Remembers your light or dark theme preference.</td>
-        <td>Persistent until changed or cleared</td>
-        <td>Preferences</td>
-      </tr>
-      <tr>
-        <td><code>form_draft_contact-form</code></td>
-        <td>AUXO Data Labs</td>
-        <td>Local storage</td>
-        <td>Temporarily stores an unfinished contact-form draft on your device.</td>
-        <td>Up to 24 hours</td>
-        <td>Preferences</td>
       </tr>
       <tr>
         <td><code>_ga</code></td>

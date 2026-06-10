@@ -60,8 +60,6 @@ import { withBase } from "../../lib/url";
   </p>
   <ul>
     <li><strong>Consent preferences:</strong> your cookie-based consent choices.</li>
-    <li><strong>Theme preference:</strong> your selected light or dark theme.</li>
-    <li><strong>Temporary form draft:</strong> an unfinished contact-form draft, stored locally for up to 24 hours if you start typing.</li>
   </ul>
 
   <h2>3. How We Use Personal Data</h2>
@@ -91,12 +89,12 @@ import { withBase } from "../../lib/url";
       </tr>
       <tr>
         <td>Remember preferences</td>
-        <td>Consent status, theme selection, form-draft restore</td>
+        <td>Consent status</td>
         <td>Legitimate interests and user-requested functionality</td>
       </tr>
       <tr>
         <td>Measure site usage</td>
-        <td>Google Analytics reporting and engagement events</td>
+        <td>Google Analytics (GA4) reporting and engagement events, managed through Google Tag Manager</td>
         <td>Consent</td>
       </tr>
       <tr>
@@ -110,8 +108,10 @@ import { withBase } from "../../lib/url";
   <h2>4. Cookies, Consent, and Similar Technologies</h2>
   <p>
     We use first-party cookies and local storage to run the site and, if you
-    choose, to understand how the site is used. Analytics scripts load only
-    after you give consent; we do not use a Google Tag Manager container.
+    choose, to understand how the site is used. We load Google Tag Manager to
+    manage Google Analytics (GA4). Using Google Consent Mode, analytics and
+    advertising storage are <strong>denied by default</strong>, and analytics
+    cookies are only set after you accept through the consent banner.
   </p>
   <p>
     You can accept or reject non-essential cookies through the consent banner or
@@ -126,7 +126,7 @@ import { withBase } from "../../lib/url";
   </p>
   <ul>
     <li><strong>Form delivery and email routing:</strong> infrastructure that delivers and routes website enquiries you submit through our contact form to our inbox or CRM.</li>
-    <li><strong>Analytics providers:</strong> Google Analytics (GA4), loaded directly only after you give analytics consent. We do not use a Google Tag Manager container.</li>
+    <li><strong>Tag management and analytics providers:</strong> Google Tag Manager, which manages Google Analytics (GA4). Under Google Consent Mode, analytics storage is denied by default and GA4 cookies are set only after you give analytics consent.</li>
     <li><strong>Scheduling providers:</strong> Google Calendar booking flows if you choose to use them.</li>
     <li><strong>Infrastructure and security providers:</strong> vendors that support hosting, delivery, uptime, and abuse prevention.</li>
     <li><strong>Authorities or advisers:</strong> where required by law or reasonably necessary to establish, exercise, or defend legal claims.</li>
@@ -147,7 +147,6 @@ import { withBase } from "../../lib/url";
   <ul>
     <li><strong>Contact enquiries and correspondence:</strong> typically up to 24 months after the last meaningful interaction.</li>
     <li><strong>Consent and preference storage:</strong> until you clear browser storage, change your settings, or the relevant item expires.</li>
-    <li><strong>Contact-form draft storage:</strong> up to 24 hours on your device.</li>
     <li><strong>Legal or compliance records:</strong> longer where required for legitimate legal, accounting, or regulatory reasons.</li>
   </ul>
 

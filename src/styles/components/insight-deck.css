@@ -24,7 +24,7 @@
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     letter-spacing: var(--tracking-mono);
-    min-block-size: 2.4rem;
+    min-block-size: 2.75rem;
     padding-block: 0.4rem;
     padding-inline: 0.95rem;
     text-transform: uppercase;
@@ -78,7 +78,7 @@
   @media (width >= 64rem) {
     .deck__list {
       gap: 1.25rem;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -147,6 +147,8 @@
     display: inline-flex;
     flex: none;
     justify-content: center;
+    min-block-size: 2.75rem;
+    min-inline-size: 2.75rem;
     padding: 0.35rem;
     position: relative;
     transition: color var(--dur-fast) var(--ease-standard);

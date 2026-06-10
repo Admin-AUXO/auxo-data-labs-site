@@ -74,3 +74,11 @@ $RECYCLE.BIN/
 .github-token
 gtm-service-account.json
 auxodata-*.json
+
+# Google service-account key — never commit
+key.json
+*.key.json
+gtm.json
+
+# Local data exploration — not part of the site
+data_analysis/

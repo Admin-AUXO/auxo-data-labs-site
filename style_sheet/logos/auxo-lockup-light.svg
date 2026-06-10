@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 40" fill="none" role="img" aria-label="AUXO Data Labs">
+  <rect x="0" y="0" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="21.5" y="0" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="0" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="21.5" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
+  <g font-family="Sora, system-ui, Arial, sans-serif" text-anchor="middle">
+    <text x="9.25" y="13.3" fill="#080808" font-weight="700" font-size="12">A</text>
+    <text x="30.75" y="13.3" fill="#080808" font-weight="700" font-size="12">U</text>
+    <text x="9.25" y="34.8" fill="#080808" font-weight="700" font-size="12">X</text>
+    <text x="30.75" y="34.8" fill="#080808" font-weight="700" font-size="12">O</text>
+  </g>
+  <text x="54" y="26" font-family="Sora, system-ui, Arial, sans-serif" font-weight="800" font-size="17" letter-spacing="2.2">
+    <tspan fill="#0A0A0A">AUXO</tspan><tspan fill="#71717A" dx="6" font-weight="400">DATA LABS</tspan>
+  </text>
+</svg>

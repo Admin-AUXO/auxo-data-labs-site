@@ -102,7 +102,7 @@
   }
 
   [data-enter]:not([data-enter="headline"]) {
-    animation: m-rise-sm 1.4s cubic-bezier(0.22, 0.68, 0.24, 1) 0.2s both;
+    animation: m-rise-sm 1.4s var(--ease-asmr) 0.2s both;
   }
 
   [data-anim="clip-up"] {
@@ -122,10 +122,9 @@
   }
 
   [data-enter="headline"] .m-word-i {
-    animation: m-word 1s cubic-bezier(0.22, 0.68, 0.24, 1) both;
+    animation: m-word 1s var(--ease-asmr) both;
     animation-delay: calc(var(--i) * 0.06s + 0.1s);
     display: inline-block;
-    will-change: transform;
   }
 
   [data-anim="draw"] {
@@ -139,7 +138,7 @@
       animation-name: m-rise;
       animation-range: entry 0% entry 80%;
       animation-timeline: view();
-      animation-timing-function: cubic-bezier(0.22, 0.68, 0.24, 1);
+      animation-timing-function: var(--ease-asmr);
     }
 
     [data-anim="blur-in"] { animation-name: m-blur; }
@@ -161,7 +160,7 @@
       animation-name: m-wand;
       animation-range: entry 4% entry 72%;
       animation-timeline: view();
-      animation-timing-function: cubic-bezier(0.22, 0.68, 0.24, 1);
+      animation-timing-function: var(--ease-asmr);
       background: var(--accent-2);
       content: "";
       inline-size: 0.14em;
