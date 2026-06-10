@@ -6,7 +6,7 @@ const manifest = {
   short_name: "AUXO",
   id: withBase("/"),
   description:
-    "AUXO Data Labs is a compliance-native data & AI studio in Dubai for real-estate and portfolio teams — turning stalled dashboards and AI pilots into reporting, forecasting, and automation that reaches production.",
+    "AUXO Data Labs is a compliance-native analytics & AI studio in Dubai for real-estate and portfolio teams — turning stalled dashboards and AI pilots into reporting, forecasting, and automation that reaches production.",
   start_url: withBase("/"),
   display: "standalone",
   background_color: "#0b0c0e",

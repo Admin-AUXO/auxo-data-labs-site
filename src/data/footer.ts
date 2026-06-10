@@ -19,7 +19,7 @@ export interface FooterContent {
 export const footerContent: FooterContent = {
   statement: "The data you hold, turned into decisions.",
   statementHighlight: "decisions",
-  tagline: "Data and AI for Gulf real estate.",
+  tagline: "Analytics and AI for Gulf real estate.",
   sections: [
     {
       title: "Explore",

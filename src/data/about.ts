@@ -71,7 +71,7 @@ export const aboutContent: AboutContent = {
   hero: {
     title: "The studio.",
     titleHighlight: "studio",
-    lead: "AUXO is a specialist data and AI studio for real estate. We turn the information you already hold into reporting, forecasts, and automation your team can trust — and run on its own.",
+    lead: "AUXO is a specialist analytics and AI studio for real estate. We turn the information you already hold into reporting, forecasts, and automation your team can trust — and run on its own.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how we work", href: "/services/" },
   },

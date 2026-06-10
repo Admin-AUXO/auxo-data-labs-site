@@ -44,7 +44,7 @@ export function organizationSchema() {
         "@type": "Service",
         name: s.name,
         description: s.description,
-        serviceType: "Real-estate data & AI",
+        serviceType: "Real-estate analytics & AI",
         provider: { "@type": "Organization", name: siteData.name, url: home },
       },
     })),
@@ -153,7 +153,7 @@ export function faqSchema(items: { question: string; answer: string }[]) {
 
 export function serviceSchema() {
   return {
-    serviceType: "Real-estate data & AI studio",
+    serviceType: "Real-estate analytics & AI studio",
     provider: { "@type": "Organization", name: siteData.name, url: home },
     areaServed: [
       { "@type": "Country", name: siteData.address.country },

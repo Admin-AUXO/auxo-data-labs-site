@@ -3,7 +3,7 @@ import { siteData } from "../../data/site";
 
 const pages = {
   index: {
-    title: "Data and AI for Gulf real estate",
+    title: "Analytics and AI for Gulf real estate",
     description: "Turn the data you already hold into decisions you can stand behind.",
   },
   services: {
@@ -13,7 +13,7 @@ const pages = {
   },
   about: {
     title: "Studio — the team behind AUXO",
-    description: "A small data and AI studio for real estate, based in Dubai and working across the Gulf.",
+    description: "A small analytics and AI studio for real estate, based in Dubai and working across the Gulf.",
   },
   insights: {
     title: "Insights — short reads",

@@ -172,7 +172,7 @@ export const servicesContent: ServicesContent = {
         price: "From AED 30,000",
         unit: "/ mo",
         timeframe: "Ongoing",
-        hook: "A senior data and AI leader in your corner for the calls that matter, from strategy to hires to vendors, minus the full-time salary.",
+        hook: "A senior analytics and AI leader in your corner for the calls that matter, from strategy to hires to vendors, minus the full-time salary.",
         bestFor: "For leaders who need a steady hand at the top table, not a new hire.",
       },
     ],
