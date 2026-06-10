@@ -31,7 +31,7 @@ const {
 
 <Section padding="lg" width="6xl">
   <div
-    class="mx-auto flex max-w-3xl flex-col items-center gap-7 rounded-2xl border border-border bg-surface px-6 py-14 text-center sm:px-12 sm:py-16"
+    class="cta-card mx-auto flex max-w-3xl flex-col items-center gap-7 rounded-2xl border border-border bg-surface px-6 py-14 text-center sm:px-12 sm:py-16"
     style="box-shadow: var(--shadow-md);"
     data-reveal
   >
@@ -58,3 +58,50 @@ const {
     {reassurance && <p class="text-sm text-subtle">{reassurance}</p>}
   </div>
 </Section>
+
+<style>
+  /* Subtle, ambient gradient sheen behind the CTA card content.
+     Oversized gradient + animated background-position = GPU-friendly. */
+  .cta-card {
+    isolation: isolate;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cta-card::before {
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      color-mix(in oklab, var(--accent) 12%, transparent) 22%,
+      transparent 48%,
+      color-mix(in oklab, var(--accent-2) 12%, transparent) 74%,
+      transparent 100%
+    );
+    background-size: 220% 220%;
+    border-radius: inherit;
+    content: "";
+    inset: 0;
+    opacity: 0.7;
+    position: absolute;
+    z-index: -1;
+    animation: cta-sheen 18s ease-in-out infinite;
+  }
+
+  @keyframes cta-sheen {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-card::before {
+      animation: none;
+    }
+  }
+</style>

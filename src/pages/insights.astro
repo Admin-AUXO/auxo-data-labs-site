@@ -5,18 +5,21 @@ import Section from "../components/layout/Section.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import { insightsContent as c } from "../data/insights";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import "../styles/components/insight-deck.css";
 
 const entries = (await getCollection("insights")).sort((a, b) => a.data.order - b.data.order);
 const slugify = (s: string): string =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 56);
-const items = entries.map((e, i) => ({ ...e.data, slug: slugify(e.data.title) || `insight-${i + 1}` }));
+const rendered = await Promise.all(entries.map((e) => render(e)));
+const items = entries.map((e, i) => ({
+  ...e.data,
+  slug: slugify(e.data.title) || `insight-${i + 1}`,
+  Content: rendered[i].Content,
+}));
 const topics = [...new Set(items.map((i) => i.topic))];
 const readCount = items.length;
 const topicCount = topics.length;
-const featuredIndex = new Map(items.filter((i) => i.featured).map((i, idx) => [i.slug, idx + 1]));
-const pad2 = (n: number): string => String(n).padStart(2, "0");
 
 const GOVERN = new Set(["Reporting", "Compliance", "Ownership"]);
 const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "govern" : "build");
@@ -29,7 +32,7 @@ const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "go
   <Section padding="xl" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
       <span class="mono-label mono-label--accent" data-enter>
-        {readCount} short reads · {topicCount} topics
+        <span data-countup>{readCount}</span> short reads · <span data-countup>{topicCount}</span> topics
       </span>
       <h1 class="text-display text-display--5xl" data-enter="headline">
         <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
@@ -61,50 +64,87 @@ const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "go
       >
         <ol class="deck__list" data-deck-list>
           {
-            items.map((item) => (
-              <li
-                class="deck__card"
-                id={item.slug}
-                data-deck-card
-                data-topic={item.topic}
-                data-family={familyOf(item.topic)}
-                data-featured={String(item.featured)}
-                data-hide={item.featured ? undefined : true}
-              >
-                <div class="deck__card-inner">
-                  {item.featured && (
-                    <span class="deck__index" aria-hidden="true">{pad2(featuredIndex.get(item.slug) ?? 0)}</span>
-                  )}
-                  <div class="deck__meta">
-                    <span class="deck__topic">{item.topic}</span>
-                    <button
-                      type="button"
-                      class="deck__share"
-                      data-deck-share
-                      aria-label={`Copy link to: ${item.title}`}
-                    >
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                      </svg>
-                    </button>
+            items.map((item) => {
+              const Body = item.Content;
+              return (
+                <li
+                  class="deck__card"
+                  id={item.slug}
+                  data-deck-card
+                  data-topic={item.topic}
+                  data-family={familyOf(item.topic)}
+                  data-featured={String(item.featured)}
+                  data-flipped="false"
+                  data-hide={item.featured ? undefined : true}
+                >
+                  <div class="deck__flip" data-deck-flip>
+                    <div class="deck__face deck__face--front">
+                      <div class="deck__card-inner">
+                        <div class="deck__meta">
+                          <span class="deck__topic">{item.topic}</span>
+                          <button
+                            type="button"
+                            class="deck__more"
+                            data-deck-flip-toggle
+                            aria-expanded="false"
+                            aria-label={`Read more: ${item.title}`}
+                          >
+                            Read more
+                            <span aria-hidden="true">&rarr;</span>
+                          </button>
+                        </div>
+                        <h3 class="deck__title">{item.title}</h3>
+                        <p class="deck__takeaway">{item.takeaway}</p>
+                        <div class="deck__foot">
+                          {item.link && (
+                            <a
+                              class="deck__link"
+                              href={item.link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {item.link.label}
+                              <span aria-hidden="true">&#8599;</span>
+                            </a>
+                          )}
+                          <button
+                            type="button"
+                            class="deck__share"
+                            data-deck-share
+                            aria-label={`Copy link to: ${item.title}`}
+                          >
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="deck__face deck__face--back">
+                      <div class="deck__card-inner">
+                        <div class="deck__meta">
+                          <span class="deck__topic">{item.topic}</span>
+                          <button
+                            type="button"
+                            class="deck__more deck__more--back"
+                            data-deck-flip-toggle
+                            aria-expanded="true"
+                            aria-label={`Close: ${item.title}`}
+                          >
+                            <span aria-hidden="true">&larr;</span>
+                            Back
+                          </button>
+                        </div>
+                        <div class="deck__body">
+                          <Body />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 class="deck__title">{item.title}</h3>
-                  <p class="deck__takeaway">{item.takeaway}</p>
-                  {item.link && (
-                    <a
-                      class="deck__link"
-                      href={item.link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.link.label}
-                      <span aria-hidden="true">&#8599;</span>
-                    </a>
-                  )}
-                </div>
-              </li>
-            ))
+                </li>
+              );
+            })
           }
         </ol>
       </div>

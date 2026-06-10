@@ -96,12 +96,14 @@ const gtmId = env.gtm.containerId;
       import { initParticleField } from "../scripts/core/particle-field";
       import { initScrollUI } from "../scripts/core/scroll-ui";
       import { initPWA } from "../scripts/core/pwa";
+      import { initCountUp } from "../scripts/ui/count-up";
 
       function boot() {
         initHeroText();
         initParticleField();
         initScrollUI();
         initPWA();
+        initCountUp();
       }
 
       boot();

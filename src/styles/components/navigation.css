@@ -436,8 +436,27 @@
     display: inline-flex;
     font-size: var(--text-sm);
     min-block-size: 2.75rem;
+    position: relative;
     text-decoration: none;
     transition: color var(--dur-fast) var(--ease-standard);
+  }
+
+  .footer__link::after {
+    background-color: var(--accent);
+    block-size: 1.5px;
+    content: "";
+    inline-size: 100%;
+    inset-block-start: calc(50% + 0.6em);
+    inset-inline-start: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-glide);
+  }
+
+  .footer__link:hover::after,
+  .footer__link:focus-visible::after {
+    transform: scaleX(1);
   }
 
   @media (width >= 64rem) {

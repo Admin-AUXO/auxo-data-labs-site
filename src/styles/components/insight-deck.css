@@ -288,7 +288,6 @@
     .deck[data-view="featured"] .deck__card:hover {
       border-color: var(--accent);
       box-shadow: var(--shadow-md);
-      transform: translateY(-4px);
     }
   }
 
@@ -436,5 +435,158 @@
     font-size: var(--text-xs);
     margin-block-start: 0.85rem;
     text-align: center;
+  }
+
+  /* Tap-to-flip ------------------------------------------------ */
+  .deck__card {
+    perspective: 1400px;
+  }
+
+  /* Both faces share one grid cell, so the card grows to the
+     taller face (the back) — no inner scrolling, no clipping. */
+  .deck__flip {
+    display: grid;
+    transform-style: preserve-3d;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .deck__card[data-flipped="true"] .deck__flip {
+    transform: rotateY(180deg);
+  }
+
+  .deck__face {
+    backface-visibility: hidden;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    grid-area: 1 / 1;
+  }
+
+  .deck__face > .deck__card-inner {
+    flex: 1;
+  }
+
+  .deck__face--back {
+    background-color: var(--surface);
+    transform: rotateY(180deg);
+  }
+
+  .deck__body {
+    color: var(--muted);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-size: var(--text-sm);
+    gap: 0.55rem;
+    line-height: 1.5;
+  }
+
+  .deck__body a {
+    color: var(--accent-2);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* "Where this fits:" — the trailing line, tagged and pinned to the
+     bottom of every back so it lines up across all cards. */
+  .deck__body > :last-child {
+    border-block-start: 1px solid var(--border);
+    color: var(--subtle);
+    font-size: var(--text-xs);
+    line-height: 1.45;
+    margin-block-start: auto;
+    padding-block-start: 0.7rem;
+  }
+
+  .deck__foot {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+    margin-block-start: auto;
+    padding-block-start: 0.4rem;
+  }
+
+  .deck__foot .deck__link {
+    margin-block-start: 0;
+    margin-inline-end: auto;
+    padding-block-start: 0;
+  }
+
+  .deck__foot .deck__share {
+    margin-inline-start: auto;
+  }
+
+  .deck__more {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--accent-2);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    gap: 0.4rem;
+    letter-spacing: var(--tracking-mono);
+    min-block-size: 2.75rem;
+    padding: 0;
+    text-transform: uppercase;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  /* "Read more" sits top-right in the meta row. */
+  .deck__meta .deck__more {
+    flex: none;
+  }
+
+  .deck__more:hover,
+  .deck__more:focus-visible {
+    color: var(--accent);
+  }
+
+  .deck__more:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+
+  /* Micro-interactions: snappy ease-out nudges (~150ms). */
+  .deck__more span {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .deck__more:hover span,
+  .deck__more:focus-visible span {
+    transform: translateX(3px);
+  }
+
+  .deck__more--back span {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .deck__more--back:hover span,
+  .deck__more--back:focus-visible span {
+    transform: translateX(-3px);
+  }
+
+  .deck__share svg {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .deck__share:hover svg,
+  .deck__share:focus-visible svg {
+    transform: scale(1.12);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deck__flip {
+      transition: none;
+    }
+
+    .deck__more span,
+    .deck__more--back span,
+    .deck__share svg {
+      transition: none;
+    }
   }
 }
