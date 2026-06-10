@@ -48,4 +48,5 @@ User-agent: Meta-ExternalAgent
 Allow: /
 
 # Curated index for LLMs: https://auxodata.com/llms.txt
+# Full insight texts for LLMs: https://auxodata.com/llms-full.txt
 Sitemap: https://auxodata.com/sitemap-index.xml

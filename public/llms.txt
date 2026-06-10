@@ -30,6 +30,9 @@ Prices are indicative; the final scope and price are agreed together before any 
 - [Terms of Use](https://auxodata.com/legal/terms/): Rules for using the public website.
 - [Cookie Policy](https://auxodata.com/legal/cookie-policy/): Cookies, storage, and consent controls.
 
+## Full content
+- [Full insight texts for LLMs](https://auxodata.com/llms-full.txt): the complete text of every published insight, plus this summary.
+
 ## Contact
 - Website: https://auxodata.com
 - Email: hello@auxodata.com
