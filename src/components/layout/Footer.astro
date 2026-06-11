@@ -67,6 +67,15 @@ const location = `${siteData.address.city}, ${siteData.address.country}`;
     <div class="footer__bar">
       <p class="footer__copy">© {year} {siteData.name}</p>
       <div class="footer__meta">
+        <button
+          type="button"
+          class="footer__pill"
+          data-motion-toggle
+          aria-pressed="false"
+        >
+          <Icon name="mdi:motion-play-outline" aria-hidden="true" />
+          <span data-motion-label>Motion off</span>
+        </button>
         <button type="button" class="footer__pill" data-consent-reopen>Cookie settings</button>
         <a href="#main" class="footer__pill footer__top">
           Back to top

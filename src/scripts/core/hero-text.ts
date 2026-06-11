@@ -1,3 +1,5 @@
+import { motionEnabled } from "./motion";
+
 function splitHeadline(head: HTMLElement): void {
   if (head.dataset.split !== undefined) return;
 
@@ -43,6 +45,9 @@ function splitHeadline(head: HTMLElement): void {
 }
 
 export function initHeroText(): void {
+  // Headline word-stagger is a motion effect; skip splitting when motion is
+  // off (the default) so headlines render as plain, fully-visible text.
+  if (!motionEnabled()) return;
   document
     .querySelectorAll<HTMLElement>('[data-enter="headline"]')
     .forEach(splitHeadline);

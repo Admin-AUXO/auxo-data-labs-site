@@ -1,10 +1,12 @@
+import { motionEnabled } from "../core/motion";
+
 // Animate [data-countup] numbers from 0 to their value when scrolled into view.
-// Honors prefers-reduced-motion by showing the final value immediately.
+// When motion is off (the default), shows the final value immediately.
 export function initCountUp(): void {
   const els = Array.from(document.querySelectorAll<HTMLElement>("[data-countup]"));
   if (els.length === 0) return;
 
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduce = !motionEnabled();
 
   const run = (el: HTMLElement): void => {
     const raw = el.dataset.countup || el.textContent || "0";

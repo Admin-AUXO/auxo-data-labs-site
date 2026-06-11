@@ -101,31 +101,31 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    [data-enter],
-    [data-anim],
-    [data-reveal],
-    [data-enter="headline"] {
-      animation: none !important;
-      clip-path: none !important;
-      opacity: 1 !important;
-    }
+  /* ── Motion is opt-in ───────────────────────────────────────────────
+     Reduced motion is the DEFAULT for every visitor. Rich motion runs only
+     when the visitor explicitly opts in via the footer toggle, which sets
+     html[data-motion="on"] (persisted in localStorage by motion.ts). With no
+     opt-in — including first visits and OS prefers-reduced-motion — the site
+     stays static. */
+  html:not([data-motion="on"]) :is([data-enter], [data-anim], [data-reveal]) {
+    animation: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
   }
 
-  @media not (prefers-reduced-motion: reduce) {
-  [data-enter]:not([data-enter="headline"]) {
+  [data-motion="on"] [data-enter]:not([data-enter="headline"]) {
     animation: m-rise-sm 0.8s var(--ease-asmr) 0.1s both;
   }
 
-  [data-anim="clip-up"] {
+  [data-motion="on"] [data-anim="clip-up"] {
     position: relative;
   }
 
-  [data-js] [data-enter="headline"]:not([data-split]) {
+  [data-motion="on"][data-js] [data-enter="headline"]:not([data-split]) {
     opacity: 0;
   }
 
-  [data-enter="headline"] .m-word {
+  [data-motion="on"] [data-enter="headline"] .m-word {
     display: inline-block;
     margin-block: -0.14em;
     overflow: clip;
@@ -133,19 +133,19 @@
     vertical-align: top;
   }
 
-  [data-enter="headline"] .m-word-i {
+  [data-motion="on"] [data-enter="headline"] .m-word-i {
     animation: m-word 0.6s var(--ease-asmr) both;
     animation-delay: calc(var(--i) * 0.035s);
     display: inline-block;
   }
 
-  [data-anim="draw"] {
+  [data-motion="on"] [data-anim="draw"] {
     transform-origin: left center;
   }
 
   @supports (animation-timeline: view()) {
-    [data-reveal],
-    [data-anim] {
+    [data-motion="on"] [data-reveal],
+    [data-motion="on"] [data-anim] {
       animation-fill-mode: both;
       animation-name: m-rise;
       animation-range: entry 0% entry 80%;
@@ -153,21 +153,21 @@
       animation-timing-function: var(--ease-asmr);
     }
 
-    [data-anim="blur-in"] { animation-name: m-blur; }
+    [data-motion="on"] [data-anim="blur-in"] { animation-name: m-blur; }
 
-    [data-anim="rise"],
-    [data-anim="rise-in"] { animation-name: m-rise; }
-    [data-anim="slide-right"] { animation-name: m-right; }
-    [data-anim="slide-left"] { animation-name: m-left; }
-    [data-anim="type"] { animation-name: m-type; }
+    [data-motion="on"] [data-anim="rise"],
+    [data-motion="on"] [data-anim="rise-in"] { animation-name: m-rise; }
+    [data-motion="on"] [data-anim="slide-right"] { animation-name: m-right; }
+    [data-motion="on"] [data-anim="slide-left"] { animation-name: m-left; }
+    [data-motion="on"] [data-anim="type"] { animation-name: m-type; }
 
-    [data-anim="clip-up"] {
+    [data-motion="on"] [data-anim="clip-up"] {
       animation-name: m-reveal-x;
       animation-range: entry 4% entry 64%;
       clip-path: inset(-12% 100% -16% 0);
     }
 
-    [data-anim="clip-up"]::after {
+    [data-motion="on"] [data-anim="clip-up"]::after {
       animation-fill-mode: both;
       animation-name: m-wand;
       animation-range: entry 4% entry 72%;
@@ -182,21 +182,16 @@
       position: absolute;
     }
 
-    [data-anim="draw"] {
+    [data-motion="on"] [data-anim="draw"] {
       animation-name: m-draw;
       animation-range: entry 0% entry 34%;
       transform: scaleX(0);
     }
-  }
-  }
 
-  @media not (prefers-reduced-motion: reduce) {
-    @supports (animation-timeline: view()) {
-      /* Staggered entrance: any reveal/anim item carrying a --i index
-         starts its scroll animation slightly later than its predecessor. */
-      :is([data-anim], [data-reveal])[style*="--i"] {
-        animation-range: entry calc(3% + var(--i) * 6%) entry calc(50% + var(--i) * 6%);
-      }
+    /* Staggered entrance: any reveal/anim item carrying a --i index
+       starts its scroll animation slightly later than its predecessor. */
+    [data-motion="on"] :is([data-anim], [data-reveal])[style*="--i"] {
+      animation-range: entry calc(3% + var(--i) * 6%) entry calc(50% + var(--i) * 6%);
     }
   }
 

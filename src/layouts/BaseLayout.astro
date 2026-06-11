@@ -49,6 +49,18 @@ const gtmId = env.gtm.containerId;
     <ClientRouter />
     <script is:inline>
       (() => {
+        // Motion is opt-in: default to reduced. Set the attribute before first
+        // paint so the static state never flashes into animation.
+        try {
+          document.documentElement.dataset.motion =
+            localStorage.getItem("auxo-motion") === "on" ? "on" : "off";
+        } catch (e) {
+          document.documentElement.dataset.motion = "off";
+        }
+      })();
+    </script>
+    <script is:inline>
+      (() => {
         document.documentElement.dataset.js = "1";
         setTimeout(() => {
           document
@@ -97,8 +109,10 @@ const gtmId = env.gtm.containerId;
       import { initScrollUI } from "../scripts/core/scroll-ui";
       import { initPWA } from "../scripts/core/pwa";
       import { initCountUp } from "../scripts/ui/count-up";
+      import { initMotion } from "../scripts/core/motion";
 
       function boot() {
+        initMotion();
         initHeroText();
         initParticleField();
         initScrollUI();

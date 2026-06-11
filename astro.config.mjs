@@ -86,6 +86,7 @@ export default defineConfig({
           'magnify',
           'magnify-scan',
           'map-marker-outline',
+          'motion-play-outline',
           'send',
           'shield-check-outline',
         ],

@@ -99,9 +99,7 @@ const {
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .cta-card::before {
-      animation: none;
-    }
+  html:not([data-motion="on"]) .cta-card::before {
+    animation: none;
   }
 </style>

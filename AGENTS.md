@@ -27,7 +27,7 @@ Audience: skeptical B2B buyers in Gulf real estate and family offices. They skim
 - Follow the existing structure before adding abstractions. Edit copy in `src/data/*.ts`.
 - The `astro-icon` allowlist in `astro.config.mjs` is exact — add an icon name there before using it, or the build fails.
 - Page-only CSS belongs in that page's frontmatter import, not global `main.css`.
-- Motion is CSS-first and respects `prefers-reduced-motion`. Keep that intact.
+- Motion is opt-in: reduced is the DEFAULT for everyone. Rich motion only runs under `html[data-motion="on"]`, set by the footer toggle (persisted in localStorage via `src/scripts/core/motion.ts`). Gate any new animation behind `[data-motion="on"]` and read `motionEnabled()` in JS — never trigger motion by default.
 - `public/` bypasses the build pipeline — keep it standards-based and self-contained.
 
 ## Content

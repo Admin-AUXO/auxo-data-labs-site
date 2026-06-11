@@ -578,15 +578,13 @@
     transform: scale(1.12);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .deck__flip {
-      transition: none;
-    }
+  html:not([data-motion="on"]) .deck__flip {
+    transition: none;
+  }
 
-    .deck__more span,
-    .deck__more--back span,
-    .deck__share svg {
-      transition: none;
-    }
+  html:not([data-motion="on"]) .deck__more span,
+  html:not([data-motion="on"]) .deck__more--back span,
+  html:not([data-motion="on"]) .deck__share svg {
+    transition: none;
   }
 }

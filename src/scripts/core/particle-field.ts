@@ -1,3 +1,5 @@
+import { motionEnabled } from "./motion";
+
 interface FieldNode {
   x: number;
   y: number;
@@ -251,7 +253,7 @@ export function initParticleField(): void {
 
   function play(): void {
     if (raf) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!motionEnabled()) return;
     raf = requestAnimationFrame(loop);
   }
 
@@ -296,22 +298,22 @@ export function initParticleField(): void {
   });
   observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
   readPalette();
   resize();
-  if (reduceMotion.matches) {
-    frame();
-  } else {
+  if (motionEnabled()) {
     play();
+  } else {
+    // Render a single static frame so the field is visible but motionless.
+    frame();
   }
 
-  reduceMotion.addEventListener("change", (e) => {
-    if (e.matches) {
+  // React live when the visitor flips the motion toggle.
+  window.addEventListener("auxo:motionchange", (e) => {
+    if ((e as CustomEvent<{ on: boolean }>).detail.on) {
+      play();
+    } else {
       stop();
       frame();
-    } else {
-      play();
     }
   });
 }
