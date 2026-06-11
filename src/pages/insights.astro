@@ -21,8 +21,17 @@ const topics = [...new Set(items.map((i) => i.topic))];
 const readCount = items.length;
 const topicCount = topics.length;
 
-const GOVERN = new Set(["Reporting", "Compliance", "Ownership"]);
-const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "govern" : "build");
+// Two-tier taxonomy: each topic belongs to a family. The filter bar groups the
+// topic chips under their family label; chips still filter by individual topic.
+const FAMILY_LABELS: Record<string, string> = {
+  foundations: "Foundations",
+  guardrails: "Guardrails",
+};
+const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
+  id,
+  label: FAMILY_LABELS[id],
+  topics: [...new Set(items.filter((i) => i.family === id).map((i) => i.topic))],
+}));
 ---
 
 <BaseLayout
@@ -46,10 +55,15 @@ const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "go
     <div class="deck-filter" role="group" aria-label="Filter insights by topic">
       <button type="button" class="deck__chip" data-deck-filter="featured" aria-pressed="true">Featured</button>
       {
-        topics.map((t) => (
-          <button type="button" class="deck__chip" data-deck-filter={t} aria-pressed="false">
-            {t}
-          </button>
+        familyGroups.map((fam) => (
+          <div class="deck-filter__group">
+            <span class="deck-filter__label">{fam.label}</span>
+            {fam.topics.map((t) => (
+              <button type="button" class="deck__chip" data-deck-filter={t} aria-pressed="false">
+                {t}
+              </button>
+            ))}
+          </div>
         ))
       }
       <button type="button" class="deck__chip" data-deck-filter="" aria-pressed="false">All</button>
@@ -72,7 +86,7 @@ const familyOf = (topic: string): "build" | "govern" => (GOVERN.has(topic) ? "go
                   id={item.slug}
                   data-deck-card
                   data-topic={item.topic}
-                  data-family={familyOf(item.topic)}
+                  data-family={item.family}
                   data-featured={String(item.featured)}
                   data-flipped="false"
                   data-hide={item.featured ? undefined : true}

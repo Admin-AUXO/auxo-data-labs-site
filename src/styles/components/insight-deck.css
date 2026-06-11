@@ -9,10 +9,37 @@
   }
 
   .deck-filter {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-block-end: 1.75rem;
+  }
+
+  .deck-filter__group {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-inline-start: 0.85rem;
+    position: relative;
+  }
+
+  .deck-filter__group::before {
+    background-color: var(--border-strong);
+    block-size: 1.4rem;
+    content: "";
+    inline-size: 1px;
+    inset-inline-start: 0;
+    position: absolute;
+  }
+
+  .deck-filter__label {
+    color: var(--subtle);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
   }
 
   .deck__chip {
@@ -87,6 +114,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+    perspective: 1400px;
     transition:
       border-color var(--dur-base) var(--ease-out),
       box-shadow var(--dur-base) var(--ease-out);
@@ -188,6 +216,7 @@
   .deck__share svg {
     block-size: 1rem;
     inline-size: 1rem;
+    transition: transform var(--dur-fast) var(--ease-out);
   }
 
   .deck__title {
@@ -437,11 +466,6 @@
     text-align: center;
   }
 
-  /* Tap-to-flip ------------------------------------------------ */
-  .deck__card {
-    perspective: 1400px;
-  }
-
   /* Both faces share one grid cell, so the card grows to the
      taller face (the back) — no inner scrolling, no clipping. */
   .deck__flip {
@@ -567,10 +591,6 @@
   .deck__more--back:hover span,
   .deck__more--back:focus-visible span {
     transform: translateX(-3px);
-  }
-
-  .deck__share svg {
-    transition: transform var(--dur-fast) var(--ease-out);
   }
 
   .deck__share:hover svg,

@@ -554,9 +554,9 @@
     color: var(--subtle);
     cursor: pointer;
     display: inline-flex;
-    gap: 0.4rem;
     font-family: inherit;
     font-size: var(--text-xs);
+    gap: 0.4rem;
     min-block-size: 2.75rem;
     padding: 0;
     text-decoration: none;
