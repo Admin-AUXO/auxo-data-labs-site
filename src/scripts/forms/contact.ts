@@ -1,8 +1,10 @@
 import emailjs from "@emailjs/browser";
 import { contactContent } from "../../data/contact";
 import { EMAIL_RE, renderStatus, type StatusState } from "./_status";
+import { track } from "../analytics/track";
 
 const FORM_ID = "contact-form";
+const FORM_NAME = "contact";
 const status = contactContent.form.status;
 
 const EMAILJS = {
@@ -82,6 +84,29 @@ function initContactForm() {
     });
   });
 
+  // Analytics: form_start (first interaction), form_abandonment (left without sending)
+  let started = false;
+  let submitted = false;
+  const markStart = () => {
+    if (started) return;
+    started = true;
+    track("form_start", { form_name: FORM_NAME, form_location: location.pathname });
+  };
+  form
+    .querySelectorAll<HTMLElement>("input, textarea, select")
+    .forEach((c) => c.addEventListener("focus", markStart, { once: true }));
+  window.addEventListener(
+    "pagehide",
+    () => {
+      if (!started || submitted) return;
+      const done = controls.filter(
+        (c) => !(c instanceof HTMLSelectElement) && c.value.trim().length > 0,
+      ).length;
+      track("form_abandonment", { form_name: FORM_NAME, fields_completed: done });
+    },
+    { once: true },
+  );
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const valid = controls
@@ -132,6 +157,13 @@ function initContactForm() {
       );
 
       if (response.status !== 200) throw new Error("send failed");
+
+      submitted = true;
+      track("generate_lead", {
+        form_name: FORM_NAME,
+        form_location: location.pathname,
+        form_type: String(data.get("topic") ?? "") || "general",
+      });
 
       setStatus(statusRegion, "success", status.success);
       form.reset();

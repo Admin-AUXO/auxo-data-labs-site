@@ -22,4 +22,18 @@ import TicTacToe from "../components/ui/TicTacToe.astro";
       </div>
     </div>
   </Section>
+
+  <script>
+    import { track } from "../scripts/analytics/track";
+    // Fire once per 404 view (initial load or SPA navigation into a 404).
+    document.addEventListener("astro:page-load", () => {
+      if (document.title.startsWith("Page not found")) {
+        track("page_not_found", {
+          page_path: location.pathname + location.search,
+          page_location: location.href,
+          error_type: "404",
+        });
+      }
+    });
+  </script>
 </BaseLayout>
