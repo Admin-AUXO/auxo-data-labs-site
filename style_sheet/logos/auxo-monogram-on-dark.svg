@@ -1,15 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none" role="img" aria-label="AUXO">
-  <rect width="180" height="180" rx="40" fill="#0B0C0E"/>
-  <g transform="translate(40,40) scale(2.5)">
+  <rect width="180" height="180" fill="#080808"/>
+  <g transform="translate(40 40) scale(2.5)">
     <rect x="0" y="0" width="18.5" height="18.5" fill="#A3E635"/>
-    <rect x="21.5" y="0" width="18.5" height="18.5" fill="#A3E635"/>
-    <rect x="0" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
-    <rect x="21.5" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
-    <g fill="#080808" font-family="Sora, system-ui, Arial, sans-serif" font-weight="700" font-size="12" text-anchor="middle">
-      <text x="9.25" y="13.3">A</text>
-      <text x="30.75" y="13.3">U</text>
-      <text x="9.25" y="34.8">X</text>
-      <text x="30.75" y="34.8">O</text>
-    </g>
+  <rect x="21.5" y="0" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="0" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
+  <rect x="21.5" y="21.5" width="18.5" height="18.5" fill="#A3E635"/>
+    <path transform="translate(3.916 14.000) scale(0.01357 -0.01357)" fill="#080808" d="M-14 0 295 700H490L800 0H594L352 603H430L188 0ZM155 136 206 282H548L599 136Z"/>
+  <path transform="translate(25.416 13.905) scale(0.01357 -0.01357)" fill="#080808" d="M393 -14Q238 -14 151.0 71.0Q64 156 64 312V700H262V318Q262 228 297.5 189.0Q333 150 395 150Q457 150 492.0 189.0Q527 228 527 318V700H722V312Q722 156 635.0 71.0Q548 -14 393 -14Z"/>
+  <path transform="translate(4.242 35.500) scale(0.01357 -0.01357)" fill="#080808" d="M-2 0 304 425 303 284 9 700H232L420 429L325 428L510 700H724L430 292V432L740 0H512L321 285H412L224 0Z"/>
+  <path transform="translate(25.009 35.500) scale(0.01357 -0.01357)" fill="#080808" d="M423 -14Q339 -14 268.0 13.0Q197 40 144.5 89.5Q92 139 63.0 205.0Q34 271 34 350Q34 429 63.0 495.0Q92 561 144.5 610.5Q197 660 268.0 687.0Q339 714 423 714Q508 714 578.5 687.0Q649 660 701.0 610.5Q753 561 782.5 495.0Q812 429 812 350Q812 271 782.5 204.5Q753 138 701.0 89.0Q649 40 578.5 13.0Q508 -14 423 -14ZM423 150Q463 150 497.5 164.0Q532 178 557.5 204.5Q583 231 597.5 268.0Q612 305 612 350Q612 396 597.5 432.5Q583 469 557.5 495.5Q532 522 497.5 536.0Q463 550 423 550Q383 550 348.5 536.0Q314 522 288.5 495.5Q263 469 248.5 432.5Q234 396 234 350Q234 305 248.5 268.0Q263 231 288.5 204.5Q314 178 348.5 164.0Q383 150 423 150Z"/>
   </g>
 </svg>

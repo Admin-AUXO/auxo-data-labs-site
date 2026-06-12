@@ -17,7 +17,7 @@
     align-items: baseline;
     color: var(--foreground);
     display: inline-flex;
-    font-family: var(--font-brand);
+    font-family: var(--font-logo);
     font-size: 1.06rem;
     font-weight: 800;
     gap: 0.42em;

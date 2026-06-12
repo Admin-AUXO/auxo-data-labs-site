@@ -9,8 +9,8 @@ const manifest = {
     "AUXO Data Labs is a compliance-native analytics & AI lab in Dubai for real-estate and portfolio teams — turning stalled dashboards and AI pilots into reporting, forecasting, and automation that reaches production.",
   start_url: withBase("/"),
   display: "standalone",
-  background_color: "#0b0c0e",
-  theme_color: "#0b0c0e",
+  background_color: "#080808",
+  theme_color: "#080808",
   orientation: "portrait-primary",
   icons: [
     { src: withBase("/favicon.svg"), sizes: "any", type: "image/svg+xml", purpose: "any" },

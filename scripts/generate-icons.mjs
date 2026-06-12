@@ -8,7 +8,7 @@ import { dirname, join } from "node:path";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const pub = join(root, "public");
 const svg = readFileSync(join(pub, "favicon.svg"));
-const BG = "#0b0c0e"; // unified brand dark (matches manifest theme/background)
+const BG = "#080808"; // brand dark / --background (matches manifest theme/background)
 
 const render = (size) => sharp(svg, { density: 384 }).resize(size, size).png();
 
