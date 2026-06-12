@@ -20,8 +20,8 @@ export default defineConfig({
   ...(isPages ? {} : { adapter: vercel({ webAnalytics: { enabled: false } }) }),
   devToolbar: { enabled: false },
   redirects: {
-    '/self-check/': '/services/',
-    '/diagnostic/': '/services/',
+    // '/self-check/' serves the AUXO Score assessment page.
+    '/diagnostic/': '/self-check/',
     '/trust/': '/about/',
     '/blog/': '/',
     '/services/compliance-intelligence/': '/services/',

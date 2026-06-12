@@ -18,6 +18,7 @@ export const navigationContent: NavigationContent = {
     { name: "Services", href: "/services/" },
     { name: "Lab", href: "/about/" },
     { name: "Insights", href: "/insights/" },
+    { name: "Self-check", href: "/self-check/" },
     { name: "Contact", href: "/contact/" },
   ],
   cta: {

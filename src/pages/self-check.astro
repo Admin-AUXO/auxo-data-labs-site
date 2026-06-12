@@ -1,0 +1,698 @@
+---
+// DRAFT — AUXO Score self-check. noindex, not linked, excluded from sitemap + pagefind.
+// A fast, multi-step self-read scored across AUXO's four pillars. Results are composed
+// by a small rules/insight engine (band + cross-pillar patterns + sharpest gaps + context)
+// so the closing read is near-unique to each set of answers. Not a sales pitch.
+// Source: AUXO-Marketing/sales/demand-gen/lead_magnet_readiness_assessment.md
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/layout/Section.astro";
+
+// 1 = not really · 5 = yes, reliably. Non-judgemental anchors (research: lower disclosure anxiety).
+const SCALE = [
+  { v: 1, k: "1", label: "Not really" },
+  { v: 2, k: "2", label: "Rarely" },
+  { v: 3, k: "3", label: "Sometimes" },
+  { v: 4, k: "4", label: "Mostly" },
+  { v: 5, k: "5", label: "Yes, reliably" },
+];
+
+// Each item: statement (shown while answering) + low (the risk line shown on the results
+// page when it scores 1–2). Low lines are written to stand alone and stay in site voice.
+const pillars = [
+  {
+    id: "data",
+    n: "01",
+    label: "Trusted data",
+    ease: "Start here — it's the foundation everything else sits on. No wrong answers; just what's true on a normal week.",
+    scenario: "A number in the board pack gets questioned in the room. What happens next?",
+    items: [
+      { t: "Finance, registration, and CRM agree on the same figures — without manual reconciliation.", low: "Your systems disagree by default, so every figure starts the day needing a referee." },
+      { t: "There's one agreed source of truth for units, sales, and collections — not three spreadsheets that drift.", low: "Three versions of the truth means the real one is whichever file happens to be open." },
+      { t: "When a number is challenged, we trace it to its source in minutes, not days.", low: "When a number is challenged, you can't show your working fast enough to defend it." },
+      { t: "New transactions land in our records without being re-keyed into several systems.", low: "The same data is typed in more than once — so it's wrong in at least one place." },
+      { t: "We trust month-end figures on the first pass; errors rarely surface after sign-off.", low: "Month-end is a re-do, not a sign-off — every close quietly costs you a second pass." },
+      { t: "Property, tenant, and owner master data is clean — few duplicates, blanks, or stale records.", low: "Duplicates and stale records mean the reports are built on sand you can't see." },
+      { t: "We could hand raw data to an auditor or buyer tomorrow without cleaning it up first.", low: "A data request today would mean a clean-up scramble before you could answer it." },
+    ],
+  },
+  {
+    id: "reporting",
+    n: "02",
+    label: "Clear reporting",
+    ease: "Now the part leadership actually sees. Think about your last close, not your best one.",
+    scenario: "Leadership asks, plainly, “how are we actually doing?” How fast — and how sure — is your answer?",
+    items: [
+      { t: "The board pack is built the same way every period, not rebuilt from scratch.", low: "Every report is hand-rebuilt, so the work never compounds and small errors creep back in." },
+      { t: "Leadership gets the numbers when they need them — not weeks after close.", low: "By the time the numbers land, the decision they were meant for has already been made." },
+      { t: "Our reports answer “so what should we do?”, not just “here's what happened.”", low: "Your reports say what happened, not what to do — so leadership still has to guess." },
+      { t: "We can break performance down by project, unit, channel, or community without a one-off pull.", low: "Any new angle on the numbers means a custom pull and a wait." },
+      { t: "Two people pulling the same report get the same answer.", low: "The same question gives two answers depending on who runs it — so neither gets trusted." },
+      { t: "Reporting doesn't hinge on one person who knows where everything lives.", low: "Reporting lives in one person's head — and walks out the door with them." },
+      { t: "We compare against budget, forecast, and prior periods without stitching files by hand.", low: "Comparing to plan means stitching files by hand, so it rarely gets done." },
+    ],
+  },
+  {
+    id: "automation",
+    n: "03",
+    label: "Reliable automation",
+    ease: "This one's about how much runs on people remembering. Be honest — most teams find gaps here.",
+    scenario: "Your key analyst is on leave for two weeks, over month-end. Does anything break?",
+    items: [
+      { t: "Recurring reports and consolidations run on a schedule, not because someone remembered.", low: "Reports run only when someone remembers — so eventually one won't." },
+      { t: "Data moves between CRM, finance, registration, and bank without manual export-and-import.", low: "Data moves by copy-paste: slow on a good day, wrong on a bad one." },
+      { t: "When a data process breaks, we're alerted — we don't find out from a wrong number.", low: "When something breaks, you find out from a wrong number, not an alert." },
+      { t: "Routine reconciliations (collections, escrow, bank) are at least partly automated.", low: "Reconciliations are done by hand, so they're only as reliable as the busiest day allows." },
+      { t: "A key person taking leave doesn't stall reporting or month-end.", low: "One person's leave can stall the close — your month-end has a single point of failure." },
+      { t: "Our processes are documented well enough that a new hire could run them.", low: "The process isn't written down, so it can't be handed over or checked." },
+      { t: "Analysts spend their time on analysis, not copying and pasting.", low: "Your analysts are paid to think but spend the month moving data by hand." },
+    ],
+  },
+  {
+    id: "compliance",
+    n: "04",
+    label: "Confident compliance",
+    ease: "Last stretch. This is about being ready to show your work — not legal advice, and nobody's marking it.",
+    scenario: "A regulator, auditor, or investor asks for records tomorrow. Ready — or a fire drill?",
+    note: "Operational readiness only — your ability to produce evidence on demand. Not legal advice; confirm your obligations with your own advisors.",
+    items: [
+      { t: "We can produce a clean audit trail for any transaction on request.", low: "You can't produce a clean trail on demand — so a simple request becomes a project." },
+      { t: "AML-relevant checks and records (where they apply to us) are captured systematically.", low: "AML-relevant records are ad hoc, so the evidence is only as good as someone's memory." },
+      { t: "We could pull the data behind a goAML / REAR submission without a manual scramble.", low: "A goAML / REAR submission would mean a manual scramble against a deadline." },
+      { t: "Our reporting supports IFRS requirements without heavy period-end rework.", low: "IFRS reporting means heavy period-end rework, every single time." },
+      { t: "We're confident our corporate-tax figures rest on reconciled, traceable data.", low: "Your tax figures rest on numbers you haven't fully reconciled — a quiet, carried risk." },
+      { t: "If asked for records tomorrow, we'd be ready in hours, not weeks.", low: "A records request would take weeks, not hours — exactly when speed matters most." },
+      { t: "We know who owns each compliance-related report and how it's produced.", low: "No clear owner for compliance reports means they're everyone's job, and no one's." },
+    ],
+  },
+];
+
+const context = {
+  role: ["Finance", "Operations", "Compliance / risk", "Founder / CEO / GM", "Something else"],
+  business: ["Developer", "Brokerage", "Property / asset manager", "Owners' association", "Family office", "Something else"],
+  scale: ["One asset or project", "A handful", "Dozens", "Hundreds+"],
+};
+
+const bands = [
+  { id: "risk", min: 0, max: 24, name: "Foundations at risk",
+    read: "The systems disagree, reporting is manual and late, and a request from a regulator or auditor would mean a scramble. The risk isn't abstract — it's a wrong number in the room or a missed filing, waiting to happen.",
+    cta: "The move isn't to fix everything at once. It's to find the one or two breaks costing you the most — and start there." },
+  { id: "patchy", min: 25, max: 49, name: "Patchy",
+    read: "Some of it works — but it leans on specific people and a lot of manual effort. You get there, it just costs you time every period, and the cracks show under pressure.",
+    cta: "Worth mapping where the effort and risk concentrate, then taking the highest-return fix first — before spending on a build." },
+  { id: "manual", min: 50, max: 74, name: "Solid but manual",
+    read: "The numbers are reliable — but you're paying for that reliability in hours and key-person dependency. You've outgrown the manual approach.",
+    cta: "You're ready to automate and consolidate. The win now is scoping it precisely, so the build delivers the right thing first time." },
+  { id: "strong", min: 75, max: 100, name: "Strong",
+    read: "Data agrees, reporting is fast and trusted, and you're ready for scrutiny. Genuinely well run.",
+    cta: "The upside now is in what AI and deeper analytics can pull from data you already trust — forecasting, pricing, portfolio insight. A conversation, not a rescue." },
+];
+
+const pillarMoves: Record<string, string> = {
+  data: "Agree one source of truth first. Until the numbers agree, everything downstream inherits the doubt.",
+  reporting: "Make the board pack repeatable and traceable before adding another dashboard.",
+  automation: "Take the routine, breakable work off people — put it on a schedule and watch it.",
+  compliance: "Build the evidence trail into the workflow, so readiness is a by-product, not a scramble.",
+};
+
+const itemLow: Record<string, string> = {};
+pillars.forEach((p) => p.items.forEach((it, i) => (itemLow[`${p.id}-${i}`] = it.low)));
+const pillarMeta = pillars.map((p) => ({ id: p.id, n: p.n, label: p.label, count: p.items.length }));
+const exampleNoun: Record<string, string> = {
+  Developer: "board pack", Brokerage: "management report", "Property / asset manager": "owner report",
+  "Owners' association": "committee report", "Family office": "investor update",
+};
+const blurbs: Record<string, string> = {
+  data: "do your systems agree?",
+  reporting: "can leadership act on it?",
+  automation: "does it run without heroics?",
+  compliance: "ready when someone asks?",
+};
+
+const total = pillars.reduce((s, p) => s + p.items.length, 0);
+const desc = "A 3-minute self-read on your data, reporting, automation, and compliance — with an honest, specific result. No grade, no pitch.";
+---
+
+<BaseLayout title="The AUXO Score — a quick self-read" description={desc} path="/self-check/">
+  <Section padding="lg" width="6xl">
+    <div class="ac" data-assessment data-total={total}>
+      <script type="application/json" id="ac-config" set:html={JSON.stringify({ bands, pillarMeta, itemLow, moves: pillarMoves, exampleNoun })} />
+
+      <!-- ===== sticky top bar: progress + nav (always at top, no scroll to reach) ===== -->
+      <div class="ac__bar" data-bar hidden>
+        <button type="button" class="ac__navbtn" data-back aria-label="Back">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="ac__track" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" data-track>
+          <span data-fill></span>
+          <em class="ac__steplabel" data-steplabel></em>
+        </div>
+        <button type="button" class="ac__navbtn ac__navbtn--next" data-next disabled>
+          <span data-next-label>Next</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+
+      <!-- ===== INTRO ===== -->
+      <div class="ac__step is-active" data-step="intro">
+        <span class="ac__kicker">The AUXO Score</span>
+        <h1 class="ac__title">How much can your data actually tell you?</h1>
+        <p class="ac__lead">
+          Answer honestly and you'll walk away with a clear <b>0–100 score</b>, a read on each
+          of the four things that decide whether your data works for you — and the single fix
+          that would move the needle most.
+        </p>
+        <ul class="ac__pillars">
+          {pillars.map((p) => (
+            <li><span class="ac__pn">{p.n}</span> <b>{p.label}</b> <span class="ac__blurb">{blurbs[p.id]}</span></li>
+          ))}
+        </ul>
+        <ul class="ac__meta" aria-label="What to expect">
+          <li>4 short sections</li><li>~3 minutes</li><li>No sign-up</li><li>Stays in your browser</li>
+        </ul>
+        <div class="ac__actions">
+          <button type="button" class="ac__btn" data-variant="primary" data-start>
+            Get my score
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" class="ac__link" data-resume hidden>Pick up where I left off</button>
+        </div>
+        <p class="ac__fine">
+          Everyone lands somewhere between <em>“foundations at risk”</em> and <em>“strong.”</em>
+          No grade, nobody sees your answers — the value is in the gaps. Tap, or press <kbd>1</kbd>–<kbd>5</kbd>.
+        </p>
+      </div>
+
+      <!-- ===== CONTEXT ===== -->
+      <div class="ac__step" data-step="context" data-name="A little context" hidden>
+        <h2 class="ac__qtitle">First — who's answering?</h2>
+        <p class="ac__qsub">This tailors your read. It's optional and doesn't affect your score.</p>
+        <div class="ac__ctx">
+          <fieldset class="ac__field"><legend>Your role</legend>
+            <div class="ac__chips" data-chips="role" data-single>
+              {context.role.map((o) => (<button type="button" class="ac__chip" data-val={o}>{o}</button>))}
+            </div>
+          </fieldset>
+          <fieldset class="ac__field"><legend>Your business</legend>
+            <div class="ac__chips" data-chips="business" data-single>
+              {context.business.map((o) => (<button type="button" class="ac__chip" data-val={o}>{o}</button>))}
+            </div>
+          </fieldset>
+          <fieldset class="ac__field"><legend>Portfolio scale</legend>
+            <div class="ac__chips" data-chips="scale" data-single>
+              {context.scale.map((o) => (<button type="button" class="ac__chip" data-val={o}>{o}</button>))}
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- ===== PILLAR STEPS ===== -->
+      {pillars.map((p) => (
+        <div class="ac__step" data-step="pillar" data-pillar={p.id} data-name={p.label} hidden>
+          <p class="ac__scenario">{p.scenario}</p>
+          <p class="ac__ease">{p.ease}</p>
+          {p.note && <p class="ac__legal">{p.note}</p>}
+          <ol class="ac__items">
+            {p.items.map((it, ii) => (
+              <li class="ac__item" data-item>
+                <span class="ac__statement">{it.t}</span>
+                <div class="ac__scale" role="radiogroup" aria-label={it.t} data-scale data-q={`${p.id}-${ii}`}>
+                  {SCALE.map((s) => (
+                    <button type="button" class="ac__dot" role="radio" aria-checked="false"
+                      data-score={s.v} aria-label={`${s.v} — ${s.label}`} title={s.label}>{s.k}</button>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div class="ac__scalekey" aria-hidden="true"><span>{SCALE[0].label}</span><span>{SCALE[4].label}</span></div>
+        </div>
+      ))}
+
+      <!-- ===== RESULTS ===== -->
+      <div class="ac__step ac__results" data-step="results" hidden>
+        <span class="ac__kicker">Your AUXO Score</span>
+        <p class="ac__sub" data-sub></p>
+        <div class="ac__scorewrap">
+          <div class="ac__gauge">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ac__gtrack" cx="60" cy="60" r="52"/>
+              <circle class="ac__gfill" cx="60" cy="60" r="52" data-gauge-fill/>
+            </svg>
+            <div class="ac__scorenum"><span data-score-num>0</span><i>/100</i></div>
+          </div>
+          <div class="ac__verdict">
+            <p class="ac__band" data-band>—</p>
+            <p class="ac__read" data-read></p>
+            <p class="ac__tonext" data-tonext hidden></p>
+          </div>
+        </div>
+
+        <div class="ac__insight" data-pattern hidden>
+          <span class="ac__insight-tag">What stands out</span>
+          <h3 data-pattern-title></h3>
+          <p data-pattern-body></p>
+        </div>
+
+        <div class="ac__barshead">
+          <h3>The four pillars</h3>
+          <span class="ac__aimkey"><i></i> aim for 75+ (“strong”)</span>
+        </div>
+        <div class="ac__bars" data-bars>
+          {pillars.map((p) => (
+            <div class="ac__pbar" data-pbar={p.id}>
+              <div class="ac__pbar-top"><span><span class="ac__pn">{p.n}</span> {p.label}</span><b><span data-pbar-num>0</span><small>/100</small></b></div>
+              <div class="ac__pbar-track"><i class="ac__pbar-aim"></i><span data-pbar-fill></span></div>
+            </div>
+          ))}
+        </div>
+
+        <div class="ac__gaps" data-gaps hidden>
+          <h3>Your sharpest gaps</h3>
+          <p class="ac__gaps-sub">The specific things you flagged as weak — in plain terms.</p>
+          <ul data-gaps-list></ul>
+        </div>
+
+        <div class="ac__start" data-start-block hidden>
+          <span class="ac__start-tag">If you fix one thing</span>
+          <p class="ac__start-lead" data-weak-name></p>
+          <p data-weak-move></p>
+          <p class="ac__aim-line" data-weak-aim></p>
+          <p class="ac__strength" data-strength></p>
+        </div>
+
+        <details class="ac__how">
+          <summary>How the score works</summary>
+          <div class="ac__how-body">
+            <p>Each statement scores 1–5. Each pillar is normalised to 0–100 — <code>(sum of its answers − count) ÷ (4 × count) × 100</code> — so all 1s is 0 and all 5s is 100. Your AUXO Score is the equal-weighted average of the four. No hidden weighting, no curve.</p>
+            <p class="ac__note">It's a self-read, so it's only as honest as your answers — enough to show you where to look, not a substitute for examining the real systems.</p>
+          </div>
+        </details>
+
+        <div class="ac__cta">
+          <p class="ac__cta-lead" data-cta-lead></p>
+          <div class="ac__actions">
+            <button type="button" class="ac__btn" data-variant="primary" data-google-calendar-open>Book a meeting</button>
+            <a class="ac__btn" data-variant="outline" data-email-results href="#">Email me this</a>
+            <button type="button" class="ac__btn" data-variant="ghost" data-copy>
+              <span data-copy-label>Copy summary</span>
+            </button>
+          </div>
+          <p class="ac__fine">No obligation. A real person replies within one business day · <a href="mailto:hello@auxodata.com">hello@auxodata.com</a></p>
+          <button type="button" class="ac__link" data-restart>Start over</button>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <style>
+    .draft-flag { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); border: 1px dashed var(--border-strong); border-radius: var(--radius-full); padding: 0.5rem 0.9rem; display: inline-block; margin-bottom: 1.6rem; }
+    .ac { max-width: 52rem; margin-inline: auto; }
+    .ac__step { animation: ac-in 0.35s ease both; }
+    [data-motion="off"] .ac__step { animation: none; }
+    @keyframes ac-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .ac__kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); display: block; margin-bottom: 1rem; }
+    .ac__pn { font: 600 0.85em/1 var(--font-mono); color: var(--accent-2); letter-spacing: var(--tracking-mono); }
+
+    /* top bar */
+    .ac__bar { position: sticky; top: 0.5rem; z-index: 5; display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.6rem; padding: 0.5rem; background: color-mix(in oklch, var(--background) 86%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--border); border-radius: var(--radius-full); }
+    .ac__navbtn { flex: none; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; font: 600 var(--text-sm)/1 var(--font-sans); color: var(--foreground); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0.5rem 0.7rem; transition: opacity .15s, background .15s, border-color .15s; }
+    .ac__navbtn--next { padding-inline: 1rem; background: var(--accent); color: var(--accent-foreground); border-color: var(--accent); }
+    .ac__navbtn[disabled] { opacity: 0.35; cursor: not-allowed; }
+    .ac__navbtn:not([disabled]):hover { border-color: var(--border-strong); }
+    .ac__track { position: relative; flex: 1; height: 30px; border-radius: var(--radius-full); background: var(--surface-sunken); overflow: hidden; display: flex; align-items: center; }
+    .ac__track > span { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, var(--accent-2), var(--accent)); opacity: 0.22; transition: width .5s cubic-bezier(.22,1,.36,1); }
+    [data-motion="off"] .ac__track > span { transition: none; }
+    .ac__steplabel { position: relative; padding-inline: 0.9rem; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--muted); font-style: normal; }
+
+    .ac__title { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-3xl); line-height: 1.04; letter-spacing: var(--tracking-display-3xl); text-wrap: balance; margin: 0 0 1rem; }
+    .ac__lead { color: var(--muted); font-size: var(--text-lg); max-width: 46ch; margin: 0 0 1.6rem; }
+    .ac__pillars { list-style: none; padding: 0; margin: 0 0 1.8rem; display: grid; gap: 0.5rem; }
+    .ac__pillars li { display: flex; align-items: baseline; gap: 0.6rem; font-weight: 500; }
+
+    .ac__qtitle { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-2xl); letter-spacing: var(--tracking-display-2xl); margin: 0 0 0.5rem; }
+    .ac__qsub { color: var(--muted); margin: 0 0 1.4rem; }
+    .ac__scenario { font-size: var(--text-lg); line-height: 1.35; border-left: 3px solid var(--accent-2); padding-left: 0.9rem; margin: 0 0 0.7rem; }
+    .ac__ease { color: var(--muted); font-size: var(--text-sm); margin: 0 0 1.1rem; }
+    .ac__legal { font-size: var(--text-xs); color: var(--subtle); background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.6rem 0.8rem; margin: 0 0 1.1rem; }
+
+    /* chips */
+    .ac__ctx { display: grid; gap: 1.2rem; }
+    .ac__field { border: 0; padding: 0; margin: 0; }
+    .ac__field legend { font-weight: 600; margin-bottom: 0.6rem; padding: 0; font-size: var(--text-sm); }
+    .ac__chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .ac__chip { font: inherit; font-size: var(--text-sm); cursor: pointer; background: var(--surface); color: var(--foreground); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0.45rem 0.95rem; transition: border-color .15s, background .15s; }
+    .ac__chip:hover { border-color: var(--border-strong); }
+    .ac__chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+
+    /* compact item rows (statement + inline scale) */
+    .ac__items { list-style: none; padding: 0; margin: 0 0 0.7rem; display: grid; gap: 0.35rem; }
+    .ac__item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.6rem 1rem; padding: 0.55rem 0.7rem; border-radius: var(--radius-md); border: 1px solid transparent; }
+    .ac__item[data-active] { border-color: var(--border); background: var(--surface-sunken); }
+    .ac__item[data-answered] .ac__statement { color: var(--muted); }
+    .ac__statement { font-weight: 500; line-height: 1.35; font-size: var(--text-sm); }
+    .ac__scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.3rem; }
+    .ac__dot { cursor: pointer; width: 2.2rem; height: 2.2rem; font: 600 var(--text-sm)/1 var(--font-mono); color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); transition: transform .12s, border-color .15s, background .15s, color .15s; }
+    .ac__dot:hover { border-color: var(--accent); color: var(--foreground); }
+    .ac__dot[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-foreground); transform: translateY(-1px); }
+    .ac__scalekey { display: flex; justify-content: space-between; font: 500 var(--text-xs)/1 var(--font-mono); color: var(--subtle); padding: 0 0.7rem; }
+
+    /* shared buttons */
+    .ac__actions { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
+    .ac__btn { font: 600 var(--text-sm)/1 var(--font-sans); cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; padding: 0.85rem 1.4rem; border-radius: var(--radius-md); border: 1px solid transparent; transition: transform .12s, opacity .15s, border-color .15s; }
+    .ac__btn[data-variant="primary"] { background: var(--accent); color: var(--accent-foreground); }
+    .ac__btn[data-variant="outline"] { background: transparent; color: var(--foreground); border-color: var(--border-strong); }
+    .ac__btn:hover { transform: translateY(-1px); }
+    .ac__link { background: none; border: 0; color: var(--accent); cursor: pointer; font: inherit; text-decoration: underline; }
+    .ac__fine { font-size: var(--text-xs); color: var(--subtle); margin: 1rem 0 0; }
+    .ac__fine a { color: var(--accent); }
+    kbd { font: 600 0.9em/1 var(--font-mono); background: var(--surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: var(--radius-sm); padding: 0.1rem 0.35rem; }
+
+    /* results */
+    .ac__scorewrap { display: flex; gap: 1.6rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.8rem; }
+    .ac__gauge { position: relative; width: 132px; height: 132px; flex: none; }
+    .ac__gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ac__gtrack { fill: none; stroke: var(--surface-raised); stroke-width: 10; }
+    .ac__gfill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 327; stroke-dashoffset: 327; transition: stroke-dashoffset 1s cubic-bezier(.22,1,.36,1); }
+    [data-motion="off"] .ac__gfill { transition: none; }
+    .ac__scorenum { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-brand); font-weight: 700; font-size: var(--text-2xl); }
+    .ac__scorenum i { font-size: var(--text-sm); color: var(--subtle); font-style: normal; align-self: flex-end; padding-bottom: 0.5rem; margin-left: 2px; }
+    .ac__band { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-xl); margin: 0 0 0.4rem; color: var(--accent); }
+    .ac__read { color: var(--muted); margin: 0; max-width: 52ch; }
+
+    .ac__insight { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface-sunken); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: 1.6rem; }
+    .ac__insight h3 { margin: 0 0 0.4rem; font-size: var(--text-lg); }
+    .ac__insight p { margin: 0; color: var(--muted); }
+
+    .ac__bars { display: grid; gap: 0.9rem; margin-bottom: 1.6rem; }
+    .ac__pbar-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; font-weight: 500; }
+    .ac__pbar-top b { font: 700 var(--text-base)/1 var(--font-mono); }
+    .ac__pbar-track { height: 7px; border-radius: var(--radius-full); background: var(--surface-sunken); overflow: hidden; }
+    .ac__pbar-track > span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--accent); transition: width .9s cubic-bezier(.22,1,.36,1); }
+    .ac__pbar[data-weak] .ac__pbar-track > span { background: var(--accent-2); }
+    .ac__pbar[data-weak] .ac__pbar-top b { color: var(--accent-2); }
+    [data-motion="off"] .ac__pbar-track > span { transition: none; }
+
+    .ac__gaps { margin-bottom: 1.6rem; }
+    .ac__gaps h3, .ac__start-lead { font-size: var(--text-lg); margin: 0 0 0.7rem; }
+    .ac__gaps ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+    .ac__gaps li { position: relative; padding-left: 1.3rem; color: var(--muted); }
+    .ac__gaps li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent-2); }
+
+    .ac__start { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: 1.6rem; }
+    .ac__start p { margin: 0 0 0.5rem; color: var(--muted); }
+    .ac__start-lead { color: var(--foreground) !important; }
+    .ac__strength { font-size: var(--text-sm); color: var(--subtle); margin: 0.7rem 0 0; }
+    .ac__note { font-size: var(--text-sm); color: var(--subtle); }
+
+    .ac__how { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 1.8rem; }
+    .ac__how summary { cursor: pointer; padding: 0.85rem 1.1rem; font-weight: 600; font-size: var(--text-sm); }
+    .ac__how-body { padding: 0 1.1rem 1.1rem; }
+    .ac__how-body p { color: var(--muted); margin: 0 0 0.5rem; font-size: var(--text-sm); }
+    .ac__how code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-sunken); padding: 0.1rem 0.35rem; border-radius: var(--radius-sm); color: var(--foreground); }
+
+    .ac__cta { border-top: 1px solid var(--border); padding-top: 1.5rem; }
+    .ac__cta-lead { font-size: var(--text-lg); margin: 0 0 1rem; max-width: 52ch; }
+
+    /* intro extras */
+    .ac__pillars li { align-items: baseline; flex-wrap: wrap; }
+    .ac__blurb { color: var(--subtle); font-weight: 400; font-size: var(--text-sm); }
+    .ac__meta { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; padding: 0; margin: 0 0 1.8rem; }
+    .ac__meta li { position: relative; padding-left: 1.1rem; font: 600 var(--text-xs)/1.3 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
+    .ac__meta li::before { content: ""; position: absolute; left: 0; top: 0.15em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+    .ac__fine em { color: var(--muted); font-style: normal; }
+    .ac__btn[data-variant="ghost"] { background: transparent; color: var(--muted); border-color: var(--border); }
+
+    /* results extras */
+    .ac__sub { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--subtle); margin: 0 0 1.4rem; }
+    .ac__tonext { margin: 0.7rem 0 0; font-size: var(--text-sm); color: var(--accent); font-weight: 600; }
+    .ac__tonext[hidden] { display: none; }
+    .ac__insight-tag, .ac__start-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
+    .ac__barshead { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.9rem; }
+    .ac__barshead h3 { margin: 0; font-size: var(--text-lg); }
+    .ac__aimkey { display: inline-flex; align-items: center; gap: 0.4rem; font: 500 var(--text-xs)/1 var(--font-mono); color: var(--subtle); }
+    .ac__aimkey i { width: 2px; height: 12px; background: var(--foreground); opacity: 0.5; border-radius: 1px; }
+    .ac__pbar-top b { display: inline-flex; align-items: baseline; gap: 1px; }
+    .ac__pbar-top b small { font-size: 0.7em; color: var(--subtle); font-weight: 500; }
+    .ac__pbar-track { position: relative; }
+    .ac__pbar-aim { position: absolute; left: 75%; top: -2px; bottom: -2px; width: 2px; background: var(--foreground); opacity: 0.45; border-radius: 1px; z-index: 1; }
+    .ac__gaps-sub { color: var(--subtle); font-size: var(--text-sm); margin: 0 0 0.9rem; }
+    .ac__gaps li { display: grid; gap: 0.2rem; padding-left: 0; }
+    .ac__gaps li::before { display: none; }
+    .ac__gap-tag { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); }
+    .ac__gap-line { color: var(--muted); }
+    .ac__aim-line { color: var(--foreground) !important; font-size: var(--text-sm); }
+    .ac__toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(1rem); opacity: 0; background: var(--foreground); color: var(--background); font-weight: 600; font-size: var(--text-sm); padding: 0.6rem 1.1rem; border-radius: var(--radius-full); transition: opacity .25s, transform .25s; pointer-events: none; z-index: 20; }
+    .ac__toast[data-show] { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 600px) {
+      .ac__item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .ac__dot { width: 100%; height: 2.4rem; }
+      .ac__steplabel { display: none; }
+      .ac__navbtn--next span { display: none; }
+      .ac__barshead { flex-direction: column; gap: 0.3rem; }
+    }
+  </style>
+
+  <script>
+    const KEY = "auxo-self-check-v2";
+
+    function init() {
+      const root = document.querySelector<HTMLElement>("[data-assessment]");
+      if (!root || root.dataset.bound === "1") return;
+      root.dataset.bound = "1";
+
+      const cfg = JSON.parse(document.getElementById("ac-config")?.textContent || "{}");
+      const bands = cfg.bands as Array<{ id: string; min: number; max: number; name: string; read: string; cta: string }>;
+      const meta = cfg.pillarMeta as Array<{ id: string; n: string; label: string; count: number }>;
+      const itemLow = cfg.itemLow as Record<string, string>;
+      const moves = cfg.moves as Record<string, string>;
+      const exNoun = cfg.exampleNoun as Record<string, string>;
+
+      const steps = Array.from(root.querySelectorAll<HTMLElement>(".ac__step"));
+      const order = steps.map((s) => s.dataset.step!);
+      const lastPillarIdx = steps.map((s, i) => (s.dataset.step === "pillar" ? i : -1)).filter((i) => i >= 0).pop()!;
+      const bar = root.querySelector<HTMLElement>("[data-bar]")!;
+      const reduce = document.documentElement.dataset.motion === "off" || matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      type State = { answers: Record<string, number>; ctx: Record<string, string>; step: number };
+      const state: State = { answers: {}, ctx: {}, step: 0 };
+      let lastSummary = "";
+      let toastEl: HTMLElement | null = null;
+      function toast(msg: string) {
+        if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "ac__toast"; document.body.appendChild(toastEl); }
+        toastEl.textContent = msg; toastEl.setAttribute("data-show", "");
+        setTimeout(() => toastEl?.removeAttribute("data-show"), 1800);
+      }
+      try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || "null") || {}); } catch {}
+      const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
+
+      // restore answers + chips
+      root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => { const v = state.answers[sc.dataset.q!]; if (v) paint(sc, v); });
+      root.querySelectorAll<HTMLElement>("[data-chips]").forEach((g) => {
+        const key = g.dataset.chips!;
+        g.querySelectorAll<HTMLButtonElement>(".ac__chip").forEach((c) => c.setAttribute("aria-pressed", state.ctx[key] === c.dataset.val ? "true" : "false"));
+      });
+      if (Object.keys(state.answers).length && state.step > 0) root.querySelector<HTMLElement>("[data-resume]")!.hidden = false;
+
+      function paint(sc: HTMLElement, v: number) {
+        sc.querySelectorAll<HTMLButtonElement>(".ac__dot").forEach((d) => {
+          const on = Number(d.dataset.score) === v;
+          d.setAttribute("aria-checked", on ? "true" : "false"); d.tabIndex = on ? 0 : -1;
+        });
+        sc.closest(".ac__item")?.setAttribute("data-answered", "");
+      }
+
+      // scale interactions
+      root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => {
+        sc.addEventListener("click", (e) => {
+          const dot = (e.target as HTMLElement).closest<HTMLButtonElement>(".ac__dot"); if (!dot) return;
+          answer(sc, Number(dot.dataset.score));
+        });
+      });
+      function answer(sc: HTMLElement, v: number) {
+        state.answers[sc.dataset.q!] = v; paint(sc, v); save();
+        const step = sc.closest<HTMLElement>('[data-step="pillar"]')!;
+        refresh(step); advanceActive(step);
+      }
+
+      // active row + number-key fast fill
+      function advanceActive(step: HTMLElement) {
+        const items = Array.from(step.querySelectorAll<HTMLElement>("[data-item]"));
+        items.forEach((it) => it.removeAttribute("data-active"));
+        const next = items.find((it) => !it.querySelector('.ac__dot[aria-checked="true"]'));
+        if (next) next.setAttribute("data-active", "");
+      }
+      document.addEventListener("keydown", (e) => {
+        if (root.dataset.bound !== "1" || !/^[1-5]$/.test(e.key)) return;
+        const tag = (e.target as HTMLElement)?.tagName;
+        if (tag === "INPUT" || tag === "TEXTAREA") return;
+        const step = steps.find((s) => !s.hidden); if (!step || step.dataset.step !== "pillar") return;
+        const active = step.querySelector<HTMLElement>('[data-item][data-active]') || step.querySelector<HTMLElement>('[data-item]:not([data-answered])');
+        const sc = active?.querySelector<HTMLElement>("[data-scale]"); if (!sc) return;
+        e.preventDefault(); answer(sc, Number(e.key));
+      });
+
+      function refresh(step: HTMLElement) {
+        const scales = step.querySelectorAll<HTMLElement>("[data-scale]");
+        const done = Array.from(scales).every((s) => state.answers[s.dataset.q!]);
+        const next = root.querySelector<HTMLButtonElement>("[data-next]")!;
+        if (!step.hidden) next.disabled = !done;
+      }
+
+      // chips
+      root.querySelectorAll<HTMLElement>("[data-chips]").forEach((g) => {
+        g.addEventListener("click", (e) => {
+          const c = (e.target as HTMLElement).closest<HTMLButtonElement>(".ac__chip"); if (!c) return;
+          const key = g.dataset.chips!;
+          g.querySelectorAll(".ac__chip").forEach((x) => x.setAttribute("aria-pressed", "false"));
+          c.setAttribute("aria-pressed", "true"); state.ctx[key] = c.dataset.val!; save();
+        });
+      });
+
+      // navigation
+      function show(i: number) {
+        state.step = i; save();
+        steps.forEach((s, idx) => { s.hidden = idx !== i; s.classList.toggle("is-active", idx === i); });
+        const step = steps[i], kind = step.dataset.step;
+        bar.hidden = kind === "intro" || kind === "results";
+        const nextLabel = root.querySelector<HTMLElement>("[data-next-label]")!;
+        if (kind === "pillar") { advanceActive(step); refresh(step); nextLabel.textContent = i === lastPillarIdx ? "See score" : "Next"; }
+        if (kind === "context") { root.querySelector<HTMLButtonElement>("[data-next]")!.disabled = false; nextLabel.textContent = "Start"; }
+        progress(i);
+        const h = step.querySelector<HTMLElement>("h1,h2,.ac__scenario"); h?.setAttribute("tabindex", "-1"); h?.focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      }
+      function progress(i: number) {
+        const kind = steps[i].dataset.step;
+        const journey = meta.length + 1; // context + pillars
+        let pos = kind === "context" ? 1 : kind === "pillar" ? 2 + steps.filter((s) => s.dataset.step === "pillar").indexOf(steps[i]) : 0;
+        const pct = Math.max(8, Math.round((Math.max(pos - 1, 0) / journey) * 100));
+        root.querySelector<HTMLElement>("[data-fill]")!.style.width = pct + "%";
+        root.querySelector<HTMLElement>("[data-track]")!.setAttribute("aria-valuenow", String(pct));
+        root.querySelector<HTMLElement>("[data-steplabel]")!.textContent = steps[i].dataset.name || "";
+      }
+
+      root.querySelector("[data-start]")?.addEventListener("click", () => {
+        try { (window as any).dataLayer = (window as any).dataLayer || []; (window as any).dataLayer.push({ event: "assessment_start", assessment: "auxo_self_check" }); } catch {}
+        show(1);
+      });
+      root.querySelector("[data-resume]")?.addEventListener("click", () => show(Math.min(state.step || 1, steps.length - 1)));
+      root.querySelector("[data-next]")?.addEventListener("click", () => {
+        const i = steps.findIndex((s) => !s.hidden);
+        if (i === lastPillarIdx) compute();
+        show(Math.min(i + 1, steps.length - 1));
+      });
+      root.querySelector("[data-back]")?.addEventListener("click", () => show(Math.max(steps.findIndex((s) => !s.hidden) - 1, 0)));
+      root.querySelector("[data-restart]")?.addEventListener("click", () => { state.answers = {}; state.ctx = {}; state.step = 0; save(); location.reload(); });
+      root.querySelector("[data-copy]")?.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(lastSummary); toast("Summary copied"); }
+        catch { toast("Couldn't copy — select and copy manually"); }
+      });
+
+      // ---------- scoring + insight engine ----------
+      function pScore(id: string) {
+        const m = meta.find((p) => p.id === id)!; let sum = 0, a = 0;
+        for (let i = 0; i < m.count; i++) { const v = state.answers[id + "-" + i]; if (v) { sum += v; a++; } }
+        return a ? Math.round(((sum - a) / (4 * a)) * 100) : 0;
+      }
+      function compute() {
+        const scores = meta.map((p) => ({ ...p, score: pScore(p.id) }));
+        const byId: Record<string, number> = {}; scores.forEach((s) => (byId[s.id] = s.score));
+        const overall = Math.round(scores.reduce((s, p) => s + p.score, 0) / scores.length);
+        const band = bands.find((b) => overall >= b.min && overall <= b.max) || bands[0];
+        const weak = scores.reduce((a, b) => (b.score < a.score ? b : a));
+        const strong = scores.reduce((a, b) => (b.score > a.score ? b : a));
+        const spread = strong.score - weak.score;
+        const lowItems = Object.keys(state.answers).filter((k) => state.answers[k] <= 2).sort((a, b) => state.answers[a] - state.answers[b]);
+        const noun = exNoun[state.ctx.business] || "board pack";
+        const col = overall < 25 ? "var(--color-danger)" : overall < 50 ? "var(--accent-2)" : "var(--accent)";
+
+        // patterns — decision-table rules, first match wins by priority
+        const patterns = [
+          { on: byId.data < byId.reporting - 12 && byId.reporting >= 50, t: "Polished reports, shaky foundations", b: `Your reporting outruns your data — the riskiest gap to have. A ${noun} looks certain right up until one figure in it is wrong in the room.` },
+          { on: weak.id === "automation" && byId.data >= 50 && byId.reporting >= 50, t: "Right today, fragile tomorrow", b: "Your numbers are right because people force them to be. That holds — until someone leaves, or the volume doubles." },
+          { on: byId.reporting < byId.data - 12 && byId.data >= 50, t: "Good data you can't see", b: `You've done the hard part: the data is trustworthy. The gap is getting it into a ${noun} fast enough to matter.` },
+          { on: weak.id === "compliance" && byId.compliance < 50, t: "Readiness is the cheapest cover you're not buying", b: "If a regulator or investor asked tomorrow, the scramble would be real — and the fix is mostly plumbing you'd want anyway." },
+          { on: spread <= 14 && overall < 50, t: "Even, and early", b: "No single disaster — just a foundation that's manual across the board. The good news: fixing one pillar well lifts the others." },
+          { on: overall >= 75, t: "Well run — now press the advantage", b: "Little here needs rescuing. The upside is in what AI and deeper analytics can pull from data you already trust." },
+        ].filter((p) => p.on);
+
+        // paint score
+        const gf = root.querySelector<SVGCircleElement>("[data-gauge-fill]")!;
+        gf.style.stroke = col;
+        requestAnimationFrame(() => (gf.style.strokeDashoffset = String(327 * (1 - overall / 100))));
+        const bEl = root.querySelector<HTMLElement>("[data-band]")!; bEl.textContent = band.name; bEl.style.color = col;
+        root.querySelector("[data-read]")!.textContent = band.read;
+        countTo(root.querySelector("[data-score-num]"), overall);
+
+        // personalised subline + distance to next band
+        const role = state.ctx.role && state.ctx.role !== "Something else" ? state.ctx.role.toLowerCase() + " view · " : "";
+        root.querySelector<HTMLElement>("[data-sub]")!.textContent = role + "based on your answers to 28 checks";
+        const bi = bands.findIndex((b) => b.id === band.id);
+        const tn = root.querySelector<HTMLElement>("[data-tonext]")!; tn.hidden = false;
+        if (bi < bands.length - 1) { const need = bands[bi + 1].min - overall; tn.textContent = `${need} point${need === 1 ? "" : "s"} from “${bands[bi + 1].name}.”`; }
+        else { tn.textContent = "Top band — genuinely well run."; }
+
+        // pattern (top 1)
+        if (patterns[0]) {
+          const box = root.querySelector<HTMLElement>("[data-pattern]")!; box.hidden = false;
+          box.querySelector("[data-pattern-title]")!.textContent = patterns[0].t;
+          box.querySelector("[data-pattern-body]")!.textContent = patterns[0].b;
+        }
+
+        // bars
+        scores.forEach((p) => {
+          const el = root.querySelector<HTMLElement>(`[data-pbar="${p.id}"]`); if (!el) return;
+          el.toggleAttribute("data-weak", p.id === weak.id && spread > 0);
+          countTo(el.querySelector("[data-pbar-num]"), p.score);
+          requestAnimationFrame(() => (el.querySelector<HTMLElement>("[data-pbar-fill]")!.style.width = p.score + "%"));
+        });
+
+        // sharpest gaps (up to 3 lowest individual statements), tagged by pillar
+        const labelOf = (id: string) => meta.find((m) => m.id === id)?.label || "";
+        if (lowItems.length) {
+          const g = root.querySelector<HTMLElement>("[data-gaps]")!; g.hidden = false;
+          g.querySelector("[data-gaps-list]")!.innerHTML = lowItems.slice(0, 3).map((k) => {
+            const pid = k.slice(0, k.lastIndexOf("-"));
+            return `<li><span class="ac__gap-tag">${labelOf(pid)}</span><span class="ac__gap-line">${itemLow[k]}</span></li>`;
+          }).join("");
+        }
+
+        // one move to make + what good looks like + strength
+        const sb = root.querySelector<HTMLElement>("[data-start-block]")!; sb.hidden = false;
+        sb.querySelector("[data-weak-name]")!.textContent = `Fix ${weak.label.toLowerCase()} first.`;
+        sb.querySelector("[data-weak-move]")!.textContent = moves[weak.id];
+        sb.querySelector("[data-weak-aim]")!.textContent = `What “good” looks like: ${weak.label} at 75+. You're at ${weak.score}.`;
+        sb.querySelector("[data-strength]")!.textContent = spread > 8 ? `Already strong: ${strong.label} (${strong.score}/100). Build from it.` : "";
+
+        root.querySelector("[data-cta-lead]")!.textContent = band.cta;
+
+        // plain-text summary for the Copy button (useful to share internally / bring to a call)
+        lastSummary = `AUXO Score: ${overall}/100 — ${band.name}\n`
+          + scores.map((p) => `• ${p.label}: ${p.score}/100`).join("\n")
+          + `\nStart here: ${weak.label}.\n${band.cta}\n— auxodata.com/self-check`;
+
+        // email result (mailto, no backend)
+        const mail = root.querySelector<HTMLAnchorElement>("[data-email-results]")!;
+        const body = `My AUXO Score: ${overall}/100 (${band.name}).%0D%0A` + scores.map((p) => `- ${p.label}: ${p.score}/100`).join("%0D%0A") + `%0D%0AStarting point: ${weak.label}.`;
+        mail.href = `mailto:hello@auxodata.com?subject=My AUXO Score (${overall}/100)&body=${body}`;
+
+        try {
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ event: "assessment_complete", assessment: "auxo_self_check", auxo_score: overall, auxo_band: band.id, weak_pillar: weak.id });
+        } catch {}
+      }
+      function countTo(el: Element | null, target: number) {
+        if (!el) return; if (reduce) { el.textContent = String(target); return; }
+        const t0 = performance.now();
+        const tick = (t: number) => { const k = Math.min((t - t0) / 850, 1); el.textContent = String(Math.round((1 - Math.pow(1 - k, 3)) * target)); if (k < 1) requestAnimationFrame(tick); };
+        requestAnimationFrame(tick);
+      }
+
+      show(state.step && state.step < steps.length ? 0 : 0); // always start at intro on load
+    }
+
+    init();
+    document.addEventListener("astro:page-load", init);
+  </script>
+</BaseLayout>
