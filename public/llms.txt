@@ -9,6 +9,7 @@ AUXO works only in real estate. It builds working systems clients own and run �
 - [Services](https://auxodata.com/services/): The four capabilities and four ways to work together.
 - [About — the lab](https://auxodata.com/about/): Beliefs, how AUXO works, where it operates, and what to expect from an engagement.
 - [Insights](https://auxodata.com/insights/): Short, one-minute positions on data, AI, reporting, forecasting, compliance, and ownership in Gulf real estate.
+- [Self-check](https://auxodata.com/self-check/): The AUXO Score — a free, ~3-minute self-assessment that scores your data, reporting, automation, and compliance readiness 0–100 and returns an honest, specific read. No sign-up; runs in the browser.
 - [Contact](https://auxodata.com/contact/): How to get in touch; common questions answered.
 
 ## What AUXO offers
