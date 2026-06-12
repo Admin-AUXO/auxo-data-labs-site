@@ -204,6 +204,16 @@ export const contactContent: ContactContent = {
           "Fast. A diagnostic takes two to three weeks; a first build ships in weeks, not quarters, in short visible steps you can see working. You won't wait months for a big-bang reveal — you'll see progress early and often, and can course-correct as we go.",
       },
       {
+        question: "Can you help us get ready for the UAE's AML rules?",
+        answer:
+          "Yes — within clear limits. We build the systems that make compliance easier to evidence: trusted records, beneficial-owner screening, goAML and REAR-ready reporting, and audit trails that are there before an examiner asks. We support the standards your business answers to; the formal sign-off, your MLRO, and legal advice stay with your own advisors. We'll tell you plainly where our work ends and theirs begins.",
+      },
+      {
+        question: "Do you use AI — and is our data safe with it?",
+        answer:
+          "We use AI only where it genuinely earns its place, with a person accountable for the calls that matter. We don't feed your data into tools that train on it, we work to the access rules you set, and the result is yours to keep. Where AI isn't the right answer, we'll say so.",
+      },
+      {
         question: "What happens after you hand over — are we stuck with you?",
         answer:
           "The opposite. Every engagement ends with a working system your team owns, plain documentation, and the training to run it. No lock-in and no licence to keep paying. We stay reachable if you want us, but you're never dependent on us.",
