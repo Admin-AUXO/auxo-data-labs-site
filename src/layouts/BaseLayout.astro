@@ -76,6 +76,11 @@ const gtmId = env.gtm.containerId;
         [data-enter="headline"] { opacity: 1 !important; }
       </style>
     </noscript>
+    <script>
+      // Track client-side (view-transition) navigations in GA4/GTM.
+      import { initPageviewTracking } from "../scripts/analytics/pageview";
+      initPageviewTracking();
+    </script>
     <StructuredData type="Organization" data={organizationSchema()} />
     <StructuredData type="LocalBusiness" data={localBusinessSchema()} />
     <StructuredData type="WebSite" data={websiteSchema()} />

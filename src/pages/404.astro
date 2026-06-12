@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import Button from "../components/ui/Button.astro";
+import TicTacToe from "../components/ui/TicTacToe.astro";
 ---
 
 <BaseLayout title="Page not found" description="The page you're looking for doesn't exist." noindex>
@@ -10,8 +11,11 @@ import Button from "../components/ui/Button.astro";
       <span class="section-index">404</span>
       <h1 class="text-display text-display--5xl max-w-[16ch]">This page took a wrong turn.</h1>
       <p class="lead mx-auto">
-        The page you're looking for moved or never existed. Let's get you back on track.
+        The page you're looking for moved or never existed. While you're here — care for a game?
       </p>
+      <div class="mt-4 mb-2 w-full max-w-lg mx-auto">
+        <TicTacToe />
+      </div>
       <div class="mt-2 flex flex-wrap justify-center gap-3">
         <Button variant="primary" size="lg" href="/" icon>Back home</Button>
         <Button variant="secondary" size="lg" href="/services/">See how we work</Button>

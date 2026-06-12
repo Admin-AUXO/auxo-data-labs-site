@@ -1,0 +1,357 @@
+---
+/**
+ * Playable tic-tac-toe against an unbeatable minimax AI.
+ * Adapted from the original auxo-landing-page intro animation; GSAP-free
+ * (Web Animations API). You play X (first move); "AUXO" plays O perfectly, so
+ * the best you can do is draw — which is the point.
+ *
+ * Design: elevated card with a CSS-grid tile board (gap-reveal lines), turn
+ * indicator, live scoreboard, animated winning strike, and comfortably large
+ * touch targets (>=48px, 10px gaps) per WCAG 2.5.5 / Apple / Material guidance.
+ *
+ * Honours the site's opt-in motion model: animations run only when
+ * documentElement[data-motion="on"] and the user hasn't asked to reduce motion.
+ */
+---
+
+<figure
+  class="ttt"
+  data-tic-tac-toe
+  aria-label="Tic-tac-toe against AUXO. You play X; AUXO plays O with perfect strategy."
+>
+  <!-- Turn indicator + scoreboard -->
+  <div class="ttt__hud">
+    <span class="ttt__chip ttt__chip--x" data-ttt-turn="X" data-active>
+      <span class="ttt__chip-mark">X</span> You
+    </span>
+    <span class="ttt__score" aria-hidden="true">
+      <b data-ttt-score-you>0</b><i>·</i><span data-ttt-score-draw>0</span><i>·</i><b data-ttt-score-ai>0</b>
+    </span>
+    <span class="ttt__chip ttt__chip--o" data-ttt-turn="O">
+      AUXO <span class="ttt__chip-mark">O</span>
+    </span>
+  </div>
+
+  <!-- Board -->
+  <div class="ttt__panel">
+    <div class="ttt__board" role="grid" data-ttt-board>
+      {
+        Array.from({ length: 9 }).map((_, i) => (
+          <button
+            type="button"
+            class="ttt__cell"
+            role="gridcell"
+            data-ttt-cell={i}
+            aria-label={`Cell ${i + 1}, empty`}
+          >
+            <span class="ttt__glyph" data-ttt-glyph aria-hidden="true" />
+          </button>
+        ))
+      }
+    </div>
+    <span class="ttt__strike" data-ttt-strike aria-hidden="true"></span>
+  </div>
+
+  <!-- Fixed-height footer so the layout never shifts as text/button change -->
+  <div class="ttt__footer">
+    <figcaption class="ttt__status" aria-live="polite">
+      <span class="ttt__status-text" data-ttt-status>Your move — tap a square.</span>
+    </figcaption>
+    <button type="button" class="ttt__reset" data-ttt-reset>
+      <span>Play again</span>
+    </button>
+  </div>
+</figure>
+
+<style>
+  .ttt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-inline: auto;
+    width: 100%;
+    max-width: 30rem; /* ~480px on desktop */
+  }
+
+  /* ---- HUD: turn chips + score ---- */
+  .ttt__hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    font-family: var(--font-sans);
+  }
+
+  .ttt__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: color-mix(in oklch, var(--foreground) 5%, transparent);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .ttt__chip-mark {
+    font-family: var(--font-brand);
+    font-weight: 800;
+  }
+
+  .ttt__chip--x .ttt__chip-mark {
+    color: var(--accent);
+  }
+  .ttt__chip--o .ttt__chip-mark {
+    color: var(--accent-2);
+  }
+
+  .ttt__chip--x[data-active] {
+    color: var(--foreground);
+    background: var(--accent-soft);
+    border-color: color-mix(in oklch, var(--accent) 40%, transparent);
+  }
+  .ttt__chip--o[data-active] {
+    color: var(--foreground);
+    background: var(--accent-2-soft);
+    border-color: color-mix(in oklch, var(--accent-2) 40%, transparent);
+  }
+
+  .ttt__score {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+  .ttt__score b {
+    font-weight: 700;
+    color: var(--foreground);
+  }
+  .ttt__score b:first-of-type {
+    color: var(--accent);
+  }
+  .ttt__score b:last-of-type {
+    color: var(--accent-2);
+  }
+  .ttt__score i {
+    opacity: 0.4;
+    font-style: normal;
+  }
+
+  /* ---- Board panel ---- */
+  .ttt__panel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 0.75rem;
+    background: color-mix(in oklch, var(--foreground) 4%, transparent);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklch, var(--foreground) 6%, transparent),
+      0 18px 40px -24px color-mix(in oklch, var(--accent) 30%, transparent);
+  }
+
+  .ttt__board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.625rem; /* 10px reveal */
+    width: 100%;
+    height: 100%;
+  }
+
+  .ttt__cell {
+    display: grid;
+    place-items: center;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    color: inherit;
+    background: color-mix(in oklch, var(--foreground) 6%, transparent);
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition:
+      background-color 0.18s ease,
+      border-color 0.18s ease,
+      transform 0.18s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .ttt__cell:not(:disabled):hover {
+    background: var(--accent-soft);
+    border-color: color-mix(in oklch, var(--accent) 35%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .ttt__cell:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .ttt__cell:disabled {
+    cursor: default;
+  }
+
+  .ttt__glyph {
+    font-family: var(--font-brand);
+    font-weight: 800;
+    font-size: clamp(2.75rem, 13vw, 4rem);
+    line-height: 1;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .ttt__glyph[data-mark="X"] {
+    color: var(--accent);
+  }
+  .ttt__glyph[data-mark="O"] {
+    color: var(--accent-2);
+  }
+
+  /* winning tiles glow; losing tiles fade */
+  .ttt[data-state="over"] .ttt__cell:has(.ttt__glyph[data-win][data-mark="X"]) {
+    background: var(--accent-soft);
+    border-color: color-mix(in oklch, var(--accent) 45%, transparent);
+  }
+  .ttt[data-state="over"] .ttt__cell:has(.ttt__glyph[data-win][data-mark="O"]) {
+    background: var(--accent-2-soft);
+    border-color: color-mix(in oklch, var(--accent-2) 45%, transparent);
+  }
+  .ttt[data-state="over"] .ttt__glyph:not([data-win]) {
+    opacity: 0.22;
+    transition: opacity 0.4s ease;
+  }
+
+  /* ---- Winning strike (computed in JS, gap-agnostic) ---- */
+  .ttt__strike {
+    position: absolute;
+    height: 4px;
+    margin-top: -2px; /* centre the 4px bar on the line's y-coordinate */
+    border-radius: var(--radius-full);
+    background: var(--accent);
+    box-shadow: 0 0 12px color-mix(in oklch, var(--accent) 70%, transparent);
+    transform-origin: left center;
+    transform: scaleX(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ---- Footer: fixed height so the board never shifts ---- */
+  .ttt__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    min-height: 4.75rem;
+    width: 100%;
+  }
+
+  .ttt__status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.6em; /* reserve two lines so longer messages don't reflow */
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    color: var(--muted);
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  /* single inline child keeps the message flowing instead of stacking words */
+  .ttt__status-text {
+    display: inline;
+  }
+  .ttt__status .ttt__x {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .ttt__status .ttt__o {
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+
+  .ttt__reset {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--accent-foreground);
+    padding: 0.55rem 1.35rem;
+    background: var(--accent);
+    border: 0;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    visibility: hidden; /* reserved in layout; revealed on game end */
+    transition:
+      background-color 0.18s ease,
+      transform 0.18s ease;
+  }
+  .ttt[data-state="over"] .ttt__reset {
+    visibility: visible;
+  }
+  .ttt__reset:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+  .ttt__reset:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 30rem) {
+    .ttt {
+      gap: 0.875rem;
+      max-width: min(22rem, 100%);
+    }
+    .ttt__hud {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 0.5rem;
+    }
+    .ttt__score {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+    }
+    .ttt__board {
+      gap: 0.5rem;
+    }
+    .ttt__glyph {
+      font-size: clamp(2.5rem, 18vw, 3.5rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ttt__cell,
+    .ttt__reset,
+    .ttt__chip {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { initTicTacToe } from "../../scripts/widgets/ticTacToe";
+
+  const boot = () =>
+    document
+      .querySelectorAll<HTMLElement>("[data-tic-tac-toe]")
+      .forEach((el) => initTicTacToe(el));
+
+  boot();
+  document.addEventListener("astro:page-load", boot);
+</script>
