@@ -116,6 +116,13 @@ const pillarMoves: Record<string, string> = {
   compliance: "Build the evidence trail into the workflow, so readiness is a by-product, not a scramble.",
 };
 
+const pillarPlain: Record<string, string> = {
+  data: "getting your systems to agree on one set of numbers",
+  reporting: "making reports leadership can actually act on",
+  automation: "taking the routine, breakable work off people",
+  compliance: "being ready to produce records the moment they're asked for",
+};
+
 const pillarCost: Record<string, string> = {
   data: "Left as-is, every {noun} you publish carries a number you can't fully stand behind — and you find out which one in the room.",
   reporting: "Left as-is, leadership keeps making calls on numbers that land too late or read two ways — the report arrives after the decision.",
@@ -181,7 +188,7 @@ const trackShort: Record<string, string> = {
 
 const pillarMeta = pillars.map((p) => ({ id: p.id, n: p.n, label: p.label, count: p.items.length }));
 const total = pillars.reduce((s, p) => s + p.items.length, 0);
-const cfg = { bands, pillarMeta, moves: pillarMoves, cost: pillarCost, reads: pillarReads, roleTone, severity: severityPrefix, exampleNoun };
+const cfg = { bands, pillarMeta, moves: pillarMoves, cost: pillarCost, plain: pillarPlain, reads: pillarReads, roleTone, severity: severityPrefix, exampleNoun };
 const desc = "A 3-minute self-read on your data, reporting, automation, and compliance — with an honest, specific result. No grade, no pitch, nobody sees your answers.";
 ---
 
@@ -304,46 +311,66 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         <p class="ac__sub" data-sub hidden></p>
 
         <div class="ac__scorewrap">
-          <div class="ac__gauge">
-            <svg viewBox="0 0 120 120" role="img" aria-label="Your AUXO Score out of 100">
-              <g transform="rotate(-90 60 60)">
-                <circle class="ac__gtrack" cx="60" cy="60" r="52"/>
-                <circle class="ac__gfill" cx="60" cy="60" r="52" data-gauge-fill pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
-              </g>
-              <text class="ac__g-num" x="60" y="60" data-score-num text-anchor="middle" dominant-baseline="central">0</text>
-              <text class="ac__g-unit" x="60" y="82" text-anchor="middle" dominant-baseline="central">/100</text>
-            </svg>
-          </div>
-          <div class="ac__headline">
-            <p class="ac__band" data-band>—</p>
-            <p class="ac__tonext" data-tonext hidden></p>
-            <div class="ac__levels-wrap">
-              <button type="button" class="ac__levels-btn" data-info aria-expanded="false">See the four levels</button>
-              <div class="ac__tip ac__tip--levels" role="tooltip">
-                <ol class="ac__levels-list">
-                  {bands.map((b) => (<li data-band-id={b.id}><b>{b.min}–{b.max}</b><span>{b.name}</span></li>))}
-                </ol>
+          <div class="ac__score">
+            <div class="ac__gauge">
+              <svg viewBox="0 0 120 120" role="img" aria-label="Your AUXO Score out of 100">
+                <g transform="rotate(-90 60 60)">
+                  <circle class="ac__gtrack" cx="60" cy="60" r="52"/>
+                  <circle class="ac__gfill" cx="60" cy="60" r="52" data-gauge-fill pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+                </g>
+                <text class="ac__g-num" x="60" y="60" data-score-num text-anchor="middle" dominant-baseline="central">0</text>
+                <text class="ac__g-unit" x="60" y="82" text-anchor="middle" dominant-baseline="central">/100</text>
+              </svg>
+            </div>
+            <div class="ac__headline">
+              <p class="ac__band" data-band>—</p>
+              <p class="ac__tonext" data-tonext hidden></p>
+              <div class="ac__levels-wrap">
+                <button type="button" class="ac__levels-btn" data-info aria-expanded="false">See the four levels</button>
+                <div class="ac__tip ac__tip--levels" role="tooltip">
+                  <ol class="ac__levels-list">
+                    {bands.map((b) => (<li data-band-id={b.id}><b>{b.min}–{b.max}</b><span>{b.name}</span></li>))}
+                  </ol>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="ac__verdict-panel" data-verdict>
-          <p class="ac__shape" data-shape></p>
-          <p class="ac__read" data-read></p>
+          <div class="ac__verdict-panel" data-verdict>
+            <p class="ac__shape" data-shape></p>
+            <p class="ac__read" data-read></p>
+          </div>
         </div>
 
         <div class="ac__cards">
-          <div class="ac__insight" data-pattern hidden>
-            <span class="ac__insight-tag">What stands out</span>
-            <h3 data-pattern-title>—</h3>
-            <p data-pattern-body></p>
+          <div class="ac__fcard ac__fcard--insight" data-pattern data-fcard role="button" tabindex="0" aria-expanded="false" aria-label="What stands out — tap to flip for why" hidden>
+            <div class="ac__fcard-inner">
+              <div class="ac__fcard-face ac__fcard-front">
+                <span class="ac__fcard-tag">What stands out</span>
+                <h3 class="ac__fcard-title" data-pattern-title>—</h3>
+                <span class="ac__fcard-flip">Tap for why <span aria-hidden="true">↻</span></span>
+              </div>
+              <div class="ac__fcard-face ac__fcard-back">
+                <span class="ac__fcard-tag">Why it matters</span>
+                <p class="ac__fcard-body" data-pattern-body></p>
+                <span class="ac__fcard-flip">Flip back <span aria-hidden="true">↻</span></span>
+              </div>
+            </div>
           </div>
-          <div class="ac__start" data-start-block hidden>
-            <span class="ac__start-tag">If you fix one thing</span>
-            <p class="ac__start-lead" data-weak-name></p>
-            <p class="ac__cost" data-weak-cost></p>
-            <p data-weak-move></p>
-            <p class="ac__aim-line" data-weak-aim></p>
+          <div class="ac__fcard ac__fcard--fix" data-start-block data-fcard role="button" tabindex="0" aria-expanded="false" aria-label="If you fix one thing — tap to flip for how" hidden>
+            <div class="ac__fcard-inner">
+              <div class="ac__fcard-face ac__fcard-front">
+                <span class="ac__fcard-tag">If you fix one thing</span>
+                <p class="ac__fcard-title" data-weak-name></p>
+                <p class="ac__fcard-sub" data-weak-aim></p>
+                <span class="ac__fcard-flip">Tap for how <span aria-hidden="true">↻</span></span>
+              </div>
+              <div class="ac__fcard-face ac__fcard-back">
+                <span class="ac__fcard-tag">How to start</span>
+                <p class="ac__fcard-body" data-weak-cost></p>
+                <p class="ac__fcard-body" data-weak-move></p>
+                <span class="ac__fcard-flip">Flip back <span aria-hidden="true">↻</span></span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -476,11 +503,13 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     kbd { font: 600 0.9em/1 var(--font-mono); background: var(--surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: var(--radius-sm); padding: 0.1rem 0.35rem; }
 
     .ac__cachedbar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.7rem 1.2rem; background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-bottom: var(--ac-4); font-size: var(--text-sm); }
-    .ac__cachedbar-text { flex: 1; min-width: 14rem; display: grid; gap: 0.25rem; }
+    .ac__cachedbar-text { flex: 1; min-width: 12rem; display: grid; gap: 0.2rem; }
+    .ac__cachedbar [data-restart] { flex: none; }
     .ac__cachedbar-kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent); }
     .ac__cachedbar p { margin: 0; color: var(--foreground); }
 
-    .ac__scorewrap { display: flex; gap: var(--ac-4); align-items: center; flex-wrap: wrap; margin-bottom: var(--ac-3); }
+    .ac__scorewrap { display: grid; grid-template-columns: auto 1fr; gap: var(--ac-4); align-items: stretch; margin-bottom: var(--ac-4); }
+    .ac__score { display: flex; gap: var(--ac-3); align-items: center; min-width: 0; }
     .ac__gauge { width: 140px; height: 140px; flex: none; }
     .ac__gauge svg { width: 100%; height: 100%; display: block; overflow: visible; }
     .ac__gtrack { fill: none; stroke: var(--surface-raised); stroke-width: 10; }
@@ -488,7 +517,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     html[data-motion="on"] .ac__gfill { transition: stroke-dashoffset 1s var(--ease-glide), stroke .4s linear; }
     .ac__g-num { font-family: var(--font-brand); font-weight: 700; font-size: 34px; fill: var(--foreground); }
     .ac__g-unit { font-family: var(--font-mono); font-size: 11px; fill: var(--subtle); letter-spacing: .04em; }
-    .ac__headline { flex: 1; min-width: 11rem; }
+    .ac__headline { min-width: 0; }
     .ac__band { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-2xl); line-height: 1.05; margin: 0; color: var(--accent); }
     .ac__tonext { margin: 0.5rem 0 0; font-size: var(--text-sm); color: var(--accent); font-weight: 600; }
     .ac__tonext[hidden] { display: none; }
@@ -501,18 +530,31 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__levels-list b { flex: none; min-width: 4.2rem; font: 700 0.82em/1.4 var(--font-mono); color: var(--subtle); letter-spacing: 0.02em; }
     .ac__levels-list li[data-current] { background: var(--surface-sunken); color: var(--foreground); font-weight: 600; }
     .ac__levels-list li[data-current] b { color: var(--accent); }
-    .ac__verdict-panel { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 1.15rem 1.25rem; margin: 0 0 var(--ac-4); }
+    .ac__verdict-panel { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 1.15rem 1.25rem; margin: 0; }
     .ac__shape { color: var(--foreground); margin: 0 0 0.55rem; max-width: none; font-weight: 600; font-size: var(--text-lg); line-height: 1.35; }
     .ac__read { color: var(--muted); margin: 0; max-width: none; }
 
     .ac__cards { display: grid; grid-template-columns: 35fr 65fr; gap: var(--ac-3); align-items: stretch; margin-bottom: var(--ac-4); }
-    .ac__cards:has(.ac__insight[hidden]) { grid-template-columns: 1fr; }
+    .ac__cards:has([data-pattern][hidden]) { grid-template-columns: 1fr; }
     .ac__cards > * { min-width: 0; }
-    .ac__cards .ac__insight, .ac__cards .ac__start { margin-bottom: 0; }
-    .ac__insight { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface-sunken); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
-    .ac__insight-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
-    .ac__insight h3 { margin: 0 0 0.4rem; font-size: var(--text-lg); }
-    .ac__insight p { margin: 0; color: var(--muted); }
+    .ac__fcard { perspective: 1200px; cursor: pointer; min-block-size: 8.5rem; }
+    .ac__fcard[hidden] { display: none; }
+    html[data-motion="on"] .ac__fcard { transition: transform .15s var(--ease-out); }
+    html[data-motion="on"] .ac__fcard:hover { transform: translateY(-2px); }
+    .ac__fcard:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: var(--radius-md); }
+    .ac__fcard-inner { position: relative; display: grid; block-size: 100%; transform-style: preserve-3d; }
+    html[data-motion="on"] .ac__fcard-inner { transition: transform .55s var(--ease-glide); }
+    .ac__fcard[aria-expanded="true"] .ac__fcard-inner { transform: rotateY(180deg); }
+    .ac__fcard-face { grid-area: 1 / 1; backface-visibility: hidden; display: flex; flex-direction: column; gap: 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-sunken); padding: 1.05rem 1.15rem; }
+    .ac__fcard-back { transform: rotateY(180deg); }
+    .ac__fcard--insight .ac__fcard-face { border-left: 3px solid var(--accent); }
+    .ac__fcard--fix .ac__fcard-face { border-left: 3px solid var(--accent-2); }
+    .ac__fcard-tag { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); }
+    .ac__fcard-title { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-lg); line-height: 1.15; margin: 0; color: var(--foreground); }
+    .ac__fcard-sub { margin: 0; font-size: var(--text-sm); color: var(--foreground); font-weight: 600; }
+    .ac__fcard-body { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.5; }
+    .ac__fcard-flip { margin-block-start: auto; padding-top: 0.3rem; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: 0.03em; text-transform: uppercase; color: var(--subtle); display: inline-flex; align-items: center; gap: 0.35rem; }
+    .ac__fcard-flip span { font-size: 1.15em; }
 
     .ac__barshead { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.9rem; }
     .ac__barshead h3 { margin: 0; font-size: var(--text-lg); }
@@ -540,13 +582,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__pbar[data-weak] .ac__pbar-top b { color: var(--accent-2); }
     .ac__pbar-aim { position: absolute; left: 75%; top: -2px; bottom: -2px; width: 2px; background: var(--foreground); opacity: 0.45; border-radius: 1px; z-index: 1; }
 
-
-    .ac__start { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
-    .ac__start-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
-    .ac__start p { margin: 0 0 0.5rem; color: var(--muted); }
-    .ac__start-lead { color: var(--foreground) !important; font-size: var(--text-lg); }
-    .ac__cost { color: var(--muted) !important; }
-    .ac__aim-line { color: var(--foreground) !important; font-size: var(--text-sm); margin-bottom: 0 !important; }
 
     .ac__note { font-size: var(--text-sm); color: var(--subtle); }
     .ac__how { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: var(--ac-4); }
@@ -598,15 +633,15 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__pick { text-align: left; }
       .ac__chip { padding: 0.6rem 1rem; }
 
-      .ac__scorewrap { gap: 1rem; margin-bottom: var(--ac-2); }
+      .ac__scorewrap { grid-template-columns: 1fr; gap: 1rem; margin-bottom: var(--ac-4); }
       .ac__gauge { width: 104px; height: 104px; }
-      .ac__headline { min-width: 9rem; }
       .ac__band { font-size: var(--text-xl); }
       .ac__shape { font-size: var(--text-base); }
       .ac__cards { grid-template-columns: 1fr; gap: var(--ac-2); }
       .ac__barshead { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
       .ac__bars { padding: 0.1rem 0.9rem; }
-      .ac__insight, .ac__start, .ac__verdict-panel { padding: 0.95rem 1rem; }
+      .ac__verdict-panel { padding: 0.95rem 1rem; }
+      .ac__fcard-face { padding: 0.95rem 1rem; }
       .ac__cachedbar { padding: 0.85rem 0.95rem; flex-direction: column; align-items: stretch; }
       .ac__cachedbar [data-restart] { width: 100%; justify-content: center; }
       .ac__actions { flex-direction: column; align-items: stretch; gap: 0.6rem; }
@@ -639,6 +674,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       const meta = cfg.pillarMeta as Array<{ id: string; n: string; label: string; count: number }>;
       const moves = cfg.moves as Record<string, string>;
       const costs = cfg.cost as Record<string, string>;
+      const plain = cfg.plain as Record<string, string>;
       const reads = cfg.reads as Record<string, Record<string, string>>;
       const roleTone = cfg.roleTone as Record<string, string>;
       const severity = cfg.severity as Record<string, string>;
@@ -828,6 +864,13 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       });
       document.addEventListener("click", () => closeTips());
       document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeTips(); });
+
+      root.querySelectorAll<HTMLElement>("[data-fcard]").forEach((card) => {
+        const flip = () => card.setAttribute("aria-expanded", card.getAttribute("aria-expanded") === "true" ? "false" : "true");
+        card.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("a, button")) return; flip(); });
+        card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+      });
+
       root.querySelector("[data-copy]")?.addEventListener("click", async () => {
         try { await navigator.clipboard.writeText(lastSummary); toast("Summary copied"); }
         catch { toast("Couldn't copy — select and copy manually"); }
@@ -871,7 +914,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         if (spread === 0) shapeEl.textContent = `All four pillars land at exactly ${lo.score} — a strikingly even read. There's no single weak link to chase; the move is lifting the whole floor.`;
         else if (even && band.id === "strong") shapeEl.textContent = `All four pillars are strong and within ${spread} point${spread === 1 ? "" : "s"} of each other (${lo.score}–${hi.score}) — a genuinely balanced, well-run operation.`;
         else if (even) shapeEl.textContent = `Your four pillars sit close together (${lo.score}–${hi.score}) — no single weak spot. The gains here come from lifting all four a notch, not chasing one.`;
-        else if (loCount >= 2) shapeEl.textContent = `${hi.label} is your strongest (${hi.score}), but ${loCount} pillars are tied at the bottom (${lo.score}). Start with ${lo.label} — it's the most foundational, so lifting it makes the rest easier.`;
+        else if (loCount >= 2) shapeEl.textContent = `${hi.label} is your strongest (${hi.score}), but ${loCount} pillars are tied at the bottom (${lo.score}). Start by ${plain[lo.id]} — the most foundational fix, which makes the rest easier.`;
         else if (hiCount >= 2) shapeEl.textContent = `${hiCount} of your pillars are strong (${hi.score}); ${lo.label} is the one holding the average back (${lo.score}). That's a contained problem — one fix moves your whole number.`;
         else shapeEl.textContent = `${hi.label} is where you're strongest (${hi.score}). ${lo.label} is the drag (${lo.score}) — it's pulling your average down further than anything else.`;
 
@@ -901,6 +944,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           { on: overall >= 75 && a < hi.score - 10, t: "Strong, but leaning on people", b: "You're well run — but automation is the soft spot in an otherwise strong picture. At your level the risk isn't accuracy, it's that too much still lives in specific people's hands." },
           { on: overall >= 75, t: "Well run — the question is what's next", b: "Little here needs rescuing. The upside is in what sharper analytics could pull from data you already trust." },
         ].filter((p) => p.on);
+        root.querySelectorAll<HTMLElement>("[data-fcard]").forEach((c) => c.setAttribute("aria-expanded", "false"));
         const box = root.querySelector<HTMLElement>("[data-pattern]")!;
         if (patterns[0]) { box.hidden = false; box.querySelector("[data-pattern-title]")!.textContent = patterns[0].t; box.querySelector("[data-pattern-body]")!.textContent = patterns[0].b; }
         else box.hidden = true;
@@ -919,8 +963,8 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         if (lo.id !== "data" && byId.data < 50 && byId.data - lo.score <= 8) target = scores.find((s) => s.id === "data")!;
         const sb = root.querySelector<HTMLElement>("[data-start-block]")!; sb.hidden = false;
         sb.querySelector("[data-weak-name]")!.textContent = (even && band.id === "strong")
-          ? `Where the next gain is: ${target.label.toLowerCase()}.`
-          : `Fix ${target.label.toLowerCase()} first.`;
+          ? `Your next gain: ${plain[target.id]}.`
+          : `Start by ${plain[target.id]}.`;
         let cost = costs[target.id].replace("{noun}", noun);
         const sev = state.ctx.scale ? severity[state.ctx.scale] : "";
         if (sev) cost = sev + cost.charAt(0).toLowerCase() + cost.slice(1);
@@ -928,8 +972,8 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         sb.querySelector("[data-weak-move]")!.textContent = moves[target.id];
         const head = 75 - target.score;
         sb.querySelector("[data-weak-aim]")!.textContent = head > 0
-          ? `What “good” looks like: ${target.label} at 75+. You're at ${target.score} — ${head} point${head === 1 ? "" : "s"} of headroom.`
-          : `What “good” looks like is holding ${target.label} where it is (${target.score}) — you're already past the bar.`;
+          ? `You're at ${target.score} here — 75+ is the bar, so ${head} point${head === 1 ? "" : "s"} to close it.`
+          : `You're already past the bar here (${target.score}/100) — worth protecting.`;
 
         lastSummary = `AUXO Score: ${overall}/100 — ${band.name}\n`
           + scores.map((p) => `• ${p.label}: ${p.score}/100`).join("\n")
