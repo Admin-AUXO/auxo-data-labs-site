@@ -140,8 +140,8 @@
   }
 
   .deck__card--cta {
-    background-color: var(--accent);
-    border-color: var(--accent);
+    background-color: var(--accent-2);
+    border-color: var(--accent-2);
   }
 
   .deck__cta {
@@ -173,6 +173,7 @@
   }
 
   .deck__cta-title {
+    color: var(--accent-foreground);
     font-family: var(--font-brand);
     font-size: var(--text-xl);
     font-weight: 700;
@@ -194,7 +195,7 @@
   }
 
   .deck__card--cta:hover {
-    box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+    box-shadow: 0 0 0 1px var(--accent-2), var(--shadow-md);
   }
 
   html[data-motion="on"] .deck__cta-go {
