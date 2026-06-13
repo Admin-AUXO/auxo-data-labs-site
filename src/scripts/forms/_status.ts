@@ -1,5 +1,3 @@
-import { isInputError, type ActionError } from "astro:actions";
-
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export type StatusState = "info" | "success" | "error";
@@ -24,11 +22,4 @@ export function renderStatus(
   region.dataset.state = state;
   const size = String(options.iconSize);
   region.innerHTML = `<svg class="${options.iconClass}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${ICON_PATHS[state]}"/></svg><span>${message}</span>`;
-}
-
-export function actionErrorMessage(error: ActionError, fallback: string): string {
-  if (isInputError(error)) {
-    return Object.values(error.fields)[0]?.[0] ?? fallback;
-  }
-  return fallback;
 }

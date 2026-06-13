@@ -11,7 +11,6 @@ export interface FooterSection {
 export interface FooterContent {
   statement: string;
   statementHighlight?: string | string[];
-  tagline: string;
   sections: FooterSection[];
   note: string;
 }
@@ -19,7 +18,6 @@ export interface FooterContent {
 export const footerContent: FooterContent = {
   statement: "The data you hold, turned into decisions.",
   statementHighlight: "decisions",
-  tagline: "Analytics and AI for Gulf real estate.",
   sections: [
     {
       title: "Explore",

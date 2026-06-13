@@ -5,7 +5,7 @@ export function withBase(path: string): string {
   return base + path;
 }
 
-export const siteOrigin = import.meta.env.SITE ?? "https://auxodata.com";
+const siteOrigin = import.meta.env.SITE ?? "https://auxodata.com";
 
 export function absoluteUrl(path: string): string {
   return new URL(withBase(path), siteOrigin).href;

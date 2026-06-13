@@ -7,7 +7,7 @@ import { footerContent } from "../../data/footer";
 import { siteData } from "../../data/site";
 import { withBase } from "../../lib/url";
 
-const { statement, statementHighlight, tagline, sections, note } = footerContent;
+const { statement, statementHighlight, sections, note } = footerContent;
 const year = new Date().getFullYear();
 const location = `${siteData.address.city}, ${siteData.address.country}`;
 ---
@@ -23,7 +23,6 @@ const location = `${siteData.address.city}, ${siteData.address.country}`;
     <div class="footer__grid">
       <div class="footer__brand">
         <Logo />
-        <p class="footer__tagline">{tagline}</p>
         <p class="footer__note">{note}</p>
         <SocialLinks />
       </div>

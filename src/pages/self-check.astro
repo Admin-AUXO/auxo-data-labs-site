@@ -18,65 +18,65 @@ const pillars: Pillar[] = [
     id: "data",
     n: "01",
     label: "Trusted data",
-    ease: "Start here — it's the foundation everything else sits on. There are no wrong answers; just what's true on a normal week.",
-    scenario: "A number in the board pack gets questioned in the room. What happens next?",
+    ease: "The foundation everything else sits on. Answer for a normal week — not your best one.",
+    scenario: "A number in the board report gets questioned in the room. What happens next?",
     items: [
-      { t: "Finance, registration, and CRM agree on the same figures — without manual reconciliation.", low: "Your systems disagree by default, so every figure starts the day needing a referee." },
-      { t: "There's one agreed source of truth for units, sales, and collections — not three spreadsheets that drift.", low: "Three versions of the truth means the real one is whichever file happens to be open." },
-      { t: "When a number is challenged, we trace it to its source in minutes, not days.", low: "When a number is challenged, you can't show your working fast enough to defend it." },
-      { t: "New transactions land in our records without being re-keyed into several systems.", low: "The same data is typed in more than once — so it's wrong in at least one place." },
-      { t: "We trust month-end figures on the first pass; errors rarely surface after sign-off.", low: "Month-end is a re-do, not a sign-off — every close quietly costs you a second pass." },
-      { t: "Property, tenant, and owner master data is clean — few duplicates, blanks, or stale records.", low: "Duplicates and stale records mean the reports are built on sand you can't see." },
-      { t: "We could hand raw data to an auditor or buyer tomorrow without cleaning it up first.", low: "A data request today would mean a clean-up scramble before you could answer it." },
+      { t: "Finance, the registration system, and the CRM all show the same numbers — without anyone forcing them to match.", low: "When the systems disagree, every figure starts the day needing someone to referee it." },
+      { t: "Units, sales, and collections live in one agreed place, not three spreadsheets that drift apart.", low: "With three versions of the truth, the real number is whichever file happens to be open." },
+      { t: "When a number is challenged, we can trace it back to its source in minutes, not days.", low: "When a number is challenged, you can't show where it came from fast enough to defend it." },
+      { t: "A new transaction is entered once, not typed again into other systems.", low: "Typing the same data into more than one place means it's wrong in at least one of them." },
+      { t: "We trust the month-end figures the first time; errors rarely surface after sign-off.", low: "If month-end takes a second pass to get right, every close quietly costs you twice." },
+      { t: "Our property, tenant, and owner records are clean — few duplicates, blanks, or out-of-date entries.", low: "Duplicates and stale records mean the reports are built on ground you can't see." },
+      { t: "We could hand our data to an auditor or buyer tomorrow without cleaning it up first.", low: "A data request today would mean a clean-up scramble before you could answer it." },
     ],
   },
   {
     id: "reporting",
     n: "02",
     label: "Clear reporting",
-    ease: "Now the part leadership actually sees. Picture your last close — the real one, not your best one.",
+    ease: "The part leadership actually sees. Picture your last close — the real one.",
     scenario: "Leadership asks, plainly, “how are we actually doing?” How fast — and how sure — is your answer?",
     items: [
-      { t: "The board pack is built the same way every period, not rebuilt from scratch.", low: "Every report is hand-rebuilt, so the work never compounds and small errors creep back in." },
-      { t: "Leadership gets the numbers when they need them — not weeks after close.", low: "By the time the numbers land, the decision they were meant for has already been made." },
-      { t: "Our reports answer “so what should we do?”, not just “here's what happened.”", low: "Your reports say what happened, not what to do — so leadership still has to guess." },
-      { t: "We can break performance down by project, unit, channel, or community without a one-off pull.", low: "Any new angle on the numbers means a custom pull and a wait." },
-      { t: "Two people pulling the same report get the same answer.", low: "The same question gives two answers depending on who runs it — so neither gets trusted." },
-      { t: "Reporting doesn't hinge on one person who knows where everything lives.", low: "Reporting lives in one person's head — and walks out the door with them." },
-      { t: "We compare against budget, forecast, and prior periods without stitching files by hand.", low: "Comparing to plan means stitching files by hand, so it rarely gets done." },
+      { t: "The board report is built the same way every period, not rebuilt from scratch.", low: "Rebuilding every report by hand means the work never compounds, and old errors creep back in." },
+      { t: "Leadership gets the numbers when they need them, not weeks after close.", low: "By the time the numbers land, the decision they were meant for has already been made." },
+      { t: "Our reports answer “so what do we do?”, not just “here's what happened.”", low: "Reports that say what happened, but not what to do, leave leadership guessing." },
+      { t: "We can break the numbers down by project, unit, channel, or community without a custom one-off report.", low: "Every new angle on the numbers means a custom pull and a wait." },
+      { t: "Two people pulling the same report get the same answer.", low: "If the same question gives two answers, neither one ends up trusted." },
+      { t: "Reporting doesn't depend on one person who knows where everything is.", low: "Reporting that lives in one person's head walks out the door with them." },
+      { t: "We compare to budget, forecast, and prior periods without stitching files together by hand.", low: "If comparing to plan means stitching files by hand, it rarely gets done." },
     ],
   },
   {
     id: "automation",
     n: "03",
     label: "Reliable automation",
-    ease: "This one's about how much runs on people remembering. Be honest — most teams find their gaps here.",
+    ease: "How much runs on people remembering. Most teams find their biggest gaps here.",
     scenario: "Your key analyst is on leave for two weeks, over month-end. Does anything break?",
     items: [
-      { t: "Recurring reports and consolidations run on a schedule, not because someone remembered.", low: "Reports run only when someone remembers — so eventually one won't." },
-      { t: "Data moves between CRM, finance, registration, and bank without manual export-and-import.", low: "Data moves by copy-paste: slow on a good day, wrong on a bad one." },
-      { t: "When a data process breaks, we're alerted — we don't find out from a wrong number.", low: "When something breaks, you find out from a wrong number, not an alert." },
-      { t: "Routine reconciliations (collections, escrow, bank) are at least partly automated.", low: "Reconciliations are done by hand, so they're only as reliable as the busiest day allows." },
-      { t: "A key person taking leave doesn't stall reporting or month-end.", low: "One person's leave can stall the close — your month-end has a single point of failure." },
-      { t: "Our processes are documented well enough that a new hire could run them.", low: "The process isn't written down, so it can't be handed over or checked." },
-      { t: "Analysts spend their time on analysis, not copying and pasting.", low: "Your analysts are paid to think but spend the month moving data by hand." },
+      { t: "Routine reports run on a schedule, not because someone remembered to run them.", low: "Reports that run only when someone remembers will, eventually, not run." },
+      { t: "Data moves between the CRM, finance, registration, and bank on its own — no manual export and import.", low: "Moving data by copy-paste is slow on a good day and wrong on a bad one." },
+      { t: "When a data process breaks, we're alerted — we don't find out from a wrong number.", low: "If nothing alerts you, you learn something broke from a wrong number." },
+      { t: "Routine reconciliations — collections, escrow, bank — are at least partly automated.", low: "Reconciliations done by hand are only as reliable as your busiest day allows." },
+      { t: "A key person taking leave doesn't stall reporting or month-end.", low: "If one person's leave can stall the close, your month-end has a single point of failure." },
+      { t: "Our processes are written down well enough that a new hire could run them.", low: "A process that isn't written down can't be handed over — or checked." },
+      { t: "Analysts spend their time on analysis, not copying and pasting.", low: "Analysts paid to think spend the month moving data by hand instead." },
     ],
   },
   {
     id: "compliance",
     n: "04",
     label: "Confident compliance",
-    ease: "Last stretch — nearly there. This is about being ready to show your work, not legal advice, and nobody's marking it.",
+    ease: "Being ready to show your work. Not legal advice, and nobody's marking it.",
     scenario: "A regulator, auditor, or investor asks for records tomorrow. Ready — or a fire drill?",
     note: "Operational readiness only — your ability to produce evidence on demand. Not legal advice; confirm your obligations with your own advisors.",
     items: [
-      { t: "We can produce a clean audit trail for any transaction on request.", low: "You can't produce a clean trail on demand — so a simple request becomes a project." },
-      { t: "AML-relevant checks and records (where they apply to us) are captured systematically.", low: "AML-relevant records are ad hoc, so the evidence is only as good as someone's memory.", gloss: "AML means anti-money-laundering — the checks that confirm who you're really dealing with and flag suspicious funds." },
-      { t: "We could pull the data behind a goAML / REAR submission without a manual scramble.", low: "A goAML / REAR submission would mean a manual scramble against a deadline.", gloss: "goAML is the UAE regulator's online filing portal; a REAR is the real-estate activity report some firms submit through it. Both need records you can pull on demand." },
-      { t: "Our reporting supports IFRS requirements without heavy period-end rework.", low: "IFRS reporting means heavy period-end rework, every single time.", gloss: "IFRS is the set of international accounting standards most companies' financial statements are expected to follow." },
-      { t: "We're confident our corporate-tax figures rest on reconciled, traceable data.", low: "Your tax figures rest on numbers you haven't fully reconciled — a quiet, carried risk." },
-      { t: "If asked for records tomorrow, we'd be ready in hours, not weeks.", low: "A records request would take weeks, not hours — exactly when speed matters most." },
-      { t: "We know who owns each compliance-related report and how it's produced.", low: "No clear owner for compliance reports means they're everyone's job, and no one's." },
+      { t: "We can produce a clean audit trail for any transaction on request.", low: "If you can't produce a clean trail on demand, a simple request turns into a project." },
+      { t: "AML checks and records, where they apply to us, are captured as routine — not ad hoc.", low: "Ad hoc AML records are only as good as someone's memory on the day.", gloss: "AML means anti-money-laundering — the checks that confirm who you're really dealing with and flag suspicious funds." },
+      { t: "We could pull the data behind a goAML / REAR submission without a manual scramble.", low: "A goAML / REAR submission would mean a manual scramble against the deadline.", gloss: "goAML is the UAE regulator's online filing portal; a REAR is the real-estate activity report some firms submit through it. Both need records you can pull on demand." },
+      { t: "Our reporting supports IFRS requirements without heavy period-end rework.", low: "IFRS reporting that means heavy rework every period is a standing cost on the team.", gloss: "IFRS is the set of international accounting standards most companies' financial statements are expected to follow." },
+      { t: "Our corporate-tax figures rest on reconciled numbers we can trace.", low: "Tax figures built on numbers you haven't reconciled are a quiet, carried risk." },
+      { t: "If asked for records tomorrow, we'd be ready in hours, not weeks.", low: "A records request that takes weeks, not hours, comes due exactly when speed matters most." },
+      { t: "We know who owns each compliance report and how it's produced.", low: "With no clear owner, compliance reports become everyone's job — and no one's." },
     ],
   },
 ];
@@ -111,7 +111,7 @@ const roleTone: Record<string, string> = {
 
 const pillarMoves: Record<string, string> = {
   data: "Agree one source of truth first. Until the numbers agree, everything downstream inherits the doubt.",
-  reporting: "Make the board pack repeatable and traceable before adding another dashboard.",
+  reporting: "Make the board report repeatable and traceable before adding another dashboard.",
   automation: "Take the routine, breakable work off people — put it on a schedule and watch it.",
   compliance: "Build the evidence trail into the workflow, so readiness is a by-product, not a scramble.",
 };
@@ -165,7 +165,7 @@ const severityPrefix: Record<string, string> = {
 };
 
 const exampleNoun: Record<string, string> = {
-  Developer: "board pack",
+  Developer: "board report",
   Brokerage: "management report",
   "Property / asset manager": "owner report",
   "Owners' association": "committee report",
@@ -188,7 +188,8 @@ const trackShort: Record<string, string> = {
 
 const pillarMeta = pillars.map((p) => ({ id: p.id, n: p.n, label: p.label, count: p.items.length }));
 const total = pillars.reduce((s, p) => s + p.items.length, 0);
-const cfg = { bands, pillarMeta, moves: pillarMoves, cost: pillarCost, plain: pillarPlain, reads: pillarReads, roleTone, severity: severityPrefix, exampleNoun };
+const flatItems = pillars.flatMap((p) => p.items.map((it, ii) => ({ q: `${p.id}-${ii}`, low: it.low })));
+const cfg = { bands, pillarMeta, moves: pillarMoves, cost: pillarCost, plain: pillarPlain, reads: pillarReads, roleTone, severity: severityPrefix, exampleNoun, items: flatItems };
 const desc = "A 3-minute self-read on your data, reporting, automation, and compliance — with an honest, specific result. No grade, no pitch, nobody sees your answers.";
 ---
 
@@ -222,11 +223,11 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
       <div class="ac__step is-active" data-step="intro">
         <span class="ac__kicker">The AUXO Score</span>
-        <h1 class="ac__title">How much can your data actually tell you?</h1>
+        <h1 class="ac__title">Is your data an asset — or a liability?</h1>
         <p class="ac__lead">
-          Answer honestly and you'll walk away with a clear <b>0–100 score</b>, a read on each
-          of the four things that decide whether your data works for you — and the one fix
-          that would move the needle most.
+          Most teams spend the last week of the quarter chasing numbers that should already
+          agree. This is a straight <b>0–100 score</b> on the four things that decide whether
+          your data pulls its weight — and the one fix that would change the most.
         </p>
         <ul class="ac__pillars">
           {pillars.map((p) => (
@@ -251,7 +252,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
       <div class="ac__step" data-step="context" data-name="A little context" hidden>
         <h2 class="ac__qtitle">First — who's answering?</h2>
-        <p class="ac__qsub">Optional, and it never changes your score. It just sharpens the read at the end. Skip it if you'd rather get straight in.</p>
+        <p class="ac__qsub">Optional — it never changes your score, just sharpens the read at the end. Skip it if you like.</p>
         <div class="ac__ctx">
           <fieldset class="ac__field"><legend>Your role</legend>
             <div class="ac__chips" data-chips="role" data-single>
@@ -307,19 +308,17 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           <button type="button" class="ac__btn" data-variant="ghost" data-restart>Start over</button>
         </div>
 
-        <span class="ac__kicker">Your AUXO Score</span>
-        <p class="ac__sub" data-sub hidden></p>
-
         <div class="ac__scorewrap">
           <div class="ac__score">
+            <span class="ac__kicker ac__kicker--score">Your AUXO Score</span>
             <div class="ac__gauge">
               <svg viewBox="0 0 120 120" role="img" aria-label="Your AUXO Score out of 100">
                 <g transform="rotate(-90 60 60)">
                   <circle class="ac__gtrack" cx="60" cy="60" r="52"/>
                   <circle class="ac__gfill" cx="60" cy="60" r="52" data-gauge-fill pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
                 </g>
-                <text class="ac__g-num" x="60" y="60" data-score-num text-anchor="middle" dominant-baseline="central">0</text>
-                <text class="ac__g-unit" x="60" y="82" text-anchor="middle" dominant-baseline="central">/100</text>
+                <text class="ac__g-num" x="60" y="58" data-score-num text-anchor="middle" dominant-baseline="central">0</text>
+                <text class="ac__g-unit" x="60" y="80" text-anchor="middle" dominant-baseline="central">/100</text>
               </svg>
             </div>
             <div class="ac__headline">
@@ -335,7 +334,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
               </div>
             </div>
           </div>
-          <div class="ac__verdict-panel" data-verdict>
+          <div class="ac__verdict" data-verdict>
             <p class="ac__shape" data-shape></p>
             <p class="ac__read" data-read></p>
           </div>
@@ -356,16 +355,16 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
               </div>
             </div>
           </div>
-          <div class="ac__fcard ac__fcard--fix" data-start-block data-fcard role="button" tabindex="0" aria-expanded="false" aria-label="If you fix one thing — tap to flip for how" hidden>
+          <div class="ac__fcard ac__fcard--fix" data-start-block data-fcard role="button" tabindex="0" aria-expanded="false" aria-label="Where to start — tap to flip for how" hidden>
             <div class="ac__fcard-inner">
               <div class="ac__fcard-face ac__fcard-front">
-                <span class="ac__fcard-tag">If you fix one thing</span>
+                <span class="ac__fcard-tag" data-fix-tag>Where to start</span>
                 <p class="ac__fcard-title" data-weak-name></p>
                 <p class="ac__fcard-sub" data-weak-aim></p>
                 <span class="ac__fcard-flip">Tap for how <span aria-hidden="true">↻</span></span>
               </div>
               <div class="ac__fcard-face ac__fcard-back">
-                <span class="ac__fcard-tag">How to start</span>
+                <span class="ac__fcard-tag" data-fix-backtag>How to start</span>
                 <p class="ac__fcard-body" data-weak-cost></p>
                 <p class="ac__fcard-body" data-weak-move></p>
                 <span class="ac__fcard-flip">Flip back <span aria-hidden="true">↻</span></span>
@@ -391,6 +390,14 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
               <div class="ac__tip" data-pbar-read role="tooltip"></div>
             </div>
           ))}
+        </div>
+
+        <div class="ac__flagged" data-flagged hidden>
+          <div class="ac__barshead">
+            <h3 data-flagged-title>The gaps behind it</h3>
+          </div>
+          <p class="ac__flagged-sub" data-flagged-sub>The specific gaps behind it — your concrete first moves.</p>
+          <ol class="ac__flagged-list" data-flagged-list></ol>
         </div>
 
         <details class="ac__how">
@@ -423,6 +430,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
   <style>
     .ac { --ac-1: .4rem; --ac-2: .7rem; --ac-3: 1.1rem; --ac-4: 1.6rem; --ac-5: 2.4rem; --ac-6: 3.2rem; max-width: 52rem; margin-inline: auto; }
     .ac [tabindex="-1"]:focus { outline: none; }
+    :global(.section.sc-shell) { padding-block: clamp(1.75rem, 1rem + 2.5vw, 3.25rem) clamp(2.5rem, 1.75rem + 3vw, 4.5rem); }
     .ac__step { opacity: 1; transform: none; }
     html[data-motion="on"] .ac__step.is-active { animation: ac-in .3s var(--ease-out) both; }
     @keyframes ac-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -446,9 +454,9 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__navbtn[disabled] { opacity: 0.35; cursor: not-allowed; }
     .ac__navbtn:not([disabled]):hover { border-color: var(--border-strong); }
     .ac__steplabel { flex: 1; min-width: 0; text-align: center; font: 600 var(--text-xs)/1.3 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--muted); font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .ac__legend { margin-top: var(--ac-2); padding-top: var(--ac-2); border-top: 1px solid var(--hairline); }
+    .ac__legend { margin-top: var(--ac-2); padding-top: var(--ac-2); border-top: 1px solid var(--hairline); text-align: center; }
     .ac__legend-q { display: block; font-size: var(--text-xs); color: var(--subtle); margin-bottom: var(--ac-1); }
-    .ac__legend-scale { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; padding: 0; margin: 0; }
+    .ac__legend-scale { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem 0.9rem; padding: 0; margin: 0; }
     .ac__legend-scale li { font-size: var(--text-xs); color: var(--muted); display: inline-flex; gap: 0.3rem; align-items: baseline; }
     .ac__legend-scale b { font: 600 0.85em/1 var(--font-mono); color: var(--accent); }
 
@@ -472,10 +480,11 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__chip:hover { border-color: var(--border-strong); }
     .ac__chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
 
-    .ac__items { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; }
-    .ac__item { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.6rem 1rem; padding: 0.55rem 0.7rem; border-radius: var(--radius-md); border: 1px solid transparent; }
-    .ac__item[data-active] { border-color: var(--border); background: var(--surface); }
-    .ac__item[data-answered] { background: var(--surface-sunken); }
+    .ac__items { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+    .ac__item { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.6rem 1.25rem; padding: 0.7rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--hairline); background: color-mix(in oklch, var(--surface) 45%, transparent); }
+    html[data-motion="on"] .ac__item { transition: border-color .15s, background .15s; }
+    .ac__item[data-active] { border-color: var(--border-strong); background: var(--surface); }
+    .ac__item[data-answered] { border-color: var(--hairline); background: var(--surface-sunken); }
     .ac__item[data-answered] .ac__statement { color: var(--muted); }
     .ac__statement { font-weight: 500; line-height: 1.35; font-size: var(--text-sm); }
     .ac__answer { display: grid; justify-items: end; gap: 0.3rem; }
@@ -508,9 +517,10 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__cachedbar-kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent); }
     .ac__cachedbar p { margin: 0; color: var(--foreground); }
 
-    .ac__scorewrap { display: grid; grid-template-columns: auto 1fr; gap: var(--ac-4); align-items: stretch; margin-bottom: var(--ac-4); }
-    .ac__score { display: flex; gap: var(--ac-3); align-items: center; min-width: 0; }
-    .ac__gauge { width: 140px; height: 140px; flex: none; }
+    .ac__scorewrap { display: grid; grid-template-columns: minmax(13rem, 15rem) 1fr; gap: var(--ac-5); align-items: stretch; margin-bottom: var(--ac-5); }
+    .ac__score { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: var(--ac-2); min-width: 0; }
+    .ac__kicker--score { display: block; width: 100%; font-size: var(--text-lg); letter-spacing: 0.1em; margin: 0 0 var(--ac-1); }
+    .ac__gauge { width: 172px; height: 172px; flex: none; }
     .ac__gauge svg { width: 100%; height: 100%; display: block; overflow: visible; }
     .ac__gtrack { fill: none; stroke: var(--surface-raised); stroke-width: 10; }
     .ac__gfill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; stroke-dashoffset: 100; }
@@ -524,15 +534,15 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__levels-wrap { position: relative; margin-top: 0.6rem; }
     .ac__levels-btn { background: none; border: 0; padding: 0; cursor: pointer; color: var(--subtle); font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; }
     .ac__levels-btn:hover, .ac__levels-btn[aria-expanded="true"] { color: var(--foreground); }
-    .ac__tip--levels { right: auto; min-width: 16rem; max-width: 22rem; }
+    .ac__tip--levels { left: 50%; right: auto; margin-left: -7.5rem; min-width: 15rem; max-width: 15rem; text-align: left; }
     .ac__levels-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
     .ac__levels-list li { display: flex; gap: 0.7rem; align-items: baseline; padding: 0.3rem 0.45rem; border-radius: var(--radius-sm); color: var(--muted); font-size: var(--text-sm); }
     .ac__levels-list b { flex: none; min-width: 4.2rem; font: 700 0.82em/1.4 var(--font-mono); color: var(--subtle); letter-spacing: 0.02em; }
     .ac__levels-list li[data-current] { background: var(--surface-sunken); color: var(--foreground); font-weight: 600; }
     .ac__levels-list li[data-current] b { color: var(--accent); }
-    .ac__verdict-panel { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 1.15rem 1.25rem; margin: 0; }
-    .ac__shape { color: var(--foreground); margin: 0 0 0.55rem; max-width: none; font-weight: 600; font-size: var(--text-lg); line-height: 1.35; }
-    .ac__read { color: var(--muted); margin: 0; max-width: none; }
+    .ac__verdict { border-left: 1px solid color-mix(in oklch, var(--foreground) 24%, transparent); padding-left: var(--ac-5); margin: 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+    .ac__shape { color: var(--foreground); margin: 0 0 0.7rem; max-width: 46ch; font-weight: 600; font-size: var(--text-xl); line-height: 1.3; }
+    .ac__read { color: var(--muted); margin: 0; max-width: 56ch; }
 
     .ac__cards { display: grid; grid-template-columns: 35fr 65fr; gap: var(--ac-3); align-items: stretch; margin-bottom: var(--ac-4); }
     .ac__cards:has([data-pattern][hidden]) { grid-template-columns: 1fr; }
@@ -583,6 +593,16 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__pbar-aim { position: absolute; left: 75%; top: -2px; bottom: -2px; width: 2px; background: var(--foreground); opacity: 0.45; border-radius: 1px; z-index: 1; }
 
 
+    .ac__flagged { margin-bottom: var(--ac-4); }
+    .ac__flagged[hidden] { display: none; }
+    .ac__flagged .ac__barshead { margin-bottom: 0.3rem; }
+    .ac__flagged-sub { margin: 0 0 0.9rem; color: var(--muted); font-size: var(--text-sm); }
+    .ac__flagged-list { list-style: none; margin: 0; padding: 0 1.1rem; display: grid; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-sunken); }
+    .ac__flagged :global(.ac__flagged-item) { display: flex; gap: 0.85rem; align-items: baseline; padding: 0.9rem 0; }
+    .ac__flagged :global(.ac__flagged-item + .ac__flagged-item) { border-top: 1px solid var(--hairline); }
+    .ac__flagged :global(.ac__flagged-num) { flex: none; min-width: 1.1rem; font: 700 var(--text-sm)/1.5 var(--font-mono); color: var(--accent-2); }
+    .ac__flagged :global(.ac__flagged-low) { margin: 0; color: var(--foreground); font-size: var(--text-sm); line-height: 1.5; }
+
     .ac__note { font-size: var(--text-sm); color: var(--subtle); }
     .ac__how { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: var(--ac-4); }
     .ac__how summary { cursor: pointer; padding: 0.85rem 1.1rem; font-weight: 600; font-size: var(--text-sm); }
@@ -597,7 +617,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__meta { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; padding: 0; margin: 0 0 var(--ac-4); }
     .ac__meta li { position: relative; padding-left: 1.1rem; font: 600 var(--text-xs)/1.3 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
     .ac__meta li::before { content: ""; position: absolute; left: 0; top: 0.15em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
-    .ac__sub { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--subtle); margin: 0 0 var(--ac-4); }
 
     :global(.ac__toast) { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(1rem); opacity: 0; background: var(--foreground); color: var(--background); font-weight: 600; font-size: var(--text-sm); padding: 0.6rem 1.1rem; border-radius: var(--radius-full); transition: opacity .25s, transform .25s; pointer-events: none; z-index: 1200; }
     :global(.ac__toast[data-show]) { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -633,14 +652,17 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__pick { text-align: left; }
       .ac__chip { padding: 0.6rem 1rem; }
 
-      .ac__scorewrap { grid-template-columns: 1fr; gap: 1rem; margin-bottom: var(--ac-4); }
-      .ac__gauge { width: 104px; height: 104px; }
-      .ac__band { font-size: var(--text-xl); }
-      .ac__shape { font-size: var(--text-base); }
+      .ac__scorewrap { grid-template-columns: 1fr; gap: var(--ac-4); margin-bottom: var(--ac-4); }
+      .ac__kicker--score { font-size: var(--text-base); }
+      .ac__gauge { width: 148px; height: 148px; }
+      .ac__band { font-size: var(--text-2xl); }
+      .ac__shape { font-size: var(--text-lg); max-width: none; }
+      .ac__read { max-width: none; }
       .ac__cards { grid-template-columns: 1fr; gap: var(--ac-2); }
       .ac__barshead { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
       .ac__bars { padding: 0.1rem 0.9rem; }
-      .ac__verdict-panel { padding: 0.95rem 1rem; }
+      .ac__verdict { border-left: 0; border-top: 1px solid color-mix(in oklch, var(--foreground) 18%, transparent); padding: var(--ac-3) 0 0; text-align: left; }
+      .ac__flagged-list { padding: 0 0.9rem; }
       .ac__fcard-face { padding: 0.95rem 1rem; }
       .ac__cachedbar { padding: 0.85rem 0.95rem; flex-direction: column; align-items: stretch; }
       .ac__cachedbar [data-restart] { width: 100%; justify-content: center; }
@@ -679,6 +701,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       const roleTone = cfg.roleTone as Record<string, string>;
       const severity = cfg.severity as Record<string, string>;
       const exNoun = cfg.exampleNoun as Record<string, string>;
+      const flatItems = cfg.items as Array<{ q: string; low: string }>;
 
       const steps = Array.from(root.querySelectorAll<HTMLElement>(".ac__step"));
       const resultsIdx = steps.findIndex((s) => s.dataset.step === "results");
@@ -713,7 +736,11 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
       Object.assign(state, load());
 
-      root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => { const v = state.answers[sc.dataset.q!]; if (v) paint(sc, v); });
+      root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => {
+        const v = state.answers[sc.dataset.q!];
+        if (v) paint(sc, v);
+        else sc.querySelectorAll<HTMLButtonElement>(".ac__dot").forEach((d, i) => { d.tabIndex = i === 0 ? 0 : -1; });
+      });
       root.querySelectorAll<HTMLElement>("[data-chips]").forEach((g) => {
         const key = g.dataset.chips!;
         g.querySelectorAll<HTMLButtonElement>(".ac__chip").forEach((c) => c.setAttribute("aria-pressed", (state.ctx as any)[key] === c.dataset.val ? "true" : "false"));
@@ -738,6 +765,12 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           answer(sc, Number(dot.dataset.score));
         });
         sc.addEventListener("keydown", (e) => {
+          if (/^[1-5]$/.test(e.key)) {
+            e.preventDefault();
+            answer(sc, Number(e.key));
+            sc.querySelector<HTMLButtonElement>(`.ac__dot[data-score="${e.key}"]`)?.focus();
+            return;
+          }
           const dots = Array.from(sc.querySelectorAll<HTMLButtonElement>(".ac__dot"));
           const cur = dots.findIndex((d) => d.getAttribute("aria-checked") === "true");
           let ni = -1;
@@ -760,7 +793,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         if (next) next.setAttribute("data-active", "");
       }
       document.addEventListener("keydown", (e) => {
-        if (root.dataset.bound !== "1" || !/^[1-5]$/.test(e.key)) return;
+        if (!root.isConnected || root.dataset.bound !== "1" || !/^[1-5]$/.test(e.key)) return;
         const tag = (e.target as HTMLElement)?.tagName;
         if (tag === "INPUT" || tag === "TEXTAREA") return;
         if ((e.target as HTMLElement)?.closest?.(".ac__scale")) return;
@@ -768,6 +801,18 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         const active = step.querySelector<HTMLElement>('[data-item][data-active]') || step.querySelector<HTMLElement>('[data-item]:not([data-answered])');
         const sc = active?.querySelector<HTMLElement>("[data-scale]"); if (!sc) return;
         e.preventDefault(); answer(sc, Number(e.key));
+      });
+      document.addEventListener("keydown", (e) => {
+        if (!root.isConnected || root.dataset.bound !== "1") return;
+        if (e.key !== "Enter" && e.key !== " ") return;
+        const step = steps.find((s) => !s.hidden);
+        if (!step || (step.dataset.step !== "pillar" && step.dataset.step !== "context")) return;
+        const next = root.querySelector<HTMLButtonElement>("[data-next]")!;
+        if (next.disabled) return;
+        const t = e.target as HTMLElement | null;
+        if (t?.closest("[data-next], [data-back], [data-info], a, input, textarea, .ac__chip")) return;
+        e.preventDefault();
+        next.click();
       });
 
       function refresh(step: HTMLElement) {
@@ -862,8 +907,8 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           }
         });
       });
-      document.addEventListener("click", () => closeTips());
-      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeTips(); });
+      document.addEventListener("click", () => { if (root.isConnected) closeTips(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && root.isConnected) closeTips(); });
 
       root.querySelectorAll<HTMLElement>("[data-fcard]").forEach((card) => {
         const flip = () => card.setAttribute("aria-expanded", card.getAttribute("aria-expanded") === "true" ? "false" : "true");
@@ -896,7 +941,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         const spread = hi.score - lo.score;
         const even = spread <= 6;
         const d = byId.data, r = byId.reporting, a = byId.automation, c = byId.compliance;
-        const noun = exNoun[state.ctx.business || ""] || "board pack";
+        const noun = exNoun[state.ctx.business || ""] || "board report";
         const col = overall < 25 ? "var(--color-danger)" : overall < 50 ? "var(--accent-2)" : "var(--accent)";
         const otherThreeAvg = (id: string) => { const o = scores.filter((s) => s.id !== id); return o.reduce((t, s) => t + s.score, 0) / o.length; };
 
@@ -906,43 +951,46 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         else requestAnimationFrame(() => (gf.style.strokeDashoffset = String(100 - overall)));
         const numEl = root.querySelector<SVGTextElement>("[data-score-num]")!; numEl.style.fill = col;
         const bEl = root.querySelector<HTMLElement>("[data-band]")!; bEl.textContent = band.name; bEl.style.color = col;
-        const vp = root.querySelector<HTMLElement>("[data-verdict]"); if (vp) vp.style.borderLeftColor = col;
+        root.querySelector<SVGElement>(".ac__gauge svg")?.setAttribute("aria-label", `Your AUXO Score: ${overall} out of 100 — ${band.name}`);
         root.querySelectorAll<HTMLElement>("[data-band-id]").forEach((li) => li.toggleAttribute("data-current", li.getAttribute("data-band-id") === band.id));
         countTo(numEl, overall);
 
+        const target = lo;
         const shapeEl = root.querySelector<HTMLElement>("[data-shape]")!;
-        if (spread === 0) shapeEl.textContent = `All four pillars land at exactly ${lo.score} — a strikingly even read. There's no single weak link to chase; the move is lifting the whole floor.`;
+        if (spread === 0 && hi.score >= 75) shapeEl.textContent = `All four pillars land at exactly ${hi.score} — uniformly strong, which is rare. Nothing here needs rescuing; the question is what more to build on it.`;
+        else if (spread === 0) shapeEl.textContent = `All four pillars land at exactly ${lo.score} — strikingly even. No single weak link to chase; the move is to lift the whole floor, starting with ${plain[target.id]}.`;
         else if (even && band.id === "strong") shapeEl.textContent = `All four pillars are strong and within ${spread} point${spread === 1 ? "" : "s"} of each other (${lo.score}–${hi.score}) — a genuinely balanced, well-run operation.`;
-        else if (even) shapeEl.textContent = `Your four pillars sit close together (${lo.score}–${hi.score}) — no single weak spot. The gains here come from lifting all four a notch, not chasing one.`;
-        else if (loCount >= 2) shapeEl.textContent = `${hi.label} is your strongest (${hi.score}), but ${loCount} pillars are tied at the bottom (${lo.score}). Start by ${plain[lo.id]} — the most foundational fix, which makes the rest easier.`;
-        else if (hiCount >= 2) shapeEl.textContent = `${hiCount} of your pillars are strong (${hi.score}); ${lo.label} is the one holding the average back (${lo.score}). That's a contained problem — one fix moves your whole number.`;
-        else shapeEl.textContent = `${hi.label} is where you're strongest (${hi.score}). ${lo.label} is the drag (${lo.score}) — it's pulling your average down further than anything else.`;
+        else if (even) shapeEl.textContent = `Your four pillars sit close together (${lo.score}–${hi.score}) — no single weak spot. The gain comes from lifting all four a notch, not chasing one.`;
+        else if (loCount >= 2) shapeEl.textContent = `${hi.label} is your strongest (${hi.score}); ${loCount} pillars are tied at the bottom (${lo.score}). Start with ${plain[target.id]} — the most foundational of them, so the rest gets easier.`;
+        else if (hiCount >= 2) shapeEl.textContent = `${hiCount} of your pillars are strong (${hi.score}); ${lo.label} is the one holding the average back (${lo.score}). A contained problem — one fix moves your whole number.`;
+        else shapeEl.textContent = `${hi.label} is where you're strongest (${hi.score}); ${lo.label} is the drag (${lo.score}), pulling your average down more than anything else.`;
 
         const tone = state.ctx.role && roleTone[state.ctx.role] ? roleTone[state.ctx.role] : "";
-        root.querySelector("[data-read]")!.textContent = band.read + tone;
+        const caveat = lo.score < 25 && (band.id === "manual" || band.id === "strong")
+          ? ` But ${lo.label} sitting at ${lo.score} is real exposure — a strong average can't cover a pillar that low.`
+          : "";
+        root.querySelector("[data-read]")!.textContent = band.read + tone + caveat;
 
-        const subEl = root.querySelector<HTMLElement>("[data-sub]")!;
-        if (state.ctx.role && state.ctx.role !== "Something else") { subEl.textContent = `${state.ctx.role} view`; subEl.hidden = false; }
-        else { subEl.textContent = ""; subEl.hidden = true; }
         const nextBand = bands.find((b) => b.min > overall);
         const tn = root.querySelector<HTMLElement>("[data-tonext]")!; tn.hidden = false;
         if (nextBand) { const need = nextBand.min - overall; tn.textContent = `${need} point${need === 1 ? "" : "s"} from “${nextBand.name}.”`; }
         else tn.textContent = "Top band — genuinely well run.";
 
         const patterns = [
-          { on: d < r - 12 && r >= 50, t: "Polished reports, shaky foundations", b: `Your reporting outruns your data — the riskiest gap to have. A ${noun} looks certain right up until one figure in it is wrong in the room.` },
-          { on: a >= 60 && d < 45, t: "Automated, on numbers you don't fully trust", b: "You've automated the moving-around of data you haven't pinned down yet. Fast and confident is a liability when the source is shaky — you're scaling the error, not catching it." },
-          { on: c < 45 && d >= 55 && r >= 55, t: "Trusted numbers, no paper trail", b: "The data's sound and the reports land — but you couldn't prove any of it on demand. Evidence is the layer you're missing, not accuracy." },
-          { on: lo.id === "automation" && d >= 50 && r >= 50, t: "Right today, fragile tomorrow", b: "Your numbers are right because people force them to be. That holds — until someone leaves, or the volume doubles." },
-          { on: r < d - 12 && d >= 50, t: "Good data you can't see", b: `You've done the hard part — the data is trustworthy. The gap is getting it into a ${noun} fast enough to matter.` },
-          { on: c >= 60 && c - Math.max(d, r, a) >= 15, t: "Compliance is carrying the rest", b: "Compliance is your strongest pillar, which is unusual — it usually trails. Worth asking whether the discipline you've built there could pull everyday reporting up with it." },
-          { on: r < 45 && c < 45, t: "The numbers don't travel", b: "Neither leadership nor an auditor gets what they need without a manual pull. Same root cause: too little of this is productised." },
-          { on: spread >= 25 && lo.score < 40 && otherThreeAvg(lo.id) >= 60, t: "One weak link in a sound chain", b: `Three of your four pillars are in good shape — ${lo.label} is the outlier dragging the score down. That's the good kind of problem: a single, contained fix moves your whole number.` },
-          { on: lo.id === "compliance" && c < 50, t: "Readiness is the cheapest cover you don't have", b: "If a regulator or investor asked tomorrow, the scramble would be real — and the fix is mostly plumbing you'd want anyway." },
-          { on: spread <= 14 && overall < 50, t: "Even, and early", b: "No single disaster — just a foundation that's manual across the board. The upside: fix one pillar well and the others rise with it." },
-          { on: spread <= 12 && overall >= 50 && overall < 75, t: "Solid all round, manual all round", b: "Nothing's broken and nothing's automated. You're carrying a reliable operation on effort — fine until the effort runs out." },
-          { on: overall >= 75 && a < hi.score - 10, t: "Strong, but leaning on people", b: "You're well run — but automation is the soft spot in an otherwise strong picture. At your level the risk isn't accuracy, it's that too much still lives in specific people's hands." },
-          { on: overall >= 75, t: "Well run — the question is what's next", b: "Little here needs rescuing. The upside is in what sharper analytics could pull from data you already trust." },
+          { on: d < r - 12 && r >= 50, t: "Polished reports, shaky foundations", b: `Your reporting is ahead of your data. A ${noun} can look certain right up until one figure in it is wrong in the room — the riskiest gap to carry.` },
+          { on: a >= 60 && d < 45, t: "Automating numbers you don't fully trust", b: "You've automated moving data you haven't pinned down. That scales the errors instead of catching them — speed makes a weak source more dangerous, not less." },
+          { on: c < 45 && d >= 55 && r >= 55, t: "Trusted numbers, no paper trail", b: "The data is sound and the reports land — but you couldn't prove any of it on demand. What's missing is evidence, not accuracy." },
+          { on: lo.id === "automation" && d >= 50 && r >= 50, t: "Right today, fragile tomorrow", b: "The numbers are right because people keep them right. That holds until someone leaves or the volume doubles." },
+          { on: r < d - 12 && d >= 50, t: "Good data you can't see", b: `The hard part is done — the data is trustworthy. The gap is getting it into a ${noun} fast enough to matter.` },
+          { on: c >= 60 && c - Math.max(d, r, a) >= 15, t: "Compliance is ahead of the rest", b: "Compliance usually trails — yours leads. Worth asking whether that same discipline could pull your everyday reporting up with it." },
+          { on: r < 45 && c < 45, t: "The numbers don't travel", b: "Neither leadership nor an auditor gets what they need without a manual pull. Same root cause: too little of this is built to repeat." },
+          { on: spread >= 25 && lo.score < 40 && otherThreeAvg(lo.id) >= 60, t: "One weak link in a strong chain", b: `Three pillars are in good shape; ${lo.label} is the outlier dragging the score down. The good kind of problem — one contained fix moves your whole number.` },
+          { on: lo.id === "compliance" && c < 50, t: "Readiness is cheap cover you don't have", b: "If a regulator or investor asked tomorrow, the scramble would be real — and the fix is mostly plumbing you'd want anyway." },
+          { on: spread <= 14 && overall < 20, t: "Manual, top to bottom", b: "Almost nothing here runs without a person on it. Start with the foundation — once the numbers agree, every fix above it gets easier." },
+          { on: spread <= 14 && overall < 50, t: "Even, and early", b: "No single disaster — a foundation that's manual across the board. Fix one pillar well and the others rise with it." },
+          { on: spread <= 12 && overall >= 50 && overall < 75, t: "Solid all round, manual all round", b: "Nothing is broken and nothing runs itself. You're carrying a reliable operation on effort — fine until the effort runs out." },
+          { on: overall >= 75 && a < hi.score - 10, t: "Strong, but leaning on people", b: "Well run — but automation is the soft spot. At your level the risk isn't accuracy, it's how much still lives in specific people's hands." },
+          { on: overall >= 75, t: "Well run — so what's next?", b: "Little here needs rescuing. The upside is what sharper analytics could pull from data you already trust." },
         ].filter((p) => p.on);
         root.querySelectorAll<HTMLElement>("[data-fcard]").forEach((c) => c.setAttribute("aria-expanded", "false"));
         const box = root.querySelector<HTMLElement>("[data-pattern]")!;
@@ -951,7 +999,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
         scores.forEach((p) => {
           const el = root.querySelector<HTMLElement>(`[data-pbar="${p.id}"]`); if (!el) return;
-          el.toggleAttribute("data-weak", p.id === lo.id && spread > 0);
+          el.toggleAttribute("data-weak", p.score === lo.score && spread > 0);
           countTo(el.querySelector("[data-pbar-num]"), p.score);
           const w = p.score + "%";
           if (reduce) el.querySelector<HTMLElement>("[data-pbar-fill]")!.style.width = w;
@@ -959,30 +1007,72 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           el.querySelector("[data-pbar-read]")!.textContent = reads[p.id][tierOf(p.score)];
         });
 
-        let target = lo;
-        if (lo.id !== "data" && byId.data < 50 && byId.data - lo.score <= 8) target = scores.find((s) => s.id === "data")!;
+        const flagged = flatItems
+          .map((it) => ({ ...it, sv: state.answers[it.q] || 0 }))
+          .filter((it) => it.q.startsWith(target.id + "-") && it.sv > 0 && it.sv <= 3)
+          .sort((a, b) => a.sv - b.sv)
+          .slice(0, 3);
+        const flagBox = root.querySelector<HTMLElement>("[data-flagged]")!;
+        const flagList = root.querySelector<HTMLElement>("[data-flagged-list]")!;
+        flagList.replaceChildren();
+        if (flagged.length) {
+          root.querySelector("[data-flagged-title]")!.textContent = `Where ${target.label} is slipping`;
+          root.querySelector("[data-flagged-sub]")!.textContent = "The specific gaps behind it — your concrete first moves.";
+          flagged.forEach((it, i) => {
+            const li = document.createElement("li");
+            li.className = "ac__flagged-item";
+            const num = document.createElement("span");
+            num.className = "ac__flagged-num";
+            num.textContent = String(i + 1);
+            const body = document.createElement("p");
+            body.className = "ac__flagged-low";
+            body.textContent = it.low;
+            li.append(num, body);
+            flagList.appendChild(li);
+          });
+          flagBox.hidden = false;
+        } else flagBox.hidden = true;
+
         const sb = root.querySelector<HTMLElement>("[data-start-block]")!; sb.hidden = false;
-        sb.querySelector("[data-weak-name]")!.textContent = (even && band.id === "strong")
-          ? `Your next gain: ${plain[target.id]}.`
-          : `Start by ${plain[target.id]}.`;
-        let cost = costs[target.id].replace("{noun}", noun);
-        const sev = state.ctx.scale ? severity[state.ctx.scale] : "";
-        if (sev) cost = sev + cost.charAt(0).toLowerCase() + cost.slice(1);
-        sb.querySelector("[data-weak-cost]")!.textContent = cost;
-        sb.querySelector("[data-weak-move]")!.textContent = moves[target.id];
-        const head = 75 - target.score;
-        sb.querySelector("[data-weak-aim]")!.textContent = head > 0
-          ? `You're at ${target.score} here — 75+ is the bar, so ${head} point${head === 1 ? "" : "s"} to close it.`
-          : `You're already past the bar here (${target.score}/100) — worth protecting.`;
+        const costEl = sb.querySelector<HTMLElement>("[data-weak-cost]")!;
+        const allStrong = band.id === "strong" && lo.score >= 60;
+        if (allStrong) {
+          sb.querySelector("[data-fix-tag]")!.textContent = "What's next";
+          sb.querySelector("[data-weak-name]")!.textContent = "All four are past the 75 bar.";
+          sb.querySelector("[data-weak-aim]")!.textContent = `Your lowest is ${target.label} at ${target.score} — still strong. The next move is building on data you trust, not fixing it.`;
+          costEl.hidden = true; costEl.textContent = "";
+          sb.querySelector("[data-weak-move]")!.textContent = "Sharper forecasting, pricing, and portfolio reads are the upside now — a different conversation from rescuing foundations.";
+        } else {
+          sb.querySelector("[data-fix-tag]")!.textContent = "Where to start";
+          sb.querySelector("[data-weak-name]")!.textContent = `${plain[target.id].charAt(0).toUpperCase()}${plain[target.id].slice(1)}.`;
+          let cost = costs[target.id].replace("{noun}", noun);
+          const sev = state.ctx.scale ? severity[state.ctx.scale] : "";
+          if (sev) cost = sev + cost.charAt(0).toLowerCase() + cost.slice(1);
+          costEl.hidden = false; costEl.textContent = cost;
+          sb.querySelector("[data-weak-move]")!.textContent = moves[target.id];
+          const head = 75 - target.score;
+          sb.querySelector("[data-weak-aim]")!.textContent = head > 0
+            ? `You're at ${target.score} here — 75+ is the bar, so ${head} point${head === 1 ? "" : "s"} to close it.`
+            : `You're already past the bar here (${target.score}/100) — worth protecting.`;
+        }
 
-        lastSummary = `AUXO Score: ${overall}/100 — ${band.name}\n`
-          + scores.map((p) => `• ${p.label}: ${p.score}/100`).join("\n")
-          + `\nStart with: ${target.label} (${target.score}/100).\n${band.cta}\n— auxodata.com/self-check`;
+        const flaggedLines = flagged.map((it, i) => `${i + 1}. ${it.low}`).join("\n");
+        const startLine = allStrong
+          ? "Next move: build on it — sharper forecasting, pricing, and portfolio reads."
+          : `Start with ${plain[target.id]}.\n${moves[target.id]}`;
+        lastSummary = `My AUXO Score: ${overall}/100 — ${band.name}\n${band.read}\n\n`
+          + "The four pillars (aim for 75+):\n"
+          + scores.map((p) => `• ${p.label}: ${p.score}${p.id === target.id && !allStrong ? "  ← start here" : ""}`).join("\n")
+          + `\n\n${startLine}`
+          + (flagged.length ? `\n\nWhere ${target.label} is slipping:\n${flaggedLines}` : "")
+          + "\n\nTake the 3-minute self-check → auxodata.com/self-check";
 
-        try {
-          localStorage.setItem(RESULT_KEY, JSON.stringify({ v: STORE_VERSION, ts: Date.now(), overall, band: band.id, weak: lo.id, strong: hi.id, scores: byId, answers: state.answers, ctx: state.ctx } as Result));
-          localStorage.setItem(BADGE_KEY, String(overall));
-        } catch {}
+        if (!cameFromCache) {
+          try {
+            localStorage.setItem(RESULT_KEY, JSON.stringify({ v: STORE_VERSION, ts: Date.now(), overall, band: band.id, weak: lo.id, strong: hi.id, scores: byId, answers: state.answers, ctx: state.ctx } as Result));
+            localStorage.setItem(BADGE_KEY, String(overall));
+          } catch {}
+        }
         markNav();
 
         if (!cameFromCache) {

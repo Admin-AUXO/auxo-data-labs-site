@@ -108,47 +108,6 @@ export function webPageSchema(opts: { title: string; description: string; path: 
   };
 }
 
-export function articleSchema(opts: {
-  title: string;
-  description: string;
-  path: string;
-  datePublished: string;
-  image?: string;
-  tags?: string[];
-}) {
-  return {
-    headline: opts.title,
-    description: opts.description,
-    url: abs(opts.path),
-    inLanguage: "en",
-    datePublished: opts.datePublished,
-    ...(opts.image ? { image: abs(opts.image) } : {}),
-    ...(opts.tags && opts.tags.length ? { keywords: opts.tags.join(", ") } : {}),
-    author: { "@type": "Organization", name: siteData.name, url: home },
-    publisher: {
-      "@type": "Organization",
-      name: siteData.name,
-      url: home,
-      logo: { "@type": "ImageObject", url: `${abs("/favicon.svg")}` },
-    },
-    mainEntityOfPage: { "@type": "WebPage", "@id": abs(opts.path) },
-  };
-}
-
-export function breadcrumbSchema(crumbs: { name: string; path: string }[]) {
-  return {
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: home },
-      ...crumbs.map((c, i) => ({
-        "@type": "ListItem",
-        position: i + 2,
-        name: c.name,
-        item: abs(c.path),
-      })),
-    ],
-  };
-}
-
 export function faqSchema(items: { question: string; answer: string }[]) {
   return {
     mainEntity: items.map((i) => ({
@@ -156,26 +115,5 @@ export function faqSchema(items: { question: string; answer: string }[]) {
       name: i.question,
       acceptedAnswer: { "@type": "Answer", text: i.answer },
     })),
-  };
-}
-
-export function serviceSchema() {
-  return {
-    serviceType: "Real-estate analytics & AI lab",
-    provider: { "@type": "Organization", name: siteData.name, url: home },
-    areaServed: [
-      { "@type": "Country", name: siteData.address.country },
-      {
-        "@type": "GeoCircle",
-        geoMidpoint: {
-          "@type": "GeoCoordinates",
-          latitude: siteData.address.coordinates.lat,
-          longitude: siteData.address.coordinates.lng,
-        },
-        geoRadius: { "@type": "Distance", name: "Global" },
-      },
-    ],
-    description: siteData.description,
-    offers: { "@type": "Offer", description: "Property data, reporting, forecasting, and AI — built live and yours to keep" },
   };
 }

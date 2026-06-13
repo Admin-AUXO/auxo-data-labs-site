@@ -132,7 +132,7 @@ export const servicesContent: ServicesContent = {
     subtitle:
       "Four ways in, each packaged and priced up front — never open-ended consulting. Start with an honest read, have one capability built, bring on a standing team, or keep a senior hand at the top table.",
     priceNote:
-      "The prices shown are indicative — we finalise the exact scope and price together once we understand what you need. No opaque quotes, no surprises on the invoice. Book a meeting and we'll talk it through.",
+      "The ranges shown are indicative — we finalise the exact scope and price together once we understand what you need. No opaque quotes, no surprises on the invoice. Book a meeting and we'll talk it through.",
     standards: {
       title: "Built to standards you answer to.",
       frameworks: ["DFSA & DIFC governance", "FATF & AML practice", "IFRS reporting"],
@@ -143,7 +143,7 @@ export const servicesContent: ServicesContent = {
       {
         name: "Pulse",
         kicker: "Diagnostic",
-        price: "AED 45,000",
+        price: "AED 40,000–60,000",
         timeframe: "2–3 weeks",
         hook: "A clear read on your data and compliance, delivered as a written assessment and a priced, prioritised plan for what to build first.",
         bestFor: "For teams who want an honest read and a plan before they commit to a build.",
@@ -152,7 +152,7 @@ export const servicesContent: ServicesContent = {
       {
         name: "Ship",
         kicker: "Fixed project",
-        price: "From AED 90,000",
+        price: "AED 90,000–250,000",
         timeframe: "4–12 weeks",
         hook: "One capability built end to end at a fixed price and date, shipped live into production and yours to keep, with no surprises.",
         bestFor: "For teams with a defined problem that is ready to be solved.",
@@ -160,7 +160,7 @@ export const servicesContent: ServicesContent = {
       {
         name: "Embedded",
         kicker: "Standing team",
-        price: "From AED 70,000",
+        price: "AED 70,000–120,000",
         unit: "/ mo",
         timeframe: "3-month minimum",
         hook: "A dedicated team working through your backlog week after week, giving you the output of a department without the headcount or hiring.",
@@ -169,7 +169,7 @@ export const servicesContent: ServicesContent = {
       {
         name: "Advisory",
         kicker: "On call",
-        price: "From AED 30,000",
+        price: "AED 30,000–50,000",
         unit: "/ mo",
         timeframe: "Ongoing",
         hook: "A senior analytics and AI leader in your corner for the calls that matter, from strategy to hires to vendors, minus the full-time salary.",
