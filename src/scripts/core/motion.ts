@@ -1,8 +1,3 @@
-// Motion is opt-in. Reduced motion is the DEFAULT for every visitor; rich
-// motion only runs when the visitor explicitly enables it via the footer
-// toggle. The choice persists in localStorage and is reflected as
-// html[data-motion="on"] (absent/"off" = reduced). The inline head script in
-// BaseLayout sets the attribute before first paint to avoid a flash.
 const KEY = "auxo-motion";
 const EVENT = "auxo:motionchange";
 
@@ -31,8 +26,6 @@ function syncToggles(on: boolean): void {
 }
 
 export function initMotion(): void {
-  // Re-apply on every (re-)boot, including Astro view transitions where the
-  // <html> attribute set by the inline head script may not carry over.
   apply(stored());
   syncToggles(motionEnabled());
 
@@ -44,7 +37,6 @@ export function initMotion(): void {
       try {
         localStorage.setItem(KEY, next ? "on" : "off");
       } catch {
-        /* ignore storage failures (private mode, etc.) */
       }
       apply(next);
       syncToggles(next);

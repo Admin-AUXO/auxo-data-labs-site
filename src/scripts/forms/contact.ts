@@ -84,7 +84,6 @@ function initContactForm() {
     });
   });
 
-  // Analytics: form_start (first interaction), form_abandonment (left without sending)
   let started = false;
   let submitted = false;
   const markStart = () => {

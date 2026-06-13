@@ -101,12 +101,6 @@
     }
   }
 
-  /* ── Motion is opt-in ───────────────────────────────────────────────
-     Reduced motion is the DEFAULT for every visitor. Rich motion runs only
-     when the visitor explicitly opts in via the footer toggle, which sets
-     html[data-motion="on"] (persisted in localStorage by motion.ts). With no
-     opt-in — including first visits and OS prefers-reduced-motion — the site
-     stays static. */
   html:not([data-motion="on"]) :is([data-enter], [data-anim], [data-reveal]) {
     animation: none !important;
     clip-path: none !important;
@@ -188,8 +182,6 @@
       transform: scaleX(0);
     }
 
-    /* Staggered entrance: any reveal/anim item carrying a --i index
-       starts its scroll animation slightly later than its predecessor. */
     [data-motion="on"] :is([data-anim], [data-reveal])[style*="--i"] {
       animation-range: entry calc(3% + var(--i) * 6%) entry calc(50% + var(--i) * 6%);
     }

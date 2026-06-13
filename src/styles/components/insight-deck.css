@@ -466,8 +466,6 @@
     text-align: center;
   }
 
-  /* Both faces share one grid cell, so the card grows to the
-     taller face (the back) — no inner scrolling, no clipping. */
   .deck__flip {
     display: grid;
     transform-style: preserve-3d;
@@ -511,8 +509,6 @@
     text-underline-offset: 2px;
   }
 
-  /* "Where this fits:" — the trailing line, tagged and pinned to the
-     bottom of every back so it lines up across all cards. */
   .deck__body > :last-child {
     border-block-start: 1px solid var(--border);
     color: var(--subtle);
@@ -559,7 +555,6 @@
     transition: color var(--dur-fast) var(--ease-out);
   }
 
-  /* "Read more" sits top-right in the meta row. */
   .deck__meta .deck__more {
     flex: none;
   }
@@ -574,7 +569,6 @@
     outline-offset: 3px;
   }
 
-  /* Micro-interactions: snappy ease-out nudges (~150ms). */
   .deck__more span {
     transition: transform var(--dur-fast) var(--ease-out);
   }

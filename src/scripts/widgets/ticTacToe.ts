@@ -1,15 +1,3 @@
-/**
- * Playable tic-tac-toe with an unbeatable minimax opponent.
- *
- * Human plays X (and moves first); "AUXO" plays O with perfect strategy.
- * Animations use the Web Animations API — no GSAP, no runtime deps — and only
- * run when the site's opt-in motion model is enabled. Init is idempotent so it
- * is safe to call on both first paint and every `astro:page-load`.
- *
- * Scoring convention: X win = +1, O win = -1, draw = 0.
- * AUXO (O) therefore minimises; the human can at best force a draw.
- */
-
 type Mark = "X" | "O";
 type Board = (Mark | null)[];
 
@@ -27,11 +15,10 @@ const LINES = [
   [2, 4, 6],
 ] as const;
 
-const POP_EASING = "cubic-bezier(0.34, 1.56, 0.64, 1)"; // approximates back.out
+const POP_EASING = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
 const O = '<span class="ttt__o">AUXO</span>';
 
-// AUXO wins escalate with the streak, then cycle through generic gloats.
 const AI_WIN_ESCALATION = [
   `${O} wins. The model doesn't miss.`,
   `Two straight for ${O}. It saw that one coming.`,
@@ -94,7 +81,7 @@ function minimax(b: Board, turn: Mark): number {
 }
 
 function bestMove(b: Board): number {
-  let best = Infinity; // AI is O → minimising
+  let best = Infinity;
   let move = -1;
   for (let i = 0; i < 9; i++) {
     if (b[i] === null) {
@@ -117,7 +104,6 @@ function motionEnabled(): boolean {
 }
 
 export function initTicTacToe(root: HTMLElement): void {
-  // Idempotent: guard against double-binding on repeat astro:page-load events.
   if (root.dataset.tttReady === "1") return;
   root.dataset.tttReady = "1";
 
@@ -140,9 +126,9 @@ export function initTicTacToe(root: HTMLElement): void {
   const score = { you: 0, draw: 0, ai: 0 };
 
   const animate = motionEnabled();
-  let locked = false; // block input while AI "thinks" / game over
+  let locked = false;
   let finished: { line: readonly number[]; winner: Mark } | null = null;
-  let aiStreak = 0; // consecutive AUXO wins, for escalating messages
+  let aiStreak = 0;
 
   function setStatus(html: string): void {
     if (status) status.innerHTML = html;
@@ -185,11 +171,6 @@ export function initTicTacToe(root: HTMLElement): void {
     );
   }
 
-  /**
-   * Draw the winning strike from the real cell rects (gap-agnostic), centred on
-   * the line through both end cells' centres. `withAnim` is false on resize so
-   * the line snaps to the new geometry without re-running the draw animation.
-   */
   function drawStrike(
     line: readonly number[],
     winner: Mark,
@@ -202,7 +183,6 @@ export function initTicTacToe(root: HTMLElement): void {
     const a = cells[line[0]].getBoundingClientRect();
     const c = cells[line[line.length - 1]].getBoundingClientRect();
 
-    // Centre points of the first and last winning cells, relative to the panel.
     const x1 = a.left + a.width / 2 - base.left;
     const y1 = a.top + a.height / 2 - base.top;
     const x2 = c.left + c.width / 2 - base.left;
@@ -211,14 +191,12 @@ export function initTicTacToe(root: HTMLElement): void {
     const dx = x2 - x1;
     const dy = y2 - y1;
     const len = Math.hypot(dx, dy);
-    const pad = 0.12; // extend slightly past the end marks
+    const pad = 0.12;
     const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
 
     const color = winner === HUMAN ? "var(--accent)" : "var(--accent-2)";
     strike.style.background = color;
     strike.style.boxShadow = `0 0 12px color-mix(in oklch, ${color} 70%, transparent)`;
-    // Pivot the bar on the start cell's centre; CSS margin-top:-2px centres the
-    // 4px-tall bar vertically, and transform-origin:left center rotates about it.
     strike.style.left = `${x1 - dx * pad}px`;
     strike.style.top = `${y1 - dy * pad}px`;
     strike.style.width = `${len * (1 + pad * 2)}px`;
@@ -332,7 +310,6 @@ export function initTicTacToe(root: HTMLElement): void {
   cells.forEach((cell, i) => cell.addEventListener("click", () => onCell(i)));
   resetBtn?.addEventListener("click", reset);
 
-  // Keep the winning strike centred if the board is resized after a win.
   let resizeRaf = 0;
   window.addEventListener("resize", () => {
     if (!finished) return;

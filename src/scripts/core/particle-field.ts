@@ -303,11 +303,9 @@ export function initParticleField(): void {
   if (motionEnabled()) {
     play();
   } else {
-    // Render a single static frame so the field is visible but motionless.
     frame();
   }
 
-  // React live when the visitor flips the motion toggle.
   window.addEventListener("auxo:motionchange", (e) => {
     if ((e as CustomEvent<{ on: boolean }>).detail.on) {
       play();

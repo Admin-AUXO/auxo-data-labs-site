@@ -74,8 +74,6 @@ function setupDeck(deck: HTMLElement): void {
         toggleFlip(card);
       }),
     );
-    // Desktop: tap anywhere on the card (but not a link/button) flips it.
-    // Mobile swipe mode handles taps via the drag end-handler instead.
     card.addEventListener("click", (e) => {
       if (swipeOn) return;
       const t = e.target as HTMLElement;
@@ -88,8 +86,6 @@ function setupDeck(deck: HTMLElement): void {
     order = allCards.filter(matches);
   }
 
-  // Desktop grid: make every visible card the same height (tallest wins),
-  // so featured and each category view are uniform. Mobile uses --deck-h.
   function equalize(): void {
     const flips = allCards
       .map((c) => c.querySelector<HTMLElement>("[data-deck-flip]"))

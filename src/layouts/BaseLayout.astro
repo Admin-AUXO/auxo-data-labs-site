@@ -49,8 +49,6 @@ const gtmId = env.gtm.containerId;
     <ClientRouter />
     <script is:inline>
       (() => {
-        // Motion is opt-in: default to reduced. Set the attribute before first
-        // paint so the static state never flashes into animation.
         try {
           document.documentElement.dataset.motion =
             localStorage.getItem("auxo-motion") === "on" ? "on" : "off";
@@ -77,8 +75,6 @@ const gtmId = env.gtm.containerId;
       </style>
     </noscript>
     <script>
-      // Analytics: manual page_view (initial + view-transition navs) plus the
-      // full delegated event taxonomy, and Core Web Vitals reporting.
       import { initAnalytics } from "../scripts/analytics/track";
       import { initWebVitals } from "../scripts/analytics/webVitals";
       initAnalytics();

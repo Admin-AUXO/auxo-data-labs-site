@@ -1,8 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
-// Full-text index for LLMs: the site summary plus every insight in full,
-// generated from the insights content collection so it never goes stale.
 export const prerender = true;
 
 const header = `# AUXO Data Labs — full content for LLMs

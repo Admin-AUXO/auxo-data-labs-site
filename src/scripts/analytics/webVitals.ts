@@ -1,8 +1,3 @@
-/**
- * Core Web Vitals → GA4 (event `web_vitals`, mapped in GTM-5TKFHDH5).
- * Reports CLS, INP, LCP, FCP, TTFB. CLS is scaled ×1000 so GA4 stores a
- * useful integer; everything else is rounded to whole milliseconds.
- */
 import { onCLS, onINP, onLCP, onFCP, onTTFB, type Metric } from "web-vitals";
 import { track } from "./track";
 

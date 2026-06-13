@@ -21,8 +21,6 @@ const topics = [...new Set(items.map((i) => i.topic))];
 const readCount = items.length;
 const topicCount = topics.length;
 
-// Two-tier taxonomy: each topic belongs to a family. The filter bar groups the
-// topic chips under their family label; chips still filter by individual topic.
 const FAMILY_LABELS: Record<string, string> = {
   foundations: "Foundations",
   guardrails: "Guardrails",

@@ -22,7 +22,6 @@
   src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations");
 }
 
-/* Logo wordmark only — subset to the AUXO / DATA LABS glyphs. */
 @font-face {
   font-display: swap;
   font-family: "Montserrat AUXO";

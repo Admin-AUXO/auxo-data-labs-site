@@ -1,17 +1,4 @@
 ---
-/**
- * Playable tic-tac-toe against an unbeatable minimax AI.
- * Adapted from the original auxo-landing-page intro animation; GSAP-free
- * (Web Animations API). You play X (first move); "AUXO" plays O perfectly, so
- * the best you can do is draw — which is the point.
- *
- * Design: elevated card with a CSS-grid tile board (gap-reveal lines), turn
- * indicator, live scoreboard, animated winning strike, and comfortably large
- * touch targets (>=48px, 10px gaps) per WCAG 2.5.5 / Apple / Material guidance.
- *
- * Honours the site's opt-in motion model: animations run only when
- * documentElement[data-motion="on"] and the user hasn't asked to reduce motion.
- */
 ---
 
 <figure
@@ -19,7 +6,6 @@
   data-tic-tac-toe
   aria-label="Tic-tac-toe against AUXO. You play X; AUXO plays O with perfect strategy."
 >
-  <!-- Turn indicator + scoreboard -->
   <div class="ttt__hud">
     <span class="ttt__chip ttt__chip--x" data-ttt-turn="X" data-active>
       <span class="ttt__chip-mark">X</span> You
@@ -32,7 +18,6 @@
     </span>
   </div>
 
-  <!-- Board -->
   <div class="ttt__panel">
     <div class="ttt__board" role="grid" data-ttt-board>
       {
@@ -52,7 +37,6 @@
     <span class="ttt__strike" data-ttt-strike aria-hidden="true"></span>
   </div>
 
-  <!-- Fixed-height footer so the layout never shifts as text/button change -->
   <div class="ttt__footer">
     <figcaption class="ttt__status" aria-live="polite">
       <span class="ttt__status-text" data-ttt-status>Your move — tap a square.</span>
@@ -71,10 +55,9 @@
     gap: 1rem;
     margin-inline: auto;
     width: 100%;
-    max-width: 30rem; /* ~480px on desktop */
+    max-width: 30rem;
   }
 
-  /* ---- HUD: turn chips + score ---- */
   .ttt__hud {
     display: flex;
     align-items: center;
@@ -147,7 +130,6 @@
     font-style: normal;
   }
 
-  /* ---- Board panel ---- */
   .ttt__panel {
     position: relative;
     width: 100%;
@@ -166,7 +148,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 0.625rem; /* 10px reveal */
+    gap: 0.625rem;
     width: 100%;
     height: 100%;
   }
@@ -220,7 +202,6 @@
     color: var(--accent-2);
   }
 
-  /* winning tiles glow; losing tiles fade */
   .ttt[data-state="over"] .ttt__cell:has(.ttt__glyph[data-win][data-mark="X"]) {
     background: var(--accent-soft);
     border-color: color-mix(in oklch, var(--accent) 45%, transparent);
@@ -234,11 +215,10 @@
     transition: opacity 0.4s ease;
   }
 
-  /* ---- Winning strike (computed in JS, gap-agnostic) ---- */
   .ttt__strike {
     position: absolute;
     height: 4px;
-    margin-top: -2px; /* centre the 4px bar on the line's y-coordinate */
+    margin-top: -2px;
     border-radius: var(--radius-full);
     background: var(--accent);
     box-shadow: 0 0 12px color-mix(in oklch, var(--accent) 70%, transparent);
@@ -248,7 +228,6 @@
     pointer-events: none;
   }
 
-  /* ---- Footer: fixed height so the board never shifts ---- */
   .ttt__footer {
     display: flex;
     flex-direction: column;
@@ -263,7 +242,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.6em; /* reserve two lines so longer messages don't reflow */
+    min-height: 2.6em;
     font-family: var(--font-sans);
     font-size: 0.9375rem;
     color: var(--muted);
@@ -271,7 +250,6 @@
     text-wrap: balance;
   }
 
-  /* single inline child keeps the message flowing instead of stacking words */
   .ttt__status-text {
     display: inline;
   }
@@ -294,7 +272,7 @@
     border: 0;
     border-radius: var(--radius-full);
     cursor: pointer;
-    visibility: hidden; /* reserved in layout; revealed on game end */
+    visibility: hidden;
     transition:
       background-color 0.18s ease,
       transform 0.18s ease;
@@ -311,7 +289,6 @@
     outline-offset: 2px;
   }
 
-  /* ---- Mobile ---- */
   @media (max-width: 30rem) {
     .ttt {
       gap: 0.875rem;

@@ -1,7 +1,5 @@
 import { motionEnabled } from "../core/motion";
 
-// Animate [data-countup] numbers from 0 to their value when scrolled into view.
-// When motion is off (the default), shows the final value immediately.
 export function initCountUp(): void {
   const els = Array.from(document.querySelectorAll<HTMLElement>("[data-countup]"));
   if (els.length === 0) return;
