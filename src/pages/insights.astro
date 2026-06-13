@@ -46,29 +46,29 @@ const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
       </h1>
       <p class="lead text-xl" data-enter>{c.hero.lead}</p>
       <p class="text-subtle text-sm" data-enter>{c.hero.framing}</p>
-      <p class="text-sm" data-enter>
-        <a href="/self-check/" class="font-semibold text-accent underline underline-offset-4 transition-colors hover:text-foreground">Or get your AUXO Score →</a>
-        <span class="text-subtle"> a 3-minute self-read on your data, reporting, automation, and compliance.</span>
-      </p>
     </div>
   </Section>
 
   <Section padding="lg" width="6xl">
     <div class="deck-filter" role="group" aria-label="Filter insights by topic">
-      <button type="button" class="deck__chip" data-deck-filter="featured" aria-pressed="true">Featured</button>
+      <div class="deck-filter__primary">
+        <button type="button" class="deck__chip" data-deck-filter="featured" aria-pressed="true">Featured</button>
+        <button type="button" class="deck__chip" data-deck-filter="" aria-pressed="false">All</button>
+      </div>
       {
         familyGroups.map((fam) => (
           <div class="deck-filter__group">
             <span class="deck-filter__label">{fam.label}</span>
-            {fam.topics.map((t) => (
-              <button type="button" class="deck__chip" data-deck-filter={t} aria-pressed="false">
-                {t}
-              </button>
-            ))}
+            <div class="deck-filter__chips">
+              {fam.topics.map((t) => (
+                <button type="button" class="deck__chip" data-deck-filter={t} aria-pressed="false">
+                  {t}
+                </button>
+              ))}
+            </div>
           </div>
         ))
       }
-      <button type="button" class="deck__chip" data-deck-filter="" aria-pressed="false">All</button>
     </div>
     <div class="deck" data-deck data-view="featured">
       <div
@@ -162,6 +162,26 @@ const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
               );
             })
           }
+          <li
+            class="deck__card deck__card--cta"
+            id="auxo-score"
+            data-deck-card
+            data-topic=""
+            data-family=""
+            data-featured="true"
+            data-flipped="false"
+          >
+            <a class="deck__cta" href="/self-check/">
+              <div class="deck__flip" data-deck-flip>
+                <div class="deck__cta-inner">
+                  <span class="deck__cta-kicker">The AUXO Score</span>
+                  <h3 class="deck__cta-title">How much can your data actually tell you?</h3>
+                  <p class="deck__cta-text">A 3-minute self-read — a 0–100 score across data, reporting, automation, and compliance, with the one fix that would move the needle most.</p>
+                  <span class="deck__cta-go">Get my score <span aria-hidden="true">&rarr;</span></span>
+                </div>
+              </div>
+            </a>
+          </li>
         </ol>
       </div>
 
