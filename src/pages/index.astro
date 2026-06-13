@@ -6,6 +6,7 @@ import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
+import SelfCheckCta from "../components/sections/shared/SelfCheckCta.astro";
 import { homeContent as c } from "../data/home";
 ---
 
@@ -49,6 +50,8 @@ import { homeContent as c } from "../data/home";
       }
     </div>
   </Section>
+
+  <SelfCheckCta />
 
   <Section padding="md" width="7xl">
     <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">

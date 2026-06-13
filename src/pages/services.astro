@@ -6,6 +6,7 @@ import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
+import SelfCheckCta from "../components/sections/shared/SelfCheckCta.astro";
 import { servicesContent as c } from "../data/services-overview";
 ---
 
@@ -77,6 +78,10 @@ import { servicesContent as c } from "../data/services-overview";
       }
     </div>
   </Section>
+
+  <SelfCheckCta
+    text="Before you pick a way to work, see where you stand: a clear 0–100 read across these four — data, reporting, automation, and compliance. No sign-up, ~3 minutes."
+  />
 
   <Section id="ways-to-work" padding="lg" width="7xl">
     <SectionHeader

@@ -1,0 +1,37 @@
+---
+import Section from "../../layout/Section.astro";
+import Button from "../../ui/Button.astro";
+
+interface Props {
+  eyebrow?: string;
+  text?: string;
+  cta?: string;
+}
+
+const {
+  eyebrow = "The AUXO Score · 3-minute self-check",
+  text = "Not sure where you stand on these four? Get a clear 0–100 read on your data, reporting, automation, and compliance — no sign-up, and it stays in your browser.",
+  cta = "Get my score",
+} = Astro.props;
+---
+
+<Section padding="md" width="6xl">
+  <div
+    class="selfcheck-cta flex flex-col items-start gap-5 rounded-xl border border-border bg-surface p-7 sm:flex-row sm:items-center sm:justify-between sm:gap-10 sm:p-9"
+    data-reveal
+  >
+    <div class="flex flex-col gap-2">
+      <span class="eyebrow text-accent-2">{eyebrow}</span>
+      <p class="max-w-xl text-lg font-medium text-foreground">{text}</p>
+    </div>
+    <Button variant="primary" size="lg" href="/self-check/" icon class="w-full shrink-0 sm:w-auto">
+      {cta}
+    </Button>
+  </div>
+</Section>
+
+<style>
+  .selfcheck-cta {
+    border-left: 3px solid var(--accent);
+  }
+</style>

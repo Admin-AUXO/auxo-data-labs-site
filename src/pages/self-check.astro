@@ -315,6 +315,14 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           <div class="ac__headline">
             <p class="ac__band" data-band>—</p>
             <p class="ac__tonext" data-tonext hidden></p>
+            <div class="ac__levels-wrap">
+              <button type="button" class="ac__levels-btn" data-info aria-expanded="false">See the four levels</button>
+              <div class="ac__tip ac__tip--levels" role="tooltip">
+                <ol class="ac__levels-list">
+                  {bands.map((b) => (<li data-band-id={b.id}><b>{b.min}–{b.max}</b><span>{b.name}</span></li>))}
+                </ol>
+              </div>
+            </div>
           </div>
         </div>
         <p class="ac__shape" data-shape></p>
@@ -357,7 +365,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         <p class="ac__strength-line" data-strength-line hidden></p>
 
         <details class="ac__how">
-          <summary>How your score works</summary>
+          <summary>What's behind your number</summary>
           <div class="ac__how-body">
             <p>Each statement scores 1–5. Each pillar is normalised to 0–100 — <code>(sum of its answers − count) ÷ (4 × count) × 100</code> — so all 1s is 0 and all 5s is 100. Your AUXO Score is the equal-weighted average of the four. No hidden weighting, no curve.</p>
             <p class="ac__note">It's a self-read, so it's only as honest as your answers — enough to show you where to look, not a substitute for examining the real systems.</p>
@@ -372,8 +380,9 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
             <button type="button" class="ac__link" data-restart>Start over</button>
           </div>
           <p class="ac__fine">
-            Everything here stayed in your browser — nothing was sent or saved. If a number stings and
-            you'd want a second pair of eyes, AUXO reads these:
+            Your answers and result are cached in your browser so you can come back to them. If you've
+            accepted analytics cookies, we record only your score, band, and weakest pillar — never your
+            individual answers. Want a second pair of eyes? AUXO reads these:
             <button type="button" class="ac__inlinelink" data-google-calendar-open>book a 30-minute read-out</button>
             or email <a href="mailto:hello@auxodata.com">hello@auxodata.com</a>. No pitch — you'll get a straight answer.
           </p>
@@ -480,11 +489,21 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__band { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-2xl); line-height: 1.05; margin: 0; color: var(--accent); }
     .ac__tonext { margin: 0.5rem 0 0; font-size: var(--text-sm); color: var(--accent); font-weight: 600; }
     .ac__tonext[hidden] { display: none; }
+    .ac__levels-wrap { position: relative; margin-top: 0.6rem; }
+    .ac__levels-btn { background: none; border: 0; padding: 0; cursor: pointer; color: var(--subtle); font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; }
+    .ac__levels-btn:hover, .ac__levels-btn[aria-expanded="true"] { color: var(--foreground); }
+    .ac__tip--levels { right: auto; min-width: 16rem; max-width: 22rem; }
+    .ac__levels-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+    .ac__levels-list li { display: flex; gap: 0.7rem; align-items: baseline; padding: 0.3rem 0.45rem; border-radius: var(--radius-sm); color: var(--muted); font-size: var(--text-sm); }
+    .ac__levels-list b { flex: none; min-width: 4.2rem; font: 700 0.82em/1.4 var(--font-mono); color: var(--subtle); letter-spacing: 0.02em; }
+    .ac__levels-list li[data-current] { background: var(--surface-sunken); color: var(--foreground); font-weight: 600; }
+    .ac__levels-list li[data-current] b { color: var(--accent); }
     .ac__shape { color: var(--foreground); margin: 0 0 0.6rem; max-width: 62ch; font-weight: 600; font-size: var(--text-lg); line-height: 1.35; }
     .ac__read { color: var(--muted); margin: 0 0 var(--ac-4); max-width: 62ch; }
 
-    .ac__cards { display: flex; flex-wrap: wrap; gap: var(--ac-3); align-items: flex-start; margin-bottom: var(--ac-4); }
-    .ac__cards > * { flex: 1 1 18rem; min-width: 0; }
+    .ac__cards { display: grid; grid-template-columns: 35fr 65fr; gap: var(--ac-3); align-items: stretch; margin-bottom: var(--ac-4); }
+    .ac__cards:has(.ac__insight[hidden]) { grid-template-columns: 1fr; }
+    .ac__cards > * { min-width: 0; }
     .ac__cards .ac__insight, .ac__cards .ac__start { margin-bottom: 0; }
     .ac__insight { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface-sunken); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
     .ac__insight-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
@@ -506,7 +525,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__tip { position: absolute; left: 0; right: 0; top: calc(100% + 0.4rem); z-index: 6; opacity: 0; visibility: hidden; transform: translateY(-3px); background: var(--surface-raised); border: 1px solid var(--border-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: 0.7rem 0.85rem; font-size: var(--text-sm); color: var(--foreground); }
     html[data-motion="on"] .ac__tip { transition: opacity .15s, visibility .15s, transform .15s; }
     .ac__tip[data-show] { opacity: 1; visibility: visible; transform: none; }
-    .ac__pbar:has(.ac__info:focus-visible) .ac__tip, .ac__item:has(.ac__info:focus-visible) .ac__tip { opacity: 1; visibility: visible; transform: none; }
+    .ac__pbar:has([data-info]:focus-visible) .ac__tip, .ac__item:has([data-info]:focus-visible) .ac__tip, .ac__levels-wrap:has([data-info]:focus-visible) .ac__tip { opacity: 1; visibility: visible; transform: none; }
     @media (hover: hover) { .ac__pbar:hover .ac__tip { opacity: 1; visibility: visible; transform: none; } }
     .ac__pbar-top b { font: 700 var(--text-lg)/1 var(--font-mono); display: inline-flex; align-items: baseline; gap: 1px; }
     .ac__pbar-top b small { font-size: 0.55em; color: var(--subtle); font-weight: 500; }
@@ -573,7 +592,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__headline { min-width: 9rem; }
       .ac__band { font-size: var(--text-xl); }
       .ac__shape { font-size: var(--text-base); }
-      .ac__cards { gap: var(--ac-2); }
+      .ac__cards { grid-template-columns: 1fr; gap: var(--ac-2); }
       .ac__barshead { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
       .ac__bars { padding: 0.1rem 0.9rem; }
       .ac__insight, .ac__start { padding: 0.95rem 1rem; }
@@ -785,7 +804,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           closeTips();
           if (!open) {
             btn.setAttribute("aria-expanded", "true");
-            btn.closest(".ac__pbar, .ac__item")?.querySelector<HTMLElement>(".ac__tip")?.setAttribute("data-show", "");
+            btn.closest(".ac__pbar, .ac__item, .ac__levels-wrap")?.querySelector<HTMLElement>(".ac__tip")?.setAttribute("data-show", "");
           }
         });
       });
@@ -824,6 +843,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         else requestAnimationFrame(() => (gf.style.strokeDashoffset = String(100 - overall)));
         const numEl = root.querySelector<SVGTextElement>("[data-score-num]")!; numEl.style.fill = col;
         const bEl = root.querySelector<HTMLElement>("[data-band]")!; bEl.textContent = band.name; bEl.style.color = col;
+        root.querySelectorAll<HTMLElement>("[data-band-id]").forEach((li) => li.toggleAttribute("data-current", li.getAttribute("data-band-id") === band.id));
         countTo(numEl, overall);
 
         const shapeEl = root.querySelector<HTMLElement>("[data-shape]")!;
