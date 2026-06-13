@@ -325,8 +325,10 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
             </div>
           </div>
         </div>
-        <p class="ac__shape" data-shape></p>
-        <p class="ac__read" data-read></p>
+        <div class="ac__verdict-panel" data-verdict>
+          <p class="ac__shape" data-shape></p>
+          <p class="ac__read" data-read></p>
+        </div>
 
         <div class="ac__cards">
           <div class="ac__insight" data-pattern hidden>
@@ -498,8 +500,9 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__levels-list b { flex: none; min-width: 4.2rem; font: 700 0.82em/1.4 var(--font-mono); color: var(--subtle); letter-spacing: 0.02em; }
     .ac__levels-list li[data-current] { background: var(--surface-sunken); color: var(--foreground); font-weight: 600; }
     .ac__levels-list li[data-current] b { color: var(--accent); }
-    .ac__shape { color: var(--foreground); margin: 0 0 0.6rem; max-width: 62ch; font-weight: 600; font-size: var(--text-lg); line-height: 1.35; }
-    .ac__read { color: var(--muted); margin: 0 0 var(--ac-4); max-width: 62ch; }
+    .ac__verdict-panel { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 1.15rem 1.25rem; margin: 0 0 var(--ac-4); }
+    .ac__shape { color: var(--foreground); margin: 0 0 0.55rem; max-width: none; font-weight: 600; font-size: var(--text-lg); line-height: 1.35; }
+    .ac__read { color: var(--muted); margin: 0; max-width: none; }
 
     .ac__cards { display: grid; grid-template-columns: 35fr 65fr; gap: var(--ac-3); align-items: stretch; margin-bottom: var(--ac-4); }
     .ac__cards:has(.ac__insight[hidden]) { grid-template-columns: 1fr; }
@@ -552,7 +555,9 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__how-body { padding: 0 1.1rem 1.1rem; }
     .ac__how-body p { color: var(--muted); margin: 0 0 0.5rem; font-size: var(--text-sm); }
     .ac__how code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-sunken); padding: 0.1rem 0.35rem; border-radius: var(--radius-sm); color: var(--foreground); }
-    .ac__close { border-top: 1px solid var(--border); padding-top: var(--ac-4); }
+    .ac__close { border-top: 1px solid var(--border); padding-top: var(--ac-4); text-align: center; }
+    .ac__close .ac__actions { justify-content: center; }
+    .ac__close .ac__fine { max-width: none; margin-inline: auto; }
 
     .ac__blurb { color: var(--subtle); font-weight: 400; font-size: var(--text-sm); }
     .ac__meta { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; padding: 0; margin: 0 0 var(--ac-4); }
@@ -578,6 +583,13 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__legend-scale { gap: 0.25rem 0.7rem; }
 
       .ac__title { font-size: var(--text-2xl); }
+      .ac__lead { font-size: var(--text-base); margin-bottom: var(--ac-4); }
+      .ac__pillars { gap: 0.9rem; margin-bottom: var(--ac-4); }
+      .ac__pillars li { display: grid; grid-template-columns: auto 1fr; column-gap: 0.65rem; row-gap: 0.1rem; }
+      .ac__pillars li .ac__pn { grid-column: 1; grid-row: 1; }
+      .ac__pillars li b { grid-column: 2; grid-row: 1; }
+      .ac__pillars li .ac__blurb { grid-column: 2; grid-row: 2; }
+      .ac__meta { gap: 0.45rem 1rem; }
       .ac__scenario { font-size: var(--text-base); }
       .ac__item { grid-template-columns: 1fr; gap: 0.45rem; padding: 0.6rem 0.7rem; }
       .ac__statement { font-size: var(--text-base); }
@@ -595,7 +607,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__cards { grid-template-columns: 1fr; gap: var(--ac-2); }
       .ac__barshead { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
       .ac__bars { padding: 0.1rem 0.9rem; }
-      .ac__insight, .ac__start { padding: 0.95rem 1rem; }
+      .ac__insight, .ac__start, .ac__verdict-panel { padding: 0.95rem 1rem; }
       .ac__cachedbar { padding: 0.7rem 0.85rem; }
       .ac__cachedbar [data-restart] { margin-left: auto; }
     }
@@ -830,6 +842,8 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         const band = bands.find((b) => overall >= b.min && overall <= b.max) || bands[0];
         let hi = scores[0], lo = scores[0];
         scores.forEach((s) => { if (s.score > hi.score) hi = s; if (s.score < lo.score) lo = s; });
+        const hiCount = scores.filter((s) => s.score === hi.score).length;
+        const loCount = scores.filter((s) => s.score === lo.score).length;
         const spread = hi.score - lo.score;
         const even = spread <= 6;
         const d = byId.data, r = byId.reporting, a = byId.automation, c = byId.compliance;
@@ -843,13 +857,17 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         else requestAnimationFrame(() => (gf.style.strokeDashoffset = String(100 - overall)));
         const numEl = root.querySelector<SVGTextElement>("[data-score-num]")!; numEl.style.fill = col;
         const bEl = root.querySelector<HTMLElement>("[data-band]")!; bEl.textContent = band.name; bEl.style.color = col;
+        const vp = root.querySelector<HTMLElement>("[data-verdict]"); if (vp) vp.style.borderLeftColor = col;
         root.querySelectorAll<HTMLElement>("[data-band-id]").forEach((li) => li.toggleAttribute("data-current", li.getAttribute("data-band-id") === band.id));
         countTo(numEl, overall);
 
         const shapeEl = root.querySelector<HTMLElement>("[data-shape]")!;
-        if (even && band.id === "strong") shapeEl.textContent = `All four pillars are strong and within a few points of each other (${lo.score}–${hi.score}) — a genuinely balanced operation.`;
-        else if (even) shapeEl.textContent = `Your four pillars sit close together (${lo.score}–${hi.score}) — no single weak spot, which is its own kind of signal.`;
-        else shapeEl.textContent = `${hi.label} is where you're strongest (${hi.score}). ${lo.label} is the drag (${lo.score}) — it's pulling the average down more than any other gap.`;
+        if (spread === 0) shapeEl.textContent = `All four pillars land at exactly ${lo.score} — a strikingly even read. There's no single weak link to chase; the move is lifting the whole floor.`;
+        else if (even && band.id === "strong") shapeEl.textContent = `All four pillars are strong and within ${spread} point${spread === 1 ? "" : "s"} of each other (${lo.score}–${hi.score}) — a genuinely balanced, well-run operation.`;
+        else if (even) shapeEl.textContent = `Your four pillars sit close together (${lo.score}–${hi.score}) — no single weak spot. The gains here come from lifting all four a notch, not chasing one.`;
+        else if (loCount >= 2) shapeEl.textContent = `${hi.label} is your strongest (${hi.score}), but ${loCount} pillars are tied at the bottom (${lo.score}). Start with ${lo.label} — it's the most foundational, so lifting it makes the rest easier.`;
+        else if (hiCount >= 2) shapeEl.textContent = `${hiCount} of your pillars are strong (${hi.score}); ${lo.label} is the one holding the average back (${lo.score}). That's a contained problem — one fix moves your whole number.`;
+        else shapeEl.textContent = `${hi.label} is where you're strongest (${hi.score}). ${lo.label} is the drag (${lo.score}) — it's pulling your average down further than anything else.`;
 
         const tone = state.ctx.role && roleTone[state.ctx.role] ? roleTone[state.ctx.role] : "";
         root.querySelector("[data-read]")!.textContent = band.read + tone;
