@@ -88,13 +88,13 @@ const context = {
 };
 
 const bands = [
-  { id: "risk", min: 0, max: 24, name: "Foundations at risk",
+  { id: "risk", min: 0, max: 24, name: "Shaky",
     read: "The systems disagree, reporting is manual and late, and a request from a regulator or auditor would mean a scramble. The risk isn't abstract — it's a wrong number in the room or a missed filing, waiting to happen.",
     cta: "Don't try to fix it all at once. Find the one or two breaks costing you the most — your lowest pillar below is where to look — and start there." },
   { id: "patchy", min: 25, max: 49, name: "Patchy",
     read: "Some of it works — but it leans on specific people and a lot of manual effort. You get there, it just costs you time every period, and the cracks show under pressure.",
     cta: "It works, but it's carried by effort. Map where that effort and risk pile up, then take the highest-return fix first — one pillar at a time, not all of them." },
-  { id: "manual", min: 50, max: 74, name: "Solid but manual",
+  { id: "manual", min: 50, max: 74, name: "Manual",
     read: "The numbers are reliable — but you're paying for that reliability in hours and key-person dependency. You've outgrown the manual approach.",
     cta: "You've outgrown doing this by hand. The next gain is moving the routine, breakable work off people and onto something that runs on a schedule — start with your weakest pillar." },
   { id: "strong", min: 75, max: 100, name: "Strong",
@@ -186,7 +186,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 ---
 
 <BaseLayout title="The AUXO Score — a quick self-read" description={desc} path="/self-check/">
-  <Section padding="lg" width="6xl">
+  <Section padding="lg" width="6xl" class="sc-shell">
     <div class="ac" data-assessment data-total={total}>
       <script type="application/json" id="ac-config" set:html={JSON.stringify(cfg)} />
 
@@ -293,8 +293,10 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
       <div class="ac__step ac__results" data-step="results" hidden>
         <div class="ac__cachedbar" data-returning hidden>
-          <span class="ac__cachedbar-kicker">Welcome back</span>
-          <p data-returning-line>Here's the read you got last time. Nothing's changed unless you have.</p>
+          <div class="ac__cachedbar-text">
+            <span class="ac__cachedbar-kicker">Welcome back</span>
+            <p data-returning-line>Here's the read you got last time.</p>
+          </div>
           <button type="button" class="ac__btn" data-variant="ghost" data-restart>Start over</button>
         </div>
 
@@ -363,8 +365,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
             </div>
           ))}
         </div>
-
-        <p class="ac__strength-line" data-strength-line hidden></p>
 
         <details class="ac__how">
           <summary>What's behind your number</summary>
@@ -475,9 +475,10 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__fine a { color: var(--accent); }
     kbd { font: 600 0.9em/1 var(--font-mono); background: var(--surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: var(--radius-sm); padding: 0.1rem 0.35rem; }
 
-    .ac__cachedbar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1rem; background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.8rem 1rem; margin-bottom: var(--ac-4); font-size: var(--text-sm); }
+    .ac__cachedbar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.7rem 1.2rem; background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-bottom: var(--ac-4); font-size: var(--text-sm); }
+    .ac__cachedbar-text { flex: 1; min-width: 14rem; display: grid; gap: 0.25rem; }
     .ac__cachedbar-kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent); }
-    .ac__cachedbar p { margin: 0; color: var(--muted); flex: 1; min-width: 14rem; }
+    .ac__cachedbar p { margin: 0; color: var(--foreground); }
 
     .ac__scorewrap { display: flex; gap: var(--ac-4); align-items: center; flex-wrap: wrap; margin-bottom: var(--ac-3); }
     .ac__gauge { width: 140px; height: 140px; flex: none; }
@@ -539,8 +540,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__pbar[data-weak] .ac__pbar-top b { color: var(--accent-2); }
     .ac__pbar-aim { position: absolute; left: 75%; top: -2px; bottom: -2px; width: 2px; background: var(--foreground); opacity: 0.45; border-radius: 1px; z-index: 1; }
 
-    .ac__strength-line { color: var(--muted); margin: 0 0 var(--ac-4); padding-left: 0.9rem; border-left: 2px solid var(--accent); font-size: var(--text-sm); max-width: 62ch; }
-    .ac__strength-line[hidden] { display: none; }
 
     .ac__start { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
     .ac__start-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
@@ -608,8 +607,15 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__barshead { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
       .ac__bars { padding: 0.1rem 0.9rem; }
       .ac__insight, .ac__start, .ac__verdict-panel { padding: 0.95rem 1rem; }
-      .ac__cachedbar { padding: 0.7rem 0.85rem; }
-      .ac__cachedbar [data-restart] { margin-left: auto; }
+      .ac__cachedbar { padding: 0.85rem 0.95rem; flex-direction: column; align-items: stretch; }
+      .ac__cachedbar [data-restart] { width: 100%; justify-content: center; }
+      .ac__actions { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+      .ac__actions .ac__btn { width: 100%; justify-content: center; }
+      .ac__actions .ac__link { text-align: center; padding-block: 0.4rem; }
+    }
+
+    @media (max-width: 640px) {
+      :global(.section.sc-shell) { padding-block-start: 1.4rem; }
     }
   </style>
 
@@ -909,12 +915,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           el.querySelector("[data-pbar-read]")!.textContent = reads[p.id][tierOf(p.score)];
         });
 
-        const sl = root.querySelector<HTMLElement>("[data-strength-line]")!;
-        sl.hidden = false;
-        if (spread > 8) sl.textContent = `One thing you've already got: ${hi.label} is at ${hi.score}. That's a real asset — the goal is to bring the rest up to meet it, not to start from zero.`;
-        else if (overall >= 50) sl.textContent = `You don't have a weak pillar to lean away from — ${hi.label} (${hi.score}) is your steadiest, and it's close. Build the next move on the habits that got it there.`;
-        else sl.textContent = "Nothing here is broken beyond repair — your pillars are low but even, which means there's no deep hole to climb out of, just a floor to raise.";
-
         let target = lo;
         if (lo.id !== "data" && byId.data < 50 && byId.data - lo.score <= 8) target = scores.find((s) => s.id === "data")!;
         const sb = root.querySelector<HTMLElement>("[data-start-block]")!; sb.hidden = false;
@@ -961,7 +961,10 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         compute();
         const bar = root.querySelector<HTMLElement>("[data-returning]")!;
         bar.hidden = false;
-        if (Date.now() - cached.ts > 90 * 864e5) root.querySelector("[data-returning-line]")!.textContent = "It's been a while. If your systems have moved on, it's worth a fresh read.";
+        const cachedBand = bands.find((b) => b.id === cached.band)?.name || "";
+        root.querySelector("[data-returning-line]")!.textContent = Date.now() - cached.ts > 90 * 864e5
+          ? `It's been a while — last time you scored ${cached.overall} (${cachedBand}). If your systems have moved on, it's worth a fresh read.`
+          : `Last time you scored ${cached.overall} — ${cachedBand}. Here's that read again; nothing's changed unless you have.`;
         show(resultsIdx);
       } else {
         if (Object.keys(state.answers).length && state.step > 0) root.querySelector<HTMLElement>("[data-resume]")!.hidden = false;
