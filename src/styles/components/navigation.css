@@ -180,6 +180,61 @@
     transform: scaleX(1);
   }
 
+  .nav__badge {
+    align-items: center;
+    color: var(--accent);
+    display: inline-flex;
+    gap: 0.22rem;
+    line-height: 0;
+    margin-inline-start: 0.35rem;
+    vertical-align: middle;
+  }
+
+  .nav__badge[hidden] {
+    display: none;
+  }
+
+  .nav__badge[data-tier="warn"] {
+    color: var(--accent-2);
+  }
+
+  .nav__badge[data-tier="danger"] {
+    color: var(--color-danger);
+  }
+
+  .nav__badge svg {
+    block-size: 0.95em;
+    inline-size: 0.95em;
+  }
+
+  .nav__badge-num {
+    font: 600 var(--text-xs) / 1 var(--font-mono);
+    letter-spacing: var(--tracking-mono);
+  }
+
+  .mobile-nav__link .nav__badge {
+    color: var(--accent);
+    margin-inline-start: auto;
+    margin-inline-end: 0.6rem;
+  }
+
+  .mobile-nav__link .nav__badge[data-tier="warn"] {
+    color: var(--accent-2);
+  }
+
+  .mobile-nav__link .nav__badge[data-tier="danger"] {
+    color: var(--color-danger);
+  }
+
+  .mobile-nav__link .nav__badge svg {
+    block-size: 1.1rem;
+    inline-size: 1.1rem;
+  }
+
+  .mobile-nav__link .nav__badge-num {
+    font-size: var(--text-base);
+  }
+
   .nav__actions {
     align-items: center;
     display: flex;

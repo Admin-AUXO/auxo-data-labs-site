@@ -25,9 +25,16 @@ const isActive = (href: string) => {
           <a
             href={withBase(item.href)}
             class="nav__link"
+            data-selfcheck={item.href === "/self-check/" ? "" : undefined}
             aria-current={isActive(item.href) ? "page" : undefined}
           >
             {item.name}
+            {item.href === "/self-check/" && (
+              <span class="nav__badge" data-nav-badge hidden>
+                <Icon name="mdi:check-decagram" aria-hidden="true" />
+                <span class="nav__badge-num" data-nav-badge-num />
+              </span>
+            )}
           </a>
         ))
       }
@@ -57,10 +64,17 @@ const isActive = (href: string) => {
         <a
           href={withBase(item.href)}
           class="mobile-nav__link"
+          data-selfcheck={item.href === "/self-check/" ? "" : undefined}
           aria-current={isActive(item.href) ? "page" : undefined}
           data-dialog-close
         >
           <span>{item.name}</span>
+          {item.href === "/self-check/" && (
+            <span class="nav__badge" data-nav-badge hidden>
+              <Icon name="mdi:check-decagram" aria-hidden="true" />
+              <span class="nav__badge-num" data-nav-badge-num />
+            </span>
+          )}
           <Icon name="mdi:arrow-right" class="mobile-nav__link-icon" aria-hidden="true" />
         </a>
       ))
@@ -172,4 +186,36 @@ const isActive = (href: string) => {
 
   bind();
   document.addEventListener("astro:page-load", bind);
+</script>
+
+<script>
+  function markSelfCheck() {
+    let score: string | null = null;
+    try {
+      score = localStorage.getItem("auxo-self-check-badge-v1");
+    } catch {
+      score = null;
+    }
+    const done = score !== null && score !== "";
+    document.querySelectorAll<HTMLElement>("[data-selfcheck]").forEach((link) => {
+      const badge = link.querySelector<HTMLElement>(".nav__badge");
+      if (!badge) return;
+      badge.hidden = !done;
+      if (done) {
+        const num = badge.querySelector<HTMLElement>(".nav__badge-num");
+        if (num) num.textContent = score;
+        const n = Number(score);
+        badge.dataset.tier = n < 25 ? "danger" : n < 50 ? "warn" : "ok";
+        link.setAttribute("aria-label", `Self-check — your score: ${score} out of 100`);
+      } else {
+        link.removeAttribute("aria-label");
+      }
+    });
+  }
+  (window as unknown as { __auxoMarkSelfCheck?: () => void }).__auxoMarkSelfCheck = markSelfCheck;
+  markSelfCheck();
+  document.addEventListener("astro:page-load", markSelfCheck);
+  addEventListener("storage", (e) => {
+    if (e.key === "auxo-self-check-badge-v1") markSelfCheck();
+  });
 </script>

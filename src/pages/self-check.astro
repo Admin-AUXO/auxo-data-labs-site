@@ -1,13 +1,7 @@
 ---
-// DRAFT — AUXO Score self-check. noindex, not linked, excluded from sitemap + pagefind.
-// A fast, multi-step self-read scored across AUXO's four pillars. Results are composed
-// by a small rules/insight engine (band + cross-pillar patterns + sharpest gaps + context)
-// so the closing read is near-unique to each set of answers. Not a sales pitch.
-// Source: AUXO-Marketing/sales/demand-gen/lead_magnet_readiness_assessment.md
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 
-// 1 = not really · 5 = yes, reliably. Non-judgemental anchors (research: lower disclosure anxiety).
 const SCALE = [
   { v: 1, k: "1", label: "Not really" },
   { v: 2, k: "2", label: "Rarely" },
@@ -16,14 +10,12 @@ const SCALE = [
   { v: 5, k: "5", label: "Yes, reliably" },
 ];
 
-// Each item: statement (shown while answering) + low (the risk line shown on the results
-// page when it scores 1–2). Low lines are written to stand alone and stay in site voice.
 const pillars = [
   {
     id: "data",
     n: "01",
     label: "Trusted data",
-    ease: "Start here — it's the foundation everything else sits on. No wrong answers; just what's true on a normal week.",
+    ease: "Start here — it's the foundation everything else sits on. There are no wrong answers; just what's true on a normal week.",
     scenario: "A number in the board pack gets questioned in the room. What happens next?",
     items: [
       { t: "Finance, registration, and CRM agree on the same figures — without manual reconciliation.", low: "Your systems disagree by default, so every figure starts the day needing a referee." },
@@ -39,7 +31,7 @@ const pillars = [
     id: "reporting",
     n: "02",
     label: "Clear reporting",
-    ease: "Now the part leadership actually sees. Think about your last close, not your best one.",
+    ease: "Now the part leadership actually sees. Picture your last close — the real one, not your best one.",
     scenario: "Leadership asks, plainly, “how are we actually doing?” How fast — and how sure — is your answer?",
     items: [
       { t: "The board pack is built the same way every period, not rebuilt from scratch.", low: "Every report is hand-rebuilt, so the work never compounds and small errors creep back in." },
@@ -55,7 +47,7 @@ const pillars = [
     id: "automation",
     n: "03",
     label: "Reliable automation",
-    ease: "This one's about how much runs on people remembering. Be honest — most teams find gaps here.",
+    ease: "This one's about how much runs on people remembering. Be honest — most teams find their gaps here.",
     scenario: "Your key analyst is on leave for two weeks, over month-end. Does anything break?",
     items: [
       { t: "Recurring reports and consolidations run on a schedule, not because someone remembered.", low: "Reports run only when someone remembers — so eventually one won't." },
@@ -71,7 +63,7 @@ const pillars = [
     id: "compliance",
     n: "04",
     label: "Confident compliance",
-    ease: "Last stretch. This is about being ready to show your work — not legal advice, and nobody's marking it.",
+    ease: "Last stretch — nearly there. This is about being ready to show your work, not legal advice, and nobody's marking it.",
     scenario: "A regulator, auditor, or investor asks for records tomorrow. Ready — or a fire drill?",
     note: "Operational readiness only — your ability to produce evidence on demand. Not legal advice; confirm your obligations with your own advisors.",
     items: [
@@ -95,17 +87,24 @@ const context = {
 const bands = [
   { id: "risk", min: 0, max: 24, name: "Foundations at risk",
     read: "The systems disagree, reporting is manual and late, and a request from a regulator or auditor would mean a scramble. The risk isn't abstract — it's a wrong number in the room or a missed filing, waiting to happen.",
-    cta: "The move isn't to fix everything at once. It's to find the one or two breaks costing you the most — and start there." },
+    cta: "Don't try to fix it all at once. Find the one or two breaks costing you the most — your lowest pillar below is where to look — and start there." },
   { id: "patchy", min: 25, max: 49, name: "Patchy",
     read: "Some of it works — but it leans on specific people and a lot of manual effort. You get there, it just costs you time every period, and the cracks show under pressure.",
-    cta: "Worth mapping where the effort and risk concentrate, then taking the highest-return fix first — before spending on a build." },
+    cta: "It works, but it's carried by effort. Map where that effort and risk pile up, then take the highest-return fix first — one pillar at a time, not all of them." },
   { id: "manual", min: 50, max: 74, name: "Solid but manual",
     read: "The numbers are reliable — but you're paying for that reliability in hours and key-person dependency. You've outgrown the manual approach.",
-    cta: "You're ready to automate and consolidate. The win now is scoping it precisely, so the build delivers the right thing first time." },
+    cta: "You've outgrown doing this by hand. The next gain is moving the routine, breakable work off people and onto something that runs on a schedule — start with your weakest pillar." },
   { id: "strong", min: 75, max: 100, name: "Strong",
     read: "Data agrees, reporting is fast and trusted, and you're ready for scrutiny. Genuinely well run.",
-    cta: "The upside now is in what AI and deeper analytics can pull from data you already trust — forecasting, pricing, portfolio insight. A conversation, not a rescue." },
+    cta: "Little here needs rescuing. The open question is what more you could pull from data you already trust — sharper forecasting, pricing, portfolio reads. A different question from fixing foundations." },
 ];
+
+const roleTone: Record<string, string> = {
+  Finance: " You'll feel this most at close and in the numbers you sign off.",
+  Operations: " You'll feel this most in the handoffs between systems and people.",
+  "Compliance / risk": " You'll feel this most the next time someone asks you to prove something.",
+  "Founder / CEO / GM": " You'll feel this most in how much of this still runs through you.",
+};
 
 const pillarMoves: Record<string, string> = {
   data: "Agree one source of truth first. Until the numbers agree, everything downstream inherits the doubt.",
@@ -114,13 +113,55 @@ const pillarMoves: Record<string, string> = {
   compliance: "Build the evidence trail into the workflow, so readiness is a by-product, not a scramble.",
 };
 
-const itemLow: Record<string, string> = {};
-pillars.forEach((p) => p.items.forEach((it, i) => (itemLow[`${p.id}-${i}`] = it.low)));
-const pillarMeta = pillars.map((p) => ({ id: p.id, n: p.n, label: p.label, count: p.items.length }));
-const exampleNoun: Record<string, string> = {
-  Developer: "board pack", Brokerage: "management report", "Property / asset manager": "owner report",
-  "Owners' association": "committee report", "Family office": "investor update",
+const pillarCost: Record<string, string> = {
+  data: "Left as-is, every {noun} you publish carries a number you can't fully stand behind — and you find out which one in the room.",
+  reporting: "Left as-is, leadership keeps making calls on numbers that land too late or read two ways — the report arrives after the decision.",
+  automation: "Left as-is, the close runs on specific people staying well and staying put — one leave, one resignation, and the month stalls.",
+  compliance: "Left as-is, the next records request turns into a multi-day scramble, exactly when you can least afford one.",
 };
+
+const pillarReads: Record<string, Record<string, string>> = {
+  data: {
+    risk: "The numbers underneath everything aren't trustworthy yet — until that's fixed, every report built on them inherits the doubt.",
+    patchy: "Right often enough to use, but not often enough to trust without checking — so someone is always quietly checking.",
+    manual: "Largely sound; what's left is reconciliation that still falls on people rather than systems.",
+    strong: "Holds up — agreement across systems, traceable to source. This is the asset the rest should be built on.",
+  },
+  reporting: {
+    risk: "Effectively manual and ad hoc — every number is a fresh excavation, and that's a tax on every decision.",
+    patchy: "Reports come together, but slowly and inconsistently — the answer can depend on who pulled it and when.",
+    manual: "Works and arrives on time; the gap is from ‘what happened’ to ‘what to do’, and from one view to many.",
+    strong: "A genuine strength — consistent, timely, and pointed at decisions rather than just records.",
+  },
+  automation: {
+    risk: "Almost nothing runs without a hand on it — your close moves at the speed of one person's availability.",
+    patchy: "Some of it's automated, but the chain breaks silently and recovery is manual — you find out when something's already late.",
+    manual: "The routine mostly runs itself; the remaining manual steps are the ones that hurt most when a key person is out.",
+    strong: "Largely runs itself, survives someone being on leave, and frees your people to analyse rather than copy-paste.",
+  },
+  compliance: {
+    risk: "Reactive — a records or audit request would mean a scramble, and that exposure compounds quietly.",
+    patchy: "You can meet requirements, but each one is a project rather than a routine, and the period-end rework is heavy.",
+    manual: "Controls mostly in place; what's missing is the systematic capture that turns a fire-drill into a five-minute export.",
+    strong: "Confident shape — clean trails, clear owners, requests answerable in hours. Hard-won and worth protecting.",
+  },
+};
+
+const severityPrefix: Record<string, string> = {
+  "One asset or project": "Even at one asset, ",
+  "A handful": "Across a handful of assets, ",
+  Dozens: "At dozens of assets this compounds — ",
+  "Hundreds+": "At your scale this compounds hard — ",
+};
+
+const exampleNoun: Record<string, string> = {
+  Developer: "board pack",
+  Brokerage: "management report",
+  "Property / asset manager": "owner report",
+  "Owners' association": "committee report",
+  "Family office": "investor update",
+};
+
 const blurbs: Record<string, string> = {
   data: "do your systems agree?",
   reporting: "can leadership act on it?",
@@ -128,37 +169,55 @@ const blurbs: Record<string, string> = {
   compliance: "ready when someone asks?",
 };
 
+const trackShort: Record<string, string> = {
+  data: "Data",
+  reporting: "Reporting",
+  automation: "Automation",
+  compliance: "Compliance",
+};
+
+const itemLow: Record<string, string> = {};
+pillars.forEach((p) => p.items.forEach((it, i) => (itemLow[`${p.id}-${i}`] = it.low)));
+const pillarMeta = pillars.map((p) => ({ id: p.id, n: p.n, label: p.label, count: p.items.length }));
 const total = pillars.reduce((s, p) => s + p.items.length, 0);
-const desc = "A 3-minute self-read on your data, reporting, automation, and compliance — with an honest, specific result. No grade, no pitch.";
+const cfg = { bands, pillarMeta, itemLow, moves: pillarMoves, cost: pillarCost, reads: pillarReads, roleTone, severity: severityPrefix, exampleNoun };
+const desc = "A 3-minute self-read on your data, reporting, automation, and compliance — with an honest, specific result. No grade, no pitch, nobody sees your answers.";
 ---
 
 <BaseLayout title="The AUXO Score — a quick self-read" description={desc} path="/self-check/">
   <Section padding="lg" width="6xl">
     <div class="ac" data-assessment data-total={total}>
-      <script type="application/json" id="ac-config" set:html={JSON.stringify({ bands, pillarMeta, itemLow, moves: pillarMoves, exampleNoun })} />
+      <script type="application/json" id="ac-config" set:html={JSON.stringify(cfg)} />
 
-      <!-- ===== sticky top bar: progress + nav (always at top, no scroll to reach) ===== -->
-      <div class="ac__bar" data-bar hidden>
-        <button type="button" class="ac__navbtn" data-back aria-label="Back">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="ac__track" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" data-track>
-          <span data-fill></span>
-          <em class="ac__steplabel" data-steplabel></em>
+      <div class="ac__sticky" data-bar hidden>
+        <div class="ac__steps" aria-hidden="true">
+          <span class="ac__seg"><i></i><em>Setup</em></span>
+          {pillars.map((p) => (<span class="ac__seg"><i></i><em>{trackShort[p.id]}</em></span>))}
         </div>
-        <button type="button" class="ac__navbtn ac__navbtn--next" data-next disabled>
-          <span data-next-label>Next</span>
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
+        <div class="ac__bar">
+          <button type="button" class="ac__navbtn" data-back aria-label="Back to previous section">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="ac__steplabel" data-steplabel aria-live="polite"></span>
+          <button type="button" class="ac__navbtn ac__navbtn--next" data-next disabled>
+            <span data-next-label>Next</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="ac__legend" data-legend hidden aria-hidden="true">
+          <span class="ac__legend-q">On a normal week, how true is each?</span>
+          <ol class="ac__legend-scale">
+            {SCALE.map((s) => (<li><b>{s.k}</b> {s.label}</li>))}
+          </ol>
+        </div>
       </div>
 
-      <!-- ===== INTRO ===== -->
       <div class="ac__step is-active" data-step="intro">
         <span class="ac__kicker">The AUXO Score</span>
         <h1 class="ac__title">How much can your data actually tell you?</h1>
         <p class="ac__lead">
           Answer honestly and you'll walk away with a clear <b>0–100 score</b>, a read on each
-          of the four things that decide whether your data works for you — and the single fix
+          of the four things that decide whether your data works for you — and the one fix
           that would move the needle most.
         </p>
         <ul class="ac__pillars">
@@ -177,15 +236,14 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           <button type="button" class="ac__link" data-resume hidden>Pick up where I left off</button>
         </div>
         <p class="ac__fine">
-          Everyone lands somewhere between <em>“foundations at risk”</em> and <em>“strong.”</em>
-          No grade, nobody sees your answers — the value is in the gaps. Tap, or press <kbd>1</kbd>–<kbd>5</kbd>.
+          There are no right answers here — an honest read is the only thing that makes the score
+          useful to you. Nobody sees it but you. Tap, or press <kbd>1</kbd>–<kbd>5</kbd>.
         </p>
       </div>
 
-      <!-- ===== CONTEXT ===== -->
       <div class="ac__step" data-step="context" data-name="A little context" hidden>
         <h2 class="ac__qtitle">First — who's answering?</h2>
-        <p class="ac__qsub">This tailors your read. It's optional and doesn't affect your score.</p>
+        <p class="ac__qsub">Optional, and it never changes your score. It just sharpens the read at the end. Skip it if you'd rather get straight in.</p>
         <div class="ac__ctx">
           <fieldset class="ac__field"><legend>Your role</legend>
             <div class="ac__chips" data-chips="role" data-single>
@@ -205,7 +263,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         </div>
       </div>
 
-      <!-- ===== PILLAR STEPS ===== -->
       {pillars.map((p) => (
         <div class="ac__step" data-step="pillar" data-pillar={p.id} data-name={p.label} hidden>
           <p class="ac__scenario">{p.scenario}</p>
@@ -215,33 +272,45 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
             {p.items.map((it, ii) => (
               <li class="ac__item" data-item>
                 <span class="ac__statement">{it.t}</span>
-                <div class="ac__scale" role="radiogroup" aria-label={it.t} data-scale data-q={`${p.id}-${ii}`}>
-                  {SCALE.map((s) => (
-                    <button type="button" class="ac__dot" role="radio" aria-checked="false"
-                      data-score={s.v} aria-label={`${s.v} — ${s.label}`} title={s.label}>{s.k}</button>
-                  ))}
+                <div class="ac__answer">
+                  <div class="ac__scale" role="radiogroup" aria-label={it.t} data-scale data-q={`${p.id}-${ii}`}>
+                    {SCALE.map((s) => (
+                      <button type="button" class="ac__dot" role="radio" aria-checked="false"
+                        data-score={s.v} aria-label={`${s.v} — ${s.label}`} title={s.label}>{s.k}</button>
+                    ))}
+                  </div>
+                  <span class="ac__pick" data-pick aria-hidden="true"></span>
                 </div>
               </li>
             ))}
           </ol>
-          <div class="ac__scalekey" aria-hidden="true"><span>{SCALE[0].label}</span><span>{SCALE[4].label}</span></div>
         </div>
       ))}
 
-      <!-- ===== RESULTS ===== -->
       <div class="ac__step ac__results" data-step="results" hidden>
+        <div class="ac__cachedbar" data-returning hidden>
+          <span class="ac__cachedbar-kicker">Welcome back</span>
+          <p data-returning-line>Here's the read you got last time. Nothing's changed unless you have.</p>
+          <button type="button" class="ac__btn" data-variant="ghost" data-restart>Start over</button>
+          <span class="ac__cachedbar-sub">Runs the 28 again — this read stays until you finish a new one.</span>
+        </div>
+
         <span class="ac__kicker">Your AUXO Score</span>
         <p class="ac__sub" data-sub></p>
         <div class="ac__scorewrap">
           <div class="ac__gauge">
-            <svg viewBox="0 0 120 120" aria-hidden="true">
-              <circle class="ac__gtrack" cx="60" cy="60" r="52"/>
-              <circle class="ac__gfill" cx="60" cy="60" r="52" data-gauge-fill/>
+            <svg viewBox="0 0 120 120" role="img" aria-label="Your AUXO Score out of 100">
+              <g transform="rotate(-90 60 60)">
+                <circle class="ac__gtrack" cx="60" cy="60" r="52"/>
+                <circle class="ac__gfill" cx="60" cy="60" r="52" data-gauge-fill pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+              </g>
+              <text class="ac__g-num" x="60" y="60" data-score-num text-anchor="middle" dominant-baseline="central">0</text>
+              <text class="ac__g-unit" x="60" y="82" text-anchor="middle" dominant-baseline="central">/100</text>
             </svg>
-            <div class="ac__scorenum"><span data-score-num>0</span><i>/100</i></div>
           </div>
           <div class="ac__verdict">
             <p class="ac__band" data-band>—</p>
+            <p class="ac__shape" data-shape></p>
             <p class="ac__read" data-read></p>
             <p class="ac__tonext" data-tonext hidden></p>
           </div>
@@ -249,7 +318,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
         <div class="ac__insight" data-pattern hidden>
           <span class="ac__insight-tag">What stands out</span>
-          <h3 data-pattern-title></h3>
+          <h3 data-pattern-title>—</h3>
           <p data-pattern-body></p>
         </div>
 
@@ -260,201 +329,272 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         <div class="ac__bars" data-bars>
           {pillars.map((p) => (
             <div class="ac__pbar" data-pbar={p.id}>
-              <div class="ac__pbar-top"><span><span class="ac__pn">{p.n}</span> {p.label}</span><b><span data-pbar-num>0</span><small>/100</small></b></div>
+              <div class="ac__pbar-top">
+                <span class="ac__pbar-name"><span class="ac__pn">{p.n}</span> {p.label}
+                  <button type="button" class="ac__info" data-info aria-expanded="false" aria-label={`What your ${p.label} score means`}>i</button>
+                </span>
+                <b><span data-pbar-num>0</span><small>/100</small></b>
+              </div>
               <div class="ac__pbar-track"><i class="ac__pbar-aim"></i><span data-pbar-fill></span></div>
+              <div class="ac__tip" data-pbar-read role="tooltip"></div>
             </div>
           ))}
         </div>
 
+        <p class="ac__strength-line" data-strength-line hidden></p>
+
         <div class="ac__gaps" data-gaps hidden>
           <h3>Your sharpest gaps</h3>
-          <p class="ac__gaps-sub">The specific things you flagged as weak — in plain terms.</p>
-          <ul data-gaps-list></ul>
+          <p class="ac__gaps-sub">The statements you rated lowest, in plain terms — grouped by pillar.</p>
+          <ul class="ac__gaps-list" data-gaps-list></ul>
         </div>
 
         <div class="ac__start" data-start-block hidden>
           <span class="ac__start-tag">If you fix one thing</span>
           <p class="ac__start-lead" data-weak-name></p>
+          <p class="ac__cost" data-weak-cost></p>
           <p data-weak-move></p>
           <p class="ac__aim-line" data-weak-aim></p>
-          <p class="ac__strength" data-strength></p>
         </div>
 
         <details class="ac__how">
-          <summary>How the score works</summary>
+          <summary>How your score works</summary>
           <div class="ac__how-body">
             <p>Each statement scores 1–5. Each pillar is normalised to 0–100 — <code>(sum of its answers − count) ÷ (4 × count) × 100</code> — so all 1s is 0 and all 5s is 100. Your AUXO Score is the equal-weighted average of the four. No hidden weighting, no curve.</p>
             <p class="ac__note">It's a self-read, so it's only as honest as your answers — enough to show you where to look, not a substitute for examining the real systems.</p>
           </div>
         </details>
 
-        <div class="ac__cta">
-          <p class="ac__cta-lead" data-cta-lead></p>
+        <div class="ac__close">
           <div class="ac__actions">
-            <button type="button" class="ac__btn" data-variant="primary" data-google-calendar-open>Book a meeting</button>
-            <a class="ac__btn" data-variant="outline" data-email-results href="#">Email me this</a>
-            <button type="button" class="ac__btn" data-variant="ghost" data-copy>
-              <span data-copy-label>Copy summary</span>
+            <button type="button" class="ac__btn" data-variant="primary" data-copy>
+              <span data-copy-label>Copy my summary</span>
             </button>
+            <button type="button" class="ac__link" data-restart>Start over</button>
           </div>
-          <p class="ac__fine">No obligation. A real person replies within one business day · <a href="mailto:hello@auxodata.com">hello@auxodata.com</a></p>
-          <button type="button" class="ac__link" data-restart>Start over</button>
+          <p class="ac__fine">
+            Everything here stayed in your browser — nothing was sent or saved. If a number stings and
+            you'd want a second pair of eyes, AUXO reads these:
+            <button type="button" class="ac__inlinelink" data-google-calendar-open>book a 30-minute read-out</button>
+            or email <a href="mailto:hello@auxodata.com">hello@auxodata.com</a>. No pitch — you'll get a straight answer.
+          </p>
         </div>
       </div>
     </div>
   </Section>
 
   <style>
-    .draft-flag { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); border: 1px dashed var(--border-strong); border-radius: var(--radius-full); padding: 0.5rem 0.9rem; display: inline-block; margin-bottom: 1.6rem; }
-    .ac { max-width: 52rem; margin-inline: auto; }
-    .ac__step { animation: ac-in 0.35s ease both; }
-    [data-motion="off"] .ac__step { animation: none; }
+    .ac { --ac-1: .4rem; --ac-2: .7rem; --ac-3: 1.1rem; --ac-4: 1.6rem; --ac-5: 2.4rem; --ac-6: 3.2rem; max-width: 52rem; margin-inline: auto; }
+    .ac [tabindex="-1"]:focus { outline: none; }
+    .ac__step { opacity: 1; transform: none; }
+    html[data-motion="on"] .ac__step.is-active { animation: ac-in .3s var(--ease-out) both; }
     @keyframes ac-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-    .ac__kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); display: block; margin-bottom: 1rem; }
+    .ac__kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); display: block; margin-bottom: var(--ac-3); }
     .ac__pn { font: 600 0.85em/1 var(--font-mono); color: var(--accent-2); letter-spacing: var(--tracking-mono); }
 
-    /* top bar */
-    .ac__bar { position: sticky; top: 0.5rem; z-index: 5; display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.6rem; padding: 0.5rem; background: color-mix(in oklch, var(--background) 86%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--border); border-radius: var(--radius-full); }
-    .ac__navbtn { flex: none; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; font: 600 var(--text-sm)/1 var(--font-sans); color: var(--foreground); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0.5rem 0.7rem; transition: opacity .15s, background .15s, border-color .15s; }
+    .ac__sticky { position: sticky; top: 0.5rem; z-index: 5; margin-bottom: var(--ac-4); padding: 0.65rem 0.75rem; background: color-mix(in oklch, var(--background) 88%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+    .ac__steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--ac-1); margin-bottom: var(--ac-2); }
+    .ac__seg { display: grid; gap: var(--ac-1); min-width: 0; }
+    .ac__seg i { height: 4px; border-radius: var(--radius-full); background: var(--surface-sunken); }
+    .ac__seg[data-state="done"] i { background: var(--accent); }
+    .ac__seg[data-state="current"] i { background: var(--accent-2); }
+    html[data-motion="on"] .ac__seg i { transition: background .35s var(--ease-glide); }
+    .ac__seg em { font: 600 0.68rem/1.2 var(--font-mono); letter-spacing: 0.01em; text-transform: uppercase; color: var(--subtle); font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ac__seg[data-state="current"] em { color: var(--foreground); }
+    .ac__seg[data-state="done"] em { color: var(--muted); }
+    .ac__bar { display: flex; align-items: center; gap: var(--ac-2); }
+    .ac__navbtn { flex: none; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; min-height: 2.5rem; font: 600 var(--text-sm)/1 var(--font-sans); color: var(--foreground); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0.5rem 0.7rem; }
+    html[data-motion="on"] .ac__navbtn { transition: opacity .15s, background .15s, border-color .15s; }
     .ac__navbtn--next { padding-inline: 1rem; background: var(--accent); color: var(--accent-foreground); border-color: var(--accent); }
     .ac__navbtn[disabled] { opacity: 0.35; cursor: not-allowed; }
     .ac__navbtn:not([disabled]):hover { border-color: var(--border-strong); }
-    .ac__track { position: relative; flex: 1; height: 30px; border-radius: var(--radius-full); background: var(--surface-sunken); overflow: hidden; display: flex; align-items: center; }
-    .ac__track > span { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, var(--accent-2), var(--accent)); opacity: 0.22; transition: width .5s cubic-bezier(.22,1,.36,1); }
-    [data-motion="off"] .ac__track > span { transition: none; }
-    .ac__steplabel { position: relative; padding-inline: 0.9rem; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--muted); font-style: normal; }
+    .ac__steplabel { flex: 1; min-width: 0; text-align: center; font: 600 var(--text-xs)/1.3 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--muted); font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ac__legend { margin-top: var(--ac-2); padding-top: var(--ac-2); border-top: 1px solid var(--hairline); }
+    .ac__legend-q { display: block; font-size: var(--text-xs); color: var(--subtle); margin-bottom: var(--ac-1); }
+    .ac__legend-scale { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; padding: 0; margin: 0; }
+    .ac__legend-scale li { font-size: var(--text-xs); color: var(--muted); display: inline-flex; gap: 0.3rem; align-items: baseline; }
+    .ac__legend-scale b { font: 600 0.85em/1 var(--font-mono); color: var(--accent); }
 
-    .ac__title { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-3xl); line-height: 1.04; letter-spacing: var(--tracking-display-3xl); text-wrap: balance; margin: 0 0 1rem; }
-    .ac__lead { color: var(--muted); font-size: var(--text-lg); max-width: 46ch; margin: 0 0 1.6rem; }
-    .ac__pillars { list-style: none; padding: 0; margin: 0 0 1.8rem; display: grid; gap: 0.5rem; }
-    .ac__pillars li { display: flex; align-items: baseline; gap: 0.6rem; font-weight: 500; }
+    .ac__title { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-3xl); line-height: 1.04; letter-spacing: var(--tracking-display-3xl); text-wrap: balance; margin: 0 0 var(--ac-3); }
+    .ac__lead { color: var(--muted); font-size: var(--text-lg); max-width: 46ch; margin: 0 0 var(--ac-4); }
+    .ac__pillars { list-style: none; padding: 0; margin: 0 0 var(--ac-4); display: grid; gap: 0.5rem; }
+    .ac__pillars li { display: flex; align-items: baseline; gap: 0.6rem; font-weight: 500; flex-wrap: wrap; }
 
     .ac__qtitle { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-2xl); letter-spacing: var(--tracking-display-2xl); margin: 0 0 0.5rem; }
-    .ac__qsub { color: var(--muted); margin: 0 0 1.4rem; }
-    .ac__scenario { font-size: var(--text-lg); line-height: 1.35; border-left: 3px solid var(--accent-2); padding-left: 0.9rem; margin: 0 0 0.7rem; }
-    .ac__ease { color: var(--muted); font-size: var(--text-sm); margin: 0 0 1.1rem; }
-    .ac__legal { font-size: var(--text-xs); color: var(--subtle); background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.6rem 0.8rem; margin: 0 0 1.1rem; }
+    .ac__qsub { color: var(--muted); margin: 0 0 var(--ac-4); max-width: 50ch; }
+    .ac__scenario { font-size: var(--text-lg); line-height: 1.35; border-left: 3px solid var(--accent-2); padding-left: 0.9rem; margin: 0 0 var(--ac-2); }
+    .ac__ease { color: var(--muted); font-size: var(--text-sm); margin: 0 0 var(--ac-3); }
+    .ac__legal { font-size: var(--text-xs); color: var(--subtle); background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.6rem 0.8rem; margin: 0 0 var(--ac-3); }
 
-    /* chips */
-    .ac__ctx { display: grid; gap: 1.2rem; }
+    .ac__ctx { display: grid; gap: var(--ac-3); }
     .ac__field { border: 0; padding: 0; margin: 0; }
     .ac__field legend { font-weight: 600; margin-bottom: 0.6rem; padding: 0; font-size: var(--text-sm); }
     .ac__chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-    .ac__chip { font: inherit; font-size: var(--text-sm); cursor: pointer; background: var(--surface); color: var(--foreground); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0.45rem 0.95rem; transition: border-color .15s, background .15s; }
+    .ac__chip { font: inherit; font-size: var(--text-sm); cursor: pointer; background: var(--surface); color: var(--foreground); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0.45rem 0.95rem; }
+    html[data-motion="on"] .ac__chip { transition: border-color .15s, background .15s; }
     .ac__chip:hover { border-color: var(--border-strong); }
     .ac__chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
 
-    /* compact item rows (statement + inline scale) */
-    .ac__items { list-style: none; padding: 0; margin: 0 0 0.7rem; display: grid; gap: 0.35rem; }
+    .ac__items { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; }
     .ac__item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.6rem 1rem; padding: 0.55rem 0.7rem; border-radius: var(--radius-md); border: 1px solid transparent; }
-    .ac__item[data-active] { border-color: var(--border); background: var(--surface-sunken); }
+    .ac__item[data-active] { border-color: var(--border); background: var(--surface); }
+    .ac__item[data-answered] { background: var(--surface-sunken); }
     .ac__item[data-answered] .ac__statement { color: var(--muted); }
     .ac__statement { font-weight: 500; line-height: 1.35; font-size: var(--text-sm); }
+    .ac__answer { display: grid; justify-items: end; gap: 0.3rem; }
     .ac__scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.3rem; }
-    .ac__dot { cursor: pointer; width: 2.2rem; height: 2.2rem; font: 600 var(--text-sm)/1 var(--font-mono); color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); transition: transform .12s, border-color .15s, background .15s, color .15s; }
+    .ac__dot { cursor: pointer; width: 2.2rem; height: 2.2rem; font: 600 var(--text-sm)/1 var(--font-mono); color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+    html[data-motion="on"] .ac__dot { transition: transform .12s, border-color .15s, background .15s, color .15s; }
     .ac__dot:hover { border-color: var(--accent); color: var(--foreground); }
-    .ac__dot[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-foreground); transform: translateY(-1px); }
-    .ac__scalekey { display: flex; justify-content: space-between; font: 500 var(--text-xs)/1 var(--font-mono); color: var(--subtle); padding: 0 0.7rem; }
+    .ac__dot[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-foreground); }
+    .ac__pick { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--accent); min-height: 0.8em; }
+    .ac__pick:empty { visibility: hidden; }
 
-    /* shared buttons */
-    .ac__actions { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
-    .ac__btn { font: 600 var(--text-sm)/1 var(--font-sans); cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; padding: 0.85rem 1.4rem; border-radius: var(--radius-md); border: 1px solid transparent; transition: transform .12s, opacity .15s, border-color .15s; }
-    .ac__btn[data-variant="primary"] { background: var(--accent); color: var(--accent-foreground); }
-    .ac__btn[data-variant="outline"] { background: transparent; color: var(--foreground); border-color: var(--border-strong); }
-    .ac__btn:hover { transform: translateY(-1px); }
+    .ac__actions { display: flex; gap: var(--ac-2); flex-wrap: wrap; align-items: center; }
+    .ac__btn { font: 600 var(--text-sm)/1 var(--font-sans); cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; padding: 0.85rem 1.4rem; border-radius: var(--radius-md); border: 1px solid transparent; }
+    html[data-motion="on"] .ac__btn { transition: transform .12s, opacity .15s, border-color .15s, background .15s; }
+    .ac__btn[data-variant="primary"] { background: var(--foreground); color: var(--background); }
+    .ac__btn[data-variant="primary"]:hover { background: color-mix(in oklch, var(--foreground) 86%, var(--background)); }
+    .ac__btn[data-variant="ghost"] { background: transparent; color: var(--foreground); border-color: var(--border-strong); }
+    .ac__btn[data-variant="ghost"]:hover { border-color: var(--foreground); }
+    html[data-motion="on"] .ac__btn:hover { transform: translateY(-1px); }
+    html[data-motion="on"] .ac__btn:active { transform: scale(0.98); }
     .ac__link { background: none; border: 0; color: var(--accent); cursor: pointer; font: inherit; text-decoration: underline; }
-    .ac__fine { font-size: var(--text-xs); color: var(--subtle); margin: 1rem 0 0; }
+    .ac__inlinelink { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; font: inherit; text-decoration: underline; }
+    .ac__fine { font-size: var(--text-xs); color: var(--subtle); margin: var(--ac-3) 0 0; max-width: 60ch; line-height: 1.6; }
     .ac__fine a { color: var(--accent); }
     kbd { font: 600 0.9em/1 var(--font-mono); background: var(--surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: var(--radius-sm); padding: 0.1rem 0.35rem; }
 
-    /* results */
-    .ac__scorewrap { display: flex; gap: 1.6rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.8rem; }
-    .ac__gauge { position: relative; width: 132px; height: 132px; flex: none; }
-    .ac__gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-    .ac__gtrack { fill: none; stroke: var(--surface-raised); stroke-width: 10; }
-    .ac__gfill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 327; stroke-dashoffset: 327; transition: stroke-dashoffset 1s cubic-bezier(.22,1,.36,1); }
-    [data-motion="off"] .ac__gfill { transition: none; }
-    .ac__scorenum { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-brand); font-weight: 700; font-size: var(--text-2xl); }
-    .ac__scorenum i { font-size: var(--text-sm); color: var(--subtle); font-style: normal; align-self: flex-end; padding-bottom: 0.5rem; margin-left: 2px; }
-    .ac__band { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-xl); margin: 0 0 0.4rem; color: var(--accent); }
-    .ac__read { color: var(--muted); margin: 0; max-width: 52ch; }
+    .ac__cachedbar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1rem; background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.8rem 1rem; margin-bottom: var(--ac-4); font-size: var(--text-sm); }
+    .ac__cachedbar-kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent); }
+    .ac__cachedbar p { margin: 0; color: var(--muted); flex: 1; min-width: 14rem; }
+    .ac__cachedbar-sub { width: 100%; font-size: var(--text-xs); color: var(--subtle); }
 
-    .ac__insight { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface-sunken); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: 1.6rem; }
+    .ac__scorewrap { display: flex; gap: var(--ac-4); align-items: center; flex-wrap: wrap; margin-bottom: var(--ac-4); }
+    .ac__gauge { width: 140px; height: 140px; flex: none; }
+    .ac__gauge svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .ac__gtrack { fill: none; stroke: var(--surface-raised); stroke-width: 10; }
+    .ac__gfill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; stroke-dashoffset: 100; }
+    html[data-motion="on"] .ac__gfill { transition: stroke-dashoffset 1s var(--ease-glide), stroke .4s linear; }
+    .ac__g-num { font-family: var(--font-brand); font-weight: 700; font-size: 34px; fill: var(--foreground); }
+    .ac__g-unit { font-family: var(--font-mono); font-size: 11px; fill: var(--subtle); letter-spacing: .04em; }
+    .ac__verdict { flex: 1; min-width: 16rem; }
+    .ac__band { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-xl); margin: 0 0 0.4rem; color: var(--accent); }
+    .ac__shape { color: var(--foreground); margin: 0 0 0.5rem; max-width: 52ch; font-weight: 500; }
+    .ac__read { color: var(--muted); margin: 0; max-width: 52ch; }
+    .ac__tonext { margin: 0.7rem 0 0; font-size: var(--text-sm); color: var(--accent); font-weight: 600; }
+    .ac__tonext[hidden] { display: none; }
+
+    .ac__insight { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface-sunken); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
+    .ac__insight-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
     .ac__insight h3 { margin: 0 0 0.4rem; font-size: var(--text-lg); }
     .ac__insight p { margin: 0; color: var(--muted); }
 
-    .ac__bars { display: grid; gap: 0.9rem; margin-bottom: 1.6rem; }
-    .ac__pbar-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; font-weight: 500; }
-    .ac__pbar-top b { font: 700 var(--text-base)/1 var(--font-mono); }
-    .ac__pbar-track { height: 7px; border-radius: var(--radius-full); background: var(--surface-sunken); overflow: hidden; }
-    .ac__pbar-track > span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--accent); transition: width .9s cubic-bezier(.22,1,.36,1); }
-    .ac__pbar[data-weak] .ac__pbar-track > span { background: var(--accent-2); }
-    .ac__pbar[data-weak] .ac__pbar-top b { color: var(--accent-2); }
-    [data-motion="off"] .ac__pbar-track > span { transition: none; }
-
-    .ac__gaps { margin-bottom: 1.6rem; }
-    .ac__gaps h3, .ac__start-lead { font-size: var(--text-lg); margin: 0 0 0.7rem; }
-    .ac__gaps ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
-    .ac__gaps li { position: relative; padding-left: 1.3rem; color: var(--muted); }
-    .ac__gaps li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent-2); }
-
-    .ac__start { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: 1.6rem; }
-    .ac__start p { margin: 0 0 0.5rem; color: var(--muted); }
-    .ac__start-lead { color: var(--foreground) !important; }
-    .ac__strength { font-size: var(--text-sm); color: var(--subtle); margin: 0.7rem 0 0; }
-    .ac__note { font-size: var(--text-sm); color: var(--subtle); }
-
-    .ac__how { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 1.8rem; }
-    .ac__how summary { cursor: pointer; padding: 0.85rem 1.1rem; font-weight: 600; font-size: var(--text-sm); }
-    .ac__how-body { padding: 0 1.1rem 1.1rem; }
-    .ac__how-body p { color: var(--muted); margin: 0 0 0.5rem; font-size: var(--text-sm); }
-    .ac__how code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-sunken); padding: 0.1rem 0.35rem; border-radius: var(--radius-sm); color: var(--foreground); }
-
-    .ac__cta { border-top: 1px solid var(--border); padding-top: 1.5rem; }
-    .ac__cta-lead { font-size: var(--text-lg); margin: 0 0 1rem; max-width: 52ch; }
-
-    /* intro extras */
-    .ac__pillars li { align-items: baseline; flex-wrap: wrap; }
-    .ac__blurb { color: var(--subtle); font-weight: 400; font-size: var(--text-sm); }
-    .ac__meta { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; padding: 0; margin: 0 0 1.8rem; }
-    .ac__meta li { position: relative; padding-left: 1.1rem; font: 600 var(--text-xs)/1.3 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
-    .ac__meta li::before { content: ""; position: absolute; left: 0; top: 0.15em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
-    .ac__fine em { color: var(--muted); font-style: normal; }
-    .ac__btn[data-variant="ghost"] { background: transparent; color: var(--muted); border-color: var(--border); }
-
-    /* results extras */
-    .ac__sub { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--subtle); margin: 0 0 1.4rem; }
-    .ac__tonext { margin: 0.7rem 0 0; font-size: var(--text-sm); color: var(--accent); font-weight: 600; }
-    .ac__tonext[hidden] { display: none; }
-    .ac__insight-tag, .ac__start-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
     .ac__barshead { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.9rem; }
     .ac__barshead h3 { margin: 0; font-size: var(--text-lg); }
     .ac__aimkey { display: inline-flex; align-items: center; gap: 0.4rem; font: 500 var(--text-xs)/1 var(--font-mono); color: var(--subtle); }
     .ac__aimkey i { width: 2px; height: 12px; background: var(--foreground); opacity: 0.5; border-radius: 1px; }
-    .ac__pbar-top b { display: inline-flex; align-items: baseline; gap: 1px; }
+    .ac__bars { display: grid; gap: var(--ac-3); margin-bottom: var(--ac-4); }
+    .ac__pbar { position: relative; }
+    .ac__pbar-top { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; font-weight: 500; }
+    .ac__pbar-name { display: inline-flex; align-items: baseline; gap: 0.35rem; flex-wrap: wrap; }
+    .ac__info { flex: none; align-self: center; width: 1.15rem; height: 1.15rem; display: inline-grid; place-items: center; cursor: pointer; font: 600 0.72rem/1 var(--font-mono); font-style: italic; color: var(--subtle); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); }
+    html[data-motion="on"] .ac__info { transition: color .15s, border-color .15s; }
+    .ac__info:hover, .ac__info[aria-expanded="true"] { color: var(--foreground); border-color: var(--border-strong); }
+    .ac__tip { position: absolute; left: 0; right: 0; top: calc(100% + 0.4rem); z-index: 6; opacity: 0; visibility: hidden; transform: translateY(-3px); background: var(--surface-raised); border: 1px solid var(--border-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: 0.7rem 0.85rem; font-size: var(--text-sm); color: var(--foreground); }
+    html[data-motion="on"] .ac__tip { transition: opacity .15s, visibility .15s, transform .15s; }
+    .ac__tip[data-show] { opacity: 1; visibility: visible; transform: none; }
+    .ac__pbar:has(.ac__info:focus-visible) .ac__tip { opacity: 1; visibility: visible; transform: none; }
+    @media (hover: hover) { .ac__pbar:hover .ac__tip { opacity: 1; visibility: visible; transform: none; } }
+    .ac__pbar-top b { font: 700 var(--text-base)/1 var(--font-mono); display: inline-flex; align-items: baseline; gap: 1px; }
     .ac__pbar-top b small { font-size: 0.7em; color: var(--subtle); font-weight: 500; }
-    .ac__pbar-track { position: relative; }
+    .ac__pbar-track { position: relative; height: 7px; border-radius: var(--radius-full); background: var(--surface-sunken); overflow: hidden; }
+    .ac__pbar-track > span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--accent); }
+    html[data-motion="on"] .ac__pbar-track > span { transition: width .9s var(--ease-glide); }
+    .ac__pbar[data-weak] .ac__pbar-track > span { background: var(--accent-2); }
+    .ac__pbar[data-weak] .ac__pbar-top b { color: var(--accent-2); }
     .ac__pbar-aim { position: absolute; left: 75%; top: -2px; bottom: -2px; width: 2px; background: var(--foreground); opacity: 0.45; border-radius: 1px; z-index: 1; }
-    .ac__gaps-sub { color: var(--subtle); font-size: var(--text-sm); margin: 0 0 0.9rem; }
-    .ac__gaps li { display: grid; gap: 0.2rem; padding-left: 0; }
-    .ac__gaps li::before { display: none; }
-    .ac__gap-tag { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); }
-    .ac__gap-line { color: var(--muted); }
-    .ac__aim-line { color: var(--foreground) !important; font-size: var(--text-sm); }
-    .ac__toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(1rem); opacity: 0; background: var(--foreground); color: var(--background); font-weight: 600; font-size: var(--text-sm); padding: 0.6rem 1.1rem; border-radius: var(--radius-full); transition: opacity .25s, transform .25s; pointer-events: none; z-index: 20; }
-    .ac__toast[data-show] { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    @media (max-width: 600px) {
-      .ac__item { grid-template-columns: 1fr; gap: 0.5rem; }
-      .ac__dot { width: 100%; height: 2.4rem; }
-      .ac__steplabel { display: none; }
-      .ac__navbtn--next span { display: none; }
-      .ac__barshead { flex-direction: column; gap: 0.3rem; }
+    .ac__strength-line { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin: 0 0 var(--ac-4); color: var(--foreground); }
+    .ac__strength-line[hidden] { display: none; }
+
+    .ac__gaps { margin-bottom: var(--ac-4); }
+    .ac__gaps h3 { font-size: var(--text-lg); margin: 0 0 0.5rem; }
+    .ac__gaps-sub { color: var(--subtle); font-size: var(--text-sm); margin: 0 0 0.9rem; max-width: 60ch; }
+    :global(.ac__gaps-list) { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+    :global(.ac__gap) { display: grid; gap: 0.45rem; }
+    :global(.ac__gap-tag) { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); }
+    :global(.ac__gap-lines) { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; }
+    :global(.ac__gap-lines li) { position: relative; padding-left: 1.15rem; color: var(--muted); }
+    :global(.ac__gap-lines li::before) { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 2px; background: var(--accent-2); }
+
+    .ac__start { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
+    .ac__start-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
+    .ac__start p { margin: 0 0 0.5rem; color: var(--muted); }
+    .ac__start-lead { color: var(--foreground) !important; font-size: var(--text-lg); }
+    .ac__cost { color: var(--muted) !important; }
+    .ac__aim-line { color: var(--foreground) !important; font-size: var(--text-sm); margin-bottom: 0 !important; }
+
+    .ac__note { font-size: var(--text-sm); color: var(--subtle); }
+    .ac__how { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: var(--ac-4); }
+    .ac__how summary { cursor: pointer; padding: 0.85rem 1.1rem; font-weight: 600; font-size: var(--text-sm); }
+    .ac__how-body { padding: 0 1.1rem 1.1rem; }
+    .ac__how-body p { color: var(--muted); margin: 0 0 0.5rem; font-size: var(--text-sm); }
+    .ac__how code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-sunken); padding: 0.1rem 0.35rem; border-radius: var(--radius-sm); color: var(--foreground); }
+    .ac__close { border-top: 1px solid var(--border); padding-top: var(--ac-4); }
+
+    .ac__blurb { color: var(--subtle); font-weight: 400; font-size: var(--text-sm); }
+    .ac__meta { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; padding: 0; margin: 0 0 var(--ac-4); }
+    .ac__meta li { position: relative; padding-left: 1.1rem; font: 600 var(--text-xs)/1.3 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
+    .ac__meta li::before { content: ""; position: absolute; left: 0; top: 0.15em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+    .ac__sub { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--subtle); margin: 0 0 var(--ac-4); }
+
+    :global(.ac__toast) { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(1rem); opacity: 0; background: var(--foreground); color: var(--background); font-weight: 600; font-size: var(--text-sm); padding: 0.6rem 1.1rem; border-radius: var(--radius-full); transition: opacity .25s, transform .25s; pointer-events: none; z-index: 1200; }
+    :global(.ac__toast[data-show]) { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 640px) {
+      .ac { --ac-4: 1.3rem; --ac-5: 1.9rem; }
+      .ac__sticky { top: 0.4rem; padding: 0.5rem 0.55rem; border-radius: var(--radius-md); }
+      .ac__steps { gap: 0.3rem; margin-bottom: 0.5rem; }
+      .ac__seg em { display: none; }
+      .ac__seg i { height: 5px; }
+      .ac__bar { gap: 0.5rem; }
+      .ac__navbtn { padding: 0.5rem 0.6rem; }
+      .ac__navbtn--next { padding-inline: 0.85rem; }
+      .ac__steplabel { font-size: 0.68rem; letter-spacing: 0.04em; }
+      .ac__legend { margin-top: 0.5rem; padding-top: 0.5rem; }
+      .ac__legend-q { display: none; }
+      .ac__legend-scale { gap: 0.25rem 0.7rem; }
+
+      .ac__title { font-size: var(--text-2xl); }
+      .ac__scenario { font-size: var(--text-base); }
+      .ac__item { grid-template-columns: 1fr; gap: 0.45rem; padding: 0.6rem 0.7rem; }
+      .ac__statement { font-size: var(--text-base); }
+      .ac__answer { justify-items: stretch; }
+      .ac__scale { gap: 0.35rem; }
+      .ac__dot { width: 100%; height: 2.85rem; font-size: var(--text-base); }
+      .ac__pick { text-align: left; }
+      .ac__chip { padding: 0.6rem 1rem; }
+
+      .ac__scorewrap { gap: 1rem; }
+      .ac__gauge { width: 116px; height: 116px; }
+      .ac__verdict { min-width: 100%; }
+      .ac__barshead { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+      .ac__insight, .ac__start, .ac__strength-line { padding: 0.9rem 1rem; }
+      .ac__cachedbar { padding: 0.7rem 0.85rem; }
+      .ac__cachedbar [data-restart] { margin-left: auto; }
     }
   </style>
 
   <script>
-    const KEY = "auxo-self-check-v2";
+    const KEY = "auxo-self-check-v3";
+    const RESULT_KEY = "auxo-self-check-result-v3";
+    const BADGE_KEY = "auxo-self-check-badge-v1";
+    const STORE_VERSION = 3;
+
+    type Ctx = { role?: string; business?: string; scale?: string };
+    type Store = { v: number; answers: Record<string, number>; ctx: Ctx; step: number };
+    type Result = { v: number; ts: number; overall: number; band: string; weak: string; strong: string; scores: Record<string, number>; answers: Record<string, number>; ctx: Ctx };
 
     function init() {
       const root = document.querySelector<HTMLElement>("[data-assessment]");
@@ -466,47 +606,78 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       const meta = cfg.pillarMeta as Array<{ id: string; n: string; label: string; count: number }>;
       const itemLow = cfg.itemLow as Record<string, string>;
       const moves = cfg.moves as Record<string, string>;
+      const costs = cfg.cost as Record<string, string>;
+      const reads = cfg.reads as Record<string, Record<string, string>>;
+      const roleTone = cfg.roleTone as Record<string, string>;
+      const severity = cfg.severity as Record<string, string>;
       const exNoun = cfg.exampleNoun as Record<string, string>;
 
       const steps = Array.from(root.querySelectorAll<HTMLElement>(".ac__step"));
-      const order = steps.map((s) => s.dataset.step!);
+      const resultsIdx = steps.findIndex((s) => s.dataset.step === "results");
       const lastPillarIdx = steps.map((s, i) => (s.dataset.step === "pillar" ? i : -1)).filter((i) => i >= 0).pop()!;
-      const bar = root.querySelector<HTMLElement>("[data-bar]")!;
-      const reduce = document.documentElement.dataset.motion === "off" || matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const sticky = root.querySelector<HTMLElement>("[data-bar]")!;
+      const legend = root.querySelector<HTMLElement>("[data-legend]")!;
+      const journeySteps = steps.filter((s) => s.dataset.step === "context" || s.dataset.step === "pillar");
+      const segEls = Array.from(root.querySelectorAll<HTMLElement>(".ac__seg"));
+      const pillarCount = meta.length;
 
-      type State = { answers: Record<string, number>; ctx: Record<string, string>; step: number };
-      const state: State = { answers: {}, ctx: {}, step: 0 };
+      const motionOn = document.documentElement.dataset.motion === "on";
+      const reduce = !motionOn || matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const labelOf = (id: string) => meta.find((m) => m.id === id)?.label || "";
+      const tierOf = (s: number) => (s < 25 ? "risk" : s < 50 ? "patchy" : s < 75 ? "manual" : "strong");
+
+      const state: Store = { v: STORE_VERSION, answers: {}, ctx: {}, step: 0 };
       let lastSummary = "";
+      let cameFromCache = false;
       let toastEl: HTMLElement | null = null;
       function toast(msg: string) {
         if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "ac__toast"; document.body.appendChild(toastEl); }
         toastEl.textContent = msg; toastEl.setAttribute("data-show", "");
         setTimeout(() => toastEl?.removeAttribute("data-show"), 1800);
       }
-      try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || "null") || {}); } catch {}
-      const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
 
-      // restore answers + chips
+      function load(): Store {
+        const empty: Store = { v: STORE_VERSION, answers: {}, ctx: {}, step: 0 };
+        try { const raw = JSON.parse(localStorage.getItem(KEY) || "null"); if (!raw || raw.v !== STORE_VERSION) return empty; return { ...empty, ...raw }; }
+        catch { return empty; }
+      }
+      function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} }
+      function readResult(): Result | null { try { const r = JSON.parse(localStorage.getItem(RESULT_KEY) || "null"); return r && r.v === STORE_VERSION ? r : null; } catch { return null; } }
+
+      Object.assign(state, load());
+
       root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => { const v = state.answers[sc.dataset.q!]; if (v) paint(sc, v); });
       root.querySelectorAll<HTMLElement>("[data-chips]").forEach((g) => {
         const key = g.dataset.chips!;
-        g.querySelectorAll<HTMLButtonElement>(".ac__chip").forEach((c) => c.setAttribute("aria-pressed", state.ctx[key] === c.dataset.val ? "true" : "false"));
+        g.querySelectorAll<HTMLButtonElement>(".ac__chip").forEach((c) => c.setAttribute("aria-pressed", (state.ctx as any)[key] === c.dataset.val ? "true" : "false"));
       });
-      if (Object.keys(state.answers).length && state.step > 0) root.querySelector<HTMLElement>("[data-resume]")!.hidden = false;
 
       function paint(sc: HTMLElement, v: number) {
+        let lbl = "";
         sc.querySelectorAll<HTMLButtonElement>(".ac__dot").forEach((d) => {
           const on = Number(d.dataset.score) === v;
           d.setAttribute("aria-checked", on ? "true" : "false"); d.tabIndex = on ? 0 : -1;
+          if (on) lbl = d.getAttribute("title") || "";
         });
-        sc.closest(".ac__item")?.setAttribute("data-answered", "");
+        const item = sc.closest<HTMLElement>(".ac__item");
+        item?.setAttribute("data-answered", "");
+        const pick = item?.querySelector<HTMLElement>("[data-pick]");
+        if (pick) pick.textContent = lbl;
       }
 
-      // scale interactions
       root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => {
         sc.addEventListener("click", (e) => {
           const dot = (e.target as HTMLElement).closest<HTMLButtonElement>(".ac__dot"); if (!dot) return;
           answer(sc, Number(dot.dataset.score));
+        });
+        sc.addEventListener("keydown", (e) => {
+          const dots = Array.from(sc.querySelectorAll<HTMLButtonElement>(".ac__dot"));
+          const cur = dots.findIndex((d) => d.getAttribute("aria-checked") === "true");
+          let ni = -1;
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") ni = Math.min((cur < 0 ? -1 : cur) + 1, dots.length - 1);
+          else if (e.key === "ArrowLeft" || e.key === "ArrowUp") ni = Math.max((cur < 0 ? dots.length : cur) - 1, 0);
+          if (ni < 0) return;
+          e.preventDefault(); answer(sc, Number(dots[ni].dataset.score)); dots[ni].focus();
         });
       });
       function answer(sc: HTMLElement, v: number) {
@@ -515,7 +686,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         refresh(step); advanceActive(step);
       }
 
-      // active row + number-key fast fill
       function advanceActive(step: HTMLElement) {
         const items = Array.from(step.querySelectorAll<HTMLElement>("[data-item]"));
         items.forEach((it) => it.removeAttribute("data-active"));
@@ -526,6 +696,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         if (root.dataset.bound !== "1" || !/^[1-5]$/.test(e.key)) return;
         const tag = (e.target as HTMLElement)?.tagName;
         if (tag === "INPUT" || tag === "TEXTAREA") return;
+        if ((e.target as HTMLElement)?.closest?.(".ac__scale")) return;
         const step = steps.find((s) => !s.hidden); if (!step || step.dataset.step !== "pillar") return;
         const active = step.querySelector<HTMLElement>('[data-item][data-active]') || step.querySelector<HTMLElement>('[data-item]:not([data-answered])');
         const sc = active?.querySelector<HTMLElement>("[data-scale]"); if (!sc) return;
@@ -539,37 +710,39 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         if (!step.hidden) next.disabled = !done;
       }
 
-      // chips
       root.querySelectorAll<HTMLElement>("[data-chips]").forEach((g) => {
         g.addEventListener("click", (e) => {
           const c = (e.target as HTMLElement).closest<HTMLButtonElement>(".ac__chip"); if (!c) return;
           const key = g.dataset.chips!;
+          const wasOn = c.getAttribute("aria-pressed") === "true";
           g.querySelectorAll(".ac__chip").forEach((x) => x.setAttribute("aria-pressed", "false"));
-          c.setAttribute("aria-pressed", "true"); state.ctx[key] = c.dataset.val!; save();
+          if (wasOn) { delete (state.ctx as any)[key]; }
+          else { c.setAttribute("aria-pressed", "true"); (state.ctx as any)[key] = c.dataset.val!; }
+          save();
         });
       });
 
-      // navigation
       function show(i: number) {
         state.step = i; save();
         steps.forEach((s, idx) => { s.hidden = idx !== i; s.classList.toggle("is-active", idx === i); });
         const step = steps[i], kind = step.dataset.step;
-        bar.hidden = kind === "intro" || kind === "results";
+        sticky.hidden = kind === "intro" || kind === "results";
+        legend.hidden = kind !== "pillar";
         const nextLabel = root.querySelector<HTMLElement>("[data-next-label]")!;
         if (kind === "pillar") { advanceActive(step); refresh(step); nextLabel.textContent = i === lastPillarIdx ? "See score" : "Next"; }
         if (kind === "context") { root.querySelector<HTMLButtonElement>("[data-next]")!.disabled = false; nextLabel.textContent = "Start"; }
         progress(i);
-        const h = step.querySelector<HTMLElement>("h1,h2,.ac__scenario"); h?.setAttribute("tabindex", "-1"); h?.focus({ preventScroll: true });
+        const h = step.querySelector<HTMLElement>("h1,h2,.ac__scenario,.ac__kicker"); h?.setAttribute("tabindex", "-1"); h?.focus({ preventScroll: true });
         window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
       }
       function progress(i: number) {
-        const kind = steps[i].dataset.step;
-        const journey = meta.length + 1; // context + pillars
-        let pos = kind === "context" ? 1 : kind === "pillar" ? 2 + steps.filter((s) => s.dataset.step === "pillar").indexOf(steps[i]) : 0;
-        const pct = Math.max(8, Math.round((Math.max(pos - 1, 0) / journey) * 100));
-        root.querySelector<HTMLElement>("[data-fill]")!.style.width = pct + "%";
-        root.querySelector<HTMLElement>("[data-track]")!.setAttribute("aria-valuenow", String(pct));
-        root.querySelector<HTMLElement>("[data-steplabel]")!.textContent = steps[i].dataset.name || "";
+        const step = steps[i];
+        const jIdx = journeySteps.indexOf(step);
+        segEls.forEach((seg, idx) => { seg.dataset.state = jIdx < 0 ? "" : idx < jIdx ? "done" : idx === jIdx ? "current" : ""; });
+        const lbl = root.querySelector<HTMLElement>("[data-steplabel]")!;
+        if (step.dataset.step === "context") lbl.textContent = "Setup";
+        else if (step.dataset.step === "pillar") lbl.textContent = `${step.dataset.name} · ${jIdx}/${pillarCount}`;
+        else lbl.textContent = "";
       }
 
       root.querySelector("[data-start]")?.addEventListener("click", () => {
@@ -583,105 +756,174 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         show(Math.min(i + 1, steps.length - 1));
       });
       root.querySelector("[data-back]")?.addEventListener("click", () => show(Math.max(steps.findIndex((s) => !s.hidden) - 1, 0)));
-      root.querySelector("[data-restart]")?.addEventListener("click", () => { state.answers = {}; state.ctx = {}; state.step = 0; save(); location.reload(); });
+      root.querySelectorAll("[data-restart]").forEach((b) => b.addEventListener("click", () => {
+        state.answers = {}; state.ctx = {}; state.step = 0;
+        try { localStorage.removeItem(KEY); } catch {}
+        cameFromCache = false;
+        resetForm();
+        root.querySelector<HTMLElement>("[data-returning]")!.hidden = true;
+        root.querySelector<HTMLElement>("[data-resume]")!.hidden = true;
+        toast("Starting fresh — your last read stays until you finish a new one.");
+        show(0);
+      }));
+
+      function resetForm() {
+        root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => {
+          sc.querySelectorAll<HTMLButtonElement>(".ac__dot").forEach((d, i) => { d.setAttribute("aria-checked", "false"); d.tabIndex = i === 0 ? 0 : -1; });
+          const item = sc.closest<HTMLElement>(".ac__item");
+          item?.removeAttribute("data-answered");
+          item?.removeAttribute("data-active");
+          const pick = item?.querySelector<HTMLElement>("[data-pick]"); if (pick) pick.textContent = "";
+        });
+        root.querySelectorAll<HTMLButtonElement>(".ac__chip").forEach((c) => c.setAttribute("aria-pressed", "false"));
+        root.querySelectorAll<HTMLButtonElement>("[data-info]").forEach((b) => b.setAttribute("aria-expanded", "false"));
+        root.querySelectorAll<HTMLElement>(".ac__tip").forEach((t) => t.removeAttribute("data-show"));
+      }
+
+      function closeTips() {
+        root.querySelectorAll<HTMLElement>("[data-info]").forEach((o) => o.setAttribute("aria-expanded", "false"));
+        root.querySelectorAll<HTMLElement>(".ac__tip").forEach((t) => t.removeAttribute("data-show"));
+      }
+      root.querySelectorAll<HTMLButtonElement>("[data-info]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = btn.getAttribute("aria-expanded") === "true";
+          closeTips();
+          if (!open) {
+            btn.setAttribute("aria-expanded", "true");
+            btn.closest(".ac__pbar")?.querySelector<HTMLElement>(".ac__tip")?.setAttribute("data-show", "");
+          }
+        });
+      });
+      document.addEventListener("click", () => closeTips());
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeTips(); });
       root.querySelector("[data-copy]")?.addEventListener("click", async () => {
         try { await navigator.clipboard.writeText(lastSummary); toast("Summary copied"); }
         catch { toast("Couldn't copy — select and copy manually"); }
       });
 
-      // ---------- scoring + insight engine ----------
+      function markNav() { try { (window as any).__auxoMarkSelfCheck?.(); } catch {} }
+
       function pScore(id: string) {
         const m = meta.find((p) => p.id === id)!; let sum = 0, a = 0;
         for (let i = 0; i < m.count; i++) { const v = state.answers[id + "-" + i]; if (v) { sum += v; a++; } }
         return a ? Math.round(((sum - a) / (4 * a)) * 100) : 0;
       }
+
       function compute() {
         const scores = meta.map((p) => ({ ...p, score: pScore(p.id) }));
         const byId: Record<string, number> = {}; scores.forEach((s) => (byId[s.id] = s.score));
         const overall = Math.round(scores.reduce((s, p) => s + p.score, 0) / scores.length);
         const band = bands.find((b) => overall >= b.min && overall <= b.max) || bands[0];
-        const weak = scores.reduce((a, b) => (b.score < a.score ? b : a));
-        const strong = scores.reduce((a, b) => (b.score > a.score ? b : a));
-        const spread = strong.score - weak.score;
-        const lowItems = Object.keys(state.answers).filter((k) => state.answers[k] <= 2).sort((a, b) => state.answers[a] - state.answers[b]);
-        const noun = exNoun[state.ctx.business] || "board pack";
+        let hi = scores[0], lo = scores[0];
+        scores.forEach((s) => { if (s.score > hi.score) hi = s; if (s.score < lo.score) lo = s; });
+        const spread = hi.score - lo.score;
+        const even = spread <= 6;
+        const d = byId.data, r = byId.reporting, a = byId.automation, c = byId.compliance;
+        const noun = exNoun[state.ctx.business || ""] || "board pack";
         const col = overall < 25 ? "var(--color-danger)" : overall < 50 ? "var(--accent-2)" : "var(--accent)";
+        const otherThreeAvg = (id: string) => { const o = scores.filter((s) => s.id !== id); return o.reduce((t, s) => t + s.score, 0) / o.length; };
 
-        // patterns — decision-table rules, first match wins by priority
-        const patterns = [
-          { on: byId.data < byId.reporting - 12 && byId.reporting >= 50, t: "Polished reports, shaky foundations", b: `Your reporting outruns your data — the riskiest gap to have. A ${noun} looks certain right up until one figure in it is wrong in the room.` },
-          { on: weak.id === "automation" && byId.data >= 50 && byId.reporting >= 50, t: "Right today, fragile tomorrow", b: "Your numbers are right because people force them to be. That holds — until someone leaves, or the volume doubles." },
-          { on: byId.reporting < byId.data - 12 && byId.data >= 50, t: "Good data you can't see", b: `You've done the hard part: the data is trustworthy. The gap is getting it into a ${noun} fast enough to matter.` },
-          { on: weak.id === "compliance" && byId.compliance < 50, t: "Readiness is the cheapest cover you're not buying", b: "If a regulator or investor asked tomorrow, the scramble would be real — and the fix is mostly plumbing you'd want anyway." },
-          { on: spread <= 14 && overall < 50, t: "Even, and early", b: "No single disaster — just a foundation that's manual across the board. The good news: fixing one pillar well lifts the others." },
-          { on: overall >= 75, t: "Well run — now press the advantage", b: "Little here needs rescuing. The upside is in what AI and deeper analytics can pull from data you already trust." },
-        ].filter((p) => p.on);
-
-        // paint score
         const gf = root.querySelector<SVGCircleElement>("[data-gauge-fill]")!;
         gf.style.stroke = col;
-        requestAnimationFrame(() => (gf.style.strokeDashoffset = String(327 * (1 - overall / 100))));
+        if (reduce) gf.style.strokeDashoffset = String(100 - overall);
+        else requestAnimationFrame(() => (gf.style.strokeDashoffset = String(100 - overall)));
+        const numEl = root.querySelector<SVGTextElement>("[data-score-num]")!; numEl.style.fill = col;
         const bEl = root.querySelector<HTMLElement>("[data-band]")!; bEl.textContent = band.name; bEl.style.color = col;
-        root.querySelector("[data-read]")!.textContent = band.read;
-        countTo(root.querySelector("[data-score-num]"), overall);
+        countTo(numEl, overall);
 
-        // personalised subline + distance to next band
-        const role = state.ctx.role && state.ctx.role !== "Something else" ? state.ctx.role.toLowerCase() + " view · " : "";
-        root.querySelector<HTMLElement>("[data-sub]")!.textContent = role + "based on your answers to 28 checks";
-        const bi = bands.findIndex((b) => b.id === band.id);
+        const shapeEl = root.querySelector<HTMLElement>("[data-shape]")!;
+        if (even && band.id === "strong") shapeEl.textContent = `All four pillars are strong and within a few points of each other (${lo.score}–${hi.score}) — a genuinely balanced operation.`;
+        else if (even) shapeEl.textContent = `Your four pillars sit close together (${lo.score}–${hi.score}) — no single weak spot, which is its own kind of signal.`;
+        else shapeEl.textContent = `${hi.label} is where you're strongest (${hi.score}). ${lo.label} is the drag (${lo.score}) — it's pulling the average down more than any other gap.`;
+
+        const tone = state.ctx.role && roleTone[state.ctx.role] ? roleTone[state.ctx.role] : "";
+        root.querySelector("[data-read]")!.textContent = band.read + tone;
+
+        const rolePrefix = state.ctx.role && state.ctx.role !== "Something else" ? state.ctx.role.toLowerCase() + " view · " : "";
+        root.querySelector<HTMLElement>("[data-sub]")!.textContent = rolePrefix + "based on your answers to 28 checks";
+        const nextBand = bands.find((b) => b.min > overall);
         const tn = root.querySelector<HTMLElement>("[data-tonext]")!; tn.hidden = false;
-        if (bi < bands.length - 1) { const need = bands[bi + 1].min - overall; tn.textContent = `${need} point${need === 1 ? "" : "s"} from “${bands[bi + 1].name}.”`; }
-        else { tn.textContent = "Top band — genuinely well run."; }
+        if (nextBand) { const need = nextBand.min - overall; tn.textContent = `${need} point${need === 1 ? "" : "s"} from “${nextBand.name}.”`; }
+        else tn.textContent = "Top band — genuinely well run.";
 
-        // pattern (top 1)
-        if (patterns[0]) {
-          const box = root.querySelector<HTMLElement>("[data-pattern]")!; box.hidden = false;
-          box.querySelector("[data-pattern-title]")!.textContent = patterns[0].t;
-          box.querySelector("[data-pattern-body]")!.textContent = patterns[0].b;
-        }
+        const patterns = [
+          { on: d < r - 12 && r >= 50, t: "Polished reports, shaky foundations", b: `Your reporting outruns your data — the riskiest gap to have. A ${noun} looks certain right up until one figure in it is wrong in the room.` },
+          { on: a >= 60 && d < 45, t: "Automated, on numbers you don't fully trust", b: "You've automated the moving-around of data you haven't pinned down yet. Fast and confident is a liability when the source is shaky — you're scaling the error, not catching it." },
+          { on: c < 45 && d >= 55 && r >= 55, t: "Trusted numbers, no paper trail", b: "The data's sound and the reports land — but you couldn't prove any of it on demand. Evidence is the layer you're missing, not accuracy." },
+          { on: lo.id === "automation" && d >= 50 && r >= 50, t: "Right today, fragile tomorrow", b: "Your numbers are right because people force them to be. That holds — until someone leaves, or the volume doubles." },
+          { on: r < d - 12 && d >= 50, t: "Good data you can't see", b: `You've done the hard part — the data is trustworthy. The gap is getting it into a ${noun} fast enough to matter.` },
+          { on: c >= 60 && c - Math.max(d, r, a) >= 15, t: "Compliance is carrying the rest", b: "Compliance is your strongest pillar, which is unusual — it usually trails. Worth asking whether the discipline you've built there could pull everyday reporting up with it." },
+          { on: r < 45 && c < 45, t: "The numbers don't travel", b: "Neither leadership nor an auditor gets what they need without a manual pull. Same root cause: too little of this is productised." },
+          { on: spread >= 25 && lo.score < 40 && otherThreeAvg(lo.id) >= 60, t: "One weak link in a sound chain", b: `Three of your four pillars are in good shape — ${lo.label} is the outlier dragging the score down. That's the good kind of problem: a single, contained fix moves your whole number.` },
+          { on: lo.id === "compliance" && c < 50, t: "Readiness is the cheapest cover you don't have", b: "If a regulator or investor asked tomorrow, the scramble would be real — and the fix is mostly plumbing you'd want anyway." },
+          { on: spread <= 14 && overall < 50, t: "Even, and early", b: "No single disaster — just a foundation that's manual across the board. The upside: fix one pillar well and the others rise with it." },
+          { on: spread <= 12 && overall >= 50 && overall < 75, t: "Solid all round, manual all round", b: "Nothing's broken and nothing's automated. You're carrying a reliable operation on effort — fine until the effort runs out." },
+          { on: overall >= 75 && a < hi.score - 10, t: "Strong, but leaning on people", b: "You're well run — but automation is the soft spot in an otherwise strong picture. At your level the risk isn't accuracy, it's that too much still lives in specific people's hands." },
+          { on: overall >= 75, t: "Well run — the question is what's next", b: "Little here needs rescuing. The upside is in what sharper analytics could pull from data you already trust." },
+        ].filter((p) => p.on);
+        const box = root.querySelector<HTMLElement>("[data-pattern]")!;
+        if (patterns[0]) { box.hidden = false; box.querySelector("[data-pattern-title]")!.textContent = patterns[0].t; box.querySelector("[data-pattern-body]")!.textContent = patterns[0].b; }
+        else box.hidden = true;
 
-        // bars
         scores.forEach((p) => {
           const el = root.querySelector<HTMLElement>(`[data-pbar="${p.id}"]`); if (!el) return;
-          el.toggleAttribute("data-weak", p.id === weak.id && spread > 0);
+          el.toggleAttribute("data-weak", p.id === lo.id && spread > 0);
           countTo(el.querySelector("[data-pbar-num]"), p.score);
-          requestAnimationFrame(() => (el.querySelector<HTMLElement>("[data-pbar-fill]")!.style.width = p.score + "%"));
+          const w = p.score + "%";
+          if (reduce) el.querySelector<HTMLElement>("[data-pbar-fill]")!.style.width = w;
+          else requestAnimationFrame(() => (el.querySelector<HTMLElement>("[data-pbar-fill]")!.style.width = w));
+          el.querySelector("[data-pbar-read]")!.textContent = reads[p.id][tierOf(p.score)];
         });
 
-        // sharpest gaps (up to 3 lowest individual statements), tagged by pillar
-        const labelOf = (id: string) => meta.find((m) => m.id === id)?.label || "";
+        const sl = root.querySelector<HTMLElement>("[data-strength-line]")!;
+        sl.hidden = false;
+        if (spread > 8) sl.textContent = `One thing you've already got: ${hi.label} is at ${hi.score}. That's a real asset — the goal is to bring the rest up to meet it, not to start from zero.`;
+        else if (overall >= 50) sl.textContent = `You don't have a weak pillar to lean away from — ${hi.label} (${hi.score}) is your steadiest, and it's close. Build the next move on the habits that got it there.`;
+        else sl.textContent = "Nothing here is broken beyond repair — your pillars are low but even, which means there's no deep hole to climb out of, just a floor to raise.";
+
+        const lowItems = Object.keys(state.answers).filter((k) => state.answers[k] <= 2).sort((x, y) => state.answers[x] - state.answers[y]).slice(0, 4);
+        const gaps = root.querySelector<HTMLElement>("[data-gaps]")!;
         if (lowItems.length) {
-          const g = root.querySelector<HTMLElement>("[data-gaps]")!; g.hidden = false;
-          g.querySelector("[data-gaps-list]")!.innerHTML = lowItems.slice(0, 3).map((k) => {
-            const pid = k.slice(0, k.lastIndexOf("-"));
-            return `<li><span class="ac__gap-tag">${labelOf(pid)}</span><span class="ac__gap-line">${itemLow[k]}</span></li>`;
-          }).join("");
-        }
+          gaps.hidden = false;
+          const groups: Array<{ pid: string; lines: string[] }> = [];
+          lowItems.forEach((k) => { const pid = k.slice(0, k.lastIndexOf("-")); let grp = groups.find((x) => x.pid === pid); if (!grp) { grp = { pid, lines: [] }; groups.push(grp); } grp.lines.push(itemLow[k]); });
+          root.querySelector("[data-gaps-list]")!.innerHTML = groups.map((grp) =>
+            `<li class="ac__gap"><span class="ac__gap-tag">${labelOf(grp.pid)}</span><ul class="ac__gap-lines">${grp.lines.map((l) => `<li>${l}</li>`).join("")}</ul></li>`
+          ).join("");
+        } else gaps.hidden = true;
 
-        // one move to make + what good looks like + strength
+        let target = lo;
+        if (lo.id !== "data" && byId.data < 50 && byId.data - lo.score <= 8) target = scores.find((s) => s.id === "data")!;
         const sb = root.querySelector<HTMLElement>("[data-start-block]")!; sb.hidden = false;
-        sb.querySelector("[data-weak-name]")!.textContent = `Fix ${weak.label.toLowerCase()} first.`;
-        sb.querySelector("[data-weak-move]")!.textContent = moves[weak.id];
-        sb.querySelector("[data-weak-aim]")!.textContent = `What “good” looks like: ${weak.label} at 75+. You're at ${weak.score}.`;
-        sb.querySelector("[data-strength]")!.textContent = spread > 8 ? `Already strong: ${strong.label} (${strong.score}/100). Build from it.` : "";
+        sb.querySelector("[data-weak-name]")!.textContent = (even && band.id === "strong")
+          ? `Where the next gain is: ${target.label.toLowerCase()}.`
+          : `Fix ${target.label.toLowerCase()} first.`;
+        let cost = costs[target.id].replace("{noun}", noun);
+        const sev = state.ctx.scale ? severity[state.ctx.scale] : "";
+        if (sev) cost = sev + cost.charAt(0).toLowerCase() + cost.slice(1);
+        sb.querySelector("[data-weak-cost]")!.textContent = cost;
+        sb.querySelector("[data-weak-move]")!.textContent = moves[target.id];
+        const head = 75 - target.score;
+        sb.querySelector("[data-weak-aim]")!.textContent = head > 0
+          ? `What “good” looks like: ${target.label} at 75+. You're at ${target.score} — ${head} point${head === 1 ? "" : "s"} of headroom.`
+          : `What “good” looks like is holding ${target.label} where it is (${target.score}) — you're already past the bar.`;
 
-        root.querySelector("[data-cta-lead]")!.textContent = band.cta;
-
-        // plain-text summary for the Copy button (useful to share internally / bring to a call)
         lastSummary = `AUXO Score: ${overall}/100 — ${band.name}\n`
           + scores.map((p) => `• ${p.label}: ${p.score}/100`).join("\n")
-          + `\nStart here: ${weak.label}.\n${band.cta}\n— auxodata.com/self-check`;
-
-        // email result (mailto, no backend)
-        const mail = root.querySelector<HTMLAnchorElement>("[data-email-results]")!;
-        const body = `My AUXO Score: ${overall}/100 (${band.name}).%0D%0A` + scores.map((p) => `- ${p.label}: ${p.score}/100`).join("%0D%0A") + `%0D%0AStarting point: ${weak.label}.`;
-        mail.href = `mailto:hello@auxodata.com?subject=My AUXO Score (${overall}/100)&body=${body}`;
+          + `\nStart with: ${target.label} (${target.score}/100).\n${band.cta}\n— auxodata.com/self-check`;
 
         try {
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          (window as any).dataLayer.push({ event: "assessment_complete", assessment: "auxo_self_check", auxo_score: overall, auxo_band: band.id, weak_pillar: weak.id });
+          localStorage.setItem(RESULT_KEY, JSON.stringify({ v: STORE_VERSION, ts: Date.now(), overall, band: band.id, weak: lo.id, strong: hi.id, scores: byId, answers: state.answers, ctx: state.ctx } as Result));
+          localStorage.setItem(BADGE_KEY, String(overall));
         } catch {}
+        markNav();
+
+        if (!cameFromCache) {
+          try { (window as any).dataLayer = (window as any).dataLayer || []; (window as any).dataLayer.push({ event: "assessment_complete", assessment: "auxo_self_check", auxo_score: overall, auxo_band: band.id, weak_pillar: lo.id }); } catch {}
+        }
       }
+
       function countTo(el: Element | null, target: number) {
         if (!el) return; if (reduce) { el.textContent = String(target); return; }
         const t0 = performance.now();
@@ -689,7 +931,20 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         requestAnimationFrame(tick);
       }
 
-      show(state.step && state.step < steps.length ? 0 : 0); // always start at intro on load
+      const cached = readResult();
+      if (cached) {
+        state.answers = cached.answers; state.ctx = cached.ctx;
+        root.querySelectorAll<HTMLElement>("[data-scale]").forEach((sc) => { const v = state.answers[sc.dataset.q!]; if (v) paint(sc, v); });
+        cameFromCache = true;
+        compute();
+        const bar = root.querySelector<HTMLElement>("[data-returning]")!;
+        bar.hidden = false;
+        if (Date.now() - cached.ts > 90 * 864e5) root.querySelector("[data-returning-line]")!.textContent = "It's been a while. If your systems have moved on, it's worth a fresh read.";
+        show(resultsIdx);
+      } else {
+        if (Object.keys(state.answers).length && state.step > 0) root.querySelector<HTMLElement>("[data-resume]")!.hidden = false;
+        show(0);
+      }
     }
 
     init();
