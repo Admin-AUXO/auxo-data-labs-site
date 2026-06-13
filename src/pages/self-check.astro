@@ -10,7 +10,10 @@ const SCALE = [
   { v: 5, k: "5", label: "Yes, reliably" },
 ];
 
-const pillars = [
+interface Item { t: string; low: string; gloss?: string; }
+interface Pillar { id: string; n: string; label: string; ease: string; scenario: string; note?: string; items: Item[]; }
+
+const pillars: Pillar[] = [
   {
     id: "data",
     n: "01",
@@ -68,9 +71,9 @@ const pillars = [
     note: "Operational readiness only — your ability to produce evidence on demand. Not legal advice; confirm your obligations with your own advisors.",
     items: [
       { t: "We can produce a clean audit trail for any transaction on request.", low: "You can't produce a clean trail on demand — so a simple request becomes a project." },
-      { t: "AML-relevant checks and records (where they apply to us) are captured systematically.", low: "AML-relevant records are ad hoc, so the evidence is only as good as someone's memory." },
-      { t: "We could pull the data behind a goAML / REAR submission without a manual scramble.", low: "A goAML / REAR submission would mean a manual scramble against a deadline." },
-      { t: "Our reporting supports IFRS requirements without heavy period-end rework.", low: "IFRS reporting means heavy period-end rework, every single time." },
+      { t: "AML-relevant checks and records (where they apply to us) are captured systematically.", low: "AML-relevant records are ad hoc, so the evidence is only as good as someone's memory.", gloss: "AML means anti-money-laundering — the checks that confirm who you're really dealing with and flag suspicious funds." },
+      { t: "We could pull the data behind a goAML / REAR submission without a manual scramble.", low: "A goAML / REAR submission would mean a manual scramble against a deadline.", gloss: "goAML is the UAE regulator's online filing portal; a REAR is the real-estate activity report some firms submit through it. Both need records you can pull on demand." },
+      { t: "Our reporting supports IFRS requirements without heavy period-end rework.", low: "IFRS reporting means heavy period-end rework, every single time.", gloss: "IFRS is the set of international accounting standards most companies' financial statements are expected to follow." },
       { t: "We're confident our corporate-tax figures rest on reconciled, traceable data.", low: "Your tax figures rest on numbers you haven't fully reconciled — a quiet, carried risk." },
       { t: "If asked for records tomorrow, we'd be ready in hours, not weeks.", low: "A records request would take weeks, not hours — exactly when speed matters most." },
       { t: "We know who owns each compliance-related report and how it's produced.", low: "No clear owner for compliance reports means they're everyone's job, and no one's." },
@@ -176,11 +179,9 @@ const trackShort: Record<string, string> = {
   compliance: "Compliance",
 };
 
-const itemLow: Record<string, string> = {};
-pillars.forEach((p) => p.items.forEach((it, i) => (itemLow[`${p.id}-${i}`] = it.low)));
 const pillarMeta = pillars.map((p) => ({ id: p.id, n: p.n, label: p.label, count: p.items.length }));
 const total = pillars.reduce((s, p) => s + p.items.length, 0);
-const cfg = { bands, pillarMeta, itemLow, moves: pillarMoves, cost: pillarCost, reads: pillarReads, roleTone, severity: severityPrefix, exampleNoun };
+const cfg = { bands, pillarMeta, moves: pillarMoves, cost: pillarCost, reads: pillarReads, roleTone, severity: severityPrefix, exampleNoun };
 const desc = "A 3-minute self-read on your data, reporting, automation, and compliance — with an honest, specific result. No grade, no pitch, nobody sees your answers.";
 ---
 
@@ -271,7 +272,9 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           <ol class="ac__items">
             {p.items.map((it, ii) => (
               <li class="ac__item" data-item>
-                <span class="ac__statement">{it.t}</span>
+                <span class="ac__statement">{it.t}{it.gloss && (
+                  <button type="button" class="ac__info ac__info--q" data-info aria-expanded="false" aria-label="What this term means">i</button>
+                )}</span>
                 <div class="ac__answer">
                   <div class="ac__scale" role="radiogroup" aria-label={it.t} data-scale data-q={`${p.id}-${ii}`}>
                     {SCALE.map((s) => (
@@ -281,6 +284,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
                   </div>
                   <span class="ac__pick" data-pick aria-hidden="true"></span>
                 </div>
+                {it.gloss && <span class="ac__tip ac__tip--q" role="tooltip">{it.gloss}</span>}
               </li>
             ))}
           </ol>
@@ -292,11 +296,11 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           <span class="ac__cachedbar-kicker">Welcome back</span>
           <p data-returning-line>Here's the read you got last time. Nothing's changed unless you have.</p>
           <button type="button" class="ac__btn" data-variant="ghost" data-restart>Start over</button>
-          <span class="ac__cachedbar-sub">Runs the 28 again — this read stays until you finish a new one.</span>
         </div>
 
         <span class="ac__kicker">Your AUXO Score</span>
-        <p class="ac__sub" data-sub></p>
+        <p class="ac__sub" data-sub hidden></p>
+
         <div class="ac__scorewrap">
           <div class="ac__gauge">
             <svg viewBox="0 0 120 120" role="img" aria-label="Your AUXO Score out of 100">
@@ -308,18 +312,27 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
               <text class="ac__g-unit" x="60" y="82" text-anchor="middle" dominant-baseline="central">/100</text>
             </svg>
           </div>
-          <div class="ac__verdict">
+          <div class="ac__headline">
             <p class="ac__band" data-band>—</p>
-            <p class="ac__shape" data-shape></p>
-            <p class="ac__read" data-read></p>
             <p class="ac__tonext" data-tonext hidden></p>
           </div>
         </div>
+        <p class="ac__shape" data-shape></p>
+        <p class="ac__read" data-read></p>
 
-        <div class="ac__insight" data-pattern hidden>
-          <span class="ac__insight-tag">What stands out</span>
-          <h3 data-pattern-title>—</h3>
-          <p data-pattern-body></p>
+        <div class="ac__cards">
+          <div class="ac__insight" data-pattern hidden>
+            <span class="ac__insight-tag">What stands out</span>
+            <h3 data-pattern-title>—</h3>
+            <p data-pattern-body></p>
+          </div>
+          <div class="ac__start" data-start-block hidden>
+            <span class="ac__start-tag">If you fix one thing</span>
+            <p class="ac__start-lead" data-weak-name></p>
+            <p class="ac__cost" data-weak-cost></p>
+            <p data-weak-move></p>
+            <p class="ac__aim-line" data-weak-aim></p>
+          </div>
         </div>
 
         <div class="ac__barshead">
@@ -342,20 +355,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         </div>
 
         <p class="ac__strength-line" data-strength-line hidden></p>
-
-        <div class="ac__gaps" data-gaps hidden>
-          <h3>Your sharpest gaps</h3>
-          <p class="ac__gaps-sub">The statements you rated lowest, in plain terms — grouped by pillar.</p>
-          <ul class="ac__gaps-list" data-gaps-list></ul>
-        </div>
-
-        <div class="ac__start" data-start-block hidden>
-          <span class="ac__start-tag">If you fix one thing</span>
-          <p class="ac__start-lead" data-weak-name></p>
-          <p class="ac__cost" data-weak-cost></p>
-          <p data-weak-move></p>
-          <p class="ac__aim-line" data-weak-aim></p>
-        </div>
 
         <details class="ac__how">
           <summary>How your score works</summary>
@@ -436,7 +435,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
 
     .ac__items { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; }
-    .ac__item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.6rem 1rem; padding: 0.55rem 0.7rem; border-radius: var(--radius-md); border: 1px solid transparent; }
+    .ac__item { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.6rem 1rem; padding: 0.55rem 0.7rem; border-radius: var(--radius-md); border: 1px solid transparent; }
     .ac__item[data-active] { border-color: var(--border); background: var(--surface); }
     .ac__item[data-answered] { background: var(--surface-sunken); }
     .ac__item[data-answered] .ac__statement { color: var(--muted); }
@@ -468,9 +467,8 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__cachedbar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1rem; background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.8rem 1rem; margin-bottom: var(--ac-4); font-size: var(--text-sm); }
     .ac__cachedbar-kicker { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent); }
     .ac__cachedbar p { margin: 0; color: var(--muted); flex: 1; min-width: 14rem; }
-    .ac__cachedbar-sub { width: 100%; font-size: var(--text-xs); color: var(--subtle); }
 
-    .ac__scorewrap { display: flex; gap: var(--ac-4); align-items: center; flex-wrap: wrap; margin-bottom: var(--ac-4); }
+    .ac__scorewrap { display: flex; gap: var(--ac-4); align-items: center; flex-wrap: wrap; margin-bottom: var(--ac-3); }
     .ac__gauge { width: 140px; height: 140px; flex: none; }
     .ac__gauge svg { width: 100%; height: 100%; display: block; overflow: visible; }
     .ac__gtrack { fill: none; stroke: var(--surface-raised); stroke-width: 10; }
@@ -478,13 +476,16 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     html[data-motion="on"] .ac__gfill { transition: stroke-dashoffset 1s var(--ease-glide), stroke .4s linear; }
     .ac__g-num { font-family: var(--font-brand); font-weight: 700; font-size: 34px; fill: var(--foreground); }
     .ac__g-unit { font-family: var(--font-mono); font-size: 11px; fill: var(--subtle); letter-spacing: .04em; }
-    .ac__verdict { flex: 1; min-width: 16rem; }
-    .ac__band { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-xl); margin: 0 0 0.4rem; color: var(--accent); }
-    .ac__shape { color: var(--foreground); margin: 0 0 0.5rem; max-width: 52ch; font-weight: 500; }
-    .ac__read { color: var(--muted); margin: 0; max-width: 52ch; }
-    .ac__tonext { margin: 0.7rem 0 0; font-size: var(--text-sm); color: var(--accent); font-weight: 600; }
+    .ac__headline { flex: 1; min-width: 11rem; }
+    .ac__band { font-family: var(--font-brand); font-weight: 700; font-size: var(--text-2xl); line-height: 1.05; margin: 0; color: var(--accent); }
+    .ac__tonext { margin: 0.5rem 0 0; font-size: var(--text-sm); color: var(--accent); font-weight: 600; }
     .ac__tonext[hidden] { display: none; }
+    .ac__shape { color: var(--foreground); margin: 0 0 0.6rem; max-width: 62ch; font-weight: 600; font-size: var(--text-lg); line-height: 1.35; }
+    .ac__read { color: var(--muted); margin: 0 0 var(--ac-4); max-width: 62ch; }
 
+    .ac__cards { display: flex; flex-wrap: wrap; gap: var(--ac-3); align-items: flex-start; margin-bottom: var(--ac-4); }
+    .ac__cards > * { flex: 1 1 18rem; min-width: 0; }
+    .ac__cards .ac__insight, .ac__cards .ac__start { margin-bottom: 0; }
     .ac__insight { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface-sunken); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
     .ac__insight-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
     .ac__insight h3 { margin: 0 0 0.4rem; font-size: var(--text-lg); }
@@ -494,39 +495,30 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__barshead h3 { margin: 0; font-size: var(--text-lg); }
     .ac__aimkey { display: inline-flex; align-items: center; gap: 0.4rem; font: 500 var(--text-xs)/1 var(--font-mono); color: var(--subtle); }
     .ac__aimkey i { width: 2px; height: 12px; background: var(--foreground); opacity: 0.5; border-radius: 1px; }
-    .ac__bars { display: grid; gap: var(--ac-3); margin-bottom: var(--ac-4); }
-    .ac__pbar { position: relative; }
-    .ac__pbar-top { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; font-weight: 500; }
-    .ac__pbar-name { display: inline-flex; align-items: baseline; gap: 0.35rem; flex-wrap: wrap; }
-    .ac__info { flex: none; align-self: center; width: 1.15rem; height: 1.15rem; display: inline-grid; place-items: center; cursor: pointer; font: 600 0.72rem/1 var(--font-mono); font-style: italic; color: var(--subtle); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); }
+    .ac__bars { display: grid; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-sunken); padding: 0.2rem 1.1rem; margin-bottom: var(--ac-4); }
+    .ac__pbar { position: relative; padding: 0.95rem 0; }
+    .ac__pbar + .ac__pbar { border-top: 1px solid var(--hairline); }
+    .ac__pbar-top { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; font-weight: 600; }
+    .ac__pbar-name { display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; }
+    .ac__info { flex: none; align-self: center; vertical-align: middle; margin-left: 0.35rem; width: 1.15rem; height: 1.15rem; display: inline-grid; place-items: center; cursor: pointer; font: 600 0.72rem/1 var(--font-mono); font-style: italic; color: var(--subtle); background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-full); }
     html[data-motion="on"] .ac__info { transition: color .15s, border-color .15s; }
-    .ac__info:hover, .ac__info[aria-expanded="true"] { color: var(--foreground); border-color: var(--border-strong); }
+    .ac__info:hover, .ac__info[aria-expanded="true"] { color: var(--foreground); border-color: var(--accent); }
     .ac__tip { position: absolute; left: 0; right: 0; top: calc(100% + 0.4rem); z-index: 6; opacity: 0; visibility: hidden; transform: translateY(-3px); background: var(--surface-raised); border: 1px solid var(--border-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: 0.7rem 0.85rem; font-size: var(--text-sm); color: var(--foreground); }
     html[data-motion="on"] .ac__tip { transition: opacity .15s, visibility .15s, transform .15s; }
     .ac__tip[data-show] { opacity: 1; visibility: visible; transform: none; }
-    .ac__pbar:has(.ac__info:focus-visible) .ac__tip { opacity: 1; visibility: visible; transform: none; }
+    .ac__pbar:has(.ac__info:focus-visible) .ac__tip, .ac__item:has(.ac__info:focus-visible) .ac__tip { opacity: 1; visibility: visible; transform: none; }
     @media (hover: hover) { .ac__pbar:hover .ac__tip { opacity: 1; visibility: visible; transform: none; } }
-    .ac__pbar-top b { font: 700 var(--text-base)/1 var(--font-mono); display: inline-flex; align-items: baseline; gap: 1px; }
-    .ac__pbar-top b small { font-size: 0.7em; color: var(--subtle); font-weight: 500; }
-    .ac__pbar-track { position: relative; height: 7px; border-radius: var(--radius-full); background: var(--surface-sunken); overflow: hidden; }
+    .ac__pbar-top b { font: 700 var(--text-lg)/1 var(--font-mono); display: inline-flex; align-items: baseline; gap: 1px; }
+    .ac__pbar-top b small { font-size: 0.55em; color: var(--subtle); font-weight: 500; }
+    .ac__pbar-track { position: relative; height: 9px; border-radius: var(--radius-full); background: var(--surface-raised); overflow: hidden; }
     .ac__pbar-track > span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--accent); }
     html[data-motion="on"] .ac__pbar-track > span { transition: width .9s var(--ease-glide); }
     .ac__pbar[data-weak] .ac__pbar-track > span { background: var(--accent-2); }
     .ac__pbar[data-weak] .ac__pbar-top b { color: var(--accent-2); }
     .ac__pbar-aim { position: absolute; left: 75%; top: -2px; bottom: -2px; width: 2px; background: var(--foreground); opacity: 0.45; border-radius: 1px; z-index: 1; }
 
-    .ac__strength-line { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin: 0 0 var(--ac-4); color: var(--foreground); }
+    .ac__strength-line { color: var(--muted); margin: 0 0 var(--ac-4); padding-left: 0.9rem; border-left: 2px solid var(--accent); font-size: var(--text-sm); max-width: 62ch; }
     .ac__strength-line[hidden] { display: none; }
-
-    .ac__gaps { margin-bottom: var(--ac-4); }
-    .ac__gaps h3 { font-size: var(--text-lg); margin: 0 0 0.5rem; }
-    .ac__gaps-sub { color: var(--subtle); font-size: var(--text-sm); margin: 0 0 0.9rem; max-width: 60ch; }
-    :global(.ac__gaps-list) { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
-    :global(.ac__gap) { display: grid; gap: 0.45rem; }
-    :global(.ac__gap-tag) { font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); }
-    :global(.ac__gap-lines) { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; }
-    :global(.ac__gap-lines li) { position: relative; padding-left: 1.15rem; color: var(--muted); }
-    :global(.ac__gap-lines li::before) { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 2px; background: var(--accent-2); }
 
     .ac__start { background: var(--surface-sunken); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; margin-bottom: var(--ac-4); }
     .ac__start-tag { display: inline-block; font: 600 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; }
@@ -576,11 +568,15 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__pick { text-align: left; }
       .ac__chip { padding: 0.6rem 1rem; }
 
-      .ac__scorewrap { gap: 1rem; }
-      .ac__gauge { width: 116px; height: 116px; }
-      .ac__verdict { min-width: 100%; }
+      .ac__scorewrap { gap: 1rem; margin-bottom: var(--ac-2); }
+      .ac__gauge { width: 104px; height: 104px; }
+      .ac__headline { min-width: 9rem; }
+      .ac__band { font-size: var(--text-xl); }
+      .ac__shape { font-size: var(--text-base); }
+      .ac__cards { gap: var(--ac-2); }
       .ac__barshead { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
-      .ac__insight, .ac__start, .ac__strength-line { padding: 0.9rem 1rem; }
+      .ac__bars { padding: 0.1rem 0.9rem; }
+      .ac__insight, .ac__start { padding: 0.95rem 1rem; }
       .ac__cachedbar { padding: 0.7rem 0.85rem; }
       .ac__cachedbar [data-restart] { margin-left: auto; }
     }
@@ -604,7 +600,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       const cfg = JSON.parse(document.getElementById("ac-config")?.textContent || "{}");
       const bands = cfg.bands as Array<{ id: string; min: number; max: number; name: string; read: string; cta: string }>;
       const meta = cfg.pillarMeta as Array<{ id: string; n: string; label: string; count: number }>;
-      const itemLow = cfg.itemLow as Record<string, string>;
       const moves = cfg.moves as Record<string, string>;
       const costs = cfg.cost as Record<string, string>;
       const reads = cfg.reads as Record<string, Record<string, string>>;
@@ -623,7 +618,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
       const motionOn = document.documentElement.dataset.motion === "on";
       const reduce = !motionOn || matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const labelOf = (id: string) => meta.find((m) => m.id === id)?.label || "";
       const tierOf = (s: number) => (s < 25 ? "risk" : s < 50 ? "patchy" : s < 75 ? "manual" : "strong");
 
       const state: Store = { v: STORE_VERSION, answers: {}, ctx: {}, step: 0 };
@@ -791,7 +785,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           closeTips();
           if (!open) {
             btn.setAttribute("aria-expanded", "true");
-            btn.closest(".ac__pbar")?.querySelector<HTMLElement>(".ac__tip")?.setAttribute("data-show", "");
+            btn.closest(".ac__pbar, .ac__item")?.querySelector<HTMLElement>(".ac__tip")?.setAttribute("data-show", "");
           }
         });
       });
@@ -840,8 +834,9 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         const tone = state.ctx.role && roleTone[state.ctx.role] ? roleTone[state.ctx.role] : "";
         root.querySelector("[data-read]")!.textContent = band.read + tone;
 
-        const rolePrefix = state.ctx.role && state.ctx.role !== "Something else" ? state.ctx.role.toLowerCase() + " view · " : "";
-        root.querySelector<HTMLElement>("[data-sub]")!.textContent = rolePrefix + "based on your answers to 28 checks";
+        const subEl = root.querySelector<HTMLElement>("[data-sub]")!;
+        if (state.ctx.role && state.ctx.role !== "Something else") { subEl.textContent = `${state.ctx.role} view`; subEl.hidden = false; }
+        else { subEl.textContent = ""; subEl.hidden = true; }
         const nextBand = bands.find((b) => b.min > overall);
         const tn = root.querySelector<HTMLElement>("[data-tonext]")!; tn.hidden = false;
         if (nextBand) { const need = nextBand.min - overall; tn.textContent = `${need} point${need === 1 ? "" : "s"} from “${nextBand.name}.”`; }
@@ -881,17 +876,6 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         if (spread > 8) sl.textContent = `One thing you've already got: ${hi.label} is at ${hi.score}. That's a real asset — the goal is to bring the rest up to meet it, not to start from zero.`;
         else if (overall >= 50) sl.textContent = `You don't have a weak pillar to lean away from — ${hi.label} (${hi.score}) is your steadiest, and it's close. Build the next move on the habits that got it there.`;
         else sl.textContent = "Nothing here is broken beyond repair — your pillars are low but even, which means there's no deep hole to climb out of, just a floor to raise.";
-
-        const lowItems = Object.keys(state.answers).filter((k) => state.answers[k] <= 2).sort((x, y) => state.answers[x] - state.answers[y]).slice(0, 4);
-        const gaps = root.querySelector<HTMLElement>("[data-gaps]")!;
-        if (lowItems.length) {
-          gaps.hidden = false;
-          const groups: Array<{ pid: string; lines: string[] }> = [];
-          lowItems.forEach((k) => { const pid = k.slice(0, k.lastIndexOf("-")); let grp = groups.find((x) => x.pid === pid); if (!grp) { grp = { pid, lines: [] }; groups.push(grp); } grp.lines.push(itemLow[k]); });
-          root.querySelector("[data-gaps-list]")!.innerHTML = groups.map((grp) =>
-            `<li class="ac__gap"><span class="ac__gap-tag">${labelOf(grp.pid)}</span><ul class="ac__gap-lines">${grp.lines.map((l) => `<li>${l}</li>`).join("")}</ul></li>`
-          ).join("");
-        } else gaps.hidden = true;
 
         let target = lo;
         if (lo.id !== "data" && byId.data < 50 && byId.data - lo.score <= 8) target = scores.find((s) => s.id === "data")!;
