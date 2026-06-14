@@ -4,7 +4,6 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import pagefind from 'astro-pagefind';
-import vercel from '@astrojs/vercel';
 import { unified } from '@astrojs/markdown-remark';
 import { fileURLToPath } from 'node:url';
 import { remarkReadingTime } from './src/lib/remark-reading-time.mjs';
@@ -17,7 +16,6 @@ export default defineConfig({
   site: isPages ? 'https://admin-auxo.github.io' : 'https://auxodata.com',
   base: isPages ? '/auxo-data-labs-site' : undefined,
   output: 'static',
-  ...(isPages ? {} : { adapter: vercel({ webAnalytics: { enabled: false } }) }),
   devToolbar: { enabled: false },
   prefetch: {
     defaultStrategy: 'viewport',

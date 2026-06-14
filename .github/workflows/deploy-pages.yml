@@ -52,9 +52,6 @@ jobs:
             astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
             astro-${{ runner.os }}-
 
-      - name: Drop server-only Actions entrypoint for static build
-        run: rm -f src/actions/index.ts
-
       - name: Build
         run: npx astro build
 

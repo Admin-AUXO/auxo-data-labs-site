@@ -214,8 +214,7 @@
 
   .mobile-nav__link .nav__badge {
     color: var(--accent);
-    margin-inline-start: auto;
-    margin-inline-end: 0.6rem;
+    margin-inline: auto 0.6rem;
   }
 
   .mobile-nav__link .nav__badge[data-tier="warn"] {

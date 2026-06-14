@@ -9,9 +9,9 @@
   }
 
   .deck-filter {
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 0.7rem;
     margin-block-end: 1.75rem;
   }

@@ -1,7 +1,7 @@
 # Build output
 dist/
 .astro/
-.vercel/
+.netlify/
 
 # Dependencies
 node_modules/
