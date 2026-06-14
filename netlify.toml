@@ -2,9 +2,13 @@
   command = "npm run build"
   publish = "dist"
 
+[build.processing]
+  skip_processing = true
+
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--prefer-offline --no-audit --fund=false"
+  SECRETS_SCAN_OMIT_KEYS = "PUBLIC_EMAILJS_SERVICE_ID,PUBLIC_EMAILJS_TEMPLATE_ID,PUBLIC_EMAILJS_PUBLIC_KEY"
 
 [[headers]]
   for = "/*"
