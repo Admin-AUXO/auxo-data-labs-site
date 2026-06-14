@@ -8,7 +8,7 @@ Audience: skeptical B2B buyers in Gulf real estate and family offices. They skim
 
 - **Astro 6**, fully static (`output: 'static'`, no adapter). Every route prerenders; the contact form posts client-side via EmailJS (`PUBLIC_EMAILJS_*` build vars). Deploy config and headers in `netlify.toml`.
 - **Tailwind v4**, CSS-first (`@import "tailwindcss"`). Tokens in `src/styles/tokens.css` are the source of truth.
-- **Pagefind** search (lazy-loaded), **Partytown** for GTM, **astro-icon**, **MDX** for Insights, **astro-og-canvas** for OG images.
+- **Pagefind** search (lazy-loaded), **astro-icon**, **MDX** for Insights, **astro-og-canvas** for OG images. GTM/GA4 load deferred (first interaction or 2.5s post-load) with inline Consent Mode v2 — keep it off the critical path.
 - Single dark theme. Self-hosted, subset `woff2` fonts in `public/fonts/`.
 
 ## Layout

@@ -8,7 +8,7 @@ Marketing site for AUXO Data Labs, a data and AI studio for Gulf real estate. Bu
 - **TypeScript**
 - **Tailwind CSS v4** — CSS-first; design tokens in `src/styles/tokens.css`
 - **Pagefind** — client-side search (lazy-loaded)
-- **Partytown** — offloads Google Tag Manager
+- **GTM / GA4** — loaded deferred (first interaction or 2.5s after load); Consent Mode v2 inline
 - **Playwright** — smoke and accessibility tests
 
 ## Getting started
