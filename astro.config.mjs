@@ -19,18 +19,6 @@ export default defineConfig({
   output: 'static',
   ...(isPages ? {} : { adapter: vercel({ webAnalytics: { enabled: false } }) }),
   devToolbar: { enabled: false },
-  redirects: {
-    '/diagnostic/': '/self-check/',
-    '/trust/': '/about/',
-    '/blog/': '/',
-    '/services/compliance-intelligence/': '/services/',
-    '/services/data-spine/': '/services/',
-    '/services/portfolio-command/': '/services/',
-    '/services/applied-ai/': '/services/',
-    '/services/forecast-engine/': '/services/',
-    '/services/ops-autopilot/': '/services/',
-    '/services/agent-studio/': '/services/',
-  },
   prefetch: {
     defaultStrategy: 'viewport',
   },

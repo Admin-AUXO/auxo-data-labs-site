@@ -27,7 +27,7 @@ const pillars: Pillar[] = [
       { t: "A new transaction is entered once, not typed again into other systems.", low: "Typing the same data into more than one place means it's wrong in at least one of them." },
       { t: "We trust the month-end figures the first time; errors rarely surface after sign-off.", low: "If month-end takes a second pass to get right, every close quietly costs you twice." },
       { t: "Our property, tenant, and owner records are clean — few duplicates, blanks, or out-of-date entries.", low: "Duplicates and stale records mean the reports are built on ground you can't see." },
-      { t: "We could hand our data to an auditor or buyer tomorrow without cleaning it up first.", low: "A data request today would mean a clean-up scramble before you could answer it." },
+      { t: "We could hand our data to an auditor or buyer tomorrow without cleaning it up first.", low: "A data request today would mean a clean-up rush before you could answer it." },
     ],
   },
   {
@@ -72,7 +72,7 @@ const pillars: Pillar[] = [
     items: [
       { t: "We can produce a clean audit trail for any transaction on request.", low: "If you can't produce a clean trail on demand, a simple request turns into a project." },
       { t: "AML checks and records, where they apply to us, are captured as routine — not ad hoc.", low: "Ad hoc AML records are only as good as someone's memory on the day.", gloss: "AML means anti-money-laundering — the checks that confirm who you're really dealing with and flag suspicious funds." },
-      { t: "We could pull the data behind a goAML / REAR submission without a manual scramble.", low: "A goAML / REAR submission would mean a manual scramble against the deadline.", gloss: "goAML is the UAE regulator's online filing portal; a REAR is the real-estate activity report some firms submit through it. Both need records you can pull on demand." },
+      { t: "We could pull the data behind a goAML / REAR submission without a manual scramble.", low: "A goAML / REAR submission would mean a frantic dig against the deadline.", gloss: "goAML is the UAE regulator's online filing portal; a REAR is the real-estate activity report some firms submit through it. Both need records you can pull on demand." },
       { t: "Our reporting supports IFRS requirements without heavy period-end rework.", low: "IFRS reporting that means heavy rework every period is a standing cost on the team.", gloss: "IFRS is the set of international accounting standards most companies' financial statements are expected to follow." },
       { t: "Our corporate-tax figures rest on reconciled numbers we can trace.", low: "Tax figures built on numbers you haven't reconciled are a quiet, carried risk." },
       { t: "If asked for records tomorrow, we'd be ready in hours, not weeks.", low: "A records request that takes weeks, not hours, comes due exactly when speed matters most." },
@@ -89,7 +89,7 @@ const context = {
 
 const bands = [
   { id: "risk", min: 0, max: 24, name: "Shaky",
-    read: "The systems disagree, reporting is manual and late, and a request from a regulator or auditor would mean a scramble. The risk isn't abstract — it's a wrong number in the room or a missed filing, waiting to happen.",
+    read: "The systems disagree, reporting is manual and late, and a request from a regulator or auditor would catch you flat-footed. The risk isn't abstract — it's a wrong number in the room or a missed filing, waiting to happen.",
     cta: "Don't try to fix it all at once. Find the one or two breaks costing you the most — your lowest pillar below is where to look — and start there." },
   { id: "patchy", min: 25, max: 49, name: "Patchy",
     read: "Some of it works — but it leans on specific people and a lot of manual effort. You get there, it just costs you time every period, and the cracks show under pressure.",
@@ -127,7 +127,7 @@ const pillarCost: Record<string, string> = {
   data: "Left as-is, every {noun} you publish carries a number you can't fully stand behind — and you find out which one in the room.",
   reporting: "Left as-is, leadership keeps making calls on numbers that land too late or read two ways — the report arrives after the decision.",
   automation: "Left as-is, the close runs on specific people staying well and staying put — one leave, one resignation, and the month stalls.",
-  compliance: "Left as-is, the next records request turns into a multi-day scramble, exactly when you can least afford one.",
+  compliance: "Left as-is, the next records request turns into a multi-day fire drill, exactly when you can least afford one.",
 };
 
 const pillarReads: Record<string, Record<string, string>> = {
@@ -150,7 +150,7 @@ const pillarReads: Record<string, Record<string, string>> = {
     strong: "Largely runs itself, survives someone being on leave, and frees your people to analyse rather than copy-paste.",
   },
   compliance: {
-    risk: "Reactive — a records or audit request would mean a scramble, and that exposure compounds quietly.",
+    risk: "Reactive — a records or audit request would leave you reaching for evidence you can't quickly produce, and that exposure compounds.",
     patchy: "You can meet requirements, but each one is a project rather than a routine, and the period-end rework is heavy.",
     manual: "Controls mostly in place; what's missing is the systematic capture that turns a fire-drill into a five-minute export.",
     strong: "Confident shape — clean trails, clear owners, requests answerable in hours. Hard-won and worth protecting.",
@@ -223,7 +223,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
 
       <div class="ac__step is-active" data-step="intro">
         <span class="ac__kicker">The AUXO Score</span>
-        <h1 class="ac__title">Is your data an asset — or a liability?</h1>
+        <h1 class="ac__title">Is your data an asset, or a liability?</h1>
         <p class="ac__lead">
           Most teams spend the last week of the quarter chasing numbers that should already
           agree. This is a straight <b>0–100 score</b> on the four things that decide whether

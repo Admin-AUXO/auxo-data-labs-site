@@ -80,7 +80,7 @@ export const homeContent: HomeContent = {
     subtitle: "Four ways we help property leaders act on numbers they trust.",
     items: [
       { name: "Trusted data", icon: "mdi:database-check-outline", desc: "One source the whole business agrees on, built from the systems you already run." },
-      { name: "Clear reporting", icon: "mdi:chart-box-outline", desc: "Board- and investor-ready reporting that holds up under hard questions in the room." },
+      { name: "Clear reporting", icon: "mdi:chart-box-outline", desc: "Board- and investor-ready reporting that holds up under the hard questions, traceable to source." },
       { name: "Reliable automation", icon: "mdi:cog-sync", desc: "Software carries the routine work, with a person accountable for the calls that matter." },
       { name: "Confident compliance", icon: "mdi:shield-check-outline", desc: "Stay ready for regulators without pulling your team off the work that pays." },
     ],

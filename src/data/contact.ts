@@ -206,7 +206,7 @@ export const contactContent: ContactContent = {
       {
         question: "Can you help us get ready for the UAE's AML rules?",
         answer:
-          "Yes — within clear limits. We build the systems that make compliance easier to evidence: trusted records, beneficial-owner screening, goAML and REAR-ready reporting, and audit trails that are there before an examiner asks. We support the standards your business answers to; the formal sign-off, your MLRO, and legal advice stay with your own advisors. We'll tell you plainly where our work ends and theirs begins.",
+          "Yes — within clear limits. We build the systems that make compliance easier to evidence: trusted records, beneficial-owner screening, reporting that's ready for goAML and the real-estate activity report (REAR), and audit trails that are there before an examiner asks. We support the standards your business answers to; the formal sign-off, your money-laundering reporting officer, and legal advice stay with your own advisors. We'll tell you plainly where our work ends and theirs begins.",
       },
       {
         question: "Do you use AI — and is our data safe with it?",
