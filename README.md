@@ -1,6 +1,6 @@
 # AUXO Data Labs — Website
 
-Marketing site for AUXO Data Labs, a data and AI studio for Gulf real estate. Built with Astro, deployed to Vercel.
+Marketing site for AUXO Data Labs, a data and AI studio for Gulf real estate. Built with Astro, deployed to Netlify.
 
 ## Stack
 
@@ -41,7 +41,6 @@ src/
   scripts/      Browser behaviour
   styles/       Tokens + layered CSS (main.css)
   content/      Insights (MDX)
-  actions/      Server actions (contact form)
 public/         Static files: fonts, icons, manifest, service worker
 style_sheet/    Brand and design reference
 ```
@@ -56,8 +55,6 @@ Single dark theme. `src/styles/tokens.css` is the source of truth for colour and
 
 ## Deployment
 
-Vercel. Every route prerenders; only the contact-form action runs server-side. The canonical remote is `auxo-site`; ship from `rebuild/v2`:
+Netlify (`auxo-data-labs.netlify.app`, custom domain `auxodata.com`). The site is fully static — every route prerenders; the contact form posts client-side via EmailJS. Pushing to `main` on `origin` (`Admin-AUXO/auxo-data-labs-site`) auto-deploys; build settings and security headers live in `netlify.toml`.
 
-```bash
-git push auxo-site rebuild/v2:main
-```
+EmailJS needs three build-time vars (set in Netlify, not committed): `PUBLIC_EMAILJS_SERVICE_ID`, `PUBLIC_EMAILJS_TEMPLATE_ID`, `PUBLIC_EMAILJS_PUBLIC_KEY`.

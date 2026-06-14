@@ -1,12 +1,12 @@
 # Working in this repo
 
-Marketing site for AUXO Data Labs. Astro 6 + TypeScript + Tailwind v4, deployed to Vercel.
+Marketing site for AUXO Data Labs. Astro 6 + TypeScript + Tailwind v4, deployed to Netlify (custom domain `auxodata.com`).
 
 Audience: skeptical B2B buyers in Gulf real estate and family offices. They skim, compare, then contact only once the page earns trust. Build for clarity, not animation noise or hydration bloat.
 
 ## Stack
 
-- **Astro 6**, static output (`output: 'static'`). Pages prerender; only the Astro Actions in `src/actions/` run server-side.
+- **Astro 6**, fully static (`output: 'static'`, no adapter). Every route prerenders; the contact form posts client-side via EmailJS (`PUBLIC_EMAILJS_*` build vars). Deploy config and headers in `netlify.toml`.
 - **Tailwind v4**, CSS-first (`@import "tailwindcss"`). Tokens in `src/styles/tokens.css` are the source of truth.
 - **Pagefind** search (lazy-loaded), **Partytown** for GTM, **astro-icon**, **MDX** for Insights, **astro-og-canvas** for OG images.
 - Single dark theme. Self-hosted, subset `woff2` fonts in `public/fonts/`.
