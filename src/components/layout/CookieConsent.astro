@@ -40,6 +40,14 @@ import { withBase } from "../../lib/url";
     display: none;
   }
 
+  /* While the fixed banner is shown, reserve space so it never overlays
+     interactive content (e.g. the self-check answer dots) on small screens. */
+  @media (max-width: 40rem) {
+    :global(body:has([data-consent-banner]:not(.is-hidden))) {
+      padding-block-end: 8rem;
+    }
+  }
+
   .consent__text {
     color: var(--muted);
     flex: 1 1 18rem;
