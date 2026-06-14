@@ -27,6 +27,10 @@ coverage/
 test-results/
 playwright-report/
 junit.xml
+
+# Local cross-device live-site smoke test (run on demand, not part of CI/build)
+/playwright.live.config.ts
+/tests-live/
 .playwright-mcp/
 reports/
 /*.png
