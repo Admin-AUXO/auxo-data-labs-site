@@ -9,10 +9,10 @@
   }
 
   .deck-filter {
-    align-items: flex-start;
+    align-items: center;
     display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
     margin-block-end: 1.75rem;
   }
 
@@ -23,11 +23,10 @@
   }
 
   .deck-filter__group {
-    align-items: baseline;
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 0.7rem;
-    inline-size: 100%;
   }
 
   .deck-filter__label {
@@ -35,7 +34,6 @@
     flex: none;
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    inline-size: 6.25rem;
     letter-spacing: var(--tracking-mono);
     text-transform: uppercase;
   }
