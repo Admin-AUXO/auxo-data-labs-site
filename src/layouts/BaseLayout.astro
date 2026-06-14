@@ -109,7 +109,6 @@ const gtmId = env.gtm.containerId;
     </button>
     <script>
       import { initHeroText } from "../scripts/core/hero-text";
-      import { initParticleField } from "../scripts/core/particle-field";
       import { initScrollUI } from "../scripts/core/scroll-ui";
       import { initPWA } from "../scripts/core/pwa";
       import { initCountUp } from "../scripts/ui/count-up";
@@ -118,14 +117,24 @@ const gtmId = env.gtm.containerId;
       function boot() {
         initMotion();
         initHeroText();
-        initParticleField();
         initScrollUI();
         initPWA();
         initCountUp();
       }
 
+      function bootField() {
+        const run = () =>
+          import("../scripts/core/particle-field").then((m) => m.initParticleField());
+        if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 2500 });
+        else setTimeout(run, 300);
+      }
+
       boot();
-      document.addEventListener("astro:page-load", boot);
+      bootField();
+      document.addEventListener("astro:page-load", () => {
+        boot();
+        bootField();
+      });
     </script>
   </body>
 </html>
