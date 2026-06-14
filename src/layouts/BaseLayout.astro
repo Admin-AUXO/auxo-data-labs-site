@@ -123,6 +123,7 @@ const gtmId = env.gtm.containerId;
       }
 
       function bootField() {
+        if (!window.matchMedia("(min-width: 48rem) and (pointer: fine)").matches) return;
         const run = () =>
           import("../scripts/core/particle-field").then((m) => m.initParticleField());
         if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 2500 });
