@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import partytown from '@astrojs/partytown';
 import pagefind from 'astro-pagefind';
 import { unified } from '@astrojs/markdown-remark';
 import { fileURLToPath } from 'node:url';
@@ -78,7 +77,6 @@ export default defineConfig({
       },
     }),
     mdx(),
-    partytown({ config: { forward: ['dataLayer.push'] } }),
     pagefind(),
   ],
 });
