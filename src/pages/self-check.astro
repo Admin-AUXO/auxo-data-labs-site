@@ -408,6 +408,41 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
           </div>
         </details>
 
+        <form name="self-check-lead" method="POST" data-netlify="true" netlify-honeypot="company_url" hidden aria-hidden="true">
+          <input type="text" name="company_url" />
+          <input type="email" name="email" />
+          <input type="text" name="auxo_score" />
+          <input type="text" name="auxo_band" />
+          <input type="text" name="weak_pillar" />
+          <textarea name="message"></textarea>
+        </form>
+
+        <div class="ac__email" data-email-block hidden>
+          <form class="ac__email-form" data-email-form name="self-check-lead" method="POST" data-netlify="true" netlify-honeypot="company_url" novalidate>
+            <input type="hidden" name="form-name" value="self-check-lead" />
+            <input type="hidden" name="auxo_score" data-lead-score value="" />
+            <input type="hidden" name="auxo_band" data-lead-band value="" />
+            <input type="hidden" name="weak_pillar" data-lead-weak value="" />
+            <input type="hidden" name="message" data-lead-message value="" />
+            <div class="ac__email-copy">
+              <span class="ac__fcard-tag">Want this read in your inbox?</span>
+              <p class="ac__email-lead" data-email-lead>Submitting sends your email and this result — your score, band, and weakest pillar — to AUXO, so we can email you the read and a short note on how Gulf real-estate operators usually compare. Your individual answers stay in your browser. No list, no pitch — drop your email only if it's useful.</p>
+            </div>
+            <div class="ac__email-row">
+              <div class="ac__email-field">
+                <label class="ac__email-label" for="ac-email">Work email</label>
+                <input type="email" id="ac-email" name="email" class="ac__email-input" placeholder="you@company.com" autocomplete="email" maxlength="255" required aria-describedby="ac-email-error" />
+              </div>
+              <button type="submit" class="ac__btn" data-variant="primary" data-email-submit>
+                <span data-email-submit-label>Email me this read</span>
+              </button>
+            </div>
+            <p class="ac__email-error" id="ac-email-error" role="alert"></p>
+            <div class="ac__email-status" data-email-status role="status" aria-live="polite" hidden></div>
+            <label class="ac__email-hp" aria-hidden="true">Company URL<input type="text" name="company_url" data-email-hp tabindex="-1" autocomplete="off" /></label>
+          </form>
+        </div>
+
         <div class="ac__close">
           <div class="ac__actions">
             <button type="button" class="ac__btn" data-variant="primary" data-copy>
@@ -618,6 +653,27 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
     .ac__meta li { position: relative; padding-left: 1.1rem; font: 600 var(--text-xs)/1.3 var(--font-mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
     .ac__meta li::before { content: ""; position: absolute; left: 0; top: 0.15em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
 
+    .ac__email { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-md); background: var(--surface-sunken); padding: 1.15rem 1.25rem; margin-bottom: var(--ac-4); }
+    .ac__email[hidden] { display: none; }
+    .ac__email-copy { display: grid; gap: 0.35rem; margin-bottom: var(--ac-3); }
+    .ac__email-lead { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.55; max-width: 60ch; }
+    .ac__email-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.7rem; }
+    .ac__email-field { flex: 1; min-width: 14rem; display: grid; gap: 0.35rem; }
+    .ac__email-label { font-weight: 600; font-size: var(--text-sm); }
+    .ac__email-input { font: inherit; font-size: var(--text-sm); color: var(--foreground); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.7rem 0.85rem; min-height: 2.85rem; scroll-margin-top: 5rem; }
+    html[data-motion="on"] .ac__email-input { transition: border-color .15s; }
+    .ac__email-input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    .ac__email-input[aria-invalid="true"] { border-color: var(--color-danger); }
+    .ac__email-row .ac__btn { flex: none; }
+    .ac__email-error { margin: 0.5rem 0 0; min-height: 1em; color: var(--color-danger); font-size: var(--text-xs); }
+    .ac__email-error:empty { display: none; }
+    .ac__email-status { margin: 0.7rem 0 0; display: flex; align-items: center; gap: 0.5rem; font-size: var(--text-sm); color: var(--muted); }
+    .ac__email-status[hidden] { display: none; }
+    .ac__email-status[data-state="success"] { color: var(--accent); }
+    .ac__email-status[data-state="error"] { color: var(--color-danger); }
+    .ac__email-status .ac__email-icon { flex: none; }
+    .ac__email-hp { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
     :global(.ac__toast) { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(1rem); opacity: 0; background: var(--foreground); color: var(--background); font-weight: 600; font-size: var(--text-sm); padding: 0.6rem 1.1rem; border-radius: var(--radius-full); transition: opacity .25s, transform .25s; pointer-events: none; z-index: 1200; }
     :global(.ac__toast[data-show]) { opacity: 1; transform: translateX(-50%) translateY(0); }
 
@@ -669,6 +725,9 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       .ac__actions { flex-direction: column; align-items: stretch; gap: 0.6rem; }
       .ac__actions .ac__btn { width: 100%; justify-content: center; }
       .ac__actions .ac__link { text-align: center; padding-block: 0.4rem; }
+      .ac__email { padding: 0.95rem 1rem; }
+      .ac__email-row { flex-direction: column; align-items: stretch; }
+      .ac__email-row .ac__btn { width: 100%; justify-content: center; }
     }
 
     @media (max-width: 640px) {
@@ -677,10 +736,21 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
   </style>
 
   <script>
+    import { track } from "../scripts/analytics/track";
     const KEY = "auxo-self-check-v3";
     const RESULT_KEY = "auxo-self-check-result-v3";
     const BADGE_KEY = "auxo-self-check-badge-v1";
+    const LEAD_KEY = "auxo-self-check-lead-v1";
     const STORE_VERSION = 3;
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const EMAILJS = {
+      serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? "",
+      templateId: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? "",
+      publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? "",
+    };
+    const emailjsReady = Boolean(EMAILJS.serviceId && EMAILJS.templateId && EMAILJS.publicKey);
+    const bandNames: Record<string, string> = { risk: "Shaky", patchy: "Patchy", manual: "Manual", strong: "Strong" };
+    const pillarNames: Record<string, string> = { data: "Trusted data", reporting: "Clear reporting", automation: "Reliable automation", compliance: "Confident compliance" };
 
     type Ctx = { role?: string; business?: string; scale?: string };
     type Store = { v: number; answers: Record<string, number>; ctx: Ctx; step: number };
@@ -719,6 +789,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       const state: Store = { v: STORE_VERSION, answers: {}, ctx: {}, step: 0 };
       let lastSummary = "";
       let cameFromCache = false;
+      let lastResult: { overall: number; band: string; weak: string } | null = null;
       let toastEl: HTMLElement | null = null;
       function toast(msg: string) {
         if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "ac__toast"; document.body.appendChild(toastEl); }
@@ -858,7 +929,7 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       }
 
       root.querySelector("[data-start]")?.addEventListener("click", () => {
-        try { (window as any).dataLayer = (window as any).dataLayer || []; (window as any).dataLayer.push({ event: "assessment_start", assessment: "auxo_self_check" }); } catch {}
+        track("assessment_start", { assessment: "auxo_self_check" });
         show(1);
       });
       root.querySelector("[data-resume]")?.addEventListener("click", () => show(Math.min(state.step || 1, steps.length - 1)));
@@ -919,6 +990,140 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
       root.querySelector("[data-copy]")?.addEventListener("click", async () => {
         try { await navigator.clipboard.writeText(lastSummary); toast("Summary copied"); }
         catch { toast("Couldn't copy — select and copy manually"); }
+      });
+
+      const emailBlock = root.querySelector<HTMLElement>("[data-email-block]");
+      const emailForm = root.querySelector<HTMLFormElement>("[data-email-form]");
+      const emailInput = root.querySelector<HTMLInputElement>("#ac-email");
+      const emailErr = root.querySelector<HTMLElement>("#ac-email-error");
+      const emailStatus = root.querySelector<HTMLElement>("[data-email-status]");
+      const emailHp = root.querySelector<HTMLInputElement>("[data-email-hp]");
+      const emailSubmit = root.querySelector<HTMLButtonElement>("[data-email-submit]");
+      const emailLead = root.querySelector<HTMLElement>("[data-email-lead]");
+      const leadScoreField = root.querySelector<HTMLInputElement>("[data-lead-score]");
+      const leadBandField = root.querySelector<HTMLInputElement>("[data-lead-band]");
+      const leadWeakField = root.querySelector<HTMLInputElement>("[data-lead-weak]");
+      const leadMessageField = root.querySelector<HTMLInputElement>("[data-lead-message]");
+      let emailSent = false;
+
+      function leadSaved() { try { return localStorage.getItem(LEAD_KEY) === "1"; } catch { return false; } }
+
+      function setEmailStatus(state: "info" | "success" | "error" | null, msg: string) {
+        if (!emailStatus) return;
+        if (!state) { emailStatus.hidden = true; emailStatus.removeAttribute("data-state"); emailStatus.textContent = ""; return; }
+        emailStatus.hidden = false;
+        emailStatus.dataset.state = state;
+        emailStatus.textContent = msg;
+      }
+
+      function showEmailBlock() {
+        if (!emailBlock) return;
+        if (leadSaved() || emailSent) {
+          emailBlock.hidden = false;
+          emailForm?.setAttribute("hidden", "");
+          setEmailStatus("success", "You're set — we've got this read on its way. No list, no follow-up unless you reply.");
+          return;
+        }
+        emailBlock.hidden = false;
+        emailForm?.removeAttribute("hidden");
+        setEmailStatus(null, "");
+      }
+
+      async function postToNetlify(value: string, scoreText: string, bandLabel: string, weakLabel: string, message: string) {
+        if (!emailForm) return false;
+        if (leadScoreField) leadScoreField.value = scoreText;
+        if (leadBandField) leadBandField.value = bandLabel;
+        if (leadWeakField) leadWeakField.value = weakLabel;
+        if (leadMessageField) leadMessageField.value = message;
+        const data = new URLSearchParams();
+        data.set("form-name", "self-check-lead");
+        data.set("email", value);
+        data.set("auxo_score", scoreText);
+        data.set("auxo_band", bandLabel);
+        data.set("weak_pillar", weakLabel);
+        data.set("message", message);
+        data.set("company_url", (emailHp?.value ?? "").trim());
+        try {
+          const res = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: data.toString(),
+          });
+          return res.ok;
+        } catch { return false; }
+      }
+
+      async function sendEmailjs(value: string, scoreText: string, bandLabel: string, weakLabel: string, message: string) {
+        if (!emailjsReady) return false;
+        try {
+          const { default: emailjs } = await import("@emailjs/browser");
+          const res = await emailjs.send(
+            EMAILJS.serviceId,
+            EMAILJS.templateId,
+            {
+              from_name: "Self-check lead",
+              from_email: value,
+              reply_to: value,
+              company: "Not provided",
+              topic: "Self-check (the AUXO Score)",
+              subject: `Self-check lead — ${bandLabel}, weakest: ${weakLabel}`,
+              message:
+                `Self-check result (volunteered email)\n` +
+                `AUXO Score: ${scoreText}\n` +
+                `Band: ${bandLabel}\n` +
+                `Weakest pillar: ${weakLabel}`,
+            },
+            { publicKey: EMAILJS.publicKey, blockHeadless: true, limitRate: { throttle: 10000 } },
+          );
+          return res.status === 200;
+        } catch { return false; }
+      }
+
+      emailForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!emailInput || !lastResult) return;
+        if ((emailHp?.value ?? "").trim()) { setEmailStatus("success", "Thanks — that's on its way."); emailForm.setAttribute("hidden", ""); return; }
+        const value = emailInput.value.trim();
+        if (!EMAIL_RE.test(value)) {
+          if (emailErr) emailErr.textContent = "Enter a valid email address.";
+          emailInput.setAttribute("aria-invalid", "true");
+          emailInput.focus();
+          return;
+        }
+        if (emailErr) emailErr.textContent = "";
+        emailInput.setAttribute("aria-invalid", "false");
+
+        const bandLabel = bandNames[lastResult.band] || lastResult.band;
+        const weakLabel = pillarNames[lastResult.weak] || lastResult.weak;
+        const scoreText = `${lastResult.overall}/100`;
+        const message =
+          `Self-check result (volunteered email)\n` +
+          `AUXO Score: ${scoreText}\n` +
+          `Band: ${bandLabel}\n` +
+          `Weakest pillar: ${weakLabel}`;
+        if (emailSubmit) emailSubmit.disabled = true;
+        setEmailStatus("info", "Sending your read…");
+        const [stored, emailed] = await Promise.all([
+          postToNetlify(value, scoreText, bandLabel, weakLabel, message),
+          sendEmailjs(value, scoreText, bandLabel, weakLabel, message),
+        ]);
+        if (emailSubmit) emailSubmit.disabled = false;
+        if (stored || emailed) {
+          emailSent = true;
+          try { localStorage.setItem(LEAD_KEY, "1"); } catch {}
+          track("generate_lead", { form_name: "self_check", form_location: location.pathname, auxo_band: lastResult.band, weak_pillar: lastResult.weak });
+          emailForm.setAttribute("hidden", "");
+          setEmailStatus("success", "Done — your read is on its way, and a real person will follow up only if it's useful. No list.");
+        } else {
+          setEmailStatus("error", "That didn't go through. Try again, or email hello@auxodata.com and we'll send it over.");
+        }
+      });
+
+      emailInput?.addEventListener("input", () => {
+        if (emailInput.getAttribute("aria-invalid") === "true" && EMAIL_RE.test(emailInput.value.trim())) {
+          emailInput.setAttribute("aria-invalid", "false");
+          if (emailErr) emailErr.textContent = "";
+        }
       });
 
       function markNav() { try { (window as any).__auxoMarkSelfCheck?.(); } catch {} }
@@ -1075,8 +1280,11 @@ const desc = "A 3-minute self-read on your data, reporting, automation, and comp
         }
         markNav();
 
+        lastResult = { overall, band: band.id, weak: lo.id };
+        showEmailBlock();
+
         if (!cameFromCache) {
-          try { (window as any).dataLayer = (window as any).dataLayer || []; (window as any).dataLayer.push({ event: "assessment_complete", assessment: "auxo_self_check", auxo_score: overall, auxo_band: band.id, weak_pillar: lo.id }); } catch {}
+          track("assessment_complete", { assessment: "auxo_self_check", auxo_score: overall, auxo_band: band.id, weak_pillar: lo.id });
         }
       }
 
