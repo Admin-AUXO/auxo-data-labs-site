@@ -42,7 +42,6 @@ src/
   styles/       Tokens + layered CSS (main.css)
   content/      Insights (MDX)
 public/         Static files: fonts, icons, manifest, service worker
-style_sheet/    Brand and design reference
 ```
 
 ## Editing content
@@ -51,7 +50,7 @@ Page copy lives in `src/data/*.ts` (home, about, services-overview, contact, nav
 
 ## Design
 
-Single dark theme. `src/styles/tokens.css` is the source of truth for colour and type. See `style_sheet/README.md` for the brand reference.
+Single dark theme. `src/styles/tokens.css` is the source of truth for colour and type. For the full human brand reference (logos, voice, usage), see the canonical kit in the marketing repo: `AUXO-Marketing/brand/`.
 
 ## Deployment
 

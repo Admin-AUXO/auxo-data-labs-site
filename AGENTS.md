@@ -19,7 +19,6 @@ Audience: skeptical B2B buyers in Gulf real estate and family offices. They skim
 - `src/styles` — tokens + layered CSS via `main.css`
 - `src/content/insights` — MDX articles
 - `public` — static files shipped as-is (icons, manifest, service worker, fonts)
-- `style_sheet` — brand reference
 
 ## Rules
 
