@@ -21,6 +21,8 @@ export interface SiteData {
     responseTime: { value: string; label: string };
   };
   bookingUrl: string;
+  /** Google's embeddable booking page. The short bookingUrl refuses to load inside an iframe. */
+  bookingEmbedUrl: string;
 }
 
 export const siteData: SiteData = {
@@ -62,4 +64,6 @@ export const siteData: SiteData = {
     },
   },
   bookingUrl: "https://calendar.app.google/aJmnvMS2uBbYPCgC7",
+  bookingEmbedUrl:
+    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cf9JS2XEAvFnPma4oW-Gy3pMVQnHWZNKWuG0X9hhJ1sKDKj5JLtZsowG9uJyPw3h9kZ1qeNH5?gv=true",
 };
