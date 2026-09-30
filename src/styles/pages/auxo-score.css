@@ -2,6 +2,8 @@
   --score-surface-2: var(--surface-raised);
   --score-lime-ink: #111;
   --score-crit: #f0645a;
+  --score-ok: var(--accent);
+  --score-warn: var(--accent-2);
 
   display: flex;
   flex-direction: column;
@@ -558,40 +560,55 @@
 }
 
 .score__radar .area {
-  fill: var(--accent-soft);
-  stroke: var(--accent);
+  fill: color-mix(in srgb, var(--foreground) 8%, transparent);
+  stroke: var(--muted);
   stroke-linejoin: round;
   stroke-width: 2;
 }
 
 .score__radar .dot {
-  fill: var(--accent);
   stroke: var(--surface);
   stroke-width: 2;
 }
 
-.score__radar .dot.weak {
-  fill: var(--accent-2);
+.score__radar .halo {
+  fill: none;
+  stroke: var(--foreground);
+  stroke-dasharray: 3 3;
+  stroke-width: 1.5;
+}
+
+.score__radar [data-tone="ok"],
+.score__table [data-tone="ok"] {
+  --tone: var(--score-ok);
+}
+
+.score__radar [data-tone="warn"],
+.score__table [data-tone="warn"] {
+  --tone: var(--score-warn);
+}
+
+.score__radar [data-tone="crit"],
+.score__table [data-tone="crit"] {
+  --tone: var(--score-crit);
+}
+
+.score__radar .dot,
+.score__radar .axis-val {
+  fill: var(--tone);
 }
 
 .score__radar .axis-lbl {
-  fill: var(--foreground);
+  fill: var(--muted);
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
 }
 
 .score__radar .axis-val {
-  fill: var(--muted);
   font-family: var(--font-mono);
-  font-size: 11px;
-}
-
-.score__radar .tick {
-  fill: var(--subtle);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  opacity: 0.6;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .score__table {
@@ -610,9 +627,10 @@
 }
 
 .score__table td:last-child {
-  color: var(--muted);
+  color: var(--tone);
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
+  font-weight: 700;
   text-align: end;
 }
 
@@ -629,15 +647,53 @@
 }
 
 .score__meter-track i {
-  background: var(--accent);
+  background: var(--tone);
   block-size: 100%;
   border-radius: 3px;
   display: block;
 }
 
-.score__meter-track i.is-weak {
-  background: var(--accent-2);
+.score__weak-tag {
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  color: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  margin-inline-start: 6px;
+  padding: 1px 5px;
+  text-transform: uppercase;
+  vertical-align: 2px;
 }
+
+.score__legend {
+  color: var(--subtle);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 6px 16px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.score__legend li {
+  align-items: center;
+  display: inline-flex;
+  gap: 6px;
+}
+
+.score__legend li::before {
+  background: var(--tone);
+  block-size: 8px;
+  border-radius: 50%;
+  content: "";
+  inline-size: 8px;
+}
+
+.score__legend [data-tone="ok"] { --tone: var(--score-ok); }
+.score__legend [data-tone="warn"] { --tone: var(--score-warn); }
+.score__legend [data-tone="crit"] { --tone: var(--score-crit); }
 
 .score__focus {
   border-inline-start: 3px solid var(--accent-2);

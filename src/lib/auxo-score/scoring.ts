@@ -7,6 +7,8 @@ export const QUADS = ["A", "U", "X", "O"] as const;
 export const IDK_POINTS = 3;
 export const IDK_LIMIT = 3;
 
+export const tone = (v: number) => (v >= 60 ? "ok" : v >= 40 ? "warn" : "crit");
+
 export const BANDS: Band[] = [
   { min: 80, name: "Healthy", line: "Your data is ready for the decisions that matter." },
   { min: 60, name: "Stable", line: "Good foundations with a few blind spots." },

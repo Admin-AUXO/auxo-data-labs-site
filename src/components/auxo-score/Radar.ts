@@ -1,4 +1,4 @@
-import { DIMENSIONS } from "../../lib/auxo-score/scoring";
+import { DIMENSIONS, tone } from "../../lib/auxo-score/scoring";
 import type { Dimension } from "../../lib/auxo-score/types";
 
 const CX = 180;
@@ -15,7 +15,6 @@ export function radarSvg(radar: Record<Dimension, number>, weakest: Dimension): 
   let s = "";
   for (const v of [25, 50, 75, 100]) {
     s += `<polygon class="ring" points="${DIMENSIONS.map((_, i) => pt(i, v).join(",")).join(" ")}"/>`;
-    s += `<text class="tick" x="${CX + 4}" y="${(CY - R * v / 100 + 3).toFixed(1)}">${v}</text>`;
   }
   DIMENSIONS.forEach((_, i) => {
     const [x, y] = pt(i, 100);
@@ -26,7 +25,8 @@ export function radarSvg(radar: Record<Dimension, number>, weakest: Dimension): 
   vals.forEach((v, i) => {
     const [x, y] = pt(i, v);
     const d = DIMENSIONS[i];
-    s += `<circle class="dot${d === weakest ? " weak" : ""}" cx="${x}" cy="${y}" r="5"><title>${d}: ${v}</title></circle>`;
+    if (d === weakest) s += `<circle class="halo" cx="${x}" cy="${y}" r="10"/>`;
+    s += `<circle class="dot" data-tone="${tone(v)}" cx="${x}" cy="${y}" r="5.5"><title>${d}: ${v}</title></circle>`;
   });
   DIMENSIONS.forEach((d, i) => {
     const [x, y] = pt(i, 122);
@@ -34,7 +34,7 @@ export function radarSvg(radar: Record<Dimension, number>, weakest: Dimension): 
     const anchor = Math.abs(c) < 0.2 ? "middle" : c > 0 ? "start" : "end";
     const dy = i === 0 ? -14 : Math.sin(angle(i)) > 0.5 ? 10 : 0;
     s += `<text class="axis-lbl" x="${x}" y="${y + dy}" text-anchor="${anchor}">${d}</text>`;
-    s += `<text class="axis-val" x="${x}" y="${y + dy + 14}" text-anchor="${anchor}">${vals[i]}</text>`;
+    s += `<text class="axis-val" data-tone="${tone(vals[i])}" x="${x}" y="${y + dy + 17}" text-anchor="${anchor}">${vals[i]}</text>`;
   });
   return s;
 }

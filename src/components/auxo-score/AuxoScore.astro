@@ -77,9 +77,14 @@ import "../../styles/pages/auxo-score.css";
       </div>
     </div>
     <div class="score__panel">
-      <p class="score__panel-title">Score by dimension (0–100)</p>
+      <p class="score__panel-title">Score by area, out of 100</p>
       <svg class="score__radar" id="radar" viewBox="0 0 360 330" role="img" aria-label="Radar chart of the five dimension scores"></svg>
       <table class="score__table" id="dimTable" aria-label="Dimension scores"></table>
+      <ul class="score__legend" aria-label="Colour key">
+        <li data-tone="ok">60+ solid</li>
+        <li data-tone="warn">40–59 needs work</li>
+        <li data-tone="crit">Under 40 at risk</li>
+      </ul>
     </div>
     <div class="score__focus" id="focus"></div>
 

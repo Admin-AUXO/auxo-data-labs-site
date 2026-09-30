@@ -1,5 +1,5 @@
 import { CARDS, FOCUS_COPY } from "../../lib/auxo-score/cards";
-import { DIMENSIONS, IDK_LIMIT, IDK_POINTS, QUADS, buildLayout, computeResult, idkCount } from "../../lib/auxo-score/scoring";
+import { DIMENSIONS, IDK_LIMIT, IDK_POINTS, QUADS, buildLayout, computeResult, idkCount, tone } from "../../lib/auxo-score/scoring";
 import { checkWorkEmail } from "../../lib/auxo-score/email";
 import { captureUtm, clearLegacy, loadState, saveResult, saveState } from "../../lib/auxo-score/storage";
 import {
@@ -208,7 +208,8 @@ export function initAuxoScore(): void {
       DIMENSIONS.map((d) => {
         const v = r.radar[d];
         const weak = d === r.weakest;
-        return `<tr><th scope="row">${d}</th><td class="score__meter"><div class="score__meter-track"><i class="${weak ? "is-weak" : ""}" style="width:${v}%"></i></div></td><td>${v}</td></tr>`;
+        const tag = weak ? ` <span class="score__weak-tag">Weakest</span>` : "";
+        return `<tr data-tone="${tone(v)}"><th scope="row">${d}${tag}</th><td class="score__meter"><div class="score__meter-track"><i style="width:${v}%"></i></div></td><td>${v}</td></tr>`;
       }).join("") +
       "</tbody>";
 

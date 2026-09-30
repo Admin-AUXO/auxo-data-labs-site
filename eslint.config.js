@@ -11,11 +11,13 @@ export default [
       parserOptions: { parser: tsParser },
       globals: { ...globals.browser },
     },
+    rules: {
+      "astro/jsx-a11y/no-noninteractive-tabindex": ["error", { roles: ["tabpanel", "region"] }],
+    },
   },
   {
     ignores: [
       "dist/",
-      ".vercel/",
       ".astro/",
       "node_modules/",
       "public/",
