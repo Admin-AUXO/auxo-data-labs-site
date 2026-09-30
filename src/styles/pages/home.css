@@ -11,6 +11,14 @@
   inline-size: 100%;
 }
 
+/* Short screens (small laptops, tablets in landscape): cap the headline by height so the
+   subheading and both CTAs stay above the fold and clear of the cookie banner. */
+@media (width >= 40rem) {
+  .home-hero h1 {
+    font-size: min(var(--text-5xl), 10.5svh);
+  }
+}
+
 /* 2. AUXO Score */
 .score-card {
   align-items: center;
@@ -294,5 +302,17 @@ html:not([data-motion="on"]) .logos__item[aria-hidden="true"] {
 
   .home-hero .lead {
     font-size: 1.05rem;
+  }
+}
+
+@media (width >= 40rem) and (height <= 820px) {
+  .home-hero {
+    align-items: flex-start;
+    min-block-size: auto;
+    padding-block: 2rem 3rem;
+  }
+
+  .home-hero h1 {
+    font-size: min(var(--text-5xl), 9.5svh);
   }
 }

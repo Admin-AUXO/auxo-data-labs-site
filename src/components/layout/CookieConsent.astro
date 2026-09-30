@@ -46,6 +46,21 @@ import { withBase } from "../../lib/url";
     font-size: var(--text-sm);
   }
 
+  /* Tablets and up: one slim row pinned low, so it doesn't sit over hero copy. */
+  @media (min-width: 40.0625rem) {
+    .consent {
+      flex-wrap: nowrap;
+      gap: 0.75rem;
+      inset-block-end: 0.75rem;
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+    }
+
+    .consent__text {
+      flex: 1 1 auto;
+      font-size: var(--text-xs);
+    }
+  }
+
   .consent__text a {
     color: var(--accent);
     text-decoration: underline;
