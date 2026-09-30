@@ -16,9 +16,9 @@ export interface NavigationContent {
 export const navigationContent: NavigationContent = {
   items: [
     { name: "The Work", href: "/the-work/" },
+    { name: "AUXO Score", href: "/auxo-score/" },
     { name: "Lab", href: "/about/" },
     { name: "Insights", href: "/insights/" },
-    { name: "Self-check", href: "/self-check/" },
     { name: "Contact", href: "/contact/" },
   ],
   cta: {

@@ -1,0 +1,25 @@
+---
+import { withBase } from "../../lib/url";
+---
+
+<section class="score__screen" id="s-extended" data-screen="extended" hidden>
+  <span class="score__eyebrow">Extended assessment</span>
+  <h2 class="score__h2" tabindex="-1">Limited seats each month.</h2>
+  <p class="score__lede">
+    We keep the number of extended assessments small so our team can review each one properly. Request a seat with
+    your work email and we'll confirm your place.
+  </p>
+  <form class="score__mail" id="seatForm" novalidate>
+    <label for="seatInput">Work email</label>
+    <div class="score__mail-row">
+      <input id="seatInput" name="email" type="email" autocomplete="email" placeholder="name@company.com" required />
+      <button class="score__btn" type="submit">Request a seat</button>
+    </div>
+    <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <p class="score__consent">
+      We'll email your report and may follow up once. No spam. <a href={withBase("/legal/privacy-policy/")}>Privacy policy</a>
+    </p>
+    <p class="score__msg" id="seatMsg" role="status"></p>
+  </form>
+  <button class="score__text-link" type="button" id="backToResult">← Back to my score</button>
+</section>

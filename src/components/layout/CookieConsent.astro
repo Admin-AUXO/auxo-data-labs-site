@@ -40,12 +40,6 @@ import { withBase } from "../../lib/url";
     display: none;
   }
 
-  @media (max-width: 40rem) {
-    :global(body:has([data-consent-banner]:not(.is-hidden))) {
-      padding-block-end: 8rem;
-    }
-  }
-
   .consent__text {
     color: var(--muted);
     flex: 1 1 18rem;
@@ -62,6 +56,38 @@ import { withBase } from "../../lib/url";
     display: flex;
     gap: 0.5rem;
     margin-inline-start: auto;
+  }
+
+  /* Phones: a slim bottom strip so it doesn't cover page content (e.g. the AUXO Score answers). */
+  @media (max-width: 40rem) {
+    .consent {
+      border-radius: var(--radius-lg);
+      flex-wrap: nowrap;
+      gap: 0.625rem;
+      inset-block-end: 0.5rem;
+      inset-inline: 0.5rem;
+      padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+    }
+
+    .consent__text {
+      flex: 1 1 auto;
+      font-size: 0.75rem;
+      line-height: 1.35;
+    }
+
+    .consent__actions {
+      flex-shrink: 0;
+      gap: 0.25rem;
+    }
+
+    .consent__actions :global(.btn) {
+      min-block-size: 40px;
+      padding-inline: 0.625rem;
+    }
+
+    :global(body:has([data-consent-banner]:not(.is-hidden))) {
+      padding-block-end: 5rem;
+    }
   }
 </style>
 

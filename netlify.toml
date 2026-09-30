@@ -22,6 +22,18 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/self-check/"
+  to = "/auxo-score/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/self-check"
+  to = "/auxo-score/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

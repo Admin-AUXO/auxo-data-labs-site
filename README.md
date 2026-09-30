@@ -57,3 +57,7 @@ Single dark theme. `src/styles/tokens.css` is the source of truth for colour and
 Netlify (`auxo-data-labs.netlify.app`, custom domain `auxodata.com`). The site is fully static — every route prerenders; the contact form posts client-side via EmailJS. Pushing to `main` on `origin` (`Admin-AUXO/auxo-data-labs-site`) auto-deploys; build settings and security headers live in `netlify.toml`.
 
 EmailJS needs three build-time vars (set in Netlify, not committed): `PUBLIC_EMAILJS_SERVICE_ID`, `PUBLIC_EMAILJS_TEMPLATE_ID`, `PUBLIC_EMAILJS_PUBLIC_KEY`.
+
+## AUXO Score
+
+The `/auxo-score/` test and its n8n webhooks are documented in [`docs/auxo-score/README.md`](docs/auxo-score/README.md). Env vars: `PUBLIC_N8N_REPORT_WEBHOOK`, `PUBLIC_N8N_EXTENDED_WEBHOOK` (see `.env.example`).

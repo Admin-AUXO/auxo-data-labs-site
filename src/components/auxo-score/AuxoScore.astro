@@ -1,0 +1,149 @@
+---
+import ExtendedGate from "./ExtendedGate.astro";
+import { DIMENSIONS } from "../../lib/auxo-score/scoring";
+import { CARDS } from "../../lib/auxo-score/cards";
+import { withBase } from "../../lib/url";
+import "../../styles/pages/auxo-score.css";
+---
+
+<div
+  class="score"
+  data-auxo-score
+  data-report-url={import.meta.env.PUBLIC_N8N_REPORT_WEBHOOK ?? ""}
+  data-extended-url={import.meta.env.PUBLIC_N8N_EXTENDED_WEBHOOK ?? ""}
+  data-contact-url={withBase("/contact/")}
+>
+  <!-- Intro -->
+  <section class="score__screen" id="s-intro" data-screen="intro">
+    <span class="score__eyebrow">Evidence-based data health check</span>
+    <h1 class="score__h1" tabindex="-1">Answer with facts, not feelings.</h1>
+    <p class="score__lede">
+      Ten questions about how your company actually handles its numbers: days, percentages, how often things go
+      wrong. Pick the answer that describes a normal month, not your best one.
+    </p>
+    <ul class="score__dims" aria-label="Dimensions measured">
+      {DIMENSIONS.map((d) => <li>{d}</li>)}
+    </ul>
+    <div class="score__facts">
+      <div><b>10</b><small>questions</small></div>
+      <div><b>~3</b><small>minutes</small></div>
+      <div><b>0–100</b><small>score</small></div>
+    </div>
+    <div class="score__resume" id="resumeBar" hidden>
+      <p id="resumeText">You have a test in progress (card 1 of 10).</p>
+      <div class="score__btn-row">
+        <button class="score__btn" type="button" id="resumeBtn">Resume</button>
+        <button class="score__btn score__btn--ghost" type="button" id="startOverBtn">Start over</button>
+      </div>
+    </div>
+    <div class="score__btn-row">
+      <button class="score__btn" type="button" id="startBtn">Start the full test →</button>
+    </div>
+    <p class="score__note">
+      If you don't know an answer, say so. Choosing "I don't know" 3 or more times ends the test with a visibility
+      finding instead of a score.
+    </p>
+    <p class="score__privacy">Your answers stay in your browser. Nothing is sent unless you ask us to email your report.</p>
+  </section>
+
+  <!-- Quiz -->
+  <section class="score__screen" id="s-quiz" data-screen="quiz" hidden>
+    <div class="score__qhead">
+      <button class="score__back" id="backBtn" type="button">← Back</button>
+      <span class="score__pill" id="dimPill">ACCURATE</span>
+      <span class="score__count" id="count">1 / 10</span>
+    </div>
+    <div class="score__bar" aria-hidden="true"><i id="progress"></i></div>
+    <h2 class="score__question" id="question" aria-live="polite" tabindex="-1">{CARDS[0].question}</h2>
+    <div class="score__grid" id="grid" role="group" aria-label="Answer options"></div>
+    <div class="score__qfoot">
+      <button class="score__idk" id="idkBtn" type="button" aria-pressed="false">I don't know</button>
+      <button class="score__keep" id="keepBtn" type="button" hidden>Keep &amp; Continue →</button>
+      <span class="score__hint">Keys: A · U · X · O · I for "I don't know"</span>
+    </div>
+  </section>
+
+  <!-- Loader -->
+  <section class="score__screen" id="s-loader" data-screen="loader" hidden>
+    <div class="score__loader">
+      <div class="score__cube" aria-hidden="true"><span>A</span><span>U</span><span>X</span><span>O</span></div>
+      <h2 class="score__loadmsg" id="loadmsg" aria-live="polite" tabindex="-1">Scoring each dimension…</h2>
+    </div>
+  </section>
+
+  <!-- Result -->
+  <section class="score__screen" id="s-result" data-screen="result" hidden>
+    <span class="score__eyebrow">Your verified AUXO Score</span>
+    <div class="score__head">
+      <h2 class="score__big" id="bigScore" tabindex="-1">0<small>/100</small></h2>
+      <div class="score__band">
+        <span class="score__chip" id="bandChip">Stable</span>
+        <p class="score__band-line" id="bandLine"></p>
+      </div>
+    </div>
+    <div class="score__panel">
+      <p class="score__panel-title">Score by dimension (0–100)</p>
+      <svg class="score__radar" id="radar" viewBox="0 0 360 330" role="img" aria-label="Radar chart of the five dimension scores"></svg>
+      <table class="score__table" id="dimTable" aria-label="Dimension scores"></table>
+    </div>
+    <div class="score__focus" id="focus"></div>
+
+    <div class="score__cta">
+      <button class="score__btn score__btn--full" type="button" id="emailBtn" aria-expanded="false" aria-controls="emailForm">
+        Email my full report
+      </button>
+      <p class="score__note score__note--center">Your full breakdown, sent to your work email.</p>
+      <form class="score__mail" id="emailForm" novalidate hidden>
+        <label for="emailInput">Work email</label>
+        <div class="score__mail-row">
+          <input id="emailInput" name="email" type="email" autocomplete="email" placeholder="name@company.com" required />
+          <button class="score__btn" type="submit">Send</button>
+        </div>
+        <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <p class="score__consent">
+          We'll email your report and may follow up once. No spam. <a href={withBase("/legal/privacy-policy/")}>Privacy policy</a>
+        </p>
+        <p class="score__msg" id="emailMsg" role="status"></p>
+      </form>
+    </div>
+
+    <div class="score__deeper">
+      <p class="score__deeper-title">Need to go deeper?</p>
+      <p class="score__note">
+        The extended assessment is for leadership teams planning to fix their data in the next 6 months. It takes
+        longer than this test, and our team reviews every submission.
+      </p>
+      <button class="score__text-link" type="button" id="extLink" aria-expanded="false" aria-controls="extCheck">
+        Take the extended version →
+      </button>
+      <form class="score__check" id="extCheck" hidden>
+        <p class="score__check-title">Is this for you?</p>
+        <label class="score__tick"><input type="checkbox" id="chk1" /> We're planning a data project this year.</label>
+        <label class="score__tick"><input type="checkbox" id="chk2" /> I can answer for both finance and operations.</label>
+        <button class="score__btn score__btn--ghost" type="submit" id="extContinue" disabled>Continue</button>
+      </form>
+    </div>
+  </section>
+
+  <ExtendedGate />
+
+  <!-- Inconclusive -->
+  <section class="score__screen" id="s-inconclusive" data-screen="inconclusive" hidden>
+    <span class="score__status">STATUS: UNVERIFIED — VISIBILITY GAP</span>
+    <h2 class="score__h2" tabindex="-1">Score Inconclusive: Data Visibility Blind Spot</h2>
+    <p class="score__lede">
+      You selected "I don't know" on 3 or more operational baseline questions. In data operations, lack of visibility
+      is itself a critical finding. You cannot optimize, automate, or trust data assets that have not been audited or
+      mapped.
+    </p>
+    <div class="score__btn-row">
+      <a class="score__btn" href={withBase("/contact/")}>Schedule Data Discovery Audit</a>
+      <button class="score__btn score__btn--ghost" type="button" id="retakeBtn">Retake Assessment with Core Team</button>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { initAuxoScore } from "./controller";
+  document.addEventListener("astro:page-load", initAuxoScore);
+</script>

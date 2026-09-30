@@ -1,0 +1,731 @@
+<title>AUXO Score Full Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one centred column, one card at a time; the 2x2 answer grid echoes the AUXO logo tiles */
+:root {
+  --bg: #080808;
+  --surface: #121411;
+  --surface-2: #1a1d18;
+  --line: #2a2e26;
+  --fg: #f2f4ee;
+  --fg-2: #a9b0a1;
+  --fg-3: #7d8476;
+  --lime: #a3e635;
+  --lime-ink: #111111;
+  --lime-soft: rgba(163, 230, 53, 0.12);
+  --amber: #f5b83d;
+  --crit: #f0645a;
+  --font-display: "Montserrat", "Arial Black", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f7f8f4; --surface: #ffffff; --surface-2: #eef1e8; --line: #d9ddd1;
+    --fg: #111111; --fg-2: #4a5043; --fg-3: #6b7263;
+    --lime: #a3e635; --lime-ink: #111111; --lime-soft: rgba(132, 190, 30, 0.16);
+    --amber: #b87a00; --crit: #c23b30; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f7f8f4; --surface: #ffffff; --surface-2: #eef1e8; --line: #d9ddd1;
+  --fg: #111111; --fg-2: #4a5043; --fg-3: #6b7263;
+  --lime: #a3e635; --lime-ink: #111111; --lime-soft: rgba(132, 190, 30, 0.16);
+  --amber: #b87a00; --crit: #c23b30; color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 560px; margin: 0 auto;
+  padding-inline: 16px; padding-block: 20px 40px;
+  min-height: 100%; display: flex; flex-direction: column; gap: 20px;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; border-radius: 6px; }
+
+/* brand bar */
+.brand { display: flex; align-items: center; gap: 10px; }
+.mark { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 30px; height: 30px; flex: none; }
+.mark span {
+  background: var(--lime); color: var(--lime-ink);
+  font-family: var(--font-display); font-size: 9px; line-height: 1;
+  display: grid; place-items: center;
+}
+.brand-name { font-family: var(--font-display); font-size: 13px; letter-spacing: 0.08em; }
+.brand-sub { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; margin-left: auto; }
+
+.screen { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+
+/* intro */
+.eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime); }
+h1, h2 { font-family: var(--font-display); font-weight: 800; margin: 0; text-wrap: balance; line-height: 1.1; }
+h1 { font-size: clamp(30px, 8vw, 42px); }
+h2 { font-size: clamp(22px, 5.5vw, 28px); }
+.lede { color: var(--fg-2); margin: 0; max-width: 60ch; }
+.dims { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.dims li {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; color: var(--fg-2);
+}
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.facts div { background: var(--surface); padding: 14px 12px; }
+.facts b { display: block; font-family: var(--font-mono); font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.facts small { color: var(--fg-3); font-size: 12px; }
+
+.btn {
+  appearance: none; border: 0; cursor: pointer;
+  background: var(--lime); color: var(--lime-ink);
+  font-weight: 700; font-size: 15px; padding: 14px 22px; border-radius: 8px;
+  text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  transition: transform .12s ease, filter .12s ease;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: translateY(1px); }
+.btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+.btn.ghost:hover { border-color: var(--fg-3); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.note { font-size: 13px; color: var(--fg-3); margin: 0; }
+
+/* quiz header */
+.qhead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.back {
+  justify-self: start; background: none; border: 0; cursor: pointer; color: var(--fg-2);
+  font-size: 14px; padding: 6px 4px;
+}
+.back:hover { color: var(--fg); }
+.back[aria-hidden="true"] { visibility: hidden; }
+.pill {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  background: var(--lime-soft); color: var(--lime); border-radius: 999px; padding: 5px 12px;
+}
+:root[data-theme="light"] .pill { color: #4d7a00; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .pill { color: #4d7a00; } }
+.count { justify-self: end; font-family: var(--font-mono); font-size: 13px; color: var(--fg-2); font-variant-numeric: tabular-nums; }
+.bar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--lime); transition: width .25s ease; }
+
+.question { font-size: clamp(18px, 4.6vw, 20px); font-weight: 700; line-height: 1.35; margin: 4px 0 0; text-wrap: pretty; min-height: 3.2em; }
+
+/* 2x2 AUXO grid */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.block {
+  position: relative; text-align: left; cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 6px;
+  padding: 34px 14px 16px; min-height: 132px;
+  display: flex; flex-direction: column; gap: 6px;
+  transition: border-color .12s ease, background .12s ease, transform .12s ease;
+}
+.block:hover { border-color: var(--fg-3); }
+.block .q {
+  position: absolute; top: 0; left: 0; width: 26px; height: 26px;
+  background: var(--lime); color: var(--lime-ink);
+  font-family: var(--font-display); font-size: 13px;
+  display: grid; place-items: center; border-radius: 4px 0 4px 0;
+}
+.block .lbl { font-weight: 700; font-size: 15px; line-height: 1.25; }
+.block .sub { font-size: 12.5px; color: var(--fg-2); line-height: 1.4; }
+.block.selected { border-color: var(--lime); background: var(--lime-soft); }
+.block.flash { transform: scale(0.98); border-color: var(--lime); background: var(--lime-soft); }
+
+.qfoot { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.idk {
+  background: none; border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+  color: var(--fg-2); font-size: 13px; padding: 7px 16px;
+}
+.idk:hover { color: var(--fg); border-color: var(--fg-3); }
+.idk.selected, .idk.flash { border-color: var(--lime); color: var(--fg); background: var(--lime-soft); }
+.keep { background: none; border: 0; cursor: pointer; color: var(--lime); font-weight: 700; font-size: 14px; padding: 4px; }
+:root[data-theme="light"] .keep { color: #4d7a00; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .keep { color: #4d7a00; } }
+.hint { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); text-align: center; }
+
+/* loader */
+.loader { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; text-align: center; padding-block: 60px; }
+.cube { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: 96px; height: 96px; }
+.cube span {
+  background: var(--lime); color: var(--lime-ink); border-radius: 3px;
+  font-family: var(--font-display); font-size: 22px; display: grid; place-items: center;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.cube span:nth-child(2) { animation-delay: .15s; }
+.cube span:nth-child(4) { animation-delay: .3s; }
+.cube span:nth-child(3) { animation-delay: .45s; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.9); } }
+.loadmsg { font-family: var(--font-mono); font-size: 14px; color: var(--fg-2); min-height: 1.5em; }
+
+/* results */
+.score-head { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
+.big { font-family: var(--font-display); font-size: clamp(72px, 22vw, 104px); line-height: .9; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.big small { font-family: var(--font-mono); font-size: 16px; color: var(--fg-3); letter-spacing: 0; margin-left: 4px; }
+.band { display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; min-width: 0; }
+.band-chip {
+  align-self: flex-start; font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; border-radius: 4px; padding: 4px 10px;
+  border: 1px solid currentColor;
+}
+.band-chip.critical { color: var(--crit); }
+.band-chip.fragile { color: var(--amber); }
+.band-chip.stable, .band-chip.healthy { color: var(--lime); }
+:root[data-theme="light"] .band-chip.stable, :root[data-theme="light"] .band-chip.healthy { color: #4d7a00; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .band-chip.stable, :root:not([data-theme="dark"]) .band-chip.healthy { color: #4d7a00; } }
+.band-line { color: var(--fg-2); font-size: 15px; margin: 0; }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 16px; }
+.panel-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 8px; }
+.radar { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; overflow: visible; }
+.radar .ring { fill: none; stroke: var(--line); stroke-width: 1; }
+.radar .spoke { stroke: var(--line); stroke-width: 1; }
+.radar .area { fill: var(--lime-soft); stroke: var(--lime); stroke-width: 2; stroke-linejoin: round; }
+.radar .dot { fill: var(--lime); stroke: var(--surface); stroke-width: 2; }
+.radar .dot.weak { fill: var(--amber); }
+.radar .axis-lbl { fill: var(--fg); font-family: var(--font-body); font-size: 12px; font-weight: 600; }
+.radar .axis-val { fill: var(--fg-2); font-family: var(--font-mono); font-size: 11px; }
+.radar .tick { fill: var(--fg-3); font-family: var(--font-mono); font-size: 9px; }
+
+.dim-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+.dim-table td { padding: 8px 0; border-top: 1px solid var(--line); }
+.dim-table td:last-child { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--fg-2); }
+.dim-table .meter { width: 40%; padding-inline: 12px; }
+.meter-track { height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.meter-track i { display: block; height: 100%; background: var(--lime); border-radius: 3px; }
+.meter-track i.weak { background: var(--amber); }
+
+.focus { border-left: 3px solid var(--amber); padding: 4px 0 4px 14px; }
+.focus b { display: block; font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+.focus p { margin: 0; color: var(--fg); }
+
+/* result actions */
+.cta { display: flex; flex-direction: column; gap: 8px; }
+.btn.full { width: 100%; padding-block: 16px; font-size: 16px; }
+.note.center { text-align: center; }
+.mail-form { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.mail-form label { font-size: 13px; font-weight: 600; color: var(--fg-2); }
+.mail-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.mail-row input {
+  flex: 1 1 200px; min-width: 0; font: inherit; font-size: 15px;
+  background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;
+}
+.mail-row input:focus { outline: 2px solid var(--lime); outline-offset: 1px; }
+.form-msg { margin: 0; font-size: 13px; min-height: 1.2em; color: var(--fg-2); }
+.form-msg.err { color: var(--crit); }
+.deeper { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-direction: column; gap: 6px; }
+.deeper-title { margin: 0; font-weight: 700; font-size: 14px; color: var(--fg-2); }
+.text-link { align-self: flex-start; background: none; border: 0; padding: 4px 0; cursor: pointer; color: var(--fg-2); font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.text-link:hover { color: var(--fg); }
+.check { display: flex; flex-direction: column; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-top: 4px; }
+.check-title { margin: 0; font-weight: 700; font-size: 14px; }
+.tick { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--fg-2); cursor: pointer; }
+.tick input { accent-color: var(--lime); width: 18px; height: 18px; margin: 1px 0 0; flex: none; }
+.check .btn { align-self: flex-start; padding: 10px 18px; font-size: 14px; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* inconclusive */
+.status-badge {
+  align-self: flex-start; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  color: var(--amber); border: 1px solid var(--amber); border-radius: 4px; padding: 5px 10px;
+}
+.theme-toggle { background: none; border: 1px solid var(--line); border-radius: 999px; color: var(--fg-3); font-size: 12px; padding: 4px 10px; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media (max-width: 380px) {
+  .block { min-height: 124px; padding: 32px 11px 13px; }
+  .block .lbl { font-size: 14px; }
+  .block .sub { font-size: 12px; }
+}
+</style>
+
+<div class="wrap">
+  <header class="brand">
+    <div class="mark" aria-hidden="true"><span>A</span><span>U</span><span>X</span><span>O</span></div>
+    <span class="brand-name">AUXO SCORE</span>
+    <span class="brand-sub">FULL TEST</span>
+  </header>
+
+  <!-- Intro -->
+  <section class="screen" id="s-intro">
+    <span class="eyebrow">Evidence-based data health check</span>
+    <h1>Answer with facts, not feelings.</h1>
+    <p class="lede">Ten questions about how your company actually handles its numbers: days, percentages, how often things go wrong. Pick the answer that describes a normal month, not your best one.</p>
+    <ul class="dims" aria-label="Dimensions measured">
+      <li>Accurate</li><li>Complete</li><li>Consistent</li><li>Timely</li><li>Trusted</li>
+    </ul>
+    <div class="facts">
+      <div><b>10</b><small>questions</small></div>
+      <div><b>~3</b><small>minutes</small></div>
+      <div><b>0–100</b><small>score</small></div>
+    </div>
+    <div class="btn-row"><button class="btn" id="startBtn" type="button">Start the full test →</button></div>
+    <p class="note">If you don't know an answer, say so. Choosing "I don't know" 3 or more times ends the test with a visibility finding instead of a score.</p>
+  </section>
+
+  <!-- Quiz -->
+  <section class="screen" id="s-quiz" hidden>
+    <div class="qhead">
+      <button class="back" id="backBtn" type="button">← Back</button>
+      <span class="pill" id="dimPill">ACCURATE</span>
+      <span class="count" id="count">1 / 10</span>
+    </div>
+    <div class="bar" aria-hidden="true"><i id="progress" style="width:0%"></i></div>
+    <p class="question" id="question" aria-live="polite"></p>
+    <div class="grid" id="grid" role="group" aria-label="Answer options"></div>
+    <div class="qfoot">
+      <button class="idk" id="idkBtn" type="button">I don't know</button>
+      <button class="keep" id="keepBtn" type="button" hidden>Keep &amp; Continue →</button>
+      <span class="hint">Keys: A · U · X · O · I for "I don't know"</span>
+    </div>
+  </section>
+
+  <!-- Loader -->
+  <section class="screen" id="s-loader" hidden>
+    <div class="loader">
+      <div class="cube" aria-hidden="true"><span>A</span><span>U</span><span>X</span><span>O</span></div>
+      <p class="loadmsg" id="loadmsg" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Result -->
+  <section class="screen" id="s-result" hidden>
+    <span class="eyebrow">Your verified AUXO Score</span>
+    <div class="score-head">
+      <div class="big" id="bigScore">0<small>/100</small></div>
+      <div class="band">
+        <span class="band-chip" id="bandChip">Stable</span>
+        <p class="band-line" id="bandLine"></p>
+      </div>
+    </div>
+    <div class="panel">
+      <p class="panel-title">Score by dimension (0–100)</p>
+      <svg class="radar" id="radar" viewBox="0 0 360 330" role="img" aria-label="Radar chart of the five dimension scores"></svg>
+      <table class="dim-table" id="dimTable" aria-label="Dimension scores"></table>
+    </div>
+    <div class="focus" id="focus"></div>
+    <div class="cta">
+      <button class="btn full" type="button" id="emailBtn" aria-expanded="false" aria-controls="emailForm">Email my full report</button>
+      <p class="note center">Your full breakdown, sent to your work email.</p>
+      <form class="mail-form" id="emailForm" novalidate hidden>
+        <label for="emailInput">Work email</label>
+        <div class="mail-row">
+          <input id="emailInput" type="email" autocomplete="email" placeholder="name@company.com" required>
+          <button class="btn" type="submit">Send</button>
+        </div>
+        <p class="form-msg" id="emailMsg" role="status"></p>
+      </form>
+    </div>
+
+    <div class="deeper">
+      <p class="deeper-title">Need to go deeper?</p>
+      <p class="note">The extended assessment is for leadership teams planning to fix their data in the next 6 months. It takes longer than this test, and our team reviews every submission.</p>
+      <button class="text-link" type="button" id="extLink" aria-expanded="false" aria-controls="extCheck">Take the extended version →</button>
+      <form class="check" id="extCheck" hidden>
+        <p class="check-title">Is this for you?</p>
+        <label class="tick"><input type="checkbox" id="chk1"> We're planning a data project this year.</label>
+        <label class="tick"><input type="checkbox" id="chk2"> I can answer for both finance and operations.</label>
+        <button class="btn ghost" type="submit" id="extContinue" disabled>Continue</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Extended access -->
+  <section class="screen" id="s-extended" hidden>
+    <span class="eyebrow">Extended assessment</span>
+    <h2>Limited seats each month.</h2>
+    <p class="lede">We keep the number of extended assessments small so our team can review each one properly. Request a seat with your work email and we'll confirm your place.</p>
+    <form class="mail-form" id="seatForm" novalidate>
+      <label for="seatInput">Work email</label>
+      <div class="mail-row">
+        <input id="seatInput" type="email" autocomplete="email" placeholder="name@company.com" required>
+        <button class="btn" type="submit">Request a seat</button>
+      </div>
+      <p class="form-msg" id="seatMsg" role="status"></p>
+    </form>
+    <button class="text-link" type="button" id="backToResult">← Back to my score</button>
+  </section>
+
+  <!-- Inconclusive -->
+  <section class="screen" id="s-inconclusive" hidden>
+    <span class="status-badge">STATUS: UNVERIFIED — VISIBILITY GAP</span>
+    <h2>Score Inconclusive: Data Visibility Blind Spot</h2>
+    <p class="lede">You selected "I don't know" on 3 or more operational baseline questions. In data operations, lack of visibility is itself a critical finding. You cannot optimize, automate, or trust data assets that have not been audited or mapped.</p>
+    <div class="btn-row">
+      <a class="btn" href="https://auxodata.com/contact/" target="_blank" rel="noopener">Schedule Data Discovery Audit</a>
+      <button class="btn ghost" type="button" data-action="restart">Retake Assessment with Core Team</button>
+    </div>
+  </section>
+</div>
+
+<script>
+// ---------- Data ----------
+const CARDS = [
+  { id: 1, dimension: "Accurate", type: "scale_ascending",
+    question: "What percentage of numbers shown to leadership or the board are touched, calculated, or adjusted by hand in spreadsheets first?",
+    options: [
+      { label: "None", sub: "100% pulled directly from dashboards/systems", tier: 1, points: 10 },
+      { label: "Under 25%", sub: "Minor formatting and cosmetic assembly only", tier: 2, points: 7 },
+      { label: "25% – 75%", sub: "Heavy copy-pasting, VLOOKUPs, and manual tweaks", tier: 3, points: 3 },
+      { label: "Over 75%", sub: "Almost entirely built and manipulated manually", tier: 4, points: 0 } ] },
+  { id: 2, dimension: "Accurate", type: "scale_descending",
+    question: "In the past 6 months, how often has a reported number or slide deck had to be re-sent or corrected after a leadership meeting?",
+    options: [
+      { label: "Almost every cycle", sub: "Re-issuing corrected decks is normal", tier: 4, points: 0 },
+      { label: "Every month or two", sub: "Noticeable calculation errors slip through", tier: 3, points: 3 },
+      { label: "Once or twice", sub: "Minor footnote or typo fixes only", tier: 2, points: 7 },
+      { label: "Zero times", sub: "What gets presented stays final", tier: 1, points: 10 } ] },
+  { id: 3, dimension: "Complete", type: "descriptive_shuffle",
+    question: "Where does critical operational data (e.g. pipeline status, inventory, pricing, cost tracking) actually live?",
+    options: [
+      { label: "Central systems", sub: "Fully tracked in CRM, ERP, or warehouse", tier: 1, points: 10 },
+      { label: "Mostly central", sub: "Some teams keep private side notes", tier: 2, points: 7 },
+      { label: "Scattered", sub: "Key metrics sit in personal sheets or Slack", tier: 3, points: 3 },
+      { label: "In people's heads", sub: "Lost forever if 2 key people leave", tier: 4, points: 0 } ] },
+  { id: 4, dimension: "Complete", type: "scale_descending",
+    question: "When leadership asks 'Why is this metric up or down?', how long does it take to pull the full breakdown?",
+    options: [
+      { label: "A week or more", sub: "Turns into an internal investigation", tier: 4, points: 0 },
+      { label: "2 to 3 days", sub: "Manual multi-system stitching required", tier: 3, points: 3 },
+      { label: "A few hours", sub: "Someone just runs and filters an export", tier: 2, points: 7 },
+      { label: "Under 5 minutes", sub: "Instant drill-down on current tools", tier: 1, points: 10 } ] },
+  { id: 5, dimension: "Consistent", type: "descriptive_shuffle",
+    question: "Does your company have single, documented definitions for core KPIs (e.g. 'Active Customer', 'Gross Margin', 'Churn')?",
+    options: [
+      { label: "Centrally locked", sub: "Documented and coded across systems", tier: 1, points: 10 },
+      { label: "Written down", sub: "But different teams still interpret loosely", tier: 2, points: 7 },
+      { label: "Tribal knowledge", sub: "Unwritten; people assume definitions", tier: 3, points: 3 },
+      { label: "No standard", sub: "Teams calculate the same metric differently", tier: 4, points: 0 } ] },
+  { id: 6, dimension: "Consistent", type: "scale_descending",
+    question: "How often do two different department heads show up to a meeting with conflicting numbers for the same thing?",
+    options: [
+      { label: "Every cycle", sub: "Discrepancies are an expected headache", tier: 4, points: 0 },
+      { label: "Frequently", sub: "Meeting time is spent debating who is right", tier: 3, points: 3 },
+      { label: "Rarely", sub: "Only if there's a clear cut-off timing difference", tier: 2, points: 7 },
+      { label: "Never", sub: "All teams report off the same baseline", tier: 1, points: 10 } ] },
+  { id: 7, dimension: "Timely", type: "scale_ascending",
+    question: "How many calendar days after month-end until executive metrics and financials are locked and shared?",
+    options: [
+      { label: "5 days or less", sub: "Fast, repeatable close", tier: 1, points: 10 },
+      { label: "6 to 10 days", sub: "Standard, predictable turnaround", tier: 2, points: 7 },
+      { label: "11 to 20 days", sub: "Significant lag before visibility", tier: 3, points: 3 },
+      { label: "21+ days", sub: "Or numbers are never officially locked", tier: 4, points: 0 } ] },
+  { id: 8, dimension: "Timely", type: "scale_descending",
+    question: "How old is the operational data managers look at when making day-to-day decisions?",
+    options: [
+      { label: "Monthly or older", sub: "Flying blind between cycles", tier: 4, points: 0 },
+      { label: "Last week's data", sub: "Weekly summary cadences only", tier: 3, points: 3 },
+      { label: "Yesterday's close", sub: "Refreshed nightly via batch", tier: 2, points: 7 },
+      { label: "Real-time / Hourly", sub: "Live view of current business", tier: 1, points: 10 } ] },
+  { id: 9, dimension: "Trusted", type: "scale_descending",
+    question: "How common is it for managers to maintain private 'shadow' spreadsheets because they don't fully trust central dashboards?",
+    options: [
+      { label: "Universal", sub: "Official tools are ignored; private sheets run things", tier: 4, points: 0 },
+      { label: "Common", sub: "Most managers maintain a side sheet to be safe", tier: 3, points: 3 },
+      { label: "Isolated", sub: "1 or 2 niche teams do this for special cases", tier: 2, points: 7 },
+      { label: "Practically zero", sub: "Official tools are the only reference", tier: 1, points: 10 } ] },
+  { id: 10, dimension: "Trusted", type: "descriptive_shuffle",
+    question: "Before leadership makes a major strategic bet, what happens to the underlying data?",
+    options: [
+      { label: "Accepted instantly", sub: "High confidence, zero audit drills", tier: 1, points: 10 },
+      { label: "Quick gut check", sub: "Light verification, accepted quickly", tier: 2, points: 7 },
+      { label: "Heavy audit", sub: "Days spent validating before trusting", tier: 3, points: 3 },
+      { label: "Ignored", sub: "Calls are made on gut feel; data is suspect", tier: 4, points: 0 } ] }
+];
+
+const DIMENSIONS = ["Accurate", "Complete", "Consistent", "Timely", "Trusted"];
+const TIE_ORDER = ["Trusted", "Consistent", "Accurate", "Complete", "Timely"];
+const QUADS = ["A", "U", "X", "O"];
+const IDK_POINTS = 3;
+const IDK_LIMIT = 3;
+
+const BANDS = [
+  { min: 80, name: "Healthy", cls: "healthy", line: "Your data is ready for the decisions that matter." },
+  { min: 60, name: "Stable", cls: "stable", line: "Good foundations with a few blind spots." },
+  { min: 40, name: "Fragile", cls: "fragile", line: "It works until someone asks a hard question." },
+  { min: 0, name: "Critical", cls: "critical", line: "Decisions are being made in the dark." }
+];
+
+const FOCUS = {
+  Accurate: "Numbers reaching leadership are being fixed by hand, so errors slip through. Start by finding where the manual edits happen.",
+  Complete: "Key data sits outside your systems or takes days to pull together. Start by mapping where it actually lives.",
+  Consistent: "Teams calculate the same metric in different ways. Start by writing down one definition for each of your top KPIs.",
+  Timely: "Numbers arrive after the decisions they should inform. Start with how long your month-end close really takes.",
+  Trusted: "People check or rebuild the numbers before they rely on them. Start by finding out why the official reports get second-guessed."
+};
+
+const LOAD_STEPS = ["Scoring each dimension…", "Building your report…"];
+
+// ---------- Pure scoring ----------
+function computeResult(answers) {
+  const dims = Object.fromEntries(DIMENSIONS.map(d => [d, 0]));
+  let total = 0;
+  for (const card of CARDS) {
+    const a = answers[card.id];
+    if (!a) continue;
+    dims[card.dimension] += a.points;
+    total += a.points;
+  }
+  const min = Math.min(...DIMENSIONS.map(d => dims[d]));
+  const weakest = TIE_ORDER.find(d => dims[d] === min);
+  const band = BANDS.find(b => total >= b.min);
+  return { total, dims, weakest, band };
+}
+function idkCount(answers) {
+  return Object.values(answers).filter(a => a.isIdk).length;
+}
+
+// ---------- Layout (quadrant mapping) ----------
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function buildLayout() {
+  // returns cardId -> array of 4 options in quadrant order A,U,X,O
+  const layout = {};
+  for (const c of CARDS) {
+    const byTier = t => c.options.find(o => o.tier === t);
+    if (c.type === "descriptive_shuffle") layout[c.id] = shuffle(c.options);
+    else if (c.type === "scale_ascending") layout[c.id] = [1, 2, 3, 4].map(byTier);
+    else layout[c.id] = [4, 3, 2, 1].map(byTier);
+  }
+  return layout;
+}
+
+// ---------- State ----------
+let state = { screen: "intro", index: 0, answers: {}, layout: buildLayout() };
+let locked = false;
+let loadTimers = [];
+
+const $ = id => document.getElementById(id);
+const screens = ["intro", "quiz", "loader", "result", "inconclusive", "extended"];
+
+function show(name) {
+  state.screen = name;
+  screens.forEach(s => { $("s-" + s).hidden = s !== name; });
+  window.scrollTo(0, 0);
+}
+
+function renderCard() {
+  const card = CARDS[state.index];
+  const prev = state.answers[card.id];
+  $("backBtn").setAttribute("aria-hidden", state.index === 0 ? "true" : "false");
+  $("backBtn").tabIndex = state.index === 0 ? -1 : 0;
+  $("dimPill").textContent = card.dimension.toUpperCase();
+  $("count").textContent = `${card.id} / ${CARDS.length}`;
+  $("progress").style.width = `${(state.index / CARDS.length) * 100}%`;
+  $("question").textContent = card.question;
+
+  const grid = $("grid");
+  grid.innerHTML = "";
+  state.layout[card.id].forEach((opt, i) => {
+    const q = QUADS[i];
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "block";
+    b.dataset.quad = q;
+    if (prev && !prev.isIdk && prev.selectedQuadrant === q) b.classList.add("selected");
+    b.setAttribute("aria-pressed", b.classList.contains("selected") ? "true" : "false");
+    b.innerHTML = `<span class="q" aria-hidden="true">${q}</span><span class="lbl"></span><span class="sub"></span>`;
+    b.querySelector(".lbl").textContent = opt.label;
+    b.querySelector(".sub").textContent = opt.sub;
+    b.addEventListener("click", () => choose(q, opt, b));
+    grid.appendChild(b);
+  });
+
+  const idk = $("idkBtn");
+  idk.classList.toggle("selected", !!(prev && prev.isIdk));
+  idk.classList.remove("flash");
+  $("keepBtn").hidden = !prev;
+}
+
+function choose(quad, opt, el) {
+  if (locked) return;
+  const card = CARDS[state.index];
+  const prev = state.answers[card.id];
+  const same = prev && (quad === "IDK" ? prev.isIdk : prev.selectedQuadrant === quad && !prev.isIdk);
+  if (!same) {
+    state.answers[card.id] = quad === "IDK"
+      ? { tier: 5, points: IDK_POINTS, selectedQuadrant: null, isIdk: true }
+      : { tier: opt.tier, points: opt.points, selectedQuadrant: quad, isIdk: false };
+  }
+  locked = true;
+  document.querySelectorAll(".block, .idk").forEach(n => n.classList.remove("selected"));
+  el.classList.add("flash");
+  setTimeout(() => { locked = false; advance(); }, 150);
+}
+
+function advance() {
+  if (idkCount(state.answers) >= IDK_LIMIT) { show("inconclusive"); return; }
+  if (state.index < CARDS.length - 1) {
+    state.index++;
+    renderCard();
+  } else {
+    runLoader();
+  }
+}
+
+function goBack() {
+  if (locked || state.index === 0) return;
+  state.index--;
+  renderCard();
+}
+
+function runLoader() {
+  show("loader");
+  locked = true;
+  const msg = $("loadmsg");
+  msg.textContent = LOAD_STEPS[0];
+  loadTimers = [
+    setTimeout(() => { msg.textContent = LOAD_STEPS[1]; }, 1500),
+    setTimeout(() => { locked = false; renderResult(); show("result"); }, 3000)
+  ];
+}
+
+// ---------- Results ----------
+function renderResult() {
+  const r = computeResult(state.answers);
+  $("bigScore").innerHTML = `${r.total}<small>/100</small>`;
+  const chip = $("bandChip");
+  chip.textContent = r.band.name;
+  chip.className = "band-chip " + r.band.cls;
+  $("bandLine").textContent = r.band.line;
+
+  drawRadar(r);
+
+  $("dimTable").innerHTML = DIMENSIONS.map(d => {
+    const v = r.dims[d] * 5;
+    const weak = d === r.weakest;
+    return `<tr><td>${d}</td><td class="meter"><div class="meter-track"><i class="${weak ? "weak" : ""}" style="width:${v}%"></i></div></td><td>${v}</td></tr>`;
+  }).join("");
+
+  $("focus").innerHTML = `<b>Weakest: ${r.weakest}</b><p>${FOCUS[r.weakest]}</p>`;
+}
+
+function drawRadar(r) {
+  const svg = $("radar");
+  const cx = 180, cy = 172, R = 112;
+  const angle = i => -Math.PI / 2 + (i * 2 * Math.PI) / DIMENSIONS.length;
+  const pt = (i, v) => [cx + Math.cos(angle(i)) * R * v / 100, cy + Math.sin(angle(i)) * R * v / 100];
+  let s = "";
+  [25, 50, 75, 100].forEach(v => {
+    const pts = DIMENSIONS.map((_, i) => pt(i, v).join(",")).join(" ");
+    s += `<polygon class="ring" points="${pts}"/>`;
+    s += `<text class="tick" x="${cx + 4}" y="${cy - R * v / 100 + 3}">${v}</text>`;
+  });
+  DIMENSIONS.forEach((_, i) => {
+    const [x, y] = pt(i, 100);
+    s += `<line class="spoke" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;
+  });
+  const vals = DIMENSIONS.map(d => r.dims[d] * 5);
+  s += `<polygon class="area" points="${vals.map((v, i) => pt(i, v).join(",")).join(" ")}"/>`;
+  vals.forEach((v, i) => {
+    const [x, y] = pt(i, v);
+    s += `<circle class="dot${DIMENSIONS[i] === r.weakest ? " weak" : ""}" cx="${x}" cy="${y}" r="5"><title>${DIMENSIONS[i]}: ${v}</title></circle>`;
+  });
+  DIMENSIONS.forEach((d, i) => {
+    const [x, y] = pt(i, 122);
+    const c = Math.cos(angle(i));
+    const anchor = Math.abs(c) < 0.2 ? "middle" : c > 0 ? "start" : "end";
+    const dy = i === 0 ? -14 : (Math.sin(angle(i)) > 0.5 ? 10 : 0);
+    s += `<text class="axis-lbl" x="${x}" y="${y + dy}" text-anchor="${anchor}">${d}</text>`;
+    s += `<text class="axis-val" x="${x}" y="${y + dy + 14}" text-anchor="${anchor}">${vals[i]}</text>`;
+  });
+  svg.innerHTML = s;
+}
+
+// ---------- Wiring ----------
+function start() {
+  loadTimers.forEach(clearTimeout);
+  locked = false;
+  state = { screen: "quiz", index: 0, answers: {}, layout: buildLayout() };
+  resetResultActions();
+  show("quiz");
+  renderCard();
+}
+
+$("startBtn").addEventListener("click", start);
+$("backBtn").addEventListener("click", goBack);
+$("idkBtn").addEventListener("click", e => choose("IDK", null, e.currentTarget));
+$("keepBtn").addEventListener("click", () => { if (!locked) advance(); });
+document.querySelectorAll('[data-action="restart"]').forEach(b => b.addEventListener("click", start));
+
+document.addEventListener("keydown", e => {
+  if (state.screen !== "quiz" || e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toUpperCase();
+  const i = QUADS.indexOf(k);
+  if (i >= 0) {
+    const btn = $("grid").children[i];
+    const opt = state.layout[CARDS[state.index].id][i];
+    choose(k, opt, btn);
+  } else if (k === "I") {
+    choose("IDK", null, $("idkBtn"));
+  } else if (e.key === "Backspace") {
+    e.preventDefault();
+    goBack();
+  }
+});
+
+// ---------- Result actions ----------
+const FREE_DOMAINS = ["gmail.com","googlemail.com","outlook.com","hotmail.com","live.com","msn.com","yahoo.com","ymail.com","icloud.com","me.com","aol.com","proton.me","protonmail.com","gmx.com","mail.com","zoho.com","yandex.com","rediffmail.com"];
+function checkWorkEmail(v) {
+  const email = v.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return "Enter a valid email address, like name@company.com.";
+  if (FREE_DOMAINS.includes(email.split("@")[1])) return "Please use your company email. Personal addresses like Gmail or Outlook can't be used.";
+  return "";
+}
+function wireEmailForm(formId, inputId, msgId, doneText) {
+  $(formId).addEventListener("submit", e => {
+    e.preventDefault();
+    const msg = $(msgId);
+    const err = checkWorkEmail($(inputId).value);
+    msg.classList.toggle("err", !!err);
+    msg.textContent = err || doneText;
+  });
+}
+wireEmailForm("emailForm", "emailInput", "emailMsg", "Request saved in this preview. Email sending isn't connected yet.");
+wireEmailForm("seatForm", "seatInput", "seatMsg", "Request saved in this preview. Seat requests aren't connected yet.");
+$("emailBtn").addEventListener("click", () => {
+  const f = $("emailForm"); f.hidden = !f.hidden;
+  $("emailBtn").setAttribute("aria-expanded", String(!f.hidden));
+  if (!f.hidden) $("emailInput").focus();
+});
+$("extLink").addEventListener("click", () => {
+  const f = $("extCheck"); f.hidden = !f.hidden;
+  $("extLink").setAttribute("aria-expanded", String(!f.hidden));
+});
+["chk1", "chk2"].forEach(id => $(id).addEventListener("change", () => {
+  $("extContinue").disabled = !($("chk1").checked && $("chk2").checked);
+}));
+$("extCheck").addEventListener("submit", e => { e.preventDefault(); if (!$("extContinue").disabled) show("extended"); });
+$("backToResult").addEventListener("click", () => show("result"));
+function resetResultActions() {
+  ["emailForm", "extCheck"].forEach(id => { $(id).hidden = true; });
+  ["emailInput", "seatInput"].forEach(id => { $(id).value = ""; });
+  ["emailMsg", "seatMsg"].forEach(id => { $(id).textContent = ""; $(id).classList.remove("err"); });
+  $("chk1").checked = $("chk2").checked = false; $("extContinue").disabled = true;
+  $("emailBtn").setAttribute("aria-expanded", "false"); $("extLink").setAttribute("aria-expanded", "false");
+}
+
+// Keep progress for viewers who have the page open during an update
+window.claude?.hot?.snapshot?.(() => ({ state }));
+const boot = data => {
+  if (data && data.state && data.state.screen && data.state.screen !== "loader") {
+    state = data.state;
+    show(state.screen);
+    if (state.screen === "quiz") renderCard();
+    if (state.screen === "result" || state.screen === "extended") renderResult();
+  }
+};
+window.claude?.hot?.ready ? window.claude.hot.ready(boot) : boot(window.claude?.hot?.data ?? {});
+</script>

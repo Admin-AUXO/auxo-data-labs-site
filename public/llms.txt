@@ -9,7 +9,7 @@ AUXO works only in real estate. It builds working systems clients own and run �
 - [The Work](https://auxodata.com/the-work/): How AUXO assesses a business (accurate, complete, consistent, timely, trusted), how an engagement runs (assessment, build, handover), and the founding team.
 - [About — the lab](https://auxodata.com/about/): Beliefs, how AUXO works, where it operates, and what to expect from an engagement.
 - [Insights](https://auxodata.com/insights/): Short, one-minute positions on data, AI, reporting, forecasting, compliance, and ownership in Gulf real estate.
-- [Self-check](https://auxodata.com/self-check/): The AUXO Score — a free, ~3-minute self-assessment that scores your data, reporting, automation, and compliance readiness 0–100 (bands: Shaky, Patchy, Manual, Strong) and returns an honest, specific read with the single highest-leverage fix. No sign-up; runs and caches in your browser.
+- [AUXO Score](https://auxodata.com/auxo-score/): A free, evidence-based data health check. Ten fact-based questions (days, percentages, frequencies, where data lives), two for each of five dimensions: Accurate, Complete, Consistent, Timely, Trusted. Each answer scores 10, 7, 3 or 0 points ("I don't know" scores 3), for a 0–100 total. Bands: Healthy (80–100), Stable (60–79), Fragile (40–59), Critical (0–39). The result shows the score, a per-dimension breakdown and the weakest dimension. Choosing "I don't know" three or more times ends the test as inconclusive (a visibility gap). No sign-up; answers stay in the browser unless the visitor asks for the report by email.
 - [Contact](https://auxodata.com/contact/): How to get in touch; common questions answered.
 
 ## What AUXO offers
