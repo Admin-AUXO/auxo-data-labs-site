@@ -15,19 +15,19 @@ import "../../styles/pages/auxo-score.css";
 >
   <!-- Intro -->
   <section class="score__screen" id="s-intro" data-screen="intro">
-    <span class="score__eyebrow">Evidence-based data health check</span>
-    <h1 class="score__h1" tabindex="-1">Answer with facts, not feelings.</h1>
+    <span class="score__eyebrow">The AUXO Score challenge</span>
+    <h1 class="score__h1" tabindex="-1">How healthy is your data, really?</h1>
     <p class="score__lede">
-      Ten questions about how your company actually handles its numbers: days, percentages, how often things go
-      wrong. Pick the answer that describes a normal month, not your best one.
+      10 quick rounds. Tap the answer that matches a normal month, not your best one. Get your score out of 100 at
+      the end.
     </p>
     <ul class="score__dims" aria-label="Dimensions measured">
       {DIMENSIONS.map((d) => <li>{d}</li>)}
     </ul>
     <div class="score__facts">
-      <div><b>10</b><small>questions</small></div>
-      <div><b>~3</b><small>minutes</small></div>
-      <div><b>0–100</b><small>score</small></div>
+      <div><b>10</b><small>rounds</small></div>
+      <div><b>~3</b><small>min</small></div>
+      <div><b>/100</b><small>your score</small></div>
     </div>
     <div class="score__resume" id="resumeBar" hidden>
       <p id="resumeText">You have a test in progress (card 1 of 10).</p>
@@ -37,7 +37,7 @@ import "../../styles/pages/auxo-score.css";
       </div>
     </div>
     <div class="score__btn-row">
-      <button class="score__btn" type="button" id="startBtn">Start the full test →</button>
+      <button class="score__btn" type="button" id="startBtn">Start the challenge →</button>
     </div>
     <p class="score__note">
       If you don't know an answer, say so. Choosing "I don't know" 3 or more times ends the test with a visibility

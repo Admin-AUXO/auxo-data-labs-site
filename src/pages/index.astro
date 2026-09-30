@@ -7,14 +7,15 @@ import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import { homeContent as c } from "../data/home";
 import { withBase } from "../lib/url";
 import "../styles/pages/home.css";
+import "../styles/pages/type-scale.css";
 
 // Duplicate the logo set so the marquee loops seamlessly; the copy is hidden from assistive tech.
 const logoLoop = [...c.logos.items, ...c.logos.items];
 ---
 
 <BaseLayout
-  title="Analytics & AI for Gulf real estate"
-  description="We turn messy, fragmented data into decisions Gulf real estate companies act on. Analytics and AI, built to last and yours to keep."
+  title="Analytics & AI for Gulf businesses"
+  description="We turn messy, fragmented data into decisions Gulf businesses act on. Analytics and AI, built to last and yours to keep."
 >
   <!-- 1. Hero -->
   <Section padding="lg" width="7xl" class="home-hero">
@@ -57,17 +58,18 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
   <!-- 3. Built on -->
   <Section padding="sm" width="7xl">
     <div class="logos" data-reveal>
-      <p class="eyebrow logos__label">{c.logos.label}</p>
-      <div class="logos__viewport">
-        <ul class="logos__track">
+      <p class="eyebrow logos__label" id="built-on-label">{c.logos.label}</p>
+      <div class="logos__viewport" data-marquee>
+        <ul class="logos__track" aria-labelledby="built-on-label">
           {
             logoLoop.map((logo, i) => (
-              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined}>
+              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined} style={logo.color ? `--brand:${logo.color}` : undefined}>
                 {logo.icon ? (
-                  <Icon name={logo.icon} class="logos__icon" role="img" aria-label={logo.name} title={logo.name} />
+                  <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
                 ) : (
-                  <span class="logos__wordmark" role="img" aria-label={logo.name}>{logo.name}</span>
+                  <span class="logos__wordmark" aria-hidden="true">{logo.name}</span>
                 )}
+                <span class="logos__name">{logo.name}</span>
               </li>
             ))
           }
@@ -76,23 +78,30 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     </div>
   </Section>
 
-  <!-- 4. Four pillars -->
-  <Section padding="sm" width="7xl">
-    <nav class="pillars" aria-label="What we build" data-reveal>
+  <!-- 4. Four pillars: a 2x2 cube like the AUXO mark; each tile flips to a short description -->
+  <Section padding="md" width="7xl">
+    <ul class="cube" aria-label="What we build">
       {
         c.pillars.map((p) => (
-          <a href={withBase(p.href)} class="pillars__link">
-            <span>{p.label}</span>
-            <Icon name="mdi:arrow-right" class="pillars__arrow" aria-hidden="true" />
-          </a>
+          <li class="cube__cell">
+            <button type="button" class="cube__tile" aria-pressed="false" data-cube-tile>
+              <span class="cube__face cube__face--front">
+                <span class="cube__letter" aria-hidden="true">{p.letter}</span>
+                <span class="cube__title">{p.title}</span>
+              </span>
+              <span class="cube__face cube__face--back">
+                <span class="cube__back-title">{p.title}</span>
+                <span class="cube__desc">{p.desc}</span>
+              </span>
+            </button>
+          </li>
         ))
       }
-    </nav>
+    </ul>
   </Section>
 
   <!-- 5. Three cards -->
   <Section padding="md" width="7xl">
-    <p class="eyebrow text-accent-2 mb-5">Inside the work</p>
     <div class="cards">
       {
         c.cards.map((card, i) => (
@@ -140,4 +149,71 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
   }
 
   document.addEventListener("astro:page-load", initGauge);
+
+  // Logo marquee: runs by default (stops only for prefers-reduced-motion), pauses on hover,
+  // on touch, and on keyboard focus; on phones it can also be swiped by hand.
+  function initMarquee() {
+    const vp = document.querySelector<HTMLElement>("[data-marquee]");
+    if (!vp || vp.dataset.bound) return;
+    vp.dataset.bound = "1";
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      vp.dataset.static = "";
+      return;
+    }
+    const SPEED = 40; // px per second
+    let paused = false;
+    let resumeTimer = 0;
+    let last = 0;
+    let pos = vp.scrollLeft;
+    const tick = (now: number) => {
+      if (!vp.isConnected) return;
+      const dt = last ? Math.min(now - last, 100) : 0;
+      last = now;
+      const half = vp.scrollWidth / 2;
+      if (!paused && !document.hidden && half > vp.clientWidth) {
+        pos += (SPEED * dt) / 1000;
+        if (pos >= half) pos -= half;
+        vp.scrollLeft = pos;
+      } else {
+        pos = vp.scrollLeft;
+      }
+      requestAnimationFrame(tick);
+    };
+    const pause = () => {
+      paused = true;
+      clearTimeout(resumeTimer);
+    };
+    const resumeSoon = (ms: number) => {
+      clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(() => {
+        pos = vp.scrollLeft % (vp.scrollWidth / 2);
+        paused = false;
+      }, ms);
+    };
+    vp.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") pause(); });
+    vp.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") resumeSoon(0); });
+    vp.addEventListener("touchstart", pause, { passive: true });
+    vp.addEventListener("touchend", () => resumeSoon(2000), { passive: true });
+    vp.addEventListener("focusin", pause);
+    vp.addEventListener("focusout", () => resumeSoon(0));
+    requestAnimationFrame(tick);
+  }
+
+  // Cube tiles: hover flips on desktop (CSS); tap or Enter/Space toggles for touch and keyboard.
+  function initCube() {
+    document.querySelectorAll<HTMLButtonElement>("[data-cube-tile]").forEach((tile) => {
+      if (tile.dataset.bound) return;
+      tile.dataset.bound = "1";
+      tile.addEventListener("click", () => {
+        const on = tile.getAttribute("aria-pressed") !== "true";
+        tile.setAttribute("aria-pressed", String(on));
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    initMarquee();
+    initCube();
+  });
 </script>
