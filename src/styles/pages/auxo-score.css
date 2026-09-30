@@ -714,26 +714,6 @@
   margin: 0;
 }
 
-.score__steps {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  list-style: decimal;
-  margin: 10px 0;
-  padding-inline-start: 1.4em;
-}
-
-.score__steps li {
-  color: var(--muted);
-  padding-inline-start: 2px;
-}
-
-.score__steps li::marker {
-  color: var(--accent-2);
-  font-family: var(--font-mono);
-  font-weight: 700;
-}
-
 .score__good {
   color: var(--muted);
   font-size: 14px;
@@ -773,8 +753,10 @@
   margin: 0;
 }
 
-.score__gap .score__gap-next {
+.score__gaps .score__gap-next {
   color: var(--accent);
+  font-size: 14px;
+  margin: 4px 0 0;
 }
 
 .score__gap-dim {

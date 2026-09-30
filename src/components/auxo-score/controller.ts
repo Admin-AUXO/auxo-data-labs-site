@@ -222,11 +222,9 @@ export function initAuxoScore(): void {
     };
     const focus = $("focus");
     focus.textContent = "";
-    const steps = el("ol", "score__steps");
-    f.steps.forEach((s) => steps.append(el("li", "", s)));
     const good = el("p", "score__good");
     good.append(el("strong", "", "What good looks like: "), f.good);
-    focus.append(el("b", "", `Your first fix: ${r.weakest}`), el("p", "", f.why), steps, good);
+    focus.append(el("b", "", `Your first fix: ${r.weakest}`), el("p", "", f.why), good);
 
     const gaps = CARDS
       .map((c) => ({ c, a: state.answers[c.id] }))
@@ -243,12 +241,10 @@ export function initAuxoScore(): void {
         const li = el("li", "score__gap");
         li.append(el("span", "score__gap-dim", c.dimension), el("b", "", c.topic));
         const now = c.options.find((o) => o.tier === a.tier);
-        const best = c.options.find((o) => o.tier === 1);
         li.append(el("p", "", a.isIdk || !now ? "You said: I don't know. Finding out is the first step." : `You said: ${now.label}. ${now.sub}.`));
-        if (best) li.append(el("p", "score__gap-next", `Aim for: ${best.label}. ${best.sub}.`));
         list.append(li);
       }
-      box.append(list);
+      box.append(list, el("p", "score__gap-next", "The step-by-step plan for each of these is in your emailed report."));
     }
   }
 

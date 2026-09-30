@@ -44,7 +44,7 @@ Responses the site understands:
 6. **Build email** (Code node → HTML + plain text). From `admin@auxodata.com`, subject `Your AUXO Score: {total}/100 ({band})`. Include:
    - Score, band, band line
    - Table of the 5 dimensions with 0–100 values (`result.radar`), weakest row highlighted
-   - Weakest dimension + `result.focus`
+   - Weakest dimension + `result.focus`, the three `result.focusSteps` and `result.focusGood` (these steps are only shown in the email, not on the site)
    - The 10 questions with the chosen answer, grouped by dimension (from `answers`)
    - "Talk to us about your score" → `https://auxodata.com/contact/`
    - Footer: company details, why they got the email, opt-out line

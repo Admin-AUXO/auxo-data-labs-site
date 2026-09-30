@@ -1,4 +1,4 @@
-import { CARDS, FOCUS_COPY } from "./cards";
+import { CARDS, FOCUS, FOCUS_COPY } from "./cards";
 
 import type { Utm } from "./storage";
 import type { Result, State } from "./types";
@@ -90,6 +90,8 @@ export function buildReportPayload(email: string, hp: string, state: State, r: R
       bandLine: r.band.line,
       weakest: r.weakest,
       focus: FOCUS_COPY[r.weakest],
+      focusSteps: FOCUS[r.weakest].steps,
+      focusGood: FOCUS[r.weakest].good,
       idkCount: r.idkCount,
       dimensions: r.dims,
       radar: r.radar,
