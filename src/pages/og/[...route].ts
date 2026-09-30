@@ -6,8 +6,8 @@ const pages = {
     title: "Analytics and AI for Gulf real estate",
     description: "Turn the data you already hold into decisions you can stand behind.",
   },
-  services: {
-    title: "Work — what AUXO builds",
+  "the-work": {
+    title: "The Work — how we assess and build",
     description:
       "Trusted data, clear reporting, reliable automation, and confident compliance for Gulf property teams.",
   },

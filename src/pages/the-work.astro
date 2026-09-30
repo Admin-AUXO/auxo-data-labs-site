@@ -1,0 +1,94 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/layout/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import Button from "../components/ui/Button.astro";
+import StructuredData from "../components/layout/StructuredData.astro";
+import { personSchema } from "../lib/structured-data";
+import { theWorkContent as c } from "../data/the-work";
+import "../styles/pages/the-work.css";
+---
+
+<BaseLayout
+  title="The Work — how we assess and build"
+  description="How AUXO assesses a real estate business's data — accurate, complete, consistent, timely, trusted — how an engagement runs, and the founding team behind it."
+>
+  <Section padding="xl" width="7xl">
+    <div class="flex max-w-3xl flex-col gap-6">
+      <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.intro.title}</h1>
+      <p class="lead max-w-2xl text-xl" data-enter>{c.intro.lead}</p>
+      <p class="max-w-2xl text-muted" data-enter>{c.intro.note}</p>
+    </div>
+  </Section>
+
+  <Section id="method" padding="lg" width="7xl" class="work-anchor">
+    <SectionHeader title={c.method.title} />
+    <ol class="method mt-10 md:mt-12">
+      {
+        c.method.dimensions.map((d, i) => (
+          <li class="method__item" data-anim="rise" style={`--i:${i}`}>
+            <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="method__name">{d.name}</h3>
+            <p class="text-muted">{d.question}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <Section padding="md" width="5xl">
+    <blockquote class="work-quote" data-reveal>
+      <p>{c.pullQuote}</p>
+    </blockquote>
+  </Section>
+
+  <Section id="engagement" padding="lg" width="7xl" class="work-anchor">
+    <SectionHeader title={c.engagement.title} />
+    <ol class="steps mt-10 md:mt-12">
+      {
+        c.engagement.steps.map((s, i) => (
+          <li class="steps__item" data-anim="rise" style={`--i:${i}`}>
+            <span class="steps__rule" aria-hidden="true" />
+            <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="text-2xl font-bold text-balance">{s.title}</h3>
+            {s.desc && <p class="text-muted">{s.desc}</p>}
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <Section id="team" padding="lg" width="7xl" class="work-anchor">
+    <SectionHeader title={c.team.title} />
+    <div class="team mt-10 md:mt-12">
+      {
+        c.team.founders.map((f) => (
+          <article class="founder" data-reveal>
+            <div class="flex flex-col gap-4">
+              <div>
+                <h3 class="text-2xl font-bold">{f.name}</h3>
+                <p class="text-accent-2 font-medium">{f.role}</p>
+              </div>
+              {f.lines.map((l) => <p class="text-muted">{l}</p>)}
+              <a href={f.linkedin} class="founder__link" target="_blank" rel="noopener noreferrer">
+                <Icon name="mdi:linkedin" aria-hidden="true" />
+                Connect on LinkedIn
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section padding="lg" width="6xl">
+    <div class="pricing" data-reveal>
+      <h2 class="text-3xl font-bold sm:text-4xl">{c.pricing.title}</h2>
+      <p class="lead max-w-xl">{c.pricing.body}</p>
+      <Button variant="primary" size="lg" href="/contact/" icon class="w-full sm:w-auto">{c.pricing.cta}</Button>
+    </div>
+  </Section>
+
+  {c.team.founders.map((f) => <StructuredData type="Person" data={personSchema(f)} />)}
+</BaseLayout>

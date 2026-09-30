@@ -34,6 +34,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      filter: (page) => !/\/(offline|404)\/?$/.test(page),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -46,7 +47,18 @@ export default defineConfig({
     }),
     icon({
       include: {
-        'simple-icons': ['x'],
+        'simple-icons': [
+          'anthropic',
+          'googlecloud',
+          'microsoftazure',
+          'oracle',
+          'powerbi',
+          'salesforce',
+          'sap',
+          'snowflake',
+          'tableau',
+          'x',
+        ],
         mdi: [
           'account-sync-outline',
           'arrow-left',

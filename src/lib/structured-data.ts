@@ -68,7 +68,6 @@ export function localBusinessSchema() {
     url: home,
     email: siteData.email,
     description: siteData.description,
-    priceRange: "$$$",
     address: {
       "@type": "PostalAddress",
       streetAddress: siteData.address.street,
@@ -115,5 +114,16 @@ export function faqSchema(items: { question: string; answer: string }[]) {
       name: i.question,
       acceptedAnswer: { "@type": "Answer", text: i.answer },
     })),
+  };
+}
+
+export function personSchema(p: { name: string; role: string; lines: string[]; linkedin: string }) {
+  return {
+    name: p.name,
+    jobTitle: p.role,
+    description: p.lines.join(" "),
+    url: abs("/the-work/#team"),
+    worksFor: { "@type": "Organization", name: siteData.name, url: home },
+    sameAs: [p.linkedin],
   };
 }

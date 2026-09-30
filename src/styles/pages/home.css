@@ -1,0 +1,298 @@
+/* Homepage-only styles. */
+
+/* Hero: keep both CTAs above the fold and clear of the cookie banner. */
+.home-hero {
+  align-items: center;
+  display: flex;
+  min-block-size: min(78svh, 46rem);
+}
+
+.home-hero > .section__container {
+  inline-size: 100%;
+}
+
+/* 2. AUXO Score */
+.score-card {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: var(--radius-xl);
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: 1fr;
+  padding: clamp(1.75rem, 1rem + 2.5vw, 2.75rem);
+}
+
+@media (width >= 56rem) {
+  .score-card {
+    gap: 2.5rem;
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+.score-gauge {
+  block-size: auto;
+  inline-size: 7.5rem;
+}
+
+.score-gauge path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 9;
+}
+
+.score-gauge__track {
+  stroke: var(--border-strong);
+}
+
+.score-gauge__fill {
+  stroke: var(--accent);
+  stroke-dasharray: 100;
+  stroke-dashoffset: 28;
+}
+
+/* Counts up once on reveal, only when motion is on. */
+[data-motion="on"] .score-gauge[data-gauge="idle"] .score-gauge__fill {
+  stroke-dashoffset: 100;
+}
+
+[data-motion="on"] .score-gauge[data-gauge="run"] .score-gauge__fill {
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+/* 3. Built on */
+.logos {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (width >= 48rem) {
+  .logos {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.logos__label {
+  flex-shrink: 0;
+  font-size: var(--text-xs, 0.75rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.logos__viewport {
+  inline-size: 100%;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  overflow: hidden;
+}
+
+.logos__track {
+  align-items: center;
+  display: flex;
+  gap: clamp(2.5rem, 2rem + 2vw, 4rem);
+  inline-size: max-content;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+/* Static wrap when motion is off: show the set once, no duplicates. */
+html:not([data-motion="on"]) .logos__viewport {
+  mask-image: none;
+}
+
+html:not([data-motion="on"]) .logos__track {
+  flex-wrap: wrap;
+  inline-size: auto;
+  justify-content: center;
+  row-gap: 1.5rem;
+}
+
+html:not([data-motion="on"]) .logos__item[aria-hidden="true"] {
+  display: none;
+}
+
+[data-motion="on"] .logos__track {
+  animation: logos-scroll 40s linear infinite;
+}
+
+[data-motion="on"] .logos__viewport:hover .logos__track {
+  animation-play-state: paused;
+}
+
+@keyframes logos-scroll {
+  to {
+    transform: translateX(calc(-50% - clamp(2.5rem, 2rem + 2vw, 4rem) / 2));
+  }
+}
+
+.logos__item {
+  color: var(--muted);
+  display: flex;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.logos__item:hover {
+  color: var(--foreground);
+}
+
+.logos__icon {
+  block-size: 1.75rem;
+  inline-size: 1.75rem;
+}
+
+.logos__wordmark {
+  font-family: var(--font-brand);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.75rem;
+}
+
+/* 4. Pillars — thin strip, clearly clickable */
+.pillars {
+  border-block: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (width >= 56rem) {
+  .pillars {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pillars__link {
+  align-items: center;
+  color: var(--foreground);
+  display: flex;
+  font-weight: 600;
+  gap: 0.5rem;
+  justify-content: space-between;
+  min-block-size: 44px;
+  padding: 1rem 1.25rem;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklch, var(--accent) 45%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+  transition:
+    background-color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.pillars__link:hover,
+.pillars__link:focus-visible {
+  background: var(--accent-soft);
+  text-decoration-color: var(--accent);
+}
+
+.pillars__arrow {
+  block-size: 1.1rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  inline-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.pillars__link:hover .pillars__arrow {
+  transform: translateX(3px);
+}
+
+/* 5. Cards — large, tall blocks so they don't read like the pillar strip */
+.cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 48rem) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cards__card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  color: var(--foreground);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-block-size: clamp(9rem, 14vw, 13rem);
+  padding: clamp(1.5rem, 1rem + 1.5vw, 2rem);
+  position: relative;
+  text-decoration: none;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.cards__card:hover,
+.cards__card:focus-visible {
+  border-color: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+.cards__title {
+  font-family: var(--font-brand);
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-block-start: auto;
+}
+
+.cards__arrow {
+  block-size: 1.5rem;
+  color: var(--accent-2);
+  inline-size: 1.5rem;
+  inset-block-start: clamp(1.5rem, 1rem + 1.5vw, 2rem);
+  inset-inline-end: clamp(1.5rem, 1rem + 1.5vw, 2rem);
+  position: absolute;
+  transition: transform 0.25s ease;
+}
+
+.cards__card:hover .cards__arrow {
+  transform: translateX(4px);
+}
+
+/* 6. Contact */
+.home-cta {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-inline: auto;
+  max-inline-size: 48rem;
+  padding: clamp(2.5rem, 2rem + 3vw, 4rem) clamp(1.5rem, 1rem + 3vw, 3rem);
+  text-align: center;
+}
+
+.score-card h2 {
+  font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.5rem);
+  line-height: 1.15;
+}
+
+/* Mobile: smaller headline + tighter top so both CTAs sit above the cookie banner. */
+@media (width < 40rem) {
+  .home-hero {
+    min-block-size: auto;
+    padding-block: 1.5rem 2.5rem;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(2rem, 9vw, 2.5rem);
+    line-height: 1.08;
+  }
+
+  .home-hero .lead {
+    font-size: 1.05rem;
+  }
+}

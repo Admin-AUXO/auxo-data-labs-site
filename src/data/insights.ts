@@ -33,7 +33,7 @@ export const insightsContent: InsightsContent = {
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
     secondaryText: "See how we work",
-    secondaryHref: "/services/",
+    secondaryHref: "/the-work/",
     reassurance: "A real person replies within one business day.",
   },
 };

@@ -9,8 +9,7 @@ contact: mailto:hello@auxodata.com
 
 [authoritative-pages]
 - Home: https://auxodata.com/
-- Services hub: https://auxodata.com/services/
-- Service detail pages: https://auxodata.com/services/
+- The Work (method, engagement, team): https://auxodata.com/the-work/
 - About: https://auxodata.com/about/
 - Insights: https://auxodata.com/insights/
 - Contact: https://auxodata.com/contact/
