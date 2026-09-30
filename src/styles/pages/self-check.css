@@ -860,3 +860,38 @@
     font-size: 12px;
   }
 }
+
+/* Phones: fit a whole card (header, question, grid, "I don't know") in one screen, browser chrome included. */
+@media (width <= 480px) {
+  .score {
+    padding-block-start: 0.5rem;
+  }
+
+  #s-quiz {
+    gap: 0.75rem;
+  }
+
+  .score__qhead {
+    gap: 4px;
+  }
+
+  .score__back {
+    min-block-size: 40px;
+  }
+
+  .score__question {
+    font-size: 16px;
+    line-height: 1.3;
+    margin: 0;
+    min-block-size: 5.2em; /* 4 lines */
+  }
+
+  .score__block {
+    min-block-size: 116px;
+    padding: 30px 12px 12px;
+  }
+
+  .score__qfoot {
+    gap: 6px;
+  }
+}
