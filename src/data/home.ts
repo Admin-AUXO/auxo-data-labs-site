@@ -57,7 +57,7 @@ export const homeContent: HomeContent = {
     stat: "More than one in three CFOs don't completely trust their own financial data.",
     footnoteId: "ref-1",
     cta: { text: "See where you stand", href: "/self-check/" },
-    reassurance: "No sign-up. Nothing leaves your browser.",
+    reassurance: "No sign-up. Your answers stay in your browser unless you ask for your report by email.",
   },
   logos: {
     label: "Built on",
