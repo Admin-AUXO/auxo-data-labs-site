@@ -15,7 +15,6 @@ import "../styles/pages/type-scale.css";
   title="The Work — how we assess and build"
   description="How AUXO assesses a real estate business's data — accurate, complete, consistent, timely, trusted — how an engagement runs, and the founding team behind it."
 >
-  <div class="ts">
   <Section padding="xl" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.intro.title}</h1>
@@ -93,5 +92,4 @@ import "../styles/pages/type-scale.css";
   </Section>
 
   {c.team.founders.map((f) => <StructuredData type="Person" data={personSchema(f)} />)}
-  </div>
 </BaseLayout>

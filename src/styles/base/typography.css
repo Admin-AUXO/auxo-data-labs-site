@@ -14,9 +14,9 @@
   }
 
   :where(h1) {
-    font-size: var(--text-4xl);
+    font-size: var(--text-5xl);
     letter-spacing: var(--tracking-display-4xl);
-    line-height: var(--text-4xl--line-height);
+    line-height: var(--text-5xl--line-height);
   }
 
   :where(h2) {
