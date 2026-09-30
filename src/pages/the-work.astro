@@ -10,7 +10,6 @@ import { theWorkContent as c } from "../data/the-work";
 import "../styles/pages/the-work.css";
 import "../styles/pages/type-scale.css";
 ---
-
 <BaseLayout
   title="The Work — how we assess and build"
   description="How AUXO assesses a real estate business's data — accurate, complete, consistent, timely, trusted — how an engagement runs, and the founding team behind it."
@@ -31,14 +30,14 @@ import "../styles/pages/type-scale.css";
           <li class="method__item" data-anim="rise" style={`--i:${i}`}>
             <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
             <h3 class="method__name">{d.name}</h3>
-            <p class="text-muted">{d.question}</p>
+            <p class="method__question text-muted">{d.question}</p>
           </li>
         ))
       }
     </ol>
   </Section>
 
-  <Section padding="md" width="5xl">
+  <Section padding="md" width="7xl">
     <blockquote class="work-quote" data-reveal>
       <p>{c.pullQuote}</p>
     </blockquote>
@@ -83,7 +82,7 @@ import "../styles/pages/type-scale.css";
     </div>
   </Section>
 
-  <Section padding="lg" width="6xl">
+  <Section padding="lg" width="7xl">
     <div class="pricing" data-reveal>
       <h2 class="text-3xl font-bold sm:text-4xl">{c.pricing.title}</h2>
       <p class="lead max-w-xl">{c.pricing.body}</p>

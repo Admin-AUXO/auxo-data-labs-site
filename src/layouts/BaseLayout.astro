@@ -31,7 +31,6 @@ const pageTitle = title ?? "AUXO Data Labs";
 const pageDesc = description ?? siteData.description;
 const gtmId = env.gtm.containerId;
 ---
-
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
@@ -57,8 +56,7 @@ const gtmId = env.gtm.containerId;
         }
       })();
     </script>
-    <script is:inline>
-      (() => {
+    <script is:inline>      (() => {
         document.documentElement.dataset.js = "1";
         setTimeout(() => {
           document
@@ -70,12 +68,10 @@ const gtmId = env.gtm.containerId;
       })();
     </script>
     <noscript>
-      <style>
-        [data-enter="headline"] { opacity: 1 !important; }
+      <style>        [data-enter="headline"] { opacity: 1 !important; }
       </style>
     </noscript>
-    <script>
-      import { initAnalytics } from "../scripts/analytics/track";
+    <script>      import { initAnalytics } from "../scripts/analytics/track";
       import { initWebVitals } from "../scripts/analytics/webVitals";
       initAnalytics();
       initWebVitals();
@@ -107,8 +103,7 @@ const gtmId = env.gtm.containerId;
         <path d="M12 19V5M5 12l7-7 7 7"></path>
       </svg>
     </button>
-    <script>
-      import { initHeroText } from "../scripts/core/hero-text";
+    <script>      import { initHeroText } from "../scripts/core/hero-text";
       import { initScrollUI } from "../scripts/core/scroll-ui";
       import { initPWA } from "../scripts/core/pwa";
       import { initCountUp } from "../scripts/ui/count-up";

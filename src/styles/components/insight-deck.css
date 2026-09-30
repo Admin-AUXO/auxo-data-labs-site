@@ -359,18 +359,7 @@
     }
   }
 
-  .deck__index {
-    display: none;
-  }
 
-  .deck[data-view="featured"] .deck__index {
-    color: var(--accent);
-    display: block;
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    letter-spacing: var(--tracking-mono);
-  }
 
   .deck[data-view="featured"] .deck__card {
     transition:

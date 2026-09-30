@@ -19,7 +19,8 @@
     "validate": "npm run lint && npm run build",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.0",

@@ -2,7 +2,7 @@ import { CARDS } from "./cards";
 import type { Answers, Band, Dimension, Layout, Result, Tier } from "./types";
 
 export const DIMENSIONS: Dimension[] = ["Accurate", "Complete", "Consistent", "Timely", "Trusted"];
-export const TIE_ORDER: Dimension[] = ["Trusted", "Consistent", "Accurate", "Complete", "Timely"];
+const TIE_ORDER: Dimension[] = ["Trusted", "Consistent", "Accurate", "Complete", "Timely"];
 export const QUADS = ["A", "U", "X", "O"] as const;
 export const IDK_POINTS = 3;
 export const IDK_LIMIT = 3;
@@ -32,8 +32,7 @@ export function computeResult(answers: Answers): Result {
   return { total, dims, radar, weakest, band, idkCount: idkCount(answers) };
 }
 
-// Fisher–Yates; rng injectable for tests
-export function shuffle<T>(arr: T[], rng: () => number = Math.random): T[] {
+function shuffle<T>(arr: T[], rng: () => number = Math.random): T[] {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
@@ -42,7 +41,6 @@ export function shuffle<T>(arr: T[], rng: () => number = Math.random): T[] {
   return a;
 }
 
-// Built once per attempt, stored in state, so Back shows the same order
 export function buildLayout(rng: () => number = Math.random): Layout {
   const layout: Layout = {};
   for (const c of CARDS) {

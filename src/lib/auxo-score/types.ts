@@ -7,19 +7,19 @@ export interface Option { label: string; sub: string; tier: Tier; points: 10 | 7
 export interface Card { id: number; dimension: Dimension; type: CardType; question: string; options: Option[]; }
 
 export interface Answer {
-  tier: Tier | 5;            // 5 = I don't know
-  points: number;            // 10 | 7 | 3 | 0, or 3 for IDK
+  tier: Tier | 5;
+  points: number;
   selectedQuadrant: Quadrant | null;
   isIdk: boolean;
 }
 export type Answers = Record<number, Answer>;
-export type Layout = Record<number, Tier[]>; // per card: tiers in quadrant order A,U,X,O
+export type Layout = Record<number, Tier[]>;
 
 export interface Band { min: number; name: "Healthy" | "Stable" | "Fragile" | "Critical"; line: string; }
 export interface Result {
   total: number;
-  dims: Record<Dimension, number>;      // 0–20 each
-  radar: Record<Dimension, number>;     // 0–100 each
+  dims: Record<Dimension, number>;
+  radar: Record<Dimension, number>;
   weakest: Dimension;
   band: Band;
   idkCount: number;

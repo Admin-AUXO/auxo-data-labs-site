@@ -1,5 +1,4 @@
 ---
-
 interface Props {
   text: string;
   highlight?: string | string[];
@@ -27,12 +26,9 @@ if (terms.length === 0) {
     .map((s) => ({ t: s, hl: lower.has(s.toLowerCase()) }));
 }
 ---
-
 {parts.map((p) => (p.hl ? <span class={cls}>{p.t}</span> : <Fragment>{p.t}</Fragment>))}
 
-<style is:global>
-  /* Lime is accent only: highlighted words stay in the text colour with a lime underline. */
-  .hl-accent {
+<style is:global>  .hl-accent {
     text-decoration: underline;
     text-decoration-color: var(--accent);
     text-decoration-thickness: 0.08em;

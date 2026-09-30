@@ -10,7 +10,7 @@ import { radarLabel, radarSvg } from "./Radar";
 import type { Answer, Quadrant, Result, Screen, State } from "../../lib/auxo-score/types";
 
 const FLASH_MS = 150;
-const LOADER_MS = 3000;
+const LOADER_MS = 1400;
 const LOAD_STEPS = ["Scoring each dimension…", "Building your report…"];
 const SCREENS: Screen[] = ["intro", "quiz", "loader", "result", "extended", "inconclusive"];
 
@@ -58,7 +58,6 @@ export function initAuxoScore(): void {
     persist();
   }
 
-  // ---------- Quiz ----------
   function renderCard(): void {
     const card = CARDS[state.index];
     const prev = state.answers[card.id];
@@ -159,7 +158,6 @@ export function initAuxoScore(): void {
     $("question").focus({ preventScroll: true });
   }
 
-  // ---------- Loader + result ----------
   function runLoader(): void {
     locked = true;
     show("loader", false);
@@ -180,7 +178,7 @@ export function initAuxoScore(): void {
     show("result");
     if (!result) return;
     saveResult({ total: result.total, band: result.band.name, weakest: result.weakest, radar: result.radar, completedAt: new Date().toISOString() });
-    (window as unknown as { __auxoMarkSelfCheck?: () => void }).__auxoMarkSelfCheck?.();
+    (window as unknown as { __auxoMarkScore?: () => void }).__auxoMarkScore?.();
     const started = Date.parse(state.startedAt);
     scoreEvent("score_complete", {
       total: result.total, band: result.band.name, weakest: result.weakest, idkCount: result.idkCount,
@@ -223,7 +221,6 @@ export function initAuxoScore(): void {
     focus.append(b, p);
   }
 
-  // ---------- Start / resume ----------
   function clearTimers(): void {
     timers.forEach(clearTimeout);
     timers = [];
@@ -272,7 +269,6 @@ export function initAuxoScore(): void {
     $("question").focus({ preventScroll: true });
   }
 
-  // ---------- Forms ----------
   function wireForm(opts: {
     formId: string; inputId: string; msgId: string; kind: "report" | "extended";
     url: string | undefined; success: (email: string) => string;
@@ -342,7 +338,6 @@ export function initAuxoScore(): void {
     success: (email) => `Request received. We'll confirm your place at ${email}.`,
   });
 
-  // ---------- Wiring ----------
   $("startBtn").addEventListener("click", start);
   $("startOverBtn").addEventListener("click", start);
   $("resumeBtn").addEventListener("click", resume);
@@ -398,7 +393,6 @@ export function initAuxoScore(): void {
   };
   document.addEventListener("keydown", keyHandler);
 
-  // ---------- Restore ----------
   const saved = loadState();
   if (saved && saved.layout && saved.answers && saved.attemptId) {
     state = saved;

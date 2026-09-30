@@ -31,7 +31,6 @@ const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
   topics: [...new Set(items.filter((i) => i.family === id).map((i) => i.topic))],
 }));
 ---
-
 <BaseLayout
   title="Insights — short reads on analytics & AI in Gulf real estate"
   description="Sharp, quick-read positions on data, AI, reporting, and compliance for Gulf real estate leaders. Each one under a minute."
@@ -214,8 +213,7 @@ const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
   />
 </BaseLayout>
 
-<script>
-  import { initInsightDeck } from "../scripts/ui/insight-deck";
+<script>  import { initInsightDeck } from "../scripts/ui/insight-deck";
   initInsightDeck();
   document.addEventListener("astro:page-load", initInsightDeck);
 </script>

@@ -57,11 +57,4 @@
   .section__container[data-w="6xl"] { --container-max: 72rem; }
   .section__container[data-w="7xl"] { --container-max: 82rem; }
   .section__container[data-w="full"] { --container-max: none; }
-
-  .rule {
-    background-color: var(--hairline);
-    block-size: 1px;
-    border: 0;
-    inline-size: 100%;
-  }
 }

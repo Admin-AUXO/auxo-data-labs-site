@@ -3,7 +3,7 @@ import { CARDS, FOCUS_COPY } from "./cards";
 import type { Utm } from "./storage";
 import type { Result, State } from "./types";
 
-export const VERSION = "auxo-score-10card-v1";
+const VERSION = "auxo-score-10card-v1";
 export const MAX_SUBMITS = 3;
 
 export const MESSAGES = {
@@ -108,7 +108,6 @@ export function buildExtendedPayload(email: string, hp: string, state: State, r:
 
 export type SubmitOutcome = { ok: true } | { ok: false; status: number; message: string };
 
-/** POSTs JSON with a 10s timeout. Only a 2xx with `{ ok: true }` counts as success. */
 export async function postJson(url: string | undefined, body: unknown): Promise<SubmitOutcome> {
   if (!url) {
     if (import.meta.env.DEV) console.warn("[auxo-score] webhook env var is not set");
@@ -134,5 +133,4 @@ export async function postJson(url: string | undefined, body: unknown): Promise<
     clearTimeout(timer);
   }
 }
-
 

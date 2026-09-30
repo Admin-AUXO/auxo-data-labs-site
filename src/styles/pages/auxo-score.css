@@ -1,5 +1,3 @@
-/* AUXO Score (/auxo-score/). Prototype tokens mapped onto site tokens; only --score-* are new. */
-
 .score {
   --score-surface-2: var(--surface-raised);
   --score-lime-ink: #111;
@@ -131,7 +129,6 @@
   margin: 0;
 }
 
-/* Buttons */
 .score__btn {
   align-items: center;
   appearance: none;
@@ -203,7 +200,6 @@
   margin: 0;
 }
 
-/* Quiz header */
 .score__qhead {
   align-items: center;
   display: grid;
@@ -275,7 +271,6 @@
   text-wrap: pretty;
 }
 
-/* 2x2 AUXO grid */
 .score__grid {
   display: grid;
   gap: 10px;
@@ -401,7 +396,6 @@
   }
 }
 
-/* Loader */
 .score__loader {
   align-items: center;
   display: flex;
@@ -466,7 +460,6 @@
   min-block-size: 1.5em;
 }
 
-/* Result */
 .score__head {
   align-items: flex-end;
   display: flex;
@@ -598,6 +591,7 @@
   fill: var(--subtle);
   font-family: var(--font-mono);
   font-size: 9px;
+  opacity: 0.6;
 }
 
 .score__table {
@@ -664,7 +658,6 @@
   margin: 0;
 }
 
-/* Result actions */
 .score__cta {
   display: flex;
   flex-direction: column;
@@ -824,7 +817,6 @@
   padding: 10px 18px;
 }
 
-/* Inconclusive */
 .score__status {
   align-self: flex-start;
   border: 1px solid var(--accent-2);
@@ -861,7 +853,6 @@
   }
 }
 
-/* Phones: fit a whole card (header, question, grid, "I don't know") in one screen, browser chrome included. */
 @media (width <= 480px) {
   .score {
     padding-block-start: 0.5rem;
@@ -883,7 +874,7 @@
     font-size: 16px;
     line-height: 1.3;
     margin: 0;
-    min-block-size: 5.2em; /* 4 lines */
+    min-block-size: 5.2em;
   }
 
   .score__block {
@@ -894,4 +885,85 @@
   .score__qfoot {
     gap: 6px;
   }
+}
+
+@media (width >= 48rem) {
+  .score {
+    max-inline-size: 720px;
+    padding-block: 2.5rem 4rem;
+  }
+
+  .score__screen {
+    gap: 1.5rem;
+  }
+
+  .score__h1 {
+    font-size: 52px;
+  }
+
+  .score__lede {
+    font-size: 18px;
+  }
+
+  .score__question {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .score__grid {
+    gap: 14px;
+  }
+
+  .score__block {
+    min-block-size: 156px;
+    padding: 40px 20px 20px;
+  }
+
+  .score__q {
+    block-size: 30px;
+    font-size: 14px;
+    inline-size: 30px;
+  }
+
+  .score__lbl {
+    font-size: 18px;
+  }
+
+  .score__sub {
+    font-size: 14px;
+  }
+
+  .score__block:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+}
+
+@media (width >= 64rem) {
+  .score:has(#s-result:not([hidden])) {
+    max-inline-size: 1080px;
+  }
+
+  #s-result {
+    align-items: start;
+    column-gap: 3rem;
+    display: grid;
+    grid-template:
+      "eyebrow panel" auto
+      "head panel" auto
+      "focus panel" auto
+      "cta panel" auto
+      "deeper panel" 1fr / minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+
+  #s-result[hidden] {
+    display: none;
+  }
+
+  #s-result > .score__eyebrow { grid-area: eyebrow; }
+  #s-result > .score__head { grid-area: head; }
+  #s-result > .score__panel { grid-area: panel; }
+  #s-result > .score__focus { grid-area: focus; }
+  #s-result > .score__cta { grid-area: cta; }
+  #s-result > .score__deeper { grid-area: deeper; }
 }

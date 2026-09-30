@@ -46,7 +46,6 @@ describe("computeResult", () => {
   });
 
   it("tie-break: Consistent beats Accurate", () => {
-    // Accurate 1-2, Complete 3-4, Consistent 5-6, Timely 7-8, Trusted 9-10
     const r = computeResult(byPoints([3, 0, 10, 10, 3, 0, 10, 10, 10, 10]));
     expect(r.weakest).toBe("Consistent");
   });

@@ -13,7 +13,6 @@ const { href = "/", markOnly = false, responsive = false, class: cls = "" } = As
 
 const wordClass = ["logo__word", responsive && "logo__word--responsive"].filter(Boolean).join(" ");
 ---
-
 <a href={withBase(href)} class={`logo ${cls}`.trim()} aria-label="AUXO Data Labs home">
   <Mark class="logo__mark" />
   {

@@ -24,20 +24,20 @@ export const theWorkContent = {
   method: {
     title: "The method",
     dimensions: [
-      { name: "Accurate", question: "is the data correct" },
-      { name: "Complete", question: "is anything missing" },
-      { name: "Consistent", question: "does it agree across systems" },
-      { name: "Timely", question: "is it current when you need it" },
-      { name: "Trusted", question: "do people actually rely on it when they decide" },
+      { name: "Accurate", question: "Is the data correct?" },
+      { name: "Complete", question: "Is anything missing?" },
+      { name: "Consistent", question: "Does it agree across systems?" },
+      { name: "Timely", question: "Is it current when you need it?" },
+      { name: "Trusted", question: "Do people actually rely on it when they decide?" },
     ] satisfies Dimension[],
   },
-  pullQuote: "We'll tell you what to build, when to build and sometimes not to build.",
+  pullQuote: "We'll tell you what to build, when to build it, and sometimes not to build at all.",
   engagement: {
     title: "How an engagement runs",
     steps: [
-      { title: "The data assessment comes first." },
-      { title: "We build systems based on what we found." },
-      { title: "The handover.", desc: "Your team runs and gets trained on what we build." },
+      { title: "The data assessment comes first.", desc: "A structured read of your data against the five dimensions above, before anything is built." },
+      { title: "We build on what we found.", desc: "Only what the assessment shows is worth building, on the systems you already run." },
+      { title: "The handover.", desc: "We train your team, document everything, and hand over a system you run and own." },
     ] satisfies EngagementStep[],
   },
   team: {
@@ -63,7 +63,7 @@ export const theWorkContent = {
   },
   pricing: {
     title: "Pricing",
-    body: "Every engagement is personalised according to the business requirements.",
-    cta: "Contact for pricing.",
+    body: "Every engagement is scoped to your business, so pricing follows what the assessment finds.",
+    cta: "Ask about pricing",
   },
 };

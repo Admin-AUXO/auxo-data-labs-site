@@ -1,7 +1,6 @@
 ---
 import { withBase } from "../../lib/url";
 ---
-
 <div class="consent is-hidden" data-consent-banner role="region" aria-label="Cookie consent">
   <p class="consent__text">
     We use privacy-friendly analytics to understand how the site is used. See our
@@ -17,8 +16,7 @@ import { withBase } from "../../lib/url";
   </div>
 </div>
 
-<style>
-  .consent {
+<style>  .consent {
     align-items: center;
     background-color: var(--surface-raised);
     border: 1px solid var(--border);
@@ -46,7 +44,6 @@ import { withBase } from "../../lib/url";
     font-size: var(--text-sm);
   }
 
-  /* Tablets and up: one slim row pinned low, so it doesn't sit over hero copy. */
   @media (min-width: 40.0625rem) {
     .consent {
       flex-wrap: nowrap;
@@ -73,7 +70,6 @@ import { withBase } from "../../lib/url";
     margin-inline-start: auto;
   }
 
-  /* Phones: a slim bottom strip so it doesn't cover page content (e.g. the AUXO Score answers). */
   @media (max-width: 40rem) {
     .consent {
       border-radius: var(--radius-lg);
@@ -106,8 +102,7 @@ import { withBase } from "../../lib/url";
   }
 </style>
 
-<script>
-  import { initConsent } from "../../scripts/analytics/consent";
+<script>  import { initConsent } from "../../scripts/analytics/consent";
   initConsent();
   document.addEventListener("astro:page-load", initConsent);
 </script>

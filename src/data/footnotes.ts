@@ -1,6 +1,5 @@
 export interface Footnote {
   id: string;
-  /** Marker shown in text. Switch to numbers once there are more than five sitewide. */
   marker: string;
   text: string;
   source: string;
@@ -15,5 +14,4 @@ export const footnotes: Footnote[] = [
       "BlackLine, Global Finance Leaders Survey, January 2024 — 1,300+ C-suite and senior finance professionals across seven markets.",
   },
 ];
-
 

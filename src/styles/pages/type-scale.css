@@ -1,6 +1,3 @@
-/* Page-specific sizes that sit outside the shared scale in tokens.css. */
-
-/* Pull quote on The Work sits between section heading and item title. */
 .work-quote p {
   font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);
 }

@@ -1,7 +1,6 @@
 ---
 import { footnotes } from "../../data/footnotes";
 ---
-
 <ol class="fn-list" aria-label="Footnotes">
   {
     footnotes.map((f, i) => (
@@ -17,8 +16,7 @@ import { footnotes } from "../../data/footnotes";
   }
 </ol>
 
-<style>
-  .fn-list {
+<style>  .fn-list {
     color: var(--subtle);
     display: grid;
     font-size: var(--text-xs, 0.75rem);

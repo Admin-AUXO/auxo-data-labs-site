@@ -22,7 +22,6 @@ const {
 const currentPath = Astro.url.pathname.replace(/^\//, "").replace(/\/$/, "");
 const meta = LEGAL_PAGE_META[currentPath];
 ---
-
 <BaseLayout
   title={title}
   description={description ?? `${title} for ${siteData.name}`}
@@ -63,8 +62,7 @@ const meta = LEGAL_PAGE_META[currentPath];
   </Section>
 </BaseLayout>
 
-<style>
-  .legal-header {
+<style>  .legal-header {
     display: flex;
     flex-direction: column;
     gap: 1rem;

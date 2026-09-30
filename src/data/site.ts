@@ -21,7 +21,6 @@ export interface SiteData {
     responseTime: { value: string; label: string };
   };
   bookingUrl: string;
-  /** Google's embeddable booking page. The short bookingUrl refuses to load inside an iframe. */
   bookingEmbedUrl: string;
 }
 

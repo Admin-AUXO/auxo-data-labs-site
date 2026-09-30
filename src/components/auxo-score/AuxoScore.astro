@@ -5,7 +5,6 @@ import { CARDS } from "../../lib/auxo-score/cards";
 import { withBase } from "../../lib/url";
 import "../../styles/pages/auxo-score.css";
 ---
-
 <div
   class="score"
   data-auxo-score
@@ -13,7 +12,6 @@ import "../../styles/pages/auxo-score.css";
   data-extended-url={import.meta.env.PUBLIC_N8N_EXTENDED_WEBHOOK ?? ""}
   data-contact-url={withBase("/contact/")}
 >
-  <!-- Intro -->
   <section class="score__screen" id="s-intro" data-screen="intro">
     <span class="score__eyebrow">The AUXO Score challenge</span>
     <h1 class="score__h1" tabindex="-1">How healthy is your data, really?</h1>
@@ -46,7 +44,6 @@ import "../../styles/pages/auxo-score.css";
     <p class="score__privacy">Your answers stay in your browser. Nothing is sent unless you ask us to email your report.</p>
   </section>
 
-  <!-- Quiz -->
   <section class="score__screen" id="s-quiz" data-screen="quiz" hidden>
     <div class="score__qhead">
       <button class="score__back" id="backBtn" type="button">← Back</button>
@@ -63,7 +60,6 @@ import "../../styles/pages/auxo-score.css";
     </div>
   </section>
 
-  <!-- Loader -->
   <section class="score__screen" id="s-loader" data-screen="loader" hidden>
     <div class="score__loader">
       <div class="score__cube" aria-hidden="true"><span>A</span><span>U</span><span>X</span><span>O</span></div>
@@ -71,9 +67,8 @@ import "../../styles/pages/auxo-score.css";
     </div>
   </section>
 
-  <!-- Result -->
   <section class="score__screen" id="s-result" data-screen="result" hidden>
-    <span class="score__eyebrow">Your verified AUXO Score</span>
+    <span class="score__eyebrow">Your AUXO Score</span>
     <div class="score__head">
       <h2 class="score__big" id="bigScore" tabindex="-1">0<small>/100</small></h2>
       <div class="score__band">
@@ -127,23 +122,20 @@ import "../../styles/pages/auxo-score.css";
 
   <ExtendedGate />
 
-  <!-- Inconclusive -->
   <section class="score__screen" id="s-inconclusive" data-screen="inconclusive" hidden>
-    <span class="score__status">STATUS: UNVERIFIED — VISIBILITY GAP</span>
-    <h2 class="score__h2" tabindex="-1">Score Inconclusive: Data Visibility Blind Spot</h2>
+    <span class="score__status">No score yet</span>
+    <h2 class="score__h2" tabindex="-1">Too many unknowns to score.</h2>
     <p class="score__lede">
-      You selected "I don't know" on 3 or more operational baseline questions. In data operations, lack of visibility
-      is itself a critical finding. You cannot optimize, automate, or trust data assets that have not been audited or
-      mapped.
+      You answered "I don't know" three or more times. That is a finding in itself: it's hard to trust or improve
+      data nobody can see clearly. Try again with someone from finance or operations, or talk to us.
     </p>
     <div class="score__btn-row">
-      <a class="score__btn" href={withBase("/contact/")}>Schedule Data Discovery Audit</a>
-      <button class="score__btn score__btn--ghost" type="button" id="retakeBtn">Retake Assessment with Core Team</button>
+      <a class="score__btn" href={withBase("/contact/")}>Talk to us</a>
+      <button class="score__btn score__btn--ghost" type="button" id="retakeBtn">Retake with a colleague</button>
     </div>
   </section>
 </div>
 
-<script>
-  import { initAuxoScore } from "./controller";
+<script>  import { initAuxoScore } from "./controller";
   document.addEventListener("astro:page-load", initAuxoScore);
 </script>

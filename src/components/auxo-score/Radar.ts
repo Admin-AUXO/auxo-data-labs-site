@@ -11,7 +11,6 @@ const pt = (i: number, v: number): [number, number] => [
   +(CY + Math.sin(angle(i)) * R * v / 100).toFixed(1),
 ];
 
-/** Builds the inner markup of the 5-spoke radar (viewBox 0 0 360 330). Pure: no DOM access. */
 export function radarSvg(radar: Record<Dimension, number>, weakest: Dimension): string {
   let s = "";
   for (const v of [25, 50, 75, 100]) {

@@ -9,7 +9,6 @@ const { id } = Astro.props;
 const n = footnotes.findIndex((f) => f.id === id) + 1;
 const note = footnotes[n - 1];
 ---
-
 {
   note && (
     <sup class="fn-ref">
@@ -20,8 +19,7 @@ const note = footnotes[n - 1];
   )
 }
 
-<style>
-  .fn-ref {
+<style>  .fn-ref {
     line-height: 0;
     vertical-align: super;
   }

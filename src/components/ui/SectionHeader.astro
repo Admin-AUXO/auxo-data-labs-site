@@ -22,7 +22,6 @@ const wrap =
     ? "items-center text-center mx-auto max-w-2xl"
     : "items-start text-left max-w-3xl";
 ---
-
 <div class={`flex flex-col gap-5 ${wrap} ${className}`.trim()} data-reveal>
   {align === "left" && <span class="block h-0.5 w-14 bg-accent-2" aria-hidden="true" data-anim="draw"></span>}
   <h2 class="text-3xl font-bold sm:text-4xl" data-anim="clip-up">

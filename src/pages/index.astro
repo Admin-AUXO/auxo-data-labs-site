@@ -9,15 +9,12 @@ import { withBase } from "../lib/url";
 import "../styles/pages/home.css";
 import "../styles/pages/type-scale.css";
 
-// Duplicate the logo set so the marquee loops seamlessly; the copy is hidden from assistive tech.
 const logoLoop = [...c.logos.items, ...c.logos.items];
 ---
-
 <BaseLayout
   title="Analytics & AI for Gulf businesses"
   description="We turn messy, fragmented data into decisions Gulf businesses act on. Analytics and AI, built to last and yours to keep."
 >
-  <!-- 1. Hero -->
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="flex flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[20ch]" data-enter="headline">{c.hero.title}</h1>
@@ -33,7 +30,6 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     </div>
   </Section>
 
-  <!-- 2. AUXO Score -->
   <Section padding="md" width="6xl">
     <div class="score-card" data-reveal>
       <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
@@ -55,15 +51,14 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     </div>
   </Section>
 
-  <!-- 3. Built on -->
   <Section padding="sm" width="7xl">
     <div class="logos" data-reveal>
       <p class="eyebrow logos__label" id="built-on-label">{c.logos.label}</p>
-      <div class="logos__viewport" data-marquee>
+      <div class="logos__viewport" data-marquee tabindex="0" role="region" aria-labelledby="built-on-label">
         <ul class="logos__track" aria-labelledby="built-on-label">
           {
             logoLoop.map((logo, i) => (
-              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined} style={logo.color ? `--brand:${logo.color}` : undefined}>
+              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined}>
                 {logo.icon ? (
                   <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
                 ) : (
@@ -78,7 +73,6 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     </div>
   </Section>
 
-  <!-- 4. Four pillars: a 2x2 cube like the AUXO mark; each tile flips to a short description -->
   <Section padding="md" width="7xl">
     <ul class="cube" aria-label="What we build">
       {
@@ -100,7 +94,6 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     </ul>
   </Section>
 
-  <!-- 5. Three cards -->
   <Section padding="md" width="7xl">
     <div class="cards">
       {
@@ -115,7 +108,6 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     </div>
   </Section>
 
-  <!-- 6. Contact -->
   <Section padding="lg" width="6xl">
     <div class="home-cta" data-reveal>
       <h2 class="text-display text-display--4xl">{c.cta.title}</h2>
@@ -126,10 +118,8 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
   </Section>
 </BaseLayout>
 
-<script>
-  import { motionEnabled } from "../scripts/core/motion";
+<script>  import { motionEnabled } from "../scripts/core/motion";
 
-  // Fill the score gauge once when it scrolls into view. Motion-off users see it filled already.
   function initGauge() {
     const g = document.querySelector<SVGElement>("[data-gauge]");
     if (!g) return;
@@ -150,8 +140,6 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
 
   document.addEventListener("astro:page-load", initGauge);
 
-  // Logo marquee: runs by default (stops only for prefers-reduced-motion), pauses on hover,
-  // on touch, and on keyboard focus; on phones it can also be swiped by hand.
   function initMarquee() {
     const vp = document.querySelector<HTMLElement>("[data-marquee]");
     if (!vp || vp.dataset.bound) return;
@@ -161,7 +149,7 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
       vp.dataset.static = "";
       return;
     }
-    const SPEED = 40; // px per second
+    const SPEED = 40;
     let paused = false;
     let resumeTimer = 0;
     let last = 0;
@@ -200,12 +188,12 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     requestAnimationFrame(tick);
   }
 
-  // Cube tiles: hover flips on desktop (CSS); tap or Enter/Space toggles for touch and keyboard.
   function initCube() {
     document.querySelectorAll<HTMLButtonElement>("[data-cube-tile]").forEach((tile) => {
       if (tile.dataset.bound) return;
       tile.dataset.bound = "1";
-      tile.addEventListener("click", () => {
+      tile.addEventListener("click", (e) => {
+        if ((e as PointerEvent).pointerType === "mouse" && window.matchMedia("(hover: hover)").matches) return;
         const on = tile.getAttribute("aria-pressed") !== "true";
         tile.setAttribute("aria-pressed", String(on));
       });

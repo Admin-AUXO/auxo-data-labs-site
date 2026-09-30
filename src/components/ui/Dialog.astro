@@ -10,7 +10,6 @@ interface Props {
 
 const { id, title, size = "md", class: cls = "" } = Astro.props;
 ---
-
 <dialog
   id={id}
   class={`dialog ${cls}`.trim()}
@@ -28,8 +27,7 @@ const { id, title, size = "md", class: cls = "" } = Astro.props;
   </div>
 </dialog>
 
-<script>
-  import { initDialogs } from "../../scripts/ui/dialog";
+<script>  import { initDialogs } from "../../scripts/ui/dialog";
   initDialogs();
   document.addEventListener("astro:page-load", initDialogs);
 </script>

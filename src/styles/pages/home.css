@@ -1,6 +1,3 @@
-/* Homepage-only styles. */
-
-/* Hero: keep both CTAs above the fold and clear of the cookie banner. */
 .home-hero {
   align-items: center;
   display: flex;
@@ -11,15 +8,12 @@
   inline-size: 100%;
 }
 
-/* Short screens (small laptops, tablets in landscape): cap the headline by height so the
-   subheading and both CTAs stay above the fold and clear of the cookie banner. */
 @media (width >= 40rem) {
   .home-hero h1 {
     font-size: min(var(--text-5xl), 10.5svh);
   }
 }
 
-/* 2. AUXO Score */
 .score-card {
   align-items: center;
   background: var(--surface);
@@ -60,7 +54,6 @@
   stroke-dashoffset: 28;
 }
 
-/* Counts up once on reveal, only when motion is on. */
 [data-motion="on"] .score-gauge[data-gauge="idle"] .score-gauge__fill {
   stroke-dashoffset: 100;
 }
@@ -69,7 +62,6 @@
   transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
 }
 
-/* 3. Built on — brand-colour logos in a marquee (JS-driven scroll, so it can also be swiped) */
 .logos {
   display: flex;
   flex-direction: column;
@@ -110,7 +102,6 @@
   padding: 0.75rem clamp(1rem, 4vw, 2rem);
 }
 
-/* Reduced motion: no scrolling, show the set once and wrap. */
 .logos__viewport[data-static] {
   mask-image: none;
   overflow: visible;
@@ -129,7 +120,7 @@
 
 .logos__item {
   align-items: center;
-  color: var(--brand, var(--foreground));
+  color: var(--accent);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -169,7 +160,6 @@
   }
 }
 
-/* 4. Pillars — 2x2 cube like the AUXO mark; each tile flips to a short description */
 .cube {
   display: grid;
   gap: clamp(0.5rem, 1.2vw, 0.75rem);
@@ -199,7 +189,7 @@
   position: relative;
   text-align: start;
   transform-style: preserve-3d;
-  transition: transform 1.4s cubic-bezier(0.45, 0, 0.2, 1);
+  transition: transform 0.7s cubic-bezier(0.45, 0, 0.2, 1);
 }
 
 .cube__tile:focus-visible {
@@ -214,12 +204,13 @@
 }
 
 @media (hover: hover) {
-  .cube__tile:hover {
+  .cube__cell:hover .cube__tile {
     transform: rotateY(180deg);
   }
 }
 
 .cube__face {
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: var(--radius-lg);
   display: flex;
@@ -277,12 +268,11 @@
   line-height: 1.4;
 }
 
-/* Reduced motion: cross-fade instead of flipping. */
 @media (prefers-reduced-motion: reduce) {
   .cube__tile,
   .cube__tile[aria-pressed="true"],
   .cube__tile:focus-visible,
-  .cube__tile:hover {
+  .cube__cell:hover .cube__tile {
     transform: none;
     transition: none;
   }
@@ -309,16 +299,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) and (hover: hover) {
-  .cube__tile:hover .cube__face--back {
+  .cube__cell:hover .cube__face--back {
     opacity: 1;
   }
 
-  .cube__tile:hover .cube__face--front {
+  .cube__cell:hover .cube__face--front {
     opacity: 0;
   }
 }
 
-/* 5. Cards — large, tall blocks so they don't read like the pillar strip */
 .cards {
   display: grid;
   gap: 1rem;
@@ -376,7 +365,6 @@
   transform: translateX(4px);
 }
 
-/* 6. Contact */
 .home-cta {
   align-items: center;
   background: var(--surface);
@@ -396,7 +384,6 @@
   line-height: 1.15;
 }
 
-/* Mobile: smaller headline + tighter top so both CTAs sit above the cookie banner. */
 @media (width < 40rem) {
   .home-hero {
     min-block-size: auto;

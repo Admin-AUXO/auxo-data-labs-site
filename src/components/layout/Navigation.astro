@@ -14,7 +14,6 @@ const isActive = (href: string) => {
   return here === target || (href !== "/" && here.startsWith(target));
 };
 ---
-
 <header class="nav" data-nav data-pagefind-ignore>
   <div class="nav__inner">
     <Logo responsive />
@@ -99,8 +98,7 @@ const isActive = (href: string) => {
   <p class="search-dialog__hint">Search insights and pages across the site.</p>
 </Dialog>
 
-<script>
-  const PAGEFIND_BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+<script>  const PAGEFIND_BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
   let prefetched = false;
   let initPromise: Promise<void> | null = null;
 
@@ -188,8 +186,7 @@ const isActive = (href: string) => {
   document.addEventListener("astro:page-load", bind);
 </script>
 
-<script>
-  function markSelfCheck() {
+<script>  function markScore() {
     let score: string | null = null;
     try {
       const saved = JSON.parse(localStorage.getItem("auxo-score-v2-result") || "null") as { total?: number } | null;
@@ -213,10 +210,10 @@ const isActive = (href: string) => {
       }
     });
   }
-  (window as unknown as { __auxoMarkSelfCheck?: () => void }).__auxoMarkSelfCheck = markSelfCheck;
-  markSelfCheck();
-  document.addEventListener("astro:page-load", markSelfCheck);
+  (window as unknown as { __auxoMarkScore?: () => void }).__auxoMarkScore = markScore;
+  markScore();
+  document.addEventListener("astro:page-load", markScore);
   addEventListener("storage", (e) => {
-    if (e.key === "auxo-score-v2-result") markSelfCheck();
+    if (e.key === "auxo-score-v2-result") markScore();
   });
 </script>

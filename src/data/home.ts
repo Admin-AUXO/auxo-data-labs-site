@@ -2,21 +2,13 @@ import { siteData } from "./site";
 
 export interface HomeLogo {
   name: string;
-  /** simple-icons name; omitted when no official mark is available (rendered as a wordmark). */
   icon?: string;
-  /** Brand colour for the mark. Omitted for marks that are black by default (rendered in the text colour on dark). */
-  color?: string;
 }
 
 export interface HomePillar {
   letter: "A" | "U" | "X" | "O";
   title: string;
   desc: string;
-}
-
-export interface HomeLink {
-  label: string;
-  href: string;
 }
 
 export interface HomeCard {
@@ -58,7 +50,7 @@ export const homeContent: HomeContent = {
     title: "We turn messy, fragmented data into intelligent decisions companies act on.",
     subtitle: "For businesses across the Gulf. Built to last, and yours to keep.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
-    secondaryCta: { text: "Explore services", href: "/the-work/" },
+    secondaryCta: { text: "See how we work", href: "/the-work/" },
   },
   score: {
     title: "Get your company's health report.",
@@ -70,15 +62,15 @@ export const homeContent: HomeContent = {
   logos: {
     label: "Built on",
     items: [
-      { name: "Power BI", icon: "simple-icons:powerbi", color: "#F2C811" },
-      { name: "Tableau", icon: "simple-icons:tableau", color: "#E97627" },
-      { name: "Snowflake", icon: "simple-icons:snowflake", color: "#29B5E8" },
-      { name: "Google Cloud", icon: "simple-icons:googlecloud", color: "#4285F4" },
-      { name: "Microsoft Azure", icon: "simple-icons:microsoftazure", color: "#0078D4" },
-      { name: "Salesforce", icon: "simple-icons:salesforce", color: "#00A1E0" },
-      { name: "SAP", icon: "simple-icons:sap", color: "#0FAAFF" },
-      { name: "Oracle", icon: "simple-icons:oracle", color: "#F80000" },
-      { name: "Yardi", color: "#0072CE" },
+      { name: "Power BI", icon: "simple-icons:powerbi" },
+      { name: "Tableau", icon: "simple-icons:tableau" },
+      { name: "Snowflake", icon: "simple-icons:snowflake" },
+      { name: "Google Cloud", icon: "simple-icons:googlecloud" },
+      { name: "Microsoft Azure", icon: "simple-icons:microsoftazure" },
+      { name: "Salesforce", icon: "simple-icons:salesforce" },
+      { name: "SAP", icon: "simple-icons:sap" },
+      { name: "Oracle", icon: "simple-icons:oracle" },
+      { name: "Yardi" },
       { name: "Anthropic", icon: "simple-icons:anthropic" },
     ],
   },

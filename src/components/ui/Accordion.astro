@@ -21,7 +21,6 @@ const { items, single = true, openFirst = false, class: cls = "" } = Astro.props
 const accordionId = nextAccordionId();
 const name = single ? `acc-${accordionId}` : undefined;
 ---
-
 <div class={`accordion ${cls}`.trim()}>
   {
     items.map((it, i) => (
