@@ -192,7 +192,8 @@ const isActive = (href: string) => {
   function markSelfCheck() {
     let score: string | null = null;
     try {
-      score = localStorage.getItem("auxo-self-check-badge-v1");
+      const saved = JSON.parse(localStorage.getItem("auxo-score-v2-result") || "null") as { total?: number } | null;
+      score = saved && Number.isFinite(saved.total) ? String(saved.total) : null;
     } catch {
       score = null;
     }
@@ -205,8 +206,8 @@ const isActive = (href: string) => {
         const num = badge.querySelector<HTMLElement>(".nav__badge-num");
         if (num) num.textContent = score;
         const n = Number(score);
-        badge.dataset.tier = n < 25 ? "danger" : n < 50 ? "warn" : "ok";
-        link.setAttribute("aria-label", `Self-check — your score: ${score} out of 100`);
+        badge.dataset.tier = n < 40 ? "danger" : n < 60 ? "warn" : "ok";
+        link.setAttribute("aria-label", `AUXO Score — your score: ${score} out of 100`);
       } else {
         link.removeAttribute("aria-label");
       }
@@ -216,6 +217,6 @@ const isActive = (href: string) => {
   markSelfCheck();
   document.addEventListener("astro:page-load", markSelfCheck);
   addEventListener("storage", (e) => {
-    if (e.key === "auxo-self-check-badge-v1") markSelfCheck();
+    if (e.key === "auxo-score-v2-result") markSelfCheck();
   });
 </script>
