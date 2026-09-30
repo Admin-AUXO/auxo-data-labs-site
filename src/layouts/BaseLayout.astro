@@ -49,10 +49,11 @@ const gtmId = env.gtm.containerId;
     <script is:inline>
       (() => {
         try {
-          document.documentElement.dataset.motion =
-            localStorage.getItem("auxo-motion") === "on" ? "on" : "off";
+          const saved = localStorage.getItem("auxo-motion");
+          const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+          document.documentElement.dataset.motion = saved ? saved : reduce ? "off" : "on";
         } catch (e) {
-          document.documentElement.dataset.motion = "off";
+          document.documentElement.dataset.motion = "on";
         }
       })();
     </script>

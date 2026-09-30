@@ -7,10 +7,11 @@ export function motionEnabled(): boolean {
 
 function stored(): boolean {
   try {
-    return localStorage.getItem(KEY) === "on";
+    const saved = localStorage.getItem(KEY);
+    if (saved) return saved === "on";
   } catch {
-    return false;
   }
+  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 function apply(on: boolean): void {
