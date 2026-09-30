@@ -73,7 +73,7 @@ export const aboutContent: AboutContent = {
     titleHighlight: "lab",
     lead: "AUXO is a specialist analytics and AI lab for real estate. We turn the information you already hold into reporting, forecasts, and automation your team can trust — and run on its own.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
-    secondaryCta: { text: "See how we work", href: "/services/" },
+    secondaryCta: { text: "See how we work", href: "/the-work/" },
   },
   beliefs: {
     title: "What we believe",

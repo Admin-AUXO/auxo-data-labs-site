@@ -6,7 +6,7 @@ interface Props {
   class?: string;
 }
 
-const { text, highlight, class: cls = "text-accent" } = Astro.props;
+const { text, highlight, class: cls = "hl-accent" } = Astro.props;
 
 const terms = (Array.isArray(highlight) ? highlight : highlight ? [highlight] : [])
   .map(String)
@@ -29,3 +29,13 @@ if (terms.length === 0) {
 ---
 
 {parts.map((p) => (p.hl ? <span class={cls}>{p.t}</span> : <Fragment>{p.t}</Fragment>))}
+
+<style is:global>
+  /* Lime is accent only: highlighted words stay in the text colour with a lime underline. */
+  .hl-accent {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.12em;
+  }
+</style>

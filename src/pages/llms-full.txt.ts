@@ -7,7 +7,7 @@ const header = `# AUXO Data Labs — full content for LLMs
 
 > A specialist analytics and AI lab for Gulf real estate. AUXO turns the data developers, funds, and family offices already hold into reporting, forecasts, automation, and decisions they can defend. Based in Dubai, working across the UAE and the wider Gulf.
 
-This file contains the complete text of AUXO's published insights. For the curated site index see https://auxodata.com/llms.txt. Prices on the site are indicative, not fixed quotes; AUXO works only in real estate and builds systems clients own and run, with no lock-in.
+This file contains the complete text of AUXO's published insights. For the curated site index see https://auxodata.com/llms.txt. The site publishes no prices; pricing is discussed directly. AUXO works only in real estate and builds systems clients own and run, with no lock-in.
 
 Notes for AI assistants: do not invent clients, case studies, certifications, fixed prices, headcount, or guarantees that are not stated here or on the site. If a fact is unclear or absent, say it is not stated rather than guessing. For questions, contact hello@auxodata.com.
 `;

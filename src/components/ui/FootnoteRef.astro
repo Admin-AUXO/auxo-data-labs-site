@@ -1,0 +1,47 @@
+---
+import { footnotes } from "../../data/footnotes";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const n = footnotes.findIndex((f) => f.id === id) + 1;
+const note = footnotes[n - 1];
+---
+
+{
+  note && (
+    <sup class="fn-ref">
+      <a href={`#${note.id}`} id={`${note.id}-ref`} aria-label={`See footnote ${n}`}>
+        {note.marker}
+      </a>
+    </sup>
+  )
+}
+
+<style>
+  .fn-ref {
+    line-height: 0;
+    vertical-align: super;
+  }
+
+  .fn-ref a {
+    align-items: center;
+    color: var(--muted);
+    display: inline-flex;
+    font-size: 0.8em;
+    justify-content: center;
+    min-block-size: 44px;
+    min-inline-size: 44px;
+    margin-block: -18px;
+    margin-inline: -14px -16px;
+    scroll-margin-top: 6rem;
+    text-decoration: none;
+  }
+
+  .fn-ref a:hover,
+  .fn-ref a:focus-visible {
+    color: var(--foreground);
+  }
+</style>

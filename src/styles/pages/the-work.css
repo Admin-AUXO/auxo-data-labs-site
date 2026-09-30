@@ -1,0 +1,150 @@
+/* The Work page styles. */
+
+/* Anchor targets clear the sticky nav. */
+.work-anchor {
+  scroll-margin-top: 5.5rem;
+}
+
+/* Method — five dimensions */
+.method {
+  background: var(--border);
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 1px;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (width >= 40rem) {
+  .method {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 64rem) {
+  .method {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.method__item {
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.75rem 1.5rem;
+}
+
+.method__name {
+  font-family: var(--font-brand);
+  font-size: var(--text-2xl, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Pull quote */
+.work-quote {
+  border-inline-start: 3px solid var(--accent-2);
+  margin: 0;
+  padding-inline-start: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+}
+
+.work-quote p {
+  font-family: var(--font-brand);
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Engagement steps */
+.steps {
+  display: grid;
+  gap: 2rem 2.5rem;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (width >= 48rem) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.steps__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-block-start: 1.25rem;
+  position: relative;
+}
+
+.steps__rule {
+  background: var(--foreground);
+  block-size: 2px;
+  inset-block-start: 0;
+  inset-inline: 0;
+  position: absolute;
+}
+
+/* Team */
+.team {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 60rem) {
+  .team {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.founder {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  padding: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+}
+
+.founder__link {
+  align-items: center;
+  color: var(--foreground);
+  display: inline-flex;
+  font-weight: 600;
+  gap: 0.5rem;
+  min-block-size: 44px;
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 0.3em;
+  width: fit-content;
+}
+
+.founder__link:hover {
+  text-decoration-color: var(--accent);
+}
+
+.founder__link svg {
+  block-size: 1.25rem;
+  inline-size: 1.25rem;
+}
+
+/* Pricing */
+.pricing {
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: clamp(1.75rem, 1rem + 2.5vw, 3rem);
+}

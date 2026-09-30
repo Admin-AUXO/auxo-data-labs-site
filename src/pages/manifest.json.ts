@@ -21,10 +21,10 @@ const manifest = {
   ],
   shortcuts: [
     {
-      name: "Services",
-      short_name: "Services",
-      description: "Reporting, forecasting, automation, and applied AI",
-      url: withBase("/services"),
+      name: "The Work",
+      short_name: "The Work",
+      description: "How we assess a business, how an engagement runs, and the team",
+      url: withBase("/the-work/"),
       icons: [{ src: withBase("/favicon.svg"), sizes: "any", type: "image/svg+xml" }],
     },
     {

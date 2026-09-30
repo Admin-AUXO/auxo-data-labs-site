@@ -2,22 +2,24 @@
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
-import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
-import HighlightText from "../components/ui/HighlightText.astro";
-import CtaSection from "../components/sections/shared/CtaSection.astro";
-import SelfCheckCta from "../components/sections/shared/SelfCheckCta.astro";
+import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import { homeContent as c } from "../data/home";
+import { withBase } from "../lib/url";
+import "../styles/pages/home.css";
+
+// Duplicate the logo set so the marquee loops seamlessly; the copy is hidden from assistive tech.
+const logoLoop = [...c.logos.items, ...c.logos.items];
 ---
 
 <BaseLayout
-  title="Analytics & AI lab for Gulf real estate"
-  description="AUXO Data Labs turns the data Gulf real-estate businesses already hold into reporting, forecasts, and automation they can trust — built to last, and yours to keep."
+  title="Analytics & AI for Gulf real estate"
+  description="We turn messy, fragmented data into decisions Gulf real estate companies act on. Analytics and AI, built to last and yours to keep."
 >
-  <Section padding="xl" width="7xl">    <div class="flex flex-col gap-8">
-      <h1 class="text-display max-w-[15ch]" data-enter="headline">
-        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
-      </h1>
+  <!-- 1. Hero -->
+  <Section padding="lg" width="7xl" class="home-hero">
+    <div class="flex flex-col gap-6">
+      <h1 class="text-display text-display--5xl max-w-[20ch]" data-enter="headline">{c.hero.title}</h1>
       <p class="lead max-w-2xl text-xl" data-enter>{c.hero.subtitle}</p>
       <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" data-enter>
         <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
@@ -30,103 +32,112 @@ import { homeContent as c } from "../data/home";
     </div>
   </Section>
 
-  <Section padding="lg" width="7xl">
-    <SectionHeader
-      title={c.capabilities.title}
-      highlight={c.capabilities.titleHighlight}
-      subtitle={c.capabilities.subtitle}
-    />
-    <div class="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-      {
-        c.capabilities.items.map((item, i) => (
-          <article class="group flex flex-col bg-surface p-8" data-reveal style={`--i:${i}`}>
-            <div class="mb-6 flex size-12 items-center justify-center rounded-lg bg-accent-soft text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-accent-foreground">
-              <Icon name={item.icon} class="size-6 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
-            </div>
-            <h3 class="text-xl font-bold sm:min-h-[2.8em]">{item.name}</h3>
-            <p class="mt-2 text-muted">{item.desc}</p>
-          </article>
-        ))
-      }
+  <!-- 2. AUXO Score -->
+  <Section padding="md" width="6xl">
+    <div class="score-card" data-reveal>
+      <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
+        <path class="score-gauge__track" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
+        <path class="score-gauge__fill" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
+      </svg>
+      <div class="flex flex-col gap-3">
+        <h2 class="text-3xl font-bold sm:text-4xl">{c.score.title}</h2>
+        <p class="max-w-xl text-lg text-muted">
+          {c.score.stat}<FootnoteRef id={c.score.footnoteId} />
+        </p>
+      </div>
+      <div class="flex flex-col items-start gap-3 sm:items-end">
+        <Button variant="primary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
+          {c.score.cta.text}
+        </Button>
+        <p class="text-sm text-subtle">{c.score.reassurance}</p>
+      </div>
     </div>
   </Section>
 
-  <SelfCheckCta />
+  <!-- 3. Built on -->
+  <Section padding="sm" width="7xl">
+    <div class="logos" data-reveal>
+      <p class="eyebrow logos__label">{c.logos.label}</p>
+      <div class="logos__viewport">
+        <ul class="logos__track">
+          {
+            logoLoop.map((logo, i) => (
+              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined}>
+                {logo.icon ? (
+                  <Icon name={logo.icon} class="logos__icon" role="img" aria-label={logo.name} title={logo.name} />
+                ) : (
+                  <span class="logos__wordmark" role="img" aria-label={logo.name}>{logo.name}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </Section>
 
+  <!-- 4. Four pillars -->
+  <Section padding="sm" width="7xl">
+    <nav class="pillars" aria-label="What we build" data-reveal>
+      {
+        c.pillars.map((p) => (
+          <a href={withBase(p.href)} class="pillars__link">
+            <span>{p.label}</span>
+            <Icon name="mdi:arrow-right" class="pillars__arrow" aria-hidden="true" />
+          </a>
+        ))
+      }
+    </nav>
+  </Section>
+
+  <!-- 5. Three cards -->
   <Section padding="md" width="7xl">
-    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-      <SectionHeader title={c.why.title} highlight={c.why.titleHighlight} />
-      <ul class="flex flex-col" data-reveal>
-        {
-          c.why.items.map((item, i) => (
-            <li
-              class:list={[
-                "flex flex-col gap-1 py-6 sm:flex-row sm:gap-8",
-                i > 0 && "border-t border-border",
-              ]}
-            >
-              <h3 class="text-lg font-bold sm:w-56 sm:shrink-0">{item.title}</h3>
-              <p class="text-muted">{item.desc}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <SectionHeader title={c.how.title} highlight={c.how.titleHighlight} subtitle={c.how.subtitle} />
-    <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+    <p class="eyebrow text-accent-2 mb-5">Inside the work</p>
+    <div class="cards">
       {
-        c.how.steps.map((step, i) => (
-          <div
-            class="group flex flex-col gap-3 pt-5"
-            data-anim="rise"
-            style={`--i:${i}`}
-          >
-            <span class="mb-2 block h-0.5 w-full origin-left bg-foreground" data-anim="draw" style={`--i:${i}`} aria-hidden="true" />
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-sm font-semibold tabular-nums text-accent-2">0{i + 1}</span>
-              <Icon name={step.icon} class="size-6 text-accent-2 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
-            </div>
-            <h3 class="text-2xl font-bold">{step.title}</h3>
-            <p class="text-muted">{step.desc}</p>
-          </div>
+        c.cards.map((card, i) => (
+          <a href={withBase(card.href)} class="cards__card" data-anim="rise" style={`--i:${i}`}>
+            <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
+            <span class="cards__title">{card.title}</span>
+            <Icon name="mdi:arrow-right" class="cards__arrow" aria-hidden="true" />
+          </a>
         ))
       }
     </div>
   </Section>
 
-  <Section padding="lg" width="7xl">
-    <div class="flex max-w-3xl flex-col gap-4" data-reveal>
-      <SectionHeader title={c.outcomes.title} highlight={c.outcomes.titleHighlight} />
-      <p class="lead max-w-2xl">{c.outcomes.lead}</p>
+  <!-- 6. Contact -->
+  <Section padding="lg" width="6xl">
+    <div class="home-cta" data-reveal>
+      <h2 class="text-display text-display--4xl">{c.cta.title}</h2>
+      <p class="lead mx-auto max-w-xl text-balance">{c.cta.description}</p>
+      <Button variant="primary" size="lg" href={c.cta.ctaHref} icon class="w-full sm:w-auto">{c.cta.ctaText}</Button>
+      <p class="text-sm text-subtle">{c.cta.reassurance}</p>
     </div>
-    <ol class="mt-10 grid gap-x-16 gap-y-8 sm:mt-12 sm:grid-cols-2">
-      {
-        c.outcomes.items.map((item, i) => (
-          <li class="flex gap-4 border-t border-border pt-6" data-anim="rise" style={`--i:${i}`}>
-            <span class="mono-datum pt-1 tabular-nums text-accent-2">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div class="flex flex-col gap-1.5">
-              <h3 class="text-lg font-bold sm:text-xl">{item.title}</h3>
-              <p class="text-muted">{item.desc}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
   </Section>
-
-  <CtaSection
-    title={c.cta.title}
-    titleHighlight={c.cta.titleHighlight}
-    description={c.cta.description}
-    ctaText={c.cta.ctaText}
-    ctaHref={c.cta.ctaHref}
-    secondaryText={c.cta.secondaryText}
-    secondaryHref={c.cta.secondaryHref}
-    reassurance={c.cta.reassurance}
-  />
 </BaseLayout>
+
+<script>
+  import { motionEnabled } from "../scripts/core/motion";
+
+  // Fill the score gauge once when it scrolls into view. Motion-off users see it filled already.
+  function initGauge() {
+    const g = document.querySelector<SVGElement>("[data-gauge]");
+    if (!g) return;
+    if (!motionEnabled()) {
+      g.dataset.gauge = "done";
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        g.dataset.gauge = "run";
+      },
+      { threshold: 0.6 },
+    );
+    io.observe(g);
+  }
+
+  document.addEventListener("astro:page-load", initGauge);
+</script>

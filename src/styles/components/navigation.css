@@ -577,6 +577,11 @@
     inline-size: 1.45rem;
   }
 
+  .footer__notes {
+    margin-block-start: 2.5rem;
+    max-inline-size: 48rem;
+  }
+
   .footer__bar {
     align-items: flex-start;
     border-block-start: 1px solid var(--hairline);
