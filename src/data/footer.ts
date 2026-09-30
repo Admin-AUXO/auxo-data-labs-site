@@ -23,7 +23,7 @@ export const footerContent: FooterContent = {
       title: "Explore",
       links: [
         { label: "The Work", href: "/the-work/" },
-        { label: "AUXO Score", href: "/self-check/" },
+        { label: "AUXO Score", href: "/auxo-score/" },
         { label: "Lab", href: "/about/" },
         { label: "Insights", href: "/insights/" },
         { label: "Contact", href: "/contact/" },

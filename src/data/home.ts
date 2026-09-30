@@ -56,7 +56,7 @@ export const homeContent: HomeContent = {
     title: "Get your company's health report.",
     stat: "More than one in three CFOs don't completely trust their own financial data.",
     footnoteId: "ref-1",
-    cta: { text: "See where you stand", href: "/self-check/" },
+    cta: { text: "See where you stand", href: "/auxo-score/" },
     reassurance: "No sign-up. Your answers stay in your browser unless you ask for your report by email.",
   },
   logos: {

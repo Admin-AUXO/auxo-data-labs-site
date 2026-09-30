@@ -60,4 +60,4 @@ EmailJS needs three build-time vars (set in Netlify, not committed): `PUBLIC_EMA
 
 ## AUXO Score
 
-The `/self-check/` test and its n8n webhooks are documented in [`docs/auxo-score/README.md`](docs/auxo-score/README.md). Env vars: `PUBLIC_N8N_REPORT_WEBHOOK`, `PUBLIC_N8N_EXTENDED_WEBHOOK` (see `.env.example`).
+The `/auxo-score/` test and its n8n webhooks are documented in [`docs/auxo-score/README.md`](docs/auxo-score/README.md). Env vars: `PUBLIC_N8N_REPORT_WEBHOOK`, `PUBLIC_N8N_EXTENDED_WEBHOOK` (see `.env.example`).

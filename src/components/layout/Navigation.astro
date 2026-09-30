@@ -25,11 +25,11 @@ const isActive = (href: string) => {
           <a
             href={withBase(item.href)}
             class="nav__link"
-            data-selfcheck={item.href === "/self-check/" ? "" : undefined}
+            data-selfcheck={item.href === "/auxo-score/" ? "" : undefined}
             aria-current={isActive(item.href) ? "page" : undefined}
           >
             {item.name}
-            {item.href === "/self-check/" && (
+            {item.href === "/auxo-score/" && (
               <span class="nav__badge" data-nav-badge hidden>
                 <Icon name="mdi:check-decagram" aria-hidden="true" />
                 <span class="nav__badge-num" data-nav-badge-num />
@@ -64,12 +64,12 @@ const isActive = (href: string) => {
         <a
           href={withBase(item.href)}
           class="mobile-nav__link"
-          data-selfcheck={item.href === "/self-check/" ? "" : undefined}
+          data-selfcheck={item.href === "/auxo-score/" ? "" : undefined}
           aria-current={isActive(item.href) ? "page" : undefined}
           data-dialog-close
         >
           <span>{item.name}</span>
-          {item.href === "/self-check/" && (
+          {item.href === "/auxo-score/" && (
             <span class="nav__badge" data-nav-badge hidden>
               <Icon name="mdi:check-decagram" aria-hidden="true" />
               <span class="nav__badge-num" data-nav-badge-num />

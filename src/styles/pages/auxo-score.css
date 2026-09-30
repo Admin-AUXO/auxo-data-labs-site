@@ -1,4 +1,4 @@
-/* AUXO Score (/self-check/). Prototype tokens mapped onto site tokens; only --score-* are new. */
+/* AUXO Score (/auxo-score/). Prototype tokens mapped onto site tokens; only --score-* are new. */
 
 .score {
   --score-surface-2: var(--surface-raised);

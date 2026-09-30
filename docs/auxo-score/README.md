@@ -1,4 +1,4 @@
-# AUXO Score (`/self-check/`)
+# AUXO Score (`/auxo-score/`)
 
 A 10-question, evidence-based data health test. Five dimensions (Accurate, Complete, Consistent, Timely, Trusted), two cards each. Answers score 10 / 7 / 3 / 0, "I don't know" scores 3. Total 0–100, banded Healthy / Stable / Fragile / Critical. Three "I don't know" answers end the test as Inconclusive.
 
@@ -18,7 +18,7 @@ A 10-question, evidence-based data health test. Five dimensions (Accurate, Compl
 | `src/components/auxo-score/controller.ts` | Client state machine, keyboard, saving, forms |
 | `src/components/auxo-score/Radar.ts` | Radar SVG builder (pure) |
 | `src/components/auxo-score/ExtendedGate.astro` | Extended early-access screen. Swap this for the real extended test later. |
-| `src/styles/pages/self-check.css` | Page styles, mapped onto site tokens |
+| `src/styles/pages/auxo-score.css` | Page styles, mapped onto site tokens |
 | `tests/auxo-score/*.test.ts` | Vitest unit tests (`npm run test:unit`) |
 
 ## Changing questions

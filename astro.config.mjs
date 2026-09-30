@@ -15,6 +15,9 @@ export default defineConfig({
   site: isPages ? 'https://admin-auxo.github.io' : 'https://auxodata.com',
   base: isPages ? '/auxo-data-labs-site' : undefined,
   output: 'static',
+  redirects: {
+    '/self-check': '/auxo-score/',
+  },
   devToolbar: { enabled: false },
   prefetch: {
     defaultStrategy: 'viewport',

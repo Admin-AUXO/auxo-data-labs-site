@@ -89,7 +89,7 @@ Responses the site understands:
     { "cardId": 10, "dimension": "Trusted", "question": "Before leadership makes a major strategic bet, what happens to the underlying data?", "tier": 3, "points": 3, "isIdk": false, "label": "Heavy audit", "sub": "Days spent validating before trusting", "quadrant": "A" }
   ],
   "context": {
-    "page": "/self-check/",
+    "page": "/auxo-score/",
     "referrer": "",
     "utm": { "source": "linkedin", "medium": "social", "campaign": "score-launch", "content": "", "term": "" },
     "startedAt": "2026-10-01T09:27:38.000Z",
@@ -139,7 +139,7 @@ Then:
     "dimensions": { "Accurate": 20, "Complete": 20, "Consistent": 14, "Timely": 14, "Trusted": 6 }
   },
   "context": {
-    "page": "/self-check/",
+    "page": "/auxo-score/",
     "referrer": "",
     "utm": { "source": "", "medium": "", "campaign": "", "content": "", "term": "" },
     "startedAt": "2026-10-01T09:27:38.000Z",

@@ -41,7 +41,7 @@ export function buildContext(state: State, utm: Utm): Context {
   }
   const started = Date.parse(state.startedAt);
   return {
-    page: "/self-check/",
+    page: "/auxo-score/",
     referrer: document.referrer || "",
     utm,
     startedAt: state.startedAt,

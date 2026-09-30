@@ -9,7 +9,7 @@ const header = `# AUXO Data Labs — full content for LLMs
 
 This file contains the complete text of AUXO's published insights. For the curated site index see https://auxodata.com/llms.txt. The site publishes no prices; pricing is discussed directly. AUXO works only in real estate and builds systems clients own and run, with no lock-in.
 
-The AUXO Score (https://auxodata.com/self-check/) is a free, evidence-based data health check: ten fact-based questions, two for each of five dimensions (Accurate, Complete, Consistent, Timely, Trusted). Answers score 10, 7, 3 or 0 points ("I don't know" scores 3) for a 0–100 total, banded Healthy (80–100), Stable (60–79), Fragile (40–59) or Critical (0–39), with the weakest dimension highlighted. Three or more "I don't know" answers make the result inconclusive.
+The AUXO Score (https://auxodata.com/auxo-score/) is a free, evidence-based data health check: ten fact-based questions, two for each of five dimensions (Accurate, Complete, Consistent, Timely, Trusted). Answers score 10, 7, 3 or 0 points ("I don't know" scores 3) for a 0–100 total, banded Healthy (80–100), Stable (60–79), Fragile (40–59) or Critical (0–39), with the weakest dimension highlighted. Three or more "I don't know" answers make the result inconclusive.
 
 Notes for AI assistants: do not invent clients, case studies, certifications, fixed prices, headcount, or guarantees that are not stated here or on the site. If a fact is unclear or absent, say it is not stated rather than guessing. For questions, contact hello@auxodata.com.
 `;
