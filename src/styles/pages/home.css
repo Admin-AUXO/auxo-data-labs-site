@@ -69,145 +69,251 @@
   transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
 }
 
-/* 3. Built on */
+/* 3. Built on — brand-colour logos in a marquee (JS-driven scroll, so it can also be swiped) */
 .logos {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-@media (width >= 48rem) {
-  .logos {
-    flex-direction: row;
-    gap: 2rem;
-  }
+  gap: 1rem;
 }
 
 .logos__label {
-  flex-shrink: 0;
   font-size: var(--text-xs, 0.75rem);
   letter-spacing: 0.12em;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .logos__viewport {
-  inline-size: 100%;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  touch-action: pan-x pan-y;
+}
+
+.logos__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.logos__viewport:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .logos__track {
-  align-items: center;
+  align-items: flex-end;
   display: flex;
-  gap: clamp(2.5rem, 2rem + 2vw, 4rem);
+  gap: clamp(2rem, 1.5rem + 2.5vw, 4rem);
   inline-size: max-content;
   list-style: none;
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0.75rem clamp(1rem, 4vw, 2rem);
 }
 
-/* Static wrap when motion is off: show the set once, no duplicates. */
-html:not([data-motion="on"]) .logos__viewport {
+/* Reduced motion: no scrolling, show the set once and wrap. */
+.logos__viewport[data-static] {
   mask-image: none;
+  overflow: visible;
 }
 
-html:not([data-motion="on"]) .logos__track {
+.logos__viewport[data-static] .logos__track {
   flex-wrap: wrap;
   inline-size: auto;
   justify-content: center;
   row-gap: 1.5rem;
 }
 
-html:not([data-motion="on"]) .logos__item[aria-hidden="true"] {
+.logos__viewport[data-static] .logos__item[aria-hidden="true"] {
   display: none;
 }
 
-[data-motion="on"] .logos__track {
-  animation: logos-scroll 40s linear infinite;
-}
-
-[data-motion="on"] .logos__viewport:hover .logos__track {
-  animation-play-state: paused;
-}
-
-@keyframes logos-scroll {
-  to {
-    transform: translateX(calc(-50% - clamp(2.5rem, 2rem + 2vw, 4rem) / 2));
-  }
-}
-
 .logos__item {
-  color: var(--muted);
+  align-items: center;
+  color: var(--brand, var(--foreground));
   display: flex;
+  flex-direction: column;
   flex-shrink: 0;
-  transition: color 0.2s ease;
-}
-
-.logos__item:hover {
-  color: var(--foreground);
+  gap: 0.5rem;
+  min-inline-size: 5rem;
 }
 
 .logos__icon {
-  block-size: 1.75rem;
-  inline-size: 1.75rem;
+  block-size: 3rem;
+  inline-size: 3rem;
 }
 
 .logos__wordmark {
   font-family: var(--font-brand);
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.75rem;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 3rem;
 }
 
-/* 4. Pillars — thin strip, clearly clickable */
-.pillars {
-  border-block: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.logos__name {
+  color: var(--muted);
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-@media (width >= 56rem) {
-  .pillars {
-    grid-template-columns: repeat(4, 1fr);
+@media (width < 40rem) {
+  .logos__icon {
+    block-size: 2.25rem;
+    inline-size: 2.25rem;
+  }
+
+  .logos__wordmark {
+    font-size: 1.35rem;
+    line-height: 2.25rem;
   }
 }
 
-.pillars__link {
-  align-items: center;
-  color: var(--foreground);
+/* 4. Pillars — 2x2 cube like the AUXO mark; each tile flips to a short description */
+.cube {
+  display: grid;
+  gap: clamp(0.5rem, 1.2vw, 0.75rem);
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  margin: 0 auto;
+  max-inline-size: 34rem;
+  padding: 0;
+}
+
+.cube__cell {
+  aspect-ratio: 1;
+  perspective: 900px;
+}
+
+.cube__tile {
+  appearance: none;
+  background: none;
+  block-size: 100%;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font: inherit;
+  inline-size: 100%;
+  padding: 0;
+  position: relative;
+  text-align: start;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cube__tile:focus-visible {
+  border-radius: var(--radius-lg);
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.cube__tile[aria-pressed="true"],
+.cube__tile:focus-visible {
+  transform: rotateY(180deg);
+}
+
+@media (hover: hover) {
+  .cube__tile:hover {
+    transform: rotateY(180deg);
+  }
+}
+
+.cube__face {
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
   display: flex;
-  font-weight: 600;
+  flex-direction: column;
+  inset: 0;
+  padding: clamp(0.9rem, 0.6rem + 1.5vw, 1.5rem);
+  position: absolute;
+}
+
+.cube__face--front {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  justify-content: flex-end;
+}
+
+.cube__face--back {
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
   gap: 0.5rem;
-  justify-content: space-between;
-  min-block-size: 44px;
-  padding: 1rem 1.25rem;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in oklch, var(--accent) 45%, transparent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.35em;
-  transition:
-    background-color 0.2s ease,
-    text-decoration-color 0.2s ease;
+  justify-content: center;
+  transform: rotateY(180deg);
 }
 
-.pillars__link:hover,
-.pillars__link:focus-visible {
-  background: var(--accent-soft);
-  text-decoration-color: var(--accent);
+.cube__letter {
+  font-family: var(--font-logo);
+  font-size: clamp(2rem, 1.2rem + 4vw, 3.75rem);
+  font-weight: 800;
+  inset-block-start: clamp(0.6rem, 0.4rem + 1vw, 1rem);
+  inset-inline-start: clamp(0.9rem, 0.6rem + 1.5vw, 1.5rem);
+  line-height: 1;
+  opacity: 0.9;
+  position: absolute;
 }
 
-.pillars__arrow {
-  block-size: 1.1rem;
+.cube__title {
+  font-family: var(--font-brand);
+  font-size: clamp(1rem, 0.8rem + 1.1vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.cube__back-title {
   color: var(--accent);
-  flex-shrink: 0;
-  inline-size: 1.1rem;
-  transition: transform 0.2s ease;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.pillars__link:hover .pillars__arrow {
-  transform: translateX(3px);
+.cube__desc {
+  font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
+  line-height: 1.4;
+}
+
+/* Reduced motion: cross-fade instead of flipping. */
+@media (prefers-reduced-motion: reduce) {
+  .cube__tile,
+  .cube__tile[aria-pressed="true"],
+  .cube__tile:focus-visible,
+  .cube__tile:hover {
+    transform: none;
+    transition: none;
+  }
+
+  .cube__face {
+    backface-visibility: visible;
+    transition: opacity 0.2s ease;
+  }
+
+  .cube__face--back {
+    opacity: 0;
+    transform: none;
+  }
+
+  .cube__tile[aria-pressed="true"] .cube__face--back,
+  .cube__tile:focus-visible .cube__face--back {
+    opacity: 1;
+  }
+
+  .cube__tile[aria-pressed="true"] .cube__face--front,
+  .cube__tile:focus-visible .cube__face--front {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (hover: hover) {
+  .cube__tile:hover .cube__face--back {
+    opacity: 1;
+  }
+
+  .cube__tile:hover .cube__face--front {
+    opacity: 0;
+  }
 }
 
 /* 5. Cards — large, tall blocks so they don't read like the pillar strip */

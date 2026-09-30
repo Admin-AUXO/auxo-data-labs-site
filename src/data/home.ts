@@ -4,6 +4,14 @@ export interface HomeLogo {
   name: string;
   /** simple-icons name; omitted when no official mark is available (rendered as a wordmark). */
   icon?: string;
+  /** Brand colour for the mark. Omitted for marks that are black by default (rendered in the text colour on dark). */
+  color?: string;
+}
+
+export interface HomePillar {
+  letter: "A" | "U" | "X" | "O";
+  title: string;
+  desc: string;
 }
 
 export interface HomeLink {
@@ -34,7 +42,7 @@ export interface HomeContent {
     label: string;
     items: HomeLogo[];
   };
-  pillars: HomeLink[];
+  pillars: HomePillar[];
   cards: HomeCard[];
   cta: {
     title: string;
@@ -48,7 +56,7 @@ export interface HomeContent {
 export const homeContent: HomeContent = {
   hero: {
     title: "We turn messy, fragmented data into intelligent decisions companies act on.",
-    subtitle: "For real estate businesses across the Gulf. Built to last, and yours to keep.",
+    subtitle: "For businesses across the Gulf. Built to last, and yours to keep.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "Explore services", href: "/the-work/" },
   },
@@ -57,28 +65,28 @@ export const homeContent: HomeContent = {
     stat: "More than one in three CFOs don't completely trust their own financial data.",
     footnoteId: "ref-1",
     cta: { text: "See where you stand", href: "/auxo-score/" },
-    reassurance: "No sign-up. Your answers stay in your browser unless you ask for your report by email.",
+    reassurance: "No sign-up. Your answers stay private unless you ask us to email your report.",
   },
   logos: {
     label: "Built on",
     items: [
-      { name: "Power BI", icon: "simple-icons:powerbi" },
-      { name: "Tableau", icon: "simple-icons:tableau" },
-      { name: "Snowflake", icon: "simple-icons:snowflake" },
-      { name: "Google Cloud", icon: "simple-icons:googlecloud" },
-      { name: "Microsoft Azure", icon: "simple-icons:microsoftazure" },
-      { name: "Salesforce", icon: "simple-icons:salesforce" },
-      { name: "SAP", icon: "simple-icons:sap" },
-      { name: "Oracle", icon: "simple-icons:oracle" },
-      { name: "Yardi" },
+      { name: "Power BI", icon: "simple-icons:powerbi", color: "#F2C811" },
+      { name: "Tableau", icon: "simple-icons:tableau", color: "#E97627" },
+      { name: "Snowflake", icon: "simple-icons:snowflake", color: "#29B5E8" },
+      { name: "Google Cloud", icon: "simple-icons:googlecloud", color: "#4285F4" },
+      { name: "Microsoft Azure", icon: "simple-icons:microsoftazure", color: "#0078D4" },
+      { name: "Salesforce", icon: "simple-icons:salesforce", color: "#00A1E0" },
+      { name: "SAP", icon: "simple-icons:sap", color: "#0FAAFF" },
+      { name: "Oracle", icon: "simple-icons:oracle", color: "#F80000" },
+      { name: "Yardi", color: "#0072CE" },
       { name: "Anthropic", icon: "simple-icons:anthropic" },
     ],
   },
   pillars: [
-    { label: "Trusted data", href: "/the-work/#method" },
-    { label: "Clear reporting", href: "/the-work/#method" },
-    { label: "Reliable automation", href: "/the-work/#method" },
-    { label: "Confident compliance", href: "/the-work/#method" },
+    { letter: "A", title: "Trusted data", desc: "One source the whole business agrees on, built from the systems you already run." },
+    { letter: "U", title: "Clear reporting", desc: "Board- and investor-ready reporting that holds up under the hard questions." },
+    { letter: "X", title: "Reliable automation", desc: "Software carries the routine work, with a person accountable for the calls that matter." },
+    { letter: "O", title: "Confident compliance", desc: "Stay ready for regulators without pulling your team off the work that pays." },
   ],
   cards: [
     { title: "The Work", href: "/the-work/" },

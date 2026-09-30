@@ -3,7 +3,7 @@ import { siteData } from "../../data/site";
 
 const pages = {
   index: {
-    title: "Analytics and AI for Gulf real estate",
+    title: "Analytics and AI for Gulf businesses",
     description: "Turn the data you already hold into decisions you can stand behind.",
   },
   "the-work": {
