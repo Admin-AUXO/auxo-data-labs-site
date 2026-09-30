@@ -155,6 +155,7 @@
     position: relative;
     text-decoration: none;
     transition: color var(--dur-fast) var(--ease-standard);
+    white-space: nowrap;
   }
 
   .nav__link::after {
