@@ -1,4 +1,4 @@
-const CALENDAR_URL = "https://calendar.app.google/aJmnvMS2uBbYPCgC7";
+const CALENDAR_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cf9JS2XEAvFnPma4oW-Gy3pMVQnHWZNKWuG0X9hhJ1sKDKj5JLtZsowG9uJyPw3h9kZ1qeNH5?gv=true";
 
 function open(d: HTMLDialogElement): void {
   if (!d.open) d.showModal();
