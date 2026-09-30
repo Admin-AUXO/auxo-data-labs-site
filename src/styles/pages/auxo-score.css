@@ -714,6 +714,77 @@
   margin: 0;
 }
 
+.score__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: decimal;
+  margin: 10px 0;
+  padding-inline-start: 1.4em;
+}
+
+.score__steps li {
+  color: var(--muted);
+  padding-inline-start: 2px;
+}
+
+.score__steps li::marker {
+  color: var(--accent-2);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.score__good {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.score__good strong {
+  color: var(--foreground);
+}
+
+.score__gaps[hidden] {
+  display: none;
+}
+
+.score__gap-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.score__gap {
+  border-block-start: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-block: 12px;
+}
+
+.score__gap b {
+  font-size: 15px;
+}
+
+.score__gap p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.score__gap .score__gap-next {
+  color: var(--accent);
+}
+
+.score__gap-dim {
+  color: var(--subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .score__cta {
   display: flex;
   flex-direction: column;
@@ -1008,8 +1079,8 @@
       "eyebrow panel" auto
       "head panel" auto
       "focus panel" auto
-      "cta panel" auto
-      "deeper panel" 1fr / minmax(0, 1fr) minmax(0, 1.05fr);
+      "cta gaps" auto
+      "deeper gaps" 1fr / minmax(0, 1fr) minmax(0, 1.05fr);
   }
 
   #s-result[hidden] {
@@ -1022,4 +1093,5 @@
   #s-result > .score__focus { grid-area: focus; }
   #s-result > .score__cta { grid-area: cta; }
   #s-result > .score__deeper { grid-area: deeper; }
+  #s-result > .score__gaps { grid-area: gaps; }
 }

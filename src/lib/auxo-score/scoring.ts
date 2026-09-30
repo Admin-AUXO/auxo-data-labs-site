@@ -10,10 +10,10 @@ export const IDK_LIMIT = 3;
 export const tone = (v: number) => (v >= 60 ? "ok" : v >= 40 ? "warn" : "crit");
 
 export const BANDS: Band[] = [
-  { min: 80, name: "Healthy", line: "Your data is ready for the decisions that matter." },
-  { min: 60, name: "Stable", line: "Good foundations with a few blind spots." },
-  { min: 40, name: "Fragile", line: "It works until someone asks a hard question." },
-  { min: 0, name: "Critical", line: "Decisions are being made in the dark." },
+  { min: 80, name: "Healthy", line: "Your data is ready for the decisions that matter. Keep it that way as you add systems and people." },
+  { min: 60, name: "Stable", line: "Good foundations with a few blind spots. Fixing the weakest area stops them from growing." },
+  { min: 40, name: "Fragile", line: "It works until someone asks a hard question. Expect rework and late corrections when the stakes are high." },
+  { min: 0, name: "Critical", line: "Decisions are being made without reliable numbers. Start with the one fix below before adding new tools." },
 ];
 
 export const idkCount = (a: Answers) => Object.values(a).filter(x => x.isIdk).length;

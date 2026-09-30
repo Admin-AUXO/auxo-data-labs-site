@@ -1,4 +1,4 @@
-import { CARDS, FOCUS_COPY } from "../../lib/auxo-score/cards";
+import { CARDS, FOCUS } from "../../lib/auxo-score/cards";
 import { DIMENSIONS, IDK_LIMIT, IDK_POINTS, QUADS, buildLayout, computeResult, idkCount, tone } from "../../lib/auxo-score/scoring";
 import { checkWorkEmail } from "../../lib/auxo-score/email";
 import { captureUtm, clearLegacy, loadState, saveResult, saveState } from "../../lib/auxo-score/storage";
@@ -213,13 +213,43 @@ export function initAuxoScore(): void {
       }).join("") +
       "</tbody>";
 
+    const f = FOCUS[r.weakest];
+    const el = (tag: string, cls: string, text = "") => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      n.textContent = text;
+      return n;
+    };
     const focus = $("focus");
     focus.textContent = "";
-    const b = document.createElement("b");
-    b.textContent = `Weakest: ${r.weakest}`;
-    const p = document.createElement("p");
-    p.textContent = FOCUS_COPY[r.weakest];
-    focus.append(b, p);
+    const steps = el("ol", "score__steps");
+    f.steps.forEach((s) => steps.append(el("li", "", s)));
+    const good = el("p", "score__good");
+    good.append(el("strong", "", "What good looks like: "), f.good);
+    focus.append(el("b", "", `Your first fix: ${r.weakest}`), el("p", "", f.why), steps, good);
+
+    const gaps = CARDS
+      .map((c) => ({ c, a: state.answers[c.id] }))
+      .filter(({ a }) => a && (a.isIdk || a.points < 7))
+      .sort((x, y) => x.a.points - y.a.points || x.c.id - y.c.id)
+      .slice(0, 3);
+    const box = $("gaps");
+    box.textContent = "";
+    box.hidden = gaps.length === 0;
+    if (gaps.length) {
+      box.append(el("p", "score__panel-title", "Where you lost the most points"));
+      const list = el("ul", "score__gap-list");
+      for (const { c, a } of gaps) {
+        const li = el("li", "score__gap");
+        li.append(el("span", "score__gap-dim", c.dimension), el("b", "", c.topic));
+        const now = c.options.find((o) => o.tier === a.tier);
+        const best = c.options.find((o) => o.tier === 1);
+        li.append(el("p", "", a.isIdk || !now ? "You said: I don't know. Finding out is the first step." : `You said: ${now.label}. ${now.sub}.`));
+        if (best) li.append(el("p", "score__gap-next", `Aim for: ${best.label}. ${best.sub}.`));
+        list.append(li);
+      }
+      box.append(list);
+    }
   }
 
   function clearTimers(): void {

@@ -4,7 +4,7 @@ export type Tier = 1 | 2 | 3 | 4;
 export type Quadrant = "A" | "U" | "X" | "O";
 
 export interface Option { label: string; sub: string; tier: Tier; points: 10 | 7 | 3 | 0; }
-export interface Card { id: number; dimension: Dimension; type: CardType; question: string; options: Option[]; }
+export interface Card { id: number; topic: string; dimension: Dimension; type: CardType; question: string; options: Option[]; }
 
 export interface Answer {
   tier: Tier | 5;
