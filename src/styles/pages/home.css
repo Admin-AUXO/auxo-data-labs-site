@@ -35,7 +35,7 @@
 @media (width >= 56rem) {
   .score-card {
     gap: 2.5rem;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 17rem);
   }
 }
 
