@@ -1,0 +1,79 @@
+---
+// Hidden landing page behind the business-card QR. Not linked, not indexed, not in the sitemap.
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Mark from "../components/layout/Mark.astro";
+import { withBase } from "../lib/url";
+import { cardPage as c } from "../data/card-links";
+import "../styles/pages/v.css";
+---
+
+<BaseLayout
+  title={`${c.person.name} — AUXO Data Labs`}
+  description="Connect with Vignesh Ramesh, Co-Founder & CEO of AUXO Data Labs."
+  path="/v/"
+  noindex
+  bare
+>
+  <section class="vpage" data-pagefind-ignore="all">
+    <header class="vpage__head">
+      <Mark class="vpage__mark" />
+      <h1 class="vpage__name">{c.person.name}</h1>
+      <p class="vpage__role">{c.person.role}</p>
+    </header>
+
+    <ul class="vpage__links">
+      {
+        c.links.map((l) => (
+          <li>
+            {l.action === "calendar" ? (
+              <button
+                type="button"
+                class="vpage__link"
+                data-google-calendar-open
+                data-card-link={l.id}
+                data-primary={l.primary ? "" : undefined}
+              >
+                <Icon name={l.icon} class="vpage__icon" aria-hidden="true" />
+                <span class="vpage__text">
+                  <span class="vpage__label">{l.label}</span>
+                  <span class="vpage__hint">{l.hint}</span>
+                </span>
+                <Icon name="mdi:arrow-right" class="vpage__arrow" aria-hidden="true" />
+              </button>
+            ) : (
+              <a
+                class="vpage__link"
+                href={l.external ? l.href : withBase(l.href ?? "/")}
+                target={l.external ? "_blank" : undefined}
+                rel={l.external ? "noopener noreferrer" : undefined}
+                download={l.action === "download" ? "" : undefined}
+                data-card-link={l.id}
+                data-primary={l.primary ? "" : undefined}
+              >
+                <Icon name={l.icon} class="vpage__icon" aria-hidden="true" />
+                <span class="vpage__text">
+                  <span class="vpage__label">{l.label}</span>
+                  <span class="vpage__hint">{l.hint}</span>
+                </span>
+                <Icon name="mdi:arrow-right" class="vpage__arrow" aria-hidden="true" />
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="vpage__foot">{c.footnote}</p>
+  </section>
+
+  <script>
+    import { track } from "../scripts/analytics/track";
+
+    // One event per button so we can see which options get used.
+    document.addEventListener("click", (e) => {
+      const el = (e.target as Element | null)?.closest<HTMLElement>("[data-card-link]");
+      if (el) track("card_link_click", { link: el.dataset.cardLink });
+    });
+  </script>
+</BaseLayout>

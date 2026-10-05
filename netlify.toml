@@ -34,6 +34,13 @@
   status = 301
   force = true
 
+# Business-card QR points at /v — catch an upper-case scan too.
+[[redirects]]
+  from = "/V"
+  to = "/v/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -63,3 +70,15 @@
   for = "/sw.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/vcard/*"
+  [headers.values]
+    Content-Type = "text/vcard; charset=utf-8"
+    Content-Disposition = "attachment; filename=vignesh-ramesh.vcf"
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/v/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
