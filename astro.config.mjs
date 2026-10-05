@@ -37,7 +37,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !/\/(offline|404)\/?$/.test(page),
+      filter: (page) => !/\/(offline|404|v)\/?$/.test(page),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -63,6 +63,7 @@ export default defineConfig({
           'x',
         ],
         mdi: [
+          'account-plus-outline',
           'account-sync-outline',
           'arrow-left',
           'arrow-right',
@@ -80,6 +81,7 @@ export default defineConfig({
           'email-outline',
           'file-document',
           'file-document-outline',
+          'gauge',
           'handshake',
           'linkedin',
           'magnify',
@@ -88,6 +90,7 @@ export default defineConfig({
           'motion-play-outline',
           'send',
           'shield-check-outline',
+          'whatsapp',
         ],
       },
     }),

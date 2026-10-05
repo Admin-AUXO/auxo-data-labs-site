@@ -23,9 +23,11 @@ interface Props {
   ogImage?: string;
   type?: "website" | "article";
   noindex?: boolean;
+  /** Hide nav and footer (used by the hidden QR page). */
+  bare?: boolean;
 }
 
-const { title, description, path, ogImage, type, noindex } = Astro.props;
+const { title, description, path, ogImage, type, noindex, bare = false } = Astro.props;
 const pagePath = path ?? Astro.url.pathname;
 const pageTitle = title ?? "AUXO Data Labs";
 const pageDesc = description ?? siteData.description;
@@ -92,11 +94,11 @@ const gtmId = env.gtm.containerId;
     <canvas id="particle-field" class="particle-field" aria-hidden="true" transition:persist></canvas>
     <div class="scroll-progress" aria-hidden="true" transition:persist><span data-scroll-progress></span></div>
     <a href="#main" class="skip-link">Skip to content</a>
-    <Navigation />
+    {!bare && <Navigation />}
     <main id="main" data-pagefind-body>
       <slot />
     </main>
-    <Footer />
+    {!bare && <Footer />}
     <CalendarDialog />
     <CookieConsent />
     <button type="button" class="to-top" data-to-top aria-label="Back to top" transition:persist>
