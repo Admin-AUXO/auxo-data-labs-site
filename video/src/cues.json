@@ -1,0 +1,89 @@
+{
+  "fps": 30,
+  "hero": {
+    "frames": 480,
+    "scan": [
+      70,
+      245
+    ],
+    "lit": 215,
+    "rings": 240,
+    "ringPeriod": 60,
+    "label": 262,
+    "fade": 388,
+    "rev": [
+      392,
+      478
+    ]
+  },
+  "film": {
+    "frames": 1800,
+    "seed": 18,
+    "beat": 332,
+    "ignite": 352,
+    "scan": [
+      352,
+      700
+    ],
+    "lines": [
+      {
+        "id": "knows",
+        "parts": [
+          96
+        ],
+        "out": 196,
+        "text": "Your business already *knows* the answer."
+      },
+      {
+        "id": "buried",
+        "parts": [
+          206
+        ],
+        "out": 318,
+        "text": "It's buried in rent rolls, ledgers|and spreadsheets that ~disagree.~"
+      },
+      {
+        "id": "together",
+        "parts": [
+          470,
+          596
+        ],
+        "out": 722,
+        "text": "Bring it together,|and the whole picture comes into *focus.*"
+      },
+      {
+        "id": "obvious",
+        "parts": [
+          1130
+        ],
+        "out": 1300,
+        "text": "Until the next move is *obvious.*"
+      }
+    ],
+    "pillars": [
+      {
+        "peak": 2,
+        "at": 790
+      },
+      {
+        "peak": 4,
+        "at": 830
+      },
+      {
+        "peak": 3,
+        "at": 870
+      },
+      {
+        "peak": 1,
+        "at": 910
+      }
+    ],
+    "pillarsOut": 975,
+    "lit": 1062,
+    "rings": 1080,
+    "ringPeriod": 60,
+    "litOut": 1370,
+    "final": 1412,
+    "fadeOut": 1768
+  }
+}

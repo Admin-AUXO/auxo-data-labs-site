@@ -22,6 +22,7 @@ export default [
       "node_modules/",
       "public/",
       "src/env.d.ts",
+      "video/",
     ],
   },
 ];
