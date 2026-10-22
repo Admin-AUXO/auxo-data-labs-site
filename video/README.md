@@ -53,7 +53,35 @@ On the i7-1360P / Iris Xe laptop: about 2–5 min for the film and 40–70s for 
 - Leader lines on the pillars were cluttered; replaced by a tile list synced to light pulses on each peak.
 
 **Open question**
-The owner still finds the look basic. The tools research below looks beyond the browser renderer. Stronger in-code post-processing is still to be researched.
+The owner still finds the look basic. Two research tracks below: upgrading the current code pipeline, and free tools beyond the browser renderer.
+
+## Code pipeline upgrades (researched 2026-10-22)
+
+Verified on this laptop with Remotion 4.0.537 and headless shell 157:
+- WebGL2 with `--gl=angle` runs on the Iris Xe (D3D11) and supports half-float render targets, which real bloom needs.
+- WebGPU fails in Remotion's bundled headless shell (`dxcompiler.dll` missing) but works when Remotion uses system Chrome via `--browser-executable`.
+- `<ThreeCanvas>` calls R3F's `advance()` each frame, so a hand-built composer rendered from `useFrame(() => composer.render(1 / fps), 1)` should work. The blank frames likely came from `@react-three/postprocessing` setting up after that call. Not yet confirmed by a test render.
+
+| Package | Licence | Adds | Notes |
+|---|---|---|---|
+| `postprocessing` 6.39.5 (pmndrs), used directly | Zlib | Mipmap bloom, DOF, chromatic aberration, vignette, `LUT3DEffect`, AgX/ACES | Half-float buffers; fixed delta per frame |
+| three.js post (`UnrealBloomPass`, `BokehPass`, `LUTPass`, `OutputPass`) | MIT | Same, less polished | Same pattern |
+| three.js WebGPU/TSL nodes (`BloomNode`, `DepthOfFieldNode`, `MotionBlur`, `FilmNode`, `GodraysNode`, `TRAANode`, `Lut3DNode`) | MIT | Full cinematic post | Needs `<ThreeWebGPUCanvas>` + system Chrome; shaders rewritten in TSL |
+| `GPUComputationRenderer` / TSL compute | MIT | Flowing GPU particles, curl noise | Must be deterministic per frame (out-of-order parallel renders) |
+| `troika-three-text` 0.52.5 | MIT | Crisp 3D SDF typography | Wrap font load in `delayRender` |
+| `@remotion/media-utils` 4.0.537 | MIT | Audio-reactive uniforms (`useAudioData`, `visualizeAudio`) | Low effort |
+| `@remotion/noise` 4.0.537 | MIT | Deterministic camera drift | Low effort |
+
+Avoid or skip: Lygia (non-commercial Prosperity licence), `three-good-godrays` (needs shadow-casting geometry; use a radial-blur pass instead), `three-gpu-pathtracer` (stills only), Gaussian splats (need captured scenes), `@theatre/core` (dormant since 2024-05), GSAP for the 3D camera (`@remotion/gsap` tweens DOM/SVG only), `@remotion/motion-blur` around `<ThreeCanvas>` (reported deadlock; multiplies render time).
+
+Ranked plan:
+1. Replace the blurred duplicate canvases with one hand-built pmndrs composer: HDR particles, mipmap bloom, AgX, a `.cube` film LUT, vignette, frame-seeded grain.
+2. DOF with animated rack focus, plus a radial-blur light-shaft pass from the scan light.
+3. Spline camera with deterministic noise drift; shader-side motion streaks.
+4. Audio-reactive terrain and scan via `@remotion/media-utils`; `troika-three-text` for 3D typography.
+5. Later: `<ThreeWebGPUCanvas>` with TSL compute particles and TSL post nodes.
+
+Sources: [Remotion WebGPU canvas](https://www.remotion.dev/docs/three-webgpu-canvas), [Remotion issue #623](https://github.com/remotion-dev/remotion/issues/623), [three.js EffectComposer](https://threejs.org/docs/pages/EffectComposer.html), [@remotion/gsap](https://www.remotion.dev/docs/gsap), [CameraMotionBlur](https://www.remotion.dev/docs/motion-blur/camera-motion-blur).
 
 ## Free 3D and film tools (researched 2026-10-22)
 
