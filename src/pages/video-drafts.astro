@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/layout/Section.astro";
+import Button from "../components/ui/Button.astro";
+import { homeContent as c } from "../data/home";
+import "../styles/pages/video-drafts.css";
+---
+<BaseLayout title="Hero video drafts" description="Internal preview of hero video concepts." noindex>
+  <Section padding="md" width="7xl">
+    <div class="vd-intro">
+      <p class="eyebrow">Internal preview · not linked anywhere</p>
+      <h1 class="text-display text-display--4xl">Terrain</h1>
+      <p class="lead max-w-2xl">A field of static, a line of light, and the one place to act. Original score composed in code: play the film below with sound.</p>
+    </div>
+  </Section>
+
+  <Section padding="md" width="7xl" class="vd-draft">
+    <p class="eyebrow vd-label"><span class="mono-datum text-accent-2">01</span> Hero cut · 16s loop · 1080 × 1080</p>
+    <p class="vd-idea text-muted">Muted autoplay on the homepage. One continuous take: static, the scan rolls in, the beam locks on the peak, the light ebbs.</p>
+    <div class="vd-hero">
+      <div class="flex flex-col gap-6">
+        <h2 class="text-display text-display--4xl">{c.hero.title}</h2>
+        <p class="lead text-xl">{c.hero.subtitle}</p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">{c.hero.primaryCta.text}</Button>
+          <a href="#film" class="vd-watch">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" /><path d="M10 8l6 4-6 4z" /></svg>
+            Watch the 60s story
+          </a>
+        </div>
+      </div>
+      <div class="vd-frame">
+        <video src="/video-drafts/terrain.mp4" autoplay muted loop playsinline preload="auto" aria-label="Terrain hero loop"></video>
+      </div>
+    </div>
+  </Section>
+
+  <Section padding="md" width="7xl" class="vd-draft" id="film">
+    <p class="eyebrow vd-label"><span class="mono-datum text-accent-2">02</span> Film · 60s · 1920 × 1080 · with sound</p>
+    <p class="vd-idea text-muted">One continuous camera journey in 2.39:1, lit like Lubezki, Deakins and Willis would: a single point of light hidden in the noise, a sunrise that resolves the terrain, the four pillars, and a top-lit beam where that first point was. Opens from “Watch the 60s story”.</p>
+    <div class="vd-film">
+      <video src="/video-drafts/film.mp4" controls playsinline preload="metadata" aria-label="AUXO 60 second film">
+        <track kind="captions" src="/video-drafts/film.vtt" srclang="en" label="English" />
+      </video>
+    </div>
+  </Section>
+</BaseLayout>
