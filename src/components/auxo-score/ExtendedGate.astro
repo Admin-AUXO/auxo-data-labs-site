@@ -1,5 +1,4 @@
 ---
-import { withBase } from "../../lib/url";
 ---
 <section class="score__screen" id="s-extended" data-screen="extended" hidden>
   <span class="score__eyebrow">Extended assessment</span>
@@ -16,7 +15,7 @@ import { withBase } from "../../lib/url";
     </div>
     <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
     <p class="score__consent">
-      We'll email your report and may follow up once. No spam. <a href={withBase("/legal/privacy-policy/")}>Privacy policy</a>
+      We'll email you to confirm your seat and may follow up once. No spam. <a href="/legal/privacy-policy/">Privacy policy</a>
     </p>
     <p class="score__msg" id="seatMsg" role="status"></p>
   </form>

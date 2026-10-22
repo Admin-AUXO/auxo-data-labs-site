@@ -1,10 +1,13 @@
 type Consent = "granted" | "denied";
 const COOKIE = "auxo_consent";
+const COOKIE_RE = new RegExp(`(?:^|; )${COOKIE}=(granted|denied)`);
 
 function readConsent(): Consent | null {
-  const m = document.cookie.match(/(?:^|; )auxo_consent=(granted|denied)/);
+  const m = document.cookie.match(COOKIE_RE);
   return m ? (m[1] as Consent) : null;
 }
+
+export const consentGranted = (): boolean => readConsent() === "granted";
 
 function writeConsent(value: Consent): void {
   document.cookie = `${COOKIE}=${value}; max-age=31536000; path=/; samesite=lax`;
@@ -27,44 +30,53 @@ function updateConsent(value: Consent): void {
 function bannerEl(): HTMLElement | null {
   return document.querySelector<HTMLElement>("[data-consent-banner]");
 }
-function show(): void {
+
+function isOpen(): boolean {
+  const banner = bannerEl();
+  return !!banner && !banner.classList.contains("is-hidden");
+}
+
+function show(focus: boolean): void {
   const banner = bannerEl();
   if (!banner) return;
   banner.classList.remove("is-hidden");
+  if (!focus) return;
   if (!banner.hasAttribute("tabindex")) banner.setAttribute("tabindex", "-1");
   banner.focus();
 }
+
 function hide(): void {
   bannerEl()?.classList.add("is-hidden");
 }
-function accept(): void {
-  writeConsent("granted");
-  updateConsent("granted");
+
+function choose(value: Consent): void {
+  writeConsent(value);
+  updateConsent(value);
   hide();
 }
-function decline(): void {
-  writeConsent("denied");
-  updateConsent("denied");
-  hide();
-}
+
+let escBound = false;
 
 export function initConsent(): void {
   const banner = bannerEl();
   if (banner && !banner.dataset.bound) {
     banner.dataset.bound = "true";
-    banner.querySelector("[data-consent-accept]")?.addEventListener("click", accept);
-    banner.querySelector("[data-consent-decline]")?.addEventListener("click", decline);
+    banner.querySelector("[data-consent-accept]")?.addEventListener("click", () => choose("granted"));
+    banner.querySelector("[data-consent-decline]")?.addEventListener("click", () => choose("denied"));
+  }
 
+  if (!escBound) {
+    escBound = true;
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !banner.classList.contains("is-hidden")) decline();
+      if (e.key === "Escape" && isOpen()) choose("denied");
     });
   }
 
   for (const el of document.querySelectorAll<HTMLElement>("[data-consent-reopen]")) {
     if (el.dataset.bound) continue;
     el.dataset.bound = "true";
-    el.addEventListener("click", show);
+    el.addEventListener("click", () => show(true));
   }
 
-  if (readConsent() === null) show();
+  if (readConsent() === null) show(false);
 }

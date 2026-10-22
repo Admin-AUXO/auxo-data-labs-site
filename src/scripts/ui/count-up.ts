@@ -1,7 +1,8 @@
 import { motionEnabled } from "../core/motion";
 
 export function initCountUp(): void {
-  const els = Array.from(document.querySelectorAll<HTMLElement>("[data-countup]"));
+  const els = Array.from(document.querySelectorAll<HTMLElement>("[data-countup]:not([data-counted])"));
+  for (const el of els) el.dataset.counted = "";
   if (els.length === 0) return;
 
   const reduce = !motionEnabled();

@@ -1,4 +1,4 @@
-export interface Footnote {
+interface Footnote {
   id: string;
   marker: string;
   text: string;

@@ -9,9 +9,8 @@ function stored(): boolean {
   try {
     const saved = localStorage.getItem(KEY);
     if (saved) return saved === "on";
-  } catch {
-  }
-  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch {}
+  return true;
 }
 
 function apply(on: boolean): void {
@@ -37,8 +36,7 @@ export function initMotion(): void {
       const next = !motionEnabled();
       try {
         localStorage.setItem(KEY, next ? "on" : "off");
-      } catch {
-      }
+      } catch {}
       apply(next);
       syncToggles(next);
       window.dispatchEvent(new CustomEvent(EVENT, { detail: { on: next } }));

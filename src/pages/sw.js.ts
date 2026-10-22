@@ -1,7 +1,6 @@
 import type { APIRoute } from "astro";
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const OFFLINE = `${base}/offline/`;
+const OFFLINE = "/offline/";
 
 const body = `const VERSION = 'auxo-v1';
 const CACHE = VERSION;

@@ -1,70 +1,113 @@
-// Buttons on the hidden QR page (auxodata.com/v).
-// The QR on the business card never changes — edit this list to change what it offers.
-
-export type CardLinkAction = "link" | "calendar" | "download";
-
-export interface CardLink {
-  id: string; // analytics label, keep stable
+interface CardContact {
+  id: string;
   label: string;
   hint: string;
-  icon: string; // must be in the astro-icon allowlist (astro.config.mjs)
-  action: CardLinkAction;
-  href?: string;
+  icon: string;
+  href: string;
   external?: boolean;
-  primary?: boolean;
 }
 
-const whatsappNumber = "971565651351";
-const whatsappMessage = "Hi Vignesh, I scanned your AUXO card and would like to connect.";
+interface CardFounder {
+  id: string;
+  name: string;
+  first: string;
+  role: string;
+  note: string;
+  vcard: string;
+  contacts: CardContact[];
+}
+
+const whatsapp = (number: string, first: string) =>
+  `https://wa.me/${number}?text=${encodeURIComponent(`Hi ${first}, good to meet you. Saving your AUXO card now.`)}`;
 
 export const cardPage = {
-  person: {
-    name: "Vignesh Ramesh",
-    role: "Co-Founder & CEO, AUXO Data Labs",
+  company: {
+    name: "AUXO Data Labs",
+    lines: ["Analytics & AI for Gulf businesses.", "Built on your data, yours to keep."],
   },
-  footnote: "UAE – USA",
-  links: [
+  greeting: "Good to meet you.",
+  chooser: {
+    title: "Who did you speak with?",
+  },
+  change: "Change",
+  saveLabel: "Save contact",
+  wallet: { apple: "Add to Apple Wallet", google: "Add to Google Wallet" },
+  meetLabel: (first: string) => `Book a meeting with ${first}`,
+  score: {
+    id: "auxo_score",
+    eyebrow: "Before we meet again",
+    label: "What's your AUXO Score?",
+    hint: "10 questions · 3 minutes",
+    href: "/auxo-score/",
+  },
+  site: { label: "auxodata.com", href: "/" },
+  local: {
+    city: "Dubai",
+    timeZone: "Asia/Dubai",
+    days: [1, 2, 3, 4, 5],
+    opens: 9,
+    closes: 18,
+    open: "In working hours",
+    closed: "After hours",
+  },
+  founders: [
     {
-      id: "auxo_score",
-      label: "Take the AUXO Score",
-      hint: "Identify your data health in 3 minutes",
-      icon: "mdi:gauge",
-      action: "link",
-      href: "/auxo-score/",
-      primary: true,
+      id: "vignesh",
+      name: "Vignesh Ramesh",
+      first: "Vignesh",
+      role: "Co-Founder & CEO",
+      note: "Happy to help with scope, pricing and partnerships.",
+      vcard: "/vcard/vignesh-ramesh.vcf",
+      contacts: [
+        {
+          id: "vignesh_whatsapp",
+          label: "WhatsApp",
+          hint: "+971 56 565 1351",
+          icon: "mdi:whatsapp",
+          href: whatsapp("971565651351", "Vignesh"),
+          external: true,
+        },
+        {
+          id: "vignesh_email",
+          label: "Email",
+          hint: "vig@auxodata.com",
+          icon: "mdi:email-outline",
+          href: "mailto:vig@auxodata.com",
+        },
+        {
+          id: "vignesh_linkedin",
+          label: "LinkedIn",
+          hint: "linkedin.com/in/vig-auxo",
+          icon: "mdi:linkedin",
+          href: "https://www.linkedin.com/in/vig-auxo",
+          external: true,
+        },
+      ],
     },
     {
-      id: "save_contact",
-      label: "Save my contact",
-      hint: "Add Vignesh to your phone",
-      icon: "mdi:account-plus-outline",
-      action: "download",
-      href: "/vcard/vignesh-ramesh.vcf",
+      id: "ajay",
+      name: "Ajay Kumar",
+      first: "Ajay",
+      role: "Co-Founder & CTO",
+      note: "Happy to help with data platforms, AI and delivery.",
+      vcard: "/vcard/ajay-kumar.vcf",
+      contacts: [
+        {
+          id: "ajay_email",
+          label: "Email",
+          hint: "ajay@auxodata.com",
+          icon: "mdi:email-outline",
+          href: "mailto:ajay@auxodata.com",
+        },
+        {
+          id: "ajay_linkedin",
+          label: "LinkedIn",
+          hint: "linkedin.com/in/ajaykumar9795",
+          icon: "mdi:linkedin",
+          href: "https://www.linkedin.com/in/ajaykumar9795",
+          external: true,
+        },
+      ],
     },
-    {
-      id: "book_call",
-      label: "Book a call",
-      hint: "Schedule an appointment",
-      icon: "mdi:calendar-clock-outline",
-      action: "calendar",
-    },
-    {
-      id: "linkedin",
-      label: "Connect on LinkedIn",
-      hint: "linkedin.com/in/vig-auxo",
-      icon: "mdi:linkedin",
-      action: "link",
-      href: "https://www.linkedin.com/in/vig-auxo",
-      external: true,
-    },
-    {
-      id: "whatsapp",
-      label: "WhatsApp",
-      hint: "+971 56 565 1351",
-      icon: "mdi:whatsapp",
-      action: "link",
-      href: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
-      external: true,
-    },
-  ] satisfies CardLink[],
+  ] satisfies CardFounder[],
 };

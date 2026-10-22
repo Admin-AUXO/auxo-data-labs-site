@@ -2,7 +2,6 @@
 import LegalLayout from "../../layouts/LegalLayout.astro";
 import { LEGAL_LAST_UPDATED } from "../../data/legal";
 import { siteData } from "../../data/site";
-import { withBase } from "../../lib/url";
 ---
 <LegalLayout
   title="Cookie Policy"
@@ -26,7 +25,7 @@ import { withBase } from "../../lib/url";
   </p>
   <p>
     It should be read together with our
-    <a href={withBase("/legal/privacy-policy/")}>Privacy Policy</a>.
+    <a href="/legal/privacy-policy/">Privacy Policy</a>.
   </p>
 
   <h2>2. What We Mean by Cookies and Similar Technologies</h2>

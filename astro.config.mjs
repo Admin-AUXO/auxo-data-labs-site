@@ -9,14 +9,12 @@ import { remarkReadingTime } from './src/lib/remark-reading-time.mjs';
 
 const srcDir = fileURLToPath(new URL('./src', import.meta.url));
 
-const isPages = process.env.GITHUB_PAGES === 'true';
-
 export default defineConfig({
-  site: isPages ? 'https://admin-auxo.github.io' : 'https://auxodata.com',
-  base: isPages ? '/auxo-data-labs-site' : undefined,
+  site: 'https://auxodata.com',
   output: 'static',
   redirects: {
     '/self-check': '/auxo-score/',
+    '/v': '/hello/',
   },
   devToolbar: { enabled: false },
   prefetch: {
@@ -37,7 +35,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !/\/(offline|404|v)\/?$/.test(page),
+      filter: (page) => !/\/(offline|404|hello)\/?$/.test(page),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -64,32 +62,29 @@ export default defineConfig({
         ],
         mdi: [
           'account-plus-outline',
-          'account-sync-outline',
+          'apple',
           'arrow-left',
           'arrow-right',
           'arrow-up',
           'calendar-clock-outline',
           'calendar-outline',
-          'chart-box-outline',
           'check-decagram',
           'clock-check-outline',
           'close',
-          'cog-sync',
           'cookie',
-          'cube-outline',
-          'database-check-outline',
           'email-outline',
           'file-document',
           'file-document-outline',
           'gauge',
-          'handshake',
           'linkedin',
           'magnify',
-          'magnify-scan',
           'map-marker-outline',
           'motion-play-outline',
           'send',
+          'share-variant-outline',
           'shield-check-outline',
+          'wallet-outline',
+          'web',
           'whatsapp',
         ],
       },

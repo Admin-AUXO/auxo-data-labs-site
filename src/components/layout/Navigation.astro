@@ -5,14 +5,10 @@ import SocialLinks from "./SocialLinks.astro";
 import Dialog from "../ui/Dialog.astro";
 import { navigationContent } from "../../data/navigation";
 import { siteData } from "../../data/site";
-import { withBase } from "../../lib/url";
 
 const { items, cta } = navigationContent;
 const here = Astro.url.pathname;
-const isActive = (href: string) => {
-  const target = withBase(href);
-  return here === target || (href !== "/" && here.startsWith(target));
-};
+const isActive = (href: string) => here === href || (href !== "/" && here.startsWith(href));
 ---
 <header class="nav" data-nav data-pagefind-ignore>
   <div class="nav__inner">
@@ -22,16 +18,16 @@ const isActive = (href: string) => {
       {
         items.map((item) => (
           <a
-            href={withBase(item.href)}
+            href={item.href}
             class="nav__link"
-            data-selfcheck={item.href === "/auxo-score/" ? "" : undefined}
+            data-score-link={item.href === "/auxo-score/" ? "" : undefined}
             aria-current={isActive(item.href) ? "page" : undefined}
           >
             {item.name}
             {item.href === "/auxo-score/" && (
-              <span class="nav__badge" data-nav-badge hidden>
+              <span class="nav__badge" hidden>
                 <Icon name="mdi:check-decagram" aria-hidden="true" />
-                <span class="nav__badge-num" data-nav-badge-num />
+                <span class="nav__badge-num" />
               </span>
             )}
           </a>
@@ -43,7 +39,7 @@ const isActive = (href: string) => {
       <button type="button" class="icon-btn" data-dialog-open="site-search" data-search-open aria-label="Search the site">
         <Icon name="mdi:magnify" aria-hidden="true" />
       </button>
-      <a href={withBase(cta.href)} class="btn nav__cta" data-variant="primary" data-size="sm">
+      <a href={cta.href} class="btn nav__cta" data-variant="primary" data-size="sm">
         {cta.label}
       </a>
       <button type="button" class="icon-btn nav__burger" data-dialog-open="mobile-nav" aria-label="Open menu">
@@ -61,17 +57,17 @@ const isActive = (href: string) => {
     {
       items.map((item) => (
         <a
-          href={withBase(item.href)}
+          href={item.href}
           class="mobile-nav__link"
-          data-selfcheck={item.href === "/auxo-score/" ? "" : undefined}
+          data-score-link={item.href === "/auxo-score/" ? "" : undefined}
           aria-current={isActive(item.href) ? "page" : undefined}
           data-dialog-close
         >
           <span>{item.name}</span>
           {item.href === "/auxo-score/" && (
-            <span class="nav__badge" data-nav-badge hidden>
+            <span class="nav__badge" hidden>
               <Icon name="mdi:check-decagram" aria-hidden="true" />
-              <span class="nav__badge-num" data-nav-badge-num />
+              <span class="nav__badge-num" />
             </span>
           )}
           <Icon name="mdi:arrow-right" class="mobile-nav__link-icon" aria-hidden="true" />
@@ -81,7 +77,7 @@ const isActive = (href: string) => {
   </nav>
 
   <div class="mobile-nav__foot">
-    <a href={withBase(cta.href)} class="btn mobile-nav__cta" data-variant="primary" data-size="lg" data-dialog-close>
+    <a href={cta.href} class="btn mobile-nav__cta" data-variant="primary" data-size="lg" data-dialog-close>
       {cta.label}
     </a>
     <div class="mobile-nav__meta">
@@ -98,10 +94,10 @@ const isActive = (href: string) => {
   <p class="search-dialog__hint">Search insights and pages across the site.</p>
 </Dialog>
 
-<script>  const PAGEFIND_BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+<script>
+  const PAGEFIND = "/pagefind/";
   let prefetched = false;
   let initPromise: Promise<void> | null = null;
-
   let cssApplied = false;
 
   function prefetchSearch() {
@@ -110,12 +106,12 @@ const isActive = (href: string) => {
     const css = document.createElement("link");
     css.rel = "prefetch";
     css.as = "style";
-    css.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.css`;
+    css.href = `${PAGEFIND}pagefind-ui.css`;
     document.head.appendChild(css);
     const js = document.createElement("link");
     js.rel = "prefetch";
     js.as = "script";
-    js.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.js`;
+    js.href = `${PAGEFIND}pagefind-ui.js`;
     document.head.appendChild(js);
   }
 
@@ -124,7 +120,7 @@ const isActive = (href: string) => {
     cssApplied = true;
     const css = document.createElement("link");
     css.rel = "stylesheet";
-    css.href = `${PAGEFIND_BASE}/pagefind/pagefind-ui.css`;
+    css.href = `${PAGEFIND}pagefind-ui.css`;
     document.head.appendChild(css);
   }
 
@@ -144,7 +140,7 @@ const isActive = (href: string) => {
       try {
         await new Promise<void>((resolve, reject) => {
           const s = document.createElement("script");
-          s.src = `${PAGEFIND_BASE}/pagefind/pagefind-ui.js`;
+          s.src = `${PAGEFIND}pagefind-ui.js`;
           s.onload = () => resolve();
           s.onerror = () => reject(new Error("pagefind"));
           document.head.appendChild(s);
@@ -153,7 +149,7 @@ const isActive = (href: string) => {
         if (w.PagefindUI) {
           new w.PagefindUI({
             element: "#pagefind-search",
-            bundlePath: `${PAGEFIND_BASE}/pagefind/`,
+            bundlePath: PAGEFIND,
             showSubResults: true,
             showImages: false,
             resetStyles: false,
@@ -176,7 +172,6 @@ const isActive = (href: string) => {
       if (btn.dataset.searchBound) return;
       btn.dataset.searchBound = "true";
       btn.addEventListener("pointerenter", prefetchSearch);
-      btn.addEventListener("mouseenter", prefetchSearch);
       btn.addEventListener("focus", prefetchSearch);
       btn.addEventListener("click", loadSearch);
     });
@@ -186,16 +181,19 @@ const isActive = (href: string) => {
   document.addEventListener("astro:page-load", bind);
 </script>
 
-<script>  function markScore() {
+<script>
+  import { RESULT_KEY } from "../../lib/auxo-score/storage";
+
+  function markScore() {
     let score: string | null = null;
     try {
-      const saved = JSON.parse(localStorage.getItem("auxo-score-v2-result") || "null") as { total?: number } | null;
+      const saved = JSON.parse(localStorage.getItem(RESULT_KEY) || "null") as { total?: number } | null;
       score = saved && Number.isFinite(saved.total) ? String(saved.total) : null;
     } catch {
       score = null;
     }
     const done = score !== null && score !== "";
-    document.querySelectorAll<HTMLElement>("[data-selfcheck]").forEach((link) => {
+    document.querySelectorAll<HTMLElement>("[data-score-link]").forEach((link) => {
       const badge = link.querySelector<HTMLElement>(".nav__badge");
       if (!badge) return;
       badge.hidden = !done;
@@ -214,6 +212,6 @@ const isActive = (href: string) => {
   markScore();
   document.addEventListener("astro:page-load", markScore);
   addEventListener("storage", (e) => {
-    if (e.key === "auxo-score-v2-result") markScore();
+    if (e.key === RESULT_KEY) markScore();
   });
 </script>

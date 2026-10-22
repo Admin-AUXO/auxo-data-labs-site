@@ -2,8 +2,6 @@
 
 A 10-question, evidence-based data health test. Five dimensions (Accurate, Complete, Consistent, Timely, Trusted), two cards each. Answers score 10 / 7 / 3 / 0, "I don't know" scores 3. Total 0–100, banded Healthy / Stable / Fragile / Critical. Three "I don't know" answers end the test as Inconclusive.
 
-`spec.md` is the full build spec; `prototype.html` is the approved visual and behaviour reference.
-
 ## Where things live
 
 | Path | What |

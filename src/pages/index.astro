@@ -5,15 +5,14 @@ import Section from "../components/layout/Section.astro";
 import Button from "../components/ui/Button.astro";
 import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import { homeContent as c } from "../data/home";
-import { withBase } from "../lib/url";
 import "../styles/pages/home.css";
-import "../styles/pages/type-scale.css";
 
 const logoLoop = [...c.logos.items, ...c.logos.items];
 ---
 <BaseLayout
   title="Analytics & AI for Gulf businesses"
   description="We turn messy, fragmented data into decisions Gulf businesses act on. Analytics and AI, built to last and yours to keep."
+  footnotes
 >
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="flex flex-col gap-6">
@@ -37,7 +36,7 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
         <path class="score-gauge__fill" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
       </svg>
       <div class="flex flex-col gap-3">
-        <h2 class="text-3xl font-bold sm:text-4xl">{c.score.title}</h2>
+        <h2 class="font-bold">{c.score.title}</h2>
         <p class="max-w-xl text-lg text-muted">
           {c.score.stat}<FootnoteRef id={c.score.footnoteId} />
         </p>
@@ -98,7 +97,7 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     <div class="cards">
       {
         c.cards.map((card, i) => (
-          <a href={withBase(card.href)} class="cards__card" data-anim="rise" style={`--i:${i}`}>
+          <a href={card.href} class="cards__card" data-anim="rise" style={`--i:${i}`}>
             <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
             <span class="cards__title">{card.title}</span>
             <Icon name="mdi:arrow-right" class="cards__arrow" aria-hidden="true" />
@@ -118,7 +117,8 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
   </Section>
 </BaseLayout>
 
-<script>  import { motionEnabled } from "../scripts/core/motion";
+<script>
+  import { motionEnabled } from "../scripts/core/motion";
 
   function initGauge() {
     const g = document.querySelector<SVGElement>("[data-gauge]");
@@ -138,28 +138,33 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     io.observe(g);
   }
 
-  document.addEventListener("astro:page-load", initGauge);
-
   function initMarquee() {
     const vp = document.querySelector<HTMLElement>("[data-marquee]");
-    if (!vp || vp.dataset.bound) return;
+    const track = vp?.firstElementChild;
+    if (!vp || !track || vp.dataset.bound) return;
     vp.dataset.bound = "1";
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      vp.dataset.static = "";
-      return;
-    }
     const SPEED = 40;
     let paused = false;
+    let visible = false;
+    let running = false;
     let resumeTimer = 0;
     let last = 0;
     let pos = vp.scrollLeft;
+    let half = 0;
+    let width = 0;
+    const measure = () => {
+      half = vp.scrollWidth / 2;
+      width = vp.clientWidth;
+    };
     const tick = (now: number) => {
-      if (!vp.isConnected) return;
+      if (!vp.isConnected || !visible || !motionEnabled()) {
+        running = false;
+        last = 0;
+        return;
+      }
       const dt = last ? Math.min(now - last, 100) : 0;
       last = now;
-      const half = vp.scrollWidth / 2;
-      if (!paused && !document.hidden && half > vp.clientWidth) {
+      if (!paused && half > width) {
         pos += (SPEED * dt) / 1000;
         if (pos >= half) pos -= half;
         vp.scrollLeft = pos;
@@ -168,6 +173,20 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
       }
       requestAnimationFrame(tick);
     };
+    const start = () => {
+      if (running || !visible || !motionEnabled()) return;
+      running = true;
+      requestAnimationFrame(tick);
+    };
+    const sync = () => {
+      if (!vp.isConnected) {
+        window.removeEventListener("auxo:motionchange", sync);
+        return;
+      }
+      vp.toggleAttribute("data-static", !motionEnabled());
+      measure();
+      start();
+    };
     const pause = () => {
       paused = true;
       clearTimeout(resumeTimer);
@@ -175,7 +194,7 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     const resumeSoon = (ms: number) => {
       clearTimeout(resumeTimer);
       resumeTimer = window.setTimeout(() => {
-        pos = vp.scrollLeft % (vp.scrollWidth / 2);
+        pos = half ? vp.scrollLeft % half : vp.scrollLeft;
         paused = false;
       }, ms);
     };
@@ -185,7 +204,15 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
     vp.addEventListener("touchend", () => resumeSoon(2000), { passive: true });
     vp.addEventListener("focusin", pause);
     vp.addEventListener("focusout", () => resumeSoon(0));
-    requestAnimationFrame(tick);
+    const ro = new ResizeObserver(measure);
+    ro.observe(vp);
+    ro.observe(track);
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      start();
+    }).observe(vp);
+    window.addEventListener("auxo:motionchange", sync);
+    sync();
   }
 
   function initCube() {
@@ -197,10 +224,12 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
         const on = tile.getAttribute("aria-pressed") !== "true";
         tile.setAttribute("aria-pressed", String(on));
       });
+      tile.addEventListener("blur", () => tile.setAttribute("aria-pressed", "false"));
     });
   }
 
   document.addEventListener("astro:page-load", () => {
+    initGauge();
     initMarquee();
     initCube();
   });

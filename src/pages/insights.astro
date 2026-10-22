@@ -213,7 +213,14 @@ const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
   />
 </BaseLayout>
 
-<script>  import { initInsightDeck } from "../scripts/ui/insight-deck";
-  initInsightDeck();
-  document.addEventListener("astro:page-load", initInsightDeck);
+<script>
+  import { initInsightDeck } from "../scripts/ui/insight-deck";
+  import { initCountUp } from "../scripts/ui/count-up";
+
+  const init = () => {
+    initInsightDeck();
+    initCountUp();
+  };
+  init();
+  document.addEventListener("astro:page-load", init);
 </script>

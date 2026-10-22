@@ -1,5 +1,6 @@
 import { siteData } from "../data/site";
 import { absoluteUrl } from "./url";
+import type { Founder } from "../data/the-work";
 
 const home = absoluteUrl("/");
 const abs = (p: string) => (p.startsWith("http") ? p : absoluteUrl(p));
@@ -117,7 +118,7 @@ export function faqSchema(items: { question: string; answer: string }[]) {
   };
 }
 
-export function personSchema(p: { name: string; role: string; lines: string[]; linkedin: string }) {
+export function personSchema(p: Founder) {
   return {
     name: p.name,
     jobTitle: p.role,

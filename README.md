@@ -46,7 +46,7 @@ public/         Static files: fonts, icons, manifest, service worker
 
 ## Editing content
 
-Page copy lives in `src/data/*.ts` (home, about, services-overview, contact, navigation, footer, site). Pages in `src/pages/*.astro` render that data. Insights articles are MDX in `src/content/insights/`.
+Page copy lives in `src/data/*.ts` (home, about, the-work, insights, contact, legal, navigation, footer, footnotes, card-links, site). Pages in `src/pages/*.astro` render that data. Insights articles are MDX in `src/content/insights/`.
 
 ## Design
 

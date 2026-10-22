@@ -1,12 +1,10 @@
 # AUXO Data Labs — all crawlers welcome, including AI assistants and LLM agents.
 User-agent: *
 Allow: /
-Disallow: /color-palette.html
 
 # AI / LLM crawlers — explicitly allowed to read and cite this site.
 User-agent: GPTBot
 Allow: /
-Disallow: /color-palette.html
 
 User-agent: OAI-SearchBot
 Allow: /

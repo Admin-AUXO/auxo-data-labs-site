@@ -1,8 +1,8 @@
 ---
 import ExtendedGate from "./ExtendedGate.astro";
-import { DIMENSIONS } from "../../lib/auxo-score/scoring";
+import { DIMENSIONS, IDK_LIMIT } from "../../lib/auxo-score/scoring";
 import { CARDS } from "../../lib/auxo-score/cards";
-import { withBase } from "../../lib/url";
+import { LOAD_STEPS } from "./copy";
 import "../../styles/pages/auxo-score.css";
 ---
 <div
@@ -10,25 +10,24 @@ import "../../styles/pages/auxo-score.css";
   data-auxo-score
   data-report-url={import.meta.env.PUBLIC_N8N_REPORT_WEBHOOK ?? ""}
   data-extended-url={import.meta.env.PUBLIC_N8N_EXTENDED_WEBHOOK ?? ""}
-  data-contact-url={withBase("/contact/")}
 >
   <section class="score__screen" id="s-intro" data-screen="intro">
     <span class="score__eyebrow">The AUXO Score challenge</span>
     <h1 class="score__h1" tabindex="-1">How healthy is your data, really?</h1>
     <p class="score__lede">
-      10 quick rounds. Tap the answer that matches a normal month, not your best one. Get your score out of 100 at
+      {CARDS.length} quick rounds. Tap the answer that matches a normal month, not your best one. Get your score out of 100 at
       the end.
     </p>
     <ul class="score__dims" aria-label="Dimensions measured">
       {DIMENSIONS.map((d) => <li>{d}</li>)}
     </ul>
     <div class="score__facts">
-      <div><b>10</b><small>rounds</small></div>
+      <div><b>{CARDS.length}</b><small>rounds</small></div>
       <div><b>~3</b><small>min</small></div>
       <div><b>/100</b><small>your score</small></div>
     </div>
     <div class="score__resume" id="resumeBar" hidden>
-      <p id="resumeText">You have a test in progress (card 1 of 10).</p>
+      <p id="resumeText">You have a test in progress (card 1 of {CARDS.length}).</p>
       <div class="score__btn-row">
         <button class="score__btn" type="button" id="resumeBtn">Resume</button>
         <button class="score__btn score__btn--ghost" type="button" id="startOverBtn">Start over</button>
@@ -38,7 +37,7 @@ import "../../styles/pages/auxo-score.css";
       <button class="score__btn" type="button" id="startBtn">Start the challenge →</button>
     </div>
     <p class="score__note">
-      If you don't know an answer, say so. Choosing "I don't know" 3 or more times ends the test with a visibility
+      If you don't know an answer, say so. Choosing "I don't know" {IDK_LIMIT} or more times ends the test with a visibility
       finding instead of a score.
     </p>
     <p class="score__privacy">Your answers stay in your browser. Nothing is sent unless you ask us to email your report.</p>
@@ -48,7 +47,7 @@ import "../../styles/pages/auxo-score.css";
     <div class="score__qhead">
       <button class="score__back" id="backBtn" type="button">← Back</button>
       <span class="score__pill" id="dimPill">ACCURATE</span>
-      <span class="score__count" id="count">1 / 10</span>
+      <span class="score__count" id="count">1 / {CARDS.length}</span>
     </div>
     <div class="score__bar" aria-hidden="true"><i id="progress"></i></div>
     <h2 class="score__question" id="question" aria-live="polite" tabindex="-1">{CARDS[0].question}</h2>
@@ -63,7 +62,7 @@ import "../../styles/pages/auxo-score.css";
   <section class="score__screen" id="s-loader" data-screen="loader" hidden>
     <div class="score__loader">
       <div class="score__cube" aria-hidden="true"><span>A</span><span>U</span><span>X</span><span>O</span></div>
-      <h2 class="score__loadmsg" id="loadmsg" aria-live="polite" tabindex="-1">Scoring each dimension…</h2>
+      <h2 class="score__loadmsg" id="loadmsg" aria-live="polite" tabindex="-1">{LOAD_STEPS[0]}</h2>
     </div>
   </section>
 
@@ -79,7 +78,7 @@ import "../../styles/pages/auxo-score.css";
     <div class="score__panel">
       <p class="score__panel-title">Score by area, out of 100</p>
       <svg class="score__radar" id="radar" viewBox="0 0 360 330" role="img" aria-label="Radar chart of the five dimension scores"></svg>
-      <table class="score__table" id="dimTable" aria-label="Dimension scores"></table>
+      <table class="score__table" id="dimTable"></table>
       <ul class="score__legend" aria-label="Colour key">
         <li data-tone="ok">60+ solid</li>
         <li data-tone="warn">40–59 needs work</li>
@@ -102,7 +101,7 @@ import "../../styles/pages/auxo-score.css";
         </div>
         <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <p class="score__consent">
-          We'll email your report and may follow up once. No spam. <a href={withBase("/legal/privacy-policy/")}>Privacy policy</a>
+          We'll email your report and may follow up once. No spam. <a href="/legal/privacy-policy/">Privacy policy</a>
         </p>
         <p class="score__msg" id="emailMsg" role="status"></p>
       </form>
@@ -136,12 +135,13 @@ import "../../styles/pages/auxo-score.css";
       data nobody can see clearly. Try again with someone from finance or operations, or talk to us.
     </p>
     <div class="score__btn-row">
-      <a class="score__btn" href={withBase("/contact/")}>Talk to us</a>
+      <a class="score__btn" href="/contact/">Talk to us</a>
       <button class="score__btn score__btn--ghost" type="button" id="retakeBtn">Retake with a colleague</button>
     </div>
   </section>
 </div>
 
-<script>  import { initAuxoScore } from "./controller";
+<script>
+  import { initAuxoScore } from "./controller";
   document.addEventListener("astro:page-load", initAuxoScore);
 </script>

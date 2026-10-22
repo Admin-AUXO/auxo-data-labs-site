@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CARDS } from "../../src/lib/auxo-score/cards";
-import { BANDS, DIMENSIONS, computeResult, idkCount } from "../../src/lib/auxo-score/scoring";
+import { DIMENSIONS, computeResult, idkCount } from "../../src/lib/auxo-score/scoring";
 import type { Answer, Answers, Tier } from "../../src/lib/auxo-score/types";
 
 const pts = { 1: 10, 2: 7, 3: 3, 4: 0 } as const;
@@ -9,7 +9,12 @@ const idk = (): Answer => ({ tier: 5, points: 3, selectedQuadrant: null, isIdk: 
 const all = (tier: Tier): Answers => Object.fromEntries(CARDS.map((c) => [c.id, ans(tier)]));
 const byPoints = (p: number[]): Answers =>
   Object.fromEntries(CARDS.map((c, i) => [c.id, { tier: 1, points: p[i], selectedQuadrant: "A", isIdk: false } as Answer]));
-const bandFor = (total: number) => BANDS.find((b) => total >= b.min)!.name;
+const totalOf = (total: number): Answers => byPoints(CARDS.map((_, i) => Math.max(0, Math.min(10, total - i * 10))));
+const bandFor = (total: number) => {
+  const r = computeResult(totalOf(total));
+  expect(r.total).toBe(total);
+  return r.band.name;
+};
 
 describe("computeResult", () => {
   it("all tier 1 → 100, Healthy, weakest Trusted on tie", () => {

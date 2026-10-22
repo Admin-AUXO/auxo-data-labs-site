@@ -8,9 +8,8 @@ export function initPWA(): void {
   registered = true;
 
   const sw = navigator.serviceWorker;
-  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   window.addEventListener("load", () => {
-    sw.register(`${base}/sw.js`, { scope: `${base}/` }).catch(() => {});
+    sw.register("/sw.js", { scope: "/" }).catch(() => {});
   });
 }

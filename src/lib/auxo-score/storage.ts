@@ -1,7 +1,7 @@
 import type { Band, Dimension, State } from "./types";
 
 const STATE_KEY = "auxo-score-v2";
-const RESULT_KEY = "auxo-score-v2-result";
+export const RESULT_KEY = "auxo-score-v2-result";
 const UTM_KEY = "auxo-score-utm";
 const LEGACY_KEYS = [
   "auxo-self-check-v3",
@@ -38,8 +38,7 @@ function read<T>(store: () => Storage, key: string): T | null {
 function write(store: () => Storage, key: string, value: unknown): void {
   try {
     store().setItem(key, JSON.stringify(value));
-  } catch {
-  }
+  } catch {}
 }
 
 const local = () => window.localStorage;
@@ -52,8 +51,7 @@ export const saveResult = (r: SavedResult) => write(local, RESULT_KEY, r);
 export function clearLegacy(): void {
   try {
     for (const k of LEGACY_KEYS) window.localStorage.removeItem(k);
-  } catch {
-  }
+  } catch {}
 }
 
 export function captureUtm(): Utm {

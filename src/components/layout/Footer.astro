@@ -6,8 +6,12 @@ import HighlightText from "../ui/HighlightText.astro";
 import FootnoteList from "../ui/FootnoteList.astro";
 import { footerContent } from "../../data/footer";
 import { siteData } from "../../data/site";
-import { withBase } from "../../lib/url";
 
+interface Props {
+  footnotes?: boolean;
+}
+
+const { footnotes = false } = Astro.props;
 const { statement, statementHighlight, sections, note } = footerContent;
 const year = new Date().getFullYear();
 const location = `${siteData.address.city}, ${siteData.address.country}`;
@@ -34,7 +38,7 @@ const location = `${siteData.address.city}, ${siteData.address.country}`;
             <ul class="footer__list">
               {s.links.map((l) => (
                 <li>
-                  <a href={withBase(l.href)} class="footer__link">
+                  <a href={l.href} class="footer__link">
                     {l.label}
                   </a>
                 </li>
@@ -63,9 +67,11 @@ const location = `${siteData.address.city}, ${siteData.address.country}`;
       </div>
     </div>
 
-    <div class="footer__notes">
-      <FootnoteList />
-    </div>
+    {footnotes && (
+      <div class="footer__notes">
+        <FootnoteList />
+      </div>
+    )}
 
     <div class="footer__bar">
       <p class="footer__copy">© {year} {siteData.name}</p>

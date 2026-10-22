@@ -1,4 +1,4 @@
-import { CARDS, FOCUS, FOCUS_COPY } from "./cards";
+import { CARDS, FOCUS } from "./cards";
 
 import type { Utm } from "./storage";
 import type { Result, State } from "./types";
@@ -13,7 +13,7 @@ export const MESSAGES = {
   failed: "Something went wrong on our side. Please try again.",
 } as const;
 
-export interface Context {
+interface Context {
   page: string;
   referrer: string;
   utm: Utm;
@@ -23,14 +23,17 @@ export interface Context {
   timezone: string;
 }
 
-const uuid = () =>
+export const uuid = () =>
   typeof crypto !== "undefined" && "randomUUID" in crypto
     ? crypto.randomUUID()
     : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
         (Number(c) ^ (Math.random() * 16) >> (Number(c) / 4)).toString(16),
       );
 
-export { uuid };
+export function durationSec(startedAt: string): number {
+  const started = Date.parse(startedAt);
+  return Number.isFinite(started) ? Math.max(0, Math.round((Date.now() - started) / 1000)) : 0;
+}
 
 export function buildContext(state: State, utm: Utm): Context {
   let timezone = "";
@@ -39,35 +42,33 @@ export function buildContext(state: State, utm: Utm): Context {
   } catch {
     timezone = "";
   }
-  const started = Date.parse(state.startedAt);
   return {
     page: "/auxo-score/",
     referrer: document.referrer || "",
     utm,
     startedAt: state.startedAt,
-    durationSec: Number.isFinite(started) ? Math.max(0, Math.round((Date.now() - started) / 1000)) : 0,
+    durationSec: durationSec(state.startedAt),
     locale: navigator.language || "",
     timezone,
   };
 }
 
-function envelope(type: string, email: string, hp: string, state: State, ctx: Context) {
-  const clean = email.trim().toLowerCase();
+function envelope(type: string, email: string, state: State, ctx: Context) {
   return {
     type,
     version: VERSION,
     submissionId: uuid(),
     attemptId: state.attemptId,
     submittedAt: new Date().toISOString(),
-    email: clean,
-    emailDomain: clean.split("@")[1] ?? "",
+    email,
+    emailDomain: email.split("@")[1] ?? "",
     consent: true,
-    hp,
+    hp: "",
     context: ctx,
   };
 }
 
-export function buildReportPayload(email: string, hp: string, state: State, r: Result, ctx: Context) {
+export function buildReportPayload(email: string, state: State, r: Result, ctx: Context) {
   const answers = CARDS.map((card) => {
     const a = state.answers[card.id];
     if (!a || a.isIdk) {
@@ -83,13 +84,13 @@ export function buildReportPayload(email: string, hp: string, state: State, r: R
     };
   });
   return {
-    ...envelope("full_report_request", email, hp, state, ctx),
+    ...envelope("full_report_request", email, state, ctx),
     result: {
       total: r.total,
       band: r.band.name,
       bandLine: r.band.line,
       weakest: r.weakest,
-      focus: FOCUS_COPY[r.weakest],
+      focus: FOCUS[r.weakest].why,
       focusSteps: FOCUS[r.weakest].steps,
       focusGood: FOCUS[r.weakest].good,
       idkCount: r.idkCount,
@@ -100,15 +101,15 @@ export function buildReportPayload(email: string, hp: string, state: State, r: R
   };
 }
 
-export function buildExtendedPayload(email: string, hp: string, state: State, r: Result, ctx: Context) {
+export function buildExtendedPayload(email: string, state: State, r: Result, ctx: Context) {
   return {
-    ...envelope("extended_interest", email, hp, state, ctx),
+    ...envelope("extended_interest", email, state, ctx),
     qualifiers: { planningProjectThisYear: true, canAnswerFinanceAndOps: true },
     result: { total: r.total, band: r.band.name, weakest: r.weakest, dimensions: r.dims },
   };
 }
 
-export type SubmitOutcome = { ok: true } | { ok: false; status: number; message: string };
+type SubmitOutcome = { ok: true } | { ok: false; status: number; message: string };
 
 export async function postJson(url: string | undefined, body: unknown): Promise<SubmitOutcome> {
   if (!url) {

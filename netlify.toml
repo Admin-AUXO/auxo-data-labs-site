@@ -34,10 +34,27 @@
   status = 301
   force = true
 
-# Business-card QR points at /v — catch an upper-case scan too.
+[[redirects]]
+  from = "/v"
+  to = "/hello/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/v/"
+  to = "/hello/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/V"
-  to = "/v/"
+  to = "/hello/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/V/"
+  to = "/hello/"
   status = 301
   force = true
 
@@ -75,10 +92,25 @@
   for = "/vcard/*"
   [headers.values]
     Content-Type = "text/vcard; charset=utf-8"
-    Content-Disposition = "attachment; filename=vignesh-ramesh.vcf"
     X-Robots-Tag = "noindex"
 
 [[headers]]
-  for = "/v/*"
+  for = "/vcard/vignesh-ramesh.vcf"
+  [headers.values]
+    Content-Disposition = "attachment; filename=vignesh-ramesh.vcf"
+
+[[headers]]
+  for = "/vcard/ajay-kumar.vcf"
+  [headers.values]
+    Content-Disposition = "attachment; filename=ajay-kumar.vcf"
+
+[[headers]]
+  for = "/wallet/*"
+  [headers.values]
+    Content-Type = "application/vnd.apple.pkpass"
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/hello/*"
   [headers.values]
     X-Robots-Tag = "noindex"

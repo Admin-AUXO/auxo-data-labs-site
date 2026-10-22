@@ -51,7 +51,6 @@ tmpclaude-*
 .mcp.json
 .serena/
 .claude/
-.playwright-mcp/
 
 # IDE files
 .vscode/

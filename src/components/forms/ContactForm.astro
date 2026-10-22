@@ -97,12 +97,14 @@ const { form } = contactContent;
   </noscript>
 </form>
 
-<script>  import { init } from "../../scripts/forms/contact";
+<script>
+  import { init } from "../../scripts/forms/contact";
   init();
   document.addEventListener("astro:page-load", init);
 </script>
 
-<style>  .field-honeypot {
+<style>
+  .field-honeypot {
     position: absolute;
     width: 1px;
     height: 1px;

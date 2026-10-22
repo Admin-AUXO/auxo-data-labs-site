@@ -1,22 +1,22 @@
 import { siteData } from "./site";
 
-export interface HomeLogo {
+interface HomeLogo {
   name: string;
   icon?: string;
 }
 
-export interface HomePillar {
+interface HomePillar {
   letter: "A" | "U" | "X" | "O";
   title: string;
   desc: string;
 }
 
-export interface HomeCard {
+interface HomeCard {
   title: string;
   href: string;
 }
 
-export interface HomeContent {
+interface HomeContent {
   hero: {
     title: string;
     subtitle: string;

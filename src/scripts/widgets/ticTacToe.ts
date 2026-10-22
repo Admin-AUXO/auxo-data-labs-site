@@ -1,3 +1,5 @@
+import { motionEnabled } from "../core/motion";
+
 type Mark = "X" | "O";
 type Board = (Mark | null)[];
 
@@ -95,12 +97,6 @@ function bestMove(b: Board): number {
     }
   }
   return move;
-}
-
-function motionEnabled(): boolean {
-  const optedIn = document.documentElement.dataset.motion === "on";
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  return optedIn && !reduce;
 }
 
 export function initTicTacToe(root: HTMLElement): void {

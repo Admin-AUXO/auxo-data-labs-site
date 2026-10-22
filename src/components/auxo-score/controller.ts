@@ -3,15 +3,15 @@ import { DIMENSIONS, IDK_LIMIT, IDK_POINTS, QUADS, buildLayout, computeResult, i
 import { checkWorkEmail } from "../../lib/auxo-score/email";
 import { captureUtm, clearLegacy, loadState, saveResult, saveState } from "../../lib/auxo-score/storage";
 import {
-  MAX_SUBMITS, MESSAGES, buildContext, buildExtendedPayload, buildReportPayload, postJson, uuid,
+  MAX_SUBMITS, MESSAGES, buildContext, buildExtendedPayload, buildReportPayload, durationSec, postJson, uuid,
 } from "../../lib/auxo-score/submit";
 import { scoreEvent } from "../../lib/auxo-score/analytics";
 import { radarLabel, radarSvg } from "./Radar";
+import { LOAD_STEPS } from "./copy";
 import type { Answer, Quadrant, Result, Screen, State } from "../../lib/auxo-score/types";
 
 const FLASH_MS = 150;
 const LOADER_MS = 1400;
-const LOAD_STEPS = ["Scoring each dimension…", "Building your report…"];
 const SCREENS: Screen[] = ["intro", "quiz", "loader", "result", "extended", "inconclusive"];
 
 let keyHandler: ((e: KeyboardEvent) => void) | null = null;
@@ -27,17 +27,27 @@ const fresh = (screen: Screen = "quiz"): State => ({
 
 export function initAuxoScore(): void {
   const found = document.querySelector<HTMLElement>("[data-auxo-score]");
+  if (found?.dataset.bound) return;
   if (keyHandler) {
     document.removeEventListener("keydown", keyHandler);
     keyHandler = null;
   }
-  if (!found || found.dataset.bound) return;
+  if (!found) return;
   const root: HTMLElement = found;
   root.dataset.bound = "1";
 
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
   const reportUrl = root.dataset.reportUrl || undefined;
   const extendedUrl = root.dataset.extendedUrl || undefined;
+  const screens = SCREENS.map((s) => [s, $(`s-${s}`)] as const);
+  const back = $("backBtn");
+  const dimPill = $("dimPill");
+  const count = $("count");
+  const progress = $("progress");
+  const question = $("question");
+  const grid = $("grid");
+  const idk = $("idkBtn");
+  const keep = $("keepBtn");
 
   clearLegacy();
   const utm = captureUtm();
@@ -52,24 +62,27 @@ export function initAuxoScore(): void {
 
   function show(name: Screen, focus = true): void {
     state.screen = name;
-    for (const s of SCREENS) $(`s-${s}`).hidden = s !== name;
+    for (const [s, el] of screens) el.hidden = s !== name;
     window.scrollTo({ top: 0 });
     if (focus) root.querySelector<HTMLElement>(`#s-${name} [tabindex="-1"]`)?.focus({ preventScroll: true });
     persist();
   }
 
+  function showCard(): void {
+    renderCard();
+    question.focus({ preventScroll: true });
+  }
+
   function renderCard(): void {
     const card = CARDS[state.index];
     const prev = state.answers[card.id];
-    const back = $("backBtn");
     back.setAttribute("aria-hidden", state.index === 0 ? "true" : "false");
     back.tabIndex = state.index === 0 ? -1 : 0;
-    $("dimPill").textContent = card.dimension.toUpperCase();
-    $("count").textContent = `${card.id} / ${CARDS.length}`;
-    $("progress").style.width = `${(state.index / CARDS.length) * 100}%`;
-    $("question").textContent = card.question;
+    dimPill.textContent = card.dimension.toUpperCase();
+    count.textContent = `${card.id} / ${CARDS.length}`;
+    progress.style.width = `${(state.index / CARDS.length) * 100}%`;
+    question.textContent = card.question;
 
-    const grid = $("grid");
     grid.textContent = "";
     state.layout[card.id].forEach((tier, i) => {
       const opt = card.options.find((o) => o.tier === tier)!;
@@ -92,16 +105,14 @@ export function initAuxoScore(): void {
       sub.className = "score__sub";
       sub.textContent = opt.sub;
       b.append(tile, lbl, sub);
-      b.addEventListener("click", () => choose(q, b));
       grid.appendChild(b);
     });
 
-    const idk = $("idkBtn");
     const idkSel = !!prev?.isIdk;
     idk.classList.toggle("is-selected", idkSel);
     idk.classList.remove("is-flash");
     idk.setAttribute("aria-pressed", String(idkSel));
-    $("keepBtn").hidden = !prev;
+    keep.hidden = !prev;
   }
 
   function choose(quad: Quadrant | "IDK", el: HTMLElement): void {
@@ -134,16 +145,16 @@ export function initAuxoScore(): void {
   }
 
   function advance(): void {
-    if (idkCount(state.answers) >= IDK_LIMIT) {
+    const unknowns = idkCount(state.answers);
+    if (unknowns >= IDK_LIMIT) {
       show("inconclusive");
-      scoreEvent("score_inconclusive", { atCard: CARDS[state.index].id, idkCount: idkCount(state.answers) });
+      scoreEvent("score_inconclusive", { atCard: CARDS[state.index].id, idkCount: unknowns });
       return;
     }
     if (state.index < CARDS.length - 1) {
       state.index++;
       persist();
-      renderCard();
-      $("question").focus({ preventScroll: true });
+      showCard();
     } else {
       runLoader();
     }
@@ -154,8 +165,7 @@ export function initAuxoScore(): void {
     scoreEvent("score_back", { fromCard: CARDS[state.index].id });
     state.index--;
     persist();
-    renderCard();
-    $("question").focus({ preventScroll: true });
+    showCard();
   }
 
   function runLoader(): void {
@@ -173,16 +183,19 @@ export function initAuxoScore(): void {
     );
   }
 
+  function persistResult(r: Result): void {
+    saveResult({ total: r.total, band: r.band.name, weakest: r.weakest, radar: r.radar, completedAt: new Date().toISOString() });
+  }
+
   function finish(): void {
     renderResult();
     show("result");
     if (!result) return;
-    saveResult({ total: result.total, band: result.band.name, weakest: result.weakest, radar: result.radar, completedAt: new Date().toISOString() });
+    persistResult(result);
     (window as unknown as { __auxoMarkScore?: () => void }).__auxoMarkScore?.();
-    const started = Date.parse(state.startedAt);
     scoreEvent("score_complete", {
       total: result.total, band: result.band.name, weakest: result.weakest, idkCount: result.idkCount,
-      durationSec: Number.isFinite(started) ? Math.round((Date.now() - started) / 1000) : 0,
+      durationSec: durationSec(state.startedAt),
     });
   }
 
@@ -277,23 +290,19 @@ export function initAuxoScore(): void {
     submits.extended = 0;
   }
 
+  function openQuiz(resumed: boolean): void {
+    scoreEvent("score_start", { resumed });
+    show("quiz", false);
+    showCard();
+  }
+
   function start(): void {
     clearTimers();
     locked = false;
     state = fresh("quiz");
     result = null;
     resetResultActions();
-    scoreEvent("score_start", { resumed: false });
-    show("quiz", false);
-    renderCard();
-    $("question").focus({ preventScroll: true });
-  }
-
-  function resume(): void {
-    scoreEvent("score_start", { resumed: true });
-    show("quiz", false);
-    renderCard();
-    $("question").focus({ preventScroll: true });
+    openQuiz(false);
   }
 
   function wireForm(opts: {
@@ -342,8 +351,8 @@ export function initAuxoScore(): void {
       const r = result ?? computeResult(state.answers);
       const ctx = buildContext(state, utm);
       const body = opts.kind === "report"
-        ? buildReportPayload(email, hp.value, state, r, ctx)
-        : buildExtendedPayload(email, hp.value, state, r, ctx);
+        ? buildReportPayload(email, state, r, ctx)
+        : buildExtendedPayload(email, state, r, ctx);
       btn.disabled = true;
       btn.textContent = "Sending…";
       say("");
@@ -367,11 +376,16 @@ export function initAuxoScore(): void {
 
   $("startBtn").addEventListener("click", start);
   $("startOverBtn").addEventListener("click", start);
-  $("resumeBtn").addEventListener("click", resume);
+  $("resumeBtn").addEventListener("click", () => openQuiz(true));
   $("retakeBtn").addEventListener("click", start);
-  $("backBtn").addEventListener("click", goBack);
-  $("idkBtn").addEventListener("click", (e) => choose("IDK", e.currentTarget as HTMLElement));
-  $("keepBtn").addEventListener("click", () => { if (!locked) advance(); });
+  back.addEventListener("click", goBack);
+  idk.addEventListener("click", () => choose("IDK", idk));
+  keep.addEventListener("click", () => { if (!locked) advance(); });
+  grid.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-quad]");
+    if (b) choose(b.dataset.quad as Quadrant, b);
+  });
+  document.addEventListener("astro:before-swap", clearTimers, { once: true });
 
   $("emailBtn").addEventListener("click", () => {
     const f = $("emailForm");
@@ -409,10 +423,10 @@ export function initAuxoScore(): void {
     const i = (QUADS as readonly string[]).indexOf(k);
     if (i >= 0) {
       e.preventDefault();
-      choose(QUADS[i], $("grid").children[i] as HTMLElement);
+      choose(QUADS[i], grid.children[i] as HTMLElement);
     } else if (k === "I") {
       e.preventDefault();
-      choose("IDK", $("idkBtn"));
+      choose("IDK", idk);
     } else if (e.key === "Backspace") {
       e.preventDefault();
       goBack();
@@ -421,7 +435,10 @@ export function initAuxoScore(): void {
   document.addEventListener("keydown", keyHandler);
 
   const saved = loadState();
-  if (saved && saved.layout && saved.answers && saved.attemptId) {
+  const valid = !!saved && !!saved.answers && !!saved.attemptId && !!saved.layout
+    && saved.index >= 0 && saved.index < CARDS.length
+    && CARDS.every((c) => Array.isArray(saved.layout[c.id]));
+  if (saved && valid) {
     state = saved;
     if (saved.screen === "quiz") {
       $("resumeText").textContent = `You have a test in progress (card ${saved.index + 1} of ${CARDS.length}).`;
@@ -430,9 +447,7 @@ export function initAuxoScore(): void {
     } else if (saved.screen === "loader" || saved.screen === "result" || saved.screen === "extended") {
       renderResult();
       show(saved.screen === "extended" ? "extended" : "result", false);
-      if (saved.screen === "loader" && result) {
-        saveResult({ total: result.total, band: result.band.name, weakest: result.weakest, radar: result.radar, completedAt: new Date().toISOString() });
-      }
+      if (saved.screen === "loader" && result) persistResult(result);
     } else if (saved.screen === "inconclusive") {
       show("inconclusive", false);
     }

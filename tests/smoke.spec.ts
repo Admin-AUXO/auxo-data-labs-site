@@ -39,3 +39,24 @@ test("retired self-check route redirects to the AUXO Score", async ({ page }) =>
   await page.goto("/self-check/");
   await expect(page).toHaveURL(/\/auxo-score\/$/);
 });
+
+test("business-card /v route redirects to /hello/", async ({ page }) => {
+  await page.goto("/v/");
+  await expect(page).toHaveURL(/\/hello\/$/);
+});
+
+test("card page: choose a founder, then change back", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/hello/");
+  const panel = page.locator("#panel-ajay");
+  await expect(panel).toBeHidden();
+  await page.locator('[data-founder="ajay"]').click();
+  await expect(panel).toBeVisible();
+  await expect(panel.locator('a[href="/vcard/ajay-kumar.vcf"]')).toBeVisible();
+  await expect(page).toHaveURL(/#ajay$/);
+  await page.reload();
+  await expect(panel).toBeVisible();
+  await panel.locator("[data-change]").click();
+  await expect(page.locator(".card__choose")).toBeVisible();
+  await expect(panel).toBeHidden();
+});

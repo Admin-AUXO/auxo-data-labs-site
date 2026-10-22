@@ -150,7 +150,3 @@ export const FOCUS: Record<Dimension, { why: string; steps: string[]; good: stri
     good: "Leadership acts on the official numbers without a separate check.",
   },
 };
-
-export const FOCUS_COPY = Object.fromEntries(
-  Object.entries(FOCUS).map(([d, f]) => [d, f.why]),
-) as Record<Dimension, string>;

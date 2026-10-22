@@ -1,11 +1,11 @@
-export interface Dimension {
+interface Dimension {
   name: string;
   question: string;
 }
 
-export interface EngagementStep {
+interface EngagementStep {
   title: string;
-  desc?: string;
+  desc: string;
 }
 
 export interface Founder {

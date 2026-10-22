@@ -33,7 +33,7 @@ For most marketing pages in this repo:
 
 ## Service Page Rules
 
-For the main services page:
+For The Work page:
 
 1. Lead with what AUXO does and how the library is organized.
 2. Help buyers self-select by problem or operating stage.

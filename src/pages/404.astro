@@ -22,7 +22,8 @@ import TicTacToe from "../components/ui/TicTacToe.astro";
     </div>
   </Section>
 
-  <script>    import { track } from "../scripts/analytics/track";
+  <script>
+    import { track } from "../scripts/analytics/track";
     document.addEventListener("astro:page-load", () => {
       if (document.title.startsWith("Page not found")) {
         track("page_not_found", {

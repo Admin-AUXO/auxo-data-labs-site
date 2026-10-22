@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Kumar;Ajay;;;
+FN:Ajay Kumar
+ORG:AUXO Data Labs
+TITLE:Co-Founder & CTO
+EMAIL;TYPE=WORK:ajay@auxodata.com
+URL:https://auxodata.com
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/ajaykumar9795
+END:VCARD

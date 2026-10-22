@@ -1,44 +1,43 @@
 import type { APIRoute } from "astro";
-import { withBase } from "../lib/url";
 
 const manifest = {
   name: "AUXO Data Labs",
   short_name: "AUXO",
-  id: withBase("/"),
+  id: "/",
   description:
     "AUXO Data Labs is a compliance-native analytics & AI lab in Dubai for real-estate and portfolio teams — turning stalled dashboards and AI pilots into reporting, forecasting, and automation that reaches production.",
-  start_url: withBase("/"),
+  start_url: "/",
   display: "standalone",
   background_color: "#080808",
   theme_color: "#080808",
   orientation: "portrait-primary",
   icons: [
-    { src: withBase("/favicon.svg"), sizes: "any", type: "image/svg+xml", purpose: "any" },
-    { src: withBase("/icon-192.png"), sizes: "192x192", type: "image/png", purpose: "any" },
-    { src: withBase("/icon-512.png"), sizes: "512x512", type: "image/png", purpose: "any" },
-    { src: withBase("/maskable-512.png"), sizes: "512x512", type: "image/png", purpose: "maskable" },
-    { src: withBase("/apple-touch-icon.png"), sizes: "180x180", type: "image/png", purpose: "any" },
+    { src: "/favicon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+    { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+    { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+    { src: "/maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+    { src: "/apple-touch-icon.png", sizes: "180x180", type: "image/png", purpose: "any" },
   ],
   shortcuts: [
     {
       name: "The Work",
       short_name: "The Work",
       description: "How we assess a business, how an engagement runs, and the team",
-      url: withBase("/the-work/"),
-      icons: [{ src: withBase("/favicon.svg"), sizes: "any", type: "image/svg+xml" }],
+      url: "/the-work/",
+      icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
     },
     {
       name: "Contact",
       short_name: "Contact",
       description: "Book a working call with AUXO",
-      url: withBase("/contact"),
-      icons: [{ src: withBase("/favicon.svg"), sizes: "any", type: "image/svg+xml" }],
+      url: "/contact/",
+      icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
     },
   ],
   categories: ["business", "productivity"],
   lang: "en",
   dir: "ltr",
-  scope: withBase("/"),
+  scope: "/",
   display_override: ["standalone", "browser"],
 };
 
