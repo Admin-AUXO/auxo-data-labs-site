@@ -53,4 +53,24 @@ On the i7-1360P / Iris Xe laptop: about 2–5 min for the film and 40–70s for 
 - Leader lines on the pillars were cluttered; replaced by a tile list synced to light pulses on each peak.
 
 **Open question**
-The owner still finds the look basic. Next step is evaluating free tools beyond the browser renderer (for example Blender, Unreal Engine, DaVinci Resolve) and stronger in-code post-processing.
+The owner still finds the look basic. The tools research below looks beyond the browser renderer. Stronger in-code post-processing is still to be researched.
+
+## Free 3D and film tools (researched 2026-10-22)
+
+Checked against commercial use for a 3-person company and this laptop (i7-1360P, Iris Xe, 16 GB). Render times are estimates.
+
+| Tool | Adds | Licence | On this laptop | Scriptable |
+|---|---|---|---|---|
+| Blender 5.2 LTS | Path-traced volumetrics, DOF, motion blur, Geometry Nodes, Mantaflow, AgX/ACES 2.0, compositor bloom and grain | GPL, renders are yours | EEVEE on Iris Xe ~3–30 s/frame; Cycles CPU-only (Iris Xe isn't Arc) ~1–5 min/frame | Full `bpy`, headless CLI |
+| SheepIt render farm | Free Cycles/EEVEE rendering | Points-based; no rights claimed; check [terms](https://www.sheepit-renderfarm.com/termsofuse) | Offloads the final render | Bake first; no scripts in uploads; 2 GB cap |
+| Unreal Engine 5.8 | Lumen, path tracer, Niagara, Sequencer | Free under $1M/yr revenue | Not viable: no Nanite, Lumen ~20 min/frame on Iris Xe | Python, heavy |
+| DaVinci Resolve free | Best-in-class grading, Fusion | Commercial OK | Fine | Scripting Studio-only since 21.1; no Film Grain/Look in free |
+| Godot 4 | Frame-perfect Movie Maker | MIT | Fine | GDScript + CLI; real-time look only |
+| Cavalry | 2D data typography | Free for individuals since 2026-04; check studio terms | Fine | JavaScript |
+| JangaFX VDB library | Smoke/fire volumes for Blender | CC0 library | Import only | n/a |
+| Houdini Apprentice | — | Non-commercial, watermarked | Not allowed | — |
+| Natron | Compositing | GPL, unmaintained since 2022 | Skip; Blender compositor covers it | — |
+
+Recommendation: build shots in Blender with `bpy` scripts, preview in EEVEE locally, render finals in Cycles on SheepIt, and grade in Blender's compositor (AgX/ACES 2.0, film grain, glare). Keep Remotion for typography and assembly. Optionally finish by hand in Resolve free.
+
+Sources: [Blender 5.0](https://www.blender.org/download/releases/5-0/), [Cycles GPU](https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html), [SheepIt FAQ](https://www.sheepit-renderfarm.com/faq), [Unreal licence](https://www.unrealengine.com/license), [Iris Xe and Nanite](https://forums.unrealengine.com/t/does-intels-iris-xe-support-nanite-full-specs-in-text-body/522321), [Resolve 21.1](https://www.cined.com/davinci-resolve-21-1-released-ai-assistant-integration-via-mcp-individual-hdr-trims-and-python-scripting-moves-to-studio/), [Godot Movie Maker](https://docs.godotengine.org/en/stable/tutorials/animation/creating_movies.html), [Cavalry free](https://www.cgchannel.com/2026/04/canva-makes-motion-graphics-and-animation-app-cavalry-free/), [JangaFX VDBs](https://jangafx.com/software/embergen/download/free-vdb-animations).
