@@ -250,7 +250,7 @@
     margin-inline: 0.4rem 0.6rem;
   }
 
-  @media (width >= 64rem) {
+  @media (width >= 76rem) {
     .nav__links {
       display: flex;
     }
