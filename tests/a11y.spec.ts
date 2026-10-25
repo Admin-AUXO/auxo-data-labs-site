@@ -1,3 +1,4 @@
+import { readdirSync, readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -6,9 +7,20 @@ const FORCE_VISIBLE =
 
 type AxeViolation = Awaited<ReturnType<AxeBuilder["analyze"]>>["violations"][number];
 
+const blogDir = new URL("../src/content/blog/", import.meta.url);
+const blogPosts = readdirSync(blogDir)
+  .filter((f) => /\.mdx?$/.test(f))
+  .filter((f) => !/^draft:\s*true\s*$/m.test(readFileSync(new URL(f, blogDir), "utf8")))
+  .map((f) => `/blog/${f.replace(/\.mdx?$/, "")}/`);
+
 const routes = [
   "/",
   "/how-it-works/",
+  "/pricing/",
+  "/marketplace/",
+  "/marketplace/?category=finance",
+  "/blog/",
+  ...blogPosts,
   "/auxo-score/",
   "/about/",
   "/insights/",
