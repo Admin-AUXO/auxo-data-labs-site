@@ -1,8 +1,19 @@
 import { siteData } from "./site";
 
+interface Link {
+  text: string;
+  href: string;
+}
+
+interface SectionIntro {
+  eyebrow: string;
+  title: string;
+  lead: string;
+}
+
 interface HomeLogo {
   name: string;
-  icon?: string;
+  icon: string;
 }
 
 interface HomePillar {
@@ -11,31 +22,71 @@ interface HomePillar {
   desc: string;
 }
 
-interface HomeCard {
+interface HomeLadderCard {
   title: string;
+  desc: string;
   href: string;
 }
 
+interface HomeSegment {
+  segment: string;
+  offer: string;
+  line: string;
+  href: string;
+}
+
+interface HomeChip {
+  label: string;
+  slug: string;
+}
+
+interface HomeBlogAngle {
+  slug: string;
+  label: string;
+}
+
 interface HomeContent {
+  meta: { title: string; description: string };
   hero: {
     title: string;
     subtitle: string;
-    primaryCta: { text: string; href: string };
-    secondaryCta: { text: string; href: string };
+    primaryCta: Link;
+    secondaryCta: Link;
+    reassurance: string;
   };
   score: {
     title: string;
     stat: string;
     footnoteId: string;
-    cta: { text: string; href: string };
+    cta: Link;
     reassurance: string;
   };
   logos: {
     label: string;
+    note: string;
     items: HomeLogo[];
   };
+  pillarsHeader: SectionIntro;
+  pillarsLabel: string;
   pillars: HomePillar[];
-  cards: HomeCard[];
+  ladder: SectionIntro & { link: Link };
+  cards: HomeLadderCard[];
+  segments: SectionIntro & {
+    listLabel: string;
+    rows: HomeSegment[];
+    cta: Link;
+  };
+  marketplace: SectionIntro & {
+    chipsLabel: string;
+    chipBase: string;
+    chips: HomeChip[];
+    cta: Link;
+  };
+  blog: SectionIntro & {
+    angles: HomeBlogAngle[];
+    linkText: string;
+    cta: Link;
+  };
   cta: {
     title: string;
     description: string;
@@ -45,51 +96,157 @@ interface HomeContent {
   };
 }
 
+const reassurance = "A real person replies within one business day.";
+
 export const homeContent: HomeContent = {
+  meta: {
+    title: "Your data, ready for AI",
+    description:
+      "We analyse your business and data, advise on the right AI setup, and build it end to end. Built to last, and yours to keep.",
+  },
   hero: {
-    title: "We turn messy, fragmented data into intelligent decisions companies act on.",
-    subtitle: "For businesses across the Gulf. Built to last, and yours to keep.",
+    title: "Your data, ready for AI.",
+    subtitle:
+      "We analyse your business and data, advise on the right AI setup, and build it end to end. Built to last, and yours to keep.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
-    secondaryCta: { text: "See how we work", href: "/the-work/" },
+    secondaryCta: { text: "See how it works", href: "/how-it-works/" },
+    reassurance,
   },
   score: {
-    title: "Get your company's health report.",
+    title: "How ready is your data for AI?",
     stat: "More than one in three CFOs don't completely trust their own financial data.",
     footnoteId: "ref-1",
-    cta: { text: "See where you stand", href: "/auxo-score/" },
-    reassurance: "No sign-up. Your answers stay private unless you ask us to email your report.",
+    cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
+    reassurance: "Free, 10 questions, no sign-up. Your answers stay in your browser unless you ask us to email your report.",
   },
   logos: {
-    label: "Built on",
+    label: "Works with",
+    note: "Tools we set up and work with. A logo here is not a partnership.",
     items: [
-      { name: "Power BI", icon: "simple-icons:powerbi" },
-      { name: "Tableau", icon: "simple-icons:tableau" },
-      { name: "Snowflake", icon: "simple-icons:snowflake" },
+      { name: "Claude", icon: "simple-icons:claude" },
+      { name: "OpenAI", icon: "simple-icons:openai" },
       { name: "Google Cloud", icon: "simple-icons:googlecloud" },
+      { name: "BigQuery", icon: "simple-icons:googlebigquery" },
+      { name: "Snowflake", icon: "simple-icons:snowflake" },
+      { name: "dbt", icon: "simple-icons:dbt" },
       { name: "Microsoft Azure", icon: "simple-icons:microsoftazure" },
+      { name: "Power BI", icon: "simple-icons:powerbi" },
       { name: "Salesforce", icon: "simple-icons:salesforce" },
-      { name: "SAP", icon: "simple-icons:sap" },
-      { name: "Oracle", icon: "simple-icons:oracle" },
-      { name: "Yardi" },
-      { name: "Anthropic", icon: "simple-icons:anthropic" },
+      { name: "HubSpot", icon: "simple-icons:hubspot" },
+      { name: "n8n", icon: "simple-icons:n8n" },
     ],
   },
+  pillarsHeader: {
+    eyebrow: "What we fix",
+    title: "Four fixes that make data ready for AI.",
+    lead: "AI on untidy data gives untidy answers. These are the four things we fix first.",
+  },
+  pillarsLabel: "What we fix",
   pillars: [
-    { letter: "A", title: "Trusted data", desc: "One source the whole business agrees on, built from the systems you already run." },
-    { letter: "U", title: "Clear reporting", desc: "Board- and investor-ready reporting that holds up under the hard questions." },
-    { letter: "X", title: "Reliable automation", desc: "Software carries the routine work, with a person accountable for the calls that matter." },
-    { letter: "O", title: "Confident compliance", desc: "Stay ready for regulators without pulling your team off the work that pays." },
+    {
+      letter: "A",
+      title: "Trusted data",
+      desc: "One source your team and your AI tools can rely on, built from the systems you already run.",
+    },
+    {
+      letter: "U",
+      title: "Clear reporting",
+      desc: "Reporting that holds up when the board, investors or auditors ask hard questions.",
+    },
+    {
+      letter: "X",
+      title: "Reliable automation",
+      desc: "AI agents and software carry the routine work. A person approves what matters.",
+    },
+    {
+      letter: "O",
+      title: "Confident compliance",
+      desc: "Clear rules for your data and AI, so you're ready when auditors, regulators or investors ask.",
+    },
   ],
+  ladder: {
+    eyebrow: "How it works",
+    title: "Analyze what you have. Advise on what fits. Build it and hand it over.",
+    lead: "Three steps. Start at any one. We recommend starting with Analyze.",
+    link: { text: "See how it works", href: "/how-it-works/" },
+  },
   cards: [
-    { title: "The Work", href: "/the-work/" },
-    { title: "The Approach", href: "/the-work/#engagement" },
-    { title: "The People", href: "/the-work/#team" },
+    {
+      title: "Analyze",
+      desc: "An honest read of your business and your data, before you spend on AI.",
+      href: "/how-it-works/#analyze",
+    },
+    {
+      title: "Advise",
+      desc: "The right AI and data setup for your team, and a plan to get there.",
+      href: "/how-it-works/#advise",
+    },
+    {
+      title: "Build",
+      desc: "Your data infrastructure and AI agent teams, set up end to end and handed over.",
+      href: "/how-it-works/#build",
+    },
   ],
+  segments: {
+    eyebrow: "Pricing",
+    title: "Start where you are.",
+    lead: "Three ways in. Every price is personal, and we send it privately after the first conversation and audit.",
+    listLabel: "Ways in",
+    rows: [
+      {
+        segment: "Funded startups",
+        offer: "Free audit",
+        line: "Then a paid AI data setup.",
+        href: "/pricing/#funded-startups",
+      },
+      {
+        segment: "Mid-sized companies",
+        offer: "AUXO Score",
+        line: "Then a fee-based deep-dive audit.",
+        href: "/pricing/#mid-sized",
+      },
+      {
+        segment: "Enterprise",
+        offer: "Custom",
+        line: "Pricing on request.",
+        href: "/pricing/#enterprise",
+      },
+    ],
+    cta: { text: "See pricing", href: "/pricing/" },
+  },
+  marketplace: {
+    eyebrow: "Marketplace",
+    title: "The AI stack for every team.",
+    lead: "Tools vetted by AUXO. Set up on your data. Managed if you want it.",
+    chipsLabel: "Marketplace categories",
+    chipBase: "/marketplace/",
+    chips: [
+      { label: "Foundation AI", slug: "foundation-ai" },
+      { label: "Engineering", slug: "engineering" },
+      { label: "Finance", slug: "finance" },
+      { label: "Operations", slug: "operations" },
+      { label: "Hiring", slug: "hiring" },
+      { label: "Sales and content", slug: "sales-and-content" },
+    ],
+    cta: { text: "Browse the marketplace", href: "/marketplace/" },
+  },
+  blog: {
+    eyebrow: "From the blog",
+    title: "Why can't Claude or an agent we already have do this?",
+    lead: "Often it can do part of it. The model is rarely the hard part.",
+    angles: [
+      { slug: "your-ai-assistant-is-not-the-hard-part", label: "For leaders" },
+      { slug: "the-model-is-the-easy-part", label: "For engineers" },
+    ],
+    linkText: "Read the post",
+    cta: { text: "Read the blog", href: "/blog/" },
+  },
   cta: {
     title: "Let's find where the friction starts.",
-    description: "Bring the problem that's nagging at you. You'll leave knowing exactly what to fix first.",
+    description:
+      "Bring the problem that's nagging at you. You'll leave knowing what to fix first, and what not to build yet.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
-    reassurance: "A real person replies within one business day.",
+    reassurance,
   },
 };

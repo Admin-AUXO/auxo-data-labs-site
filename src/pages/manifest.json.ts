@@ -5,7 +5,7 @@ const manifest = {
   short_name: "AUXO",
   id: "/",
   description:
-    "AUXO Data Labs is a compliance-native analytics & AI lab in Dubai for real-estate and portfolio teams — turning stalled dashboards and AI pilots into reporting, forecasting, and automation that reaches production.",
+    "AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Built to last, and yours to keep.",
   start_url: "/",
   display: "standalone",
   background_color: "#080808",
@@ -20,16 +20,23 @@ const manifest = {
   ],
   shortcuts: [
     {
-      name: "The Work",
-      short_name: "The Work",
-      description: "How we assess a business, how an engagement runs, and the team",
+      name: "How it works",
+      short_name: "How it works",
+      description: "Analyze, Advise, Build, and the founding team",
       url: "/how-it-works/",
+      icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
+    },
+    {
+      name: "AUXO Score",
+      short_name: "AUXO Score",
+      description: "Check how ready your data is for AI",
+      url: "/auxo-score/",
       icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
     },
     {
       name: "Contact",
       short_name: "Contact",
-      description: "Book a working call with AUXO",
+      description: "Book a meeting with AUXO",
       url: "/contact/",
       icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
     },

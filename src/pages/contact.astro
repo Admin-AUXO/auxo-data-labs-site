@@ -14,8 +14,8 @@ import { contactContent as c } from "../data/contact";
 const faqItems = c.faq.items.map((item) => ({ title: item.question, body: item.answer }));
 ---
 <BaseLayout
-  title="Contact — talk to a Gulf real estate analytics & AI team"
-  description="Tell us what's slowing your decisions down. A real person reads your note and replies within one business day. Dubai-based, working across the UAE and the wider Gulf."
+  title={c.meta.title}
+  description={c.meta.description}
 >
   <Section padding="xl" width="7xl">    <div class="flex flex-col gap-8">
       <h1 class="text-display max-w-[12ch]" data-enter="headline">

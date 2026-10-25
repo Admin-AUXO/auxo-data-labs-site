@@ -50,7 +50,6 @@ export default defineConfig({
     icon({
       include: {
         'simple-icons': [
-          'anthropic',
           'claude',
           'dbt',
           'googlebigquery',
@@ -59,12 +58,9 @@ export default defineConfig({
           'microsoftazure',
           'n8n',
           'openai',
-          'oracle',
           'powerbi',
           'salesforce',
-          'sap',
           'snowflake',
-          'tableau',
           'x',
         ],
         mdi: [

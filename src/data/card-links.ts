@@ -23,7 +23,7 @@ const whatsapp = (number: string, first: string) =>
 export const cardPage = {
   company: {
     name: "AUXO Data Labs",
-    lines: ["Analytics & AI for Gulf businesses.", "Built on your data, yours to keep."],
+    lines: ["Your data, ready for AI.", "Built on your data, yours to keep."],
   },
   greeting: "Good to meet you.",
   chooser: {

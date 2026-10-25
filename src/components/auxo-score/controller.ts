@@ -1,13 +1,13 @@
 import { CARDS, FOCUS } from "../../lib/auxo-score/cards";
 import { DIMENSIONS, IDK_LIMIT, IDK_POINTS, QUADS, buildLayout, computeResult, idkCount, tone } from "../../lib/auxo-score/scoring";
 import { checkWorkEmail } from "../../lib/auxo-score/email";
-import { captureUtm, clearLegacy, loadState, saveResult, saveState } from "../../lib/auxo-score/storage";
+import { captureOffer, captureUtm, clearLegacy, loadState, saveResult, saveState } from "../../lib/auxo-score/storage";
 import {
   MAX_SUBMITS, MESSAGES, buildContext, buildExtendedPayload, buildReportPayload, durationSec, postJson, uuid,
 } from "../../lib/auxo-score/submit";
 import { scoreEvent } from "../../lib/auxo-score/analytics";
 import { radarLabel, radarSvg } from "./Radar";
-import { LOAD_STEPS } from "./copy";
+import { LOAD_STEPS, OFFER_FREE_AUDIT, SCORE_COPY } from "./copy";
 import type { Answer, Quadrant, Result, Screen, State } from "../../lib/auxo-score/types";
 
 const FLASH_MS = 150;
@@ -51,6 +51,11 @@ export function initAuxoScore(): void {
 
   clearLegacy();
   const utm = captureUtm();
+  const freeAudit = captureOffer(OFFER_FREE_AUDIT);
+  root.dataset.offer = freeAudit ? OFFER_FREE_AUDIT : "";
+  root.querySelectorAll<HTMLElement>("[data-path]").forEach((n) => {
+    n.hidden = n.dataset.path !== (freeAudit ? "startup" : "default");
+  });
 
   let state: State = fresh("intro");
   let locked = false;
@@ -283,6 +288,9 @@ export function initAuxoScore(): void {
     $<HTMLInputElement>("chk1").checked = false;
     $<HTMLInputElement>("chk2").checked = false;
     $<HTMLButtonElement>("extContinue").disabled = true;
+    $<HTMLInputElement>("callChk1").checked = false;
+    $<HTMLInputElement>("callChk2").checked = false;
+    $<HTMLButtonElement>("callBtn").disabled = true;
     $("emailBtn").textContent = "Email my full report";
     $("emailBtn").setAttribute("aria-expanded", "false");
     $("extLink").setAttribute("aria-expanded", "false");
@@ -371,7 +379,7 @@ export function initAuxoScore(): void {
   });
   wireForm({
     formId: "seatForm", inputId: "seatInput", msgId: "seatMsg", kind: "extended", url: extendedUrl,
-    success: (email) => `Request received. We'll confirm your place at ${email}.`,
+    success: SCORE_COPY.extended.success,
   });
 
   $("startBtn").addEventListener("click", start);
@@ -415,6 +423,24 @@ export function initAuxoScore(): void {
   });
   $("backToResult").addEventListener("click", () => show("result"));
 
+  for (const id of ["callChk1", "callChk2"]) {
+    $(id).addEventListener("change", () => {
+      $<HTMLButtonElement>("callBtn").disabled = !($<HTMLInputElement>("callChk1").checked && $<HTMLInputElement>("callChk2").checked);
+    });
+  }
+  $("callBtn").addEventListener("click", () => {
+    scoreEvent("score_free_audit_book", { band: result?.band.name ?? "", source: "result" });
+  });
+  $("inconclusiveCallBtn").addEventListener("click", () => {
+    scoreEvent("score_free_audit_book", { source: "inconclusive" });
+  });
+  $("callTip").addEventListener("click", () => {
+    const f = $("emailForm");
+    if (f.hidden) $("emailBtn").click();
+    else $("emailInput").focus();
+    f.scrollIntoView({ block: "center" });
+  });
+
   keyHandler = (e: KeyboardEvent) => {
     if (state.screen !== "quiz" || e.metaKey || e.ctrlKey || e.altKey) return;
     const t = e.target as HTMLElement | null;
@@ -441,7 +467,7 @@ export function initAuxoScore(): void {
   if (saved && valid) {
     state = saved;
     if (saved.screen === "quiz") {
-      $("resumeText").textContent = `You have a test in progress (card ${saved.index + 1} of ${CARDS.length}).`;
+      $("resumeText").textContent = SCORE_COPY.intro.resume(saved.index + 1, CARDS.length);
       $("resumeBar").hidden = false;
       state.screen = "intro";
     } else if (saved.screen === "loader" || saved.screen === "result" || saved.screen === "extended") {

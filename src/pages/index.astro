@@ -1,30 +1,48 @@
 ---
 import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
 import FootnoteRef from "../components/ui/FootnoteRef.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
 import { homeContent as c } from "../data/home";
 import "../styles/pages/home.css";
 
 const logoLoop = [...c.logos.items, ...c.logos.items];
+
+const angleOrder = (slug: string) => {
+  const i = c.blog.angles.findIndex((a) => a.slug === slug);
+  return i === -1 ? c.blog.angles.length : i;
+};
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf() || angleOrder(a.id) - angleOrder(b.id))
+  .slice(0, 2)
+  .map((post) => ({
+    href: `/blog/${post.id}/`,
+    title: post.data.title,
+    description: post.data.description,
+    author: post.data.author,
+    angle: c.blog.angles.find((a) => a.slug === post.id)?.label,
+  }));
 ---
-<BaseLayout
-  title="Analytics & AI for Gulf businesses"
-  description="We turn messy, fragmented data into decisions Gulf businesses act on. Analytics and AI, built to last and yours to keep."
-  footnotes
->
+<BaseLayout title={c.meta.title} description={c.meta.description} footnotes>
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="flex flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[20ch]" data-enter="headline">{c.hero.title}</h1>
       <p class="lead max-w-2xl text-xl" data-enter>{c.hero.subtitle}</p>
-      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" data-enter>
-        <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
-          {c.hero.primaryCta.text}
-        </Button>
-        <Button variant="secondary" size="lg" href={c.hero.secondaryCta.href} class="w-full sm:w-auto">
-          {c.hero.secondaryCta.text}
-        </Button>
+      <div class="flex flex-col gap-3" data-enter>
+        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
+            {c.hero.primaryCta.text}
+          </Button>
+          <Button variant="secondary" size="lg" href={c.hero.secondaryCta.href} class="w-full sm:w-auto">
+            {c.hero.secondaryCta.text}
+          </Button>
+        </div>
+        <p class="text-sm text-subtle">{c.hero.reassurance}</p>
       </div>
     </div>
   </Section>
@@ -45,76 +63,174 @@ const logoLoop = [...c.logos.items, ...c.logos.items];
         <Button variant="primary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
           {c.score.cta.text}
         </Button>
-        <p class="text-sm text-subtle">{c.score.reassurance}</p>
+        <p class="text-sm text-subtle sm:text-end">{c.score.reassurance}</p>
       </div>
     </div>
   </Section>
 
   <Section padding="sm" width="7xl">
     <div class="logos" data-reveal>
-      <p class="eyebrow logos__label" id="built-on-label">{c.logos.label}</p>
-      <div class="logos__viewport" data-marquee tabindex="0" role="region" aria-labelledby="built-on-label">
-        <ul class="logos__track" aria-labelledby="built-on-label">
+      <p class="eyebrow logos__label" id="works-with-label">{c.logos.label}</p>
+      <div class="logos__viewport" data-marquee tabindex="0" role="region" aria-labelledby="works-with-label">
+        <ul class="logos__track" aria-labelledby="works-with-label">
           {
             logoLoop.map((logo, i) => (
               <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined}>
-                {logo.icon ? (
-                  <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
-                ) : (
-                  <span class="logos__wordmark" aria-hidden="true">{logo.name}</span>
-                )}
+                <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
                 <span class="logos__name">{logo.name}</span>
               </li>
             ))
           }
         </ul>
       </div>
+      <p class="logos__note text-subtle">{c.logos.note}</p>
     </div>
   </Section>
 
-  <Section padding="md" width="7xl">
-    <ul class="cube" aria-label="What we build">
+  <Section padding="lg" width="7xl">
+    <div class="home-fix">
+      <div class="home-head">
+        <p class="section-index" data-reveal>{c.pillarsHeader.eyebrow}</p>
+        <SectionHeader title={c.pillarsHeader.title} subtitle={c.pillarsHeader.lead} />
+      </div>
+      <ul class="cube" aria-label={c.pillarsLabel}>
+        {
+          c.pillars.map((p) => (
+            <li class="cube__cell">
+              <button type="button" class="cube__tile" aria-pressed="false" data-cube-tile>
+                <span class="cube__face cube__face--front">
+                  <span class="cube__letter" aria-hidden="true">{p.letter}</span>
+                  <span class="cube__title">{p.title}</span>
+                </span>
+                <span class="cube__face cube__face--back">
+                  <span class="cube__back-title">{p.title}</span>
+                  <span class="cube__desc">{p.desc}</span>
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <div class="home-head">
+      <p class="section-index" data-reveal>{c.ladder.eyebrow}</p>
+      <SectionHeader title={c.ladder.title} subtitle={c.ladder.lead} />
+    </div>
+    <ol class="cards mt-10 md:mt-12">
       {
-        c.pillars.map((p) => (
-          <li class="cube__cell">
-            <button type="button" class="cube__tile" aria-pressed="false" data-cube-tile>
-              <span class="cube__face cube__face--front">
-                <span class="cube__letter" aria-hidden="true">{p.letter}</span>
-                <span class="cube__title">{p.title}</span>
-              </span>
-              <span class="cube__face cube__face--back">
-                <span class="cube__back-title">{p.title}</span>
-                <span class="cube__desc">{p.desc}</span>
-              </span>
-            </button>
+        c.cards.map((card, i) => (
+          <li class="cards__cell" data-anim="rise" style={`--i:${i}`}>
+            <a href={card.href} class="cards__card">
+              <span class="mono-datum text-accent-2" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="cards__title">{card.title}</h3>
+              <p class="cards__desc text-muted">{card.desc}</p>
+              <Icon name="mdi:arrow-right" class="cards__arrow" aria-hidden="true" />
+            </a>
           </li>
         ))
       }
-    </ul>
-  </Section>
-
-  <Section padding="md" width="7xl">
-    <div class="cards">
-      {
-        c.cards.map((card, i) => (
-          <a href={card.href} class="cards__card" data-anim="rise" style={`--i:${i}`}>
-            <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
-            <span class="cards__title">{card.title}</span>
-            <Icon name="mdi:arrow-right" class="cards__arrow" aria-hidden="true" />
-          </a>
-        ))
-      }
+    </ol>
+    <div class="home-more">
+      <Button variant="secondary" href={c.ladder.link.href} icon class="w-full sm:w-auto">{c.ladder.link.text}</Button>
     </div>
   </Section>
 
-  <Section padding="lg" width="6xl">
-    <div class="home-cta" data-reveal>
-      <h2 class="text-display text-display--4xl">{c.cta.title}</h2>
-      <p class="lead mx-auto max-w-xl text-balance">{c.cta.description}</p>
-      <Button variant="primary" size="lg" href={c.cta.ctaHref} icon class="w-full sm:w-auto">{c.cta.ctaText}</Button>
-      <p class="text-sm text-subtle">{c.cta.reassurance}</p>
+  <Section padding="lg" width="7xl">
+    <div class="home-split">
+      <div class="home-head">
+        <p class="section-index" data-reveal>{c.segments.eyebrow}</p>
+        <SectionHeader title={c.segments.title} subtitle={c.segments.lead} />
+      </div>
+      <div class="flex flex-col gap-6">
+        <ul class="segments" aria-label={c.segments.listLabel}>
+          {
+            c.segments.rows.map((row, i) => (
+              <li data-anim="rise" style={`--i:${i}`}>
+                <a href={row.href} class="segments__row">
+                  <h3 class="segments__name">{row.segment}</h3>
+                  <span class="segments__offer">{row.offer}</span>
+                  <span class="segments__line text-muted">{row.line}</span>
+                  <Icon name="mdi:arrow-right" class="segments__arrow" aria-hidden="true" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div>
+          <Button variant="secondary" href={c.segments.cta.href} icon class="w-full sm:w-auto">{c.segments.cta.text}</Button>
+        </div>
+      </div>
     </div>
   </Section>
+
+  <Section padding="lg" width="7xl">
+    <div class="market" data-reveal>
+      <div class="home-head">
+        <p class="section-index">{c.marketplace.eyebrow}</p>
+        <h2 class="text-3xl font-bold sm:text-4xl">{c.marketplace.title}</h2>
+        <p class="lead max-w-2xl text-balance">{c.marketplace.lead}</p>
+      </div>
+      <div class="flex flex-col gap-6">
+        <ul class="market__chips" aria-label={c.marketplace.chipsLabel}>
+          {
+            c.marketplace.chips.map((chip) => (
+              <li>
+                <a href={`${c.marketplace.chipBase}?category=${chip.slug}`} class="market__chip">{chip.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <div>
+          <Button variant="primary" href={c.marketplace.cta.href} icon class="w-full sm:w-auto">{c.marketplace.cta.text}</Button>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  {
+    posts.length > 0 && (
+      <Section padding="lg" width="7xl">
+        <div class="home-head">
+          <p class="section-index" data-reveal>{c.blog.eyebrow}</p>
+          <SectionHeader title={c.blog.title} subtitle={c.blog.lead} />
+        </div>
+        <ul class="posts mt-10 md:mt-12">
+          {posts.map((post, i) => (
+            <li data-anim="rise" style={`--i:${i}`}>
+              <article class="posts__card">
+                {post.angle && <p class="posts__angle">{post.angle}</p>}
+                <h3 class="posts__title">
+                  <a href={post.href} class="posts__link">{post.title}</a>
+                </h3>
+                <p class="text-muted">{post.description}</p>
+                <div class="posts__foot">
+                  <span class="text-sm text-subtle">{post.author}</span>
+                  <span class="posts__more" aria-hidden="true">
+                    {c.blog.linkText}
+                    <Icon name="mdi:arrow-right" />
+                  </span>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+        <div class="home-more">
+          <Button variant="secondary" href={c.blog.cta.href} icon class="w-full sm:w-auto">{c.blog.cta.text}</Button>
+        </div>
+      </Section>
+    )
+  }
+
+  <CtaSection
+    title={c.cta.title}
+    description={c.cta.description}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+    reassurance={c.cta.reassurance}
+  />
 </BaseLayout>
 
 <script>

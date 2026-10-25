@@ -22,6 +22,10 @@
     text-rendering: auto;
   }
 
+  main {
+    overflow-x: clip;
+  }
+
   ::selection {
     background-color: color-mix(in oklch, var(--accent) 26%, transparent);
     color: var(--foreground);

@@ -2,8 +2,11 @@
 import ExtendedGate from "./ExtendedGate.astro";
 import { DIMENSIONS, IDK_LIMIT } from "../../lib/auxo-score/scoring";
 import { CARDS } from "../../lib/auxo-score/cards";
-import { LOAD_STEPS } from "./copy";
+import { LOAD_STEPS, SCORE_COPY } from "./copy";
 import "../../styles/pages/auxo-score.css";
+
+const { intro, result, inconclusive } = SCORE_COPY;
+const { deeper, reviewCall } = result;
 ---
 <div
   class="score"
@@ -12,35 +15,49 @@ import "../../styles/pages/auxo-score.css";
   data-extended-url={import.meta.env.PUBLIC_N8N_EXTENDED_WEBHOOK ?? ""}
 >
   <section class="score__screen" id="s-intro" data-screen="intro">
-    <span class="score__eyebrow">The AUXO Score challenge</span>
-    <h1 class="score__h1" tabindex="-1">How healthy is your data, really?</h1>
+    <span class="score__eyebrow">
+      <span data-path="default">{intro.default.eyebrow}</span>
+      <span data-path="startup" hidden>{intro.startup.eyebrow}</span>
+    </span>
+    <h1 class="score__h1" tabindex="-1">
+      <span data-path="default">{intro.default.title}</span>
+      <span data-path="startup" hidden>{intro.startup.title}</span>
+    </h1>
     <p class="score__lede">
-      {CARDS.length} quick rounds. Tap the answer that matches a normal month, not your best one. Get your score out of 100 at
-      the end.
+      <span data-path="default">{intro.default.lede(CARDS.length)}</span>
+      <span data-path="startup" hidden>{intro.startup.lede}</span>
     </p>
-    <ul class="score__dims" aria-label="Dimensions measured">
+    <ul class="score__dims" aria-label={intro.dimensionsLabel} data-path="default">
       {DIMENSIONS.map((d) => <li>{d}</li>)}
     </ul>
+    <ol class="score__steps" aria-label={intro.startup.stepsLabel} data-path="startup" hidden>
+      {
+        intro.startup.steps.map((step, i) => (
+          <li>
+            <span class="score__step-num" aria-hidden="true">{i + 1}</span>
+            <span>{step}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="score__eligibility" data-path="startup" hidden>{intro.startup.eligibility}</p>
     <div class="score__facts">
-      <div><b>{CARDS.length}</b><small>rounds</small></div>
-      <div><b>~3</b><small>min</small></div>
-      <div><b>/100</b><small>your score</small></div>
+      <div><b>{CARDS.length}</b><small>{intro.facts.rounds}</small></div>
+      <div><b>~3</b><small>{intro.facts.minutes}</small></div>
+      <div><b>/100</b><small>{intro.facts.score}</small></div>
     </div>
     <div class="score__resume" id="resumeBar" hidden>
-      <p id="resumeText">You have a test in progress (card 1 of {CARDS.length}).</p>
+      <p id="resumeText">{intro.resume(1, CARDS.length)}</p>
       <div class="score__btn-row">
-        <button class="score__btn" type="button" id="resumeBtn">Resume</button>
-        <button class="score__btn score__btn--ghost" type="button" id="startOverBtn">Start over</button>
+        <button class="score__btn" type="button" id="resumeBtn">{intro.resumeButton}</button>
+        <button class="score__btn score__btn--ghost" type="button" id="startOverBtn">{intro.startOverButton}</button>
       </div>
     </div>
     <div class="score__btn-row">
-      <button class="score__btn" type="button" id="startBtn">Start the challenge →</button>
+      <button class="score__btn" type="button" id="startBtn">{intro.startButton}</button>
     </div>
-    <p class="score__note">
-      If you don't know an answer, say so. Choosing "I don't know" {IDK_LIMIT} or more times ends the test with a visibility
-      finding instead of a score.
-    </p>
-    <p class="score__privacy">Your answers stay in your browser. Nothing is sent unless you ask us to email your report.</p>
+    <p class="score__note">{intro.note(IDK_LIMIT)}</p>
+    <p class="score__privacy">{intro.privacy}</p>
   </section>
 
   <section class="score__screen" id="s-quiz" data-screen="quiz" hidden>
@@ -107,36 +124,54 @@ import "../../styles/pages/auxo-score.css";
       </form>
     </div>
 
-    <div class="score__deeper">
-      <p class="score__deeper-title">Need to go deeper?</p>
-      <p class="score__note">
-        The extended assessment is for leadership teams planning to fix their data in the next 6 months. It takes
-        longer than this test, and our team reviews every submission.
-      </p>
+    <div class="score__deeper" data-path="default">
+      <h3 class="score__deeper-title">{deeper.title}</h3>
+      <p class="score__note">{deeper.body}</p>
       <button class="score__text-link" type="button" id="extLink" aria-expanded="false" aria-controls="extCheck">
-        Take the extended version →
+        {deeper.link}
       </button>
       <form class="score__check" id="extCheck" hidden>
-        <p class="score__check-title">Is this for you?</p>
-        <label class="score__tick"><input type="checkbox" id="chk1" /> We're planning a data project this year.</label>
-        <label class="score__tick"><input type="checkbox" id="chk2" /> I can answer for both finance and operations.</label>
-        <button class="score__btn score__btn--ghost" type="submit" id="extContinue" disabled>Continue</button>
+        <p class="score__check-title">{deeper.checkTitle}</p>
+        <label class="score__tick"><input type="checkbox" id="chk1" /> {deeper.ticks[0]}</label>
+        <label class="score__tick"><input type="checkbox" id="chk2" /> {deeper.ticks[1]}</label>
+        <button class="score__btn score__btn--ghost" type="submit" id="extContinue" disabled>{deeper.continue}</button>
       </form>
+      <p class="score__note score__startup-line">
+        {deeper.startupLine} <a class="score__inline-link" href={deeper.startupLink.href}>{deeper.startupLink.text}</a>
+      </p>
+    </div>
+
+    <div class="score__deeper score__call" data-path="startup" hidden>
+      <h3 class="score__call-title" id="callTitle">{reviewCall.title}</h3>
+      <p class="score__note">{reviewCall.body}</p>
+      <div class="score__check" role="group" aria-labelledby="callTitle">
+        <label class="score__tick"><input type="checkbox" id="callChk1" /> {reviewCall.ticks[0]}</label>
+        <label class="score__tick"><input type="checkbox" id="callChk2" /> {reviewCall.ticks[1]}</label>
+        <button class="score__btn" type="button" id="callBtn" data-google-calendar-open disabled>{reviewCall.button}</button>
+      </div>
+      <button class="score__text-link" type="button" id="callTip" aria-controls="emailForm">{reviewCall.tip}</button>
+      <p class="score__note">{reviewCall.reassurance}</p>
+      <p class="score__note">
+        {reviewCall.notEligible.before}<button class="score__inline-link" type="button" data-google-calendar-open>{reviewCall.notEligible.bookText}</button>{reviewCall.notEligible.middle}<a class="score__inline-link" href={reviewCall.notEligible.deepDive.href}>{reviewCall.notEligible.deepDive.text}</a>{reviewCall.notEligible.after}
+      </p>
     </div>
   </section>
 
   <ExtendedGate />
 
   <section class="score__screen" id="s-inconclusive" data-screen="inconclusive" hidden>
-    <span class="score__status">No score yet</span>
-    <h2 class="score__h2" tabindex="-1">Too many unknowns to score.</h2>
+    <span class="score__status">{inconclusive.status}</span>
+    <h2 class="score__h2" tabindex="-1">{inconclusive.title}</h2>
     <p class="score__lede">
-      You answered "I don't know" three or more times. That is a finding in itself: it's hard to trust or improve
-      data nobody can see clearly. Try again with someone from finance or operations, or talk to us.
+      <span data-path="default">{inconclusive.default.lede}</span>
+      <span data-path="startup" hidden>{inconclusive.startup.lede}</span>
     </p>
     <div class="score__btn-row">
-      <a class="score__btn" href="/contact/">Talk to us</a>
-      <button class="score__btn score__btn--ghost" type="button" id="retakeBtn">Retake with a colleague</button>
+      <a class="score__btn" href={inconclusive.default.talk.href} data-path="default">{inconclusive.default.talk.text}</a>
+      <button class="score__btn" type="button" id="inconclusiveCallBtn" data-google-calendar-open data-path="startup" hidden>
+        {inconclusive.startup.book}
+      </button>
+      <button class="score__btn score__btn--ghost" type="button" id="retakeBtn">{inconclusive.retake}</button>
     </div>
   </section>
 </div>

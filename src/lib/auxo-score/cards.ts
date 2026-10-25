@@ -116,7 +116,7 @@ export const FOCUS: Record<Dimension, { why: string; steps: string[]; good: stri
   Complete: {
     why: "Key data sits outside your systems or takes days to pull together, so questions go unanswered when they matter.",
     steps: [
-      "Map where pipeline, pricing, cost and occupancy data actually live today, including personal sheets.",
+      "Map where pipeline, pricing, cost and headcount data actually live today, including personal sheets.",
       "Name one owner for each dataset that only exists in a spreadsheet or in someone's head.",
       "Move the most critical of those into a shared system this month.",
     ],

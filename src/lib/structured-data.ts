@@ -6,10 +6,28 @@ const home = absoluteUrl("/");
 const abs = (p: string) => (p.startsWith("http") ? p : absoluteUrl(p));
 
 const serviceOffers = [
-  { name: "Trusted data", description: "One source the whole business agrees on, built from the systems you already run." },
-  { name: "Clear reporting", description: "Board- and investor-ready reporting that holds up under questions." },
-  { name: "Reliable automation", description: "Software carries the routine work, with a person accountable for the calls that matter." },
-  { name: "Confident compliance", description: "Stay ready for regulators without pulling your team off real work." },
+  {
+    name: "Analyze",
+    description:
+      "An honest read of your business and your data, before you spend on AI. Includes the free AUXO Score, a free audit for funded startups, and a paid deep-dive audit.",
+  },
+  {
+    name: "Advise",
+    description:
+      "The right AI and data setup for your team, and a plan to get there: roadmap, tool selection and governance.",
+  },
+  {
+    name: "Build",
+    description:
+      "Your data infrastructure and AI agent teams, set up end to end and handed over. Built to last, and yours to keep.",
+  },
+  { name: "Managed upkeep", description: "Optional monthly upkeep and tuning after Build. No minimum term." },
+];
+
+const areaServed = [
+  { "@type": "Country", name: "United Arab Emirates" },
+  { "@type": "Country", name: "United States" },
+  { "@type": "Place", name: "Europe" },
 ];
 
 export function organizationSchema() {
@@ -19,6 +37,7 @@ export function organizationSchema() {
     url: home,
     logo: `${abs("/favicon.svg")}`,
     description: siteData.description,
+    slogan: siteData.tagline,
     email: siteData.email,
     foundingDate: String(siteData.founded),
     address: {
@@ -27,25 +46,18 @@ export function organizationSchema() {
       addressLocality: siteData.address.city,
       addressCountry: siteData.address.country,
     },
-    areaServed: [
-      { "@type": "Country", name: siteData.address.country },
-      { "@type": "Place", name: "Gulf Cooperation Council" },
-    ],
+    areaServed,
     knowsAbout: [
-      "Real estate data",
-      "Property analytics",
-      "Investor and board reporting",
-      "Forecasting",
-      "Process automation",
-      "Artificial intelligence for real estate",
-      "Regulatory compliance",
-      "UAE anti-money-laundering (AML) compliance",
-      "goAML and Real Estate Activity Report (REAR) reporting",
-      "Beneficial ownership screening",
-      "Family office portfolio reporting",
-      "IFRS financial reporting",
-      "Dubai Land Department (DLD) transaction data",
-      "Automated valuation models",
+      "Data infrastructure",
+      "Data quality and AI readiness",
+      "Data audits",
+      "AI tool selection",
+      "Data and AI governance",
+      "AI agents with human approval",
+      "Data pipelines",
+      "Reporting and business intelligence",
+      "Finance operations data",
+      "Workflow automation",
     ],
     makesOffer: serviceOffers.map((s) => ({
       "@type": "Offer",
@@ -53,7 +65,7 @@ export function organizationSchema() {
         "@type": "Service",
         name: s.name,
         description: s.description,
-        serviceType: "Real-estate analytics & AI",
+        serviceType: "Data and AI services",
         provider: { "@type": "Organization", name: siteData.name, url: home },
       },
     })),
@@ -80,10 +92,7 @@ export function localBusinessSchema() {
       latitude: siteData.address.coordinates.lat,
       longitude: siteData.address.coordinates.lng,
     },
-    areaServed: [
-      { "@type": "Country", name: siteData.address.country },
-      { "@type": "Place", name: "Gulf Cooperation Council" },
-    ],
+    areaServed,
     sameAs: [siteData.social.linkedin, siteData.social.twitter],
   };
 }

@@ -3,6 +3,11 @@ export interface SiteData {
   author: string;
   tagline: string;
   description: string;
+  shortVersion: string;
+  locationLine: string;
+  reassurance: string;
+  aiLine: string;
+  ownershipLine: string;
   url: string;
   email: string;
   privacyEmail: string;
@@ -27,9 +32,14 @@ export interface SiteData {
 export const siteData: SiteData = {
   name: "AUXO Data Labs",
   author: "AUXO Data Labs",
-  tagline: "Analytics and AI for decisions that hold.",
+  tagline: "Your data, ready for AI.",
   description:
-    "AUXO is an analytics and AI lab for Gulf real estate. We turn the data you already have into reporting, forecasts, and automation you can trust — built to last, and yours to keep.",
+    "AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Built to last, and yours to keep.",
+  shortVersion: "End-to-end data and AI, yours to keep.",
+  locationLine: "Based in Dubai. Serving the UAE, the US and Europe.",
+  reassurance: "A real person replies within one business day.",
+  aiLine: "AI where it earns its place. A person approves what goes out.",
+  ownershipLine: "Built to last, and yours to keep.",
   url: import.meta.env.SITE ?? "https://auxodata.com",
   email: "hello@auxodata.com",
   privacyEmail: "privacy@auxodata.com",
@@ -46,12 +56,12 @@ export const siteData: SiteData = {
   founded: 2025,
   stats: {
     practitionerExperience: {
-      value: "Real estate only",
-      label: "We build for property and nothing else, so we start inside your business.",
+      value: "Human approval",
+      label: "Nothing goes out without a person's sign-off.",
     },
     production: {
       value: "Live systems",
-      label: "Working systems in daily use — not slideware.",
+      label: "Working systems for daily use. Not slideware.",
     },
     primaryFocus: {
       value: "Yours to keep",

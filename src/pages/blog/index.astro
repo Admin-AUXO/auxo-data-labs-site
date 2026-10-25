@@ -1,29 +1,87 @@
 ---
-import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/layout/Section.astro";
+import Button from "../../components/ui/Button.astro";
+import HighlightText from "../../components/ui/HighlightText.astro";
+import PostCard from "../../components/blog/PostCard.astro";
+import { getPublishedPosts, tagSlug } from "../../components/blog/posts";
+import { blogContent } from "../../data/blog";
+import "../../styles/pages/blog.css";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const c = blogContent.index;
+const posts = await getPublishedPosts();
+
+const tagCounts = new Map<string, number>();
+posts.forEach(({ post }) => post.data.tags.forEach((t) => tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1)));
+const tags = [...tagCounts.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .map(([label]) => ({ label, key: tagSlug(label) }));
 ---
-<BaseLayout
-  title="Blog: data and AI, written plainly"
-  description="Long reads from AUXO on data, AI tools and agents, and when not to build. Written plainly, with sources."
->
+<BaseLayout title={c.metaTitle} description={c.metaDescription}>
   <Section padding="xl" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
-      <h1 class="text-display text-display--5xl max-w-[16ch]">Data and AI, written plainly.</h1>
-      <p class="lead max-w-2xl text-xl">Long reads on data, AI tools and agents, and when not to build. Every figure has a source.</p>
+      <span class="blog-hero__icon" aria-hidden="true" data-enter>
+        <Icon name="mdi:newspaper-variant-outline" />
+      </span>
+      <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">
+        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
+      </h1>
+      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
     </div>
-    <ul class="mt-10 flex flex-col gap-4">
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ul>
+  </Section>
+
+  <Section padding="sm" width="7xl" class="blog-index">
+    {
+      posts.length > 0 ? (
+        <Fragment>
+          {tags.length > 1 && (
+            <div class="blog-filter" role="group" aria-label={c.tagFilterLabel} data-blog-filter hidden>
+              <button type="button" class="blog-filter__chip" data-blog-tag="" aria-pressed="true">
+                {c.tagFilterAll}
+              </button>
+              {tags.map((t) => (
+                <button type="button" class="blog-filter__chip" data-blog-tag={t.key} aria-pressed="false">
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          )}
+          <ul class="blog-list" aria-label={c.listLabel}>
+            {posts.map((summary, i) => (
+              <li data-blog-item data-tags={summary.post.data.tags.map(tagSlug).join(" ")}>
+                <PostCard summary={summary} index={i} />
+              </li>
+            ))}
+          </ul>
+        </Fragment>
+      ) : (
+        <div class="blog-empty" data-reveal>
+          <h2 class="text-2xl font-bold">{c.emptyState.title}</h2>
+          <p class="text-muted">{c.emptyState.body}</p>
+          <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {c.emptyState.links.map((l, i) => (
+              <Button variant={i === 0 ? "primary" : "secondary"} href={l.href} icon={i === 0} class="w-full sm:w-auto">
+                {l.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    <p class="blog-shortreads">
+      <a href={c.shortReadsLink.href} class="blog-textlink">
+        {c.shortReadsLink.label}
+        <Icon name="mdi:arrow-right" aria-hidden="true" />
+      </a>
+    </p>
   </Section>
 </BaseLayout>
+
+<script>
+  import { initBlogFilter } from "../../components/blog/filter";
+
+  initBlogFilter();
+  document.addEventListener("astro:page-load", initBlogFilter);
+</script>

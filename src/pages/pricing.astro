@@ -1,15 +1,140 @@
 ---
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import Button from "../components/ui/Button.astro";
+import Accordion from "../components/ui/Accordion.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
+import StructuredData from "../components/layout/StructuredData.astro";
+import { faqSchema } from "../lib/structured-data";
+import { pricingContent as c } from "../data/pricing";
+import "../styles/pages/pricing.css";
+
+const faqItems = c.faq.items.map((item) => ({ title: item.question, body: item.answer }));
 ---
-<BaseLayout
-  title="Pricing: start where you are"
-  description="Free audit for funded startups, the AUXO Score for mid-sized companies, custom scope for enterprise. Every price is personal and sent privately."
->
+<BaseLayout title={c.metaTitle} description={c.metaDescription}>
   <Section padding="xl" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
-      <h1 class="text-display text-display--5xl max-w-[16ch]">Start where you are.</h1>
-      <p class="lead max-w-2xl text-xl">Pick the path that fits your company. Every price is personal, and we send it privately after the first conversation and audit.</p>
+      <p class="eyebrow text-accent" data-enter>{c.hero.eyebrow}</p>
+      <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
+      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
     </div>
   </Section>
+
+  <Section padding="sm" width="7xl" class="plans-section">
+    <ul class="plans">
+      {
+        c.cards.items.map((p, i) => (
+          <li
+            id={p.id}
+            class="plan"
+            data-highlight={p.highlighted ? "" : undefined}
+            data-anim="rise"
+            style={`--i:${i}`}
+          >
+            <article class="plan__body" aria-labelledby={`${p.id}-eyebrow ${p.id}-title`}>
+              <header class="plan__head">
+                <div class="plan__meta">
+                  <p id={`${p.id}-eyebrow`} class="plan__eyebrow">
+                    <Icon name={p.icon} class="plan__icon" aria-hidden="true" />
+                    {p.eyebrow}
+                  </p>
+                  {p.badge && <span class="plan__badge">{p.badge}</span>}
+                </div>
+                <h2 id={`${p.id}-title`} class="plan__title">{p.title}</h2>
+                <p class="plan__subline">{p.subline}</p>
+              </header>
+
+              <ul class="plan__bullets">
+                {p.bullets.map((b) => (
+                  <li>
+                    <Icon name="mdi:check" class="plan__check" aria-hidden="true" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="plan__cta">
+                <Button variant={p.cta.variant} size="lg" href={p.cta.href} icon class="w-full">
+                  {p.cta.text}
+                </Button>
+              </div>
+
+              <div class="plan__tiers">
+                <p id={`${p.id}-tiers`} class="plan__tiers-label">{c.cards.tiersLabel}</p>
+                <ul class="plan__chips" aria-labelledby={`${p.id}-tiers`}>
+                  {p.tiers.map((t) => (
+                    <li class="plan__chip">
+                      <span class="plan__chip-name">{t.name}</span>
+                      {t.note && (
+                        <span class="plan__chip-note">
+                          <span class="sr-only">, </span>
+                          {t.note}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p class="plan__fine">{p.finePrint}</p>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="plans-fine" data-reveal>
+      {
+        c.finePrint.map((line) => (
+          <li>
+            <Icon name="mdi:information-outline" class="plans-fine__icon" aria-hidden="true" />
+            <span>{line}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section id="free-audit" padding="lg" width="7xl" class="plans-anchor">
+    <div class="free-audit" data-reveal>
+      <SectionHeader title={c.freeAudit.title} />
+      <p class="free-audit__body">{c.freeAudit.body}</p>
+    </div>
+  </Section>
+
+  <Section padding="md" width="7xl">
+    <div class="not-sure" data-reveal>
+      <div class="not-sure__text">
+        <h2 class="text-3xl font-bold">{c.notSure.title}</h2>
+        <p class="lead">{c.notSure.body}</p>
+      </div>
+      <div class="not-sure__action">
+        <Button calendar variant="primary" size="lg" icon iconName="mdi:calendar-clock-outline" class="w-full sm:w-auto">
+          {c.notSure.cta}
+        </Button>
+        <p class="text-sm text-subtle">{c.notSure.reassurance}</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="faq" padding="lg" width="5xl" class="plans-anchor">
+    <SectionHeader title={c.faq.title} />
+    <div class="mt-10" data-reveal>
+      <Accordion items={faqItems} openFirst />
+    </div>
+  </Section>
+
+  <CtaSection
+    title={c.cta.title}
+    description={c.cta.description}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+    secondaryText={c.cta.secondaryText}
+    secondaryHref={c.cta.secondaryHref}
+    reassurance={c.cta.reassurance}
+  />
+
+  <StructuredData type="FAQPage" data={faqSchema(c.faq.items)} />
 </BaseLayout>

@@ -22,24 +22,31 @@ export interface AboutEngagementPrinciple {
 }
 
 export interface AboutContent {
+  meta: {
+    title: string;
+    description: string;
+  };
   hero: {
     title: string;
     titleHighlight: string | string[];
     lead: string;
     primaryCta: { text: string; href: string };
     secondaryCta: { text: string; href: string };
+    reassurance: string;
   };
   beliefs: {
     title: string;
     titleHighlight?: string | string[];
     lead: string;
     items: AboutBelief[];
+    aiLine: string;
   };
   how: {
     title: string;
     titleHighlight?: string | string[];
     subtitle: string;
     steps: AboutStep[];
+    link: { text: string; href: string };
   };
   where: {
     title: string;
@@ -68,12 +75,18 @@ export interface AboutContent {
 }
 
 export const aboutContent: AboutContent = {
+  meta: {
+    title: "About AUXO: data and AI, yours to keep",
+    description:
+      "AUXO Data Labs is a founder-led data and AI service platform in Dubai, serving the UAE, the US and Europe. Clients own what we build.",
+  },
   hero: {
-    title: "The lab.",
-    titleHighlight: "lab",
-    lead: "AUXO is a specialist analytics and AI lab for real estate. We turn the information you already hold into reporting, forecasts, and automation your team can trust — and run on its own.",
+    title: "Data first. Then AI.",
+    titleHighlight: "Then AI",
+    lead: "AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Founded in 2025 and based in Dubai, we work with funded startups, mid-sized companies and enterprise teams in the UAE, the US and Europe.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
-    secondaryCta: { text: "See how we work", href: "/the-work/" },
+    secondaryCta: { text: "See how it works", href: "/how-it-works/" },
+    reassurance: siteData.reassurance,
   },
   beliefs: {
     title: "What we believe",
@@ -81,58 +94,60 @@ export const aboutContent: AboutContent = {
     lead: "Four convictions shape every engagement.",
     items: [
       {
-        title: "Real estate, nothing else",
-        desc: "Property is the only sector we work in, so we start fluent in Gulf deal structures, registration, and AML — not learning them on your time.",
-      },
-      {
         title: "Built to run",
-        desc: "We deliver systems in daily use, not a deck and not a pilot that stalls. Production from the first build, not a someday promise.",
+        desc: "We deliver systems in daily use, not a deck and not a pilot that stalls.",
       },
       {
         title: "Yours to keep",
-        desc: "You own everything we build. The knowledge stays in-house and passes to whoever runs it next. No lock-in, no black box.",
+        desc: "You own everything we build: the code, the setup, the documentation and the accounts. No lock-in, no black box.",
+      },
+      {
+        title: "A person approves",
+        desc: "AI does the groundwork. A person signs off on what goes out.",
       },
       {
         title: "Plain and honest",
         desc: "We are clear about the trade-offs and clear about fit. We will tell you when not to build.",
       },
     ],
+    aiLine: siteData.aiLine,
   },
   how: {
-    title: "How we build",
-    titleHighlight: "build",
-    subtitle: "Four steps, no drama. We move from a real problem to a system your team owns.",
+    title: "How we work",
+    titleHighlight: "work",
+    subtitle: "Analyze what you have. Advise on what fits. Build it and hand it over.",
     steps: [
       {
         label: "First",
-        title: "Scope",
-        desc: "We sit with your team and get the problem, and the first move, clear together.",
+        title: "Analyze",
+        desc: "An honest read of your business and your data, starting with the free AUXO Score.",
       },
       {
         label: "Then",
-        title: "Build",
-        desc: "We build in short, visible steps you can see working.",
+        title: "Advise",
+        desc: "The right AI and data setup for your team: a roadmap, the right tools, and clear rules on who approves what.",
       },
       {
         label: "Next",
-        title: "Embed",
-        desc: "We put it into your day-to-day, in production, alongside the people who use it.",
+        title: "Build",
+        desc: "Data infrastructure, AI tools and AI agent teams, set up end to end on the systems you already run.",
       },
       {
         label: "Finally",
         title: "Hand over",
-        desc: "Your team takes the controls and runs it with confidence — no retainer to renew.",
+        desc: "Your team takes the controls. No retainer to renew. Managed upkeep is there if you want it.",
       },
     ],
+    link: { text: "See the full detail", href: "/how-it-works/" },
   },
   where: {
     title: "Where we work",
     titleHighlight: "work",
-    body: "We are based in Dubai and work with property teams across the UAE and the wider Gulf — fluent in the governance and AML expectations regional institutions answer to. We handle your data on the terms you set, taking only what the work needs.",
+    body: "We are based in Dubai Internet City and work with teams across the UAE, the US and Europe. We work remotely by default. We handle your data on the terms you set, taking only what the work needs.",
     points: [
       { label: "Based in", value: "Dubai" },
-      { label: "Serving", value: "The UAE and the Gulf" },
-      { label: "Focused on", value: "Real estate only" },
+      { label: "Serving", value: "The UAE, the US and Europe" },
+      { label: "Built for", value: "Funded startups, mid-sized companies and enterprise teams" },
     ],
   },
   engagement: {
@@ -143,30 +158,30 @@ export const aboutContent: AboutContent = {
     principles: [
       {
         title: "Confidential by default",
-        desc: "We're glad to sign an NDA before the first detailed conversation, and your name, your numbers, and your plans stay between us.",
+        desc: "We're glad to sign an NDA before the first detailed conversation. Your name, your numbers and your plans stay between us.",
       },
       {
         title: "Careful with your data",
-        desc: "We take only the data the work needs — sampled, anonymised, or hashed wherever we can — handle it under NDA, and never reuse it for anything else.",
+        desc: "We take only the data the work needs, sampled, anonymised or hashed wherever we can. We never reuse it, host it for resale or sell it.",
       },
       {
-        title: "No dependency on us",
-        desc: "Every engagement ends with your team trained and running it without us. We stay reachable if you want us — you're never reliant on us.",
+        title: "Open about money",
+        desc: "We tell you how we get paid, including any referral fee, before you commit.",
       },
       {
         title: "A person, not a process",
-        desc: "You work directly with the team doing the build, not an account manager relaying messages. Clear language, no black box.",
+        desc: "You work directly with the founders, not an account manager relaying messages. Clear language, no black box.",
       },
     ],
   },
   cta: {
     title: "Start with the problem, not a pitch.",
     titleHighlight: "not a pitch",
-    description: "Now you know how we work. The next move is a short conversation — no pitch, no obligation.",
+    description: "Now you know how we work. The next move is a short conversation. No pitch, no obligation.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
-    secondaryText: "Read our thinking",
-    secondaryHref: "/insights/",
-    reassurance: "A real person replies within one business day.",
+    secondaryText: "Read the blog",
+    secondaryHref: "/blog/",
+    reassurance: siteData.reassurance,
   },
 };

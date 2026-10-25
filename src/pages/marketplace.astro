@@ -1,15 +1,287 @@
 ---
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import Button from "../components/ui/Button.astro";
+import Accordion from "../components/ui/Accordion.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
+import StructuredData from "../components/layout/StructuredData.astro";
+import { faqSchema } from "../lib/structured-data";
+import {
+  marketplaceContent as c,
+  marketplaceCards as cards,
+  anyPartnerJoined,
+  addToStackHref,
+  stackRequestBase,
+  fill,
+} from "../data/marketplace";
+import "../styles/pages/marketplace.css";
+
+const escapeHtml = (s: string): string =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i.answer) }));
+const legend = Object.values(c.badges).filter((b) => b.key !== "partner" || anyPartnerJoined);
+const all = c.filters.categories[0];
 ---
-<BaseLayout
-  title="Marketplace: the AI stack for every team"
-  description="AI tools vetted by AUXO, set up on your data in your own accounts, and managed if you want it. Plus AUXO's own sales and content agents."
->
+<BaseLayout title={c.meta.title} description={c.meta.description}>
   <Section padding="xl" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
-      <h1 class="text-display text-display--5xl max-w-[16ch]">The AI stack for every team.</h1>
-      <p class="lead max-w-2xl text-xl">Tools vetted by AUXO. Set up on your data. Managed if you want it.</p>
+      <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
+      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
     </div>
   </Section>
+
+  <Section id="tools" padding="sm" width="7xl" class="mkt-anchor">
+    <div
+      class="mkt"
+      data-marketplace
+      data-results-one={c.filters.resultsOne}
+      data-results-many={c.filters.resultsMany}
+      data-label-add={c.card.addToStack}
+      data-label-added={c.card.addedState}
+      data-remove-label={c.card.removeLabel}
+      data-count-one={c.tray.countOne}
+      data-count-many={c.tray.countMany}
+      data-request-base={stackRequestBase}
+    >
+      <div class="mkt-filters">
+        <div class="mkt-filters__chips" role="group" aria-label={c.filters.ariaLabel}>
+          <Icon name="mdi:filter-variant" class="mkt-filters__icon" aria-hidden="true" />
+          {
+            c.filters.categories.map((cat) => (
+              <button
+                type="button"
+                class="mkt-chip"
+                data-filter={cat.slug}
+                data-description={cat.description}
+                aria-pressed={cat.slug === "all" ? "true" : "false"}
+              >
+                <Icon name={cat.icon} class="mkt-chip__icon" aria-hidden="true" />
+                {cat.label}
+              </button>
+            ))
+          }
+        </div>
+        <div class="mkt-filters__status" aria-live="polite">
+          <p class="mkt-filters__desc" data-filter-desc>{all.description}</p>
+          <p class="mkt-filters__count" data-filter-count>
+            {fill(c.filters.resultsMany, { n: cards.length })}
+          </p>
+        </div>
+      </div>
+
+      <ul class="mkt-grid">
+        {
+          cards.map((card) => {
+            const badge = c.badges[card.badgeKey];
+            const nameId = `tool-${card.slug}-name`;
+            return (
+              <li class="mkt-card" id={`tool-${card.slug}`} data-category={card.category} data-kind={card.kind}>
+                <div class="mkt-card__top">
+                  <span class="mkt-badge" data-badge={card.badgeKey} title={badge.meaning}>
+                    <Icon name={badge.icon} aria-hidden="true" />
+                    {card.badge}
+                  </span>
+                  {card.status && <span class="mkt-status">{card.status}</span>}
+                </div>
+                <div class="mkt-card__head">
+                  <h2 class="mkt-card__name" id={nameId}>{card.name}</h2>
+                  <p class="mkt-card__vendor">{fill(c.card.vendorLabel, { vendor: card.vendor })}</p>
+                </div>
+                <p class="mkt-card__line">{card.line}</p>
+                {card.includes && (
+                  <div class="mkt-card__includes">
+                    <p class="mkt-card__label">{c.card.includesLabel}</p>
+                    <ul class="mkt-card__chips">
+                      {card.includes.map((inc) => (
+                        <li class="mkt-mini-chip">{inc.name}</li>
+                      ))}
+                    </ul>
+                    {card.note && <p class="mkt-card__note">{card.note}</p>}
+                  </div>
+                )}
+                {card.kind === "built-by-auxo" && (
+                  <div class="mkt-card__agent">
+                    <ul class="mkt-card__facts">
+                      {c.card.agentFacts.map((f) => (
+                        <li>
+                          <Icon name="mdi:check" aria-hidden="true" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <p class="mkt-card__note">{c.card.agentDetail}</p>
+                    {card.extra && <p class="mkt-card__note">{card.extra}</p>}
+                  </div>
+                )}
+                {card.disclosures.map((d) => (
+                  <p class="mkt-card__disclosure">{d}</p>
+                ))}
+                <div class="mkt-card__foot">
+                  <p class="mkt-card__pay">{card.howYouPay}</p>
+                  <div class="mkt-card__actions">
+                    <a
+                      class="btn mkt-add"
+                      data-variant="outline"
+                      data-size="sm"
+                      href={addToStackHref(card.slug)}
+                      aria-describedby={nameId}
+                      data-add-to-stack={card.slug}
+                      data-name={card.name}
+                    >
+                      <Icon name="mdi:plus" class="mkt-add__plus" aria-hidden="true" />
+                      <Icon name="mdi:check" class="mkt-add__check" aria-hidden="true" />
+                      <span data-add-label>{c.card.addToStack}</span>
+                    </a>
+                    {card.url && (
+                      <a class="mkt-card__link" href={card.url} target="_blank" rel="noopener">
+                        {c.card.vendorLink}
+                        <span class="sr-only">: {card.name}</span>
+                        <Icon name="mdi:open-in-new" aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </li>
+            );
+          })
+        }
+        <li class="mkt-card mkt-card--custom" data-category="any">
+          <span class="mkt-card__glyph" aria-hidden="true">
+            <Icon name="mdi:layers-outline" />
+          </span>
+          <div class="mkt-card__head">
+            <h2 class="mkt-card__name">{c.customStack.title}</h2>
+            <p class="mkt-card__vendor">{c.customStack.line}</p>
+          </div>
+          <p class="mkt-card__line">{c.customStack.body}</p>
+          <div class="mkt-card__foot">
+            <Button variant="primary" size="sm" href={c.customStack.href} icon>{c.customStack.cta}</Button>
+          </div>
+        </li>
+      </ul>
+
+      <p class="mkt-billing">{c.vendorBillingNote}</p>
+
+      <div class="mkt-tray" data-stack-tray hidden>
+        <p class="mkt-tray__count" data-stack-count aria-live="polite"></p>
+        <div class="mkt-tray__actions">
+          <button type="button" class="btn" data-variant="ghost" data-size="sm" data-stack-clear>
+            <Icon name="mdi:close" aria-hidden="true" />
+            {c.tray.clear}
+          </button>
+          <a class="btn" data-variant="primary" data-size="sm" href={stackRequestBase} data-stack-request>
+            {c.tray.action}
+            <Icon name="mdi:arrow-right" class="btn__icon" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section padding="md" width="7xl">
+    <div class="mkt-legend" data-reveal>
+      <h2 class="mkt-legend__title">{c.legendTitle}</h2>
+      <dl class="mkt-legend__list">
+        {
+          legend.map((b) => (
+            <div class="mkt-legend__item">
+              <dt>
+                <span class="mkt-badge" data-badge={b.key}>
+                  <Icon name={b.icon} aria-hidden="true" />
+                  {b.label}
+                </span>
+              </dt>
+              <dd>
+                <p>{b.meaning}</p>
+                <p class="mkt-card__pay">{b.howYouPay}</p>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <div class="mkt-paid">
+      <div class="mkt-paid__head">
+        <Icon name="mdi:cash-multiple" class="mkt-paid__icon" aria-hidden="true" />
+        <SectionHeader title={c.howWeGetPaid.title} subtitle={c.howWeGetPaid.subline} />
+      </div>
+      <ul class="mkt-paid__list" style={`--cols:${c.howWeGetPaid.items.length}`}>
+        {
+          c.howWeGetPaid.items.map((item, i) => (
+            <li class="mkt-paid__item" data-anim="rise" style={`--i:${i}`}>
+              <Icon name={item.icon} class="mkt-paid__item-icon" aria-hidden="true" />
+              <h3 class="text-xl font-bold">{item.title}</h3>
+              <p class="text-muted">{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <SectionHeader title={c.vetting.title} subtitle={c.vetting.lead} />
+    <ol class="mkt-vet mt-10 md:mt-12">
+      {
+        c.vetting.items.map((v, i) => (
+          <li class="mkt-vet__item" data-anim="rise" style={`--i:${i}`}>
+            <span class="mkt-vet__check" aria-hidden="true">
+              <Icon name="mdi:check" />
+            </span>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="mkt-vet__title">{v.title}</h3>
+              <p class="text-muted">{v.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <SectionHeader title={c.setup.title} subtitle={c.setup.lead} />
+    <ol class="mkt-steps mt-10 md:mt-12">
+      {
+        c.setup.steps.map((s, i) => (
+          <li class="mkt-steps__item" data-anim="rise" style={`--i:${i}`}>
+            <span class="mkt-steps__rule" aria-hidden="true" />
+            <span class="mono-datum text-accent-2" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <p class="mkt-steps__text">{s}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <Section padding="lg" width="5xl">
+    <SectionHeader title={c.faq.title} />
+    <div class="mt-8 md:mt-10">
+      <Accordion items={faqItems} />
+    </div>
+  </Section>
+
+  <CtaSection
+    title={c.cta.title}
+    description={c.cta.description}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+    secondaryText={c.cta.secondaryText}
+    secondaryHref={c.cta.secondaryHref}
+    reassurance={c.cta.reassurance}
+  />
+
+  <StructuredData type="FAQPage" data={faqSchema(c.faq.items)} />
 </BaseLayout>
+
+<script>
+  import { initMarketplace } from "../scripts/marketplace";
+
+  initMarketplace();
+  document.addEventListener("astro:page-load", initMarketplace);
+</script>

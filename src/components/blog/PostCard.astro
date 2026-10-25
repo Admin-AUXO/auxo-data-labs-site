@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import { blogContent } from "../../data/blog";
+import type { BlogPostSummary } from "./posts";
+import TagList from "./TagList.astro";
+
+interface Props {
+  summary: BlogPostSummary;
+  headingLevel?: 2 | 3;
+  index?: number;
+}
+
+const { summary, headingLevel = 2, index = 0 } = Astro.props;
+const { post, href, minutes, dateLabel, isoDate } = summary;
+const c = blogContent.index;
+const Heading = headingLevel === 3 ? "h3" : "h2";
+---
+<article class="post-card" data-anim="rise" style={`--i:${index}`}>
+  <p class="post-card__meta mono-datum">
+    <time datetime={isoDate}>{dateLabel}</time>
+    <span aria-hidden="true">·</span>
+    <span>{minutes} {c.minutesSuffix}</span>
+    <span aria-hidden="true">·</span>
+    <span>{post.data.author}</span>
+  </p>
+  <Heading class="post-card__title">
+    <a href={href} class="post-card__link">{post.data.title}</a>
+  </Heading>
+  <p class="post-card__desc">{post.data.description}</p>
+  <TagList tags={post.data.tags} label={blogContent.post.tagsLabel} />
+  <span class="post-card__go" aria-hidden="true">
+    {c.cardLink}
+    <Icon name="mdi:arrow-right" />
+  </span>
+</article>

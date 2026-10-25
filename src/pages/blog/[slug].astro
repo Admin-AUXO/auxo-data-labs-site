@@ -1,23 +1,108 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/layout/Section.astro";
+import StructuredData from "../../components/layout/StructuredData.astro";
+import CtaSection from "../../components/sections/shared/CtaSection.astro";
+import PostCard from "../../components/blog/PostCard.astro";
+import TagList from "../../components/blog/TagList.astro";
+import {
+  authorFor,
+  blogPostingSchema,
+  getPublishedPosts,
+  relatedPosts,
+} from "../../components/blog/posts";
+import { blogContent } from "../../data/blog";
+import "../../styles/pages/blog.css";
 
 export const getStaticPaths = (async () => {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  const all = await getPublishedPosts();
+  return all.map((summary) => ({
+    params: { slug: summary.slug },
+    props: { summary, related: relatedPosts(summary.post, all) },
+  }));
 }) satisfies GetStaticPaths;
 
-const { post } = Astro.props;
+const { summary, related } = Astro.props;
+const { post, minutes, dateLabel, isoDate } = summary;
 const { Content } = await render(post);
+const c = blogContent.post;
+const author = authorFor(post.data.author);
+const lineParts =
+  author.line && author.linkText && author.linkHref && author.line.includes(author.linkText)
+    ? author.line.split(author.linkText)
+    : null;
 ---
 <BaseLayout title={post.data.title} description={post.data.description} type="article">
-  <Section padding="xl" width="prose">
-    <a href="/blog/">Back to the blog</a>
-    <h1 class="text-display text-display--5xl mt-6">{post.data.title}</h1>
-    <article class="prose mt-10">
-      <Content />
+  <Section padding="lg" width="4xl">
+    <article class="blog-article">
+      <header class="blog-article__header">
+        <a href={c.backLink.href} class="blog-back" data-enter>
+          <Icon name="mdi:arrow-left" aria-hidden="true" />
+          {c.backLink.label}
+        </a>
+        <h1 class="text-display text-display--5xl text-balance" data-enter="headline">{post.data.title}</h1>
+        <p class="blog-byline mono-datum" data-enter>
+          <span>{c.byPrefix} {post.data.author}</span>
+          <span aria-hidden="true">·</span>
+          <time datetime={isoDate}>{dateLabel}</time>
+          <span aria-hidden="true">·</span>
+          <span>{minutes} {c.minutesSuffix}</span>
+        </p>
+        <TagList tags={post.data.tags} label={c.tagsLabel} />
+      </header>
+
+      <div class="prose-auxo blog-prose">
+        <Content />
+      </div>
+
+      {
+        author.line && (
+          <footer class="blog-author">
+            {lineParts ? (
+              <p>
+                {lineParts[0]}
+                <a href={author.linkHref} class="blog-author__link" target="_blank" rel="noopener noreferrer">
+                  <Icon name="mdi:linkedin" aria-hidden="true" />
+                  {author.linkText}
+                </a>
+                {lineParts.slice(1).join(author.linkText ?? "")}
+              </p>
+            ) : (
+              <p>{author.line}</p>
+            )}
+          </footer>
+        )
+      }
     </article>
   </Section>
+
+  {
+    related.length > 0 && (
+      <Section padding="md" width="7xl">
+        <h2 class="text-3xl font-bold sm:text-4xl" data-reveal>{c.relatedHeading}</h2>
+        <ul class="blog-list blog-list--related mt-8">
+          {related.map((s, i) => (
+            <li>
+              <PostCard summary={s} headingLevel={3} index={i} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+
+  <CtaSection
+    title={c.endCta.title}
+    description={c.endCta.description}
+    ctaText={c.endCta.ctaText}
+    ctaHref={c.endCta.ctaHref}
+    secondaryText={c.endCta.secondaryText}
+    secondaryHref={c.endCta.secondaryHref}
+    reassurance={c.endCta.reassurance}
+  />
+
+  <StructuredData type="BlogPosting" data={blogPostingSchema(summary)} />
 </BaseLayout>

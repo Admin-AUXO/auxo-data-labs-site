@@ -4,25 +4,157 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
+import Accordion from "../components/ui/Accordion.astro";
+import CtaSection from "../components/sections/shared/CtaSection.astro";
 import StructuredData from "../components/layout/StructuredData.astro";
-import { personSchema } from "../lib/structured-data";
+import { faqSchema, personSchema } from "../lib/structured-data";
 import { howItWorksContent as c } from "../data/how-it-works";
 import "../styles/pages/how-it-works.css";
+
+const escapeHtml = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+const faqItems = c.faq.items.map((item) => ({
+  title: item.question,
+  body:
+    `<p>${escapeHtml(item.answer)}</p>` +
+    ("link" in item && item.link
+      ? `<p><a class="hiw-faq-link" href="${escapeHtml(item.link.href)}">${escapeHtml(item.link.text)}</a></p>`
+      : ""),
+}));
+
+const navItems = [
+  ...c.ladder.steps.map((s) => ({ id: s.id, index: s.label.replace(/\D/g, ""), name: s.name })),
+  { id: c.ladder.upkeep.id, index: "+", name: c.ladder.upkeep.title },
+];
 ---
-<BaseLayout
-  title="The Work — how we assess and build"
-  description="How AUXO assesses a real estate business's data — accurate, complete, consistent, timely, trusted — how an engagement runs, and the founding team behind it."
->
+<BaseLayout title={c.meta.title} description={c.meta.description}>
   <Section padding="xl" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.intro.title}</h1>
       <p class="lead max-w-2xl text-xl" data-enter>{c.intro.lead}</p>
-      <p class="max-w-2xl text-muted" data-enter>{c.intro.note}</p>
+      <p class="hiw-summary" data-enter>{c.intro.summary}</p>
+      <p class="max-w-2xl text-sm text-muted" data-enter>{c.intro.note}</p>
+      <div class="flex flex-col items-start gap-3" data-enter>
+        <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
+          {c.intro.primaryCta.text}
+        </Button>
+        <p class="text-sm text-subtle">{c.intro.reassurance}</p>
+      </div>
+    </div>
+    <nav class="hiw-jump mt-12 md:mt-16" aria-label={c.ladder.navLabel} data-enter>
+      <ol class="hiw-jump__list">
+        {
+          navItems.map((n) => (
+            <li>
+              <a class="hiw-jump__link" href={`#${n.id}`}>
+                <span class="hiw-jump__index" aria-hidden="true">{n.index}</span>
+                <span>{n.name}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </Section>
+
+  <Section padding="md" width="7xl">
+    <div class="ladder">
+      {
+        c.ladder.steps.map((step) => (
+          <article id={step.id} class="ladder__step hiw-anchor" aria-labelledby={`${step.id}-title`}>
+            <div class="ladder__head" data-reveal>
+              <div class="ladder__badge">
+                <Icon name={step.icon} class="ladder__icon" aria-hidden="true" />
+                <span class="section-index">{step.label}</span>
+              </div>
+              <h2 id={`${step.id}-title`} class="ladder__name">{step.name}</h2>
+              <p class="ladder__promise">{step.promise}</p>
+              {step.links.length > 0 && (
+                <ul class="ladder__links">
+                  {step.links.map((l) => (
+                    <li>
+                      <a class="hiw-link" href={l.href}>
+                        {l.text}
+                        <Icon name="mdi:arrow-right" aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div class="ladder__body">
+              <div class="flex flex-col gap-5" data-reveal>
+                <h3 class="ladder__label">{c.ladder.labels.whatYouGet}</h3>
+                <ul class="ladder__gets">
+                  {step.whatYouGet.map((g, i) => (
+                    <li class="ladder__get" data-anim="rise" style={`--i:${i}`}>
+                      <Icon name="mdi:check-circle-outline" class="ladder__check" aria-hidden="true" />
+                      <div class="flex flex-col gap-1">
+                        <span class="font-semibold text-foreground">{g.title}</span>
+                        <span class="text-muted">{g.body}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <dl class="ladder__facts" data-reveal>
+                <div class="ladder__fact">
+                  <dt class="ladder__label">{c.ladder.labels.duration}</dt>
+                  <dd>{step.duration}</dd>
+                </div>
+                <div class="ladder__fact">
+                  <dt class="ladder__label">{c.ladder.labels.suits}</dt>
+                  <dd>{step.suits}</dd>
+                </div>
+                <div class="ladder__fact ladder__fact--not">
+                  <dt class="ladder__label">{c.ladder.labels.isNot}</dt>
+                  <dd>{step.isNot}</dd>
+                </div>
+              </dl>
+
+              {step.id === "build" && (
+                <div class="ladder__own" data-reveal>
+                  <p class="ladder__own-line">{c.ladder.build.ownershipLine}</p>
+                  <p class="text-sm text-subtle">{c.ladder.build.aiBuiltNote}</p>
+                </div>
+              )}
+            </div>
+          </article>
+        ))
+      }
+
+      <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title" data-reveal>
+        <div class="ladder__badge">
+          <Icon name={c.ladder.upkeep.icon} class="ladder__icon" aria-hidden="true" />
+          <span class="section-index">{c.ladder.upkeep.label}</span>
+        </div>
+        <div class="upkeep__grid">
+          <div class="flex flex-col gap-3">
+            <h2 id="managed-upkeep-title" class="ladder__name">{c.ladder.upkeep.title}</h2>
+            <p class="ladder__promise">{c.ladder.upkeep.promise}</p>
+          </div>
+          <div class="flex flex-col gap-4">
+            <p class="text-muted">{c.ladder.upkeep.body}</p>
+            <p class="upkeep__terms">{c.ladder.upkeep.terms}</p>
+          </div>
+        </div>
+      </article>
     </div>
   </Section>
 
-  <Section id="method" padding="lg" width="7xl" class="work-anchor">
-    <SectionHeader title={c.method.title} />
+  <Section padding="md" width="7xl" background="ink">
+    <p class="hiw-ailine" data-reveal>
+      <Icon name="mdi:account-check-outline" class="hiw-ailine__icon" aria-hidden="true" />
+      <span>{c.aiLine}</span>
+    </p>
+  </Section>
+
+  <Section id="method" padding="lg" width="7xl" class="hiw-anchor">
+    <p class="eyebrow text-accent mb-4">{c.method.eyebrow}</p>
+    <SectionHeader title={c.method.title} subtitle={c.method.lead} />
     <ol class="method mt-10 md:mt-12">
       {
         c.method.dimensions.map((d, i) => (
@@ -34,32 +166,32 @@ import "../styles/pages/how-it-works.css";
         ))
       }
     </ol>
+    <p class="mt-6 max-w-2xl text-sm text-muted">{c.method.note}</p>
   </Section>
 
   <Section padding="md" width="7xl">
-    <blockquote class="work-quote" data-reveal>
+    <blockquote class="hiw-quote" data-reveal>
       <p>{c.pullQuote}</p>
     </blockquote>
   </Section>
 
-  <Section id="engagement" padding="lg" width="7xl" class="work-anchor">
+  <Section id="engagement" padding="lg" width="7xl" class="hiw-anchor">
     <SectionHeader title={c.engagement.title} />
     <ol class="steps mt-10 md:mt-12">
       {
         c.engagement.steps.map((s, i) => (
           <li class="steps__item" data-anim="rise" style={`--i:${i}`}>
-            <span class="steps__rule" aria-hidden="true" />
-            <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
-            <h3 class="text-2xl font-bold text-balance">{s.title}</h3>
-            <p class="text-muted">{s.desc}</p>
+            <span class="steps__index mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="steps__title">{s.title}</h3>
+            <p class="steps__desc text-muted">{s.desc}</p>
           </li>
         ))
       }
     </ol>
   </Section>
 
-  <Section id="team" padding="lg" width="7xl" class="work-anchor">
-    <SectionHeader title={c.team.title} />
+  <Section id="team" padding="lg" width="7xl" class="hiw-anchor">
+    <SectionHeader title={c.team.title} subtitle={c.team.lead} />
     <div class="team mt-10 md:mt-12">
       {
         c.team.founders.map((f) => (
@@ -70,9 +202,15 @@ import "../styles/pages/how-it-works.css";
                 <p class="text-accent-2 font-medium">{f.role}</p>
               </div>
               {f.lines.map((l) => <p class="text-muted">{l}</p>)}
-              <a href={f.linkedin} class="founder__link" target="_blank" rel="noopener noreferrer">
+              <a
+                href={f.linkedin}
+                class="founder__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${c.team.linkLabel}: ${f.name}`}
+              >
                 <Icon name="mdi:linkedin" aria-hidden="true" />
-                Connect on LinkedIn
+                {c.team.linkLabel}
               </a>
             </div>
           </article>
@@ -81,13 +219,33 @@ import "../styles/pages/how-it-works.css";
     </div>
   </Section>
 
-  <Section padding="lg" width="7xl">
-    <div class="pricing" data-reveal>
+  <Section padding="md" width="7xl">
+    <div class="hiw-pricing" data-reveal>
       <h2 class="text-3xl font-bold sm:text-4xl">{c.pricing.title}</h2>
       <p class="lead max-w-xl">{c.pricing.body}</p>
-      <Button variant="primary" size="lg" href="/contact/" icon class="w-full sm:w-auto">{c.pricing.cta}</Button>
+      <Button variant="secondary" size="lg" href={c.pricing.cta.href} icon class="w-full sm:w-auto">
+        {c.pricing.cta.text}
+      </Button>
     </div>
   </Section>
 
+  <Section id="faq" padding="lg" width="5xl" class="hiw-anchor">
+    <SectionHeader title={c.faq.title} />
+    <div class="mt-10" data-reveal>
+      <Accordion items={faqItems} openFirst />
+    </div>
+  </Section>
+
+  <CtaSection
+    title={c.cta.title}
+    description={c.cta.description}
+    ctaText={c.cta.ctaText}
+    ctaHref={c.cta.ctaHref}
+    secondaryText={c.cta.secondaryText}
+    secondaryHref={c.cta.secondaryHref}
+    reassurance={c.cta.reassurance}
+  />
+
+  <StructuredData type="FAQPage" data={faqSchema(c.faq.items)} />
   {c.team.founders.map((f) => <StructuredData type="Person" data={personSchema(f)} />)}
 </BaseLayout>
