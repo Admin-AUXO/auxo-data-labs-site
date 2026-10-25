@@ -70,7 +70,7 @@ const gtmId = env.gtm.containerId;
         try {
           saved = localStorage.getItem("auxo-motion");
         } catch {}
-        root.dataset.motion = saved || (matchMedia("(prefers-reduced-motion: reduce)").matches ? "off" : "on");
+        root.dataset.motion = saved || "on";
         root.dataset.js = "1";
         setTimeout(() => {
           document

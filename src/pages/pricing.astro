@@ -13,6 +13,12 @@ import { escapeHtml } from "../lib/text";
 import "../styles/pages/pricing.css";
 
 const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escapeHtml(item.answer) }));
+const ladder = [
+  { name: "Analyze", label: "Analyze" },
+  { name: "Advise", label: "Advise" },
+  { name: "Build", label: "Build" },
+  { name: "Managed upkeep", label: "Upkeep" },
+];
 ---
 <BaseLayout title={c.metaTitle} description={c.metaDescription}>
   <Section padding="xl" width="7xl">
@@ -64,18 +70,18 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
 
               <div class="plan__tiers">
                 <p id={`${p.id}-tiers`} class="plan__tiers-label">{c.cards.tiersLabel}</p>
-                <ul class="plan__chips" aria-labelledby={`${p.id}-tiers`}>
-                  {p.tiers.map((t) => (
-                    <li class="plan__chip">
-                      <span class="plan__chip-name">{t.name}</span>
-                      {t.note && (
-                        <span class="plan__chip-note">
-                          <span class="sr-only">, </span>
-                          {t.note}
-                        </span>
-                      )}
-                    </li>
-                  ))}
+                <ul class="plan__steps" aria-labelledby={`${p.id}-tiers`}>
+                  {ladder.map((step) => {
+                    const tier = p.tiers.find((t) => t.name === step.name);
+                    return (
+                      <li class="plan__step" data-on={tier ? "yes" : "no"}>
+                        <Icon name={tier ? "mdi:check" : "mdi:minus"} class="plan__step-mark" aria-hidden="true" />
+                        <span class="plan__step-name">{step.label}</span>
+                        {tier?.note && <span class="plan__step-note">{tier.note}</span>}
+                        {!tier && <span class="sr-only">{c.cards.notIncludedLabel}</span>}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
@@ -100,23 +106,23 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
 
   <Section id="free-audit" padding="lg" width="7xl" class="plans-anchor">
     <div class="free-audit" data-reveal>
-      <SectionHeader title={c.freeAudit.title} />
-      <p class="free-audit__body">{c.freeAudit.body}</p>
-    </div>
-  </Section>
-
-  <Section padding="md" width="7xl">
-    <div class="not-sure" data-reveal>
-      <div class="not-sure__text">
-        <h2 class="text-3xl font-bold">{c.notSure.title}</h2>
-        <p class="lead text-pretty">{c.notSure.body}</p>
+      <div class="free-audit__intro">
+        <SectionHeader title={c.freeAudit.title} />
+        <p class="free-audit__note">{c.freeAudit.note}</p>
       </div>
-      <div class="not-sure__action">
-        <Button calendar variant="primary" size="lg" icon iconName="mdi:calendar-clock-outline" class="w-full sm:w-auto">
-          {c.notSure.cta}
-        </Button>
-        <p class="text-sm text-subtle">{c.notSure.reassurance}</p>
-      </div>
+      <ul class="free-audit__points">
+        {
+          c.freeAudit.points.map((pt) => (
+            <li class="free-audit__point">
+              <span class="free-audit__icon" aria-hidden="true">
+                <Icon name={pt.icon} />
+              </span>
+              <h3 class="free-audit__point-title">{pt.title}</h3>
+              <p class="free-audit__point-body">{pt.body}</p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </Section>
 

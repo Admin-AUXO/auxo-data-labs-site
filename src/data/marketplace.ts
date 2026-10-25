@@ -34,6 +34,7 @@ interface ToolBase {
   name: string;
   vendor: string;
   category: CategorySlug;
+  short: string;
   line: string;
 }
 
@@ -68,6 +69,7 @@ export interface MarketplaceCard {
   kind: ToolConfig["kind"];
   badge: Badge;
   badgeKey: BadgeKey;
+  short: string;
   line: string;
   howYouPay: string;
   url?: string;
@@ -160,6 +162,7 @@ const tools: ToolConfig[] = [
     name: "Claude Team plan",
     vendor: "Anthropic",
     category: "foundation-ai",
+    short: "Claude for your whole team, on your files and tools.",
     line: "Claude for your whole team, connected to your company files and tools, with clear rules on use.",
     url: "https://claude.com/pricing",
     partnerProgrammeJoined: false,
@@ -170,6 +173,7 @@ const tools: ToolConfig[] = [
     name: "ChatGPT Business",
     vendor: "OpenAI",
     category: "foundation-ai",
+    short: "A shared ChatGPT workspace with admin controls.",
     line: "A shared ChatGPT workspace for your team, connected to your company knowledge, with admin controls.",
     url: "https://chatgpt.com/business/",
     partnerProgrammeJoined: false,
@@ -180,6 +184,7 @@ const tools: ToolConfig[] = [
     name: "AI assistant for your company",
     vendor: "AUXO",
     category: "foundation-ai",
+    short: "Claude or ChatGPT, connected to your systems.",
     line: "Claude Team plan or ChatGPT Business, connected to your drives and systems, with usage rules and training.",
     includes: ["claude-team", "chatgpt-business"],
     note: "We set up one of the two, whichever fits your team.",
@@ -190,6 +195,7 @@ const tools: ToolConfig[] = [
     name: "Claude Code",
     vendor: "Anthropic",
     category: "engineering",
+    short: "A coding agent whose work your engineers review.",
     line: "A coding agent that drafts fixes, tests and migrations for your engineers to review.",
     url: "https://claude.com/product/claude-code",
     partnerProgrammeJoined: false,
@@ -200,6 +206,7 @@ const tools: ToolConfig[] = [
     name: "Onshape",
     vendor: "PTC",
     category: "engineering",
+    short: "Cloud CAD for hardware teams, with AI built in.",
     line: "Cloud CAD and data management for hardware teams, with a built-in AI Advisor.",
     url: "https://www.onshape.com/en/",
     partnerProgrammeJoined: false,
@@ -210,6 +217,7 @@ const tools: ToolConfig[] = [
     name: "Flux",
     vendor: "Flux",
     category: "engineering",
+    short: "PCB design with an AI copilot.",
     line: "Browser-based PCB design with an AI copilot that reads datasheets and runs design checks.",
     url: "https://www.flux.ai/",
     partnerProgrammeJoined: false,
@@ -220,6 +228,7 @@ const tools: ToolConfig[] = [
     name: "AI for hardware engineers",
     vendor: "AUXO",
     category: "engineering",
+    short: "Design reviews and BOM checks on your data.",
     line: "Design review, bill-of-materials checks and test logs, set up on your engineering data.",
     includes: ["onshape", "flux", "claude-team"],
     note: "Set up in your accounts. Your engineers review every check.",
@@ -230,6 +239,7 @@ const tools: ToolConfig[] = [
     name: "Numeric",
     vendor: "Numeric",
     category: "finance",
+    short: "A faster month-end close, beside your ERP.",
     line: "Month-end close, reconciliations and cash management, alongside your existing ERP.",
     url: "https://www.numeric.io/",
     partnerProgrammeJoined: false,
@@ -240,6 +250,7 @@ const tools: ToolConfig[] = [
     name: "Ramp",
     vendor: "Ramp",
     category: "finance",
+    short: "Cards, expenses and bill pay in one place.",
     line: "Corporate cards, expenses, bill pay and accounting automation in one place.",
     url: "https://ramp.com/",
     partnerProgrammeJoined: false,
@@ -250,6 +261,7 @@ const tools: ToolConfig[] = [
     name: "AI for accounting",
     vendor: "AUXO",
     category: "finance",
+    short: "Reconciliation and close on your finance data.",
     line: "Reconciliation, month-end close and reporting, set up on your finance data.",
     includes: ["numeric", "ramp", "claude-team"],
     note: "Your finance lead approves every entry before it posts.",
@@ -260,6 +272,7 @@ const tools: ToolConfig[] = [
     name: "n8n",
     vendor: "n8n",
     category: "operations",
+    short: "Workflow automation you can host yourself.",
     line: "Workflow automation and AI agents you can host yourself or run in n8n's cloud.",
     url: "https://n8n.io/",
     partnerProgrammeJoined: false,
@@ -270,6 +283,7 @@ const tools: ToolConfig[] = [
     name: "Fin",
     vendor: "Fin",
     category: "operations",
+    short: "AI answers for customer support, with handoff.",
     line: "An AI agent that answers customer questions across your support channels and hands off to your team.",
     url: "https://fin.ai/",
     partnerProgrammeJoined: false,
@@ -280,6 +294,7 @@ const tools: ToolConfig[] = [
     name: "AI for operations",
     vendor: "AUXO",
     category: "operations",
+    short: "Workflows and follow-ups on systems you run.",
     line: "Workflows, vendor follow-ups and dashboards, set up on the systems you already run.",
     includes: ["n8n", "fin", "claude-team"],
     note: "A named person owns each workflow and approves what goes out.",
@@ -290,6 +305,7 @@ const tools: ToolConfig[] = [
     name: "Ashby",
     vendor: "Ashby",
     category: "hiring",
+    short: "Recruiting, scheduling and analytics in one.",
     line: "Applicant tracking, sourcing, scheduling and recruiting analytics in one system.",
     url: "https://www.ashbyhq.com/",
     partnerProgrammeJoined: false,
@@ -300,6 +316,7 @@ const tools: ToolConfig[] = [
     name: "Juicebox",
     vendor: "Juicebox",
     category: "hiring",
+    short: "AI candidate search and outreach drafts.",
     line: "AI candidate search and outreach drafts, for your recruiters to review.",
     url: "https://juicebox.ai/",
     partnerProgrammeJoined: false,
@@ -310,6 +327,7 @@ const tools: ToolConfig[] = [
     name: "AI for hiring",
     vendor: "AUXO",
     category: "hiring",
+    short: "Sourcing and screening. People decide.",
     line: "Sourcing, screening and interview scheduling. A person makes every hiring decision.",
     includes: ["ashby", "juicebox"],
     note: "Legal checks stay with your advisers.",
@@ -320,6 +338,7 @@ const tools: ToolConfig[] = [
     name: "AUXO sales agent",
     vendor: "AUXO",
     category: "sales-and-content",
+    short: "Prospect lists, outreach drafts and pipeline.",
     line: "Builds your prospect and partner lists, drafts the outreach, and tracks your pipeline. You approve every message before it is sent.",
     status: "Early access",
     extra: "Meetings book through your own booking link.",
@@ -330,6 +349,7 @@ const tools: ToolConfig[] = [
     name: "AUXO content agent",
     vendor: "AUXO",
     category: "sales-and-content",
+    short: "Plans, drafts and reports on your content.",
     line: "Plans and drafts your content, publishes only what you approve, and reports how it performs.",
     status: "Early access",
   },
@@ -347,6 +367,7 @@ function toCard(t: ToolConfig): MarketplaceCard {
     vendor: t.vendor,
     category: t.category,
     kind: t.kind,
+    short: t.short,
     line: t.line,
   };
   if (t.kind === "third-party") {
@@ -458,16 +479,17 @@ export const marketplaceContent = {
     resultsMany: "{n} tools",
   },
   badges,
-  legendTitle: "What the badges mean",
   card: {
     addToStack: "Add to stack",
     addedState: "Added",
+    detailsLabel: "Details",
+    backLabel: "Back",
     vendorLabel: "By {vendor}",
     vendorLink: "Vendor site",
     includesLabel: "Includes",
     agentFacts: ["Built on Claude", "Works in your own Google Sheet and Drive"],
     agentDetail:
-      "You approve, read drafts and see results in your own Sheet and Drive. Your lists, drafts and data stay yours if you stop. The agent itself is a subscription.",
+      "You approve every draft. If you stop, your lists, drafts and data stay yours. The agent is a subscription.",
   },
   tray: {
     countOne: "1 in your stack",
@@ -476,7 +498,7 @@ export const marketplaceContent = {
     clear: "Clear",
   },
   vendorBillingNote:
-    "Third-party tools are bought in your company's name, on your own contract with the vendor. We tell you what the vendor charges before you commit.",
+    "You buy third-party tools in your company's name, on your own contract. We tell you the vendor's price before you commit.",
   customStack: {
     title: "Custom stack",
     line: "Built for your function.",
@@ -495,7 +517,7 @@ export const marketplaceContent = {
     items: [
       {
         title: "It works on your data where you can see it.",
-        body: "It connects to the systems teams already run, without moving data somewhere you can't inspect.",
+        body: "It connects to the systems you already run, without moving data somewhere you can't inspect.",
       },
       {
         title: "We can explain its data handling.",
@@ -515,7 +537,7 @@ export const marketplaceContent = {
       },
       {
         title: "Our advice is not for sale.",
-        body: "A referral fee never decides what we recommend, and we will point you to a tool we don't list if it fits better.",
+        body: "A referral fee never decides what we recommend. If an unlisted tool fits better, we'll say so.",
       },
     ],
   },
@@ -524,11 +546,9 @@ export const marketplaceContent = {
     lead: "Add to stack opens a short request form, prefilled with your tools. Then:",
     steps: [
       "Tell us about your team and what you want the tool to do.",
-      "A short call to confirm fit. If it isn't right for you, we say so.",
-      "We send a setup plan and price, privately.",
+      "A short call to confirm fit, then a setup plan and price, sent privately.",
       "We set it up in your accounts, on your data, with clear rules on use.",
-      "We hand it over with plain‑English documentation and training.",
-      "Optional managed upkeep, monthly.",
+      "We hand it over with documentation and training. Managed upkeep is optional.",
     ],
   },
   faq: {

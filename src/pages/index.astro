@@ -133,9 +133,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         ))
       }
     </ol>
-    <div class="home-more">
-      <Button variant="secondary" href={c.ladder.link.href} icon class="w-full sm:w-auto">{c.ladder.link.text}</Button>
-    </div>
   </Section>
 
   <Section padding="lg" width="7xl">
@@ -159,9 +156,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
             ))
           }
         </ul>
-        <div>
-          <Button variant="secondary" href={c.segments.cta.href} icon class="w-full sm:w-auto">{c.segments.cta.text}</Button>
-        </div>
       </div>
     </div>
   </Section>

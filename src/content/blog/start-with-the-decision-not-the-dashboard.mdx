@@ -1,0 +1,53 @@
+---
+title: "Start with the decision, not the dashboard"
+description: "Most reporting and AI projects start with a request for visibility. Name the decision, its owner and its deadline first, and the build gets much smaller."
+date: 2026-10-25
+author: "AUXO Data Labs"
+tags: ["Decision-making", "Data infrastructure"]
+draft: false
+---
+
+"We need more visibility."
+
+That is how most reporting and AI projects start. It sounds reasonable. It is also not a decision, which is why so many of these projects end as a dashboard people glance at and a meeting that still runs long.
+
+## Visibility is not a decision
+
+A dashboard answers "what happened?" A decision answers "what are we doing about it, who says so, and by when?" Most companies have far more of the first than the second.
+
+The surveys show the gap. In a McKinsey global survey, only 20% of respondents said their organisations excel at decision making, and 61% said most of the time they spend on decisions is used ineffectively ([McKinsey](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/decision-making-in-the-age-of-urgency)). In a Gartner survey of marketing analytics users, analytics influenced just 53% of marketing decisions, and a third of respondents said decision makers cherry-pick data to fit a view they already hold. Gartner's analyst was blunt: better data alone won't change that ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2022-09-15-gartner-survey-reveals-marketing-analytics-are-only-influencing-53-percent-of-decisions)).
+
+More data does not close this gap. The missing piece sits upstream of the data.
+
+## Write the decision down first
+
+Before anyone touches a data source, write one sentence:
+
+**Who decides what, by when, using which numbers, and what would change the answer?**
+
+For example: "By the fifth working day of each month, the COO approves or holds next month's hiring plan, based on cash runway and the sales pipeline. If runway falls below the level the board agreed, hiring pauses."
+
+That sentence does a lot of work. It names an owner, not a meeting. It sets a deadline. It tells you which two numbers matter, how fresh they must be and how accurate. It also tells you what you don't need: the dozens of other charts that would have gone on the dashboard "just in case".
+
+If nobody can write the sentence, that is the finding. Don't build yet.
+
+## Match the effort to the decision
+
+Not every decision deserves the same machinery. In his 2015 letter to shareholders, Jeff Bezos split decisions into two kinds. One-way doors are hard or impossible to reverse and deserve care. Two-way doors can be undone, and he argued most decisions are like that ([Amazon, 2015 letter](https://www.sec.gov/Archives/edgar/data/1018724/000119312516530910/d168744dex991.htm)). A year later he suggested most decisions should be made with about 70% of the information you wish you had ([Amazon, 2016 letter](https://www.sec.gov/Archives/edgar/data/1018724/000119312517120198/d373368dex991.htm)).
+
+For data work, this sets the bar. A reversible weekly call on ad spend needs a quick, roughly right number. An irreversible call on a new market or a senior hire needs reconciled figures and a person who can explain them. Building the second kind of system for the first kind of decision wastes months. Building the first kind for the second is a risk.
+
+There is good news in the McKinsey survey too. Faster decisions tended to be higher quality, not lower. Speed and care are not opposites when the decision is clear.
+
+## When not to build
+
+Sometimes the right answer is no new system at all.
+
+- **The decision happens twice a year.** A well-kept spreadsheet and a good conversation will do.
+- **The owner won't act differently whatever the number says.** Then the report is decoration. Sort out who decides first.
+- **The data to answer it doesn't exist yet.** Start capturing it, and decide on judgement for now.
+- **An existing report already answers it.** Point people to it, and retire the copies.
+
+## The takeaway
+
+Start every reporting or AI project with one written sentence: who decides what, by when, with which numbers. Build only what that sentence needs. If nobody can write it, you have found the real problem, and it is far cheaper to fix than a dashboard.

@@ -69,12 +69,11 @@ interface HomeContent {
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  ladder: SectionIntro & { link: Link };
+  ladder: SectionIntro;
   cards: HomeLadderCard[];
   segments: SectionIntro & {
     listLabel: string;
     rows: HomeSegment[];
-    cta: Link;
   };
   marketplace: SectionIntro & {
     chipsLabel: string;
@@ -139,7 +138,7 @@ export const homeContent: HomeContent = {
   pillarsHeader: {
     eyebrow: "What we fix",
     title: "Four fixes that make data ready for AI.",
-    lead: "AI on untidy data gives untidy answers. These are the four things we fix first.",
+    lead: "AI on untidy data gives untidy answers. We fix these four first.",
   },
   pillarsLabel: "What we fix",
   pillars: [
@@ -168,7 +167,6 @@ export const homeContent: HomeContent = {
     eyebrow: "How it works",
     title: "Analyze what you have. Advise on what fits. Build it and hand it over.",
     lead: "Three steps. Start at any one. We recommend starting with Analyze.",
-    link: { text: "See how it works", href: "/how-it-works/" },
   },
   cards: [
     {
@@ -190,7 +188,7 @@ export const homeContent: HomeContent = {
   segments: {
     eyebrow: "Pricing",
     title: "Start where you are.",
-    lead: "Three ways in. Every price is personal, and we send it privately after the first conversation and audit.",
+    lead: "Three ways in. Every price is personal and sent privately.",
     listLabel: "Ways in",
     rows: [
       {
@@ -212,7 +210,6 @@ export const homeContent: HomeContent = {
         href: "/pricing/#enterprise",
       },
     ],
-    cta: { text: "See pricing", href: "/pricing/" },
   },
   marketplace: {
     eyebrow: "Marketplace",
@@ -242,9 +239,9 @@ export const homeContent: HomeContent = {
     cta: { text: "Read the blog", href: "/blog/" },
   },
   cta: {
-    title: "Let's find where the friction starts.",
+    title: "Tell us what isn't working.",
     description:
-      "Bring the problem that's nagging at you. You'll leave knowing what to fix first, and what not to build yet.",
+      "Bring the problem. You'll leave knowing what to fix first, and what not to build yet.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
     reassurance,

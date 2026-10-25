@@ -112,7 +112,7 @@ const topics: ContactTopic[] = [
     slug: "free-audit",
     label: "Free audit",
     hint: "The free audit starts with the AUXO Score and ends with a review call. Funded startups, seed to Series B, one per company.",
-    hintLink: { text: "Start your free audit", href: "/auxo-score/?offer=free-audit" },
+    hintLink: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit" },
   },
   {
     slug: "deep-dive-audit",
@@ -175,7 +175,7 @@ export const contactContent: ContactContent = {
   },
   form: {
     title: "Send a message",
-    description: "A few plain lines is enough: what you want to fix, and the timeline that matters.",
+    description: "A few lines is enough. No formal brief needed.",
     fields: [
       {
         name: "name",
@@ -237,7 +237,7 @@ export const contactContent: ContactContent = {
       "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply, never for marketing without separate opt-in, and we don't sell or rent your details. Any service we use to handle your message is bound to do the same.",
     consentLink: { text: "Privacy Policy", href: "/legal/privacy-policy/" },
     submitText: "Send message",
-    note: "The first conversation is about getting the problem clear. No prep needed.",
+    note: "No prep needed for the first conversation.",
     status: {
       sending: "Sending your message…",
       success: "Thank you. Your message is on its way, and we'll reply within one business day.",
@@ -253,15 +253,15 @@ export const contactContent: ContactContent = {
     steps: [
       {
         title: "You send a note",
-        desc: "A few plain lines about what you want to fix and the timeline that matters. No formal brief needed.",
+        desc: "Use the form or email us. Say what you want to fix and by when.",
       },
       {
-        title: "We reply within a day",
-        desc: "A founder reads it and replies within one business day, not a sales inbox.",
+        title: "We reply within one business day",
+        desc: "A founder reads it, not a sales inbox.",
       },
       {
         title: "A short call",
-        desc: "We get the problem clear and agree the first concrete step together. If we're not the right fit, we say so.",
+        desc: "We get the problem clear and agree a first step. If we're not the right fit, we say so.",
       },
     ],
   },
@@ -278,32 +278,17 @@ export const contactContent: ContactContent = {
       {
         question: "Is this confidential? Can we sign an NDA first?",
         answer:
-          "Yes. We keep your name and details to ourselves, and we're glad to sign an NDA before any detailed conversation. Mention it in your message and we'll send ours within a day, or work from the document your legal team prefers.",
+          "Yes. Your name and details stay with us, and we're glad to sign an NDA first. Say so in your message and we'll send ours, or use your legal team's.",
       },
       {
-        question: "What happens to our data? Do you take copies of it?",
+        question: "What happens to our data, and is it safe with AI?",
         answer:
-          "We take only the data a piece of work needs, and wherever we can we use a sample, or anonymise or hash it first. Everything is handled under NDA and to the access rules you set, never reused, and returned or removed when the work is done. What we build runs on your data, in your accounts.",
+          "We take only what the work needs, anonymised where we can, under NDA and your access rules. It's never reused or fed to tools that train on it, and it's returned or removed when the work ends.",
       },
       {
         question: "What if our data is messy, scattered or incomplete?",
         answer:
           "That's the normal starting point, not a blocker. Most of the early work is making sense of what you already hold across spreadsheets, systems and inboxes. You don't need to tidy anything before we talk.",
-      },
-      {
-        question: "Do we have to replace the tools we already use?",
-        answer:
-          "No. We build on the systems you already run: your CRM, your finance stack, your spreadsheets. If a tool or agent you have works, we'll say so and suggest keeping it.",
-      },
-      {
-        question: "How quickly do we see something real?",
-        answer:
-          "The deep-dive audit takes 2 to 3 weeks. Setting up one tool or stack takes 1 to 2 weeks, and a first build takes 4 to 12 weeks, in short steps you can see working.",
-      },
-      {
-        question: "Do you use AI, and is our data safe with it?",
-        answer:
-          "We use AI where it earns its place, and a person approves what goes out. We don't feed your data into tools that train on it, we work to the access rules you set, and the result is yours to keep.",
       },
       {
         question: "Can you make us compliant?",
@@ -313,12 +298,7 @@ export const contactContent: ContactContent = {
       {
         question: "What happens after you hand over? Are we stuck with you?",
         answer:
-          "The opposite. Every build ends with a working system your team owns, plain documentation and the training to run it. Managed upkeep is optional, monthly, and you can stop with 30 days' notice and keep everything.",
-      },
-      {
-        question: "Where do you work?",
-        answer:
-          "We're based in Dubai and work with teams across the UAE, the US and Europe. We work remotely by default.",
+          "No. Every build ends with a system your team owns, plain documentation and training. Managed upkeep is optional and monthly. Stop with 30 days' notice and keep everything.",
       },
     ],
   },

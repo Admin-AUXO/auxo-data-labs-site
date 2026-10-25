@@ -1,20 +1,20 @@
 @layer components {
   .section {
     background-color: transparent;
-    padding-block: var(--section-py, clamp(2.5rem, 1.5rem + 5vw, 6rem));
+    padding-block: var(--section-py, clamp(2rem, 1.25rem + 3.5vw, 4.5rem));
     position: relative;
   }
 
   .section[data-pad="sm"] {
-    --section-py: clamp(2rem, 1.25rem + 3vw, 3.5rem);
+    --section-py: clamp(1.5rem, 1rem + 2vw, 2.75rem);
   }
 
   .section[data-pad="lg"] {
-    --section-py: clamp(3rem, 2rem + 5.5vw, 7.5rem);
+    --section-py: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
   }
 
   .section[data-pad="xl"] {
-    --section-py: clamp(3.5rem, 2.25rem + 6.5vw, 9rem);
+    --section-py: clamp(3rem, 1.75rem + 5vw, 7rem);
   }
 
   .section[data-bg="surface"] {

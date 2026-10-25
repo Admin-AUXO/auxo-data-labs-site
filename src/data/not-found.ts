@@ -15,6 +15,6 @@ export const notFoundContent: NotFoundContent = {
   index: "404",
   title: "This page took a wrong turn.",
   lead: "The page you're looking for moved or never existed. While you're here, care for a game?",
-  primaryCta: { text: "Back home", href: "/" },
+  primaryCta: { text: "Back to home", href: "/" },
   secondaryCta: { text: "See how it works", href: "/how-it-works/" },
 };

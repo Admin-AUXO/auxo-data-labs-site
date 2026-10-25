@@ -68,7 +68,7 @@ export const siteData: SiteData = {
       label: "Every project ends with a system your team owns. No lock-in.",
     },
     responseTime: {
-      value: "Reply within 1 business day",
+      value: "Replies within one business day",
       label: "A real person reads your note and replies.",
     },
   },

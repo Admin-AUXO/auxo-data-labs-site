@@ -1,0 +1,47 @@
+---
+title: "Name the approver before you build the agent"
+description: "Human approval of AI output is easy to promise and hard to design. Which actions need it, who signs off, and how to stop review becoming a rubber stamp."
+date: 2026-10-25
+author: "AUXO Data Labs"
+tags: ["AI agents", "Ownership"]
+draft: false
+---
+
+"A person approves what goes out" is easy to promise. It is harder to design. Which person? Approving which actions? Seeing what, and how quickly? Get those answers wrong and the approval step becomes either a bottleneck or a rubber stamp.
+
+## You own what your AI says
+
+In 2024, a Canadian tribunal ordered Air Canada to compensate a customer after its website chatbot gave him wrong information about bereavement fares. The airline argued the chatbot was a separate legal entity responsible for its own actions. The tribunal rejected that, and found the airline responsible for all the information on its website, chatbot included ([American Bar Association](https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/)). It was a small-claims ruling, not binding precedent. The principle is still hard to argue with.
+
+Many companies check less than they think. In a McKinsey survey published in March 2025, 27% of respondents whose organisations use generative AI said employees review all of its output before use. A similar share said 20% or less gets checked ([McKinsey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value)).
+
+## Not every action needs the same approval
+
+Sort what the agent does by risk. OpenAI's guide to building agents suggests rating each tool low, medium or high, based on read or write access, whether the action can be reversed, the permissions it needs and its financial impact. It says sensitive, irreversible or high-stakes actions, such as large refunds or payments, should go to a person ([OpenAI](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)).
+
+A simple table is usually enough:
+
+- **Read and summarise:** no approval. Spot-check a sample each week.
+- **Draft for internal use:** the person who uses the draft reviews it.
+- **Send to a customer, supplier or candidate:** a named person approves each one.
+- **Pay, refund, sign or decide:** a named person approves, and above a set limit a second person signs too.
+
+For each line, write down the approver by name or role, what they see, and how fast they must respond. Then decide what happens if nobody responds. The safe default is that nothing goes out.
+
+## The rubber-stamp risk
+
+An approver facing hundreds of drafts a day will start clicking yes. That is not a character flaw. It is a known effect called automation bias. A systematic review of research on clinical decision support, published in the Journal of the American Medical Informatics Association, found that heavy workload and time pressure make people more likely to over-rely on automated advice, and that making users accountable helps ([JAMIA](https://academic.oup.com/jamia/article/19/1/121/732254)). The EU AI Act requires high-risk AI systems to be built so the people overseeing them can stay aware of this tendency, and can override or disregard the output ([EU AI Act, Article 14](https://artificialintelligenceact.eu/article/14/)).
+
+So design for real review:
+
+- Show the approver the source next to the draft, not just the draft.
+- Keep the queue small enough to read properly. If it isn't, fix the agent or narrow its job.
+- Track how often approvers edit or reject. A long run with no edits may mean the agent is good, or that nobody is reading. Sample some drafts to find out which.
+
+## When to skip the approval step
+
+Approval costs time. Don't add it where it adds nothing: internal summaries, first drafts a person will rewrite anyway, small actions that are easy to undo. Save the approver's attention for the places where a mistake would reach a customer, the ledger or a hiring decision.
+
+## The takeaway
+
+Before you build an agent, write one line for each action it can take: who approves it, what they see, how fast they respond, and what happens if they don't. If you can't fill in the line, the agent shouldn't take that action yet.

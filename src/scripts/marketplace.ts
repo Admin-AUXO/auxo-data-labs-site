@@ -124,10 +124,46 @@ function setupStack(root: HTMLElement): void {
   render();
 }
 
+function setupFlips(root: HTMLElement): void {
+  const cards = Array.from(root.querySelectorAll<HTMLElement>(".mkt-card[data-flipped]"));
+
+  const setFlipped = (card: HTMLElement, on: boolean, moveFocus: boolean): void => {
+    card.dataset.flipped = String(on);
+    const front = card.querySelector<HTMLElement>('[data-mkt-face="front"]');
+    const back = card.querySelector<HTMLElement>('[data-mkt-face="back"]');
+    if (front) front.inert = on;
+    if (back) back.inert = !on;
+    if (back && on) back.scrollTop = 0;
+    if (moveFocus) (on ? back : front)?.querySelector<HTMLButtonElement>("[data-mkt-flip]")?.focus({ preventScroll: true });
+  };
+
+  for (const card of cards) {
+    setFlipped(card, false, false);
+    card.querySelectorAll<HTMLButtonElement>("[data-mkt-flip]").forEach((btn) =>
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const on = card.dataset.flipped !== "true";
+        setFlipped(card, on, true);
+        if (on) track("marketplace_details", { tool: card.id.replace(/^tool-/, "") });
+      }),
+    );
+    card.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("a, button")) return;
+      if (window.getSelection()?.toString()) return;
+      setFlipped(card, card.dataset.flipped !== "true", false);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape" || card.dataset.flipped !== "true") return;
+      setFlipped(card, false, true);
+    });
+  }
+}
+
 export function initMarketplace(): void {
   const root = document.querySelector<HTMLElement>("[data-marketplace]");
   if (!root || root.dataset.bound === "true") return;
   root.dataset.bound = "true";
   setupFilters(root);
   setupStack(root);
+  setupFlips(root);
 }

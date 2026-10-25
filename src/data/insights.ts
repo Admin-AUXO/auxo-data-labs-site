@@ -6,7 +6,6 @@ export interface InsightsContent {
     title: string;
     titleHighlight: string | string[];
     lead: string;
-    framing: string;
   };
   cta: {
     title: string;
@@ -28,13 +27,12 @@ export const insightsContent: InsightsContent = {
   hero: {
     title: "Short reads for people who move fast.",
     titleHighlight: "move fast",
-    lead: "No long essays. Short, plain positions on data and AI for finance, operations, engineering, hiring, sales and content teams. Each one takes under a minute.",
-    framing: "Start with the featured picks, filter by topic, or open the full set.",
+    lead: "One-minute positions on data and AI for finance, operations, engineering, hiring, sales and content teams.",
   },
   cta: {
     title: "See one that fits your team?",
     titleHighlight: "fits your team",
-    description: "See a problem you recognise? That's a good place to start a conversation.",
+    description: "Bring it to a short call. We'll tell you what we'd fix first.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
     secondaryText: "See how it works",

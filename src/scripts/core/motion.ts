@@ -10,7 +10,7 @@ function stored(): boolean {
     const saved = localStorage.getItem(KEY);
     if (saved) return saved === "on";
   } catch {}
-  return !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return true;
 }
 
 function apply(on: boolean): void {

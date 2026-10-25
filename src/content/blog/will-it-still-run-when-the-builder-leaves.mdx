@@ -1,0 +1,48 @@
+---
+title: "Will it still run when the builder leaves?"
+description: "Most data and AI projects are scoped as a build. The real test comes when the person who built it moves on. Five checks to run before you call it done."
+date: 2026-10-25
+author: "AUXO Data Labs"
+tags: ["Ownership", "Engineering"]
+draft: false
+---
+
+Most data and AI projects are scoped as a build. The real test comes later, when the person who built it moves on.
+
+They will. In the US, the median time workers had been with their current employer was 4.1 years in January 2026, and 3.0 years for workers aged 25 to 34 ([US Bureau of Labor Statistics](https://www.bls.gov/news.release/tenure.nr0.htm)). If you expect a pipeline, a report or an AI agent to run for five years, plan for it to outlive its builder.
+
+## How systems fail after the builder leaves
+
+They rarely break on day one. They decay.
+
+A formula only one person understood stops matching the business after a pricing change. An API key expires, and it lived in a former contractor's personal account. An agent's rules were tuned by one engineer, and nobody else knows why it skips certain customers. The model it runs on is retired by the vendor. Anthropic, for example, publishes a schedule for this, and once a model is retired, requests to it fail ([Anthropic](https://platform.claude.com/docs/en/about-claude/model-deprecations)).
+
+Each of these is small. Together they turn a working system into one that people quietly work around.
+
+Knowledge silos are common even in well-run teams. In Stack Overflow's 2024 developer survey, 30% of developers said knowledge silos affect their productivity ten or more times a week ([Stack Overflow](https://survey.stackoverflow.co/2024/professional-developers)).
+
+## Why handover gets skipped
+
+Handover is the last item in the plan and the first to be cut. The build ran long. The budget is spent. The internal team is told they'll "take it from here", without the reasons behind the design or the steps to take when it breaks.
+
+Nobody chooses this. It happens because the project was judged at go-live, not at month six.
+
+## Five checks before you call it done
+
+1. **Everything is in the company's name.** Code repositories, cloud accounts, vendor contracts, API keys and admin access. Not a founder's personal email. Not a contractor's account.
+2. **A plain-English runbook exists.** What it does, why it was built that way, what to check when a number looks wrong, and who to ask.
+3. **Someone else has run it.** A second person has done the monthly run, or fixed a failure, without the builder in the room.
+4. **It tells you when it breaks.** Data checks and alerts flag a missing feed or an odd number before the board pack does.
+5. **It has an owner on the org chart.** A role, not one person's goodwill. When that person moves on, the role passes to someone else.
+
+For AI agents, add one more. Keep the prompts, rules, approval lists and model versions written down next to the code, so the next person can change them safely.
+
+## When this is overkill
+
+Not everything needs a runbook. A one-off analysis for a board question, a prototype you plan to throw away, a spreadsheet one person uses for their own planning: leave them light.
+
+The question is simple. Will this still need to run next quarter, and will other people rely on it? If yes, plan the handover from the start. If no, keep it light and label it as temporary, so nobody builds on it by mistake.
+
+## The takeaway
+
+Ask the builder to take two weeks off. If the system keeps running and someone else can fix it, you own it. If not, what you own is a dependency on one person. Fix that before you build anything new on top.

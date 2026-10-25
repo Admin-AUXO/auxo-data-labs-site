@@ -74,38 +74,38 @@ export const SCORE_COPY: ScoreCopy = {
   meta: {
     title: "AUXO Score: is your data ready for AI?",
     description:
-      "A free 10-question check of how ready your data is for AI, across five dimensions. Get a 0 to 100 score in about 3 minutes. No sign-up.",
+      "Is your data ready for AI? 10 questions on five checks, a score out of 100, about 3 minutes. Free, no sign-up.",
   },
   intro: {
     default: {
       eyebrow: "The AUXO Score",
       title: "How ready is your data for AI?",
       lede: (n) =>
-        `${n} quick rounds. Tap the answer that matches a normal month, not your best one. Get your score out of 100 at the end.`,
+        `${n} questions. Pick the answer that matches a normal month, not your best one. You get a score out of 100 at the end.`,
     },
     startup: {
       eyebrow: "Free audit for funded startups",
       title: "Step 1: your AUXO Score.",
-      lede: "Ten quick questions on how ready your data is for AI. Then book a 45‑minute review call with a founder. We send a one-page summary of what to fix first after the call.",
+      lede: "10 questions on your data, a 45‑minute call with a founder, then a one-page summary of what to fix first.",
       stepsLabel: "Free audit steps",
       steps: ["AUXO Score", "Founder review call", "One-page summary"],
       eligibility: "For funded startups, seed to Series B. One per company.",
     },
     dimensionsLabel: "Dimensions measured",
-    facts: { rounds: "rounds", minutes: "min", score: "your score" },
-    resume: (i, n) => `You have a check in progress (card ${i} of ${n}).`,
+    facts: { rounds: "questions", minutes: "min", score: "your score" },
+    resume: (i, n) => `You have a check in progress (question ${i} of ${n}).`,
     resumeButton: "Resume",
     startOverButton: "Start over",
     startButton: "Start the AUXO Score →",
     note: (limit) =>
-      `If you don't know an answer, say so. Choosing "I don't know" ${limit} or more times ends the check with a visibility finding instead of a score.`,
+      `Not sure? Pick "I don't know". Picking it ${limit} or more times ends the check with a finding instead of a score.`,
     privacy:
-      "Free and no sign-up. Your answers stay in your browser. Nothing is sent unless you ask us to email your report.",
+      "Free, no sign-up. Your answers stay in your browser unless you ask us to email your report.",
   },
   result: {
     deeper: {
-      title: "Want an expert read?",
-      body: "The deep-dive audit is a review of your own systems and data, under NDA if you want one. You get a written assessment, a prioritised plan and a readout with your leadership. It is paid, and priced privately after a first conversation.",
+      title: "Want a deeper read?",
+      body: "A review of your own systems and data, under NDA if you want: a written assessment, a prioritised plan and a leadership readout. Paid, and priced privately after a first conversation.",
       link: "Ask about a deep-dive audit →",
       checkTitle: "Is this for you?",
       ticks: [
@@ -118,7 +118,7 @@ export const SCORE_COPY: ScoreCopy = {
     },
     reviewCall: {
       title: "Step 2: book your review call.",
-      body: "Your score is saved in this browser. Book a 45‑minute call with a founder and we'll go through it together. After the call we send a one-page summary of what to fix first.",
+      body: "Your score is saved in this browser. Book a 45‑minute call and a founder will go through it with you. A one-page summary of what to fix first follows.",
       ticks: [
         "We've raised from outside investors, seed to Series B.",
         "This is our company's first free audit with AUXO.",
@@ -130,7 +130,7 @@ export const SCORE_COPY: ScoreCopy = {
         before: "Not a funded startup? ",
         bookText: "Book a meeting",
         middle: " instead, or ",
-        deepDive: { text: "ask about the deep-dive audit", href: "/contact/?topic=deep-dive-audit" },
+        deepDive: { text: "ask about a deep-dive audit", href: "/contact/?topic=deep-dive-audit" },
         after: ".",
       },
     },
@@ -138,12 +138,12 @@ export const SCORE_COPY: ScoreCopy = {
   extended: {
     eyebrow: "Deep-dive audit",
     title: "Ask about a deep-dive audit.",
-    lede: "Leave your work email and a founder will reply within one business day to arrange a first conversation. Your score comes with your request.",
+    lede: "Leave your work email and a founder will reply within one business day. Your score is sent with your request.",
     label: "Work email",
     placeholder: "name@company.com",
     submit: "Send request",
     consent: "We'll email you about the deep-dive audit and may follow up once. No spam.",
-    privacyLink: "Privacy policy",
+    privacyLink: "Privacy Policy",
     success: (email) => `Request received. A founder will reply to ${email} within one business day.`,
     back: "← Back to my score",
   },

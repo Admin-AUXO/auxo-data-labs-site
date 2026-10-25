@@ -21,43 +21,59 @@ const faqItems = c.faq.items.map((item) => ({
       : ""),
 }));
 
-const navItems = [
-  ...c.ladder.steps.map((s) => ({ id: s.id, index: s.label.replace(/\D/g, ""), name: s.name })),
-  { id: c.ladder.upkeep.id, index: "+", name: c.ladder.upkeep.title },
+const mapItems = [
+  ...c.ladder.steps.map((s) => ({
+    id: s.id,
+    index: s.label.replace(/\D/g, ""),
+    name: s.name,
+  })),
+  {
+    id: c.ladder.upkeep.id,
+    index: "+",
+    name: c.ladder.upkeep.title,
+  },
 ];
+
+const facts = [
+  { kind: "duration", label: c.ladder.labels.duration, icon: "mdi:clock-outline" },
+  { kind: "suits", label: c.ladder.labels.suits, icon: "mdi:target" },
+  { kind: "isNot", label: c.ladder.labels.isNot, icon: "mdi:close-circle-outline" },
+] as const;
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description}>
-  <Section padding="xl" width="7xl">
-    <div class="flex max-w-3xl flex-col gap-6">
-      <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.intro.title}</h1>
-      <p class="lead max-w-2xl text-xl" data-enter>{c.intro.lead}</p>
-      <p class="hiw-summary" data-enter>{c.intro.summary}</p>
-      <p class="max-w-2xl text-sm text-muted" data-enter>{c.intro.note}</p>
-      <div class="flex flex-col items-start gap-3" data-enter>
-        <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
-          {c.intro.primaryCta.text}
-        </Button>
-        <p class="text-sm text-subtle">{c.intro.reassurance}</p>
+  <Section padding="lg" width="7xl">
+    <div class="hiw-hero">
+      <div class="flex flex-col gap-6">
+        <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.intro.title}</h1>
+        <p class="lead max-w-xl text-xl" data-enter>{c.intro.lead}</p>
+        <div class="flex flex-col items-start gap-3" data-enter>
+          <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
+            {c.intro.primaryCta.text}
+          </Button>
+          <p class="text-sm text-subtle">{c.intro.reassurance}</p>
+        </div>
       </div>
+      <nav class="hiw-map" aria-label={c.ladder.navLabel} data-enter>
+        <ol class="hiw-map__list">
+          {
+            mapItems.map((n) => (
+              <li>
+                <a class="hiw-map__link" href={`#${n.id}`}>
+                  <span class="hiw-map__index">{n.index}</span>
+                  <span class="hiw-map__name">{n.name}</span>
+                  <Icon name="mdi:arrow-right" class="hiw-map__go" aria-hidden="true" />
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
     </div>
-    <nav class="hiw-jump mt-12 md:mt-16" aria-label={c.ladder.navLabel} data-enter>
-      <ol class="hiw-jump__list">
-        {
-          navItems.map((n) => (
-            <li>
-              <a class="hiw-jump__link" href={`#${n.id}`}>
-                <span class="hiw-jump__index" aria-hidden="true">{n.index}</span>
-                <span>{n.name}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </nav>
   </Section>
 
-  <Section padding="md" width="7xl">
+  <Section padding="sm" width="7xl">
     <div class="ladder">
+      <div class="ladder__stack">
       {
         c.ladder.steps.map((step) => (
           <article id={step.id} class="ladder__step hiw-anchor" aria-labelledby={`${step.id}-title`}>
@@ -82,47 +98,50 @@ const navItems = [
               )}
             </div>
 
-            <div class="ladder__body">
-              <div class="flex flex-col gap-5" data-reveal>
-                <h3 class="ladder__label">{c.ladder.labels.whatYouGet}</h3>
-                <ul class="ladder__gets">
-                  {step.whatYouGet.map((g, i) => (
-                    <li class="ladder__get" data-anim="rise" style={`--i:${i}`}>
-                      <Icon name="mdi:check-circle-outline" class="ladder__check" aria-hidden="true" />
-                      <div class="flex flex-col gap-1">
-                        <span class="font-semibold text-foreground">{g.title}</span>
-                        <span class="text-muted">{g.body}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <dl class="ladder__facts" data-reveal>
+              {facts.map((f) => (
+                <div class="ladder__fact" data-kind={f.kind}>
+                  <dt class="ladder__fact-label">
+                    <Icon name={f.icon} aria-hidden="true" />
+                    {f.label}
+                  </dt>
+                  <dd>{step[f.kind]}</dd>
+                </div>
+              ))}
+            </dl>
 
-              <dl class="ladder__facts" data-reveal>
-                <div class="ladder__fact">
-                  <dt class="ladder__label">{c.ladder.labels.duration}</dt>
-                  <dd>{step.duration}</dd>
-                </div>
-                <div class="ladder__fact">
-                  <dt class="ladder__label">{c.ladder.labels.suits}</dt>
-                  <dd>{step.suits}</dd>
-                </div>
-                <div class="ladder__fact ladder__fact--not">
-                  <dt class="ladder__label">{c.ladder.labels.isNot}</dt>
-                  <dd>{step.isNot}</dd>
-                </div>
-              </dl>
-
-              {step.id === "build" && (
-                <div class="ladder__own" data-reveal>
-                  <p class="ladder__own-line">{c.ladder.build.ownershipLine}</p>
-                  <p class="text-sm text-subtle">{c.ladder.build.aiBuiltNote}</p>
-                </div>
-              )}
+            <div class="ladder__what" data-reveal>
+              <h3 class="ladder__label">{c.ladder.labels.whatYouGet}</h3>
+              <ul class="ladder__gets" style={`--n:${step.whatYouGet.length}`}>
+                {step.whatYouGet.map((g, i) => (
+                  <li class="ladder__get" data-anim="rise" style={`--i:${i}`}>
+                    <span class="ladder__get-icon" aria-hidden="true">
+                      <Icon name={g.icon} />
+                    </span>
+                    <div class="ladder__get-head">
+                      <h4 class="ladder__get-title">{g.title}</h4>
+                      {g.tag && (
+                        <span class="ladder__tag" data-tone={g.tone}>
+                          {g.tag}
+                        </span>
+                      )}
+                    </div>
+                    <p class="ladder__get-body">{g.body}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
+
+            {step.id === "build" && (
+              <div class="ladder__own" data-reveal>
+                <p class="ladder__own-line">{c.ladder.build.ownershipLine}</p>
+                <p class="text-sm text-subtle">{c.ladder.build.aiBuiltNote}</p>
+              </div>
+            )}
           </article>
         ))
       }
+      </div>
 
       <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title" data-reveal>
         <div class="ladder__badge">
@@ -167,27 +186,6 @@ const navItems = [
     <p class="mt-6 max-w-2xl text-sm text-muted">{c.method.note}</p>
   </Section>
 
-  <Section padding="md" width="7xl">
-    <blockquote class="hiw-quote" data-reveal>
-      <p>{c.pullQuote}</p>
-    </blockquote>
-  </Section>
-
-  <Section id="engagement" padding="lg" width="7xl" class="hiw-anchor">
-    <SectionHeader title={c.engagement.title} />
-    <ol class="steps mt-10 md:mt-12">
-      {
-        c.engagement.steps.map((s, i) => (
-          <li class="steps__item" data-anim="rise" style={`--i:${i}`}>
-            <span class="steps__index mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
-            <h3 class="steps__title">{s.title}</h3>
-            <p class="steps__desc text-muted">{s.desc}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </Section>
-
   <Section id="team" padding="lg" width="7xl" class="hiw-anchor">
     <SectionHeader title={c.team.title} subtitle={c.team.lead} />
     <div class="team mt-10 md:mt-12">
@@ -214,16 +212,6 @@ const navItems = [
           </article>
         ))
       }
-    </div>
-  </Section>
-
-  <Section padding="md" width="7xl">
-    <div class="hiw-pricing" data-reveal>
-      <h2 class="text-3xl font-bold sm:text-4xl">{c.pricing.title}</h2>
-      <p class="lead max-w-xl">{c.pricing.body}</p>
-      <Button variant="secondary" size="lg" href={c.pricing.cta.href} icon class="w-full sm:w-auto">
-        {c.pricing.cta.text}
-      </Button>
     </div>
   </Section>
 

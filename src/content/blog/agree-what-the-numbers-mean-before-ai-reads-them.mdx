@@ -1,0 +1,50 @@
+---
+title: "Agree what the numbers mean before AI reads them"
+description: "Ask three teams how many active customers you have and you may get three answers. Why that matters more once AI reads your data, and a short way to fix it."
+date: 2026-10-25
+author: "AUXO Data Labs"
+tags: ["Data readiness", "Data infrastructure"]
+draft: false
+---
+
+Ask sales, finance and operations how many active customers you have. You may get three answers, and each team is right by its own rule. Sales counts anyone with an open contract. Finance counts anyone billed this quarter. Operations counts anyone who logged in last month.
+
+People cope with this. They know whose number to use in which meeting. An AI assistant doesn't.
+
+## Small mismatches, large costs
+
+Definitions sound like admin until one goes wrong. NASA lost the Mars Climate Orbiter in 1999 because its ground software used English units while the spacecraft's software used metric. The mismatch threw off the trajectory and sent the spacecraft too close to Mars ([NASA](https://science.nasa.gov/mission/mars-climate-orbiter/)). Two teams, two working systems, one missing agreement.
+
+Business mismatches are quieter, but they add up. Gartner research from 2020 put the cost of poor data quality at an average of at least $12.9 million a year per organisation ([Gartner](https://www.gartner.com/en/data-analytics/topics/data-quality)).
+
+## Why AI raises the stakes
+
+When a person pulls a number, they pick a definition, often without saying so. When an AI agent does it, it also picks one, and you may never see which. Ask it for churn and it will answer with confidence, built on whichever table it found first.
+
+Most companies are not ready for this. Gartner found that 63% of organisations either don't have, or aren't sure they have, the right data management practices for AI. It predicts that through 2026, organisations will abandon 60% of AI projects that are not supported by AI-ready data ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk)).
+
+The model is not the weak point here. The missing agreement is.
+
+## A short glossary beats a long one
+
+You don't need to define everything. Start with the 10 to 20 terms that run the business: the ones in the board pack, the investor update and your first AI use case. For each one, write down:
+
+- **Name:** for example, "active customer".
+- **Definition:** one sentence, including what is left out.
+- **Source:** the system and the field it comes from.
+- **Owner:** the person who decides if it changes.
+- **Last changed:** the date and the reason.
+
+Then check each definition against the data. Does the CRM actually hold the field the definition depends on? Is it filled in for most records? A definition the data can't support is only a wish.
+
+Finally, put the glossary where your tools can use it. That might be a metrics layer in your warehouse, or a document your AI assistant reads before it answers. A glossary that lives in a slide deck helps nobody.
+
+## When not to start here
+
+If you are a ten-person startup with one system and one person running the numbers, you probably don't have this problem yet. Write your five key definitions down anyway. It takes an hour and saves arguments later.
+
+And if teams genuinely need different views, keep them, but give them different names: "billed customers", "active users". The problem is one word with three meanings, not three useful numbers.
+
+## The takeaway
+
+Before an AI tool reads your data, agree what the important words mean, where each number comes from and who owns it. It is the cheapest part of any AI project, and the easiest to skip.

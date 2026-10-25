@@ -106,7 +106,7 @@ export const aboutContent: AboutContent = {
       },
       {
         title: "Plain and honest",
-        desc: "We are clear about the trade-offs and clear about fit. We will tell you when not to build.",
+        desc: "We're clear about trade-offs and fit. We'll tell you when not to build.",
       },
     ],
     aiLine: siteData.aiLine,
@@ -124,7 +124,7 @@ export const aboutContent: AboutContent = {
       {
         label: "Then",
         title: "Advise",
-        desc: "The right AI and data setup for your team: a roadmap, the right tools, and clear rules on who approves what.",
+        desc: "A roadmap, a tool shortlist and clear rules on who approves what.",
       },
       {
         label: "Next",
@@ -137,11 +137,11 @@ export const aboutContent: AboutContent = {
         desc: "Your team takes the controls. No retainer to renew. Managed upkeep is there if you want it.",
       },
     ],
-    link: { text: "See the full detail", href: "/how-it-works/" },
+    link: { text: "See how it works", href: "/how-it-works/" },
   },
   where: {
     title: "Where we work",
-    body: "We are based in Dubai Internet City and work with teams across the UAE, the US and Europe. We work remotely by default. We handle your data on the terms you set, taking only what the work needs.",
+    body: "We work from Dubai Internet City, remotely by default, with teams across the UAE, the US and Europe.",
     points: [
       { label: "Based in", value: "Dubai" },
       { label: "Serving", value: "The UAE, the US and Europe" },
@@ -151,16 +151,16 @@ export const aboutContent: AboutContent = {
   engagement: {
     title: "What to expect",
     titleHighlight: "expect",
-    lead: "Working with an outside team should feel safe. Here is what you can expect from the first conversation onward.",
+    lead: "Working with an outside team should feel safe. Here's what to expect from the first conversation.",
     reassurance: "We are happy to sign an NDA before we begin.",
     principles: [
       {
         title: "Confidential by default",
-        desc: "We're glad to sign an NDA before the first detailed conversation. Your name, your numbers and your plans stay between us.",
+        desc: "Your name, your numbers and your plans stay between us.",
       },
       {
         title: "Careful with your data",
-        desc: "We take only the data the work needs, sampled, anonymised or hashed wherever we can. We never reuse it, host it for resale or sell it.",
+        desc: "We take only what the work needs, sampled, anonymised or hashed where we can. We never reuse, resell or host it.",
       },
       {
         title: "Open about money",
@@ -168,14 +168,14 @@ export const aboutContent: AboutContent = {
       },
       {
         title: "A person, not a process",
-        desc: "You work directly with the founders, not an account manager relaying messages. Clear language, no black box.",
+        desc: "You work directly with the founders, not an account manager. Clear language, no black box.",
       },
     ],
   },
   cta: {
     title: "Start with the problem, not a pitch.",
     titleHighlight: "not a pitch",
-    description: "Now you know how we work. The next move is a short conversation. No pitch, no obligation.",
+    description: "The next step is a short conversation. No obligation.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
     secondaryText: "Read the blog",
