@@ -23,7 +23,7 @@ const manifest = {
       name: "The Work",
       short_name: "The Work",
       description: "How we assess a business, how an engagement runs, and the team",
-      url: "/the-work/",
+      url: "/how-it-works/",
       icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
     },
     {

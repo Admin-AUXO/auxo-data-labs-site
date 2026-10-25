@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/layout/Section.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+<BaseLayout
+  title="Blog: data and AI, written plainly"
+  description="Long reads from AUXO on data, AI tools and agents, and when not to build. Written plainly, with sources."
+>
+  <Section padding="xl" width="7xl">
+    <div class="flex max-w-3xl flex-col gap-6">
+      <h1 class="text-display text-display--5xl max-w-[16ch]">Data and AI, written plainly.</h1>
+      <p class="lead max-w-2xl text-xl">Long reads on data, AI tools and agents, and when not to build. Every figure has a source.</p>
+    </div>
+    <ul class="mt-10 flex flex-col gap-4">
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+</BaseLayout>

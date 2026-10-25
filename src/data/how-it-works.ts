@@ -15,7 +15,7 @@ export interface Founder {
   linkedin: string;
 }
 
-export const theWorkContent = {
+export const howItWorksContent = {
   intro: {
     title: "How we assess a business.",
     lead: "We begin with a structured read of where your data actually stands. Not a proposal but an assessment.",

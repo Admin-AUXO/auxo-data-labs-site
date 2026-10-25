@@ -7,6 +7,10 @@ export interface NavItem {
 
 export interface NavigationContent {
   items: NavItem[];
+  secondaryLink: {
+    label: string;
+    href: string;
+  };
   cta: {
     label: string;
     href: string;
@@ -15,12 +19,16 @@ export interface NavigationContent {
 
 export const navigationContent: NavigationContent = {
   items: [
-    { name: "The Work", href: "/the-work/" },
+    { name: "How it works", href: "/how-it-works/" },
+    { name: "Pricing", href: "/pricing/" },
+    { name: "Marketplace", href: "/marketplace/" },
+    { name: "Blog", href: "/blog/" },
     { name: "AUXO Score", href: "/auxo-score/" },
-    { name: "Lab", href: "/about/" },
-    { name: "Insights", href: "/insights/" },
-    { name: "Contact", href: "/contact/" },
   ],
+  secondaryLink: {
+    label: "Contact",
+    href: "/contact/",
+  },
   cta: {
     label: "Book a meeting",
     href: siteData.bookingUrl,

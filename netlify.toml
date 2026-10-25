@@ -11,14 +11,26 @@
   SECRETS_SCAN_OMIT_KEYS = "PUBLIC_EMAILJS_SERVICE_ID,PUBLIC_EMAILJS_TEMPLATE_ID,PUBLIC_EMAILJS_PUBLIC_KEY"
 
 [[redirects]]
+  from = "/the-work/"
+  to = "/how-it-works/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/the-work"
+  to = "/how-it-works/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/services/"
-  to = "/the-work/"
+  to = "/how-it-works/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/services"
-  to = "/the-work/"
+  to = "/how-it-works/"
   status = 301
   force = true
 

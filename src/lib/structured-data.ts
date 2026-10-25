@@ -1,6 +1,6 @@
 import { siteData } from "../data/site";
 import { absoluteUrl } from "./url";
-import type { Founder } from "../data/the-work";
+import type { Founder } from "../data/how-it-works";
 
 const home = absoluteUrl("/");
 const abs = (p: string) => (p.startsWith("http") ? p : absoluteUrl(p));
@@ -123,7 +123,7 @@ export function personSchema(p: Founder) {
     name: p.name,
     jobTitle: p.role,
     description: p.lines.join(" "),
-    url: abs("/the-work/#team"),
+    url: abs("/how-it-works/#team"),
     worksFor: { "@type": "Organization", name: siteData.name, url: home },
     sameAs: [p.linkedin],
   };

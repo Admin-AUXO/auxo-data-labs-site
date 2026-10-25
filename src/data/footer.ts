@@ -16,15 +16,23 @@ export interface FooterContent {
 }
 
 export const footerContent: FooterContent = {
-  statement: "The data you hold, turned into decisions.",
-  statementHighlight: "decisions",
+  statement: "Your data, ready for AI.",
+  statementHighlight: "ready for AI",
   sections: [
     {
       title: "Explore",
       links: [
-        { label: "The Work", href: "/the-work/" },
+        { label: "How it works", href: "/how-it-works/" },
+        { label: "Pricing", href: "/pricing/" },
+        { label: "Marketplace", href: "/marketplace/" },
         { label: "AUXO Score", href: "/auxo-score/" },
-        { label: "Lab", href: "/about/" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About", href: "/about/" },
+        { label: "Blog", href: "/blog/" },
         { label: "Insights", href: "/insights/" },
         { label: "Contact", href: "/contact/" },
       ],
@@ -38,5 +46,5 @@ export const footerContent: FooterContent = {
       ],
     },
   ],
-  note: "Made to last, and yours to keep. Built in Dubai.",
+  note: "Built to last, and yours to keep. Based in Dubai. Serving the UAE, the US and Europe.",
 };

@@ -8,7 +8,7 @@ type AxeViolation = Awaited<ReturnType<AxeBuilder["analyze"]>>["violations"][num
 
 const routes = [
   "/",
-  "/the-work/",
+  "/how-it-works/",
   "/auxo-score/",
   "/about/",
   "/insights/",
