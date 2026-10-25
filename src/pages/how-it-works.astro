@@ -7,7 +7,7 @@ import Button from "../components/ui/Button.astro";
 import Accordion from "../components/ui/Accordion.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import StructuredData from "../components/layout/StructuredData.astro";
-import { faqSchema, personSchema } from "../lib/structured-data";
+import { faqSchema } from "../lib/structured-data";
 import { howItWorksContent as c } from "../data/how-it-works";
 import { escapeHtml } from "../lib/text";
 import "../styles/pages/how-it-works.css";
@@ -111,7 +111,7 @@ const facts = [
             </dl>
 
             <div class="ladder__what" data-reveal>
-              <h3 class="ladder__label">{c.ladder.labels.whatYouGet}</h3>
+              <h3 class="sr-only">{c.ladder.labels.whatYouGet}</h3>
               <ul class="ladder__gets" style={`--n:${step.whatYouGet.length}`}>
                 {step.whatYouGet.map((g, i) => (
                   <li class="ladder__get" data-anim="rise" style={`--i:${i}`}>
@@ -144,35 +144,21 @@ const facts = [
       </div>
 
       <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title" data-reveal>
-        <div class="ladder__badge">
-          <Icon name={c.ladder.upkeep.icon} class="ladder__icon" aria-hidden="true" />
-          <span class="section-index">{c.ladder.upkeep.label}</span>
+        <Icon name={c.ladder.upkeep.icon} class="upkeep__icon" aria-hidden="true" />
+        <div class="upkeep__head">
+          <h2 id="managed-upkeep-title" class="upkeep__title">{c.ladder.upkeep.title}</h2>
+          <span class="upkeep__tag">{c.ladder.upkeep.label}</span>
         </div>
-        <div class="upkeep__grid">
-          <div class="flex flex-col gap-3">
-            <h2 id="managed-upkeep-title" class="ladder__name">{c.ladder.upkeep.title}</h2>
-            <p class="ladder__promise">{c.ladder.upkeep.promise}</p>
-          </div>
-          <div class="flex flex-col gap-4">
-            <p class="text-muted">{c.ladder.upkeep.body}</p>
-            <p class="upkeep__terms">{c.ladder.upkeep.terms}</p>
-          </div>
-        </div>
+        <p class="upkeep__body">
+          {c.ladder.upkeep.promise} {c.ladder.upkeep.terms}
+        </p>
       </article>
     </div>
   </Section>
 
-  <Section padding="md" width="7xl" background="surface">
-    <p class="hiw-ailine" data-reveal>
-      <Icon name="mdi:account-check-outline" class="hiw-ailine__icon" aria-hidden="true" />
-      <span>{c.aiLine}</span>
-    </p>
-  </Section>
-
   <Section id="method" padding="lg" width="7xl" class="hiw-anchor">
-    <p class="section-index mb-4">{c.method.eyebrow}</p>
     <SectionHeader title={c.method.title} subtitle={c.method.lead} />
-    <ol class="method mt-10 md:mt-12">
+    <ol class="method mt-8">
       {
         c.method.dimensions.map((d, i) => (
           <li class="method__item" data-anim="rise" style={`--i:${i}`}>
@@ -183,42 +169,25 @@ const facts = [
         ))
       }
     </ol>
-    <p class="mt-6 max-w-2xl text-sm text-muted">{c.method.note}</p>
   </Section>
 
-  <Section id="team" padding="lg" width="7xl" class="hiw-anchor">
-    <SectionHeader title={c.team.title} subtitle={c.team.lead} />
-    <div class="team mt-10 md:mt-12">
-      {
-        c.team.founders.map((f) => (
-          <article class="founder" data-reveal>
-            <div class="flex flex-col gap-4">
-              <div>
-                <h3 class="text-2xl font-bold">{f.name}</h3>
-                <p class="text-accent-2 font-medium">{f.role}</p>
-              </div>
-              {f.lines.map((l) => <p class="text-muted">{l}</p>)}
-              <a
-                href={f.linkedin}
-                class="founder__link"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${c.team.linkLabel}: ${f.name}`}
-              >
-                <Icon name="mdi:linkedin" aria-hidden="true" />
-                {c.team.linkLabel}
-              </a>
-            </div>
-          </article>
-        ))
-      }
-    </div>
+  <Section padding="sm" width="7xl">
+    <p class="hiw-team" data-reveal>
+      <Icon name="mdi:account-group-outline" class="hiw-team__icon" aria-hidden="true" />
+      <span>{c.teamLine.text}</span>
+      <a class="hiw-link" href={c.teamLine.link.href}>
+        {c.teamLine.link.text}
+        <Icon name="mdi:arrow-right" aria-hidden="true" />
+      </a>
+    </p>
   </Section>
 
   <Section id="faq" padding="lg" width="7xl" class="hiw-anchor">
-    <SectionHeader title={c.faq.title} />
-    <div class="mt-10 max-w-4xl" data-reveal>
-      <Accordion items={faqItems} openFirst />
+    <div class="faq-split">
+      <SectionHeader title={c.faq.title} />
+      <div class="faq-split__list" data-reveal>
+        <Accordion items={faqItems} openFirst />
+      </div>
     </div>
   </Section>
 
@@ -233,5 +202,4 @@ const facts = [
   />
 
   <StructuredData type="FAQPage" data={faqSchema(c.faq.items)} />
-  {c.team.founders.map((f) => <StructuredData type="Person" data={personSchema(f)} />)}
 </BaseLayout>

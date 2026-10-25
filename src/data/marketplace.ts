@@ -129,7 +129,7 @@ const badges: Record<BadgeKey, BadgeInfo> = {
     key: "works-with",
     label: "Works with",
     meaning: "A third-party tool we set up and can manage. We have no commercial agreement with the vendor.",
-    howYouPay: "Setup + managed",
+    howYouPay: "One-off setup · optional upkeep",
     icon: "mdi:puzzle-outline",
   },
   partner: {
@@ -143,7 +143,7 @@ const badges: Record<BadgeKey, BadgeInfo> = {
     key: "auxo-stack",
     label: "AUXO stack",
     meaning: "A set of listed tools we put together for one function.",
-    howYouPay: "Setup + managed",
+    howYouPay: "One-off setup · optional upkeep",
     icon: "mdi:layers-outline",
   },
   "built-by-auxo": {
@@ -483,13 +483,14 @@ export const marketplaceContent = {
     addToStack: "Add to stack",
     addedState: "Added",
     detailsLabel: "Details",
+    payLabel: "How you pay",
     backLabel: "Back",
     vendorLabel: "By {vendor}",
     vendorLink: "Vendor site",
     includesLabel: "Includes",
     agentFacts: ["Built on Claude", "Works in your own Google Sheet and Drive"],
     agentDetail:
-      "You approve every draft. If you stop, your lists, drafts and data stay yours. The agent is a subscription.",
+      "If you stop, your lists, drafts and data stay yours.",
   },
   tray: {
     countOne: "1 in your stack",
@@ -497,8 +498,8 @@ export const marketplaceContent = {
     action: "Request setup",
     clear: "Clear",
   },
-  vendorBillingNote:
-    "You buy third-party tools in your company's name, on your own contract. We tell you the vendor's price before you commit.",
+  payNote:
+    "Each tool: a one-off setup fee, then optional monthly upkeep. Vendors bill you directly, on your own contract.",
   customStack: {
     title: "Custom stack",
     line: "Built for your function.",

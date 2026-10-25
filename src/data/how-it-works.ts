@@ -31,13 +31,6 @@ export interface LadderStep {
   links: Link[];
 }
 
-export interface Founder {
-  name: string;
-  role: string;
-  lines: string[];
-  linkedin: string;
-}
-
 export interface FaqItem {
   question: string;
   answer: string;
@@ -60,9 +53,9 @@ export const howItWorksContent = {
     navLabel: "Steps",
     labels: {
       whatYouGet: "What you get",
-      duration: "Typical duration",
+      duration: "Time",
       suits: "Best for",
-      isNot: "It is not",
+      isNot: "It isn't",
     },
     steps: [
       {
@@ -176,7 +169,7 @@ export const howItWorksContent = {
     build: {
       ownershipLine: siteData.ownershipLine,
       aiBuiltNote:
-        "AI-built means we use AI coding and data tools to do the build work, and an AUXO engineer reviews and tests everything before handover. What we build is yours to keep.",
+        "AI-built means we use AI tools for the build work, then review and test everything before handover.",
     },
     upkeep: {
       id: "managed-upkeep",
@@ -184,17 +177,13 @@ export const howItWorksContent = {
       icon: "mdi:sync",
       title: "Managed upkeep",
       promise: "We keep it running and tuned, month by month.",
-      body: "We check it runs, fix what breaks, update it as tools and models change, tune agent rules, and send a short plain‑English report each month.",
       terms:
         "Monthly, no minimum term. Stop with 30 days' notice and keep everything we built. Never a condition of Build.",
     },
   },
-  aiLine: "AI where it earns its place. A person approves what goes out.",
   method: {
-    eyebrow: "The method",
     title: "Five checks behind every audit.",
-    lead: "Every AUXO Score and audit reads your data against the same five checks.",
-    note: "We publish it so you can judge it before you meet us.",
+    lead: "Every AUXO Score and audit reads your data against the same five checks. We publish them so you can judge the method first.",
     dimensions: [
       { name: "Accurate", question: "Is the data correct?" },
       { name: "Complete", question: "Is anything missing?" },
@@ -203,28 +192,9 @@ export const howItWorksContent = {
       { name: "Trusted", question: "Do people rely on it to make decisions?" },
     ] satisfies Dimension[],
   },
-  team: {
-    title: "The founding team",
-    lead: "You work with the founders, not an account manager.",
-    linkLabel: "Connect on LinkedIn",
-    founders: [
-      {
-        name: "Vignesh Ramesh",
-        role: "Co-Founder & CEO",
-        lines: [
-          "Ex-IBM systems engineer. 10+ years executing enterprise mandates across the GCC, including BP Oman, RTA, DEWA and TransCo.",
-        ],
-        linkedin: "https://www.linkedin.com/in/vig-auxo",
-      },
-      {
-        name: "Ajay Kumar",
-        role: "Co-Founder & CTO",
-        lines: [
-          "Analytics architect. 10+ years building cloud infrastructure and BI for Fortune 500s and scale-ups across the EU, US and MENA.",
-        ],
-        linkedin: "https://www.linkedin.com/in/ajaykumar9795",
-      },
-    ] satisfies Founder[],
+  teamLine: {
+    text: "You work with the founders, not an account manager.",
+    link: { text: "Meet the team", href: "/about/#team" } satisfies Link,
   },
   faq: {
     title: "Questions about how it works",

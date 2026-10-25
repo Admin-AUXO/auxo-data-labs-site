@@ -18,21 +18,16 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
   title={c.meta.title}
   description={c.meta.description}
 >
-  <Section padding="xl" width="7xl">    <div class="flex flex-col gap-8">
-      <h1 class="text-display max-w-[12ch]" data-enter="headline">
-        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
-      </h1>
-      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
-    </div>
-  </Section>
-
   <Section padding="lg" width="7xl">
     <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-      <div class="flex flex-col gap-8" data-reveal>
-        <div class="flex flex-col gap-4">
-          <span class="block h-0.5 w-14 bg-accent-2" data-anim="draw" aria-hidden="true"></span>
-          <h2 class="text-2xl font-bold">{c.details.title}</h2>
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-5">
+          <h1 class="text-display text-display--5xl max-w-[12ch]" data-enter="headline">
+            <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
+          </h1>
+          <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
         </div>
+        <h2 class="text-2xl" data-reveal>{c.details.title}</h2>
 
         <ul class="flex flex-col">
           {
@@ -74,10 +69,9 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
       </div>
 
       <div class="flex flex-col gap-6">
-        <div class="flex flex-col gap-4">
-          <span class="block h-0.5 w-14 bg-accent-2" data-anim="draw" aria-hidden="true"></span>
-          <h2 class="text-2xl font-bold">{c.form.title}</h2>
-          <p class="-mt-2 text-muted">{c.form.description}</p>
+        <div class="flex flex-col gap-2">
+          <h2 class="text-2xl">{c.form.title}</h2>
+          <p class="text-muted">{c.form.description}</p>
         </div>
         <ContactForm />
       </div>
@@ -90,7 +84,7 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
       highlight={c.nextSteps.titleHighlight}
       subtitle={c.nextSteps.subtitle}
     />
-    <ol class="mt-14 grid gap-x-10 gap-y-10 md:grid-cols-3">
+    <ol class="mt-8 grid gap-x-10 gap-y-8 md:grid-cols-3">
       {
         c.nextSteps.steps.map((step, i) => (
           <li
@@ -107,9 +101,11 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
   </Section>
 
   <Section padding="lg" width="7xl">
-    <SectionHeader title={c.faq.title} highlight={c.faq.titleHighlight} subtitle={c.faq.description} />
-    <div class="mt-10 max-w-4xl" data-reveal>
-      <Accordion items={faqItems} openFirst />
+    <div class="faq-split">
+      <SectionHeader title={c.faq.title} highlight={c.faq.titleHighlight} subtitle={c.faq.description} />
+      <div class="faq-split__list" data-reveal>
+        <Accordion items={faqItems} openFirst />
+      </div>
     </div>
   </Section>
 

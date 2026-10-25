@@ -57,11 +57,11 @@ export const blogContent: BlogContent = {
   index: {
     metaTitle: "Blog: data and AI, written plainly",
     metaDescription:
-      "Long reads from AUXO on data, AI tools and agents, and when not to build. Written plainly, with sources.",
+      "Plain reads from AUXO on data, AI tools and agents, and when not to build. Every figure has a source.",
     hero: {
       title: "Data and AI, written plainly.",
       titleHighlight: "written plainly",
-      lead: "Long reads on data, AI tools and agents, and when not to build. Every figure has a source.",
+      lead: "Plain reads on data, AI tools and agents, and when not to build. Every figure has a source.",
     },
     tagFilterLabel: "Filter posts by topic",
     tagFilterAll: "All topics",
@@ -102,9 +102,12 @@ export const blogContent: BlogContent = {
       linkText: "Ajay Kumar",
       linkHref: "https://www.linkedin.com/in/ajaykumar9795",
     },
-    "AUXO Data Labs": {
-      kind: "Organization",
-      line: "Written by the AUXO Data Labs founders.",
+    "Vignesh Ramesh": {
+      kind: "Person",
+      jobTitle: "Co-Founder & CEO",
+      line: "Vignesh Ramesh is Co-Founder & CEO of AUXO Data Labs.",
+      linkText: "Vignesh Ramesh",
+      linkHref: "https://www.linkedin.com/in/vig-auxo",
     },
   },
 };

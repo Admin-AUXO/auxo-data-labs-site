@@ -85,13 +85,12 @@
     border-radius: var(--radius-full);
     color: var(--muted);
     cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: var(--tracking-mono);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
     min-block-size: 2.75rem;
     padding-block: 0.4rem;
-    padding-inline: 0.95rem;
-    text-transform: uppercase;
+    padding-inline: 1rem;
     transition:
       background-color var(--dur-fast) var(--ease-standard),
       border-color var(--dur-fast) var(--ease-standard),
@@ -167,13 +166,13 @@
   }
 
   .deck__card--cta {
-    background-color: var(--accent-2);
-    border-color: var(--accent-2);
+    background-color: var(--surface);
+    border-color: color-mix(in oklch, var(--accent-2) 45%, transparent);
   }
 
   .deck__cta {
     block-size: 100%;
-    color: var(--accent-foreground);
+    color: var(--foreground);
     display: block;
     text-decoration: none;
   }
@@ -191,32 +190,32 @@
   }
 
   .deck__cta-kicker {
+    color: var(--accent-2);
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 600;
+    font-size: 0.75rem;
     letter-spacing: var(--tracking-mono);
-    opacity: 0.72;
     text-transform: uppercase;
   }
 
   .deck__cta-title {
-    color: var(--accent-foreground);
+    color: var(--foreground);
     font-family: var(--font-brand);
     font-size: var(--text-xl);
-    font-weight: 700;
-    line-height: 1.1;
+    font-weight: var(--font-weight-display);
+    line-height: 1.2;
   }
 
   .deck__cta-text {
-    color: color-mix(in oklch, var(--accent-foreground) 80%, transparent);
+    color: var(--muted);
     font-size: var(--text-sm);
     line-height: 1.55;
   }
 
   .deck__cta-go {
     align-items: center;
+    color: var(--accent);
     display: inline-flex;
-    font-weight: 700;
+    font-weight: 600;
     gap: 0.4rem;
     margin-block-start: auto;
   }
@@ -670,7 +669,7 @@
     align-items: center;
     background: transparent;
     border: 0;
-    color: var(--accent-2);
+    color: var(--subtle);
     cursor: pointer;
     display: inline-flex;
     font-family: var(--font-mono);

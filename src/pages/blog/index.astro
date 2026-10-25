@@ -21,9 +21,6 @@ const tags = [...tagCounts.entries()]
 <BaseLayout title={c.metaTitle} description={c.metaDescription}>
   <Section padding="lg" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
-      <span class="blog-hero__icon" aria-hidden="true" data-enter>
-        <Icon name="mdi:newspaper-variant-outline" />
-      </span>
       <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">
         <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
       </h1>

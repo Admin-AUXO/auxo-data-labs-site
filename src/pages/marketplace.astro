@@ -64,6 +64,7 @@ const all = c.filters.categories[0];
             {fill(c.filters.resultsMany, { n: cards.length })}
           </p>
         </div>
+        <p class="mkt-paynote">{c.payNote}</p>
       </div>
 
       <ul class="mkt-grid">
@@ -106,7 +107,7 @@ const all = c.filters.categories[0];
                     </div>
                     <p class="mkt-card__line">{card.short}</p>
                     <div class="mkt-card__foot">
-                      <p class="mkt-card__pay">{card.howYouPay}</p>
+                      {card.kind === "built-by-auxo" && <p class="mkt-card__pay">{card.howYouPay}</p>}
                       <a
                         class="btn mkt-add"
                         data-no-cta
@@ -137,10 +138,17 @@ const all = c.filters.categories[0];
                       </button>
                     </div>
                     <p class="mkt-card__detail">{card.line}</p>
-                    <p class="mkt-card__meaning">
-                      <Icon name={badge.icon} aria-hidden="true" />
-                      <span>{badge.meaning}</span>
-                    </p>
+                    {card.kind !== "built-by-auxo" && (
+                      <Fragment>
+                        <p class="mkt-card__meaning">
+                          <Icon name={badge.icon} aria-hidden="true" />
+                          <span>{badge.meaning}</span>
+                        </p>
+                        <p class="mkt-card__payline">
+                          <span>{c.card.payLabel}:</span> {card.howYouPay}
+                        </p>
+                      </Fragment>
+                    )}
                     {card.includes && (
                       <div class="mkt-card__includes">
                         <p class="mkt-card__label">{c.card.includesLabel}</p>
@@ -198,7 +206,6 @@ const all = c.filters.categories[0];
         </div>
       </div>
 
-      <p class="mkt-billing">{c.vendorBillingNote}</p>
 
       <div class="mkt-tray" data-stack-tray hidden>
         <p class="mkt-tray__count" data-stack-count aria-live="polite"></p>
@@ -217,28 +224,40 @@ const all = c.filters.categories[0];
   </Section>
 
   <Section padding="lg" width="7xl">
-    <div class="mkt-paid">
-      <div class="mkt-paid__head">
-        <Icon name="mdi:cash-multiple" class="mkt-paid__icon" aria-hidden="true" />
-        <SectionHeader title={c.howWeGetPaid.title} subtitle={c.howWeGetPaid.subline} />
+    <div class="mkt-how">
+      <div class="mkt-how__col">
+        <SectionHeader title={c.setup.title} subtitle={c.setup.lead} />
+        <ol class="mkt-how__steps">
+          {
+            c.setup.steps.map((step, i) => (
+              <li class="mkt-how__step" data-anim="rise" style={`--i:${i}`}>
+                <span class="mkt-how__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <p>{step}</p>
+              </li>
+            ))
+          }
+        </ol>
       </div>
-      <ul class="mkt-paid__list" style={`--cols:${c.howWeGetPaid.items.length}`}>
-        {
-          c.howWeGetPaid.items.map((item, i) => (
-            <li class="mkt-paid__item" data-anim="rise" style={`--i:${i}`}>
-              <Icon name={item.icon} class="mkt-paid__item-icon" aria-hidden="true" />
-              <h3 class="text-xl font-bold">{item.title}</h3>
-              <p class="text-muted">{item.body}</p>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="mkt-how__col">
+        <SectionHeader title={c.howWeGetPaid.title} subtitle={c.howWeGetPaid.subline} />
+        <ul class="mkt-how__paid">
+          {
+            c.howWeGetPaid.items.map((item, i) => (
+              <li class="mkt-how__item" data-anim="rise" style={`--i:${i}`}>
+                <Icon name={item.icon} class="mkt-how__icon" aria-hidden="true" />
+                <h3 class="mkt-how__title">{item.title}</h3>
+                <p class="mkt-how__body">{item.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </Section>
 
   <Section padding="lg" width="7xl">
     <SectionHeader title={c.vetting.title} subtitle={c.vetting.lead} />
-    <ol class="mkt-vet mt-10 md:mt-12">
+    <ol class="mkt-vet mt-8">
       {
         c.vetting.items.map((v, i) => (
           <li class="mkt-vet__item" data-anim="rise" style={`--i:${i}`}>
@@ -256,24 +275,11 @@ const all = c.filters.categories[0];
   </Section>
 
   <Section padding="lg" width="7xl">
-    <SectionHeader title={c.setup.title} subtitle={c.setup.lead} />
-    <ol class="mkt-steps mt-10 md:mt-12">
-      {
-        c.setup.steps.map((s, i) => (
-          <li class="mkt-steps__item" data-anim="rise" style={`--i:${i}`}>
-            <span class="mkt-steps__rule" aria-hidden="true" />
-            <span class="mono-datum text-accent-2" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-            <p class="mkt-steps__text">{s}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <SectionHeader title={c.faq.title} />
-    <div class="mt-8 max-w-4xl md:mt-10">
-      <Accordion items={faqItems} />
+    <div class="faq-split">
+      <SectionHeader title={c.faq.title} />
+      <div class="faq-split__list" data-reveal>
+        <Accordion items={faqItems} />
+      </div>
     </div>
   </Section>
 

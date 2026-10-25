@@ -1,4 +1,22 @@
 @layer components {
+  .faq-split {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (width >= 64rem) {
+    .faq-split {
+      align-items: start;
+      gap: 4rem;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
+
+    .faq-split > :first-child {
+      position: sticky;
+      top: 6rem;
+    }
+  }
+
   .accordion {
     display: flex;
     flex-direction: column;

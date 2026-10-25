@@ -1,17 +1,19 @@
 ---
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
+import StructuredData from "../components/layout/StructuredData.astro";
+import { personSchema } from "../lib/structured-data";
 import { aboutContent as c } from "../data/about";
-
-const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
+import "../styles/pages/about.css";
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description}>
-  <Section padding="xl" width="7xl">
-    <div class="flex max-w-3xl flex-col gap-7">
+  <Section padding="lg" width="7xl">
+    <div class="flex max-w-3xl flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[14ch]" data-enter="headline">
         <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
       </h1>
@@ -28,111 +30,72 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
         <p class="text-sm text-subtle">{c.hero.reassurance}</p>
       </div>
     </div>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-      <div class="lg:self-start">
-        <SectionHeader title={c.beliefs.title} highlight={c.beliefs.titleHighlight} />
-        <p class="mt-5 max-w-xs text-muted">{c.beliefs.lead}</p>
-      </div>
-      <div class="flex flex-col" data-reveal>
-        <div class="flex flex-col border-t border-border">
-          {
-            c.beliefs.items.map((item) => (
-              <article class="flex flex-col gap-3 border-b border-border py-6 sm:py-8 md:flex-row md:items-baseline md:gap-10">
-                <span class="block h-px w-10 shrink-0 bg-accent md:mt-3.5" aria-hidden="true" />
-                <div class="max-w-2xl">
-                  <h3 class="text-2xl font-bold">{item.title}</h3>
-                  <p class="mt-2 text-lg text-muted">{item.desc}</p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <SectionHeader
-      title={c.how.title}
-      highlight={c.how.titleHighlight}
-      subtitle={c.how.subtitle}
-    />
-    <ol class="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 sm:gap-y-12 md:mt-12 lg:grid-cols-4">
+    <dl class="about-facts" data-enter>
       {
-        c.how.steps.map((step, i) => (
-          <li class="relative flex flex-col gap-3 pt-6" data-anim={stepAnim[i]}>
-            <span class="absolute inset-x-0 top-0 h-0.5 bg-foreground" aria-hidden="true" />
-            <span class="eyebrow text-accent-2">{step.label}</span>
-            <h3 class="text-2xl font-bold">{step.title}</h3>
-            <p class="text-muted">{step.desc}</p>
-            {i < c.how.steps.length - 1 && (
-              <span
-                class="pointer-events-none absolute -right-7 top-7 hidden text-2xl leading-none text-subtle lg:block"
-                aria-hidden="true"
-              >
-                &rarr;
-              </span>
-            )}
+        c.hero.facts.map((f) => (
+          <div class="about-facts__item">
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <SectionHeader title={c.beliefs.title} subtitle={c.beliefs.lead} />
+    <ul class="about-grid mt-8">
+      {
+        c.beliefs.items.map((item, i) => (
+          <li class="about-grid__item" data-anim="rise" style={`--i:${i}`}>
+            <Icon name={item.icon} class="about-grid__icon" aria-hidden="true" />
+            <h3 class="about-grid__title">{item.title}</h3>
+            <p class="about-grid__desc">{item.desc}</p>
           </li>
         ))
       }
-    </ol>
-    <div class="mt-10">
-      <Button variant="ghost" href={c.how.link.href} icon class="-ms-2">
-        {c.how.link.text}
-      </Button>
+    </ul>
+  </Section>
+
+  <Section id="team" padding="lg" width="7xl" class="about-anchor">
+    <SectionHeader title={c.team.title} subtitle={c.team.lead} />
+    <div class="about-team mt-8">
+      {
+        c.team.founders.map((f) => (
+          <article class="about-team__person" data-reveal>
+            <h3 class="about-team__name">{f.name}</h3>
+            <p class="about-team__role">{f.role}</p>
+            {f.lines.map((l) => <p class="about-team__line">{l}</p>)}
+            <a
+              href={f.linkedin}
+              class="about-team__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${c.team.linkLabel}: ${f.name}`}
+            >
+              <Icon name="mdi:linkedin" aria-hidden="true" />
+              {c.team.linkLabel}
+            </a>
+          </article>
+        ))
+      }
     </div>
   </Section>
 
   <Section padding="lg" width="7xl">
-    <div class="flex flex-col gap-10">
-      <div>
-        <SectionHeader title={c.where.title} />
-        <p class="mt-5 max-w-3xl text-lg font-medium sm:text-xl" data-anim="rise-in">
-          {c.where.body}
-        </p>
-      </div>
-      <dl class="grid gap-px border border-border bg-border sm:grid-cols-3" data-reveal>
-        {
-          c.where.points.map((point) => (
-            <div class="flex flex-col gap-2 bg-surface p-6 sm:p-8">
-              <dt class="mono-datum">{point.label}</dt>
-              <dd class="text-xl font-bold text-balance">{point.value}</dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <div class="flex max-w-3xl flex-col gap-4" data-reveal>
-      <SectionHeader title={c.engagement.title} highlight={c.engagement.titleHighlight} />
-      <p class="max-w-2xl text-lg text-muted">{c.engagement.lead}</p>
-      <p class="flex items-start gap-3 text-sm text-subtle">
-        <span class="mt-2 h-px w-6 shrink-0 bg-accent" aria-hidden="true"></span>
-        {c.engagement.reassurance}
-      </p>
-    </div>
-    <ol class="mt-12 grid gap-x-12 sm:mt-16 lg:grid-cols-2 lg:gap-x-20">
+    <SectionHeader title={c.engagement.title} subtitle={c.engagement.lead} />
+    <ul class="about-grid about-grid--two mt-8">
       {
         c.engagement.principles.map((principle, i) => (
-          <li
-            class="flex gap-5 border-t border-border py-7"
-            data-anim={i % 2 === 0 ? "slide-right" : "slide-left"}
-          >
-            <span class="mono-datum pt-1" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-            <div class="flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-balance">{principle.title}</h3>
-              <p class="text-muted">{principle.desc}</p>
-            </div>
+          <li class="about-grid__item" data-anim="rise" style={`--i:${i}`}>
+            <Icon name={principle.icon} class="about-grid__icon" aria-hidden="true" />
+            <h3 class="about-grid__title">{principle.title}</h3>
+            <p class="about-grid__desc">{principle.desc}</p>
           </li>
         ))
       }
-    </ol>
+    </ul>
+    <p class="about-note">{c.engagement.reassurance}</p>
   </Section>
 
   <CtaSection
@@ -146,4 +109,6 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
     secondaryHref={c.cta.secondaryHref}
     reassurance={c.cta.reassurance}
   />
+
+  {c.team.founders.map((f) => <StructuredData type="Person" data={personSchema(f)} />)}
 </BaseLayout>

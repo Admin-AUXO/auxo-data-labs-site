@@ -22,7 +22,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { summary, related } = Astro.props;
-const { post, minutes, dateLabel, isoDate } = summary;
+const { post, minutes, isoDate } = summary;
 const { Content } = await render(post);
 const c = blogContent.post;
 const author = authorFor(post.data.author);
@@ -48,8 +48,6 @@ const lineParts =
         <h1 class="text-display text-display--5xl text-balance" data-enter="headline">{post.data.title}</h1>
         <p class="blog-byline mono-datum" data-enter>
           <span>{c.byPrefix} {post.data.author}</span>
-          <span aria-hidden="true">·</span>
-          <time datetime={isoDate}>{dateLabel}</time>
           <span aria-hidden="true">·</span>
           <span>{minutes} {c.minutesSuffix}</span>
         </p>
@@ -85,7 +83,7 @@ const lineParts =
     related.length > 0 && (
       <Section padding="md" width="4xl">
         <div class="blog-related">
-          <h2 class="text-3xl font-bold sm:text-4xl" data-reveal>{c.relatedHeading}</h2>
+          <h2 class="text-3xl" data-reveal>{c.relatedHeading}</h2>
           <ul class="blog-list blog-list--related mt-8">
             {related.map((s, i) => (
               <li>

@@ -39,6 +39,8 @@ export interface PricingContent {
     eyebrow: string;
     title: string;
     lead: string;
+    rulesTitle: string;
+    rules: { tone: "free" | "paid" | "optional"; icon: string; text: string }[];
   };
   cards: {
     tiersLabel: string;
@@ -50,7 +52,6 @@ export interface PricingContent {
     points: { icon: string; title: string; body: string }[];
     note: string;
   };
-  finePrint: string[];
   faq: {
     title: string;
     items: FaqItem[];
@@ -74,6 +75,13 @@ export const pricingContent: PricingContent = {
     eyebrow: "Pricing",
     title: "Start where you are.",
     lead: "Pick the path that fits your company. Every price is personal, and we send it privately after the first conversation and audit.",
+    rulesTitle: "How pricing works",
+    rules: [
+      { tone: "free", icon: "mdi:check", text: "Free: the AUXO Score and the free audit." },
+      { tone: "paid", icon: "mdi:file-document-outline", text: "Everything else has a fixed price, in writing, before any work." },
+      { tone: "optional", icon: "mdi:sync", text: "Managed upkeep is optional and monthly. Stop with 30 days' notice." },
+      { tone: "optional", icon: "mdi:domain", text: "Third-party tools are billed to you by the vendor, on your own contract." },
+    ],
   },
   cards: {
     tiersLabel: "Includes",
@@ -99,7 +107,7 @@ export const pricingContent: PricingContent = {
         icon: "mdi:office-building-outline",
         eyebrow: "Mid-sized companies",
         title: "AUXO Score",
-        subline: "Then a fee-based deep-dive audit.",
+        subline: "Then a paid deep-dive audit.",
         bullets: [
           "Your AI-readiness score, free",
           "Paid deep-dive audit and plan",
@@ -120,7 +128,7 @@ export const pricingContent: PricingContent = {
         eyebrow: "Enterprise",
         title: "Custom",
         subline: "Pricing on request.",
-        bullets: ["Scope built around you", "Dedicated AI agent teams", "Confidential pricing"],
+        bullets: ["Scope built around you", "Dedicated AI agent teams", "Procurement and security review"],
         cta: { text: "Talk to us", href: "/contact/?topic=enterprise", variant: "secondary" },
         tiers: [{ name: "Analyze" }, { name: "Advise" }, { name: "Build" }, { name: "Managed upkeep" }],
         finePrint:
@@ -137,10 +145,6 @@ export const pricingContent: PricingContent = {
     ],
     note: "Funded startups, seed to Series B, one per company. It isn't the deep-dive audit and has no build. Not enough data yet? We'll say so and suggest what to set up first.",
   },
-  finePrint: [
-    "Only the AUXO Score and the free audit are free. Everything else is priced in writing before you commit.",
-    "Third-party tools are billed by the vendor to your company, on your own contract.",
-  ],
   faq: {
     title: "Pricing questions",
     items: [
@@ -150,11 +154,6 @@ export const pricingContent: PricingContent = {
           "Every company's data and goals are different, so a fixed price would be a guess. We price after the first conversation and audit, and send it to you in writing before any work starts.",
       },
       {
-        question: "Who qualifies for the free audit?",
-        answer:
-          "Startups that have raised outside investment, seed to Series B. A public announcement or a named investor is enough. One per company.",
-      },
-      {
         question: "What happens after the audit?",
         answer:
           "You get the results in writing. If something is worth building, we send a plan and a price, privately. If nothing is, we say so. There's no obligation to go further.",
@@ -162,11 +161,6 @@ export const pricingContent: PricingContent = {
       {
         question: "Can we sign an NDA first?",
         answer: "Yes. We're happy to sign an NDA before we begin. Send us yours, or ask for ours.",
-      },
-      {
-        question: "How does managed upkeep work?",
-        answer:
-          "Optional, monthly, after a build: we keep it running and tuned, and report each month. No minimum term. Stop with 30 days' notice and keep everything we built.",
       },
       {
         question: "Can you work with our procurement process?",

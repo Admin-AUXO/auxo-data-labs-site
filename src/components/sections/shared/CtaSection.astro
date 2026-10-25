@@ -28,75 +28,77 @@ const {
   secondaryHref,
 } = Astro.props;
 ---
-<Section padding="lg" width="6xl">
-  <div
-    class="cta-card mx-auto flex max-w-3xl flex-col items-center gap-7 rounded-2xl border border-border bg-surface px-6 py-14 text-center sm:px-12 sm:py-16"
-    style="box-shadow: var(--shadow-md);"
-    data-reveal
-  >
-    <h2 class="text-display text-display--4xl" data-anim="blur-in">
-      <HighlightText text={title} highlight={titleHighlight} />
-    </h2>
-    {
-      description && (
-        <p class="lead mx-auto text-balance">
-          <HighlightText text={description} highlight={descriptionHighlight} />
-        </p>
-      )
-    }
-    <div class="flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-      <Button variant="primary" size="lg" href={ctaHref} icon class="w-full sm:w-auto">{ctaText}</Button>
+<Section padding="md" width="7xl">
+  <div class="cta-band" data-reveal>
+    <div class="cta-band__text">
+      <h2 class="cta-band__title">
+        <HighlightText text={title} highlight={titleHighlight} />
+      </h2>
       {
-        secondaryText && secondaryHref && (
-          <Button variant="secondary" size="lg" href={secondaryHref} class="w-full sm:w-auto">
-            {secondaryText}
-          </Button>
+        description && (
+          <p class="cta-band__desc">
+            <HighlightText text={description} highlight={descriptionHighlight} />
+          </p>
         )
       }
     </div>
-    {reassurance && <p class="text-sm text-subtle">{reassurance}</p>}
+    <div class="cta-band__actions">
+      <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+        <Button variant="primary" size="lg" href={ctaHref} icon class="w-full sm:w-auto">{ctaText}</Button>
+        {
+          secondaryText && secondaryHref && (
+            <Button variant="secondary" size="lg" href={secondaryHref} class="w-full sm:w-auto">
+              {secondaryText}
+            </Button>
+          )
+        }
+      </div>
+      {reassurance && <p class="text-sm text-subtle">{reassurance}</p>}
+    </div>
   </div>
 </Section>
 
 <style>
-  .cta-card {
-    isolation: isolate;
-    overflow: hidden;
-    position: relative;
+  .cta-band {
+    border-block: 1px solid var(--border);
+    display: grid;
+    gap: 1.5rem 3rem;
+    padding-block: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
   }
 
-  .cta-card::before {
-    background: linear-gradient(
-      120deg,
-      transparent 0%,
-      color-mix(in oklab, var(--accent) 12%, transparent) 22%,
-      transparent 48%,
-      color-mix(in oklab, var(--accent-2) 12%, transparent) 74%,
-      transparent 100%
-    );
-    background-size: 220% 220%;
-    border-radius: inherit;
-    content: "";
-    inset: 0;
-    opacity: 0.7;
-    position: absolute;
-    z-index: -1;
-    animation: cta-sheen 18s ease-in-out infinite;
-  }
-
-  @keyframes cta-sheen {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
+  @media (width >= 64rem) {
+    .cta-band {
+      align-items: center;
+      grid-template-columns: minmax(0, 1fr) auto;
     }
   }
 
-  html:not([data-motion="on"]) .cta-card::before {
-    animation: none;
+  .cta-band__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .cta-band__title {
+    font-size: var(--text-3xl);
+  }
+
+  .cta-band__desc {
+    color: var(--muted);
+    font-size: var(--text-lg);
+    line-height: 1.5;
+    max-inline-size: 36rem;
+  }
+
+  .cta-band__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media (width >= 64rem) {
+    .cta-band__actions {
+      align-items: flex-end;
+    }
   }
 </style>

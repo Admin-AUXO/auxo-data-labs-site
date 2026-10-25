@@ -1,24 +1,27 @@
 import { siteData } from "./site";
 
 export interface AboutBelief {
+  icon: string;
   title: string;
   desc: string;
 }
 
-export interface AboutStep {
-  label: string;
-  title: string;
-  desc: string;
-}
-
-export interface AboutWherePoint {
+export interface AboutFact {
   label: string;
   value: string;
 }
 
 export interface AboutEngagementPrinciple {
+  icon: string;
   title: string;
   desc: string;
+}
+
+export interface Founder {
+  name: string;
+  role: string;
+  lines: string[];
+  linkedin: string;
 }
 
 export interface AboutContent {
@@ -33,29 +36,21 @@ export interface AboutContent {
     primaryCta: { text: string; href: string };
     secondaryCta: { text: string; href: string };
     reassurance: string;
+    facts: AboutFact[];
   };
   beliefs: {
     title: string;
-    titleHighlight?: string | string[];
     lead: string;
     items: AboutBelief[];
-    aiLine: string;
   };
-  how: {
+  team: {
     title: string;
-    titleHighlight?: string | string[];
-    subtitle: string;
-    steps: AboutStep[];
-    link: { text: string; href: string };
-  };
-  where: {
-    title: string;
-    body: string;
-    points: AboutWherePoint[];
+    lead: string;
+    linkLabel: string;
+    founders: Founder[];
   };
   engagement: {
     title: string;
-    titleHighlight?: string | string[];
     lead: string;
     reassurance: string;
     principles: AboutEngagementPrinciple[];
@@ -86,87 +81,83 @@ export const aboutContent: AboutContent = {
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
     reassurance: siteData.reassurance,
+    facts: [
+      { label: "Based in", value: "Dubai" },
+      { label: "Serving", value: "The UAE, the US and Europe" },
+      { label: "Built for", value: "Funded startups, mid\u2011sized companies and enterprise teams" },
+    ],
   },
   beliefs: {
     title: "What we believe",
-    titleHighlight: "believe",
     lead: "Four convictions shape how we work.",
     items: [
       {
+        icon: "mdi:cog-outline",
         title: "Built to run",
         desc: "We build systems for daily use, not a deck and not a pilot that stalls.",
       },
       {
+        icon: "mdi:key-outline",
         title: "Yours to keep",
         desc: "You own everything we build: the code, the setup, the documentation and the accounts. No lock-in, no black box.",
       },
       {
+        icon: "mdi:account-check-outline",
         title: "A person approves",
         desc: "AI does the groundwork. A person signs off on what goes out.",
       },
       {
+        icon: "mdi:message-text-outline",
         title: "Plain and honest",
         desc: "We're clear about trade-offs and fit. We'll tell you when not to build.",
       },
     ],
-    aiLine: siteData.aiLine,
   },
-  how: {
-    title: "How we work",
-    titleHighlight: "work",
-    subtitle: "Analyze what you have. Advise on what fits. Build it and hand it over.",
-    steps: [
+  team: {
+    title: "The founding team",
+    lead: "You work with the founders, not an account manager.",
+    linkLabel: "Connect on LinkedIn",
+    founders: [
       {
-        label: "First",
-        title: "Analyze",
-        desc: "An honest read of your business and your data, starting with the free AUXO Score.",
+        name: "Vignesh Ramesh",
+        role: "Co-Founder & CEO",
+        lines: [
+          "Ex-IBM systems engineer. 10+ years executing enterprise mandates across the GCC, including BP Oman, RTA, DEWA and TransCo.",
+        ],
+        linkedin: "https://www.linkedin.com/in/vig-auxo",
       },
       {
-        label: "Then",
-        title: "Advise",
-        desc: "A roadmap, a tool shortlist and clear rules on who approves what.",
+        name: "Ajay Kumar",
+        role: "Co-Founder & CTO",
+        lines: [
+          "Analytics architect. 10+ years building cloud infrastructure and BI for Fortune 500s and scale-ups across the EU, US and MENA.",
+        ],
+        linkedin: "https://www.linkedin.com/in/ajaykumar9795",
       },
-      {
-        label: "Next",
-        title: "Build",
-        desc: "Data infrastructure, AI tools and AI agent teams, set up end to end on the systems you already run.",
-      },
-      {
-        label: "Finally",
-        title: "Hand over",
-        desc: "Your team takes the controls. No retainer to renew. Managed upkeep is there if you want it.",
-      },
-    ],
-    link: { text: "See how it works", href: "/how-it-works/" },
-  },
-  where: {
-    title: "Where we work",
-    body: "We work from Dubai Internet City, remotely by default, with teams across the UAE, the US and Europe.",
-    points: [
-      { label: "Based in", value: "Dubai" },
-      { label: "Serving", value: "The UAE, the US and Europe" },
-      { label: "Built for", value: "Funded startups, mid‑sized companies and enterprise teams" },
     ],
   },
   engagement: {
     title: "What to expect",
-    titleHighlight: "expect",
     lead: "Working with an outside team should feel safe. Here's what to expect from the first conversation.",
     reassurance: "We are happy to sign an NDA before we begin.",
     principles: [
       {
+        icon: "mdi:lock-outline",
         title: "Confidential by default",
         desc: "Your name, your numbers and your plans stay between us.",
       },
       {
+        icon: "mdi:shield-check-outline",
         title: "Careful with your data",
         desc: "We take only what the work needs, sampled, anonymised or hashed where we can. We never reuse, resell or host it.",
       },
       {
+        icon: "mdi:cash-multiple",
         title: "Open about money",
         desc: "We tell you how we get paid, including any referral fee, before you commit.",
       },
       {
+        icon: "mdi:account-check-outline",
         title: "A person, not a process",
         desc: "You work directly with the founders, not an account manager. Clear language, no black box.",
       },

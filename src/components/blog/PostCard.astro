@@ -11,17 +11,15 @@ interface Props {
 }
 
 const { summary, headingLevel = 2, index = 0 } = Astro.props;
-const { post, href, minutes, dateLabel, isoDate } = summary;
+const { post, href, minutes } = summary;
 const c = blogContent.index;
 const Heading = headingLevel === 3 ? "h3" : "h2";
 ---
 <article class="post-card" data-anim="rise" style={`--i:${index}`}>
   <p class="post-card__meta mono-datum">
-    <time datetime={isoDate}>{dateLabel}</time>
+    <span>{post.data.author}</span>
     <span aria-hidden="true">·</span>
     <span>{minutes} {c.minutesSuffix}</span>
-    <span aria-hidden="true">·</span>
-    <span>{post.data.author}</span>
   </p>
   <Heading class="post-card__title">
     <a href={href} class="post-card__link">{post.data.title}</a>

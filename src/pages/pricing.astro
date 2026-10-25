@@ -21,11 +21,25 @@ const ladder = [
 ];
 ---
 <BaseLayout title={c.metaTitle} description={c.metaDescription}>
-  <Section padding="xl" width="7xl">
-    <div class="flex max-w-3xl flex-col gap-6">
-      <p class="section-index" data-enter>{c.hero.eyebrow}</p>
-      <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
-      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
+  <Section padding="lg" width="7xl">
+    <div class="plans-hero">
+      <div class="flex flex-col gap-6">
+        <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
+        <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
+      </div>
+      <div class="plans-rules" data-enter>
+        <h2 class="plans-rules__title">{c.hero.rulesTitle}</h2>
+        <ul class="plans-rules__list">
+          {
+            c.hero.rules.map((r) => (
+              <li class="plans-rules__item" data-tone={r.tone}>
+                <Icon name={r.icon} class="plans-rules__icon" aria-hidden="true" />
+                <span>{r.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </Section>
 
@@ -92,22 +106,12 @@ const ladder = [
       }
     </ul>
 
-    <ul class="plans-fine" data-reveal>
-      {
-        c.finePrint.map((line) => (
-          <li>
-            <Icon name="mdi:information-outline" class="plans-fine__icon" aria-hidden="true" />
-            <span>{line}</span>
-          </li>
-        ))
-      }
-    </ul>
   </Section>
 
   <Section id="free-audit" padding="lg" width="7xl" class="plans-anchor">
     <div class="free-audit" data-reveal>
       <div class="free-audit__intro">
-        <SectionHeader title={c.freeAudit.title} />
+        <h2 class="free-audit__title">{c.freeAudit.title}</h2>
         <p class="free-audit__note">{c.freeAudit.note}</p>
       </div>
       <ul class="free-audit__points">
@@ -127,9 +131,11 @@ const ladder = [
   </Section>
 
   <Section id="faq" padding="lg" width="7xl" class="plans-anchor">
-    <SectionHeader title={c.faq.title} />
-    <div class="mt-10 max-w-4xl" data-reveal>
-      <Accordion items={faqItems} openFirst />
+    <div class="faq-split">
+      <SectionHeader title={c.faq.title} />
+      <div class="faq-split__list" data-reveal>
+        <Accordion items={faqItems} openFirst />
+      </div>
     </div>
   </Section>
 

@@ -200,7 +200,7 @@ export const homeContent: HomeContent = {
       {
         segment: "Mid-sized companies",
         offer: "AUXO Score",
-        line: "Then a fee-based deep-dive audit.",
+        line: "Then a paid deep-dive audit.",
         href: "/pricing/#mid-sized",
       },
       {

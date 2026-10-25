@@ -409,27 +409,18 @@
     flex-wrap: wrap;
     gap: 1.75rem 2.5rem;
     justify-content: space-between;
-    margin-block-end: 3rem;
-    padding-block-end: 2.5rem;
+    margin-block-end: 2.25rem;
+    padding-block-end: 1.75rem;
   }
 
   .footer__statement {
     font-family: var(--font-brand);
-    font-size: var(--text-3xl);
-    font-weight: 700;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-display);
     letter-spacing: var(--tracking-display-3xl);
     line-height: 1.05;
     margin: 0;
-    max-inline-size: 20ch;
-  }
-
-  .footer__statement::before {
-    background-color: var(--accent-2);
-    block-size: 0.14rem;
-    content: "";
-    display: block;
-    inline-size: 3.5rem;
-    margin-block-end: 1.75rem;
+    max-inline-size: none;
   }
 
   .footer__grid {
@@ -490,7 +481,7 @@
   }
 
   .footer__col-title {
-    color: var(--accent-2);
+    color: var(--subtle);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     letter-spacing: var(--tracking-mono);
