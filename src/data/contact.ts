@@ -81,6 +81,7 @@ export interface ContactContent {
       customStackNoFunction: string;
     };
     consentNote: string;
+    consentLink: { text: string; href: string };
     submitText: string;
     note: string;
     status: {
@@ -234,6 +235,7 @@ export const contactContent: ContactContent = {
     },
     consentNote:
       "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply, never for marketing without separate opt-in, and we don't sell or rent your details. Any service we use to handle your message is bound to do the same.",
+    consentLink: { text: "Privacy Policy", href: "/legal/privacy-policy/" },
     submitText: "Send message",
     note: "The first conversation is about getting the problem clear. No prep needed.",
     status: {

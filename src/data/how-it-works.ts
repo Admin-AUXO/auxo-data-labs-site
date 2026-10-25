@@ -184,12 +184,12 @@ export const howItWorksContent = {
       icon: "mdi:sync",
       title: "Managed upkeep",
       promise: "We keep it running and tuned, month by month.",
-      body: "We check it runs, fix what breaks, update it as tools and models change, tune agent rules, and send a short plain-English report each month.",
+      body: "We check it runs, fix what breaks, update it as tools and models change, tune agent rules, and send a short plain‑English report each month.",
       terms:
         "Monthly and rolling, with no minimum term. Stop with 30 days' notice and keep everything we built. Managed upkeep is never a condition of Build.",
     },
   },
-  aiLine: "AI where it earns its place. A person approves what goes out.",
+  aiLine: "AI where it earns its place. A person approves what goes out.",
   method: {
     eyebrow: "The method",
     title: "Five checks behind every audit.",

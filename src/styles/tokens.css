@@ -80,7 +80,7 @@
 :root {
   color-scheme: dark;
 
-  --measure: 66ch;
+  --measure: 40rem;
   --measure-lead: 54ch;
   --container: 80rem;
   --dur-fast: 190ms;

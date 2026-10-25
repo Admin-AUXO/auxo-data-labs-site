@@ -23,7 +23,7 @@ export const LEGAL_PAGE_META: Record<string, LegalPageMeta> = {
     eyebrow: "Website Terms of Use",
     icon: "mdi:file-document",
     summary:
-      "The rules governing access to the public AUXO website, its content, and the tools made available through it.",
+      "Use the site to learn about AUXO. Don't scrape or misuse it, and don't treat it as professional advice. Client work runs under its own signed agreement.",
     highlights: [
       "Public site use only",
       "Anti-scraping restrictions",
@@ -34,7 +34,7 @@ export const LEGAL_PAGE_META: Record<string, LegalPageMeta> = {
     eyebrow: "Cookies & Local Storage",
     icon: "mdi:cookie",
     summary:
-      "How consent, analytics, theme preferences, and browser-side storage work on auxodata.com.",
+      "How consent, analytics, and browser-side storage work on auxodata.com.",
     highlights: [
       "Consent-first analytics",
       "Local storage transparency",

@@ -61,47 +61,49 @@ import { siteData } from "../../data/site";
   </ul>
 
   <h2>3. How We Use Personal Data</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Purpose</th>
-        <th>Examples</th>
-        <th>Primary Legal Basis</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Operate and secure the site</td>
-        <td>Core page delivery, stability, abuse prevention, diagnostics</td>
-        <td>Legitimate interests</td>
-      </tr>
-      <tr>
-        <td>Respond to enquiries</td>
-        <td>Replying to emails and contact-form submissions</td>
-        <td>Legitimate interests or pre-contract steps</td>
-      </tr>
-      <tr>
-        <td>Arrange meetings you request</td>
-        <td>Opening and handling calendar-booking flows</td>
-        <td>Legitimate interests or pre-contract steps</td>
-      </tr>
-      <tr>
-        <td>Remember preferences</td>
-        <td>Consent status</td>
-        <td>Legitimate interests and user-requested functionality</td>
-      </tr>
-      <tr>
-        <td>Measure site usage</td>
-        <td>Google Analytics (GA4) reporting and engagement events, managed through Google Tag Manager</td>
-        <td>Consent</td>
-      </tr>
-      <tr>
-        <td>Meet legal obligations and protect rights</td>
-        <td>Recordkeeping, dispute handling, compliance requests</td>
-        <td>Legal obligation or legitimate interests</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrap" role="region" aria-label="How we use personal data" tabindex="0">
+    <table>
+      <thead>
+        <tr>
+          <th>Purpose</th>
+          <th>Examples</th>
+          <th>Primary Legal Basis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Purpose">Operate and secure the site</td>
+          <td data-label="Examples">Core page delivery, stability, abuse prevention, diagnostics</td>
+          <td data-label="Primary Legal Basis">Legitimate interests</td>
+        </tr>
+        <tr>
+          <td data-label="Purpose">Respond to enquiries</td>
+          <td data-label="Examples">Replying to emails and contact-form submissions</td>
+          <td data-label="Primary Legal Basis">Legitimate interests or pre-contract steps</td>
+        </tr>
+        <tr>
+          <td data-label="Purpose">Arrange meetings you request</td>
+          <td data-label="Examples">Opening and handling calendar-booking flows</td>
+          <td data-label="Primary Legal Basis">Legitimate interests or pre-contract steps</td>
+        </tr>
+        <tr>
+          <td data-label="Purpose">Remember preferences</td>
+          <td data-label="Examples">Consent status</td>
+          <td data-label="Primary Legal Basis">Legitimate interests and user-requested functionality</td>
+        </tr>
+        <tr>
+          <td data-label="Purpose">Measure site usage</td>
+          <td data-label="Examples">Google Analytics (GA4) reporting and engagement events, managed through Google Tag Manager</td>
+          <td data-label="Primary Legal Basis">Consent</td>
+        </tr>
+        <tr>
+          <td data-label="Purpose">Meet legal obligations and protect rights</td>
+          <td data-label="Examples">Recordkeeping, dispute handling, compliance requests</td>
+          <td data-label="Primary Legal Basis">Legal obligation or legitimate interests</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <h2>4. Cookies, Consent, and Similar Technologies</h2>
   <p>
@@ -182,15 +184,9 @@ import { siteData } from "../../data/site";
 
   <h2>11. Contact Us</h2>
   <p>
-    For privacy questions or rights requests, contact Rapple International FZE
-    trading as AUXO Data Labs at
-    <a href={`mailto:${siteData.privacyEmail}`}>{siteData.privacyEmail}</a>.
-  </p>
-
-  <h2>Privacy Contact</h2>
-  <p>
-    Use this contact route for privacy questions, correction requests, or
-    concerns about how website data is handled.
+    For privacy questions, rights or correction requests, or concerns about how
+    website data is handled, contact Rapple International FZE trading as AUXO
+    Data Labs:
   </p>
   <ul>
     <li>

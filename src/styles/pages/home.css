@@ -1,7 +1,11 @@
 .home-hero {
   align-items: center;
   display: flex;
-  min-block-size: min(78svh, 46rem);
+  min-block-size: min(72svh, 44rem);
+}
+
+.home-hero + .section {
+  padding-block-start: 0;
 }
 
 .home-hero > .section__container {
@@ -22,8 +26,12 @@
   border-radius: var(--radius-xl);
   display: grid;
   gap: 1.75rem;
-  grid-template-columns: 1fr;
-  padding: clamp(1.75rem, 1rem + 2.5vw, 2.75rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(1.25rem, 0.5rem + 3vw, 2.75rem);
+}
+
+.score-card .btn {
+  padding-inline: 1.5rem;
 }
 
 @media (width >= 56rem) {
@@ -673,7 +681,7 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   .home-hero {
     align-items: flex-start;
     min-block-size: auto;
-    padding-block: 2rem 3rem;
+    padding-block: 3.5rem 3rem;
   }
 
   .home-hero h1 {

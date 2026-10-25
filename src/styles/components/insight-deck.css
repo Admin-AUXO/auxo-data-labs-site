@@ -44,15 +44,38 @@
     gap: 0.5rem;
   }
 
-  @media (width >= 48rem) {
-    .deck-filter__group {
-      border-inline-start: 1px solid var(--border-strong);
-      padding-inline-start: 0.9rem;
+  @media (width < 48rem) {
+    .deck-filter {
+      flex-wrap: nowrap;
+      margin-inline: calc(var(--gutter) * -1);
+      overflow-x: auto;
+      padding-inline: var(--gutter);
+      scrollbar-width: none;
     }
 
+    .deck-filter::-webkit-scrollbar {
+      display: none;
+    }
+
+    .deck-filter__primary,
+    .deck-filter__group,
+    .deck-filter__chips {
+      flex: none;
+      flex-wrap: nowrap;
+    }
+  }
+
+  @media (width >= 48rem) {
     .deck-filter__label {
       align-self: center;
       font-size: 0.6875rem;
+    }
+  }
+
+  @media (width >= 80rem) {
+    .deck-filter__group {
+      border-inline-start: 1px solid var(--border-strong);
+      padding-inline-start: 0.9rem;
     }
   }
 
@@ -469,6 +492,7 @@
     color: var(--foreground);
     cursor: pointer;
     display: inline-flex;
+    flex: none;
     font-size: 1.25rem;
     inline-size: 2.75rem;
     justify-content: center;
@@ -510,6 +534,10 @@
     gap: 0.4rem;
   }
 
+  .deck__dots[hidden] {
+    display: none;
+  }
+
   .deck__dot {
     background-color: var(--border-strong);
     block-size: 0.4rem;
@@ -518,9 +546,16 @@
     cursor: pointer;
     inline-size: 0.4rem;
     padding: 0;
+    position: relative;
     transition:
       background-color var(--dur-fast) var(--ease-standard),
       inline-size var(--dur-fast) var(--ease-standard);
+  }
+
+  .deck__dot::after {
+    content: "";
+    inset: -0.6rem -0.2rem;
+    position: absolute;
   }
 
   .deck__dot[aria-current="true"] {
@@ -591,17 +626,40 @@
   .deck__foot {
     align-items: center;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
+    gap: 1rem;
     justify-content: space-between;
     margin-block-start: auto;
     padding-block-start: 0.4rem;
   }
 
-  .deck__foot .deck__link {
+  .deck__foot .deck__link,
+  .deck[data-view="featured"] .deck__foot .deck__link {
+    align-self: center;
+    display: block;
+    flex: 1 1 0;
     margin-block-start: 0;
-    margin-inline-end: auto;
+    min-inline-size: 0;
     padding-block-start: 0;
+  }
+
+  .deck__foot .deck__link span {
+    display: inline-block;
+  }
+
+  .deck__foot .deck__link,
+  .deck__foot .deck__link:hover,
+  .deck__foot .deck__link:focus-visible {
+    background-image: none;
+    text-decoration-color: transparent;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color var(--dur-base) var(--ease-out);
+  }
+
+  .deck__foot .deck__link:hover,
+  .deck__foot .deck__link:focus-visible {
+    text-decoration-color: currentcolor;
   }
 
   .deck__foot .deck__share {

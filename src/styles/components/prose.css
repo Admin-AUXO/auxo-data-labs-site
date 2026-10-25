@@ -7,12 +7,6 @@
     max-inline-size: var(--measure);
   }
 
-  .prose-auxo > p:first-of-type {
-    color: var(--foreground);
-    font-size: var(--text-lg);
-    line-height: 1.6;
-  }
-
   .prose-auxo h2 {
     color: var(--foreground);
     font-size: var(--text-2xl);
@@ -142,6 +136,89 @@
     height: auto;
     margin-block: 1.75rem;
     max-width: 100%;
+  }
+
+  .prose-auxo .table-wrap {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-block: 0 1.75rem;
+    overflow-x: auto;
+  }
+
+  .prose-auxo .table-wrap table {
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    inline-size: 100%;
+    line-height: 1.55;
+  }
+
+  .prose-auxo .table-wrap :is(th, td) {
+    border-block-end: 1px solid var(--border);
+    padding: 0.7rem 0.9rem;
+    text-align: start;
+    vertical-align: top;
+  }
+
+  .prose-auxo .table-wrap th {
+    background-color: var(--surface);
+    color: var(--foreground);
+    font-weight: 700;
+  }
+
+  .prose-auxo .table-wrap tbody tr:last-child td {
+    border-block-end: 0;
+  }
+
+  .prose-auxo .table-wrap + p {
+    margin-block-start: -0.75rem;
+  }
+
+  @media (width < 48rem) {
+    .prose-auxo .table-wrap {
+      border: 0;
+      border-radius: 0;
+      overflow: visible;
+    }
+
+    .prose-auxo .table-wrap thead {
+      block-size: 1px;
+      clip-path: inset(50%);
+      inline-size: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+    }
+
+    .prose-auxo .table-wrap :is(table, tbody, tr, td) {
+      display: block;
+    }
+
+    .prose-auxo .table-wrap tr {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding-block: 0.4rem;
+    }
+
+    .prose-auxo .table-wrap tr + tr {
+      margin-block-start: 0.75rem;
+    }
+
+    .prose-auxo .table-wrap td,
+    .prose-auxo .table-wrap tbody tr:last-child td {
+      border: 0;
+      display: grid;
+      gap: 0.15rem;
+      padding: 0.45rem 1rem;
+    }
+
+    .prose-auxo .table-wrap td::before {
+      color: var(--subtle);
+      content: attr(data-label);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-mono);
+      text-transform: uppercase;
+    }
   }
 
   .prose-auxo hr {

@@ -107,6 +107,16 @@
     opacity: 1 !important;
   }
 
+  @media print {
+    :is([data-enter], [data-anim], [data-reveal]) {
+      animation: none !important;
+      clip-path: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      translate: none !important;
+    }
+  }
+
   [data-motion="on"] [data-enter]:not([data-enter="headline"]) {
     animation: m-rise-sm 0.8s var(--ease-asmr) 0.1s both;
   }

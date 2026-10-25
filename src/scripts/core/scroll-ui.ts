@@ -20,7 +20,7 @@ function apply(): void {
   }
 
   const toTop = document.querySelector<HTMLElement>("[data-to-top]");
-  if (toTop) toTop.toggleAttribute("data-visible", y > 600);
+  if (toTop) toTop.toggleAttribute("data-visible", y > 600 && max - y > 200);
 
   lastY = y;
 }

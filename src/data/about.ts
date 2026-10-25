@@ -145,7 +145,7 @@ export const aboutContent: AboutContent = {
     points: [
       { label: "Based in", value: "Dubai" },
       { label: "Serving", value: "The UAE, the US and Europe" },
-      { label: "Built for", value: "Funded startups, mid-sized companies and enterprise teams" },
+      { label: "Built for", value: "Funded startups, mid‑sized companies and enterprise teams" },
     ],
   },
   engagement: {

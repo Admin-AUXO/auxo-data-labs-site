@@ -83,15 +83,17 @@ const lineParts =
 
   {
     related.length > 0 && (
-      <Section padding="md" width="7xl">
-        <h2 class="text-3xl font-bold sm:text-4xl" data-reveal>{c.relatedHeading}</h2>
-        <ul class="blog-list blog-list--related mt-8">
-          {related.map((s, i) => (
-            <li>
-              <PostCard summary={s} headingLevel={3} index={i} />
-            </li>
-          ))}
-        </ul>
+      <Section padding="md" width="4xl">
+        <div class="blog-related">
+          <h2 class="text-3xl font-bold sm:text-4xl" data-reveal>{c.relatedHeading}</h2>
+          <ul class="blog-list blog-list--related mt-8">
+            {related.map((s, i) => (
+              <li>
+                <PostCard summary={s} headingLevel={3} index={i} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
     )
   }

@@ -109,7 +109,7 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
     <div class="not-sure" data-reveal>
       <div class="not-sure__text">
         <h2 class="text-3xl font-bold">{c.notSure.title}</h2>
-        <p class="lead">{c.notSure.body}</p>
+        <p class="lead text-pretty">{c.notSure.body}</p>
       </div>
       <div class="not-sure__action">
         <Button calendar variant="primary" size="lg" icon iconName="mdi:calendar-clock-outline" class="w-full sm:w-auto">
@@ -120,9 +120,9 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
     </div>
   </Section>
 
-  <Section id="faq" padding="lg" width="5xl" class="plans-anchor">
+  <Section id="faq" padding="lg" width="7xl" class="plans-anchor">
     <SectionHeader title={c.faq.title} />
-    <div class="mt-10" data-reveal>
+    <div class="mt-10 max-w-4xl" data-reveal>
       <Accordion items={faqItems} openFirst />
     </div>
   </Section>

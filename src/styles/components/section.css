@@ -17,6 +17,18 @@
     --section-py: clamp(3.5rem, 2.25rem + 6.5vw, 9rem);
   }
 
+  .section[data-bg="surface"] {
+    background-color: var(--surface);
+  }
+
+  .section[data-bg="raised"] {
+    background-color: var(--surface-raised);
+  }
+
+  .section[data-bg="sunken"] {
+    background-color: var(--surface-sunken);
+  }
+
   .section[data-bg="accent"] {
     --foreground: var(--accent-foreground);
     --muted: color-mix(in oklch, var(--accent-foreground) 78%, var(--accent));
@@ -55,6 +67,6 @@
   .section__container[data-w="4xl"] { --container-max: 56rem; }
   .section__container[data-w="5xl"] { --container-max: 64rem; }
   .section__container[data-w="6xl"] { --container-max: 72rem; }
-  .section__container[data-w="7xl"] { --container-max: 82rem; }
+  .section__container[data-w="7xl"] { --container-max: var(--container); }
   .section__container[data-w="full"] { --container-max: none; }
 }

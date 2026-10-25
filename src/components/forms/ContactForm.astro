@@ -3,6 +3,7 @@ import Button from "../ui/Button.astro";
 import { contactContent } from "../../data/contact";
 
 const { form } = contactContent;
+const [consentBefore, consentAfter] = form.consentNote.split(form.consentLink.text);
 ---
 <form id="contact-form" class="flex flex-col gap-5" novalidate>
   {
@@ -79,7 +80,9 @@ const { form } = contactContent;
 
   <label class="field-consent">
     <input type="checkbox" name="consent" class="field-consent__checkbox" required />
-    <span class="field-consent__text">{form.consentNote}</span>
+    <span class="field-consent__text">
+      {consentBefore}<a href={form.consentLink.href} target="_blank" rel="noopener">{form.consentLink.text}</a>{consentAfter}
+    </span>
   </label>
 
   <div class="form-status" role="status" aria-live="polite" />
@@ -131,5 +134,15 @@ const { form } = contactContent;
     flex: none;
     inline-size: 1.05rem;
     margin-block-start: 0.15rem;
+  }
+
+  .field-consent__text a {
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .field-consent__text a:hover {
+    color: var(--foreground);
   }
 </style>

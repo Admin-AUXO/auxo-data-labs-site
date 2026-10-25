@@ -74,9 +74,10 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
       </div>
 
       <div class="flex flex-col gap-6">
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-4">
+          <span class="block h-0.5 w-14 bg-accent-2" data-anim="draw" aria-hidden="true"></span>
           <h2 class="text-2xl font-bold">{c.form.title}</h2>
-          <p class="text-muted">{c.form.description}</p>
+          <p class="-mt-2 text-muted">{c.form.description}</p>
         </div>
         <ContactForm />
       </div>
@@ -89,11 +90,11 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
       highlight={c.nextSteps.titleHighlight}
       subtitle={c.nextSteps.subtitle}
     />
-    <ol class="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-3">
+    <ol class="mt-14 grid gap-x-10 gap-y-10 md:grid-cols-3">
       {
         c.nextSteps.steps.map((step, i) => (
           <li
-            class="flex flex-col gap-3 border-t-2 border-foreground pt-5"
+            class="flex flex-col gap-3 border-t-2 border-foreground pt-5 md:row-span-3 md:grid md:grid-rows-subgrid"
             data-anim={i === 0 ? "rise" : i === 1 ? "slide-right" : "slide-left"}
           >
             <span class="font-mono text-sm font-semibold tabular-nums text-accent-2">0{i + 1}</span>
@@ -105,9 +106,9 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
     </ol>
   </Section>
 
-  <Section padding="lg" width="5xl">
+  <Section padding="lg" width="7xl">
     <SectionHeader title={c.faq.title} highlight={c.faq.titleHighlight} subtitle={c.faq.description} />
-    <div class="mt-10" data-reveal>
+    <div class="mt-10 max-w-4xl" data-reveal>
       <Accordion items={faqItems} openFirst />
     </div>
   </Section>

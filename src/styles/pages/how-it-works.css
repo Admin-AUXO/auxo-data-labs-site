@@ -139,12 +139,10 @@
 }
 
 .hiw-link {
-  align-items: center;
   color: var(--foreground);
-  display: inline-flex;
+  display: inline;
   font-weight: 600;
-  gap: 0.5rem;
-  min-block-size: 44px;
+  padding-block: 0.75rem;
   text-decoration: underline;
   text-decoration-color: var(--border-strong);
   text-underline-offset: 0.3em;
@@ -158,8 +156,10 @@
 .hiw-link svg {
   block-size: 1.1rem;
   color: var(--accent);
-  flex: none;
+  display: inline-block;
   inline-size: 1.1rem;
+  margin-inline-start: 0.4rem;
+  vertical-align: -0.2em;
 }
 
 .ladder__body {
@@ -254,6 +254,10 @@
   padding: clamp(1.5rem, 1rem + 2vw, 2.75rem);
 }
 
+.upkeep .section-index {
+  white-space: nowrap;
+}
+
 .upkeep .ladder__name {
   font-size: var(--text-3xl);
 }
@@ -314,11 +318,19 @@
   .method {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .method__item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (width >= 64rem) {
   .method {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .method__item:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 }
 
@@ -407,6 +419,7 @@
 .steps__desc {
   grid-area: desc;
   line-height: 1.6;
+  max-inline-size: 38rem;
 }
 
 .team {

@@ -19,7 +19,7 @@ const tags = [...tagCounts.entries()]
   .map(([label]) => ({ label, key: tagSlug(label) }));
 ---
 <BaseLayout title={c.metaTitle} description={c.metaDescription}>
-  <Section padding="xl" width="7xl">
+  <Section padding="lg" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
       <span class="blog-hero__icon" aria-hidden="true" data-enter>
         <Icon name="mdi:newspaper-variant-outline" />

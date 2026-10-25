@@ -79,44 +79,46 @@ import { siteData } from "../../data/site";
   </p>
 
   <h2>5. Current Cookie and Storage Declaration</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Identifier</th>
-        <th>Provider</th>
-        <th>Storage Type</th>
-        <th>Purpose</th>
-        <th>Typical Duration</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>auxo_consent</code></td>
-        <td>AUXO Data Labs</td>
-        <td>Cookie</td>
-        <td>Stores your granted or denied analytics consent so the site knows whether to enable Google Analytics on later visits.</td>
-        <td>Up to 12 months</td>
-        <td>Strictly necessary</td>
-      </tr>
-      <tr>
-        <td><code>_ga</code></td>
-        <td>Google Analytics</td>
-        <td>Cookie</td>
-        <td>Distinguishes visitors for aggregate analytics reporting when analytics is enabled.</td>
-        <td>Up to 2 years by default, subject to browser limits</td>
-        <td>Analytics</td>
-      </tr>
-      <tr>
-        <td><code>_ga_*</code></td>
-        <td>Google Analytics</td>
-        <td>Cookie</td>
-        <td>Persists session and measurement state for GA4 when analytics is enabled.</td>
-        <td>Up to 2 years by default, subject to browser limits</td>
-        <td>Analytics</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrap" role="region" aria-label="Cookie and storage declaration" tabindex="0">
+    <table>
+      <thead>
+        <tr>
+          <th>Identifier</th>
+          <th>Provider</th>
+          <th>Storage Type</th>
+          <th>Purpose</th>
+          <th>Typical Duration</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Identifier"><code>auxo_consent</code></td>
+          <td data-label="Provider">AUXO Data Labs</td>
+          <td data-label="Storage Type">Cookie</td>
+          <td data-label="Purpose">Stores your granted or denied analytics consent so the site knows whether to enable Google Analytics on later visits.</td>
+          <td data-label="Typical Duration">Up to 12 months</td>
+          <td data-label="Category">Strictly necessary</td>
+        </tr>
+        <tr>
+          <td data-label="Identifier"><code>_ga</code></td>
+          <td data-label="Provider">Google Analytics</td>
+          <td data-label="Storage Type">Cookie</td>
+          <td data-label="Purpose">Distinguishes visitors for aggregate analytics reporting when analytics is enabled.</td>
+          <td data-label="Typical Duration">Up to 2 years by default, subject to browser limits</td>
+          <td data-label="Category">Analytics</td>
+        </tr>
+        <tr>
+          <td data-label="Identifier"><code>_ga_*</code></td>
+          <td data-label="Provider">Google Analytics</td>
+          <td data-label="Storage Type">Cookie</td>
+          <td data-label="Purpose">Persists session and measurement state for GA4 when analytics is enabled.</td>
+          <td data-label="Typical Duration">Up to 2 years by default, subject to browser limits</td>
+          <td data-label="Category">Analytics</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <p>
     <em>
       This table reflects the tools we can verify from the current site code.

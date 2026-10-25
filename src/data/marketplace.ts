@@ -312,7 +312,7 @@ const tools: ToolConfig[] = [
     category: "hiring",
     line: "Sourcing, screening and interview scheduling. A person makes every hiring decision.",
     includes: ["ashby", "juicebox"],
-    note: "A person makes every hiring decision. Legal checks stay with your advisers.",
+    note: "Legal checks stay with your advisers.",
   },
   {
     kind: "built-by-auxo",
@@ -527,7 +527,7 @@ export const marketplaceContent = {
       "A short call to confirm fit. If it isn't right for you, we say so.",
       "We send a setup plan and price, privately.",
       "We set it up in your accounts, on your data, with clear rules on use.",
-      "We hand it over with plain-English documentation and training.",
+      "We hand it over with plain‑English documentation and training.",
       "Optional managed upkeep, monthly.",
     ],
   },

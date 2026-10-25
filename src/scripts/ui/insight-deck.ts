@@ -116,6 +116,8 @@ function setupDeck(deck: HTMLElement): void {
   function buildDots(): void {
     if (!dotsWrap) return;
     dotsWrap.replaceChildren();
+    dotsWrap.hidden = order.length > 9;
+    if (dotsWrap.hidden) return;
     order.forEach((_card, i) => {
       const dot = document.createElement("button");
       dot.type = "button";

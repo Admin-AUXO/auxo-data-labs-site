@@ -1,4 +1,5 @@
 .mkt-anchor {
+  padding-block-start: 0.5rem;
   scroll-margin-top: 5.5rem;
 }
 
@@ -33,9 +34,37 @@ html:not([data-js]) .mkt-filters {
   margin-inline-end: 0.25rem;
 }
 
+@media (width < 48rem) {
+  .mkt-filters__chips {
+    flex-wrap: nowrap;
+    margin-inline: calc(var(--gutter) * -1);
+    overflow-x: auto;
+    padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .mkt-filters__chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mkt-chip {
+    flex: none;
+  }
+}
+
 @media (width >= 48rem) {
   .mkt-filters__icon {
     display: none;
+  }
+}
+
+@media (width >= 64rem) {
+  .mkt-filters__chips {
+    gap: 0.375rem;
+  }
+
+  .mkt-chip {
+    padding-inline: 0.75rem;
   }
 }
 
@@ -111,13 +140,13 @@ html:not([data-js]) .mkt-filters {
   padding: 0;
 }
 
-@media (width >= 40rem) {
+@media (width >= 44rem) {
   .mkt-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (width >= 64rem) {
+@media (width >= 72rem) {
   .mkt-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -150,6 +179,31 @@ html:not([data-js]) .mkt-filters {
 .mkt-card--custom {
   background: var(--surface-sunken);
   border-style: dashed;
+  grid-column: 1 / -1;
+}
+
+@media (width >= 44rem) {
+  .mkt-card--custom {
+    align-items: center;
+    display: grid;
+    gap: 0.4rem 1.5rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .mkt-card--custom .mkt-card__glyph {
+    grid-row: 1 / span 2;
+  }
+
+  .mkt-card--custom .mkt-card__head,
+  .mkt-card--custom .mkt-card__line {
+    grid-column: 2;
+  }
+
+  .mkt-card--custom .mkt-card__foot {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin-block-start: 0;
+  }
 }
 
 .mkt-card__top {
@@ -345,8 +399,14 @@ html:not([data-js]) .mkt-filters {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  min-block-size: 2.75rem;
+}
+
+@media (width >= 44rem) {
+  .mkt-card__actions {
+    flex-wrap: nowrap;
+  }
 }
 
 .mkt-add__check {
@@ -379,10 +439,12 @@ html:not([data-js]) .mkt-filters {
   font-size: var(--text-sm);
   font-weight: 600;
   gap: 0.35rem;
+  margin-inline-start: auto;
   min-block-size: 2.75rem;
   text-decoration: underline;
   text-decoration-color: var(--border-strong);
   text-underline-offset: 0.3em;
+  white-space: nowrap;
 }
 
 .mkt-card__link:hover {
@@ -476,7 +538,7 @@ html:not([data-js]) .mkt-filters {
 
 @media (width >= 48rem) {
   .mkt-legend__list {
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   }
 }
 
@@ -526,13 +588,7 @@ html:not([data-js]) .mkt-filters {
   padding: 0;
 }
 
-@media (width >= 40rem) {
-  .mkt-paid__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (width >= 64rem) {
+@media (width >= 48rem) {
   .mkt-paid__list {
     grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
   }

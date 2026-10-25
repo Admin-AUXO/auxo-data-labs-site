@@ -47,7 +47,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </Section>
 
-  <Section padding="md" width="6xl">
+  <Section padding="md" width="7xl">
     <div class="score-card" data-reveal>
       <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
         <path class="score-gauge__track" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
@@ -55,15 +55,15 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
       </svg>
       <div class="flex flex-col gap-3">
         <h2 class="font-bold">{c.score.title}</h2>
-        <p class="max-w-xl text-lg text-muted">
+        <p class="max-w-xl text-lg text-muted text-balance">
           {c.score.stat}<FootnoteRef id={c.score.footnoteId} />
         </p>
       </div>
-      <div class="flex flex-col items-start gap-3 sm:items-end">
+      <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
         <Button variant="primary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
           {c.score.cta.text}
         </Button>
-        <p class="text-sm text-subtle sm:text-end">{c.score.reassurance}</p>
+        <p class="text-sm text-subtle text-pretty min-[56rem]:text-end">{c.score.reassurance}</p>
       </div>
     </div>
   </Section>

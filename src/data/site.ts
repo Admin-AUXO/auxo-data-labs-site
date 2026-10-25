@@ -38,7 +38,7 @@ export const siteData: SiteData = {
   shortVersion: "End-to-end data and AI, yours to keep.",
   locationLine: "Based in Dubai. Serving the UAE, the US and Europe.",
   reassurance: "A real person replies within one business day.",
-  aiLine: "AI where it earns its place. A person approves what goes out.",
+  aiLine: "AI where it earns its place. A person approves what goes out.",
   ownershipLine: "Built to last, and yours to keep.",
   url: import.meta.env.SITE ?? "https://auxodata.com",
   email: "hello@auxodata.com",

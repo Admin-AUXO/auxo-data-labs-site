@@ -86,10 +86,10 @@ export const SCORE_COPY: ScoreCopy = {
     startup: {
       eyebrow: "Free audit for funded startups",
       title: "Step 1: your AUXO Score.",
-      lede: "Ten quick questions on how ready your data is for AI. Then book a 45-minute review call with a founder. We send a one-page summary of what to fix first after the call.",
+      lede: "Ten quick questions on how ready your data is for AI. Then book a 45‑minute review call with a founder. We send a one-page summary of what to fix first after the call.",
       stepsLabel: "Free audit steps",
       steps: ["AUXO Score", "Founder review call", "One-page summary"],
-      eligibility: "For funded startups, seed to Series B. One per company.",
+      eligibility: "For funded startups, seed to Series B. One per company.",
     },
     dimensionsLabel: "Dimensions measured",
     facts: { rounds: "rounds", minutes: "min", score: "your score" },
@@ -118,7 +118,7 @@ export const SCORE_COPY: ScoreCopy = {
     },
     reviewCall: {
       title: "Step 2: book your review call.",
-      body: "Your score is saved in this browser. Book a 45-minute call with a founder and we'll go through it together. After the call we send a one-page summary of what to fix first.",
+      body: "Your score is saved in this browser. Book a 45‑minute call with a founder and we'll go through it together. After the call we send a one-page summary of what to fix first.",
       ticks: [
         "We've raised from outside investors, seed to Series B.",
         "This is our company's first free audit with AUXO.",

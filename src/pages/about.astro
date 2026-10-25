@@ -50,8 +50,8 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
             ))
           }
         </div>
-        <p class="mt-8 flex items-start gap-3 text-lg font-medium text-balance">
-          <span class="mt-3.5 h-px w-6 shrink-0 bg-accent-2" aria-hidden="true"></span>
+        <p class="mt-8 flex items-start gap-3 text-lg font-medium text-balance md:gap-10">
+          <span class="mt-3.5 h-px w-6 shrink-0 bg-accent-2 md:w-10" aria-hidden="true"></span>
           {c.beliefs.aiLine}
         </p>
       </div>
@@ -64,7 +64,7 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
       highlight={c.how.titleHighlight}
       subtitle={c.how.subtitle}
     />
-    <ol class="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 sm:gap-y-12 md:mt-12 md:grid-cols-4">
+    <ol class="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 sm:gap-y-12 md:mt-12 lg:grid-cols-4">
       {
         c.how.steps.map((step, i) => (
           <li class="relative flex flex-col gap-3 pt-6" data-anim={stepAnim[i]}>
@@ -74,7 +74,7 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
             <p class="text-muted">{step.desc}</p>
             {i < c.how.steps.length - 1 && (
               <span
-                class="pointer-events-none absolute -right-7 top-7 hidden text-2xl leading-none text-subtle md:block"
+                class="pointer-events-none absolute -right-7 top-7 hidden text-2xl leading-none text-subtle lg:block"
                 aria-hidden="true"
               >
                 &rarr;
@@ -93,8 +93,8 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
 
   <Section padding="lg" width="7xl">
     <div class="flex flex-col gap-10">
-      <div data-reveal>
-        <h2 class="section-index">{c.where.title}</h2>
+      <div>
+        <SectionHeader title={c.where.title} />
         <p class="mt-5 max-w-3xl text-lg font-medium sm:text-xl" data-anim="rise-in">
           {c.where.body}
         </p>

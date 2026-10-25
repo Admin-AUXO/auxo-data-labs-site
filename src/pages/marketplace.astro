@@ -23,7 +23,7 @@ const legend = Object.values(c.badges).filter((b) => b.key !== "partner" || anyP
 const all = c.filters.categories[0];
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description}>
-  <Section padding="xl" width="7xl">
+  <Section padding="lg" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
       <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
@@ -255,9 +255,9 @@ const all = c.filters.categories[0];
     </ol>
   </Section>
 
-  <Section padding="lg" width="5xl">
+  <Section padding="lg" width="7xl">
     <SectionHeader title={c.faq.title} />
-    <div class="mt-8 md:mt-10">
+    <div class="mt-8 max-w-4xl md:mt-10">
       <Accordion items={faqItems} />
     </div>
   </Section>
