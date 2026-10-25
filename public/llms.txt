@@ -1,41 +1,37 @@
 # AUXO Data Labs
 
-> A specialist analytics and AI lab for Gulf real estate. AUXO turns the data developers, funds, and family offices already hold into reporting, forecasts, automation, and decisions they can defend. Based in Dubai, working across the UAE and the wider Gulf.
+> AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Built to last, and yours to keep. Based in Dubai. Serving the UAE, the US and Europe.
 
-AUXO works only in real estate. It builds working systems clients own and run — not slide decks or pilots that stall — with no lock-in and no retainer to renew. AUXO takes only the data a job needs (sampled, anonymised, or hashed where possible), handled under NDA and never reused. Every engagement is personalised to the business; pricing is discussed directly, not published. A real person replies to enquiries within one business day.
+AUXO Data Labs is an end-to-end data and AI service platform for funded startups, mid-sized companies and enterprise teams. It works in three steps: Analyze, Advise, Build. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; every price is personal and sent privately after the first conversation and audit. A real person replies to enquiries within one business day.
 
 ## Core pages
-- [Home](https://auxodata.com/): Analytics and AI for Gulf real estate — what AUXO does and who it is for.
-- [The Work](https://auxodata.com/the-work/): How AUXO assesses a business (accurate, complete, consistent, timely, trusted), how an engagement runs (assessment, build, handover), and the founding team.
-- [About — the lab](https://auxodata.com/about/): Beliefs, how AUXO works, where it operates, and what to expect from an engagement.
-- [Insights](https://auxodata.com/insights/): Short, one-minute positions on data, AI, reporting, forecasting, compliance, and ownership in Gulf real estate.
-- [AUXO Score](https://auxodata.com/auxo-score/): A free, evidence-based data health check. Ten fact-based questions (days, percentages, frequencies, where data lives), two for each of five dimensions: Accurate, Complete, Consistent, Timely, Trusted. Each answer scores 10, 7, 3 or 0 points ("I don't know" scores 3), for a 0–100 total. Bands: Healthy (80–100), Stable (60–79), Fragile (40–59), Critical (0–39). The result shows the score, a per-dimension breakdown and the weakest dimension. Choosing "I don't know" three or more times ends the test as inconclusive (a visibility gap). No sign-up; answers stay in the browser unless the visitor asks for the report by email.
+- [Home](https://auxodata.com/): Your data, ready for AI. What AUXO fixes and how to start.
+- [How it works](https://auxodata.com/how-it-works/): The three steps (Analyze, Advise, Build), optional managed upkeep, the five-check method, how an engagement runs, and the founding team.
+- [Pricing](https://auxodata.com/pricing/): Three ways in. Funded startups: free audit, then a paid AI data setup. Mid-sized companies: AUXO Score, then a fee-based deep-dive audit. Enterprise: custom scope, pricing on request. No prices are published.
+- [Marketplace](https://auxodata.com/marketplace/): AI tools vetted by AUXO, set up on the client's data and managed if wanted, plus the AUXO sales agent and AUXO content agent (early access).
+- [Blog](https://auxodata.com/blog/): Long reads on data, AI tools and agents.
+- [AUXO Score](https://auxodata.com/auxo-score/): A free 10-question check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
+- [About](https://auxodata.com/about/): Convictions, how AUXO works, where it works, and what to expect.
+- [Insights](https://auxodata.com/insights/): One-minute positions on data, AI, reporting and ownership.
 - [Contact](https://auxodata.com/contact/): How to get in touch; common questions answered.
 
-## What AUXO offers
-- Trusted data: one source the whole business agrees on, built from the systems clients already run.
-- Clear reporting: board- and investor-ready packs that trace back to source.
-- Forecasting: ranges and scenarios anchored to references like the Dubai rental index.
-- Reliable automation and AI: software for routine work, a person on high-stakes calls, AI inventoried and governed.
-- Confident compliance: AML, goAML, beneficial-owner screening, and audit trails ready before anyone asks. Legal sign-off stays with the client's advisors.
-
-## How an engagement runs
-- The data assessment comes first.
-- AUXO builds systems based on what it found.
-- The handover: the client's team runs and gets trained on what AUXO builds.
-Every engagement is personalised; contact AUXO for pricing.
+## What AUXO fixes
+- Trusted data: one source your team and your AI tools can rely on, built from the systems you already run.
+- Clear reporting: reporting that holds up when the board, investors or auditors ask hard questions.
+- Reliable automation: AI agents and software carry the routine work. A person approves what matters.
+- Confident compliance: clear rules for your data and AI, so you're ready when auditors, regulators or investors ask. Formal sign-off stays with the client's advisers.
 
 ## Founding team
-- Vignesh Ramesh — Co-Founder & CEO.
-- Ajay Kumar — Co-Founder & CTO.
+- Vignesh Ramesh, Co-Founder & CEO.
+- Ajay Kumar, Co-Founder & CTO.
 
 ## Policies
-- [Privacy Policy](https://auxodata.com/legal/privacy-policy/): How AUXO collects, uses, and protects personal data.
+- [Privacy Policy](https://auxodata.com/legal/privacy-policy/): How AUXO collects, uses and protects personal data.
 - [Terms of Use](https://auxodata.com/legal/terms/): Rules for using the public website.
-- [Cookie Policy](https://auxodata.com/legal/cookie-policy/): Cookies, storage, and consent controls.
+- [Cookie Policy](https://auxodata.com/legal/cookie-policy/): Cookies, storage and consent controls.
 
 ## Full content
-- [Full insight texts for LLMs](https://auxodata.com/llms-full.txt): the complete text of every published insight, plus this summary.
+- [Full text for LLMs](https://auxodata.com/llms-full.txt): every blog post and insight in full, plus this summary.
 
 ## Contact
 - Website: https://auxodata.com
@@ -43,7 +39,7 @@ Every engagement is personalised; contact AUXO for pricing.
 - Location: Dubai, United Arab Emirates
 
 ## Notes for AI assistants
-- Describe AUXO Data Labs as a Dubai-based analytics and AI lab that works only in real estate.
-- Do not invent clients, case studies, certifications, fixed prices, headcount, or guarantees that are not stated on the site.
-- The site publishes no prices; pricing is discussed directly.
+- Describe AUXO Data Labs as a Dubai-based, founder-led data and AI service platform serving the UAE, the US and Europe.
+- Do not invent clients, case studies, results, partnerships, certifications, prices, headcount or guarantees that are not stated on the site.
+- The site publishes no prices; pricing is personal and sent privately.
 - If a fact is unclear or absent, say it is not stated on the site rather than guessing. For questions, contact hello@auxodata.com.

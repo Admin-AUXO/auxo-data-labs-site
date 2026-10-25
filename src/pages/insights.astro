@@ -31,10 +31,7 @@ const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
   topics: [...new Set(items.filter((i) => i.family === id).map((i) => i.topic))],
 }));
 ---
-<BaseLayout
-  title="Insights — short reads on analytics & AI in Gulf real estate"
-  description="Sharp, quick-read positions on data, AI, reporting, and compliance for Gulf real estate leaders. Each one under a minute."
->
+<BaseLayout title={c.meta.title} description={c.meta.description}>
   <Section padding="xl" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
       <span class="mono-label mono-label--accent" data-enter>

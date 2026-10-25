@@ -1,0 +1,95 @@
+---
+title: "The model is the easy part"
+description: "Why can't Claude or an agent you already have do this? Often it can do part of it. The hard part is the system around the model. A technical checklist."
+date: 2026-10-27
+author: "Ajay Kumar"
+tags: ["AI agents", "Data infrastructure", "Evaluation", "Engineering"]
+draft: false
+---
+
+"We already pay for Claude. Our engineers have built an agent or two. Why would we need anyone else?"
+
+It is a fair question. If you run engineering, data or a platform team, you have probably asked it yourself.
+
+The short answer: often it can do part of it. The model is rarely the hard part. The hard part is the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and keeping it running as things change.
+
+This post is the longer, technical version of that answer. It is written for the people who would have to build the thing and then keep it running.
+
+## Start with what already works
+
+General assistants are good, and they keep getting better. Claude, ChatGPT and Microsoft Copilot already help people draft, summarise, write code and work through analysis. We often recommend them ourselves.
+
+The evidence supports this. In a study of more than 5,000 customer support agents, access to a generative AI assistant raised issues resolved per hour [by 14% on average](https://www.nber.org/papers/w31161). Narrow, well-defined steps also go well. Salesforce AI Research's CRMArena-Pro benchmark found leading agents scored above 83% on single-turn workflow execution ([arXiv, 2025](https://arxiv.org/abs/2505.18878)).
+
+So if your team uses an assistant on well-scoped tasks, keep doing it. The trouble starts when the work moves from one person's task to a company process. That is where the model stops being the main variable.
+
+## The model is one part. The system is the rest.
+
+A production agent is a model plus everything around it. In my experience, the parts around it take most of the effort.
+
+- **Data contracts.** The agent reads from your CRM, ERP, warehouse or shared drive. If "customer", "active" or "revenue" means three things in three systems, the agent will pick one, and you won't know which. Someone has to agree the definitions and check them at the source.
+- **Retrieval and context quality.** What the model sees decides what it says. Stale documents, duplicates and missing fields turn into confident wrong answers. Retrieval needs its own tests.
+- **Tool and integration permissions.** Every tool you give an agent is a permission. Read access to a ticket queue is a different risk from write access to a payment system.
+- **Evaluation sets.** A fixed set of real tasks with known good answers, run on every change. Without one, "it seems better" is the only measure you have.
+- **Observability.** A trace of every run: inputs, retrieved context, tool calls, outputs and cost. When something goes wrong, you need to replay it.
+- **Cost and latency budgets.** Agents loop. A task that costs very little in a demo can cost far more at volume. A slow agent in a user-facing path is a broken agent.
+- **Human approval.** Decide which outputs a person must approve before they go out. Then build that step into the workflow, not into a policy document.
+- **Audit logs.** Who asked, what the agent did, on which data, who approved it, and when. Your auditors and your security team will ask.
+- **Versioning.** Models change. Prompts change. Data changes. Pin versions, record which one ran, and re-run your evaluations before you switch.
+- **Security and data residency.** Where the data goes, who can see it, whether the vendor keeps it or trains on it, and which region it sits in. In the UAE, the US and Europe, that answer can carry legal weight.
+
+None of this depends on how capable the model is. A better model does not fix a missing data contract.
+
+## Where it breaks in practice
+
+Public benchmarks show the shape of the failures. The ones below tested models from 2024 and 2025, and newer models will score higher. The pattern is still useful, because it shows where the work gets hard.
+
+TheAgentCompany is a research benchmark of 175 realistic office tasks in a simulated company. The best agent tested fully completed about 30% of them. The hardest tasks involved talking to colleagues and working through complex office web apps ([The Register, June 2025](https://www.theregister.com/2025/06/29/ai_agents_fail_a_lot/)). Those are integration and process problems, not reasoning problems.
+
+CRMArena-Pro tested agents on realistic CRM data. Success fell from about 58% on single-turn tasks to about 35% when the work ran over several turns. The authors also found the agents showed "near-zero inherent confidentiality awareness" ([arXiv, 2025](https://arxiv.org/abs/2505.18878)). For a CTO, that is the finding that matters most. A model will not protect data it was never told is sensitive. Permissions and filtering have to sit outside it.
+
+Cost behaves the same way. Anthropic's own engineers report that agents use about four times the tokens of a chat, and multi-agent systems about 15 times ([Anthropic, June 2025](https://www.anthropic.com/engineering/multi-agent-research-system)). They also found their multi-agent setup did much better on research tasks, so the cost can be worth paying. But only for tasks valuable enough to justify it. That is a design decision, not a default.
+
+And projects stall. In S&P Global's 2025 survey, 42% of companies said they had abandoned most of their AI initiatives, up from 17% the year before. Cost, data privacy and security were among the top obstacles ([CIO Dive, March 2025](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/)). None of those is a model problem.
+
+## The model makers say the same thing
+
+You don't have to take a services firm's word for this. The vendors publish it themselves.
+
+Anthropic's guide to [building effective agents](https://www.anthropic.com/research/building-effective-agents) recommends starting with the simplest setup that works and adding agents only when they are needed. It notes that agents trade higher cost and latency for better performance, and that their errors can compound. It recommends testing in a sandbox, with guardrails. Its guide to [evaluating agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) says teams without evaluations end up catching problems in production, and suggests starting with 20 to 50 tasks drawn from real failures.
+
+OpenAI's [practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) tells teams to layer guardrails and rate each tool by risk: read or write access, whether the action can be reversed, and its financial impact. Sensitive, irreversible or high-stakes actions should go to a person.
+
+Microsoft publishes a [deployment blueprint](https://learn.microsoft.com/en-us/microsoft-365/copilot/agent-essentials/agent-essentials-overview) that asks customers to fix oversharing first, including loose permissions, sites with no owner and sensitive content, before rolling out Microsoft 365 Copilot and agents. Its [2025 Responsible AI Transparency Report](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Responsible-AI-Transparency-Report-2025-vertical.pdf) says enterprise customers must put their own human oversight and access controls in place.
+
+Three model makers, one message. They supply the model. Data readiness, evaluation and oversight are the customer's job.
+
+## A production-ready checklist
+
+Before an agent touches real work, I want a clear yes to each of these.
+
+1. A named owner for the agent, and one for each data source it reads.
+2. Written definitions for the fields it relies on, checked at the source.
+3. An evaluation set of real tasks, run before every model, prompt or data change.
+4. Least-privilege access: read by default, write only where needed, nothing irreversible without approval.
+5. A human approval step for anything sent, posted, paid or decided.
+6. A trace of every run, kept long enough to investigate a complaint.
+7. A cost ceiling per task and per month, a latency target, and alerts on both.
+8. An audit log of who asked, what ran, on which data, and who approved it.
+9. Pinned model and prompt versions, with a tested path to upgrade.
+10. A clear answer on where data is processed and stored, and whether the vendor keeps it.
+11. Code, documentation, accounts and access in your company's name, so it runs without the people who built it.
+
+If your current agent has all eleven, keep it. Swapping models or vendors for its own sake adds risk and little else. If it has three, the model was never the problem.
+
+## How AUXO helps
+
+We do the work around the model, and we can do it with Claude or ChatGPT inside. It runs in three steps, and you can start at any one.
+
+- **Analyze.** An honest read of your business and your data before you spend on AI. Start with the free [AUXO Score](/auxo-score/): ten questions on how ready your data is for AI, with no sign-up.
+- **Advise.** The right AI and data setup for your team: which tools to use, which to skip, and who approves what.
+- **Build.** Data infrastructure and AI agent teams, set up end to end in your own accounts and handed over. Built to last, and yours to keep.
+
+AI where it earns its place. A person approves what goes out. And if what you already have works, we'll say so.
+
+If you want to talk through your own setup, [book a meeting](https://calendar.app.google/aJmnvMS2uBbYPCgC7).

@@ -1,0 +1,114 @@
+---
+title: "Your AI assistant is not the hard part"
+description: "Claude or ChatGPT can often do part of the job. Why company AI pilots stall anyway, what DIY really costs, and what to ask before buying another AI tool."
+date: 2026-10-27
+author: "AUXO Data Labs"
+tags: ["AI agents", "Data readiness", "Buying AI"]
+draft: false
+---
+
+"Why can't Claude, ChatGPT or an agent we already have do this?"
+
+It is a fair question. Founders ask it. CFOs ask it. Heads of operations ask it, often with a ChatGPT tab open in the background. The honest answer is that it often can do part of it.
+
+The model is rarely the hard part. The hard part is the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and keeping it running as things change. This post is about that gap. Where general assistants deliver. Why company pilots stall. What doing it yourself really costs. And when you should not hire anyone at all.
+
+## General assistants already deliver for individuals
+
+Start with what works, because a lot does.
+
+In a study of more than 5,000 customer support agents, access to a generative AI assistant raised issues resolved per hour by 14% on average, and by 34% for novice and less skilled workers ([NBER](https://www.nber.org/papers/w31161)). That is a real gain on a well-scoped, repeated task.
+
+Staff are not waiting for permission either. A preliminary 2025 report from MIT's NANDA initiative found workers at 90% of the companies it studied using personal AI tools, while only 40% of those companies had bought an official subscription ([VentureBeat](https://venturebeat.com/ai/mit-report-misunderstood-shadow-ai-economy-booms-while-headlines-cry-failure)).
+
+So if the job is one person, one task, information they can paste in, and a person reading the result before it goes anywhere, a general assistant is often enough. Drafting. Summarising. A first pass at a spreadsheet. Rewriting a policy in plain English. Buy a team plan, write clear rules on what data may go in, and get on with it.
+
+## The trouble starts when the work belongs to the company
+
+Things change when the task stops being one person's and becomes the company's. Now the assistant has to read live data from several systems, act inside them, and be right often enough that people stop checking every line.
+
+That is where reliability drops. Salesforce AI Research tested leading agents on realistic CRM tasks. They succeeded about 58% of the time on single-turn tasks and about 35% when the work ran over several turns. They also showed near-zero awareness of what was confidential ([arXiv](https://arxiv.org/abs/2505.18878)). Those were 2025 models, and newer ones score higher. The shape of the problem is the point. Multi-step work on real business data is harder than a single question in a chat window.
+
+It shows up in results too. McKinsey's 2025 survey found 88% of organisations use AI somewhere, but only 39% report any impact on EBIT at the enterprise level ([McKinsey](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-state-of-ai-2025)). Using AI and getting value from it are different things.
+
+## Why pilots stall
+
+Pilots rarely stall because the model was too weak. S&P Global found that 42% of companies abandoned most of their AI initiatives in 2025, up from 17% the year before. Cost, privacy and security were among the top obstacles ([CIO Dive](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/)). In 2024, Gartner predicted that at least 30% of generative AI projects would be dropped after proof of concept by the end of 2025, citing poor data quality, weak risk controls, rising costs and unclear business value ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025)).
+
+The reasons fall into six groups. None of them is about the model.
+
+### Data readiness
+
+The pilot ran on a clean export. The real data lives in five systems that disagree about what a customer, an order or an invoice is. An assistant reading untidy data gives untidy answers, with confidence. In RSM's 2025 survey of middle-market firms using generative AI, 41% named data quality as a top rollout challenge ([RSM](https://rsmus.com/newsroom/2025/middle-market-firms-rapidly-embracing-generative-ai-but-expertise-gaps-pose-risks-rsm-2025-ai-survey.html)).
+
+### Integration
+
+A demo can copy and paste. Production cannot. It needs live connections, the right permissions, and somewhere for the output to land. Microsoft tells its own customers to fix oversharing, meaning loose permissions and sensitive files anyone can reach, before rolling out Microsoft Copilot and agents ([Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-365/copilot/agent-essentials/agent-essentials-overview)).
+
+### Ownership
+
+The pilot was someone's side project. Nobody owns it in the org chart. When that person changes role or leaves, it quietly stops.
+
+### Approvals
+
+Who checks the output before it reaches a customer, a supplier or the ledger? OpenAI's own guide to building agents says actions that are sensitive, irreversible or high-stakes should trigger human oversight ([OpenAI](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)). Someone has to decide which actions those are, and who signs off.
+
+### Change management
+
+The team keeps the old spreadsheet "just in case". The workflow does not change, so no time is saved. A tool nobody trusts becomes a second job.
+
+### Cost of running
+
+Agents cost more to run than chat. Anthropic's engineers report that agents use about four times the tokens of a chat, and multi-agent systems about fifteen times ([Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)). Gartner expects at least half of generative AI projects to overrun their budgets through 2028, because of poor architecture choices and a lack of operational know-how ([Gartner](https://www.gartner.com/en/articles/hype-cycle-for-genai)). Pilot volume hides this. Production volume does not.
+
+## The real cost of doing it yourself
+
+Doing it yourself is often the right call. It is not free. The licence is the cheap part.
+
+The real cost is the work around the model. Someone has to connect the systems, clean the data, write the rules, build tests, and fix things when a vendor changes an API or a model. Anthropic advises teams to start testing an agent with 20 to 50 tasks drawn from real failures, and warns that without that testing, problems get caught only in production ([Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)).
+
+If that work goes to a new hire, budget for it honestly. Built In puts average total cash pay for a US data engineer at about $150,000 ([Built In](https://builtin.com/salaries/us/data-engineer)), before recruiting, benefits and tools. One person also cannot cover data, integration, testing and governance alone.
+
+If it goes to an existing manager in their spare evenings, the cost is hidden but real. It comes out of the job you hired them for.
+
+Then there is risk. An agent that emails the wrong customer or exposes the wrong file costs more than the project saved. Rules are also tightening. In California, businesses that use automated decision-making for significant decisions, such as lending, housing or employment, must comply with new rules from 1 January 2027 ([CPPA](https://cppa.ca.gov/announcements/2025/20250923.html)).
+
+Most mid-sized firms already know this. In the same RSM survey, 92% hit problems rolling out generative AI, and 70% of those using it said they need outside help to get full value from it ([RSM](https://rsmus.com/newsroom/2025/middle-market-firms-rapidly-embracing-generative-ai-but-expertise-gaps-pose-risks-rsm-2025-ai-survey.html)).
+
+Setting it up properly does not mean setting it up big. Anthropic's own advice is to find the simplest solution that works and add complexity only when it is needed ([Anthropic](https://www.anthropic.com/research/building-effective-agents)). We agree.
+
+## What to ask before you buy another AI tool
+
+Before the next subscription, answer these:
+
+1. **What exact task will it do, and who does that task today?**
+2. **Which data does it need?** Is that data correct, and is it in one place?
+3. **Which systems must it read from or write to?** Who grants that access?
+4. **What may it do without a person, and what needs approval?** Name the approver.
+5. **How will you know it works?** Pick 20 real examples to test it against before launch.
+6. **What will it cost to run at real volume**, not pilot volume?
+7. **Who owns it after launch?** What happens if they leave?
+8. **Can you export your data and leave?** Is the account in your company's name?
+
+If you cannot answer the first three, the tool is not your next purchase. The data and the process are.
+
+## When not to hire anyone
+
+Plainly, there are times you should not hire us or anyone else.
+
+- **Your team uses Claude, ChatGPT or Microsoft Copilot well.** People check the output, and the work is drafting and analysis. Keep going. Add a short policy on what data may go in.
+- **An agent you already run works.** It has an owner, someone checks it, and the cost is known. Keep it. Replacing a working tool is cost with no gain.
+- **There is no repeated process yet.** If the task happens twice a quarter, automation will not pay back. Fix the process first.
+- **The stakes are low and the action is reversible.** One person, one task, easy to undo. A general assistant is fine.
+
+## How AUXO helps
+
+When the work does belong to the company, we do the part around the model. We work in three steps, and you can start at any one.
+
+- **Analyze:** an honest read of your business and your data, before you spend on AI.
+- **Advise:** the right AI and data setup for your team, and a plan to get there.
+- **Build:** your data infrastructure and AI agent teams, set up end to end and handed over.
+
+We often do it with Claude or ChatGPT inside. You own what we build, and a person approves what goes out. We will also tell you when not to build, and that includes when not to replace something that already works.
+
+If you want a quick read first, take the free [AUXO Score](/auxo-score/). It is 10 questions on how ready your data is for AI, with no sign-up. If you would rather talk it through, [book a meeting](https://calendar.app.google/aJmnvMS2uBbYPCgC7) with a founder.
