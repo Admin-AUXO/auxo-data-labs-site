@@ -45,7 +45,7 @@ test("homepage hero and section links", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("main h1")).toContainText("Your data, ready for AI");
   await expect(page.locator('main a[href="/how-it-works/#analyze"]')).toHaveCount(1);
-  await expect(page.locator('main a[href="/pricing/#mid-sized"]')).toHaveCount(1);
+  await expect(page.locator('main a[href="/pricing/#growing"]')).toHaveCount(1);
   await expect(page.locator('main a[href^="/marketplace/?category="]').first()).toBeVisible();
 });
 
@@ -57,17 +57,16 @@ test("how it works has the ladder anchors", async ({ page }) => {
   await expect(page.locator("#analyze h2")).toHaveText("Analyze");
 });
 
-test("pricing shows three segment cards with one recommended", async ({ page }) => {
+test("pricing shows three segment cards with no badge", async ({ page }) => {
   await page.goto("/pricing/");
   const cards = page.locator(".plans > .plan");
   await expect(cards).toHaveCount(3);
-  for (const id of ["funded-startups", "mid-sized", "enterprise"]) {
+  for (const id of ["startups", "growing", "large-organisations"]) {
     await expect(page.locator(`#${id} article h2`)).toBeVisible();
   }
-  await expect(page.locator(".plan__badge")).toHaveCount(1);
-  await expect(page.locator("#mid-sized .plan__badge")).toHaveText("Recommended");
-  await expect(page.locator('#funded-startups a[href="/auxo-score/?offer=free-audit"]')).toBeVisible();
-  await expect(page.locator('#enterprise a[href="/contact/?topic=enterprise"]')).toBeVisible();
+  await expect(page.locator(".plan__badge")).toHaveCount(0);
+  await expect(page.locator('#startups a[href="/auxo-score/?offer=free-audit"]')).toBeVisible();
+  await expect(page.locator('#large-organisations a[href="/contact/?topic=enterprise"]')).toBeVisible();
   const text = await page.locator("main").innerText();
   expect(text).not.toMatch(/AED|USD|\$\s?\d|€\s?\d|most popular/i);
 });
@@ -78,7 +77,7 @@ test("marketplace filter reads and writes the category", async ({ page }) => {
   await expect(finance).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator('.mkt-grid > [data-category="finance"]').first()).toBeVisible();
   await expect(page.locator('.mkt-grid > [data-category="engineering"]').first()).toBeHidden();
-  await expect(page.locator('.mkt-grid > [data-category="any"]')).toBeVisible();
+  await expect(page.locator(".mkt-card--custom")).toBeVisible();
 
   await page.locator('[data-filter="engineering"]').click();
   await expect(page).toHaveURL(/\?category=engineering$/);
@@ -130,16 +129,6 @@ test("mobile nav dialog opens", async ({ page }) => {
   await page.goto("/");
   await page.locator(".nav__burger").click();
   await expect(page.locator("#mobile-nav")).toBeVisible();
-});
-
-test("retired self-check route redirects to the AUXO Score", async ({ page }) => {
-  await page.goto("/self-check/");
-  await expect(page).toHaveURL(/\/auxo-score\/$/);
-});
-
-test("retired the-work route redirects to how it works", async ({ page }) => {
-  await page.goto("/the-work/");
-  await expect(page).toHaveURL(/\/how-it-works\/$/);
 });
 
 test("business-card /v route redirects to /hello/", async ({ page }) => {

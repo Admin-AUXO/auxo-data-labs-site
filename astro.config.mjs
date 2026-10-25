@@ -13,8 +13,6 @@ export default defineConfig({
   site: 'https://auxodata.com',
   output: 'static',
   redirects: {
-    '/self-check': '/auxo-score/',
-    '/the-work': '/how-it-works/',
     '/v': '/hello/',
   },
   devToolbar: { enabled: false },

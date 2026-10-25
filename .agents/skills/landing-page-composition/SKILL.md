@@ -31,25 +31,27 @@ For most marketing pages in this repo:
 6. Objection-handling content such as FAQ, scope guidance, or fit criteria
 7. Final CTA
 
-## Service Page Rules
+## Offer Page Rules
 
-For The Work page:
+There are no individual service pages; offers live on three pages (copy in `src/data/how-it-works.ts`, `pricing.ts`, `marketplace.ts`).
 
-1. Lead with what AUXO does and how the library is organized.
-2. Help buyers self-select by problem or operating stage.
-3. Show the service catalog with short, differentiated summaries.
-4. Add industries, engagement models, or other relevance layers only if they sharpen fit.
-5. End with one clear recommendation CTA.
+For How it works (`/how-it-works/`):
 
-For individual service pages:
+1. Lead with the three steps (Analyze, Advise, Build): who each suits, what it delivers, how long it takes.
+2. Show managed upkeep as optional after Build, not as a fourth step.
+3. Follow with the method and an FAQ for objection handling.
+4. End with one clear CTA.
 
-1. Hero: service name, buyer problem, concrete outcome, direct CTA.
-2. Best-fit block: who it is for, primary stakeholders, primary output, trigger conditions.
-3. Overview: why the problem matters and what gets fixed.
-4. Deliverables or benefits: tangible artifacts, not slogan cards.
-5. Process: what happens, in what order, with what outputs.
-6. Outcomes and FAQ: expected change plus objection handling.
-7. Final CTA.
+For Pricing (`/pricing/`):
+
+1. One card per segment: startups (seed to Series B), growing companies (50–500 people), large organisations.
+2. Each card: the way in, what comes first and next, timing, and one CTA. No prices; "a fixed price per phase, set by scope, in writing".
+3. Close with what every engagement includes, the FAQ, and the final CTA.
+
+For Marketplace (`/marketplace/`):
+
+1. Order: AUXO stacks, then Built by AUXO agents, then third-party tools.
+2. Keep how the client pays AUXO (one-off setup, optional upkeep) separate from vendor billing.
 
 ## Rules
 

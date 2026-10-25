@@ -35,6 +35,12 @@
   force = true
 
 [[redirects]]
+  from = "/services/*"
+  to = "/how-it-works/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/self-check/"
   to = "/auxo-score/"
   status = 301

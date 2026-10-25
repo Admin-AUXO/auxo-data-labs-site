@@ -34,12 +34,12 @@ Shape the system before touching components.
 - Primary outputs, proof statements, and stakeholder groups deserve stronger visual hierarchy than generic paragraph copy.
 - Motion must reinforce reading order or state change.
 - Use a few memorable moments, not constant shimmer.
-- Always respect reduced motion and avoid scroll-jank theatrics.
+- Gate motion behind `html[data-motion="on"]` (the footer toggle; the OS reduced-motion setting is not used) and avoid scroll-jank theatrics.
 - Adapt to the existing Astro and CSS architecture instead of importing a foreign design system whole.
 - When changing a shared visual language, update tokens or reusable patterns instead of stacking one-off overrides.
 
 ## High-Risk Areas
 
-- Mega menus: keep them inside the viewport, grouped clearly, and visually quieter than the page behind them.
-- Mobile service sections: convert dense grids into accordions or carousels only when the alternate pattern improves comprehension.
+- Navigation and the mobile menu dialog: keep them inside the viewport, grouped clearly, and visually quieter than the page behind them.
+- Mobile offer sections (pricing cards, marketplace grid): convert dense grids into accordions or carousels only when the alternate pattern improves comprehension.
 - Comparison-heavy sections: make labels, fit statements, and outputs visually scannable before styling supporting copy.

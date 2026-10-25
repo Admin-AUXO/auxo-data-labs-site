@@ -86,9 +86,9 @@ export const SCORE_COPY: ScoreCopy = {
     startup: {
       eyebrow: "Free audit for startups, seed to Series B",
       title: "Step 1: your AUXO Score.",
-      lede: "10 questions on your data, a 45‑minute call with a founder, then a one-page summary of what to fix first.",
+      lede: "10 questions on your data, a 45‑minute call with a founder, then a one-page plan of what to fix first.",
       stepsLabel: "Free audit steps",
-      steps: ["AUXO Score", "Founder review call", "One-page summary"],
+      steps: ["AUXO Score", "Founder call", "One-page plan"],
       eligibility: "For investor-funded startups, seed to Series B. One per company.",
     },
     dimensionsLabel: "Dimensions measured",
@@ -117,13 +117,13 @@ export const SCORE_COPY: ScoreCopy = {
       startupLink: { text: "See the free audit", href: "/pricing/#startups" },
     },
     reviewCall: {
-      title: "Step 2: book your review call.",
-      body: "Your score is saved in this browser. Book a 45‑minute call and a founder will go through it with you. A one-page summary of what to fix first follows.",
+      title: "Step 2: book your founder call.",
+      body: "Your score is saved in this browser. Book a 45‑minute call and a founder will go through it with you. A one-page plan of what to fix first follows within 3 business days.",
       ticks: [
         "We've raised from outside investors, seed to Series B.",
         "This is our company's first free audit with AUXO.",
       ],
-      button: "Book your review call",
+      button: "Book your founder call",
       tip: "Email the report to yourself first, so you have it on the call.",
       reassurance: "A real person replies within one business day.",
       notEligible: {
@@ -155,8 +155,8 @@ export const SCORE_COPY: ScoreCopy = {
       talk: { text: "Talk to us", href: "/contact/?topic=not-sure" },
     },
     startup: {
-      lede: "That is a finding in itself, and still worth a review call. Book your call and bring someone from finance or operations, or retake the check with them first.",
-      book: "Book your review call",
+      lede: "That is a finding in itself, and still worth a founder call. Book your call and bring someone from finance or operations, or retake the check with them first.",
+      book: "Book your founder call",
     },
     retake: "Retake with a colleague",
   },

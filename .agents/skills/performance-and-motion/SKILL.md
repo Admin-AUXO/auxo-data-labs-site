@@ -1,6 +1,6 @@
 ---
 name: performance-and-motion
-description: Use when adding or changing animations, scroll-driven behavior, carousel behavior, lazy loading, service worker behavior, hydration strategy, or other performance-sensitive front-end behavior in this Astro site. Trigger for motion (motion.dev), Embla, reveal effects, runtime media loading, and interaction code that can affect responsiveness.
+description: Use when adding or changing animations, scroll-driven behavior, carousel behavior, lazy loading, service worker behavior (`src/pages/sw.js.ts`), client script strategy, or other performance-sensitive front-end behavior in this Astro site. Trigger for reveal effects, the particle field, hero text, count-ups, runtime media loading, and interaction code that can affect responsiveness.
 ---
 
 # Performance and Motion
@@ -10,20 +10,21 @@ Fast first. Fancy second.
 ## Priorities
 
 1. Preserve static delivery whenever possible.
-2. Keep hydration narrow and intentional.
+2. Keep client scripts narrow and intentional (plain `<script>` modules; there are no framework islands).
 3. Protect LCP, input responsiveness, and scroll smoothness.
-4. Respect reduced motion before styling the effect.
+4. Gate motion behind the site toggle before styling the effect.
 
 ## Rules
 
 - Animate emphasis, transitions, or orientation. Not everything.
+- Motion is on by default and switched by the footer toggle, not the OS reduced-motion setting. Gate CSS under `html[data-motion="on"]` and check `motionEnabled()` from `src/scripts/core/motion.ts` in JS.
 - Use transform and opacity for movement when possible.
 - Avoid stacked scroll listeners when CSS or existing observers can do the job.
-- Re-test page transitions and re-initialization after motion changes.
+- Initialise on `astro:page-load` and clear timers on `astro:before-swap`; re-test page transitions and re-initialization after motion changes.
 - Do not fight existing transforms with extra animation layers.
 - Protect nested scroll regions; keep menus, drawers, and dialogs scrollable on their own without the page fighting them.
 - Keep carousel content light and avoid heavy first-frame assets.
-- Use Embla where horizontal comparison helps. Do not turn essential navigation or core reading flows into swipe traps.
+- No carousel library is installed; reuse the insight deck (`src/scripts/ui/insight-deck.ts`) or plain CSS where horizontal comparison helps. Do not turn essential navigation or core reading flows into swipe traps.
 - Prefer mobile-only carousel activation for dense card collections when desktop already has enough width.
 - Dropdowns, drawers, and modal menus need deliberate overflow behavior. If the viewport is shorter than the design, the component still has to work.
 - Treat hero media as LCP-critical and everything else as suspect.
@@ -32,6 +33,6 @@ Fast first. Fancy second.
 
 ## Verification
 
-- Check reduced-motion behavior after adding or changing animations.
+- Check the page with the footer motion toggle both on and off after adding or changing animations.
 - Check keyboard and touch interaction for carousels, accordions, and menus.
 - Check that runtime initialization survives Astro page transitions and repeated menu opens.

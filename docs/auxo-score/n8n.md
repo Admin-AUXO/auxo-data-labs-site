@@ -69,9 +69,15 @@ Responses the site understands:
   "result": {
     "total": 74,
     "band": "Stable",
-    "bandLine": "Good foundations with a few blind spots.",
+    "bandLine": "Good foundations with a few blind spots. Fix the weakest area before AI tools start relying on it.",
     "weakest": "Trusted",
-    "focus": "People check or rebuild the numbers before they rely on them. Start by finding out why the official reports get second-guessed.",
+    "focus": "People check or rebuild the numbers before they rely on them, so the official reports cost effort without earning trust.",
+    "focusSteps": [
+      "Ask three managers which side spreadsheets they keep and why.",
+      "Fix the specific gap behind the most common answer in the official report.",
+      "Retire that side sheet publicly once the official version covers it."
+    ],
+    "focusGood": "Leadership acts on the official numbers without a separate check.",
     "idkCount": 0,
     "dimensions": { "Accurate": 20, "Complete": 20, "Consistent": 14, "Timely": 14, "Trusted": 6 },
     "radar": { "Accurate": 100, "Complete": 100, "Consistent": 70, "Timely": 70, "Trusted": 30 }

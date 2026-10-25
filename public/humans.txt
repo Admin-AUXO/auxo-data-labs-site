@@ -1,5 +1,7 @@
 /* TEAM */
 Developer: AUXO Data Labs
+Co-Founder & CEO: Vignesh Ramesh
+Co-Founder & CTO: Ajay Kumar
 Location: Dubai, United Arab Emirates
 Website: https://auxodata.com
 Email: hello@auxodata.com
@@ -9,7 +11,7 @@ Astro: https://astro.build
 Tailwind CSS: https://tailwindcss.com
 
 /* SITE */
-Last update: 2026/06/10
+Last update: 2026/10/26
 Standards: HTML5, CSS3, JavaScript ES6+
 Components: Astro, Tailwind CSS
 Software: Visual Studio Code, Git
