@@ -25,9 +25,9 @@ export const insightsContent: InsightsContent = {
     description: "One-minute positions on data, AI, reporting and ownership. Plain, sourced and quick to read.",
   },
   hero: {
-    title: "Short reads for people who move fast.",
-    titleHighlight: "move fast",
-    lead: "One-minute positions on data and AI for finance, operations, engineering, hiring, sales and content teams.",
+    title: "One-minute reads on data and AI.",
+    titleHighlight: "data and AI",
+    lead: "Short, sourced positions for finance, operations, engineering, hiring, sales and content teams.",
   },
   cta: {
     title: "See one that fits your team?",

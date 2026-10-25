@@ -13,6 +13,8 @@ import { escapeHtml } from "../lib/text";
 import "../styles/pages/pricing.css";
 
 const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escapeHtml(item.answer) }));
+const factKeys = ["first", "then", "time", "price", "stop"] as const;
+const factIds = c.cards.items.map((p) => `${p.id}-facts`).join(" ");
 const ladder = [
   { name: "Analyze", label: "Analyze" },
   { name: "Advise", label: "Advise" },
@@ -47,40 +49,54 @@ const ladder = [
     <ul class="plans">
       {
         c.cards.items.map((p, i) => (
-          <li
-            id={p.id}
-            class="plan"
-            data-highlight={p.highlighted ? "" : undefined}
-            data-anim="rise"
-            style={`--i:${i}`}
-          >
+          <li id={p.id} class="plan" data-anim="rise" style={`--i:${i}`}>
             <article class="plan__body" aria-labelledby={`${p.id}-eyebrow ${p.id}-title`}>
               <header class="plan__head">
-                <div class="plan__meta">
+                <div class="plan__who">
                   <p id={`${p.id}-eyebrow`} class="plan__eyebrow">
                     <Icon name={p.icon} class="plan__icon" aria-hidden="true" />
                     {p.eyebrow}
                   </p>
-                  {p.badge && <span class="plan__badge">{p.badge}</span>}
+                  <p class="plan__descriptor">{p.descriptor}</p>
                 </div>
-                <h2 id={`${p.id}-title`} class="plan__title">{p.title}</h2>
-                <p class="plan__subline">{p.subline}</p>
+                <div class="plan__what">
+                  <h2 id={`${p.id}-title`} class="plan__title">{p.title}</h2>
+                  <p class="plan__subline">{p.subline}</p>
+                </div>
               </header>
 
-              <ul class="plan__bullets">
-                {p.bullets.map((b) => (
-                  <li>
-                    <Icon name="mdi:check" class="plan__check" aria-hidden="true" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-
               <div class="plan__cta">
-                <Button variant={p.cta.variant} size="lg" href={p.cta.href} icon class="w-full">
+                <Button variant="secondary" size="lg" href={p.cta.href} icon class="w-full">
                   {p.cta.text}
                 </Button>
+                {p.secondary && (
+                  <a class="plan__secondary" href={p.secondary.href}>
+                    {p.secondary.text}
+                    <Icon name="mdi:arrow-right" aria-hidden="true" />
+                  </a>
+                )}
+                <button
+                  type="button"
+                  class="plan__toggle"
+                  data-plans-toggle
+                  aria-expanded="false"
+                  aria-controls={factIds}
+                  data-show={c.cards.detailsShow}
+                  data-hide={c.cards.detailsHide}
+                >
+                  <span data-plans-label>{c.cards.detailsShow}</span>
+                  <Icon name="mdi:plus" aria-hidden="true" />
+                </button>
               </div>
+
+              <dl class="plan__facts" id={`${p.id}-facts`}>
+                {factKeys.map((k) => (
+                  <div class="plan__fact" data-fact={k}>
+                    <dt>{c.cards.factLabels[k]}</dt>
+                    <dd>{p.facts[k]}</dd>
+                  </div>
+                ))}
+              </dl>
 
               <div class="plan__tiers">
                 <p id={`${p.id}-tiers`} class="plan__tiers-label">{c.cards.tiersLabel}</p>
@@ -106,23 +122,14 @@ const ladder = [
       }
     </ul>
 
-  </Section>
-
-  <Section id="free-audit" padding="lg" width="7xl" class="plans-anchor">
-    <div class="free-audit" data-reveal>
-      <div class="free-audit__intro">
-        <h2 class="free-audit__title">{c.freeAudit.title}</h2>
-        <p class="free-audit__note">{c.freeAudit.note}</p>
-      </div>
-      <ul class="free-audit__points">
+    <div class="plans-includes" data-reveal>
+      <h2 class="plans-includes__title">{c.includes.title}</h2>
+      <ul class="plans-includes__list">
         {
-          c.freeAudit.points.map((pt) => (
-            <li class="free-audit__point">
-              <span class="free-audit__icon" aria-hidden="true">
-                <Icon name={pt.icon} />
-              </span>
-              <h3 class="free-audit__point-title">{pt.title}</h3>
-              <p class="free-audit__point-body">{pt.body}</p>
+          c.includes.items.map((item) => (
+            <li class="plans-includes__item">
+              <Icon name={item.icon} aria-hidden="true" />
+              <span>{item.text}</span>
             </li>
           ))
         }
@@ -151,3 +158,24 @@ const ladder = [
 
   <StructuredData type="FAQPage" data={faqSchema(c.faq.items)} />
 </BaseLayout>
+
+<script>
+  function initPlans(): void {
+    const list = document.querySelector<HTMLElement>(".plans");
+    if (!list || list.dataset.bound === "true") return;
+    list.dataset.bound = "true";
+    const buttons = Array.from(list.querySelectorAll<HTMLButtonElement>("[data-plans-toggle]"));
+    const set = (open: boolean): void => {
+      list.toggleAttribute("data-open", open);
+      for (const b of buttons) {
+        b.setAttribute("aria-expanded", String(open));
+        const label = b.querySelector<HTMLElement>("[data-plans-label]");
+        if (label) label.textContent = (open ? b.dataset.hide : b.dataset.show) ?? "";
+      }
+    };
+    for (const b of buttons) b.addEventListener("click", () => set(!list.hasAttribute("data-open")));
+    set(false);
+  }
+
+  document.addEventListener("astro:page-load", initPlans);
+</script>

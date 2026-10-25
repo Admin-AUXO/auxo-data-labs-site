@@ -61,7 +61,7 @@ export const blogContent: BlogContent = {
     hero: {
       title: "Data and AI, written plainly.",
       titleHighlight: "written plainly",
-      lead: "Plain reads on data, AI tools and agents, and when not to build. Every figure has a source.",
+      lead: "Founder notes on data, AI tools and agents, and when not to build. Every figure has a source.",
     },
     tagFilterLabel: "Filter posts by topic",
     tagFilterAll: "All topics",

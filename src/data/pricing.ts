@@ -7,24 +7,31 @@ export interface PlanTier {
   note?: string;
 }
 
-export interface PlanCta {
+export interface PlanLink {
   text: string;
   href: string;
-  variant: "primary" | "secondary";
+}
+
+export interface PlanFacts {
+  first: string;
+  then: string;
+  time: string;
+  price: string;
+  stop: string;
 }
 
 export interface PlanCard {
   id: string;
   icon: string;
   eyebrow: string;
-  badge?: string;
+  descriptor: string;
   title: string;
   subline: string;
-  bullets: string[];
-  cta: PlanCta;
+  facts: PlanFacts;
+  cta: PlanLink;
+  secondary?: PlanLink;
   tiers: PlanTier[];
   finePrint: string;
-  highlighted?: boolean;
 }
 
 export interface FaqItem {
@@ -43,14 +50,16 @@ export interface PricingContent {
     rules: { tone: "free" | "paid" | "optional"; icon: string; text: string }[];
   };
   cards: {
+    factLabels: Record<keyof PlanFacts, string>;
+    detailsShow: string;
+    detailsHide: string;
     tiersLabel: string;
     notIncludedLabel: string;
     items: PlanCard[];
   };
-  freeAudit: {
+  includes: {
     title: string;
-    points: { icon: string; title: string; body: string }[];
-    note: string;
+    items: { icon: string; text: string }[];
   };
   faq: {
     title: string;
@@ -68,115 +77,141 @@ export interface PricingContent {
 }
 
 export const pricingContent: PricingContent = {
-  metaTitle: "Pricing: start where you are",
+  metaTitle: "Pricing: three ways in, a fixed price per phase",
   metaDescription:
-    "Free audit for funded startups, the AUXO Score for mid-sized companies, custom scope for enterprise. Every price is personal and sent privately.",
+    "A free audit for startups, seed to Series B. A deep-dive audit for growing companies. One unit first for large organisations. A fixed price per phase, in writing.",
   hero: {
     eyebrow: "Pricing",
     title: "Start where you are.",
-    lead: "Pick the path that fits your company. Every price is personal, and we send it privately after the first conversation and audit.",
+    lead: "Three ways in. Each phase has a fixed price, set by scope and agreed in writing before work starts.",
     rulesTitle: "How pricing works",
     rules: [
-      { tone: "free", icon: "mdi:check", text: "Free: the AUXO Score and the free audit." },
-      { tone: "paid", icon: "mdi:file-document-outline", text: "Everything else has a fixed price, in writing, before any work." },
+      { tone: "free", icon: "mdi:check", text: "Free: the AUXO Score, and the free audit for seed to Series B startups." },
+      { tone: "paid", icon: "mdi:file-document-outline", text: "A fixed price per phase, set by scope, in writing before any work." },
+      { tone: "free", icon: "mdi:key-outline", text: "Stop after any phase. You keep everything delivered." },
+      { tone: "optional", icon: "mdi:domain", text: "Vendors bill you directly, on your own contract." },
       { tone: "optional", icon: "mdi:sync", text: "Managed upkeep is optional and monthly. Stop with 30 days' notice." },
-      { tone: "optional", icon: "mdi:domain", text: "Third-party tools are billed to you by the vendor, on your own contract." },
     ],
   },
   cards: {
+    detailsShow: "Show details",
+    detailsHide: "Hide details",
+    factLabels: {
+      first: "First",
+      then: "Then",
+      time: "Typical time",
+      price: "Price set by",
+      stop: "If you stop",
+    },
     tiersLabel: "Includes",
     notIncludedLabel: "Not included",
     items: [
       {
-        id: "funded-startups",
+        id: "startups",
         icon: "mdi:rocket-launch-outline",
-        eyebrow: "Funded startups",
+        eyebrow: "Startups, seed to Series B",
+        descriptor: "Investor-funded, moving fast, no data team yet.",
         title: "Free audit",
-        subline: "Then a paid AI data setup.",
-        bullets: [
-          "Score, founder call and summary, free",
-          "AI-built data infrastructure",
-          "Set up end to end, yours to keep",
-        ],
-        cta: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit", variant: "secondary" },
+        subline: "Then a fixed-price data foundation.",
+        facts: {
+          first: "Your AUXO Score, a 45-minute founder call and a one-page plan. Free.",
+          then: "Your core tools connected into one clean source in your own cloud, with the metrics investors ask for.",
+          time: "Plan within 3 business days of the call. Build: 4 to 12 weeks.",
+          price: "The systems we connect and the metrics you need.",
+          stop: "The plan is yours, whether or not you build with us.",
+        },
+        cta: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit" },
+        secondary: { text: "Take the AUXO Score first", href: "/auxo-score/" },
         tiers: [{ name: "Analyze", note: "free audit" }, { name: "Build" }],
-        finePrint: "Seed to Series B. One per company.",
+        finePrint: "One per company. You've raised from outside investors.",
       },
       {
-        id: "mid-sized",
+        id: "growing",
         icon: "mdi:office-building-outline",
-        eyebrow: "Mid-sized companies",
-        title: "AUXO Score",
-        subline: "Then a paid deep-dive audit.",
-        bullets: [
-          "Your AI-readiness score, free",
-          "Paid deep-dive audit and plan",
-          "AI tools marketplace",
-        ],
-        cta: { text: "Get your AUXO Score", href: "/auxo-score/", variant: "secondary" },
-        tiers: [
-          { name: "Analyze" },
-          { name: "Advise" },
-          { name: "Build", note: "marketplace tools" },
-        ],
-        finePrint:
-          "About 50 to 500 staff, as a guide. The deep-dive audit is priced privately.",
+        eyebrow: "Growing companies",
+        descriptor: "50–500 people, with numbers spread across tools, sites and spreadsheets.",
+        title: "Deep-dive audit",
+        subline: "Start free with the AUXO Score.",
+        facts: {
+          first: "Your systems reviewed under NDA: each fix rated red, amber or green, a build-first plan and a leadership readout.",
+          then: "Roadmap, tool choice and governance, then builds in phases you approve one at a time.",
+          time: "Audit: 2 to 3 weeks. Each build phase: 4 to 12 weeks.",
+          price: "The systems, entities and teams in scope.",
+          stop: "Stop after the audit. The assessment and plan are yours.",
+        },
+        cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
+        secondary: { text: "Ask about a deep-dive audit", href: "/contact/?topic=deep-dive-audit" },
+        tiers: [{ name: "Analyze" }, { name: "Advise" }, { name: "Build" }],
+        finePrint: "A guide, not a rule. Under 50 people and not a startup? Start with the AUXO Score.",
       },
       {
-        id: "enterprise",
+        id: "large-organisations",
         icon: "mdi:domain",
-        eyebrow: "Enterprise",
-        title: "Custom",
-        subline: "Pricing on request.",
-        bullets: ["Scope built around you", "Dedicated AI agent teams", "Procurement and security review"],
-        cta: { text: "Talk to us", href: "/contact/?topic=enterprise", variant: "secondary" },
+        eyebrow: "Large organisations",
+        descriptor: "One business unit first, through procurement and security review.",
+        title: "One unit first",
+        subline: "Scoped by proposal, phase by phase.",
+        facts: {
+          first: "An NDA, a scoping call, then a written proposal for one unit.",
+          then: "Builds in your environment, alongside your data team or integrator. Managed upkeep if you want it.",
+          time: "Proposal within 5 business days of scoping. First phase: 2 to 3 weeks, plus your procurement steps.",
+          price: "Scope per phase, on your contract terms.",
+          stop: "Each phase stands alone. Code, documents and accounts are in your name.",
+        },
+        cta: { text: "Talk to us", href: "/contact/?topic=enterprise" },
+        secondary: { text: "Book a meeting", href: siteData.bookingUrl },
         tiers: [{ name: "Analyze" }, { name: "Advise" }, { name: "Build" }, { name: "Managed upkeep" }],
-        finePrint:
-          "For procurement, security review or a custom contract. Start with one team. NDA first if you want.",
+        finePrint: "We answer security questionnaires plainly, including what we don't hold.",
       },
     ],
   },
-  freeAudit: {
-    title: "The free audit, stated plainly",
-    points: [
-      { icon: "mdi:gauge", title: "AUXO Score", body: "10 questions on your data, scored out of 100." },
-      { icon: "mdi:account-tie-outline", title: "45-minute founder call", body: "We walk through your score together." },
-      { icon: "mdi:file-document-outline", title: "One-page plan", body: "What to fix first, sent after the call." },
+  includes: {
+    title: "Every engagement includes",
+    items: [
+      { icon: "mdi:account-tie-outline", text: "A founder on every call" },
+      { icon: "mdi:file-document-outline", text: "A fixed price per phase, in writing" },
+      { icon: "mdi:key-outline", text: "Your accounts, contracts and code" },
+      { icon: "mdi:account-check-outline", text: "A person approves what agents send" },
+      { icon: "mdi:school-outline", text: "Documentation and training at handover" },
     ],
-    note: "Funded startups, seed to Series B, one per company. It isn't the deep-dive audit and has no build. Not enough data yet? We'll say so and suggest what to set up first.",
   },
   faq: {
     title: "Pricing questions",
     items: [
       {
-        question: "Why no prices here?",
+        question: "How do you set the price?",
         answer:
-          "Every company's data and goals are different, so a fixed price would be a guess. We price after the first conversation and audit, and send it to you in writing before any work starts.",
+          "By scope: the systems we connect, the teams involved and what we build. Each phase gets a fixed price in writing before work starts. We don't publish prices because no two scopes match.",
       },
       {
-        question: "What happens after the audit?",
+        question: "What exactly is the free audit?",
         answer:
-          "You get the results in writing. If something is worth building, we send a plan and a price, privately. If nothing is, we say so. There's no obligation to go further.",
+          "Your AUXO Score, a 45-minute call with a founder and a one-page plan of what to fix first, within 3 business days of the call. For seed to Series B startups, one per company. Not enough data yet? We'll say so and suggest what to set up first.",
       },
       {
-        question: "Can we sign an NDA first?",
-        answer: "Yes. We're happy to sign an NDA before we begin. Send us yours, or ask for ours.",
+        question: "Why not hire a data engineer instead?",
+        answer:
+          "Often you should, later. We set up the foundation your first data hire inherits: documented, tested and in your name, so they build on it instead of starting over.",
+      },
+      {
+        question: "You're two founders. Can you deliver?",
+        answer:
+          "A founder leads every engagement, from first call to handover. Vignesh leads scoping, governance and enterprise work; Ajay leads architecture, data builds and agents. Everything is documented in your name, so nothing depends on us.",
       },
       {
         question: "Can you work with our procurement process?",
         answer:
-          "Yes. We work through your procurement, security review and contract steps, and can start with one team or business unit. We answer security questions plainly, including what we don't have. Pricing is set by proposal.",
+          "Yes. We work through your procurement, security review and contract steps, starting with one team or business unit. NDA first if you want one.",
       },
     ],
   },
   cta: {
-    title: "Start with the free AUXO Score.",
-    description:
-      "10 questions, about 3 minutes, no sign-up. Not sure which path fits? Book a meeting and we'll point you to the right start.",
-    ctaText: "Get your AUXO Score",
-    ctaHref: "/auxo-score/",
-    secondaryText: "Book a meeting",
-    secondaryHref: siteData.bookingUrl,
-    reassurance: "A real person replies within one business day.",
+    title: "Not sure which path fits?",
+    description: "Book a meeting and leave with one clear next step.",
+    ctaText: "Book a meeting",
+    ctaHref: siteData.bookingUrl,
+    secondaryText: "Get your AUXO Score",
+    secondaryHref: "/auxo-score/",
+    reassurance: siteData.reassurance,
   },
 };

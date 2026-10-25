@@ -22,9 +22,25 @@ const all = c.filters.categories[0];
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description}>
   <Section padding="lg" width="7xl">
-    <div class="flex max-w-3xl flex-col gap-6">
-      <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
-      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
+    <div class="mkt-hero">
+      <div class="flex flex-col gap-6">
+        <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
+        <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
+      </div>
+      <div class="mkt-why" data-enter>
+        <h2 class="mkt-why__title">{c.why.title}</h2>
+        <ul class="mkt-why__list">
+          {
+            c.why.items.map((item) => (
+              <li class="mkt-why__item">
+                <Icon name={item.icon} class="mkt-why__icon" aria-hidden="true" />
+                <h3 class="mkt-why__name">{item.title}</h3>
+                <p class="mkt-why__body">{item.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </Section>
 
@@ -106,6 +122,13 @@ const all = c.filters.categories[0];
                       </p>
                     </div>
                     <p class="mkt-card__line">{card.short}</p>
+                    <p class="mkt-card__live">
+                      <Icon name="mdi:clock-outline" aria-hidden="true" />
+                      <span>
+                        {c.card.liveInLabel} <strong>{card.liveIn}</strong>{" "}
+                        <span class="mkt-card__typical">{c.card.liveInSuffix}</span>
+                      </span>
+                    </p>
                     <div class="mkt-card__foot">
                       {card.kind === "built-by-auxo" && <p class="mkt-card__pay">{card.howYouPay}</p>}
                       <a
@@ -137,18 +160,16 @@ const all = c.filters.categories[0];
                         {c.card.backLabel}
                       </button>
                     </div>
-                    <p class="mkt-card__detail">{card.line}</p>
-                    {card.kind !== "built-by-auxo" && (
-                      <Fragment>
-                        <p class="mkt-card__meaning">
-                          <Icon name={badge.icon} aria-hidden="true" />
-                          <span>{badge.meaning}</span>
-                        </p>
-                        <p class="mkt-card__payline">
-                          <span>{c.card.payLabel}:</span> {card.howYouPay}
-                        </p>
-                      </Fragment>
-                    )}
+                    <dl class="mkt-card__spec">
+                      <div>
+                        <dt>{c.card.bestForLabel}</dt>
+                        <dd>{card.bestFor}</dd>
+                      </div>
+                      <div>
+                        <dt>{c.card.setupLabel}</dt>
+                        <dd>{card.setup}</dd>
+                      </div>
+                    </dl>
                     {card.includes && (
                       <div class="mkt-card__includes">
                         <p class="mkt-card__label">{c.card.includesLabel}</p>
@@ -171,19 +192,29 @@ const all = c.filters.categories[0];
                           ))}
                         </ul>
                         <p class="mkt-card__note">{c.card.agentDetail}</p>
-                        {card.extra && <p class="mkt-card__note">{card.extra}</p>}
                       </div>
                     )}
+                    <div class="mkt-card__terms">
+                      <p>
+                        <span>{c.card.payLabel}</span> {card.howYouPay}
+                      </p>
+                      {card.vendorBilling && (
+                        <p>
+                          <span>{c.card.vendorBillingLabel}</span> {card.vendorBilling}
+                        </p>
+                      )}
+                      {card.kind === "third-party" && <p class="mkt-card__meaning">{badge.meaning}</p>}
+                      {card.url && (
+                        <a class="mkt-card__link" href={card.url} target="_blank" rel="noopener">
+                          {c.card.vendorLink}
+                          <span class="sr-only">: {card.name}</span>
+                          <Icon name="mdi:open-in-new" aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
                     {card.disclosures.map((d) => (
                       <p class="mkt-card__disclosure">{d}</p>
                     ))}
-                    {card.url && (
-                      <a class="mkt-card__link" href={card.url} target="_blank" rel="noopener">
-                        {c.card.vendorLink}
-                        <span class="sr-only">: {card.name}</span>
-                        <Icon name="mdi:open-in-new" aria-hidden="true" />
-                      </a>
-                    )}
                   </div>
                 </div>
               </li>
@@ -191,6 +222,8 @@ const all = c.filters.categories[0];
           })
         }
       </ul>
+
+      <p class="mkt-paynote">{c.liveInNote}</p>
 
       <div class="mkt-card mkt-card--custom" data-custom-stack={c.customStack.href}>
         <span class="mkt-card__glyph" aria-hidden="true">

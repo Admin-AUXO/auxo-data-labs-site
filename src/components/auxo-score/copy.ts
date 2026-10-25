@@ -84,12 +84,12 @@ export const SCORE_COPY: ScoreCopy = {
         `${n} questions. Pick the answer that matches a normal month, not your best one. You get a score out of 100 at the end.`,
     },
     startup: {
-      eyebrow: "Free audit for funded startups",
+      eyebrow: "Free audit for startups, seed to Series B",
       title: "Step 1: your AUXO Score.",
       lede: "10 questions on your data, a 45‑minute call with a founder, then a one-page summary of what to fix first.",
       stepsLabel: "Free audit steps",
       steps: ["AUXO Score", "Founder review call", "One-page summary"],
-      eligibility: "For funded startups, seed to Series B. One per company.",
+      eligibility: "For investor-funded startups, seed to Series B. One per company.",
     },
     dimensionsLabel: "Dimensions measured",
     facts: { rounds: "questions", minutes: "min", score: "your score" },
@@ -104,8 +104,8 @@ export const SCORE_COPY: ScoreCopy = {
   },
   result: {
     deeper: {
-      title: "Want a deeper read?",
-      body: "A review of your own systems and data, under NDA if you want: a written assessment, a prioritised plan and a leadership readout. Paid, and priced privately after a first conversation.",
+      title: "Want this checked against your real systems?",
+      body: "A review of your own systems and data, under NDA if you want: each fix rated red, amber or green, a build-first plan and a leadership readout. A fixed price, set by scope, in writing.",
       link: "Ask about a deep-dive audit →",
       checkTitle: "Is this for you?",
       ticks: [
@@ -113,8 +113,8 @@ export const SCORE_COPY: ScoreCopy = {
         "I can answer for both finance and operations.",
       ],
       continue: "Continue",
-      startupLine: "Funded startup, seed to Series B? You may qualify for a free audit.",
-      startupLink: { text: "See the free audit", href: "/pricing/#funded-startups" },
+      startupLine: "Startup, seed to Series B? You may qualify for a free audit.",
+      startupLink: { text: "See the free audit", href: "/pricing/#startups" },
     },
     reviewCall: {
       title: "Step 2: book your review call.",
@@ -127,7 +127,7 @@ export const SCORE_COPY: ScoreCopy = {
       tip: "Email the report to yourself first, so you have it on the call.",
       reassurance: "A real person replies within one business day.",
       notEligible: {
-        before: "Not a funded startup? ",
+        before: "Not a startup, seed to Series B? ",
         bookText: "Book a meeting",
         middle: " instead, or ",
         deepDive: { text: "ask about a deep-dive audit", href: "/contact/?topic=deep-dive-audit" },

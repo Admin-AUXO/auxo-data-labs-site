@@ -65,13 +65,17 @@ const gtmId = env.gtm.containerId;
     <ClientRouter />
     <script is:inline>
       (() => {
-        const root = document.documentElement;
-        let saved = null;
-        try {
-          saved = localStorage.getItem("auxo-motion");
-        } catch {}
-        root.dataset.motion = saved || "on";
-        root.dataset.js = "1";
+        const applyRoot = () => {
+          const root = document.documentElement;
+          let saved = null;
+          try {
+            saved = localStorage.getItem("auxo-motion");
+          } catch {}
+          root.dataset.motion = saved || "on";
+          root.dataset.js = "1";
+        };
+        applyRoot();
+        document.addEventListener("astro:after-swap", applyRoot);
         setTimeout(() => {
           document
             .querySelectorAll('[data-enter="headline"]:not([data-split])')

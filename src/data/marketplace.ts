@@ -36,11 +36,15 @@ interface ToolBase {
   category: CategorySlug;
   short: string;
   line: string;
+  setup: string;
+  liveIn: string;
+  bestFor: string;
 }
 
 interface ThirdPartyConfig extends ToolBase {
   kind: "third-party";
   url: string;
+  vendorBilling: string;
   partnerProgrammeJoined: boolean;
   partnerProgramme?: string;
   partnerJoinedOn?: string;
@@ -56,7 +60,6 @@ interface StackConfig extends ToolBase {
 interface AgentConfig extends ToolBase {
   kind: "built-by-auxo";
   status: "Early access";
-  extra?: string;
 }
 
 type ToolConfig = ThirdPartyConfig | StackConfig | AgentConfig;
@@ -71,6 +74,10 @@ export interface MarketplaceCard {
   badgeKey: BadgeKey;
   short: string;
   line: string;
+  setup: string;
+  liveIn: string;
+  bestFor: string;
+  vendorBilling?: string;
   howYouPay: string;
   url?: string;
   partnerProgrammeJoined: boolean;
@@ -78,7 +85,6 @@ export interface MarketplaceCard {
   status?: "Early access";
   includes?: { slug: string; name: string }[];
   note?: string;
-  extra?: string;
   disclosures: string[];
 }
 
@@ -86,8 +92,8 @@ const categories: Category[] = [
   { slug: "all", label: "All", description: "Every tool, stack and agent we list.", icon: "mdi:view-grid-outline" },
   {
     slug: "foundation-ai",
-    label: "Foundation AI",
-    description: "General AI assistants, connected to your company data and set up with clear rules on use.",
+    label: "AI assistants",
+    description: "Claude or ChatGPT for your team, connected to your data, with rules on use.",
     icon: "mdi:brain",
   },
   {
@@ -106,7 +112,7 @@ const categories: Category[] = [
   {
     slug: "operations",
     label: "Operations",
-    description: "Workflows, vendor management, dashboards and routine admin.",
+    description: "Routine workflows, support questions and admin, on the systems you run.",
     icon: "mdi:cog-outline",
   },
   {
@@ -164,6 +170,10 @@ const tools: ToolConfig[] = [
     category: "foundation-ai",
     short: "Claude for your whole team, on your files and tools.",
     line: "Claude for your whole team, connected to your company files and tools, with clear rules on use.",
+    setup: "Workspace and admin roles, connectors to your drive and knowledge base, shared projects with company context, rules on use and one training session.",
+    liveIn: "1–2 weeks",
+    bestFor: "Teams using AI on personal accounts, with no company data or rules.",
+    vendorBilling: "Per user, monthly or annually.",
     url: "https://claude.com/pricing",
     partnerProgrammeJoined: false,
   },
@@ -175,6 +185,10 @@ const tools: ToolConfig[] = [
     category: "foundation-ai",
     short: "A shared ChatGPT workspace with admin controls.",
     line: "A shared ChatGPT workspace for your team, connected to your company knowledge, with admin controls.",
+    setup: "Workspace, single sign-on where your plan allows, drive connectors, shared projects for repeat tasks, data controls, rules on use and training.",
+    liveIn: "1–2 weeks",
+    bestFor: "Teams standardising on ChatGPT who need admin control.",
+    vendorBilling: "Per user, monthly or annually.",
     url: "https://chatgpt.com/business/",
     partnerProgrammeJoined: false,
   },
@@ -184,10 +198,13 @@ const tools: ToolConfig[] = [
     name: "AI assistant for your company",
     vendor: "AUXO",
     category: "foundation-ai",
-    short: "Claude or ChatGPT, connected to your systems.",
+    short: "One approved AI assistant, connected to your systems.",
     line: "Claude Team plan or ChatGPT Business, connected to your drives and systems, with usage rules and training.",
+    setup: "We help you choose Claude or ChatGPT, set it up in your accounts, and add a usage policy and starter projects for each team.",
+    liveIn: "2–3 weeks",
+    bestFor: "Companies replacing scattered personal AI accounts with one approved assistant.",
     includes: ["claude-team", "chatgpt-business"],
-    note: "We set up one of the two, whichever fits your team.",
+    note: "",
   },
   {
     kind: "third-party",
@@ -197,6 +214,10 @@ const tools: ToolConfig[] = [
     category: "engineering",
     short: "A coding agent whose work your engineers review.",
     line: "A coding agent that drafts fixes, tests and migrations for your engineers to review.",
+    setup: "Seats or API access, project instructions per repository, permissions, review steps in your pull-request flow and a hands-on session.",
+    liveIn: "About 1 week",
+    bestFor: "Software teams that want AI help and keep human code review.",
+    vendorBilling: "Included in Claude seats, or billed by API usage.",
     url: "https://claude.com/product/claude-code",
     partnerProgrammeJoined: false,
   },
@@ -208,6 +229,10 @@ const tools: ToolConfig[] = [
     category: "engineering",
     short: "Cloud CAD for hardware teams, with AI built in.",
     line: "Cloud CAD and data management for hardware teams, with a built-in AI Advisor.",
+    setup: "Workspace, roles and release workflow, a plan for moving existing CAD files, links to your parts and BOM data, and training.",
+    liveIn: "2–4 weeks, longer for large file moves",
+    bestFor: "Hardware teams choosing or moving to cloud CAD.",
+    vendorBilling: "Annual subscription, per user.",
     url: "https://www.onshape.com/en/",
     partnerProgrammeJoined: false,
   },
@@ -219,6 +244,10 @@ const tools: ToolConfig[] = [
     category: "engineering",
     short: "PCB design with an AI copilot.",
     line: "Browser-based PCB design with an AI copilot that reads datasheets and runs design checks.",
+    setup: "Team workspace, part libraries, design-rule checks, a review flow, and import of existing projects where the format allows.",
+    liveIn: "1–2 weeks",
+    bestFor: "Hardware startups without a dedicated electronics team.",
+    vendorBilling: "Free plan, or paid plans per user.",
     url: "https://www.flux.ai/",
     partnerProgrammeJoined: false,
   },
@@ -228,10 +257,13 @@ const tools: ToolConfig[] = [
     name: "AI for hardware engineers",
     vendor: "AUXO",
     category: "engineering",
-    short: "Design reviews and BOM checks on your data.",
-    line: "Design review, bill-of-materials checks and test logs, set up on your engineering data.",
+    short: "BOM checks and test-log reviews on your engineering data.",
+    line: "Claude on your existing CAD exports, bill of materials and test logs, with checks your engineers review.",
+    setup: "Claude connected to your CAD exports, BOM and test logs, with checks your engineers sign off. Onshape or Flux only if you're choosing tools anyway.",
+    liveIn: "3–6 weeks",
+    bestFor: "Hardware teams moving from prototype to production.",
     includes: ["onshape", "flux", "claude-team"],
-    note: "Set up in your accounts. Your engineers review every check.",
+    note: "",
   },
   {
     kind: "third-party",
@@ -241,6 +273,10 @@ const tools: ToolConfig[] = [
     category: "finance",
     short: "A faster month-end close, beside your ERP.",
     line: "Month-end close, reconciliations and cash management, alongside your existing ERP.",
+    setup: "Links to your accounting system and bank feeds, a close checklist, reconciliation rules and reviewer sign-offs.",
+    liveIn: "2–4 weeks",
+    bestFor: "Finance teams closing the month in spreadsheets.",
+    vendorBilling: "Subscription, quoted by Numeric.",
     url: "https://www.numeric.io/",
     partnerProgrammeJoined: false,
   },
@@ -252,6 +288,10 @@ const tools: ToolConfig[] = [
     category: "finance",
     short: "Cards, expenses and bill pay in one place.",
     line: "Corporate cards, expenses, bill pay and accounting automation in one place.",
+    setup: "Spend policies, approval chains, accounting sync with ledger mapping, and receipt rules.",
+    liveIn: "1–3 weeks once Ramp approves your account",
+    bestFor: "US- and Canada-registered companies. We check availability elsewhere first.",
+    vendorBilling: "Free core plan; paid tiers per user.",
     url: "https://ramp.com/",
     partnerProgrammeJoined: false,
   },
@@ -262,9 +302,12 @@ const tools: ToolConfig[] = [
     vendor: "AUXO",
     category: "finance",
     short: "Reconciliation and close on your finance data.",
-    line: "Reconciliation, month-end close and reporting, set up on your finance data.",
+    line: "Numeric and a spend tool on your ledger, with Claude drafting variance notes for review.",
+    setup: "Numeric and a spend tool connected to your ledger, with Claude drafting variance notes. Your finance lead approves every entry before it posts.",
+    liveIn: "4–6 weeks",
+    bestFor: "Finance leads who want a faster close they can check.",
     includes: ["numeric", "ramp", "claude-team"],
-    note: "Your finance lead approves every entry before it posts.",
+    note: "",
   },
   {
     kind: "third-party",
@@ -274,6 +317,10 @@ const tools: ToolConfig[] = [
     category: "operations",
     short: "Workflow automation you can host yourself.",
     line: "Workflow automation and AI agents you can host yourself or run in n8n's cloud.",
+    setup: "Hosting in your cloud or n8n's, stored credentials, your first two or three workflows, error alerts, approval steps and documentation.",
+    liveIn: "1–3 weeks",
+    bestFor: "Teams that want automation they host and own.",
+    vendorBilling: "Free to self-host, or a cloud subscription.",
     url: "https://n8n.io/",
     partnerProgrammeJoined: false,
   },
@@ -285,6 +332,10 @@ const tools: ToolConfig[] = [
     category: "operations",
     short: "AI answers for customer support, with handoff.",
     line: "An AI agent that answers customer questions across your support channels and hands off to your team.",
+    setup: "Knowledge sources, tone and limits, handoff rules, tests on past conversations, and reporting.",
+    liveIn: "2–3 weeks",
+    bestFor: "Support teams answering the same questions every day.",
+    vendorBilling: "Per resolved conversation.",
     url: "https://fin.ai/",
     partnerProgrammeJoined: false,
   },
@@ -294,10 +345,13 @@ const tools: ToolConfig[] = [
     name: "AI for operations",
     vendor: "AUXO",
     category: "operations",
-    short: "Workflows and follow-ups on systems you run.",
-    line: "Workflows, vendor follow-ups and dashboards, set up on the systems you already run.",
+    short: "Routine workflows and support, on systems you run.",
+    line: "n8n for routine workflows, Fin for support questions and Claude for drafts, on the systems you already run.",
+    setup: "n8n workflows for two or three routine processes, Fin for support and Claude for drafts. A named owner approves what goes out.",
+    liveIn: "3–6 weeks",
+    bestFor: "Operations teams re-keying data between tools.",
     includes: ["n8n", "fin", "claude-team"],
-    note: "A named person owns each workflow and approves what goes out.",
+    note: "",
   },
   {
     kind: "third-party",
@@ -307,6 +361,10 @@ const tools: ToolConfig[] = [
     category: "hiring",
     short: "Recruiting, scheduling and analytics in one.",
     line: "Applicant tracking, sourcing, scheduling and recruiting analytics in one system.",
+    setup: "Job and stage templates, scorecards, scheduling, calendar and HR links, a move from your current tracker, and reports.",
+    liveIn: "2–4 weeks",
+    bestFor: "Companies hiring steadily from spreadsheets or a basic tracker.",
+    vendorBilling: "Annual subscription, quoted by Ashby.",
     url: "https://www.ashbyhq.com/",
     partnerProgrammeJoined: false,
   },
@@ -318,6 +376,10 @@ const tools: ToolConfig[] = [
     category: "hiring",
     short: "AI candidate search and outreach drafts.",
     line: "AI candidate search and outreach drafts, for your recruiters to review.",
+    setup: "Seats, searches for your open roles, outreach templates, tracker sync and review rules.",
+    liveIn: "About 1 week",
+    bestFor: "Teams hiring without a full-time sourcer.",
+    vendorBilling: "Per seat, monthly or annually.",
     url: "https://juicebox.ai/",
     partnerProgrammeJoined: false,
   },
@@ -327,8 +389,11 @@ const tools: ToolConfig[] = [
     name: "AI for hiring",
     vendor: "AUXO",
     category: "hiring",
-    short: "Sourcing and screening. People decide.",
-    line: "Sourcing, screening and interview scheduling. A person makes every hiring decision.",
+    short: "Sourcing and screening on your tracker. People decide.",
+    line: "Sourcing, screening and scheduling on top of your applicant tracker. A person makes every hiring decision.",
+    setup: "Juicebox for sourcing, connected to your tracker (or Ashby, if you're choosing one), with scorecards and human review steps.",
+    liveIn: "3–5 weeks",
+    bestFor: "Companies with a steady hiring plan and no recruiting operations.",
     includes: ["ashby", "juicebox"],
     note: "Legal checks stay with your advisers.",
   },
@@ -340,8 +405,10 @@ const tools: ToolConfig[] = [
     category: "sales-and-content",
     short: "Prospect lists, outreach drafts and pipeline.",
     line: "Builds your prospect and partner lists, drafts the outreach, and tracks your pipeline. You approve every message before it is sent.",
+    setup: "Your target-customer rules and sources, a Sheet and Drive workspace, message style, approval steps and your booking link.",
+    liveIn: "1–2 weeks to first drafts",
+    bestFor: "Founders who sell, without a sales team yet.",
     status: "Early access",
-    extra: "Meetings book through your own booking link.",
   },
   {
     kind: "built-by-auxo",
@@ -351,6 +418,9 @@ const tools: ToolConfig[] = [
     category: "sales-and-content",
     short: "Plans, drafts and reports on your content.",
     line: "Plans and drafts your content, publishes only what you approve, and reports how it performs.",
+    setup: "Topics and voice guide, a content calendar in your Sheet, approval steps, a publishing connection and a monthly report.",
+    liveIn: "1–2 weeks to first drafts",
+    bestFor: "Teams that need steady content without a full-time writer.",
     status: "Early access",
   },
 ];
@@ -369,6 +439,9 @@ function toCard(t: ToolConfig): MarketplaceCard {
     kind: t.kind,
     short: t.short,
     line: t.line,
+    setup: t.setup,
+    liveIn: t.liveIn,
+    bestFor: t.bestFor,
   };
   if (t.kind === "third-party") {
     const joined = t.partnerProgrammeJoined;
@@ -379,6 +452,7 @@ function toCard(t: ToolConfig): MarketplaceCard {
       badgeKey: badge.key,
       howYouPay: joined ? (t.partnerModel ?? badges.partner.howYouPay) : badges["works-with"].howYouPay,
       url: t.url,
+      vendorBilling: t.vendorBilling,
       partnerProgrammeJoined: joined,
       partnerModel: joined ? t.partnerModel : undefined,
       disclosures: joined ? [disclosure(t.vendor)] : [],
@@ -413,12 +487,16 @@ function toCard(t: ToolConfig): MarketplaceCard {
     howYouPay: badges["built-by-auxo"].howYouPay,
     partnerProgrammeJoined: false,
     status: t.status,
-    extra: t.extra,
     disclosures: [],
   };
 }
 
-export const marketplaceCards: MarketplaceCard[] = tools.map(toCard);
+const kindRank: Record<ToolConfig["kind"], number> = { "auxo-stack": 0, "built-by-auxo": 1, "third-party": 2 };
+
+export const marketplaceCards: MarketplaceCard[] = tools
+  .map((t, i) => ({ t, i }))
+  .sort((a, b) => kindRank[a.t.kind] - kindRank[b.t.kind] || a.i - b.i)
+  .map(({ t }) => toCard(t));
 
 export const anyPartnerJoined = marketplaceCards.some((c) => c.partnerProgrammeJoined);
 
@@ -438,7 +516,7 @@ const getPaidItems = [
   {
     key: "managed",
     title: "Managed upkeep",
-    body: "An optional monthly fee for upkeep and tuning. No minimum term. Stop with 30 days' notice and keep the setup.",
+    body: "Optional and monthly. We add and remove users, check access each quarter, fix broken connections, update rules and prompts, and send a one-page note each month. No minimum term; 30 days' notice.",
     icon: "mdi:sync",
     visible: true,
   },
@@ -464,13 +542,33 @@ const faqFeeAnswer = anyPartnerJoined
 
 export const marketplaceContent = {
   meta: {
-    title: "Marketplace: the AI stack for every team",
+    title: "Marketplace: AI tools, set up on your data",
     description:
-      "AI tools vetted by AUXO, set up on your data in your own accounts, and managed if you want it. Plus AUXO's own sales and content agents.",
+      "AI tools chosen with six checks, set up on your data in your own accounts, and managed only if you want it. Plus AUXO's own sales and content agents.",
   },
   hero: {
-    title: "The AI stack for every team.",
-    lead: "Tools vetted by AUXO. Set up on your data. Managed if you want it.",
+    title: "AI tools, set up on your data.",
+    lead: "Chosen with six checks. Set up in your accounts by a founder. Managed only if you want it.",
+  },
+  why: {
+    title: "Why set it up through us",
+    items: [
+      {
+        icon: "mdi:database-outline",
+        title: "Connected to your data",
+        body: "Your systems, permissions and rules on use, tested on real work.",
+      },
+      {
+        icon: "mdi:scale-balance",
+        title: "Chosen for fit, not fees",
+        body: "Six checks before we list a tool. No vendor pays us today.",
+      },
+      {
+        icon: "mdi:key-outline",
+        title: "Yours from day one",
+        body: "Your account, your vendor contract, documentation and training.",
+      },
+    ],
   },
   filters: {
     ariaLabel: "Filter tools by team",
@@ -483,12 +581,17 @@ export const marketplaceContent = {
     addToStack: "Add to stack",
     addedState: "Added",
     detailsLabel: "Details",
-    payLabel: "How you pay",
+    payLabel: "You pay AUXO",
+    vendorBillingLabel: "Vendor bills",
+    setupLabel: "What we set up",
+    liveInLabel: "Live in",
+    liveInSuffix: "(typical)",
+    bestForLabel: "Best for",
     backLabel: "Back",
     vendorLabel: "By {vendor}",
     vendorLink: "Vendor site",
     includesLabel: "Includes",
-    agentFacts: ["Built on Claude", "Works in your own Google Sheet and Drive"],
+    agentFacts: ["Built on Claude", "Google Sheets and Drive (v1; not Microsoft 365 yet)"],
     agentDetail:
       "If you stop, your lists, drafts and data stay yours.",
   },
@@ -499,11 +602,12 @@ export const marketplaceContent = {
     clear: "Clear",
   },
   payNote:
-    "Each tool: a one-off setup fee, then optional monthly upkeep. Vendors bill you directly, on your own contract.",
+    "Vendors bill you directly. We charge a one-off setup fee, then optional monthly upkeep. Our agents are a subscription.",
+  liveInNote: "Live in: typical time from kickoff, once your vendor account is open. Your setup plan confirms it.",
   customStack: {
     title: "Custom stack",
     line: "Built for your function.",
-    body: "Need something not listed? We'll put together a stack for your team.",
+    body: "Not listed? Tell us the work. We'll propose a stack, or tell you to keep what you have.",
     cta: "Talk to us",
     href: "/contact/?topic=custom-stack",
   },
@@ -547,7 +651,7 @@ export const marketplaceContent = {
     lead: "Add to stack opens a short request form, prefilled with your tools. Then:",
     steps: [
       "Tell us about your team and what you want the tool to do.",
-      "A short call to confirm fit, then a setup plan and price, sent privately.",
+      "A short call to confirm fit, then a setup plan and a fixed price, in writing.",
       "We set it up in your accounts, on your data, with clear rules on use.",
       "We hand it over with documentation and training. Managed upkeep is optional.",
     ],
@@ -555,6 +659,11 @@ export const marketplaceContent = {
   faq: {
     title: "Marketplace questions",
     items: [
+      {
+        question: "Why not sign up for the tool ourselves?",
+        answer:
+          "You can, and for one person it's often enough. For a team, the work is connecting it to your data, deciding who sees what, writing the rules on use and training people. We do that in your account.",
+      },
       {
         question: "Do we have to buy these tools through AUXO?",
         answer:

@@ -27,7 +27,7 @@ const pages: Record<string, OGPage> = {
   },
   pricing: {
     title: "Start where you are.",
-    description: "Free audit for funded startups. AUXO Score for mid-sized companies. Custom for enterprise.",
+    description: "Free audit for startups. Deep-dive audit for growing companies. One unit first for large organisations.",
   },
   marketplace: {
     title: "The AI stack for every team.",

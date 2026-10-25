@@ -27,6 +27,7 @@ export interface LadderStep {
   whatYouGet: LadderItem[];
   duration: string;
   suits: string;
+  bring: string;
   isNot: string;
   links: Link[];
 }
@@ -55,6 +56,7 @@ export const howItWorksContent = {
       whatYouGet: "What you get",
       duration: "Time",
       suits: "Best for",
+      bring: "You bring",
       isNot: "It isn't",
     },
     steps: [
@@ -75,7 +77,7 @@ export const howItWorksContent = {
           {
             icon: "mdi:account-tie-outline",
             title: "Free audit",
-            tag: "Funded startups",
+            tag: "Seed to Series B",
             tone: "free",
             body: "Your AUXO Score, a 45-minute call with a founder and a one-page plan of what to fix first.",
           },
@@ -89,10 +91,11 @@ export const howItWorksContent = {
         ],
         duration: "Score: about 3 minutes. Free audit: one 45-minute call. Deep-dive: 2 to 3 weeks.",
         suits: "Teams about to spend on AI or data, or whose numbers disagree across systems.",
+        bring: "Read access to the systems in scope.",
         isNot: "A sales call in disguise, a generic checklist or a compliance certificate.",
         links: [
           { text: "Get your AUXO Score", href: "/auxo-score/" },
-          { text: "Funded startup? Get your free audit", href: "/auxo-score/?offer=free-audit" },
+          { text: "Startup, seed to Series B? Get your free audit", href: "/auxo-score/?offer=free-audit" },
         ],
       },
       {
@@ -127,6 +130,7 @@ export const howItWorksContent = {
         ],
         duration: "1 to 3 weeks, often straight after the deep-dive audit. Ongoing advice: monthly.",
         suits: "Teams with too many AI options and no plan, or that need rules before rolling AI out.",
+        bring: "The people who own the decisions.",
         isNot: "Open-ended consulting, a vendor pitch or legal sign-off. Referral fees never decide what we recommend.",
         links: [{ text: "Browse the marketplace", href: "/marketplace/" }],
       },
@@ -162,6 +166,7 @@ export const howItWorksContent = {
         ],
         duration: "One tool or stack: 1 to 2 weeks. A data foundation or agent team: 4 to 12 weeks.",
         suits: "Teams with a clear first use case and access to their data.",
+        bring: "A named owner for each system and agent.",
         isNot: "A black box, a rented system or a stalled pilot. Agents never send, post or pay without a person's approval.",
         links: [],
       },
@@ -178,7 +183,7 @@ export const howItWorksContent = {
       title: "Managed upkeep",
       promise: "We keep it running and tuned, month by month.",
       terms:
-        "Monthly, no minimum term. Stop with 30 days' notice and keep everything we built. Never a condition of Build.",
+        "We add and remove users, check access each quarter, fix broken connections, update rules and prompts, and send a one-page note each month. Monthly, no minimum term. Stop with 30 days' notice and keep everything we built.",
     },
   },
   method: {
@@ -193,12 +198,22 @@ export const howItWorksContent = {
     ] satisfies Dimension[],
   },
   teamLine: {
-    text: "You work with the founders, not an account manager.",
+    text: "A founder leads every engagement, from first call to handover.",
     link: { text: "Meet the team", href: "/about/#team" } satisfies Link,
   },
   faq: {
     title: "Questions about how it works",
     items: [
+      {
+        question: "Will it fit the tools we run?",
+        answer:
+          "We build on what you already run: Google Cloud, BigQuery, Azure, Snowflake, dbt, Power BI and more. If a system works, we keep it.",
+      },
+      {
+        question: "Is AI-built work reliable?",
+        answer:
+          "AI drafts the build work. We review and test every change before handover, and you get the code, the tests and the documentation.",
+      },
       {
         question: "Do we have to start with Analyze?",
         answer:

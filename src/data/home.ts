@@ -54,6 +54,10 @@ interface HomeContent {
     secondaryCta: Link;
     reassurance: string;
   };
+  proof: {
+    text: string;
+    link: Link;
+  };
   score: {
     title: string;
     stat: string;
@@ -110,6 +114,10 @@ export const homeContent: HomeContent = {
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
     reassurance,
+  },
+  proof: {
+    text: "Founder-led. Ex-IBM enterprise delivery across the GCC. Cloud and BI architecture for Fortune 500s.",
+    link: { text: "Meet the founders", href: "/about/#team" },
   },
   score: {
     title: "How ready is your data for AI?",
@@ -188,37 +196,37 @@ export const homeContent: HomeContent = {
   segments: {
     eyebrow: "Pricing",
     title: "Start where you are.",
-    lead: "Three ways in. Every price is personal and sent privately.",
+    lead: "Three ways in. A fixed price per phase, in writing.",
     listLabel: "Ways in",
     rows: [
       {
-        segment: "Funded startups",
+        segment: "Startups, seed to Series B",
         offer: "Free audit",
-        line: "Then a paid AI data setup.",
-        href: "/pricing/#funded-startups",
+        line: "Then a fixed-price data foundation.",
+        href: "/pricing/#startups",
       },
       {
-        segment: "Mid-sized companies",
-        offer: "AUXO Score",
-        line: "Then a paid deep-dive audit.",
-        href: "/pricing/#mid-sized",
+        segment: "Growing companies, 50–500 people",
+        offer: "Deep-dive audit",
+        line: "Start free with the AUXO Score.",
+        href: "/pricing/#growing",
       },
       {
-        segment: "Enterprise",
-        offer: "Custom",
-        line: "Pricing on request.",
-        href: "/pricing/#enterprise",
+        segment: "Large organisations",
+        offer: "One unit first",
+        line: "Scoped by proposal, phase by phase.",
+        href: "/pricing/#large-organisations",
       },
     ],
   },
   marketplace: {
     eyebrow: "Marketplace",
-    title: "The AI stack for every team.",
-    lead: "Tools vetted by AUXO. Set up on your data. Managed if you want it.",
+    title: "AI tools, set up on your data.",
+    lead: "Chosen with six checks. Set up in your accounts. Managed only if you want it.",
     chipsLabel: "Marketplace categories",
     chipBase: "/marketplace/",
     chips: [
-      { label: "Foundation AI", slug: "foundation-ai" },
+      { label: "AI assistants", slug: "foundation-ai" },
       { label: "Engineering", slug: "engineering" },
       { label: "Finance", slug: "finance" },
       { label: "Operations", slug: "operations" },

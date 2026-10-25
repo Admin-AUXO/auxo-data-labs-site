@@ -235,6 +235,7 @@ function initContactForm() {
   const analyticsContext = () => ({
     topic: currentTopic()?.slug,
     tools: selectedTools().map((t) => t.slug).join(",") || undefined,
+    fit: (form.elements.namedItem("fit") as HTMLSelectElement | null)?.value || undefined,
   });
 
   controls.forEach((control) => {
@@ -307,6 +308,7 @@ function initContactForm() {
     setStatus(statusRegion, "info", status.sending);
 
     const topicLabel = String(data.get("topic") ?? "");
+    const fitLabel = String(data.get("fit") ?? "");
     const toolNames = selectedTools().map((t) => t.name).join(", ");
     const context = analyticsContext();
 
@@ -321,8 +323,9 @@ function initContactForm() {
           company: String(data.get("company") ?? "") || "Not provided",
           topic: topicLabel || "Not specified",
           tools: toolNames || "None",
-          subject: [topicLabel || "Website enquiry", toolNames].filter(Boolean).join(": "),
-          message: String(data.get("message") ?? ""),
+          fit: fitLabel || "Not specified",
+          subject: [topicLabel || "Website enquiry", toolNames, fitLabel].filter(Boolean).join(": "),
+          message: [fitLabel && `Fits: ${fitLabel}`, String(data.get("message") ?? "")].filter(Boolean).join("\n\n"),
         },
         { publicKey: EMAILJS.publicKey },
       );

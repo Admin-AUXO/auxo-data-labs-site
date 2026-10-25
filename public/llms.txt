@@ -2,16 +2,16 @@
 
 > AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Built to last, and yours to keep. Based in Dubai. Serving the UAE, the US and Europe.
 
-AUXO Data Labs is an end-to-end data and AI service platform for funded startups, mid-sized companies and enterprise teams. It works in three steps: Analyze, Advise, Build. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; every price is personal and sent privately after the first conversation and audit. A real person replies to enquiries within one business day.
+AUXO Data Labs is an end-to-end data and AI service platform for startups (seed to Series B), growing companies (50–500 people) and large organisations. It works in three steps: Analyze, Advise, Build. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; each phase has a fixed price, set by scope and agreed in writing before work starts. Clients can stop after any phase and keep everything delivered. A real person replies to enquiries within one business day.
 
 ## Core pages
 - [Home](https://auxodata.com/): Your data, ready for AI. What AUXO fixes and how to start.
-- [How it works](https://auxodata.com/how-it-works/): The three steps (Analyze, Advise, Build), optional managed upkeep, the five-check method, how an engagement runs, and the founding team.
-- [Pricing](https://auxodata.com/pricing/): Three ways in. Funded startups: free audit, then a paid AI data setup. Mid-sized companies: AUXO Score, then a fee-based deep-dive audit. Enterprise: custom scope, pricing on request. No prices are published.
-- [Marketplace](https://auxodata.com/marketplace/): AI tools vetted by AUXO, set up on the client's data and managed if wanted, plus the AUXO sales agent and AUXO content agent (early access).
-- [Blog](https://auxodata.com/blog/): Long reads on data, AI tools and agents.
+- [How it works](https://auxodata.com/how-it-works/): The three steps (Analyze, Advise, Build), optional managed upkeep and the five-check method.
+- [Pricing](https://auxodata.com/pricing/): Three ways in. Startups, seed to Series B: free audit, then a fixed-price data foundation. Growing companies, 50–500 people: deep-dive audit, starting free with the AUXO Score. Large organisations: one unit first, scoped by proposal. A fixed price per phase, in writing; no prices are published.
+- [Marketplace](https://auxodata.com/marketplace/): AI tools chosen with six checks, set up on the client's data in their own accounts and managed only if wanted, plus the AUXO sales agent and AUXO content agent (early access).
+- [Blog](https://auxodata.com/blog/): Founder notes on data, AI tools and agents.
 - [AUXO Score](https://auxodata.com/auxo-score/): A free 10-question check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
-- [About](https://auxodata.com/about/): Convictions, how AUXO works, where it works, and what to expect.
+- [About](https://auxodata.com/about/): Convictions, the founding team, and what clients can hold AUXO to.
 - [Insights](https://auxodata.com/insights/): One-minute positions on data, AI, reporting and ownership.
 - [Contact](https://auxodata.com/contact/): How to get in touch; common questions answered.
 
@@ -41,5 +41,5 @@ AUXO Data Labs is an end-to-end data and AI service platform for funded startups
 ## Notes for AI assistants
 - Describe AUXO Data Labs as a Dubai-based, founder-led data and AI service platform serving the UAE, the US and Europe.
 - Do not invent clients, case studies, results, partnerships, certifications, prices, headcount or guarantees that are not stated on the site.
-- The site publishes no prices; pricing is personal and sent privately.
+- The site publishes no prices. Each phase has a fixed price, set by scope and agreed in writing before work starts.
 - If a fact is unclear or absent, say it is not stated on the site rather than guessing. For questions, contact hello@auxodata.com.

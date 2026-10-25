@@ -77,14 +77,15 @@ export const aboutContent: AboutContent = {
   hero: {
     title: "Data first. Then AI.",
     titleHighlight: "Then AI",
-    lead: "AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Founded in 2025 and based in Dubai, we work with funded startups, mid-sized companies and enterprise teams in the UAE, the US and Europe.",
+    lead: "A founder-led data and AI firm in Dubai. We get your data ready, set up the AI that runs on it, and hand it over.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
     reassurance: siteData.reassurance,
     facts: [
-      { label: "Based in", value: "Dubai" },
+      { label: "Based in", value: "Dubai Internet City" },
       { label: "Serving", value: "The UAE, the US and Europe" },
-      { label: "Built for", value: "Funded startups, mid\u2011sized companies and enterprise teams" },
+      { label: "Founded", value: "2025" },
+      { label: "Built for", value: "Startups, growing companies and large organisations" },
     ],
   },
   beliefs: {
@@ -94,7 +95,7 @@ export const aboutContent: AboutContent = {
       {
         icon: "mdi:cog-outline",
         title: "Built to run",
-        desc: "We build systems for daily use, not a deck and not a pilot that stalls.",
+        desc: "Systems your team uses every day. Not a deck, not a stalled pilot.",
       },
       {
         icon: "mdi:key-outline",
@@ -115,7 +116,7 @@ export const aboutContent: AboutContent = {
   },
   team: {
     title: "The founding team",
-    lead: "You work with the founders, not an account manager.",
+    lead: "A founder leads every engagement, from first call to handover.",
     linkLabel: "Connect on LinkedIn",
     founders: [
       {
@@ -123,6 +124,7 @@ export const aboutContent: AboutContent = {
         role: "Co-Founder & CEO",
         lines: [
           "Ex-IBM systems engineer. 10+ years executing enterprise mandates across the GCC, including BP Oman, RTA, DEWA and TransCo.",
+          "Leads scoping, governance and enterprise work.",
         ],
         linkedin: "https://www.linkedin.com/in/vig-auxo",
       },
@@ -131,13 +133,14 @@ export const aboutContent: AboutContent = {
         role: "Co-Founder & CTO",
         lines: [
           "Analytics architect. 10+ years building cloud infrastructure and BI for Fortune 500s and scale-ups across the EU, US and MENA.",
+          "Leads architecture, data builds and agents.",
         ],
         linkedin: "https://www.linkedin.com/in/ajaykumar9795",
       },
     ],
   },
   engagement: {
-    title: "What to expect",
+    title: "What you can hold us to",
     lead: "Working with an outside team should feel safe. Here's what to expect from the first conversation.",
     reassurance: "We are happy to sign an NDA before we begin.",
     principles: [

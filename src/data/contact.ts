@@ -111,13 +111,13 @@ const topics: ContactTopic[] = [
   {
     slug: "free-audit",
     label: "Free audit",
-    hint: "The free audit starts with the AUXO Score and ends with a review call. Funded startups, seed to Series B, one per company.",
+    hint: "The free audit starts with the AUXO Score and ends with a founder call. Startups, seed to Series B, one per company.",
     hintLink: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit" },
   },
   {
     slug: "deep-dive-audit",
     label: "Deep-dive audit",
-    hint: "Paid and priced privately after a first conversation. NDA first if you want one.",
+    hint: "A fixed price, set by scope and agreed in writing. NDA first if you want one.",
   },
   {
     slug: "marketplace-tool",
@@ -131,7 +131,7 @@ const topics: ContactTopic[] = [
   },
   {
     slug: "enterprise",
-    label: "Enterprise",
+    label: "Large organisation",
     hint: "Tell us about procurement, security review or contract needs. We can start with one team.",
   },
   { slug: "something-else", label: "Something else" },
@@ -144,9 +144,9 @@ export const contactContent: ContactContent = {
       "Tell us what you want AI and your data to do. A real person replies within one business day. Based in Dubai, serving the UAE, the US and Europe.",
   },
   hero: {
-    title: "Let's talk.",
-    titleHighlight: "talk",
-    lead: "Tell us what you want your data and AI to do. A real person reads your note and replies within one business day.",
+    title: "Talk to a founder.",
+    titleHighlight: "founder",
+    lead: "A few lines is enough. A founder reads every note and replies within one business day.",
   },
   details: {
     title: "Reach us",
@@ -175,7 +175,7 @@ export const contactContent: ContactContent = {
   },
   form: {
     title: "Send a message",
-    description: "A few lines is enough. No formal brief needed.",
+    description: "Tell us the problem and the systems it touches. No formal brief needed.",
     fields: [
       {
         name: "name",
@@ -201,6 +201,14 @@ export const contactContent: ContactContent = {
         placeholder: "Your company",
         optional: true,
         maxLength: 100,
+      },
+      {
+        name: "fit",
+        label: "Which fits you best?",
+        type: "select",
+        placeholder: "Select one…",
+        optional: true,
+        options: ["Startup, seed to Series B", "Growing company, 50–500 people", "Large organisation", "None of these"],
       },
       {
         name: "topic",
@@ -249,7 +257,7 @@ export const contactContent: ContactContent = {
   nextSteps: {
     title: "What happens next",
     titleHighlight: "next",
-    subtitle: "No drawn-out process. Three steps from your note to a clear first move.",
+    subtitle: "Three steps from your note to a clear first move.",
     steps: [
       {
         title: "You send a note",
@@ -273,7 +281,7 @@ export const contactContent: ContactContent = {
       {
         question: "What does working together cost?",
         answer:
-          "Every price is personal. We price after the first conversation and audit, and send it to you in writing before any work starts. The AUXO Score is free, and so is the free audit for funded startups.",
+          "We price by scope: a fixed price per phase, in writing, before work starts. The AUXO Score is free, and so is the free audit for startups, seed to Series B.",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",
