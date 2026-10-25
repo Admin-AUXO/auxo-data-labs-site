@@ -8,12 +8,8 @@ import StructuredData from "../../components/layout/StructuredData.astro";
 import CtaSection from "../../components/sections/shared/CtaSection.astro";
 import PostCard from "../../components/blog/PostCard.astro";
 import TagList from "../../components/blog/TagList.astro";
-import {
-  authorFor,
-  blogPostingSchema,
-  getPublishedPosts,
-  relatedPosts,
-} from "../../components/blog/posts";
+import { authorFor, getPublishedPosts, relatedPosts } from "../../lib/blog";
+import { blogPostingSchema } from "../../lib/structured-data";
 import { blogContent } from "../../data/blog";
 import "../../styles/pages/blog.css";
 
@@ -35,7 +31,13 @@ const lineParts =
     ? author.line.split(author.linkText)
     : null;
 ---
-<BaseLayout title={post.data.title} description={post.data.description} type="article">
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  publishedTime={isoDate}
+  modifiedTime={isoDate}
+>
   <Section padding="lg" width="4xl">
     <article class="blog-article">
       <header class="blog-article__header">

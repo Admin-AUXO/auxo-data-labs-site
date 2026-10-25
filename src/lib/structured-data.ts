@@ -1,6 +1,7 @@
 import { siteData } from "../data/site";
 import { absoluteUrl } from "./url";
 import type { Founder } from "../data/how-it-works";
+import { authorFor, type BlogPostSummary } from "./blog";
 
 const home = absoluteUrl("/");
 const abs = (p: string) => (p.startsWith("http") ? p : absoluteUrl(p));
@@ -135,5 +136,40 @@ export function personSchema(p: Founder) {
     url: abs("/how-it-works/#team"),
     worksFor: { "@type": "Organization", name: siteData.name, url: home },
     sameAs: [p.linkedin],
+  };
+}
+
+export function blogPostingSchema(summary: BlogPostSummary) {
+  const { post } = summary;
+  const author = authorFor(post.data.author);
+  const url = absoluteUrl(summary.href);
+  const authorNode =
+    author.kind === "Organization"
+      ? { "@type": "Organization", name: post.data.author, url: home }
+      : {
+          "@type": "Person",
+          name: post.data.author,
+          ...(author.jobTitle ? { jobTitle: author.jobTitle } : {}),
+          ...(author.linkHref ? { sameAs: [author.linkHref] } : {}),
+          worksFor: { "@type": "Organization", name: siteData.name, url: home },
+        };
+  return {
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: summary.isoDate,
+    dateModified: summary.isoDate,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image: absoluteUrl(`/og/blog-${summary.slug}.png`),
+    inLanguage: "en",
+    timeRequired: `PT${summary.minutes}M`,
+    keywords: post.data.tags.length ? post.data.tags.join(", ") : undefined,
+    author: authorNode,
+    publisher: {
+      "@type": "Organization",
+      name: siteData.name,
+      url: home,
+      logo: { "@type": "ImageObject", url: absoluteUrl("/favicon.svg") },
+    },
   };
 }

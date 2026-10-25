@@ -85,7 +85,7 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
       }
     </ol>
     <div class="mt-10">
-      <Button variant="ghost" href={c.how.link.href} icon>
+      <Button variant="ghost" href={c.how.link.href} icon class="-ms-2">
         {c.how.link.text}
       </Button>
     </div>
@@ -94,9 +94,7 @@ const stepAnim = ["slide-right", "rise", "rise", "slide-left"] as const;
   <Section padding="lg" width="7xl">
     <div class="flex flex-col gap-10">
       <div data-reveal>
-        <h2 class="eyebrow text-accent">
-          <HighlightText text={c.where.title} highlight={c.where.titleHighlight} />
-        </h2>
+        <h2 class="section-index">{c.where.title}</h2>
         <p class="mt-5 max-w-3xl text-lg font-medium sm:text-xl" data-anim="rise-in">
           {c.where.body}
         </p>

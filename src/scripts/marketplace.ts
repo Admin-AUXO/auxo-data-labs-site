@@ -1,7 +1,7 @@
-const STORE_KEY = "auxo-stack";
+import { fill } from "../lib/text";
+import { track } from "./analytics/track";
 
-const fill = (template: string, vars: Record<string, string | number>): string =>
-  template.replace(/\{(\w+)\}/g, (m, k: string) => (k in vars ? String(vars[k]) : m));
+const STORE_KEY = "auxo-stack";
 
 function readStack(valid: Set<string>): string[] {
   try {
@@ -27,6 +27,9 @@ function setupFilters(root: HTMLElement): void {
   const valid = new Set(chips.map((c) => c.dataset.filter ?? ""));
   const one = root.dataset.resultsOne ?? "";
   const many = root.dataset.resultsMany ?? "";
+  const customCard = root.querySelector<HTMLElement>("[data-custom-stack]");
+  const customLink = customCard?.querySelector<HTMLAnchorElement>("a[href]") ?? null;
+  const customBase = customCard?.dataset.customStack ?? "";
 
   function apply(slug: string, syncUrl: boolean): void {
     const active = valid.has(slug) ? slug : "all";
@@ -43,6 +46,9 @@ function setupFilters(root: HTMLElement): void {
       if (on && desc) desc.textContent = chip.dataset.description ?? "";
     }
     if (count) count.textContent = shown === 1 ? one : fill(many, { n: shown });
+    if (customLink && customBase) {
+      customLink.href = active === "all" ? customBase : `${customBase}&category=${encodeURIComponent(active)}`;
+    }
     if (!syncUrl) return;
     const url = new URL(window.location.href);
     if (active === "all") url.searchParams.delete("category");
@@ -78,8 +84,7 @@ function setupStack(root: HTMLElement): void {
       btn.dataset.added = String(added);
       const label = btn.querySelector<HTMLElement>("[data-add-label]");
       if (label) label.textContent = added ? (d.labelAdded ?? "") : (d.labelAdd ?? "");
-      if (added) btn.setAttribute("aria-label", fill(d.removeLabel ?? "", { name: btn.dataset.name ?? "" }));
-      else btn.removeAttribute("aria-label");
+      btn.setAttribute("aria-pressed", String(added));
     }
     tray.hidden = stack.length === 0;
     trayCount.textContent =
@@ -89,7 +94,9 @@ function setupStack(root: HTMLElement): void {
   };
 
   const toggle = (slug: string): void => {
-    stack = stack.includes(slug) ? stack.filter((s) => s !== slug) : [...stack, slug];
+    const removing = stack.includes(slug);
+    stack = removing ? stack.filter((s) => s !== slug) : [...stack, slug];
+    track(removing ? "stack_remove" : "stack_add", { tool: slug, stack_size: stack.length });
     render();
   };
 

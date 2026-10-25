@@ -83,6 +83,10 @@ key.json
 *.key.json
 gtm.json
 
+# Local video drafts and render outputs — never deploy
+public/video-drafts/
+video/out/
+
 # Local data exploration — not part of the site
 data_analysis/
 .font-originals/

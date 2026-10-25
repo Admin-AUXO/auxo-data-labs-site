@@ -22,12 +22,25 @@ interface Props {
   path?: string;
   ogImage?: string;
   type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
   noindex?: boolean;
   bare?: boolean;
   footnotes?: boolean;
 }
 
-const { title, description, path, ogImage, type, noindex, bare = false, footnotes = false } = Astro.props;
+const {
+  title,
+  description,
+  path,
+  ogImage,
+  type,
+  publishedTime,
+  modifiedTime,
+  noindex,
+  bare = false,
+  footnotes = false,
+} = Astro.props;
 const pagePath = path ?? Astro.url.pathname;
 const pageTitle = title ?? "AUXO Data Labs";
 const pageDesc = description ?? siteData.description;
@@ -45,6 +58,8 @@ const gtmId = env.gtm.containerId;
       path={pagePath}
       ogImage={ogImage}
       type={type}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
       noindex={noindex}
     />
     <ClientRouter />

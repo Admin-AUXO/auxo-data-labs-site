@@ -9,10 +9,8 @@ import CtaSection from "../components/sections/shared/CtaSection.astro";
 import StructuredData from "../components/layout/StructuredData.astro";
 import { faqSchema, personSchema } from "../lib/structured-data";
 import { howItWorksContent as c } from "../data/how-it-works";
+import { escapeHtml } from "../lib/text";
 import "../styles/pages/how-it-works.css";
-
-const escapeHtml = (s: string) =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const faqItems = c.faq.items.map((item) => ({
   title: item.question,
@@ -145,7 +143,7 @@ const navItems = [
     </div>
   </Section>
 
-  <Section padding="md" width="7xl" background="ink">
+  <Section padding="md" width="7xl" background="surface">
     <p class="hiw-ailine" data-reveal>
       <Icon name="mdi:account-check-outline" class="hiw-ailine__icon" aria-hidden="true" />
       <span>{c.aiLine}</span>
@@ -153,7 +151,7 @@ const navItems = [
   </Section>
 
   <Section id="method" padding="lg" width="7xl" class="hiw-anchor">
-    <p class="eyebrow text-accent mb-4">{c.method.eyebrow}</p>
+    <p class="section-index mb-4">{c.method.eyebrow}</p>
     <SectionHeader title={c.method.title} subtitle={c.method.lead} />
     <ol class="method mt-10 md:mt-12">
       {

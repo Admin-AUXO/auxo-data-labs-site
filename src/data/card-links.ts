@@ -1,3 +1,5 @@
+import { siteData } from "./site";
+
 interface CardContact {
   id: string;
   label: string;
@@ -23,7 +25,7 @@ const whatsapp = (number: string, first: string) =>
 export const cardPage = {
   company: {
     name: "AUXO Data Labs",
-    lines: ["Your data, ready for AI.", "Built on your data, yours to keep."],
+    lines: ["Your data, ready for AI.", siteData.shortVersion],
   },
   greeting: "Good to meet you.",
   chooser: {
@@ -56,7 +58,7 @@ export const cardPage = {
       name: "Vignesh Ramesh",
       first: "Vignesh",
       role: "Co-Founder & CEO",
-      note: "Happy to help with scope, pricing and partnerships.",
+      note: "Happy to help with scope, pricing and getting started.",
       vcard: "/vcard/vignesh-ramesh.vcf",
       contacts: [
         {

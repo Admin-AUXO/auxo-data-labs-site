@@ -276,7 +276,7 @@ export const contactContent: ContactContent = {
       {
         question: "Is this confidential? Can we sign an NDA first?",
         answer:
-          "Yes. We keep client relationships and details to ourselves, and we're glad to sign an NDA before any detailed conversation. Mention it in your message and we'll send ours within a day, or work from the document your legal team prefers.",
+          "Yes. We keep your name and details to ourselves, and we're glad to sign an NDA before any detailed conversation. Mention it in your message and we'll send ours within a day, or work from the document your legal team prefers.",
       },
       {
         question: "What happens to our data? Do you take copies of it?",

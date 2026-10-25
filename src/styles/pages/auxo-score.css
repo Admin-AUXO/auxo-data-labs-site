@@ -10,7 +10,7 @@
   font-family: var(--font-sans);
   margin-inline: auto;
   max-inline-size: 560px;
-  padding: 1.25rem 1rem 3rem;
+  padding: 1.25rem min(var(--gutter), 1.5rem) 3rem;
 }
 
 .score :focus-visible {

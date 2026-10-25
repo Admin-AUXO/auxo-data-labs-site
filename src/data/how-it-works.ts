@@ -174,7 +174,7 @@ export const howItWorksContent = {
       },
     ] satisfies LadderStep[],
     build: {
-      ownershipLine: "Built to last, and yours to keep.",
+      ownershipLine: siteData.ownershipLine,
       aiBuiltNote:
         "AI-built means we use AI coding and data tools to do the build work, and an AUXO engineer reviews and tests everything before handover. What we build is yours to keep.",
     },

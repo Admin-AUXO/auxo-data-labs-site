@@ -1,8 +1,6 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import getReadingTime from "reading-time";
-import { siteData } from "../../data/site";
-import { blogContent, type BlogAuthor } from "../../data/blog";
-import { absoluteUrl } from "../../lib/url";
+import { blogContent, type BlogAuthor } from "../data/blog";
 
 export type BlogPost = CollectionEntry<"blog">;
 
@@ -71,40 +69,4 @@ export function relatedPosts(current: BlogPost, all: BlogPostSummary[], limit = 
     .sort((a, b) => b.shared - a.shared || a.order - b.order)
     .slice(0, limit)
     .map(({ s }) => s);
-}
-
-export function blogPostingSchema(summary: BlogPostSummary) {
-  const { post } = summary;
-  const author = authorFor(post.data.author);
-  const home = absoluteUrl("/");
-  const url = absoluteUrl(summary.href);
-  const authorNode =
-    author.kind === "Organization"
-      ? { "@type": "Organization", name: post.data.author, url: home }
-      : {
-          "@type": "Person",
-          name: post.data.author,
-          ...(author.jobTitle ? { jobTitle: author.jobTitle } : {}),
-          ...(author.linkHref ? { sameAs: [author.linkHref] } : {}),
-          worksFor: { "@type": "Organization", name: siteData.name, url: home },
-        };
-  return {
-    headline: post.data.title,
-    description: post.data.description,
-    datePublished: summary.isoDate,
-    dateModified: summary.isoDate,
-    url,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    image: absoluteUrl(`/og/blog-${summary.slug}.png`),
-    inLanguage: "en",
-    timeRequired: `PT${summary.minutes}M`,
-    keywords: post.data.tags.length ? post.data.tags.join(", ") : undefined,
-    author: authorNode,
-    publisher: {
-      "@type": "Organization",
-      name: siteData.name,
-      url: home,
-      logo: { "@type": "ImageObject", url: absoluteUrl("/favicon.svg") },
-    },
-  };
 }

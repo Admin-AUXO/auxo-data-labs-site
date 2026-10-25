@@ -9,7 +9,12 @@ import { footnotes } from "../../data/footnotes";
           {f.marker}
         </a>
         <p>
-          {f.text} <cite>{f.source}</cite>
+          {f.text}{" "}
+          <cite>
+            <a href={f.url} class="fn-list__source" target="_blank" rel="noopener noreferrer">
+              {f.source}
+            </a>
+          </cite>
         </p>
       </li>
     ))
@@ -52,5 +57,15 @@ import { footnotes } from "../../data/footnotes";
 
   .fn-list cite {
     font-style: italic;
+  }
+
+  .fn-list__source {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .fn-list__source:hover {
+    color: var(--foreground);
   }
 </style>

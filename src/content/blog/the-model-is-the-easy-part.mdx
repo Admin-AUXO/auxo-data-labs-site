@@ -1,7 +1,7 @@
 ---
 title: "The model is the easy part"
 description: "Why can't Claude or an agent you already have do this? Often it can do part of it. The hard part is the system around the model. A technical checklist."
-date: 2026-10-27
+date: 2026-10-25
 author: "Ajay Kumar"
 tags: ["AI agents", "Data infrastructure", "Evaluation", "Engineering"]
 draft: false
@@ -44,7 +44,7 @@ None of this depends on how capable the model is. A better model does not fix a 
 
 Public benchmarks show the shape of the failures. The ones below tested models from 2024 and 2025, and newer models will score higher. The pattern is still useful, because it shows where the work gets hard.
 
-TheAgentCompany is a research benchmark of 175 realistic office tasks in a simulated company. The best agent tested fully completed about 30% of them. The hardest tasks involved talking to colleagues and working through complex office web apps ([The Register, June 2025](https://www.theregister.com/2025/06/29/ai_agents_fail_a_lot/)). Those are integration and process problems, not reasoning problems.
+TheAgentCompany is a research benchmark of 175 realistic office tasks in a simulated company ([arXiv, 2024](https://arxiv.org/abs/2412.14161)). The best agent tested fully completed about 30% of them. The hardest tasks involved talking to colleagues and working through complex office web apps ([The Register, June 2025](https://www.theregister.com/2025/06/29/ai_agents_fail_a_lot/)). Those are integration and process problems, not reasoning problems.
 
 CRMArena-Pro tested agents on realistic CRM data. Success fell from about 58% on single-turn tasks to about 35% when the work ran over several turns. The authors also found the agents showed "near-zero inherent confidentiality awareness" ([arXiv, 2025](https://arxiv.org/abs/2505.18878)). For a CTO, that is the finding that matters most. A model will not protect data it was never told is sensitive. Permissions and filtering have to sit outside it.
 
@@ -60,7 +60,7 @@ Anthropic's guide to [building effective agents](https://www.anthropic.com/resea
 
 OpenAI's [practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) tells teams to layer guardrails and rate each tool by risk: read or write access, whether the action can be reversed, and its financial impact. Sensitive, irreversible or high-stakes actions should go to a person.
 
-Microsoft publishes a [deployment blueprint](https://learn.microsoft.com/en-us/microsoft-365/copilot/agent-essentials/agent-essentials-overview) that asks customers to fix oversharing first, including loose permissions, sites with no owner and sensitive content, before rolling out Microsoft 365 Copilot and agents. Its [2025 Responsible AI Transparency Report](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Responsible-AI-Transparency-Report-2025-vertical.pdf) says enterprise customers must put their own human oversight and access controls in place.
+Microsoft publishes a [deployment blueprint](https://learn.microsoft.com/en-us/microsoft-365/copilot/secure-govern-copilot-foundational-deployment-guidance) that asks customers to fix oversharing first, including loose permissions, sites with no owner and sensitive content, before rolling out Microsoft Copilot and agents. Its [2025 Responsible AI Transparency Report](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Responsible-AI-Transparency-Report-2025-vertical.pdf) says enterprise customers must put their own human oversight and access controls in place.
 
 Three model makers, one message. They supply the model. Data readiness, evaluation and oversight are the customer's job.
 

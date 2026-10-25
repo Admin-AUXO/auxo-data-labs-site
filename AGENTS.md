@@ -2,7 +2,7 @@
 
 Marketing site for AUXO Data Labs. Astro 6 + TypeScript + Tailwind v4, deployed to Netlify (custom domain `auxodata.com`).
 
-Audience: skeptical B2B buyers in Gulf real estate and family offices. They skim, compare, then contact only once the page earns trust. Build for clarity, not animation noise or hydration bloat.
+Audience: sceptical founders, finance leads, operators and team heads at funded startups, mid-sized companies and enterprises in the UAE, the US and Europe. They skim, compare, then contact only once the page earns trust. Build for clarity, not animation noise or hydration bloat.
 
 ## Stack
 
@@ -17,7 +17,8 @@ Audience: skeptical B2B buyers in Gulf real estate and family offices. They skim
 - `src/data` — page copy (edit content here, not in templates)
 - `src/scripts` — browser behaviour
 - `src/styles` — tokens + layered CSS via `main.css`
-- `src/content/insights` — MDX articles
+- `src/content/insights` — MDX insight cards
+- `src/content/blog` — MDX blog posts
 - `public` — static files shipped as-is (icons, manifest, service worker, fonts)
 
 ## Rules

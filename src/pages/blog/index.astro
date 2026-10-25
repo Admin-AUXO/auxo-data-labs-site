@@ -5,7 +5,7 @@ import Section from "../../components/layout/Section.astro";
 import Button from "../../components/ui/Button.astro";
 import HighlightText from "../../components/ui/HighlightText.astro";
 import PostCard from "../../components/blog/PostCard.astro";
-import { getPublishedPosts, tagSlug } from "../../components/blog/posts";
+import { getPublishedPosts, tagSlug } from "../../lib/blog";
 import { blogContent } from "../../data/blog";
 import "../../styles/pages/blog.css";
 
@@ -72,15 +72,14 @@ const tags = [...tagCounts.entries()]
 
     <p class="blog-shortreads">
       <a href={c.shortReadsLink.href} class="blog-textlink">
-        {c.shortReadsLink.label}
-        <Icon name="mdi:arrow-right" aria-hidden="true" />
+        <span class="blog-textlink__text">{c.shortReadsLink.label}</span><Icon name="mdi:arrow-right" aria-hidden="true" />
       </a>
     </p>
   </Section>
 </BaseLayout>
 
 <script>
-  import { initBlogFilter } from "../../components/blog/filter";
+  import { initBlogFilter } from "../../scripts/blog-filter";
 
   initBlogFilter();
   document.addEventListener("astro:page-load", initBlogFilter);

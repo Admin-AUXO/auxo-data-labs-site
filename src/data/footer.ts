@@ -1,3 +1,5 @@
+import { siteData } from "./site";
+
 export interface FooterLink {
   label: string;
   href: string;
@@ -46,5 +48,5 @@ export const footerContent: FooterContent = {
       ],
     },
   ],
-  note: "Built to last, and yours to keep. Based in Dubai. Serving the UAE, the US and Europe.",
+  note: `${siteData.ownershipLine} ${siteData.locationLine}`,
 };

@@ -50,7 +50,6 @@ export interface AboutContent {
   };
   where: {
     title: string;
-    titleHighlight?: string | string[];
     body: string;
     points: AboutWherePoint[];
   };
@@ -91,11 +90,11 @@ export const aboutContent: AboutContent = {
   beliefs: {
     title: "What we believe",
     titleHighlight: "believe",
-    lead: "Four convictions shape every engagement.",
+    lead: "Four convictions shape how we work.",
     items: [
       {
         title: "Built to run",
-        desc: "We deliver systems in daily use, not a deck and not a pilot that stalls.",
+        desc: "We build systems for daily use, not a deck and not a pilot that stalls.",
       },
       {
         title: "Yours to keep",
@@ -142,7 +141,6 @@ export const aboutContent: AboutContent = {
   },
   where: {
     title: "Where we work",
-    titleHighlight: "work",
     body: "We are based in Dubai Internet City and work with teams across the UAE, the US and Europe. We work remotely by default. We handle your data on the terms you set, taking only what the work needs.",
     points: [
       { label: "Based in", value: "Dubai" },

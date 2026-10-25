@@ -14,12 +14,9 @@ import {
   anyPartnerJoined,
   addToStackHref,
   stackRequestBase,
-  fill,
 } from "../data/marketplace";
+import { escapeHtml, fill } from "../lib/text";
 import "../styles/pages/marketplace.css";
-
-const escapeHtml = (s: string): string =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i.answer) }));
 const legend = Object.values(c.badges).filter((b) => b.key !== "partner" || anyPartnerJoined);
@@ -41,7 +38,6 @@ const all = c.filters.categories[0];
       data-results-many={c.filters.resultsMany}
       data-label-add={c.card.addToStack}
       data-label-added={c.card.addedState}
-      data-remove-label={c.card.removeLabel}
       data-count-one={c.tray.countOne}
       data-count-many={c.tray.countMany}
       data-request-base={stackRequestBase}
@@ -124,12 +120,12 @@ const all = c.filters.categories[0];
                   <div class="mkt-card__actions">
                     <a
                       class="btn mkt-add"
+                      data-no-cta
                       data-variant="outline"
                       data-size="sm"
                       href={addToStackHref(card.slug)}
                       aria-describedby={nameId}
                       data-add-to-stack={card.slug}
-                      data-name={card.name}
                     >
                       <Icon name="mdi:plus" class="mkt-add__plus" aria-hidden="true" />
                       <Icon name="mdi:check" class="mkt-add__check" aria-hidden="true" />
@@ -148,7 +144,7 @@ const all = c.filters.categories[0];
             );
           })
         }
-        <li class="mkt-card mkt-card--custom" data-category="any">
+        <li class="mkt-card mkt-card--custom" data-category="any" data-custom-stack={c.customStack.href}>
           <span class="mkt-card__glyph" aria-hidden="true">
             <Icon name="mdi:layers-outline" />
           </span>
@@ -168,7 +164,7 @@ const all = c.filters.categories[0];
       <div class="mkt-tray" data-stack-tray hidden>
         <p class="mkt-tray__count" data-stack-count aria-live="polite"></p>
         <div class="mkt-tray__actions">
-          <button type="button" class="btn" data-variant="ghost" data-size="sm" data-stack-clear>
+          <button type="button" class="btn" data-variant="ghost" data-size="sm" data-stack-clear data-no-cta>
             <Icon name="mdi:close" aria-hidden="true" />
             {c.tray.clear}
           </button>

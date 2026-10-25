@@ -3,6 +3,7 @@ interface Footnote {
   marker: string;
   text: string;
   source: string;
+  url: string;
 }
 
 export const footnotes: Footnote[] = [
@@ -12,6 +13,7 @@ export const footnotes: Footnote[] = [
     text: "37% of CFOs surveyed said they do not completely trust the accuracy of their organisation's financial data.",
     source:
       "BlackLine, Global Finance Leaders Survey, January 2024 — 1,300+ C-suite and senior finance professionals across seven markets.",
+    url: "https://www.blackline.com/about/press-releases/2024/nearly-40-percent-of-cfos-do-not-completely-trust-their-organizations-financial-data-according-to-blackline-survey/",
   },
 ];
 

@@ -241,8 +241,13 @@
     gap: 0.6rem;
   }
 
-  .nav__cta {
+  .nav__cta,
+  .nav__secondary {
     display: none;
+  }
+
+  .nav__secondary {
+    margin-inline: 0.4rem 0.6rem;
   }
 
   @media (width >= 64rem) {
@@ -252,6 +257,10 @@
 
     .nav__cta {
       display: inline-flex;
+    }
+
+    .nav__secondary {
+      display: inline-block;
     }
 
     .nav__burger {

@@ -65,7 +65,7 @@ function onClick(e: MouseEvent): void {
   }
 
   const btn = start.closest<HTMLElement>(".btn");
-  if (btn) {
+  if (btn && !btn.hasAttribute("data-no-cta")) {
     const href = btn.getAttribute("href") || "";
     track("cta_click", {
       cta_text: (btn.textContent || "").trim().slice(0, 80),

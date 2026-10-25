@@ -1,6 +1,6 @@
 # AUXO Data Labs — Website
 
-Marketing site for AUXO Data Labs, a data and AI studio for Gulf real estate. Built with Astro, deployed to Netlify.
+Marketing site for AUXO Data Labs, an end-to-end data and AI service platform for funded startups, mid-sized companies and enterprises in the UAE, the US and Europe. Built with Astro, deployed to Netlify.
 
 ## Stack
 

@@ -6,7 +6,7 @@ import Dialog from "../ui/Dialog.astro";
 import { navigationContent } from "../../data/navigation";
 import { siteData } from "../../data/site";
 
-const { items, cta } = navigationContent;
+const { items, secondaryLink, cta } = navigationContent;
 const here = Astro.url.pathname;
 const isActive = (href: string) => here === href || (href !== "/" && here.startsWith(href));
 ---
@@ -39,6 +39,13 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
       <button type="button" class="icon-btn" data-dialog-open="site-search" data-search-open aria-label="Search the site">
         <Icon name="mdi:magnify" aria-hidden="true" />
       </button>
+      <a
+        href={secondaryLink.href}
+        class="nav__link nav__secondary"
+        aria-current={isActive(secondaryLink.href) ? "page" : undefined}
+      >
+        {secondaryLink.label}
+      </a>
       <a href={cta.href} class="btn nav__cta" data-variant="primary" data-size="sm">
         {cta.label}
       </a>
@@ -74,6 +81,15 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
         </a>
       ))
     }
+    <a
+      href={secondaryLink.href}
+      class="mobile-nav__link"
+      aria-current={isActive(secondaryLink.href) ? "page" : undefined}
+      data-dialog-close
+    >
+      <span>{secondaryLink.label}</span>
+      <Icon name="mdi:arrow-right" class="mobile-nav__link-icon" aria-hidden="true" />
+    </a>
   </nav>
 
   <div class="mobile-nav__foot">
@@ -167,13 +183,23 @@ const isActive = (href: string) => here === href || (href !== "/" && here.starts
     return initPromise;
   }
 
+  function focusSearchInput() {
+    requestAnimationFrame(() => {
+      document.querySelector<HTMLInputElement>("#pagefind-search .pagefind-ui__search-input")?.focus();
+    });
+  }
+
+  function openSearch() {
+    loadSearch().then(focusSearchInput, () => undefined);
+  }
+
   function bind() {
     document.querySelectorAll<HTMLElement>("[data-search-open]").forEach((btn) => {
       if (btn.dataset.searchBound) return;
       btn.dataset.searchBound = "true";
       btn.addEventListener("pointerenter", prefetchSearch);
       btn.addEventListener("focus", prefetchSearch);
-      btn.addEventListener("click", loadSearch);
+      btn.addEventListener("click", openSearch);
     });
   }
 

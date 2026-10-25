@@ -41,6 +41,27 @@ const { deeper, reviewCall } = result;
       }
     </ol>
     <p class="score__eligibility" data-path="startup" hidden>{intro.startup.eligibility}</p>
+    <script is:inline>
+      (function () {
+        var s = document.currentScript;
+        var root = s && s.closest("[data-auxo-score]");
+        if (!root) return;
+        var offer = "free-audit";
+        var on = false;
+        try {
+          on =
+            new URLSearchParams(location.search).get("offer") === offer ||
+            JSON.parse(sessionStorage.getItem("auxo-score-offer") || "null") === offer;
+        } catch (e) {
+          on = false;
+        }
+        if (!on) return;
+        root.dataset.offer = offer;
+        root.querySelectorAll("[data-path]").forEach(function (n) {
+          n.hidden = n.dataset.path !== "startup";
+        });
+      })();
+    </script>
     <div class="score__facts">
       <div><b>{CARDS.length}</b><small>{intro.facts.rounds}</small></div>
       <div><b>~3</b><small>{intro.facts.minutes}</small></div>
@@ -60,7 +81,7 @@ const { deeper, reviewCall } = result;
     <p class="score__privacy">{intro.privacy}</p>
   </section>
 
-  <section class="score__screen" id="s-quiz" data-screen="quiz" hidden>
+  <section class="score__screen" id="s-quiz" data-screen="quiz" data-pagefind-ignore="all" hidden>
     <div class="score__qhead">
       <button class="score__back" id="backBtn" type="button">← Back</button>
       <span class="score__pill" id="dimPill">ACCURATE</span>
@@ -76,14 +97,14 @@ const { deeper, reviewCall } = result;
     </div>
   </section>
 
-  <section class="score__screen" id="s-loader" data-screen="loader" hidden>
+  <section class="score__screen" id="s-loader" data-screen="loader" data-pagefind-ignore="all" hidden>
     <div class="score__loader">
       <div class="score__cube" aria-hidden="true"><span>A</span><span>U</span><span>X</span><span>O</span></div>
       <h2 class="score__loadmsg" id="loadmsg" aria-live="polite" tabindex="-1">{LOAD_STEPS[0]}</h2>
     </div>
   </section>
 
-  <section class="score__screen" id="s-result" data-screen="result" hidden>
+  <section class="score__screen" id="s-result" data-screen="result" data-pagefind-ignore="all" hidden>
     <span class="score__eyebrow">Your AUXO Score</span>
     <div class="score__head">
       <h2 class="score__big" id="bigScore" tabindex="-1">0<small>/100</small></h2>

@@ -45,8 +45,14 @@
   }
 
   @media (width >= 48rem) {
+    .deck-filter__group {
+      border-inline-start: 1px solid var(--border-strong);
+      padding-inline-start: 0.9rem;
+    }
+
     .deck-filter__label {
       align-self: center;
+      font-size: 0.6875rem;
     }
   }
 

@@ -2,6 +2,7 @@ import emailjs from "@emailjs/browser";
 import { contactContent, type ContactTool, type ContactTopic } from "../../data/contact";
 import { EMAIL_RE, renderStatus, type StatusState } from "./_status";
 import { track } from "../analytics/track";
+import { fill } from "../../lib/text";
 
 const FORM_ID = "contact-form";
 const FORM_NAME = "contact";
@@ -33,13 +34,14 @@ const VALIDATORS: Record<string, Validator> = {
         : null,
 };
 
-const fill = (template: string, vars: Record<string, string>) =>
-  template.replace(/\{(\w+)\}/g, (m, k: string) => vars[k] ?? m);
-
 const joinNames = (names: string[]) =>
   names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 
-const topicBySlug = (slug: string | null) => topics.find((t) => t.slug === slug);
+const TOPIC_ALIASES: Record<string, string> = { marketplace: "marketplace-tool" };
+const topicBySlug = (slug: string | null) => {
+  const s = slug ? (TOPIC_ALIASES[slug] ?? slug) : slug;
+  return topics.find((t) => t.slug === s);
+};
 const topicByLabel = (label: string) => topics.find((t) => t.label === label);
 
 function lowerFirst(label: string): string {

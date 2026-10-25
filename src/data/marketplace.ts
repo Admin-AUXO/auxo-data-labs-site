@@ -157,7 +157,7 @@ const tools: ToolConfig[] = [
   {
     kind: "third-party",
     slug: "claude-team",
-    name: "Claude Team",
+    name: "Claude Team plan",
     vendor: "Anthropic",
     category: "foundation-ai",
     line: "Claude for your whole team, connected to your company files and tools, with clear rules on use.",
@@ -180,7 +180,7 @@ const tools: ToolConfig[] = [
     name: "AI assistant for your company",
     vendor: "AUXO",
     category: "foundation-ai",
-    line: "Claude Team or ChatGPT Business, connected to your drives and systems, with usage rules and training.",
+    line: "Claude Team plan or ChatGPT Business, connected to your drives and systems, with usage rules and training.",
     includes: ["claude-team", "chatgpt-business"],
     note: "We set up one of the two, whichever fits your team.",
   },
@@ -268,7 +268,7 @@ const tools: ToolConfig[] = [
     kind: "third-party",
     slug: "fin",
     name: "Fin",
-    vendor: "Intercom",
+    vendor: "Fin",
     category: "operations",
     line: "An AI agent that answers customer questions across your support channels and hands off to your team.",
     url: "https://fin.ai/",
@@ -406,9 +406,6 @@ export const stackRequestBase = "/contact/?topic=marketplace-tool&tool=";
 export const addToStackHref = (slugs: string | string[]): string =>
   `${stackRequestBase}${[slugs].flat().map(encodeURIComponent).join(",")}`;
 
-export const fill = (template: string, vars: Record<string, string | number>): string =>
-  template.replace(/\{(\w+)\}/g, (m, k: string) => (k in vars ? String(vars[k]) : m));
-
 const getPaidItems = [
   {
     key: "setup",
@@ -465,7 +462,6 @@ export const marketplaceContent = {
   card: {
     addToStack: "Add to stack",
     addedState: "Added",
-    removeLabel: "Remove {name} from your stack",
     vendorLabel: "By {vendor}",
     vendorLink: "Vendor site",
     includesLabel: "Includes",
@@ -495,7 +491,7 @@ export const marketplaceContent = {
   },
   vetting: {
     title: "How we vet a tool",
-    lead: "A tool is listed only when all six are true, checked by a founder and recorded in the tool's config.",
+    lead: "Before we recommend a tool, a founder checks all six.",
     items: [
       {
         title: "It works on your data where you can see it.",
@@ -514,8 +510,8 @@ export const marketplaceContent = {
         body: "We can tell you what the vendor charges before you commit.",
       },
       {
-        title: "We have set it up ourselves.",
-        body: "Tested on sample data before it is listed.",
+        title: "We set it up ourselves.",
+        body: "On sample data, before we recommend it to you.",
       },
       {
         title: "Our advice is not for sale.",
