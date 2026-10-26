@@ -35,7 +35,8 @@ const { deeper, reviewCall } = result;
         intro.startup.steps.map((step, i) => (
           <li>
             <span class="score__step-num" aria-hidden="true">{i + 1}</span>
-            <span>{step}</span>
+            <span class="score__step-title">{step.title}</span>
+            <span class="score__step-detail">{step.detail}</span>
           </li>
         ))
       }
@@ -62,7 +63,7 @@ const { deeper, reviewCall } = result;
         });
       })();
     </script>
-    <div class="score__facts">
+    <div class="score__facts" data-path="default">
       <div><b>{CARDS.length}</b><small>{intro.facts.rounds}</small></div>
       <div><b>~3</b><small>{intro.facts.minutes}</small></div>
       <div><b>/100</b><small>{intro.facts.score}</small></div>

@@ -16,7 +16,7 @@ export interface ScoreCopy {
       title: string;
       lede: string;
       stepsLabel: string;
-      steps: string[];
+      steps: { title: string; detail: string }[];
       eligibility: string;
     };
     dimensionsLabel: string;
@@ -83,12 +83,16 @@ export const SCORE_COPY: ScoreCopy = {
         `${n} questions. Answer for a normal month, not your best one. You get a score out of 100.`,
     },
     startup: {
-      eyebrow: "Free audit",
-      title: "Step 1: your AUXO Score.",
-      lede: "Then a founder call and a one-page plan.",
+      eyebrow: "Free audit for startups",
+      title: "Your free data audit, in three steps.",
+      lede: "Start with the AUXO Score. A founder takes it from there.",
       stepsLabel: "Free audit steps",
-      steps: ["AUXO Score", "Founder call", "One-page plan"],
-      eligibility: "For investor-funded startups, seed to Series B. One per company.",
+      steps: [
+        { title: "AUXO Score", detail: "10 questions, about 3 minutes." },
+        { title: "Founder call", detail: "45 minutes on what your score shows." },
+        { title: "One-page plan", detail: "What to fix first, within 3 business days." },
+      ],
+      eligibility: "For startups that have raised from outside investors, seed to Series B. One per company.",
     },
     dimensionsLabel: "Dimensions measured",
     facts: { rounds: "questions", minutes: "min", score: "your score" },
