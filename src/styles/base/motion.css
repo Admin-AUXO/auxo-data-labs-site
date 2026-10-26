@@ -118,7 +118,7 @@
   }
 
   [data-motion="on"] [data-enter]:not([data-enter="headline"]) {
-    animation: m-rise-sm 0.8s var(--ease-asmr) 0.1s both;
+    animation: m-rise-sm 0.55s var(--ease-asmr) 0.05s both;
   }
 
   [data-motion="on"] [data-anim="clip-up"] {
@@ -138,8 +138,8 @@
   }
 
   [data-motion="on"] [data-enter="headline"] .m-word-i {
-    animation: m-word 0.6s var(--ease-asmr) both;
-    animation-delay: calc(var(--i) * 0.035s);
+    animation: m-word 0.42s var(--ease-asmr) both;
+    animation-delay: calc(var(--i) * 0.022s);
     display: inline-block;
   }
 

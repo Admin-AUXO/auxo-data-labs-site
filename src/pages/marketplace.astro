@@ -24,7 +24,8 @@ const all = c.filters.categories[0];
   <Section padding="lg" width="7xl">
     <div class="mkt-hero">
       <div class="flex flex-col gap-6">
-        <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
+        <p class="section-index" data-enter>{c.hero.eyebrow}</p>
+        <h1 class="text-display text-display--hero max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
         <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
       </div>
       <div class="mkt-why" data-enter>
@@ -262,7 +263,7 @@ const all = c.filters.categories[0];
   <Section padding="lg" width="7xl">
     <div class="mkt-how">
       <div class="mkt-how__col">
-        <SectionHeader title={c.setup.title} subtitle={c.setup.lead} />
+        <SectionHeader eyebrow={c.setup.eyebrow} title={c.setup.title} subtitle={c.setup.lead} />
         <ol class="mkt-how__steps">
           {
             c.setup.steps.map((step, i) => (
@@ -278,7 +279,7 @@ const all = c.filters.categories[0];
         </div>
       </div>
       <div class="mkt-how__col">
-        <SectionHeader title={c.howWeGetPaid.title} subtitle={c.howWeGetPaid.subline} />
+        <SectionHeader eyebrow={c.howWeGetPaid.eyebrow} title={c.howWeGetPaid.title} subtitle={c.howWeGetPaid.subline} />
         <ul class="mkt-how__paid">
           {
             c.howWeGetPaid.items.map((item, i) => (
@@ -295,7 +296,7 @@ const all = c.filters.categories[0];
   </Section>
 
   <Section padding="lg" width="7xl">
-    <SectionHeader title={c.vetting.title} subtitle={c.vetting.lead} />
+    <SectionHeader eyebrow={c.vetting.eyebrow} title={c.vetting.title} subtitle={c.vetting.lead} />
     <ol class="mkt-vet mt-8">
       {
         c.vetting.items.map((v, i) => (

@@ -37,7 +37,7 @@ const familyGroups = (["foundations", "guardrails"] as const).map((id) => ({
       <span class="mono-label mono-label--accent" data-enter>
         <span data-countup>{readCount}</span> short reads · <span data-countup>{topicCount}</span> topics
       </span>
-      <h1 class="text-display text-display--5xl" data-enter="headline">
+      <h1 class="text-display text-display--hero" data-enter="headline">
         <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} soften />
       </h1>
       <p class="lead text-xl" data-enter>{c.hero.lead}</p>

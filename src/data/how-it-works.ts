@@ -69,13 +69,13 @@ export const howItWorksContent = {
           {
             icon: "mdi:gauge",
             title: "AUXO Score",
-            tag: "Free",
+            tag: "No charge",
             tone: "free",
             body: "10 questions and a score out of 100. About 3 minutes, no sign-up.",
           },
           {
             icon: "mdi:account-tie-outline",
-            title: "Free audit",
+            title: "Startup audit",
             tag: "Seed to Series B",
             tone: "free",
             body: "Your AUXO Score, a 45-minute founder call and a one-page plan.",
@@ -88,13 +88,13 @@ export const howItWorksContent = {
             body: "We review your systems under NDA. You get each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
           },
         ],
-        duration: "Score: about 3 minutes. Free audit: one 45-minute call. Deep-dive: 2 to 3 weeks.",
+        duration: "Score: about 3 minutes. Startup audit: one 45-minute call. Deep-dive: 2 to 3 weeks.",
         suits: "Teams about to spend on AI, or whose numbers don't match.",
         bring: "View-only access to the tools we look at.",
         isNot: "A sales pitch, a generic checklist or a compliance certificate.",
         links: [
           { text: "Get your AUXO Score", href: "/auxo-score/" },
-          { text: "Startup, seed to Series B? Get your free audit", href: "/auxo-score/?offer=free-audit" },
+          { text: "Startup, seed to Series B? Get your startup audit", href: "/auxo-score/?offer=free-audit" },
         ],
       },
       {
@@ -182,6 +182,7 @@ export const howItWorksContent = {
     },
   },
   method: {
+    eyebrow: "The method",
     title: "Five checks behind every audit.",
     lead: "Every score and audit uses the same five checks. Here they are.",
     dimensions: [
@@ -193,6 +194,7 @@ export const howItWorksContent = {
     ] satisfies Dimension[],
   },
   faq: {
+    eyebrow: "FAQ",
     title: "Questions about how it works",
     items: [
       {

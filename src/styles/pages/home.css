@@ -477,6 +477,12 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   transform: translateY(-2px);
 }
 
+.cards__icon {
+  block-size: 1.4rem;
+  color: var(--accent);
+  inline-size: 1.4rem;
+}
+
 .cards__title {
   font-family: var(--font-brand);
   font-size: var(--text-2xl);

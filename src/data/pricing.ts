@@ -51,6 +51,7 @@ export interface PricingContent {
     items: { icon: string; text: string }[];
   };
   faq: {
+    eyebrow: string;
     title: string;
     items: FaqItem[];
   };
@@ -66,14 +67,14 @@ export interface PricingContent {
 export const pricingContent: PricingContent = {
   metaTitle: "Pricing: three ways in, a fixed price per phase",
   metaDescription:
-    "A free audit for startups, seed to Series B. A deep-dive audit for growing companies. One unit first for large organisations. A fixed price per phase, in writing.",
+    "A startup audit, seed to Series B. A deep-dive audit for growing companies. One unit first for large organisations. A fixed price per phase, in writing.",
   hero: {
     eyebrow: "Pricing",
     title: "Start where you are.",
     lead: "Three ways in. Each phase has a fixed price, agreed in writing before we start.",
     rulesTitle: "How pricing works",
     rules: [
-      { tone: "free", icon: "mdi:check", text: "Free: the AUXO Score, and the free audit for seed to Series B startups." },
+      { tone: "free", icon: "mdi:check", text: "No charge for the AUXO Score or the startup audit." },
       { tone: "free", icon: "mdi:key-outline", text: "Stop after any phase. You keep everything delivered." },
       { tone: "optional", icon: "mdi:domain", text: "Tool vendors bill you directly." },
       { tone: "optional", icon: "mdi:sync", text: "Upkeep is optional and monthly. Stop with 30 days' notice." },
@@ -95,7 +96,7 @@ export const pricingContent: PricingContent = {
         icon: "mdi:rocket-launch-outline",
         eyebrow: "Startups, seed to Series B",
         descriptor: "Investor-funded, moving fast, no data team yet.",
-        title: "Free audit",
+        title: "Startup audit",
         subline: "Then a fixed-price data foundation.",
         facts: {
           first: "Your AUXO Score, a 45-minute founder call and a one-page plan.",
@@ -104,7 +105,7 @@ export const pricingContent: PricingContent = {
           price: "How many tools we connect and the metrics you need.",
           stop: "The plan is yours, whether or not you build with us.",
         },
-        cta: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit" },
+        cta: { text: "Get your startup audit", href: "/auxo-score/?offer=free-audit" },
         finePrint: "One per company.",
       },
       {
@@ -113,7 +114,7 @@ export const pricingContent: PricingContent = {
         eyebrow: "Growing companies",
         descriptor: "50–500 people, with numbers spread across tools and spreadsheets.",
         title: "Deep-dive audit",
-        subline: "Start free with the AUXO Score.",
+        subline: "Start with the AUXO Score.",
         facts: {
           first: "We review your systems under NDA. You get each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
           then: "A plan, the right tools and clear rules. Then we build in phases you approve one at a time.",
@@ -153,6 +154,7 @@ export const pricingContent: PricingContent = {
     ],
   },
   faq: {
+    eyebrow: "FAQ",
     title: "Pricing questions",
     items: [
       {
@@ -161,7 +163,7 @@ export const pricingContent: PricingContent = {
           "By what's involved: the tools, the teams and what we build. Each phase gets a fixed price in writing before we start. No two jobs match, so we don't publish prices.",
       },
       {
-        question: "Who can get the free audit?",
+        question: "Who can get the startup audit?",
         answer:
           "For startups that have raised from outside investors, one per company. Not enough data yet? We'll say so and suggest what to set up first.",
       },

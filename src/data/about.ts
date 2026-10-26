@@ -30,6 +30,7 @@ export interface AboutContent {
     description: string;
   };
   hero: {
+    eyebrow: string;
     title: string;
     titleHighlight: string | string[];
     lead: string;
@@ -38,17 +39,20 @@ export interface AboutContent {
     facts: AboutFact[];
   };
   beliefs: {
+    eyebrow: string;
     title: string;
     lead: string;
     items: AboutBelief[];
   };
   team: {
+    eyebrow: string;
     title: string;
     lead: string;
     linkLabel: string;
     founders: Founder[];
   };
   engagement: {
+    eyebrow: string;
     title: string;
     lead: string;
     reassurance: string;
@@ -72,6 +76,7 @@ export const aboutContent: AboutContent = {
       "AUXO Data Labs is a founder-led data and AI firm in Dubai, working with clients in the UAE, the US and Europe. Clients own what we build.",
   },
   hero: {
+    eyebrow: "About",
     title: "Data first. Then AI.",
     titleHighlight: "Then AI",
     lead: "A founder-led data and AI firm. We get your data ready, set up the AI, and hand it over.",
@@ -85,6 +90,7 @@ export const aboutContent: AboutContent = {
     ],
   },
   beliefs: {
+    eyebrow: "Principles",
     title: "What we believe",
     lead: "Four things shape how we work.",
     items: [
@@ -111,6 +117,7 @@ export const aboutContent: AboutContent = {
     ],
   },
   team: {
+    eyebrow: "Team",
     title: "The founding team",
     lead: "A founder leads every engagement, from first call to handover.",
     linkLabel: "Connect on LinkedIn",
@@ -136,6 +143,7 @@ export const aboutContent: AboutContent = {
     ],
   },
   engagement: {
+    eyebrow: "Commitments",
     title: "What you can hold us to",
     lead: "Working with an outside team should feel safe. Here's what to expect.",
     reassurance: "We are happy to sign an NDA before we begin.",

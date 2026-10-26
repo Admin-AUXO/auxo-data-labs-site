@@ -27,7 +27,7 @@ const pages: Record<string, OGPage> = {
   },
   pricing: {
     title: "Start where you are.",
-    description: "Free audit for startups. Deep-dive audit for growing companies. One unit first for large organisations.",
+    description: "Startup audit, seed to Series B. Deep-dive audit for growing companies. One unit first for large organisations.",
   },
   marketplace: {
     title: "The AI stack for every team.",
@@ -51,7 +51,7 @@ const pages: Record<string, OGPage> = {
   },
   "auxo-score": {
     title: "How ready is your data for AI?",
-    description: "A free 10-question check. Your score out of 100 in about 3 minutes.",
+    description: "A 10-question check. Your score out of 100 in about 3 minutes.",
   },
   "legal-privacy-policy": { title: "Privacy Policy", description: siteData.name },
   "legal-terms": { title: "Terms of Use", description: siteData.name },

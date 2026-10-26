@@ -132,7 +132,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         c.cards.map((card, i) => (
           <li class="cards__cell" data-anim="rise" style={`--i:${i}`}>
             <a href={card.href} class="cards__card">
-              <span class="mono-datum text-accent-2" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <Icon name={card.icon} class="cards__icon" aria-hidden="true" />
               <h3 class="cards__title">{card.title}</h3>
               <p class="cards__desc text-muted">{card.desc}</p>
               <Icon name="mdi:arrow-right" class="cards__arrow" aria-hidden="true" />

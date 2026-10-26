@@ -547,6 +547,7 @@ export const marketplaceContent = {
       "AI tools we check first, set up on your data in your own accounts. Plus AUXO's own sales and content agents.",
   },
   hero: {
+    eyebrow: "Marketplace",
     title: "AI tools, set up on your data.",
     lead: "Set up in your accounts by a founder. Managed only if you want it.",
   },
@@ -612,11 +613,13 @@ export const marketplaceContent = {
     href: "/contact/?topic=custom-stack",
   },
   howWeGetPaid: {
+    eyebrow: "Fees",
     title: "How we get paid.",
     subline: "Plainly, so you can judge our advice.",
     items: getPaidItems.filter((i) => i.visible),
   },
   vetting: {
+    eyebrow: "Vetting",
     title: "How we vet a tool",
     lead: "Before we recommend a tool, a founder checks all six.",
     items: [
@@ -647,6 +650,7 @@ export const marketplaceContent = {
     ],
   },
   setup: {
+    eyebrow: "Setup",
     title: "How setup works",
     lead: "Add to stack opens a short form with your tools filled in. Then:",
     steps: [

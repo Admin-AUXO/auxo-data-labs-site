@@ -72,7 +72,7 @@ export const SCORE_COPY: ScoreCopy = {
   meta: {
     title: "AUXO Score: is your data ready for AI?",
     description:
-      "Is your data ready for AI? 10 questions on five checks, a score out of 100, about 3 minutes. Free, no sign-up.",
+      "Is your data ready for AI? 10 questions on five checks, a score out of 100, about 3 minutes. No sign-up.",
   },
   intro: {
     default: {
@@ -85,7 +85,7 @@ export const SCORE_COPY: ScoreCopy = {
       eyebrow: "Startup audit",
       title: "Find out what to fix first.",
       lede: "Three steps with a founder, starting with the AUXO Score.",
-      stepsLabel: "Free audit steps",
+      stepsLabel: "Startup audit steps",
       steps: [
         { title: "AUXO Score", detail: "10 questions, about 3 minutes." },
         { title: "Founder call", detail: "45 minutes on what your score shows." },
@@ -112,15 +112,15 @@ export const SCORE_COPY: ScoreCopy = {
         "I can answer for both finance and operations.",
       ],
       continue: "Continue",
-      startupLine: "Startup, seed to Series B? You may qualify for a free audit.",
-      startupLink: { text: "See the free audit", href: "/auxo-score/?offer=free-audit" },
+      startupLine: "Startup, seed to Series B? You may qualify for the startup audit.",
+      startupLink: { text: "See the startup audit", href: "/auxo-score/?offer=free-audit" },
     },
     reviewCall: {
       title: "Step 2: book your founder call.",
       body: "Your score is saved on this device. Book a 45‑minute call to go through it with a founder. Your one-page plan follows within 3 business days.",
       ticks: [
         "We've raised from outside investors, seed to Series B.",
-        "This is our company's first free audit with AUXO.",
+        "This is our company's first startup audit with AUXO.",
       ],
       button: "Book your founder call",
       tip: "Email the report to yourself first, so you have it on the call.",

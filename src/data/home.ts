@@ -23,6 +23,7 @@ interface HomePillar {
 }
 
 interface HomeLadderCard {
+  icon: string;
   title: string;
   desc: string;
   href: string;
@@ -124,7 +125,7 @@ export const homeContent: HomeContent = {
     stat: "More than one in three CFOs don't completely trust their own financial data.",
     footnoteId: "ref-1",
     cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
-    reassurance: "Free, 10 questions, no sign-up. Your answers stay on your device unless you ask for the report by email.",
+    reassurance: "10 questions, no sign-up. Your answers stay on your device unless you ask for the report by email.",
   },
   logos: {
     label: "Works with",
@@ -177,16 +178,19 @@ export const homeContent: HomeContent = {
   },
   cards: [
     {
+      icon: "mdi:magnify",
       title: "Analyze",
       desc: "An honest read of your business and your data, before you spend on AI.",
       href: "/how-it-works/#analyze",
     },
     {
+      icon: "mdi:lightbulb-outline",
       title: "Advise",
       desc: "The right AI and data setup for your team, and a plan to get there.",
       href: "/how-it-works/#advise",
     },
     {
+      icon: "mdi:hammer-wrench",
       title: "Build",
       desc: "Your data and AI tools, set up end to end and handed over.",
       href: "/how-it-works/#build",
@@ -200,14 +204,14 @@ export const homeContent: HomeContent = {
     rows: [
       {
         segment: "Startups, seed to Series B",
-        offer: "Free audit",
+        offer: "Startup audit",
         line: "Then a fixed-price data foundation.",
         href: "/pricing/#startups",
       },
       {
         segment: "Growing companies, 50–500 people",
         offer: "Deep-dive audit",
-        line: "Start free with the AUXO Score.",
+        line: "Start with the AUXO Score.",
         href: "/pricing/#growing",
       },
       {

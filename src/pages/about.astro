@@ -14,7 +14,8 @@ import "../styles/pages/about.css";
 <BaseLayout title={c.meta.title} description={c.meta.description}>
   <Section padding="lg" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
-      <h1 class="text-display text-display--5xl max-w-[14ch]" data-enter="headline">
+      <p class="section-index" data-enter>{c.hero.eyebrow}</p>
+      <h1 class="text-display text-display--hero max-w-[14ch]" data-enter="headline">
         <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} soften />
       </h1>
       <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
@@ -42,7 +43,7 @@ import "../styles/pages/about.css";
   </Section>
 
   <Section padding="lg" width="7xl">
-    <SectionHeader title={c.beliefs.title} subtitle={c.beliefs.lead} />
+    <SectionHeader eyebrow={c.beliefs.eyebrow} title={c.beliefs.title} subtitle={c.beliefs.lead} />
     <ul class="about-grid mt-8">
       {
         c.beliefs.items.map((item, i) => (
@@ -57,7 +58,7 @@ import "../styles/pages/about.css";
   </Section>
 
   <Section id="team" padding="lg" width="7xl" class="about-anchor">
-    <SectionHeader title={c.team.title} subtitle={c.team.lead} />
+    <SectionHeader eyebrow={c.team.eyebrow} title={c.team.title} subtitle={c.team.lead} />
     <div class="about-team mt-8">
       {
         c.team.founders.map((f) => (
@@ -82,7 +83,7 @@ import "../styles/pages/about.css";
   </Section>
 
   <Section padding="lg" width="7xl">
-    <SectionHeader title={c.engagement.title} subtitle={c.engagement.lead} />
+    <SectionHeader eyebrow={c.engagement.eyebrow} title={c.engagement.title} subtitle={c.engagement.lead} />
     <ul class="about-grid about-grid--three mt-8">
       {
         c.engagement.principles.map((principle, i) => (

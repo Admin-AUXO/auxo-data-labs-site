@@ -65,6 +65,13 @@
     text-wrap: balance;
   }
 
+  .text-display--hero {
+    font-size: clamp(2.75rem, 0.9rem + 5vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
   .text-display--5xl {
     font-size: var(--text-5xl);
     letter-spacing: var(--tracking-display-5xl);

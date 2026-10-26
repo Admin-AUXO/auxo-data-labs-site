@@ -54,6 +54,7 @@ export interface ContactContent {
     description: string;
   };
   hero: {
+    eyebrow: string;
     title: string;
     titleHighlight: string | string[];
     lead: string;
@@ -91,12 +92,14 @@ export interface ContactContent {
     };
   };
   nextSteps: {
+    eyebrow: string;
     title: string;
     titleHighlight?: string | string[];
     subtitle: string;
     steps: { title: string; desc: string }[];
   };
   faq: {
+    eyebrow: string;
     title: string;
     titleHighlight?: string | string[];
     description: string;
@@ -108,9 +111,9 @@ const topics: ContactTopic[] = [
   { slug: "not-sure", label: "Not sure where to start" },
   {
     slug: "free-audit",
-    label: "Free audit",
+    label: "Startup audit",
     hint: "Starts with the AUXO Score, then a founder call. For startups, seed to Series B. One per company.",
-    hintLink: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit" },
+    hintLink: { text: "Get your startup audit", href: "/auxo-score/?offer=free-audit" },
   },
   {
     slug: "deep-dive-audit",
@@ -142,6 +145,7 @@ export const contactContent: ContactContent = {
       "Tell us what you want AI and your data to do. A real person replies within one business day.",
   },
   hero: {
+    eyebrow: "Contact",
     title: "Talk to a founder.",
     titleHighlight: "founder",
     lead: "A few lines is enough.",
@@ -251,6 +255,7 @@ export const contactContent: ContactContent = {
     },
   },
   nextSteps: {
+    eyebrow: "Next steps",
     title: "What happens next",
     titleHighlight: "next",
     subtitle: "Three steps to a clear first move.",
@@ -270,6 +275,7 @@ export const contactContent: ContactContent = {
     ],
   },
   faq: {
+    eyebrow: "FAQ",
     title: "Before you reach out",
     titleHighlight: "reach out",
     description: "The questions founders and team leads ask us first.",
@@ -277,7 +283,7 @@ export const contactContent: ContactContent = {
       {
         question: "What does working together cost?",
         answer:
-          "Each phase has a fixed price, agreed in writing before we start. The AUXO Score is free, and so is the audit for startups, seed to Series B.",
+          "Each phase has a fixed price, agreed in writing before we start. There's no charge for the AUXO Score or the startup audit (seed to Series B).",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",

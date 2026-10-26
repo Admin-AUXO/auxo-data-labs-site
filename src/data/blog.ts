@@ -10,6 +10,7 @@ export interface BlogContent {
     metaTitle: string;
     metaDescription: string;
     hero: {
+      eyebrow: string;
       title: string;
       titleHighlight: string | string[];
       lead: string;
@@ -49,6 +50,7 @@ export const blogContent: BlogContent = {
     metaDescription:
       "Plain reads from AUXO on data, AI tools and agents, and when not to build. Every figure has a source.",
     hero: {
+      eyebrow: "Blog",
       title: "Data and AI, written plainly.",
       titleHighlight: "written plainly",
       lead: "Founder notes on data, AI tools and agents, and when not to build. Every figure has a source.",

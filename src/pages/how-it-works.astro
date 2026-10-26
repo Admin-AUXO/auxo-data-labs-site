@@ -163,7 +163,7 @@ const facts = [
   </Section>
 
   <Section id="method" padding="lg" width="7xl" class="hiw-anchor">
-    <SectionHeader title={c.method.title} subtitle={c.method.lead} />
+    <SectionHeader eyebrow={c.method.eyebrow} title={c.method.title} subtitle={c.method.lead} />
     <ol class="method mt-8">
       {
         c.method.dimensions.map((d, i) => (
@@ -179,7 +179,7 @@ const facts = [
 
   <Section id="faq" padding="lg" width="7xl" class="hiw-anchor">
     <div class="faq-split">
-      <SectionHeader title={c.faq.title} />
+      <SectionHeader eyebrow={c.faq.eyebrow} title={c.faq.title} />
       <div class="faq-split__list" data-reveal>
         <Accordion items={faqItems} openFirst />
       </div>
