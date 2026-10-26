@@ -1,6 +1,6 @@
 ---
 import ExtendedGate from "./ExtendedGate.astro";
-import { DIMENSIONS, IDK_LIMIT } from "../../lib/auxo-score/scoring";
+import { DIMENSIONS } from "../../lib/auxo-score/scoring";
 import { CARDS } from "../../lib/auxo-score/cards";
 import { LOAD_STEPS, SCORE_COPY } from "./copy";
 import "../../styles/pages/auxo-score.css";
@@ -30,18 +30,25 @@ const { deeper, reviewCall } = result;
     <ul class="score__dims" aria-label={intro.dimensionsLabel} data-path="default">
       {DIMENSIONS.map((d) => <li>{d}</li>)}
     </ul>
-    <ol class="score__steps" aria-label={intro.startup.stepsLabel} data-path="startup" hidden>
-      {
-        intro.startup.steps.map((step, i) => (
-          <li>
-            <span class="score__step-num" aria-hidden="true">{i + 1}</span>
-            <span class="score__step-title">{step.title}</span>
-            <span class="score__step-detail">{step.detail}</span>
-          </li>
-        ))
-      }
-    </ol>
-    <p class="score__eligibility" data-path="startup" hidden>{intro.startup.eligibility}</p>
+    <div class="score__side">
+      <ol class="score__steps" aria-label={intro.startup.stepsLabel} data-path="startup" hidden>
+        {
+          intro.startup.steps.map((step, i) => (
+            <li>
+              <span class="score__step-num" aria-hidden="true">{i + 1}</span>
+              <span class="score__step-title">{step.title}</span>
+              <span class="score__step-detail">{step.detail}</span>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="score__eligibility" data-path="startup" hidden>{intro.startup.eligibility}</p>
+      <div class="score__facts" data-path="default">
+        <div><b>{CARDS.length}</b><small>{intro.facts.rounds}</small></div>
+        <div><b>~3</b><small>{intro.facts.minutes}</small></div>
+        <div><b>/100</b><small>{intro.facts.score}</small></div>
+      </div>
+    </div>
     <script is:inline>
       (function () {
         var s = document.currentScript;
@@ -63,11 +70,6 @@ const { deeper, reviewCall } = result;
         });
       })();
     </script>
-    <div class="score__facts" data-path="default">
-      <div><b>{CARDS.length}</b><small>{intro.facts.rounds}</small></div>
-      <div><b>~3</b><small>{intro.facts.minutes}</small></div>
-      <div><b>/100</b><small>{intro.facts.score}</small></div>
-    </div>
     <div class="score__resume" id="resumeBar" hidden>
       <p id="resumeText">{intro.resume(1, CARDS.length)}</p>
       <div class="score__btn-row">
@@ -78,8 +80,7 @@ const { deeper, reviewCall } = result;
     <div class="score__btn-row">
       <button class="score__btn" type="button" id="startBtn">{intro.startButton}</button>
     </div>
-    <p class="score__note">{intro.note(IDK_LIMIT)}</p>
-    <p class="score__privacy">{intro.privacy}</p>
+    <p class="score__note">{intro.note}</p>
   </section>
 
   <section class="score__screen" id="s-quiz" data-screen="quiz" data-pagefind-ignore="all" hidden>

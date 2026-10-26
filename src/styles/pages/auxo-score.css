@@ -113,13 +113,21 @@
 }
 
 .score__resume {
+  align-items: center;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 14px;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  justify-content: space-between;
+  padding: 10px 10px 10px 16px;
+}
+
+.score__resume .score__btn {
+  font-size: 14px;
+  min-block-size: 38px;
+  padding: 8px 16px;
 }
 
 .score__resume p {
@@ -190,12 +198,6 @@
 
 .score__note--center {
   text-align: center;
-}
-
-.score__privacy {
-  color: var(--subtle);
-  font-size: 12px;
-  margin: 0;
 }
 
 .score__qhead {
@@ -1008,8 +1010,26 @@ html[data-motion="off"] .score *::after {
 }
 
 @media (width >= 64rem) {
-  .score:has(#s-result:not([hidden])) {
+  .score:has(#s-result:not([hidden])),
+  .score:has(#s-intro:not([hidden])) {
     max-inline-size: 1080px;
+  }
+
+  #s-intro {
+    align-content: center;
+    column-gap: 4rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  }
+
+  #s-intro > * {
+    grid-column: 1;
+  }
+
+  #s-intro > .score__side {
+    align-self: center;
+    grid-column: 2;
+    grid-row: 1 / span 7;
   }
 
   #s-result {
@@ -1057,24 +1077,6 @@ html[data-motion="off"] .score *::after {
   border-block-start: 1px solid var(--border);
 }
 
-@media (width >= 40rem) {
-  .score__steps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .score__steps li {
-    align-content: start;
-    align-items: start;
-    grid-template-columns: minmax(0, 1fr);
-    padding: 20px 22px;
-  }
-
-  .score__steps li + li {
-    border-block-start: 0;
-    border-inline-start: 1px solid var(--border);
-  }
-}
-
 .score__steps li:first-child .score__step-num {
   background: var(--accent);
   color: var(--background);
@@ -1092,14 +1094,10 @@ html[data-motion="off"] .score *::after {
   grid-column: 2;
 }
 
-@media (width >= 40rem) {
-  .score__step-title {
-    margin-block-start: 10px;
-  }
-
-  .score__step-detail {
-    grid-column: 1;
-  }
+.score__side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .score__step-num {
@@ -1160,16 +1158,6 @@ html[data-motion="off"] .score *::after {
 }
 
 @media (width >= 30rem) {
-  .score__steps {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .score__steps li {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-  }
-
   .score__call .score__check .score__btn {
     align-self: flex-start;
   }

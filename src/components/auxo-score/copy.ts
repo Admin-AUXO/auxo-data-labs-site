@@ -25,8 +25,7 @@ export interface ScoreCopy {
     resumeButton: string;
     startOverButton: string;
     startButton: string;
-    note: (limit: number) => string;
-    privacy: string;
+    note: string;
   };
   result: {
     deeper: {
@@ -83,9 +82,9 @@ export const SCORE_COPY: ScoreCopy = {
         `${n} questions. Answer for a normal month, not your best one. You get a score out of 100.`,
     },
     startup: {
-      eyebrow: "Free audit for startups",
-      title: "Your free data audit, in three steps.",
-      lede: "Start with the AUXO Score. A founder takes it from there.",
+      eyebrow: "Startup audit",
+      title: "Find out what to fix first.",
+      lede: "Three steps with a founder, starting with the AUXO Score.",
       stepsLabel: "Free audit steps",
       steps: [
         { title: "AUXO Score", detail: "10 questions, about 3 minutes." },
@@ -100,10 +99,7 @@ export const SCORE_COPY: ScoreCopy = {
     resumeButton: "Resume",
     startOverButton: "Start over",
     startButton: "Start the AUXO Score →",
-    note: (limit) =>
-      `Not sure? Pick "I don't know". Picking it ${limit} or more times ends the check with a finding instead of a score.`,
-    privacy:
-      "Free, no sign-up. Your answers stay on your device unless you ask for the report by email.",
+    note: "Not sure of an answer? Pick \"I don't know\". No sign-up, and your answers stay on your device unless you ask for the report by email.",
   },
   result: {
     deeper: {
