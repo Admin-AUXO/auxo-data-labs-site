@@ -1,12 +1,5 @@
 import { siteData } from "./site";
 
-export type LadderTier = "Analyze" | "Advise" | "Build" | "Managed upkeep";
-
-export interface PlanTier {
-  name: LadderTier;
-  note?: string;
-}
-
 export interface PlanLink {
   text: string;
   href: string;
@@ -29,8 +22,6 @@ export interface PlanCard {
   subline: string;
   facts: PlanFacts;
   cta: PlanLink;
-  secondary?: PlanLink;
-  tiers: PlanTier[];
   finePrint: string;
 }
 
@@ -53,8 +44,6 @@ export interface PricingContent {
     factLabels: Record<keyof PlanFacts, string>;
     detailsShow: string;
     detailsHide: string;
-    tiersLabel: string;
-    notIncludedLabel: string;
     items: PlanCard[];
   };
   includes: {
@@ -70,8 +59,6 @@ export interface PricingContent {
     description: string;
     ctaText: string;
     ctaHref: string;
-    secondaryText: string;
-    secondaryHref: string;
     reassurance: string;
   };
 }
@@ -87,7 +74,6 @@ export const pricingContent: PricingContent = {
     rulesTitle: "How pricing works",
     rules: [
       { tone: "free", icon: "mdi:check", text: "Free: the AUXO Score, and the free audit for seed to Series B startups." },
-      { tone: "paid", icon: "mdi:file-document-outline", text: "A fixed price per phase, set by scope, in writing before any work." },
       { tone: "free", icon: "mdi:key-outline", text: "Stop after any phase. You keep everything delivered." },
       { tone: "optional", icon: "mdi:domain", text: "Vendors bill you directly, on your own contract." },
       { tone: "optional", icon: "mdi:sync", text: "Managed upkeep is optional and monthly. Stop with 30 days' notice." },
@@ -103,8 +89,6 @@ export const pricingContent: PricingContent = {
       price: "Price set by",
       stop: "If you stop",
     },
-    tiersLabel: "Includes",
-    notIncludedLabel: "Not included",
     items: [
       {
         id: "startups",
@@ -114,16 +98,14 @@ export const pricingContent: PricingContent = {
         title: "Free audit",
         subline: "Then a fixed-price data foundation.",
         facts: {
-          first: "Your AUXO Score, a 45-minute founder call and a one-page plan. Free.",
+          first: "Your AUXO Score, a 45-minute founder call and a one-page plan.",
           then: "Your core tools connected into one clean source in your own cloud, with the metrics investors ask for.",
           time: "Plan within 3 business days of the call. Build: 4 to 12 weeks.",
           price: "The systems we connect and the metrics you need.",
           stop: "The plan is yours, whether or not you build with us.",
         },
         cta: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit" },
-        secondary: { text: "Take the AUXO Score first", href: "/auxo-score/" },
-        tiers: [{ name: "Analyze", note: "free audit" }, { name: "Build" }],
-        finePrint: "One per company. You've raised from outside investors.",
+        finePrint: "One per company.",
       },
       {
         id: "growing",
@@ -140,9 +122,7 @@ export const pricingContent: PricingContent = {
           stop: "Stop after the audit. The assessment and plan are yours.",
         },
         cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
-        secondary: { text: "Ask about a deep-dive audit", href: "/contact/?topic=deep-dive-audit" },
-        tiers: [{ name: "Analyze" }, { name: "Advise" }, { name: "Build" }],
-        finePrint: "A guide, not a rule. Under 50 people and not a startup? Start with the AUXO Score.",
+        finePrint: "A guide, not a rule.",
       },
       {
         id: "large-organisations",
@@ -159,8 +139,6 @@ export const pricingContent: PricingContent = {
           stop: "Each phase stands alone. Code, documents and accounts are in your name.",
         },
         cta: { text: "Talk to us", href: "/contact/?topic=enterprise" },
-        secondary: { text: "Book a meeting", href: siteData.bookingUrl },
-        tiers: [{ name: "Analyze" }, { name: "Advise" }, { name: "Build" }, { name: "Managed upkeep" }],
         finePrint: "We answer security questionnaires plainly, including what we don't hold.",
       },
     ],
@@ -169,7 +147,6 @@ export const pricingContent: PricingContent = {
     title: "Every engagement includes",
     items: [
       { icon: "mdi:account-tie-outline", text: "A founder on every call" },
-      { icon: "mdi:file-document-outline", text: "A fixed price per phase, in writing" },
       { icon: "mdi:key-outline", text: "Your accounts, contracts and code" },
       { icon: "mdi:account-check-outline", text: "A person approves what agents send" },
       { icon: "mdi:school-outline", text: "Documentation and training at handover" },
@@ -186,7 +163,7 @@ export const pricingContent: PricingContent = {
       {
         question: "What exactly is the free audit?",
         answer:
-          "Your AUXO Score, a 45-minute call with a founder and a one-page plan of what to fix first, within 3 business days of the call. For seed to Series B startups, one per company. Not enough data yet? We'll say so and suggest what to set up first.",
+          "For startups that have raised from outside investors, one per company. Not enough data yet? We'll say so and suggest what to set up first.",
       },
       {
         question: "Why not hire a data engineer instead?",
@@ -210,8 +187,6 @@ export const pricingContent: PricingContent = {
     description: "Book a meeting and leave with one clear next step.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
-    secondaryText: "Get your AUXO Score",
-    secondaryHref: "/auxo-score/",
     reassurance: siteData.reassurance,
   },
 };

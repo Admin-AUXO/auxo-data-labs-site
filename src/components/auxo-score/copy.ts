@@ -45,7 +45,6 @@ export interface ScoreCopy {
       ticks: [string, string];
       button: string;
       tip: string;
-      reassurance: string;
       notEligible: { before: string; bookText: string; middle: string; deepDive: ScoreLink; after: string };
     };
   };
@@ -84,9 +83,9 @@ export const SCORE_COPY: ScoreCopy = {
         `${n} questions. Pick the answer that matches a normal month, not your best one. You get a score out of 100 at the end.`,
     },
     startup: {
-      eyebrow: "Free audit for startups, seed to Series B",
+      eyebrow: "Free audit",
       title: "Step 1: your AUXO Score.",
-      lede: "10 questions on your data, a 45‑minute call with a founder, then a one-page plan of what to fix first.",
+      lede: "Then a founder call and a one-page plan.",
       stepsLabel: "Free audit steps",
       steps: ["AUXO Score", "Founder call", "One-page plan"],
       eligibility: "For investor-funded startups, seed to Series B. One per company.",
@@ -114,7 +113,7 @@ export const SCORE_COPY: ScoreCopy = {
       ],
       continue: "Continue",
       startupLine: "Startup, seed to Series B? You may qualify for a free audit.",
-      startupLink: { text: "See the free audit", href: "/pricing/#startups" },
+      startupLink: { text: "See the free audit", href: "/auxo-score/?offer=free-audit" },
     },
     reviewCall: {
       title: "Step 2: book your founder call.",
@@ -125,7 +124,6 @@ export const SCORE_COPY: ScoreCopy = {
       ],
       button: "Book your founder call",
       tip: "Email the report to yourself first, so you have it on the call.",
-      reassurance: "A real person replies within one business day.",
       notEligible: {
         before: "Not a startup, seed to Series B? ",
         bookText: "Book a meeting",

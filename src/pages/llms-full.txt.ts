@@ -27,7 +27,7 @@ export const GET: APIRoute = async () => {
     .map((p) => {
       const d = p.data;
       const body = (p.body ?? "").trim();
-      return `## ${d.title}\nBy: ${d.author}\nDate: ${isoDate(d.date)}\n\n${body}`;
+      return `## ${d.title}\nDate: ${isoDate(d.date)}\n\n${body}`;
     })
     .join("\n\n---\n\n");
 

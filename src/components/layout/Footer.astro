@@ -14,7 +14,6 @@ interface Props {
 const { footnotes = false } = Astro.props;
 const { statement, statementHighlight, sections, note } = footerContent;
 const year = new Date().getFullYear();
-const location = `${siteData.address.city}, ${siteData.address.country}`;
 ---
 <footer class="footer" data-pagefind-ignore>
   <div class="footer__inner">
@@ -54,10 +53,6 @@ const location = `${siteData.address.city}, ${siteData.address.country}`;
           <li>
             <Icon name="mdi:email-outline" aria-hidden="true" />
             <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
-          </li>
-          <li>
-            <Icon name="mdi:map-marker-outline" aria-hidden="true" />
-            <span>{location}</span>
           </li>
           <li>
             <Icon name="mdi:clock-check-outline" aria-hidden="true" />

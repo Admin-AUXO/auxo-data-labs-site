@@ -516,7 +516,7 @@ const getPaidItems = [
   {
     key: "managed",
     title: "Managed upkeep",
-    body: "Optional and monthly. We add and remove users, check access each quarter, fix broken connections, update rules and prompts, and send a one-page note each month. No minimum term; 30 days' notice.",
+    body: "Optional and monthly. No minimum term; 30 days' notice.",
     icon: "mdi:sync",
     visible: true,
   },
@@ -548,7 +548,7 @@ export const marketplaceContent = {
   },
   hero: {
     title: "AI tools, set up on your data.",
-    lead: "Chosen with six checks. Set up in your accounts by a founder. Managed only if you want it.",
+    lead: "Set up in your accounts by a founder. Managed only if you want it.",
   },
   why: {
     title: "Why set it up through us",
@@ -664,30 +664,14 @@ export const marketplaceContent = {
         answer:
           "You can, and for one person it's often enough. For a team, the work is connecting it to your data, deciding who sees what, writing the rules on use and training people. We do that in your account.",
       },
-      {
-        question: "Do we have to buy these tools through AUXO?",
-        answer:
-          "No. You sign up with the vendor in your company's name, on your own contract. We set the tool up and can manage it if you want.",
-      },
       { question: "Do you earn a fee from these vendors?", answer: faqFeeAnswer },
-      {
-        question: "What if the tool we need isn't listed?",
-        answer:
-          "Ask for a custom stack. If a tool we don't list fits you better, we'll say so and help you set it up.",
-      },
-      {
-        question: "Can we keep using a tool we already have?",
-        answer: "Yes. If it works, we'll suggest keeping it and connect it to the rest of your setup.",
-      },
     ],
   },
   cta: {
     title: "Not sure what your team needs?",
-    description: "Start with the AUXO Score, or book a meeting and we'll suggest a stack.",
+    description: "We'll suggest a stack for your team.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
-    secondaryText: "Get your AUXO Score",
-    secondaryHref: "/auxo-score/",
     reassurance: "A real person replies within one business day.",
   },
 };

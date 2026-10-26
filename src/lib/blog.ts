@@ -1,6 +1,6 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import getReadingTime from "reading-time";
-import { blogContent, type BlogAuthor } from "../data/blog";
+import { blogContent } from "../data/blog";
 
 export type BlogPost = CollectionEntry<"blog">;
 
@@ -29,10 +29,6 @@ export function tagSlug(tag: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-}
-
-export function authorFor(name: string): BlogAuthor {
-  return blogContent.authors[name] ?? { kind: "Person" };
 }
 
 async function minutesFor(post: BlogPost): Promise<number> {

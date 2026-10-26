@@ -8,7 +8,7 @@ import StructuredData from "../../components/layout/StructuredData.astro";
 import CtaSection from "../../components/sections/shared/CtaSection.astro";
 import PostCard from "../../components/blog/PostCard.astro";
 import TagList from "../../components/blog/TagList.astro";
-import { authorFor, getPublishedPosts, relatedPosts } from "../../lib/blog";
+import { getPublishedPosts, relatedPosts } from "../../lib/blog";
 import { blogPostingSchema } from "../../lib/structured-data";
 import { blogContent } from "../../data/blog";
 import "../../styles/pages/blog.css";
@@ -25,11 +25,6 @@ const { summary, related } = Astro.props;
 const { post, minutes, isoDate } = summary;
 const { Content } = await render(post);
 const c = blogContent.post;
-const author = authorFor(post.data.author);
-const lineParts =
-  author.line && author.linkText && author.linkHref && author.line.includes(author.linkText)
-    ? author.line.split(author.linkText)
-    : null;
 ---
 <BaseLayout
   title={post.data.title}
@@ -47,8 +42,6 @@ const lineParts =
         </a>
         <h1 class="text-display text-display--5xl text-balance" data-enter="headline">{post.data.title}</h1>
         <p class="blog-byline mono-datum" data-enter>
-          <span>{c.byPrefix} {post.data.author}</span>
-          <span aria-hidden="true">·</span>
           <span>{minutes} {c.minutesSuffix}</span>
         </p>
         <TagList tags={post.data.tags} label={c.tagsLabel} />
@@ -57,25 +50,6 @@ const lineParts =
       <div class="prose-auxo blog-prose">
         <Content />
       </div>
-
-      {
-        author.line && (
-          <footer class="blog-author">
-            {lineParts ? (
-              <p>
-                {lineParts[0]}
-                <a href={author.linkHref} class="blog-author__link" target="_blank" rel="noopener noreferrer">
-                  <Icon name="mdi:linkedin" aria-hidden="true" />
-                  {author.linkText}
-                </a>
-                {lineParts.slice(1).join(author.linkText ?? "")}
-              </p>
-            ) : (
-              <p>{author.line}</p>
-            )}
-          </footer>
-        )
-      }
     </article>
   </Section>
 

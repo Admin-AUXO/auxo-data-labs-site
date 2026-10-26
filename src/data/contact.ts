@@ -61,7 +61,6 @@ export interface ContactContent {
   details: {
     title: string;
     items: ContactDetail[];
-    responseTime: string;
     cta: { text: string };
   };
   form: {
@@ -83,7 +82,6 @@ export interface ContactContent {
     consentNote: string;
     consentLink: { text: string; href: string };
     submitText: string;
-    note: string;
     status: {
       sending: string;
       success: string;
@@ -131,7 +129,7 @@ const topics: ContactTopic[] = [
   },
   {
     slug: "enterprise",
-    label: "Large organisation",
+    label: "One unit first",
     hint: "Tell us about procurement, security review or contract needs. We can start with one team.",
   },
   { slug: "something-else", label: "Something else" },
@@ -146,7 +144,7 @@ export const contactContent: ContactContent = {
   hero: {
     title: "Talk to a founder.",
     titleHighlight: "founder",
-    lead: "A few lines is enough. A founder reads every note and replies within one business day.",
+    lead: "A few lines is enough.",
   },
   details: {
     title: "Reach us",
@@ -170,12 +168,11 @@ export const contactContent: ContactContent = {
         external: true,
       },
     ],
-    responseTime: "Replies within one business day.",
     cta: { text: "Book a meeting" },
   },
   form: {
     title: "Send a message",
-    description: "Tell us the problem and the systems it touches. No formal brief needed.",
+    description: "Tell us the problem and the systems it touches.",
     fields: [
       {
         name: "name",
@@ -245,7 +242,6 @@ export const contactContent: ContactContent = {
       "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply, never for marketing without separate opt-in, and we don't sell or rent your details. Any service we use to handle your message is bound to do the same.",
     consentLink: { text: "Privacy Policy", href: "/legal/privacy-policy/" },
     submitText: "Send message",
-    note: "No prep needed for the first conversation.",
     status: {
       sending: "Sending your message…",
       success: "Thank you. Your message is on its way, and we'll reply within one business day.",
@@ -265,7 +261,7 @@ export const contactContent: ContactContent = {
       },
       {
         title: "We reply within one business day",
-        desc: "A founder reads it, not a sales inbox.",
+        desc: "Not a sales inbox.",
       },
       {
         title: "A short call",

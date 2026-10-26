@@ -106,7 +106,7 @@
 @supports (grid-template-rows: subgrid) {
   @media (width >= 64rem) {
     .plan {
-      grid-row: span 10;
+      grid-row: span 9;
       grid-template-rows: subgrid;
     }
 
@@ -116,7 +116,7 @@
     }
 
     html[data-js] .plans:not([data-open]) .plan {
-      grid-row: span 5;
+      grid-row: span 4;
     }
   }
 }
@@ -229,40 +229,22 @@
   transition: transform var(--dur-base) var(--ease-out);
 }
 
-.plans[data-open] .plan__toggle svg {
+.plan__toggle[aria-expanded="true"] svg {
   transform: rotate(45deg);
 }
 
-html:not([data-js]) .plan__toggle {
+.plans-more {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 1rem;
+}
+
+html:not([data-js]) .plans-more {
   display: none;
 }
 
 html[data-js] .plans:not([data-open]) .plan__facts {
   display: none;
-}
-
-.plan__secondary {
-  align-items: center;
-  align-self: center;
-  color: var(--muted);
-  display: inline-flex;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  gap: 0.35rem;
-  min-block-size: 2.75rem;
-  text-decoration: underline;
-  text-decoration-color: var(--border-strong);
-  text-underline-offset: 0.3em;
-}
-
-.plan__secondary:hover {
-  color: var(--foreground);
-  text-decoration-color: var(--accent);
-}
-
-.plan__secondary svg {
-  block-size: 1rem;
-  inline-size: 1rem;
 }
 
 .plans-includes {
@@ -322,70 +304,6 @@ html[data-js] .plans:not([data-open]) .plan__facts {
 
 .plan__cta .btn {
   padding-inline: 1rem;
-  white-space: nowrap;
-}
-
-.plan__tiers {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.plan__tiers-label {
-  color: var(--subtle);
-  font-size: var(--text-sm);
-}
-
-.plan__steps {
-  display: grid;
-  gap: 0.35rem 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.plan__step {
-  align-items: center;
-  column-gap: 0.45rem;
-  display: grid;
-  font-size: var(--text-sm);
-  grid-template-columns: 1rem minmax(0, 1fr);
-  grid-template-rows: auto 1.05rem;
-  line-height: 1.35;
-}
-
-.plan__step-mark,
-.plan__step-name {
-  grid-row: 1;
-}
-
-.plan__step-mark {
-  block-size: 0.95rem;
-  color: var(--accent);
-  inline-size: 0.95rem;
-}
-
-.plan__step[data-on="no"] .plan__step-mark {
-  color: var(--subtle);
-}
-
-.plan__step-name {
-  color: var(--foreground);
-  font-weight: 600;
-}
-
-.plan__step[data-on="no"] .plan__step-name {
-  color: var(--subtle);
-  font-weight: 400;
-}
-
-.plan__step-note {
-  align-self: start;
-  color: var(--muted);
-  font-size: var(--text-xs);
-  grid-column: 2;
-  grid-row: 2;
   white-space: nowrap;
 }
 

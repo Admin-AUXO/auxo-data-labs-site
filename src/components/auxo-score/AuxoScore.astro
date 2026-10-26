@@ -171,7 +171,6 @@ const { deeper, reviewCall } = result;
         <button class="score__btn" type="button" id="callBtn" data-google-calendar-open disabled>{reviewCall.button}</button>
       </div>
       <button class="score__text-link" type="button" id="callTip" aria-controls="emailForm">{reviewCall.tip}</button>
-      <p class="score__note">{reviewCall.reassurance}</p>
       <p class="score__note">
         {reviewCall.notEligible.before}<button class="score__inline-link" type="button" data-google-calendar-open>{reviewCall.notEligible.bookText}</button>{reviewCall.notEligible.middle}<a class="score__inline-link" href={reviewCall.notEligible.deepDive.href}>{reviewCall.notEligible.deepDive.text}</a>{reviewCall.notEligible.after}
       </p>

@@ -15,12 +15,6 @@ import "../styles/pages/pricing.css";
 const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escapeHtml(item.answer) }));
 const factKeys = ["first", "then", "time", "price", "stop"] as const;
 const factIds = c.cards.items.map((p) => `${p.id}-facts`).join(" ");
-const ladder = [
-  { name: "Analyze", label: "Analyze" },
-  { name: "Advise", label: "Advise" },
-  { name: "Build", label: "Build" },
-  { name: "Managed upkeep", label: "Upkeep" },
-];
 ---
 <BaseLayout title={c.metaTitle} description={c.metaDescription}>
   <Section padding="lg" width="7xl">
@@ -69,24 +63,6 @@ const ladder = [
                 <Button variant="secondary" size="lg" href={p.cta.href} icon class="w-full">
                   {p.cta.text}
                 </Button>
-                {p.secondary && (
-                  <a class="plan__secondary" href={p.secondary.href}>
-                    {p.secondary.text}
-                    <Icon name="mdi:arrow-right" aria-hidden="true" />
-                  </a>
-                )}
-                <button
-                  type="button"
-                  class="plan__toggle"
-                  data-plans-toggle
-                  aria-expanded="false"
-                  aria-controls={factIds}
-                  data-show={c.cards.detailsShow}
-                  data-hide={c.cards.detailsHide}
-                >
-                  <span data-plans-label>{c.cards.detailsShow}</span>
-                  <Icon name="mdi:plus" aria-hidden="true" />
-                </button>
               </div>
 
               <dl class="plan__facts" id={`${p.id}-facts`}>
@@ -98,29 +74,27 @@ const ladder = [
                 ))}
               </dl>
 
-              <div class="plan__tiers">
-                <p id={`${p.id}-tiers`} class="plan__tiers-label">{c.cards.tiersLabel}</p>
-                <ul class="plan__steps" aria-labelledby={`${p.id}-tiers`}>
-                  {ladder.map((step) => {
-                    const tier = p.tiers.find((t) => t.name === step.name);
-                    return (
-                      <li class="plan__step" data-on={tier ? "yes" : "no"}>
-                        <Icon name={tier ? "mdi:check" : "mdi:minus"} class="plan__step-mark" aria-hidden="true" />
-                        <span class="plan__step-name">{step.label}</span>
-                        {tier?.note && <span class="plan__step-note">{tier.note}</span>}
-                        {!tier && <span class="sr-only">{c.cards.notIncludedLabel}</span>}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-
               <p class="plan__fine">{p.finePrint}</p>
             </article>
           </li>
         ))
       }
     </ul>
+
+    <div class="plans-more">
+      <button
+        type="button"
+        class="plan__toggle"
+        data-plans-toggle
+        aria-expanded="false"
+        aria-controls={factIds}
+        data-show={c.cards.detailsShow}
+        data-hide={c.cards.detailsHide}
+      >
+        <span data-plans-label>{c.cards.detailsShow}</span>
+        <Icon name="mdi:plus" aria-hidden="true" />
+      </button>
+    </div>
 
     <div class="plans-includes" data-reveal>
       <h2 class="plans-includes__title">{c.includes.title}</h2>
@@ -151,8 +125,6 @@ const ladder = [
     description={c.cta.description}
     ctaText={c.cta.ctaText}
     ctaHref={c.cta.ctaHref}
-    secondaryText={c.cta.secondaryText}
-    secondaryHref={c.cta.secondaryHref}
     reassurance={c.cta.reassurance}
   />
 
@@ -164,7 +136,7 @@ const ladder = [
     const list = document.querySelector<HTMLElement>(".plans");
     if (!list || list.dataset.bound === "true") return;
     list.dataset.bound = "true";
-    const buttons = Array.from(list.querySelectorAll<HTMLButtonElement>("[data-plans-toggle]"));
+    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-plans-toggle]"));
     const set = (open: boolean): void => {
       list.toggleAttribute("data-open", open);
       for (const b of buttons) {

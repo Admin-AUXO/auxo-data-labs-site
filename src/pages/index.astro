@@ -24,7 +24,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     href: `/blog/${post.id}/`,
     title: post.data.title,
     description: post.data.description,
-    author: post.data.author,
     angle: c.blog.angles.find((a) => a.slug === post.id)?.label,
   }));
 ---
@@ -42,7 +41,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
             {c.hero.secondaryCta.text}
           </Button>
         </div>
-        <p class="text-sm text-subtle">{c.hero.reassurance}</p>
       </div>
       <p class="home-proof" data-enter>
         <Icon name="mdi:account-tie-outline" class="home-proof__icon" aria-hidden="true" />
@@ -65,7 +63,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         </p>
       </div>
       <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
-        <Button variant="primary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
+        <Button variant="secondary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
           {c.score.cta.text}
         </Button>
         <p class="text-sm text-subtle text-pretty min-[56rem]:text-end">{c.score.reassurance}</p>
@@ -122,7 +120,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   <Section padding="lg" width="7xl">
     <div class="home-head">
       <p class="section-index" data-reveal>{c.ladder.eyebrow}</p>
-      <SectionHeader title={c.ladder.title} subtitle={c.ladder.lead} />
+      <SectionHeader title={c.ladder.title} />
     </div>
     <ol class="cards mt-8">
       {
@@ -183,7 +181,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
           }
         </ul>
         <div>
-          <Button variant="primary" href={c.marketplace.cta.href} icon class="w-full sm:w-auto">{c.marketplace.cta.text}</Button>
+          <Button variant="secondary" href={c.marketplace.cta.href} icon class="w-full sm:w-auto">{c.marketplace.cta.text}</Button>
         </div>
       </div>
     </div>
@@ -206,7 +204,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
                 </h3>
                 <p class="text-muted">{post.description}</p>
                 <div class="posts__foot">
-                  <span class="text-sm text-subtle">{post.author}</span>
                   <span class="posts__more" aria-hidden="true">
                     {c.blog.linkText}
                     <Icon name="mdi:arrow-right" />

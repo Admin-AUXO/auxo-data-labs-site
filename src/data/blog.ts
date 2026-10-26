@@ -5,14 +5,6 @@ interface LinkItem {
   href: string;
 }
 
-export interface BlogAuthor {
-  kind: "Person" | "Organization";
-  jobTitle?: string;
-  line?: string;
-  linkText?: string;
-  linkHref?: string;
-}
-
 export interface BlogContent {
   index: {
     metaTitle: string;
@@ -36,7 +28,6 @@ export interface BlogContent {
   };
   post: {
     backLink: LinkItem;
-    byPrefix: string;
     minutesSuffix: string;
     tagsLabel: string;
     relatedHeading: string;
@@ -50,7 +41,6 @@ export interface BlogContent {
       reassurance: string;
     };
   };
-  authors: Record<string, BlogAuthor>;
 }
 
 export const blogContent: BlogContent = {
@@ -80,34 +70,17 @@ export const blogContent: BlogContent = {
   },
   post: {
     backLink: { label: "Back to the blog", href: "/blog/" },
-    byPrefix: "By",
     minutesSuffix: "min read",
     tagsLabel: "Topics",
     relatedHeading: "Read next",
     endCta: {
       title: "Want an honest read of your own setup?",
-      description: "Take the AUXO Score, or book a meeting with a founder.",
+      description: "A founder will tell you what to fix first.",
       ctaText: "Book a meeting",
       ctaHref: siteData.bookingUrl,
       secondaryText: "Get your AUXO Score",
       secondaryHref: "/auxo-score/",
       reassurance: "A real person replies within one business day.",
-    },
-  },
-  authors: {
-    "Ajay Kumar": {
-      kind: "Person",
-      jobTitle: "Co-Founder & CTO",
-      line: "Ajay Kumar is Co-Founder & CTO of AUXO Data Labs.",
-      linkText: "Ajay Kumar",
-      linkHref: "https://www.linkedin.com/in/ajaykumar9795",
-    },
-    "Vignesh Ramesh": {
-      kind: "Person",
-      jobTitle: "Co-Founder & CEO",
-      line: "Vignesh Ramesh is Co-Founder & CEO of AUXO Data Labs.",
-      linkText: "Vignesh Ramesh",
-      linkHref: "https://www.linkedin.com/in/vig-auxo",
     },
   },
 };

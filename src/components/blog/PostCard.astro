@@ -17,8 +17,6 @@ const Heading = headingLevel === 3 ? "h3" : "h2";
 ---
 <article class="post-card" data-anim="rise" style={`--i:${index}`}>
   <p class="post-card__meta mono-datum">
-    <span>{post.data.author}</span>
-    <span aria-hidden="true">·</span>
     <span>{minutes} {c.minutesSuffix}</span>
   </p>
   <Heading class="post-card__title">

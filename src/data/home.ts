@@ -52,7 +52,6 @@ interface HomeContent {
     subtitle: string;
     primaryCta: Link;
     secondaryCta: Link;
-    reassurance: string;
   };
   proof: {
     text: string;
@@ -73,7 +72,7 @@ interface HomeContent {
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  ladder: SectionIntro;
+  ladder: Omit<SectionIntro, "lead">;
   cards: HomeLadderCard[];
   segments: SectionIntro & {
     listLabel: string;
@@ -113,7 +112,6 @@ export const homeContent: HomeContent = {
       "We analyse your business and data, advise on the right AI setup, and build it end to end. Built to last, and yours to keep.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
-    reassurance,
   },
   proof: {
     text: "Founder-led. Ex-IBM enterprise delivery across the GCC. Cloud and BI architecture for Fortune 500s.",
@@ -146,7 +144,7 @@ export const homeContent: HomeContent = {
   pillarsHeader: {
     eyebrow: "What we fix",
     title: "Four fixes that make data ready for AI.",
-    lead: "AI on untidy data gives untidy answers. We fix these four first.",
+    lead: "AI on untidy data gives untidy answers.",
   },
   pillarsLabel: "What we fix",
   pillars: [
@@ -168,13 +166,12 @@ export const homeContent: HomeContent = {
     {
       letter: "O",
       title: "Confident compliance",
-      desc: "Clear rules for your data and AI, so you're ready when auditors, regulators or investors ask.",
+      desc: "Clear rules for your data and AI, written down before anyone asks.",
     },
   ],
   ladder: {
     eyebrow: "How it works",
-    title: "Analyze what you have. Advise on what fits. Build it and hand it over.",
-    lead: "Three steps. Start at any one. We recommend starting with Analyze.",
+    title: "Three steps. Start at any one.",
   },
   cards: [
     {
@@ -222,7 +219,7 @@ export const homeContent: HomeContent = {
   marketplace: {
     eyebrow: "Marketplace",
     title: "AI tools, set up on your data.",
-    lead: "Chosen with six checks. Set up in your accounts. Managed only if you want it.",
+    lead: "Tools for each team, set up in your accounts.",
     chipsLabel: "Marketplace categories",
     chipBase: "/marketplace/",
     chips: [

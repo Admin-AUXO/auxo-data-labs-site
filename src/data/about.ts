@@ -35,7 +35,6 @@ export interface AboutContent {
     lead: string;
     primaryCta: { text: string; href: string };
     secondaryCta: { text: string; href: string };
-    reassurance: string;
     facts: AboutFact[];
   };
   beliefs: {
@@ -62,8 +61,6 @@ export interface AboutContent {
     descriptionHighlight?: string | string[];
     ctaText: string;
     ctaHref: string;
-    secondaryText: string;
-    secondaryHref: string;
     reassurance: string;
   };
 }
@@ -77,10 +74,9 @@ export const aboutContent: AboutContent = {
   hero: {
     title: "Data first. Then AI.",
     titleHighlight: "Then AI",
-    lead: "A founder-led data and AI firm in Dubai. We get your data ready, set up the AI that runs on it, and hand it over.",
+    lead: "A founder-led data and AI firm. We get your data ready, set up the AI that runs on it, and hand it over.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
-    reassurance: siteData.reassurance,
     facts: [
       { label: "Based in", value: "Dubai Internet City" },
       { label: "Serving", value: "The UAE, the US and Europe" },
@@ -159,11 +155,6 @@ export const aboutContent: AboutContent = {
         title: "Open about money",
         desc: "We tell you how we get paid, including any referral fee, before you commit.",
       },
-      {
-        icon: "mdi:account-check-outline",
-        title: "A person, not a process",
-        desc: "You work directly with the founders, not an account manager. Clear language, no black box.",
-      },
     ],
   },
   cta: {
@@ -172,8 +163,6 @@ export const aboutContent: AboutContent = {
     description: "The next step is a short conversation. No obligation.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
-    secondaryText: "Read the blog",
-    secondaryHref: "/blog/",
     reassurance: siteData.reassurance,
   },
 };

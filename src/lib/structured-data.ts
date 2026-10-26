@@ -1,7 +1,7 @@
 import { siteData } from "../data/site";
 import { absoluteUrl } from "./url";
 import type { Founder } from "../data/about";
-import { authorFor, type BlogPostSummary } from "./blog";
+import type { BlogPostSummary } from "./blog";
 
 const home = absoluteUrl("/");
 const abs = (p: string) => (p.startsWith("http") ? p : absoluteUrl(p));
@@ -141,18 +141,7 @@ export function personSchema(p: Founder) {
 
 export function blogPostingSchema(summary: BlogPostSummary) {
   const { post } = summary;
-  const author = authorFor(post.data.author);
   const url = absoluteUrl(summary.href);
-  const authorNode =
-    author.kind === "Organization"
-      ? { "@type": "Organization", name: post.data.author, url: home }
-      : {
-          "@type": "Person",
-          name: post.data.author,
-          ...(author.jobTitle ? { jobTitle: author.jobTitle } : {}),
-          ...(author.linkHref ? { sameAs: [author.linkHref] } : {}),
-          worksFor: { "@type": "Organization", name: siteData.name, url: home },
-        };
   return {
     headline: post.data.title,
     description: post.data.description,
@@ -164,7 +153,7 @@ export function blogPostingSchema(summary: BlogPostSummary) {
     inLanguage: "en",
     timeRequired: `PT${summary.minutes}M`,
     keywords: post.data.tags.length ? post.data.tags.join(", ") : undefined,
-    author: authorNode,
+    author: { "@type": "Organization", name: siteData.name, url: home },
     publisher: {
       "@type": "Organization",
       name: siteData.name,

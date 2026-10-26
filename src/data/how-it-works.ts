@@ -48,7 +48,6 @@ export const howItWorksContent = {
     title: "How it works.",
     lead: "Three steps. Start at any one. We recommend starting with Analyze.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl } satisfies Link,
-    reassurance: "A real person replies within one business day.",
   },
   ladder: {
     navLabel: "Steps",
@@ -159,15 +158,13 @@ export const howItWorksContent = {
           {
             icon: "mdi:key-outline",
             title: "Handover",
-            tag: "Yours to keep",
-            tone: "free",
             body: "Documentation, training, and the code, accounts and access in your name.",
           },
         ],
         duration: "One tool or stack: 1 to 2 weeks. A data foundation or agent team: 4 to 12 weeks.",
         suits: "Teams with a clear first use case and access to their data.",
         bring: "A named owner for each system and agent.",
-        isNot: "A black box, a rented system or a stalled pilot. Agents never send, post or pay without a person's approval.",
+        isNot: "A black box, a rented system or a stalled pilot.",
         links: [],
       },
     ] satisfies LadderStep[],
@@ -199,7 +196,7 @@ export const howItWorksContent = {
   },
   teamLine: {
     text: "A founder leads every engagement, from first call to handover.",
-    link: { text: "Meet the team", href: "/about/#team" } satisfies Link,
+    link: { text: "Meet the founders", href: "/about/#team" } satisfies Link,
   },
   faq: {
     title: "Questions about how it works",
@@ -208,11 +205,6 @@ export const howItWorksContent = {
         question: "Will it fit the tools we run?",
         answer:
           "We build on what you already run: Google Cloud, BigQuery, Azure, Snowflake, dbt, Power BI and more. If a system works, we keep it.",
-      },
-      {
-        question: "Is AI-built work reliable?",
-        answer:
-          "AI drafts the build work. We review and test every change before handover, and you get the code, the tests and the documentation.",
       },
       {
         question: "Do we have to start with Analyze?",
@@ -235,20 +227,13 @@ export const howItWorksContent = {
         answer:
           "No. Agents draft, sort, check and flag. Each one has a named person who approves its work. Nothing is sent, posted or paid, and no hiring decision is made, without a person's approval.",
       },
-      {
-        question: "Do we have to replace the tools we already use?",
-        answer:
-          "No. We build on the systems you already run. If a tool or agent you have works, we'll say so and suggest keeping it.",
-      },
     ] satisfies FaqItem[],
   },
   cta: {
     title: "Start with an honest read.",
-    description: "Book a meeting, or take the AUXO Score first. Either way, you'll know where to start.",
+    description: "Leave knowing where to start.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
-    secondaryText: "Get your AUXO Score",
-    secondaryHref: "/auxo-score/",
     reassurance: "A real person replies within one business day.",
   },
 };

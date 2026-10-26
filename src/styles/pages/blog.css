@@ -425,29 +425,6 @@ body:has(.blog-article) .particle-field {
   padding-inline-start: 0.75rem;
 }
 
-.blog-author {
-  border-block-start: 1px solid var(--hairline);
-  color: var(--muted);
-  margin-block-start: 3rem;
-  padding-block-start: 1.5rem;
-}
-
-.blog-author__link {
-  align-items: center;
-  color: var(--accent);
-  display: inline-flex;
-  font-weight: 600;
-  gap: 0.3rem;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  vertical-align: bottom;
-}
-
-.blog-author__link svg {
-  block-size: 1.1em;
-  inline-size: 1.1em;
-}
-
 @media (width <= 25rem) {
   .post-card {
     border-radius: var(--radius-lg);

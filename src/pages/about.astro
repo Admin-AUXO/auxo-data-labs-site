@@ -27,7 +27,6 @@ import "../styles/pages/about.css";
             {c.hero.secondaryCta.text}
           </Button>
         </div>
-        <p class="text-sm text-subtle">{c.hero.reassurance}</p>
       </div>
     </div>
     <dl class="about-facts" data-enter>
@@ -84,7 +83,7 @@ import "../styles/pages/about.css";
 
   <Section padding="lg" width="7xl">
     <SectionHeader title={c.engagement.title} subtitle={c.engagement.lead} />
-    <ul class="about-grid about-grid--two mt-8">
+    <ul class="about-grid about-grid--three mt-8">
       {
         c.engagement.principles.map((principle, i) => (
           <li class="about-grid__item" data-anim="rise" style={`--i:${i}`}>
@@ -105,8 +104,6 @@ import "../styles/pages/about.css";
     descriptionHighlight={c.cta.descriptionHighlight}
     ctaText={c.cta.ctaText}
     ctaHref={c.cta.ctaHref}
-    secondaryText={c.cta.secondaryText}
-    secondaryHref={c.cta.secondaryHref}
     reassurance={c.cta.reassurance}
   />
 
