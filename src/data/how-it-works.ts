@@ -194,10 +194,6 @@ export const howItWorksContent = {
       { name: "Trusted", question: "Do people rely on it to make decisions?" },
     ] satisfies Dimension[],
   },
-  teamLine: {
-    text: "A founder leads every engagement, from first call to handover.",
-    link: { text: "Meet the founders", href: "/about/#team" } satisfies Link,
-  },
   faq: {
     title: "Questions about how it works",
     items: [

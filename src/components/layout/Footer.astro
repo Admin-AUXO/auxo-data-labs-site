@@ -2,7 +2,6 @@
 import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
 import SocialLinks from "./SocialLinks.astro";
-import HighlightText from "../ui/HighlightText.astro";
 import FootnoteList from "../ui/FootnoteList.astro";
 import { footerContent } from "../../data/footer";
 import { siteData } from "../../data/site";
@@ -12,17 +11,11 @@ interface Props {
 }
 
 const { footnotes = false } = Astro.props;
-const { statement, statementHighlight, sections, note } = footerContent;
+const { sections, note } = footerContent;
 const year = new Date().getFullYear();
 ---
 <footer class="footer" data-pagefind-ignore>
   <div class="footer__inner">
-    <div class="footer__lead">
-      <p class="footer__statement" data-anim="type">
-        <HighlightText text={statement} highlight={statementHighlight} />
-      </p>
-    </div>
-
     <div class="footer__grid">
       <div class="footer__brand">
         <Logo />
@@ -53,10 +46,6 @@ const year = new Date().getFullYear();
           <li>
             <Icon name="mdi:email-outline" aria-hidden="true" />
             <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
-          </li>
-          <li>
-            <Icon name="mdi:clock-check-outline" aria-hidden="true" />
-            <span>{siteData.stats.responseTime.value}</span>
           </li>
         </ul>
       </div>

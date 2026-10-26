@@ -657,7 +657,6 @@ export const marketplaceContent = {
     ],
   },
   faq: {
-    title: "Marketplace questions",
     items: [
       {
         question: "Why not sign up for the tool ourselves?",

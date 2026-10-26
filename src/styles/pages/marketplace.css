@@ -821,6 +821,10 @@ html:not([data-js]) .mkt-more {
 }
 
 .mkt-how__steps,
+.mkt-how__faq {
+  margin-block-start: 1.5rem;
+}
+
 .mkt-how__paid {
   display: grid;
   list-style: none;

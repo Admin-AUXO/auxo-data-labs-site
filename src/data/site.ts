@@ -19,12 +19,6 @@ export interface SiteData {
   };
   social: { linkedin: string; twitter: string };
   founded: number;
-  stats: {
-    practitionerExperience: { value: string; label: string };
-    production: { value: string; label: string };
-    primaryFocus: { value: string; label: string };
-    responseTime: { value: string; label: string };
-  };
   bookingUrl: string;
   bookingEmbedUrl: string;
 }
@@ -54,24 +48,6 @@ export const siteData: SiteData = {
     twitter: "https://x.com/AuxoData",
   },
   founded: 2025,
-  stats: {
-    practitionerExperience: {
-      value: "Human approval",
-      label: "Nothing goes out without a person's sign-off.",
-    },
-    production: {
-      value: "Live systems",
-      label: "Working systems your team uses daily. Not just slides.",
-    },
-    primaryFocus: {
-      value: "Yours to keep",
-      label: "Every project ends with a system your team owns. No lock-in.",
-    },
-    responseTime: {
-      value: "Replies within one business day",
-      label: "A real person reads your note and replies.",
-    },
-  },
   bookingUrl: "https://calendar.app.google/aJmnvMS2uBbYPCgC7",
   bookingEmbedUrl:
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cf9JS2XEAvFnPma4oW-Gy3pMVQnHWZNKWuG0X9hhJ1sKDKj5JLtZsowG9uJyPw3h9kZ1qeNH5?gv=true",

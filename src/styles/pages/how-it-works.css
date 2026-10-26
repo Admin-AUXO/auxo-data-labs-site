@@ -246,7 +246,7 @@
 .ladder__what {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .ladder__label {
@@ -259,7 +259,7 @@
 
 .ladder__gets {
   display: grid;
-  gap: 2rem 3rem;
+  gap: 1rem 2rem;
   grid-template-columns: minmax(0, 1fr);
   list-style: none;
   margin: 0;
@@ -284,7 +284,7 @@
   display: grid;
   gap: 0.35rem 0.75rem;
   grid-template-columns: 1.3rem minmax(0, 1fr);
-  padding-block-start: 1rem;
+  padding-block-start: 0.75rem;
 }
 
 .ladder__get-icon {
@@ -417,20 +417,6 @@
   .upkeep__body {
     grid-column: auto;
   }
-}
-
-.hiw-team {
-  align-items: center;
-  color: var(--muted);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-}
-
-.hiw-team__icon {
-  block-size: 1.3rem;
-  color: var(--accent);
-  inline-size: 1.3rem;
 }
 
 .method {

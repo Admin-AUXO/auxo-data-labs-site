@@ -11,15 +11,11 @@ export interface FooterSection {
 }
 
 export interface FooterContent {
-  statement: string;
-  statementHighlight?: string | string[];
   sections: FooterSection[];
   note: string;
 }
 
 export const footerContent: FooterContent = {
-  statement: "Your data, ready for AI.",
-  statementHighlight: "ready for AI",
   sections: [
     {
       title: "Explore",

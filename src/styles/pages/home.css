@@ -1,15 +1,5 @@
-.home-hero {
-  align-items: center;
-  display: flex;
-  min-block-size: min(72svh, 44rem);
-}
-
 .home-hero + .section {
   padding-block-start: 0;
-}
-
-.home-hero > .section__container {
-  inline-size: 100%;
 }
 
 @media (width >= 40rem) {
@@ -134,7 +124,7 @@
   font-size: var(--text-sm);
   gap: 0.5rem 0.75rem;
   margin-block-start: 0.75rem;
-  max-inline-size: 48rem;
+  max-inline-size: 64rem;
   padding-block-start: 1.25rem;
 }
 
@@ -732,9 +722,40 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   line-height: 1.15;
 }
 
+@media (width < 48rem) {
+  .cards {
+    gap: 0.75rem;
+  }
+
+  .cards__card {
+    align-items: baseline;
+    display: grid;
+    gap: 0.35rem 0.75rem;
+    grid-template-columns: auto 1fr;
+    padding: 1rem 3.25rem 1.1rem 1.25rem;
+  }
+
+  .cards__title {
+    font-size: var(--text-xl);
+    margin-block-start: 0;
+  }
+
+  .cards__desc {
+    grid-column: 2;
+  }
+
+  .cards__arrow {
+    inset-block-start: 1.1rem;
+    inset-inline-end: 1.25rem;
+  }
+}
+
 @media (width < 40rem) {
+  .posts > li:nth-child(n + 3) {
+    display: none;
+  }
+
   .home-hero {
-    min-block-size: auto;
     padding-block: 1.5rem 2.5rem;
   }
 
@@ -750,8 +771,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 
 @media (width >= 40rem) and (height <= 820px) {
   .home-hero {
-    align-items: flex-start;
-    min-block-size: auto;
     padding-block: 3.5rem 3rem;
   }
 

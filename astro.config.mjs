@@ -82,7 +82,6 @@ export default defineConfig({
           'check-circle-outline',
           'check-decagram',
           'chip',
-          'clock-check-outline',
           'clock-outline',
           'close',
           'close-circle-outline',

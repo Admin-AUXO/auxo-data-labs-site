@@ -31,7 +31,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="flex flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[20ch]" data-enter="headline">{c.hero.title}</h1>
-      <p class="lead max-w-2xl text-xl" data-enter>{c.hero.subtitle}</p>
+      <p class="lead max-w-3xl text-xl" data-enter>{c.hero.subtitle}</p>
       <div class="flex flex-col gap-3" data-enter>
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
