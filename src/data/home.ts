@@ -205,13 +205,13 @@ export const homeContent: HomeContent = {
       {
         segment: "Startups, seed to Series B",
         offer: "Startup audit",
-        line: "Then a fixed-price data foundation.",
+        line: "A plan to get the numbers investors ask for.",
         href: "/pricing/#startups",
       },
       {
         segment: "Growing companies, 50–500 people",
         offer: "Deep-dive audit",
-        line: "Start with the AUXO Score.",
+        line: "What to fix, what to build first and what not to buy.",
         href: "/pricing/#growing",
       },
       {

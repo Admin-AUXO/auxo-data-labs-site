@@ -22,8 +22,8 @@ function writeStack(list: string[]): void {
 function setupFilters(root: HTMLElement): void {
   const chips = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-filter]"));
   const cards = Array.from(root.querySelectorAll<HTMLElement>(".mkt-grid > [data-category]"));
-  const desc = root.querySelector<HTMLElement>("[data-filter-desc]");
   const count = root.querySelector<HTMLElement>("[data-filter-count]");
+  const empty = root.querySelector<HTMLElement>("[data-filter-empty]");
   const valid = new Set(chips.map((c) => c.dataset.filter ?? ""));
   const one = root.dataset.resultsOne ?? "";
   const many = root.dataset.resultsMany ?? "";
@@ -35,17 +35,13 @@ function setupFilters(root: HTMLElement): void {
     const active = valid.has(slug) ? slug : "all";
     let shown = 0;
     for (const card of cards) {
-      const cat = card.dataset.category;
-      const visible = cat === "any" || active === "all" || cat === active;
+      const visible = active === "all" || card.dataset.category === active;
       card.hidden = !visible;
-      if (visible && cat !== "any") shown += 1;
+      if (visible) shown += 1;
     }
-    for (const chip of chips) {
-      const on = chip.dataset.filter === active;
-      chip.setAttribute("aria-pressed", String(on));
-      if (on && desc) desc.textContent = chip.dataset.description ?? "";
-    }
+    for (const chip of chips) chip.setAttribute("aria-pressed", String(chip.dataset.filter === active));
     if (count) count.textContent = shown === 1 ? one : fill(many, { n: shown });
+    if (empty) empty.hidden = shown > 0;
     if (customLink && customBase) {
       customLink.href = active === "all" ? customBase : `${customBase}&category=${encodeURIComponent(active)}`;
     }
@@ -60,8 +56,7 @@ function setupFilters(root: HTMLElement): void {
     chip.addEventListener("click", () => apply(chip.dataset.filter ?? "all", true));
   }
 
-  const initial = new URL(window.location.href).searchParams.get("category") ?? "all";
-  apply(initial, false);
+  apply(new URL(window.location.href).searchParams.get("category") ?? "all", false);
 }
 
 function setupStack(root: HTMLElement): void {

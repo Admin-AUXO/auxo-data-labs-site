@@ -247,6 +247,23 @@ html[data-js] .plans:not([data-open]) .plan__facts {
   display: none;
 }
 
+.plans-score {
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  justify-content: space-between;
+  margin-block-start: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+  padding: 1rem 1.25rem;
+}
+
+.plans-score p {
+  margin: 0;
+}
+
 .plans-includes {
   border-block: 1px solid var(--border);
   display: grid;

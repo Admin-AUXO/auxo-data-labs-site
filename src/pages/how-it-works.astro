@@ -45,19 +45,19 @@ const facts = [
 ] as const;
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description}>
-  <Section padding="lg" width="7xl">
+  <Section padding="lg" width="7xl" class="hiw-hero-section">
     <div class="hiw-hero">
       <div class="hiw-hero__head">
         <p class="section-index" data-enter>{c.intro.eyebrow}</p>
         <h1 class="hiw-hero__title" data-enter>
           <HighlightText text={c.intro.title} highlight={c.intro.titleHighlight} />
         </h1>
-      </div>
-      <div class="hiw-hero__side" data-enter>
-        <p class="lead hiw-hero__lead">{c.intro.lead}</p>
-        <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
-          {c.intro.primaryCta.text}
-        </Button>
+        <div class="hiw-hero__side" data-enter>
+          <p class="lead hiw-hero__lead">{c.intro.lead}</p>
+          <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
+            {c.intro.primaryCta.text}
+          </Button>
+        </div>
       </div>
       <nav class="hiw-map" aria-label={c.ladder.navLabel} data-enter>
         <ol class="hiw-map__list">
@@ -70,7 +70,7 @@ const facts = [
                     <span class="hiw-map__name">{n.name}</span>
                     {n.tag && <span class="hiw-map__tag">{n.tag}</span>}
                   </span>
-                  <Icon name="mdi:arrow-right" class="hiw-map__go" aria-hidden="true" />
+                  <Icon name="mdi:arrow-down" class="hiw-map__go" aria-hidden="true" />
                 </a>
               </li>
             ))

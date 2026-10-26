@@ -47,7 +47,7 @@ export const howItWorksContent = {
     eyebrow: "How it works",
     title: "Analyze. Advise. Build.",
     titleHighlight: ".",
-    lead: "Three steps. Start at any one. We recommend starting with Analyze.",
+    lead: "Three steps. Start at any one.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl } satisfies Link,
   },
   ladder: {
@@ -78,14 +78,14 @@ export const howItWorksContent = {
             title: "Startup audit",
             tag: "Seed to Series B",
             tone: "free",
-            body: "Your AUXO Score, a 45-minute founder call and a one-page plan.",
+            body: "Your AUXO Score, a 45-minute founder call and a one-page plan to get the numbers investors ask for.",
           },
           {
             icon: "mdi:file-search-outline",
             title: "Deep-dive audit",
             tag: "Paid",
             tone: "paid",
-            body: "We review your systems under NDA. You get each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
+            body: "We review your systems under NDA: what to fix, what to build first and what not to buy, with a short readout for your leaders.",
           },
         ],
         duration: "Score: about 3 minutes. Startup audit: one 45-minute call. Deep-dive: 2 to 3 weeks.",
@@ -94,7 +94,7 @@ export const howItWorksContent = {
         isNot: "A sales pitch, a generic checklist or a compliance certificate.",
         links: [
           { text: "Get your AUXO Score", href: "/auxo-score/" },
-          { text: "Startup, seed to Series B? Get your startup audit", href: "/auxo-score/?offer=free-audit" },
+          { text: "Startup, seed to Series B? Apply for the startup audit", href: "/contact/?topic=startup-audit" },
         ],
       },
       {
@@ -183,8 +183,8 @@ export const howItWorksContent = {
   },
   method: {
     eyebrow: "The method",
-    title: "Five checks behind every audit.",
-    lead: "Every score and audit uses the same five checks. Here they are.",
+    title: "Five checks. One honest score.",
+    lead: "Every score and audit uses the same five checks.",
     dimensions: [
       { name: "Accurate", question: "Is the data correct?" },
       { name: "Complete", question: "Is anything missing?" },
@@ -195,7 +195,7 @@ export const howItWorksContent = {
   },
   faq: {
     eyebrow: "FAQ",
-    title: "Questions about how it works",
+    title: "Good questions. Plain answers.",
     items: [
       {
         question: "Will it fit the tools we run?",
@@ -226,7 +226,7 @@ export const howItWorksContent = {
     ] satisfies FaqItem[],
   },
   cta: {
-    title: "Start with an honest read.",
+    title: "Not sure where to start? Start with an honest read.",
     description: "Leave knowing where to start.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,

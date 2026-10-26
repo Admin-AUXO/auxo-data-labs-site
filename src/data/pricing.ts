@@ -46,6 +46,7 @@ export interface PricingContent {
     detailsHide: string;
     items: PlanCard[];
   };
+  score: { text: string; cta: { text: string; href: string } };
   includes: {
     title: string;
     items: { icon: string; text: string }[];
@@ -97,15 +98,15 @@ export const pricingContent: PricingContent = {
         eyebrow: "Startups, seed to Series B",
         descriptor: "Investor-funded, moving fast, no data team yet.",
         title: "Startup audit",
-        subline: "Then a fixed-price data foundation.",
+        subline: "A plan to get the numbers investors ask for.",
         facts: {
-          first: "Your AUXO Score, a 45-minute founder call and a one-page plan.",
+          first: "A short application, a 45-minute founder call and a one-page plan.",
           then: "Your main tools joined into one clean set of numbers, with the metrics investors ask for.",
           time: "Plan within 3 business days of the call. Build: 4 to 12 weeks.",
           price: "How many tools we connect and the metrics you need.",
           stop: "The plan is yours, whether or not you build with us.",
         },
-        cta: { text: "Get your startup audit", href: "/auxo-score/?offer=free-audit" },
+        cta: { text: "Apply for the startup audit", href: "/contact/?topic=startup-audit" },
         finePrint: "One per company.",
       },
       {
@@ -114,15 +115,15 @@ export const pricingContent: PricingContent = {
         eyebrow: "Growing companies",
         descriptor: "50–500 people, with numbers spread across tools and spreadsheets.",
         title: "Deep-dive audit",
-        subline: "Start with the AUXO Score.",
+        subline: "What to fix, what to build first and what not to buy.",
         facts: {
           first: "We review your systems under NDA. You get each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
           then: "A plan, the right tools and clear rules. Then we build in phases you approve one at a time.",
           time: "Audit: 2 to 3 weeks. Each build phase: 4 to 12 weeks.",
           price: "The tools, companies and teams involved.",
-          stop: "Stop after the audit. The findings and plan are yours.",
+          stop: "Stop after the audit. The findings and plan are yours. The fee is credited if you build with us within 60 days.",
         },
-        cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
+        cta: { text: "Book a scoping call", href: siteData.bookingUrl },
         finePrint: "A guide, not a rule.",
       },
       {
@@ -143,6 +144,10 @@ export const pricingContent: PricingContent = {
         finePrint: "We answer security questions plainly, including what we don't have.",
       },
     ],
+  },
+  score: {
+    text: "Not ready to talk? Take the AUXO Score: 10 questions, about 3 minutes.",
+    cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
   },
   includes: {
     title: "Every engagement includes",

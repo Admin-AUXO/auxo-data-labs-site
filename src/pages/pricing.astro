@@ -97,6 +97,11 @@ const factIds = c.cards.items.map((p) => `${p.id}-facts`).join(" ");
       </button>
     </div>
 
+    <div class="plans-score" data-reveal>
+      <p>{c.score.text}</p>
+      <Button variant="secondary" size="sm" href={c.score.cta.href} icon>{c.score.cta.text}</Button>
+    </div>
+
     <div class="plans-includes" data-reveal>
       <h2 class="plans-includes__title">{c.includes.title}</h2>
       <ul class="plans-includes__list">

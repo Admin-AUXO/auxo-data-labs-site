@@ -185,19 +185,6 @@ html:not([data-js]) .mkt-filters {
   inline-size: 1.05rem;
 }
 
-.mkt-filters__status {
-  align-items: baseline;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
-  justify-content: space-between;
-}
-
-.mkt-filters__desc {
-  color: var(--muted);
-  max-inline-size: var(--measure);
-}
-
 .mkt-filters__count {
   color: var(--subtle);
   font-family: var(--font-mono);
@@ -246,7 +233,7 @@ html:not([data-js]) .mkt-filters {
   border-radius: var(--radius-xl);
   grid-area: 1 / 1;
   min-inline-size: 0;
-  padding: clamp(1.4rem, 1.1rem + 0.8vw, 2rem);
+  padding: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
   transition: border-color var(--dur-fast) var(--ease-standard);
 }
 
@@ -257,20 +244,20 @@ html:not([data-js]) .mkt-filters {
 }
 
 .mkt-face--front > * + * {
-  margin-block-start: 1rem;
+  margin-block-start: 0.9rem;
+}
+
+.mkt-face--front > .mkt-card__line {
+  margin-block-start: 0.4rem;
 }
 
 .mkt-face--front > .mkt-card__foot {
   margin-block-start: auto;
 }
 
-.mkt-face--front > .mkt-card__line {
-  margin-block-start: 0.5rem;
-}
-
 @media (width >= 44rem) {
   .mkt-grid {
-    grid-auto-rows: min-content min-content min-content auto min-content;
+    grid-auto-rows: min-content min-content min-content 1fr min-content;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     row-gap: 0;
   }
@@ -303,7 +290,7 @@ html:not([data-js]) .mkt-filters {
 
   .mkt-face--front > .mkt-card__foot {
     grid-row: 5;
-    margin-block-start: 1rem;
+    margin-block-start: 0.9rem;
   }
 }
 
@@ -341,8 +328,9 @@ html:not([data-js]) .mkt-more {
 .mkt-card__tags {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.4rem;
+  min-inline-size: 0;
 }
 
 .mkt-card__top {
@@ -366,9 +354,9 @@ html:not([data-js]) .mkt-more {
   font-size: var(--text-xs);
   gap: 0.4rem;
   letter-spacing: var(--tracking-mono);
+  line-height: 1.2;
   margin-inline-start: auto;
-  min-block-size: 2rem;
-  padding: 0.3rem 0.8rem;
+  padding: 0.3rem 0.65rem;
   text-transform: uppercase;
   transition:
     border-color var(--dur-fast) var(--ease-standard),
@@ -501,15 +489,6 @@ html:not([data-js]) .mkt-more {
   text-wrap: balance;
 }
 
-.mkt-card__vendor {
-  align-items: center;
-  color: var(--subtle);
-  display: flex;
-  flex-wrap: wrap;
-  font-size: var(--text-sm);
-  row-gap: 0.25rem;
-}
-
 .mkt-card__line {
   color: var(--muted);
   font-size: var(--text-base);
@@ -521,29 +500,6 @@ html:not([data-js]) .mkt-more {
   font-size: var(--text-lg);
   font-weight: var(--font-weight-display);
   line-height: 1.25;
-}
-
-.mkt-card__spec {
-  display: grid;
-  gap: 0.6rem;
-  margin: 0;
-}
-
-.mkt-card__spec div {
-  display: grid;
-  gap: 0.1rem;
-}
-
-.mkt-card__spec dt {
-  color: var(--subtle);
-  font-size: var(--text-xs);
-}
-
-.mkt-card__spec dd {
-  color: var(--foreground);
-  font-size: var(--text-sm);
-  line-height: 1.5;
-  margin: 0;
 }
 
 .mkt-card__live {
@@ -576,7 +532,7 @@ html:not([data-js]) .mkt-more {
 .mkt-card__terms {
   border-block-start: 1px solid var(--hairline);
   color: var(--muted);
-  display: grid;
+  display: block;
   font-size: var(--text-xs);
   gap: 0.3rem;
   line-height: 1.5;
@@ -584,23 +540,10 @@ html:not([data-js]) .mkt-more {
   padding-block-start: 0.75rem;
 }
 
-.mkt-card__terms span {
-  color: var(--subtle);
-}
-
-.mkt-card__terms span::after {
-  content: ":";
-}
-
-.mkt-card__meaning {
-  color: var(--subtle);
-}
-
-.mkt-card__includes,
-.mkt-card__agent {
+.mkt-card__block {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .mkt-card__label {
@@ -611,33 +554,21 @@ html:not([data-js]) .mkt-more {
   text-transform: uppercase;
 }
 
-.mkt-card__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.mkt-mini-chip {
-  background: var(--surface-raised);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  padding-block: 0.2rem;
-  padding-inline: 0.55rem;
+.mkt-empty {
+  color: var(--muted);
+  padding-block: 1rem;
 }
 
 .mkt-card__note {
   color: var(--muted);
-  font-size: var(--text-sm);
-  line-height: 1.55;
+  font-size: 0.85rem;
+  line-height: 1.45;
 }
 
 .mkt-card__facts {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -646,9 +577,10 @@ html:not([data-js]) .mkt-more {
 .mkt-card__facts li {
   align-items: flex-start;
   display: flex;
-  font-size: var(--text-sm);
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 500;
   gap: 0.45rem;
+  line-height: 1.4;
 }
 
 .mkt-card__facts svg {
@@ -687,12 +619,9 @@ html:not([data-js]) .mkt-more {
   margin-inline-start: auto;
 }
 
-.mkt-card__pay {
-  color: var(--accent-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-mono);
-  text-transform: uppercase;
+.mkt-card__start {
+  background: none;
+  border: 1px solid color-mix(in oklch, var(--accent-2) 45%, transparent);
 }
 
 .mkt-add__check {

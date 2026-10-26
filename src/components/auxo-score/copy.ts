@@ -89,7 +89,7 @@ export const SCORE_COPY: ScoreCopy = {
       steps: [
         { title: "AUXO Score", detail: "10 questions, about 3 minutes." },
         { title: "Founder call", detail: "45 minutes on what your score shows." },
-        { title: "One-page plan", detail: "What to fix first, within 3 business days." },
+        { title: "One-page plan", detail: "How to get the numbers investors ask for, within 3 business days." },
       ],
       eligibility: "For startups that have raised from outside investors, seed to Series B. One per company.",
     },
@@ -113,7 +113,7 @@ export const SCORE_COPY: ScoreCopy = {
       ],
       continue: "Continue",
       startupLine: "Startup, seed to Series B? You may qualify for the startup audit.",
-      startupLink: { text: "See the startup audit", href: "/auxo-score/?offer=free-audit" },
+      startupLink: { text: "Apply for the startup audit", href: "/contact/?topic=startup-audit" },
     },
     reviewCall: {
       title: "Step 2: book your founder call.",

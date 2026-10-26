@@ -1,5 +1,12 @@
 import { siteData } from "./site";
-import { marketplaceCards, marketplaceContent } from "./marketplace";
+import { marketplaceCards, marketplaceContent, retiredSlugs, type BadgeKey } from "./marketplace";
+
+const toolGroups: Record<BadgeKey, string> = {
+  "auxo-stack": "Team bundles",
+  "works-with": "Setup services",
+  partner: "Partner tools",
+  "built-by-auxo": "AUXO agents",
+};
 
 export interface ContactField {
   name: string;
@@ -23,7 +30,7 @@ export interface ContactDetail {
 
 export type ContactTopicSlug =
   | "not-sure"
-  | "free-audit"
+  | "startup-audit"
   | "deep-dive-audit"
   | "marketplace-tool"
   | "custom-stack"
@@ -41,6 +48,7 @@ export interface ContactTool {
   slug: string;
   name: string;
   group: string;
+  startHere: boolean;
   disclosures: string[];
 }
 
@@ -72,10 +80,8 @@ export interface ContactContent {
     topics: ContactTopic[];
     tools: {
       label: string;
-      removeLabel: string;
-      addLabel: string;
-      addPlaceholder: string;
       catalogue: ContactTool[];
+      aliases: Record<string, string>;
       functions: ContactFunction[];
     };
     prefill: {
@@ -113,10 +119,10 @@ export interface ContactContent {
 const topics: ContactTopic[] = [
   { slug: "not-sure", label: "Not sure where to start" },
   {
-    slug: "free-audit",
+    slug: "startup-audit",
     label: "Startup audit",
-    hint: "Starts with the AUXO Score, then a founder call. For startups, seed to Series B. One per company.",
-    hintLink: { text: "Get your startup audit", href: "/auxo-score/?offer=free-audit" },
+    hint: "For startups that raised from outside investors, seed to Series B. One per company.",
+    hintLink: { text: "Take the AUXO Score first (optional)", href: "/auxo-score/" },
   },
   {
     slug: "deep-dive-audit",
@@ -233,11 +239,15 @@ export const contactContent: ContactContent = {
     ],
     topics,
     tools: {
-      label: "Tools in this request",
-      removeLabel: "Remove {name}",
-      addLabel: "Add from the marketplace",
-      addPlaceholder: "Choose a tool or stack",
-      catalogue: marketplaceCards.map((c) => ({ slug: c.slug, name: c.name, group: c.badge, disclosures: c.disclosures })),
+      label: "Tools you're interested in",
+      catalogue: marketplaceCards.map((c) => ({
+        slug: c.slug,
+        name: c.name,
+        group: toolGroups[c.badgeKey],
+        startHere: c.startHere,
+        disclosures: c.disclosures,
+      })),
+      aliases: retiredSlugs,
       functions: marketplaceContent.filters.categories
         .filter((c) => c.slug !== "all")
         .map((c) => ({ slug: c.slug, label: c.label })),

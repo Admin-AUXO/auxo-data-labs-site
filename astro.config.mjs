@@ -68,6 +68,7 @@ export default defineConfig({
           'account-search-outline',
           'account-tie-outline',
           'apple',
+          'arrow-down',
           'arrow-left',
           'arrow-right',
           'arrow-up',

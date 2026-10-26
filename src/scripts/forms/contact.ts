@@ -7,7 +7,7 @@ import { fill } from "../../lib/text";
 const FORM_ID = "contact-form";
 const FORM_NAME = "contact";
 const { status, topics, tools: toolCopy, prefill } = contactContent.form;
-const CLOSE_PATH = "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z";
+const CHECK_PATH = "M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z";
 
 const EMAILJS = {
   serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? "",
@@ -37,7 +37,7 @@ const VALIDATORS: Record<string, Validator> = {
 const joinNames = (names: string[]) =>
   names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 
-const TOPIC_ALIASES: Record<string, string> = { marketplace: "marketplace-tool" };
+const TOPIC_ALIASES: Record<string, string> = { marketplace: "marketplace-tool", "free-audit": "startup-audit" };
 const topicBySlug = (slug: string | null) => {
   const s = slug ? (TOPIC_ALIASES[slug] ?? slug) : slug;
   return topics.find((t) => t.slug === s);
@@ -54,7 +54,8 @@ function readQuery() {
   const seen = new Set<string>();
   const tools: ContactTool[] = [];
   for (const raw of (params.get("tool") ?? "").split(",")) {
-    const slug = raw.trim().toLowerCase();
+    const given = raw.trim().toLowerCase();
+    const slug = toolCopy.aliases[given] ?? given;
     const tool = known.get(slug);
     if (tool && !seen.has(slug)) {
       seen.add(slug);
@@ -118,83 +119,64 @@ function createToolList(messageField: HTMLElement) {
   const wrap = document.createElement("div");
   wrap.className = "field";
   wrap.hidden = true;
+  wrap.setAttribute("role", "group");
   const label = document.createElement("p");
   label.id = "tools-label";
   label.className = "field__label";
   label.textContent = toolCopy.label;
-  const list = document.createElement("ul");
-  list.className = "flex flex-wrap gap-2";
-  list.setAttribute("aria-labelledby", label.id);
+  wrap.setAttribute("aria-labelledby", label.id);
+  const groupsWrap = document.createElement("div");
+  groupsWrap.className = "flex flex-col gap-3";
   const notes = document.createElement("div");
   notes.className = "flex flex-col gap-1 text-sm text-subtle";
-  const picker = document.createElement("select");
-  picker.className = "select";
-  picker.setAttribute("aria-label", toolCopy.addLabel);
-  wrap.append(label, list, picker, notes);
+  wrap.append(label, groupsWrap, notes);
   messageField.insertAdjacentElement("beforebegin", wrap);
 
   let current: ContactTool[] = [];
   let open = false;
+  const buttons = new Map<string, HTMLButtonElement>();
 
-  const renderPicker = () => {
-    picker.textContent = "";
-    const placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.textContent = toolCopy.addPlaceholder;
-    picker.append(placeholder);
-    const groups = new Map<string, HTMLOptGroupElement>();
-    for (const tool of toolCopy.catalogue) {
-      if (current.some((t) => t.slug === tool.slug)) continue;
-      let group = groups.get(tool.group);
-      if (!group) {
-        group = document.createElement("optgroup");
-        group.label = tool.group;
-        groups.set(tool.group, group);
-        picker.append(group);
-      }
-      const option = document.createElement("option");
-      option.value = tool.slug;
-      option.textContent = tool.name;
-      group.append(option);
+  const groups = new Map<string, ContactTool[]>();
+  for (const tool of [...toolCopy.catalogue].sort((a, b) => Number(b.startHere) - Number(a.startHere))) {
+    const list = groups.get(tool.group) ?? [];
+    list.push(tool);
+    groups.set(tool.group, list);
+  }
+  for (const [name, tools] of groups) {
+    const block = document.createElement("div");
+    block.className = "flex flex-col gap-2";
+    const heading = document.createElement("p");
+    heading.className = "text-xs text-subtle";
+    heading.textContent = name;
+    const row = document.createElement("div");
+    row.className = "flex flex-wrap gap-2";
+    for (const tool of tools) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className =
+        "group inline-flex min-h-9 items-center gap-1.5 rounded-full border border-border px-3 py-1 text-sm font-medium text-muted transition-colors hover:text-foreground aria-pressed:border-accent aria-pressed:text-foreground";
+      btn.setAttribute("aria-pressed", "false");
+      btn.innerHTML = `<svg class="hidden size-4 text-accent group-aria-pressed:block" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${CHECK_PATH}"/></svg>`;
+      btn.append(tool.name);
+      btn.addEventListener("click", () => {
+        const on = current.some((t) => t.slug === tool.slug);
+        current = on ? current.filter((t) => t.slug !== tool.slug) : [...current, tool];
+        render();
+      });
+      buttons.set(tool.slug, btn);
+      row.append(btn);
     }
-    picker.hidden = groups.size === 0;
-  };
-
-  picker.addEventListener("change", () => {
-    const tool = toolCopy.catalogue.find((t) => t.slug === picker.value);
-    if (!tool) return;
-    current = [...current, tool];
-    render();
-    picker.focus();
-  });
+    block.append(heading, row);
+    groupsWrap.append(block);
+  }
 
   const render = () => {
-    list.textContent = "";
+    wrap.hidden = !open;
+    for (const [slug, btn] of buttons) {
+      btn.setAttribute("aria-pressed", String(current.some((t) => t.slug === slug)));
+    }
     notes.textContent = "";
-    wrap.hidden = !open && current.length === 0;
-    renderPicker();
     for (const tool of current) {
-      const li = document.createElement("li");
-      li.className =
-        "inline-flex items-center gap-1 rounded-full border border-border bg-surface py-1 pr-1 pl-3 text-sm font-medium";
-      const name = document.createElement("span");
-      name.textContent = tool.name;
-      const remove = document.createElement("button");
-      remove.type = "button";
-      remove.className =
-        "inline-flex size-8 items-center justify-center rounded-full text-subtle transition-colors hover:text-foreground";
-      remove.setAttribute("aria-label", fill(toolCopy.removeLabel, { name: tool.name }));
-      remove.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${CLOSE_PATH}"/></svg>`;
-      remove.addEventListener("click", () => {
-        const index = current.findIndex((t) => t.slug === tool.slug);
-        current = current.filter((t) => t.slug !== tool.slug);
-        render();
-        const buttons = list.querySelectorAll<HTMLButtonElement>("button");
-        const next = buttons[Math.min(index, buttons.length - 1)];
-        (next ?? messageField.querySelector<HTMLElement>("textarea"))?.focus();
-      });
-      li.append(name, remove);
-      list.append(li);
       for (const line of tool.disclosures) {
         const p = document.createElement("p");
         p.textContent = line;
@@ -248,12 +230,19 @@ function initContactForm() {
   const renderHint = topicSelect ? createTopicHint(topicSelect) : () => {};
   const currentTopic = () => (topicSelect ? topicByLabel(topicSelect.value) : undefined);
   const toolList = messageField ? createToolList(messageField) : null;
-  const syncTools = () => toolList?.show(["marketplace-tool", "custom-stack"].includes(currentTopic()?.slug ?? ""));
+  const toolsOpen = () => currentTopic()?.slug === "marketplace-tool";
+  const syncTools = () => toolList?.show(toolsOpen());
+  let autoText = "";
   topicSelect?.addEventListener("change", () => {
     renderHint(currentTopic());
     syncTools();
+    if (message && autoText && message.value === autoText) {
+      message.value = "";
+      autoText = "";
+      updateCounter();
+    }
   });
-  const selectedTools = () => toolList?.get() ?? [];
+  const selectedTools = () => (toolsOpen() ? (toolList?.get() ?? []) : []);
 
   const query = readQuery();
   if (topicSelect && query.topic) {
@@ -273,6 +262,7 @@ function initContactForm() {
     }
     if (text) {
       message.value = text.slice(0, Number(message.getAttribute("maxlength")) || 500);
+      autoText = message.value;
       updateCounter();
     }
   }
