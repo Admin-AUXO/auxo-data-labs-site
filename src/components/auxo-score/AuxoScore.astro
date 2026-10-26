@@ -64,8 +64,14 @@ const { next } = result;
 
   <section class="score__screen" id="s-result" data-screen="result" data-pagefind-ignore="all" hidden>
     <span class="score__eyebrow">Your AUXO Score</span>
-    <div class="score__head">
-      <h2 class="score__big" id="bigScore" tabindex="-1">0<small>/100</small></h2>
+    <div class="score__head" id="scoreHead">
+      <div class="score__ring">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="score__ring-track" cx="60" cy="60" r="52" pathLength="100" />
+          <circle class="score__ring-fill" id="scoreRing" cx="60" cy="60" r="52" pathLength="100" />
+        </svg>
+        <h2 class="score__big" id="bigScore" tabindex="-1">0<small>/100</small></h2>
+      </div>
       <div class="score__band">
         <span class="score__chip" id="bandChip">Stable</span>
         <p class="score__band-line" id="bandLine"></p>

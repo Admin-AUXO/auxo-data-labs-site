@@ -208,6 +208,8 @@ export function initAuxoScore(): void {
     const chip = $("bandChip");
     chip.textContent = r.band.name;
     chip.dataset.band = r.band.name.toLowerCase();
+    $("scoreHead").dataset.band = r.band.name.toLowerCase();
+    $("scoreRing").style.strokeDasharray = `${r.total} 100`;
     $("bandLine").textContent = r.band.line;
 
     $("dimTable").innerHTML =

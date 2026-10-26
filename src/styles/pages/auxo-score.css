@@ -457,29 +457,95 @@
 }
 
 .score__head {
-  align-items: flex-end;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
+  --band: var(--accent);
+
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 20px;
+}
+
+.score__head[data-band="fragile"] {
+  --band: var(--score-warn);
+}
+
+.score__head[data-band="critical"] {
+  --band: var(--score-crit);
+}
+
+.score__ring {
+  block-size: 132px;
+  display: grid;
+  inline-size: 132px;
+  place-items: center;
+  position: relative;
+}
+
+.score__ring svg {
+  inset: 0;
+  position: absolute;
+  rotate: -90deg;
+}
+
+.score__ring circle {
+  fill: none;
+  stroke-width: 9;
+}
+
+.score__ring-track {
+  stroke: var(--border);
+}
+
+.score__ring-fill {
+  stroke: var(--band);
+  stroke-dasharray: 0 100;
+  stroke-linecap: round;
+}
+
+@media (width >= 48rem) {
+  .score__head {
+    gap: 28px;
+    padding: 24px 28px;
+  }
+
+  .score__ring {
+    block-size: 160px;
+    inline-size: 160px;
+  }
+
+  .score__big {
+    font-size: 56px;
+  }
+}
+
+[data-motion="on"] .score__ring-fill {
+  transition: stroke-dasharray 1.1s var(--ease-out);
 }
 
 .score__big {
+  display: grid;
   font-family: var(--font-brand);
-  font-size: clamp(72px, 22vw, 104px);
+  font-size: 46px;
   font-variant-numeric: tabular-nums;
   font-weight: 800;
+  justify-items: center;
   letter-spacing: -0.02em;
   line-height: 0.9;
   margin: 0;
+  position: relative;
 }
 
 .score__big small {
   color: var(--subtle);
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: 0;
-  margin-inline-start: 4px;
+  letter-spacing: 0.08em;
+  margin-block-start: 4px;
 }
 
 .score__band {
@@ -822,7 +888,7 @@ html[data-motion="off"] .score *::after {
 @media (width >= 64rem) {
   .score:has(#s-result:not([hidden])),
   .score:has(#s-intro:not([hidden])) {
-    max-inline-size: 1080px;
+    max-inline-size: 1280px;
   }
 
   #s-intro {
