@@ -2,37 +2,32 @@
 interface Props {
   text: string;
   highlight?: string | string[];
+  soften?: boolean;
   class?: string;
 }
 
-const { text, highlight, class: cls = "hl-accent" } = Astro.props;
+const { text, highlight, soften = false, class: cls = "hl-accent" } = Astro.props;
 
 const terms = (Array.isArray(highlight) ? highlight : highlight ? [highlight] : [])
   .map(String)
   .filter(Boolean);
 
-type Part = { t: string; hl: boolean };
-let parts: Part[];
+type Part = { t: string; cls: string | null };
 
-if (terms.length === 0) {
-  parts = [{ t: text, hl: false }];
-} else {
+const mark = (segment: string, base: string | null): Part[] => {
+  if (terms.length === 0) return [{ t: segment, cls: base }];
   const escaped = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
   const re = new RegExp(`(${escaped.join("|")})`, "gi");
   const lower = new Set(terms.map((t) => t.toLowerCase()));
-  parts = text
+  return segment
     .split(re)
     .filter((s) => s !== "")
-    .map((s) => ({ t: s, hl: lower.has(s.toLowerCase()) }));
-}
----
-{parts.map((p) => (p.hl ? <span class={cls}>{p.t}</span> : <Fragment>{p.t}</Fragment>))}
+    .map((s) => ({ t: s, cls: lower.has(s.toLowerCase()) ? cls : base }));
+};
 
-<style is:global>
-  .home-hero .hl-accent {
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.12em;
-  }
-</style>
+const split = soften ? text.match(/^(.+?[.?!])(\s+)(\S.*)$/) : null;
+const parts: Part[] = split
+  ? [...mark(split[1], null), { t: split[2], cls: null }, ...mark(split[3], "tone-soft")]
+  : mark(text, null);
+---
+{parts.map((p) => (p.cls ? <span class={p.cls}>{p.t}</span> : <Fragment>{p.t}</Fragment>))}

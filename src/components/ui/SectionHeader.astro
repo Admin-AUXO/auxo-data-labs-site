@@ -23,8 +23,8 @@ const wrap =
     : "items-start text-left max-w-3xl";
 ---
 <div class={`flex flex-col gap-3 ${wrap} ${className}`.trim()} data-reveal>
-  <h2 class="text-3xl" data-anim="clip-up">
-    <HighlightText text={title} highlight={highlight} />
+  <h2 class="text-4xl" data-anim="clip-up">
+    <HighlightText text={title} highlight={highlight} soften />
   </h2>
-  {subtitle && <p class="lead max-w-2xl text-balance">{subtitle}</p>}
+  {subtitle && <p class="lead max-w-2xl text-lg text-balance">{subtitle}</p>}
 </div>

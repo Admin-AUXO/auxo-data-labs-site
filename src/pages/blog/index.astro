@@ -22,7 +22,7 @@ const tags = [...tagCounts.entries()]
   <Section padding="lg" width="7xl">
     <div class="flex max-w-3xl flex-col gap-6">
       <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">
-        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
+        <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} soften />
       </h1>
       <p class="lead max-w-2xl text-xl" data-enter>{c.hero.lead}</p>
     </div>

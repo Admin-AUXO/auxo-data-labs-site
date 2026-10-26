@@ -47,6 +47,14 @@
 }
 
 @layer components {
+  .hl-accent {
+    color: var(--accent);
+  }
+
+  .tone-soft {
+    color: var(--muted);
+  }
+
   .text-display {
     font-family: var(--font-brand);
     font-optical-sizing: auto;

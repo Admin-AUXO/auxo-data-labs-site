@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
 import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import { homeContent as c } from "../data/home";
@@ -29,17 +30,21 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description} footnotes>
   <Section padding="lg" width="7xl" class="home-hero">
-    <div class="flex flex-col gap-6">
-      <h1 class="text-display text-display--5xl max-w-[20ch]" data-enter="headline">{c.hero.title}</h1>
-      <p class="lead max-w-3xl text-xl" data-enter>{c.hero.subtitle}</p>
-      <div class="flex flex-col gap-3" data-enter>
-        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-          <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
-            {c.hero.primaryCta.text}
-          </Button>
-          <Button variant="secondary" size="lg" href={c.hero.secondaryCta.href} class="w-full sm:w-auto">
-            {c.hero.secondaryCta.text}
-          </Button>
+    <div class="home-hero__inner">
+      <div class="home-hero__main">
+        <h1 class="home-hero__title" data-enter="headline">
+          <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
+        </h1>
+        <div class="home-hero__row">
+          <p class="lead home-hero__lead" data-enter>{c.hero.subtitle}</p>
+          <div class="home-hero__ctas" data-enter>
+            <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
+              {c.hero.primaryCta.text}
+            </Button>
+            <Button variant="secondary" size="lg" href={c.hero.secondaryCta.href} class="w-full sm:w-auto">
+              {c.hero.secondaryCta.text}
+            </Button>
+          </div>
         </div>
       </div>
       <p class="home-proof" data-enter>
@@ -144,7 +149,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         <p class="section-index" data-reveal>{c.segments.eyebrow}</p>
         <SectionHeader title={c.segments.title} subtitle={c.segments.lead} />
       </div>
-      <div class="flex flex-col gap-6">
+      <div>
         <ul class="segments" aria-label={c.segments.listLabel}>
           {
             c.segments.rows.map((row, i) => (
@@ -167,10 +172,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     <div class="market" data-reveal>
       <div class="home-head">
         <p class="section-index">{c.marketplace.eyebrow}</p>
-        <h2 class="text-3xl">{c.marketplace.title}</h2>
+        <h2 class="text-4xl"><HighlightText text={c.marketplace.title} soften /></h2>
         <p class="lead max-w-2xl text-balance">{c.marketplace.lead}</p>
       </div>
-      <div class="flex flex-col gap-6">
+      <div class="market__actions">
         <ul class="market__chips" aria-label={c.marketplace.chipsLabel}>
           {
             c.marketplace.chips.map((chip) => (

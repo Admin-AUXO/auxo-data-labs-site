@@ -49,6 +49,7 @@ interface HomeContent {
   meta: { title: string; description: string };
   hero: {
     title: string;
+    titleHighlight: string;
     subtitle: string;
     primaryCta: Link;
     secondaryCta: Link;
@@ -108,6 +109,7 @@ export const homeContent: HomeContent = {
   },
   hero: {
     title: "Your data, ready for AI.",
+    titleHighlight: "AI.",
     subtitle:
       "We look at your business and data, tell you which AI fits, and set it up for you. Built to last, and yours to keep.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },

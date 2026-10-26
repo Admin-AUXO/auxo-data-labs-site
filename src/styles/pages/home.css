@@ -2,9 +2,69 @@
   padding-block-start: 0;
 }
 
+.home-hero {
+  display: flex;
+  min-block-size: min(84svh, 54rem);
+}
+
+.home-hero > .section__container {
+  display: flex;
+}
+
+.home-hero__inner {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: space-between;
+}
+
+.home-hero__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: clamp(1.75rem, 1rem + 2vw, 3rem);
+  justify-content: center;
+}
+
+.home-hero__title {
+  font-family: var(--font-brand);
+  font-size: clamp(3rem, 0.9rem + 7.2vw, 7.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  margin: 0;
+  max-inline-size: 11ch;
+}
+
+.home-hero__row {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.home-hero__lead {
+  font-size: clamp(1.1rem, 1rem + 0.45vw, 1.35rem);
+  margin: 0;
+  max-inline-size: 40ch;
+}
+
+.home-hero__ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 @media (width >= 40rem) {
-  .home-hero h1 {
-    font-size: min(var(--text-5xl), 10.5svh);
+  .home-hero__ctas {
+    align-items: center;
+    flex-flow: row wrap;
+  }
+}
+
+@media (width >= 64rem) {
+  .home-hero__row {
+    align-items: end;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 }
 
@@ -69,7 +129,6 @@
 .logos__label {
   font-size: var(--text-xs);
   letter-spacing: 0.12em;
-  text-align: center;
   text-transform: uppercase;
 }
 
@@ -181,12 +240,21 @@
 
 .cube {
   display: grid;
-  gap: clamp(0.5rem, 1.2vw, 0.75rem);
-  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   list-style: none;
-  margin: 0 auto;
-  max-inline-size: 34rem;
+  margin: 0;
   padding: 0;
+}
+
+@media (width >= 48rem) {
+  .cube {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cube__cell {
+    aspect-ratio: 5 / 4;
+  }
 }
 
 .cube__cell {
@@ -327,7 +395,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 
 .logos__note {
   font-size: var(--text-xs);
-  text-align: center;
 }
 
 .home-head {
@@ -348,30 +415,17 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 .home-fix,
 .home-split,
 .market {
-  align-items: center;
   display: grid;
-  gap: clamp(2rem, 1.5rem + 3vw, 4rem);
+  gap: 2rem;
   grid-template-columns: minmax(0, 1fr);
 }
 
-@media (width >= 56rem) {
-  .home-fix {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
-  }
-
-  .home-split,
-  .market {
-    align-items: start;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  }
-
-  .market {
-    align-items: center;
-  }
-}
-
-.home-fix .cube {
-  inline-size: 100%;
+.market__actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  justify-content: space-between;
 }
 
 .cards {
@@ -480,12 +534,35 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   text-decoration: none;
 }
 
-@media (width >= 40rem) {
+@media (width >= 40rem) and (width < 56rem) {
   .segments__row {
     grid-template-areas:
       "name offer arrow"
       "line line arrow";
     grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+}
+
+@media (width >= 56rem) {
+  .segments {
+    border-block-start: 0;
+    display: grid;
+    gap: 0 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .segments > li {
+    border-block: 1px solid var(--border);
+    display: grid;
+  }
+
+  .segments__row {
+    align-content: start;
+    grid-template-areas:
+      "offer arrow"
+      "name name"
+      "line line";
+    padding-block: 1.5rem;
   }
 }
 
@@ -756,15 +833,16 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   }
 
   .home-hero {
-    padding-block: 1.5rem 2.5rem;
+    min-block-size: auto;
+    padding-block: 2rem 2.5rem;
   }
 
-  .home-hero h1 {
-    font-size: clamp(2rem, 9vw, 2.5rem);
-    line-height: 1.08;
+  .home-hero__title {
+    font-size: clamp(2.6rem, 12vw, 3.4rem);
+    line-height: 1.02;
   }
 
-  .home-hero .lead {
+  .home-hero__lead {
     font-size: 1.05rem;
   }
 }
@@ -774,7 +852,7 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
     padding-block: 3.5rem 3rem;
   }
 
-  .home-hero h1 {
-    font-size: min(var(--text-5xl), 9.5svh);
+  .home-hero__title {
+    font-size: min(clamp(3rem, 0.9rem + 7.2vw, 7.5rem), 13svh);
   }
 }

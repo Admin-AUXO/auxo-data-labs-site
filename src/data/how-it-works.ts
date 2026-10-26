@@ -44,7 +44,9 @@ export const howItWorksContent = {
       "Analyze, Advise, Build: an honest look at your data, the right AI for you, then a build you own.",
   },
   intro: {
-    title: "How it works.",
+    eyebrow: "How it works",
+    title: "Analyze. Advise. Build.",
+    titleHighlight: ".",
     lead: "Three steps. Start at any one. We recommend starting with Analyze.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl } satisfies Link,
   },

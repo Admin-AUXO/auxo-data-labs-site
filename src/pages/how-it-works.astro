@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
 import Accordion from "../components/ui/Accordion.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import StructuredData from "../components/layout/StructuredData.astro";
@@ -26,10 +27,12 @@ const mapItems = [
     id: s.id,
     icon: s.icon,
     name: s.name,
+    tag: null as string | null,
   })),
   {
     id: c.ladder.upkeep.id,
     icon: c.ladder.upkeep.icon,
+    tag: c.ladder.upkeep.label as string | null,
     name: c.ladder.upkeep.title,
   },
 ];
@@ -44,14 +47,17 @@ const facts = [
 <BaseLayout title={c.meta.title} description={c.meta.description}>
   <Section padding="lg" width="7xl">
     <div class="hiw-hero">
-      <div class="flex flex-col gap-6">
-        <h1 class="text-display text-display--5xl max-w-[16ch]" data-enter="headline">{c.intro.title}</h1>
-        <p class="lead max-w-xl text-xl" data-enter>{c.intro.lead}</p>
-        <div class="flex flex-col items-start gap-3" data-enter>
-          <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
-            {c.intro.primaryCta.text}
-          </Button>
-        </div>
+      <div class="hiw-hero__head">
+        <p class="section-index" data-enter>{c.intro.eyebrow}</p>
+        <h1 class="hiw-hero__title" data-enter>
+          <HighlightText text={c.intro.title} highlight={c.intro.titleHighlight} />
+        </h1>
+      </div>
+      <div class="hiw-hero__side" data-enter>
+        <p class="lead hiw-hero__lead">{c.intro.lead}</p>
+        <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
+          {c.intro.primaryCta.text}
+        </Button>
       </div>
       <nav class="hiw-map" aria-label={c.ladder.navLabel} data-enter>
         <ol class="hiw-map__list">
@@ -60,7 +66,10 @@ const facts = [
               <li>
                 <a class="hiw-map__link" href={`#${n.id}`}>
                   <Icon name={n.icon} class="hiw-map__icon" aria-hidden="true" />
-                  <span class="hiw-map__name">{n.name}</span>
+                  <span class="hiw-map__text">
+                    <span class="hiw-map__name">{n.name}</span>
+                    {n.tag && <span class="hiw-map__tag">{n.tag}</span>}
+                  </span>
                   <Icon name="mdi:arrow-right" class="hiw-map__go" aria-hidden="true" />
                 </a>
               </li>
