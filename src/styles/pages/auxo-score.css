@@ -640,12 +640,6 @@
   color: var(--foreground);
 }
 
-.score__cta {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .score__mail {
   display: flex;
   flex-direction: column;
@@ -842,18 +836,10 @@ html[data-motion="off"] .score *::after {
     grid-column: 1;
   }
 
-  #s-intro > .score__next {
+.score__actions {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.score__next-title {
-  font-family: var(--font-brand);
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 0;
 }
 
 .score__next-list {
@@ -865,12 +851,35 @@ html[data-motion="off"] .score *::after {
 }
 
 .score__next-item {
+  align-items: flex-start;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  display: grid;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
   gap: 6px;
-  padding: 14px 16px;
-  place-items: start start;
+  padding: 18px;
+}
+
+.score__next-item > .score__btn {
+  margin-block-start: auto;
+}
+
+.score__next-item > .score__note {
+  margin-block-end: 10px;
+}
+
+.score__next-item--report {
+  border-color: color-mix(in oklch, var(--accent) 55%, var(--border));
+}
+
+.score__next-item .score__mail {
+  inline-size: 100%;
+}
+
+@media (width >= 48rem) {
+  .score__next-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .score__next-who {
@@ -892,16 +901,26 @@ html[data-motion="off"] .score *::after {
     grid-template:
       "eyebrow panel" auto
       "head panel" auto
-      "focus panel" 1fr
-      "cta next" auto / minmax(0, 1fr) minmax(0, 1fr);
+      "focus panel" auto
+      "actions actions" auto / minmax(0, 1fr) minmax(0, 1fr);
   }
 
   #s-result > .score__eyebrow { grid-area: eyebrow; }
   #s-result > .score__head { grid-area: head; }
-  #s-result > .score__panel { grid-area: panel; }
   #s-result > .score__focus { grid-area: focus; }
-  #s-result > .score__cta { grid-area: cta; }
-  #s-result > .score__next { grid-area: next; }
+
+  #s-result > .score__actions {
+    grid-area: actions;
+    margin-block-start: 1rem;
+  }
+
+  #s-result > .score__panel {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    grid-area: panel;
+    justify-content: space-between;
+  }
 }
 
 .score__side {

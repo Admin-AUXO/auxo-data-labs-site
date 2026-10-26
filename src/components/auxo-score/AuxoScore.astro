@@ -82,28 +82,28 @@ const { next } = result;
       </ul>
     </div>
 
-    <div class="score__cta">
-      <button class="score__btn score__btn--full" type="button" id="emailBtn" aria-expanded="false" aria-controls="emailForm">
-        Email my full report
-      </button>
-      <p class="score__note score__note--center">Includes a step-by-step plan for your weakest areas.</p>
-      <form class="score__mail" id="emailForm" novalidate hidden>
-        <label for="emailInput">Work email</label>
-        <div class="score__mail-row">
-          <input id="emailInput" name="email" type="email" autocomplete="email" placeholder="name@company.com" required />
-          <button class="score__btn" type="submit">Send</button>
-        </div>
-        <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <p class="score__consent">
-          We'll email your report and may follow up once. No spam. <a href="/legal/privacy-policy/">Privacy Policy</a>
-        </p>
-        <p class="score__msg" id="emailMsg" role="status"></p>
-      </form>
-    </div>
-
-    <div class="score__next">
-      <h3 class="score__next-title">{next.title}</h3>
+    <div class="score__actions">
+      <p class="score__panel-title">{next.title}</p>
       <ul class="score__next-list">
+        <li class="score__next-item score__next-item--report">
+          <p class="score__next-who">{next.report.who}</p>
+          <p class="score__note">{next.report.what}</p>
+          <button class="score__btn" type="button" id="emailBtn" aria-expanded="false" aria-controls="emailForm">
+            Email my full report
+          </button>
+          <form class="score__mail" id="emailForm" novalidate hidden>
+            <label for="emailInput">Work email</label>
+            <div class="score__mail-row">
+              <input id="emailInput" name="email" type="email" autocomplete="email" placeholder="name@company.com" required />
+              <button class="score__btn" type="submit">Send</button>
+            </div>
+            <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <p class="score__consent">
+              We'll email your report and may follow up once. No spam. <a href="/legal/privacy-policy/">Privacy Policy</a>
+            </p>
+            <p class="score__msg" id="emailMsg" role="status"></p>
+          </form>
+        </li>
         <li class="score__next-item">
           <p class="score__next-who">{next.startup.who}</p>
           <p class="score__note">{next.startup.what}</p>

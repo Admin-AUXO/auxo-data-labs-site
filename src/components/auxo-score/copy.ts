@@ -19,6 +19,7 @@ export interface ScoreCopy {
   result: {
     next: {
       title: string;
+      report: { who: string; what: string };
       startup: { who: string; what: string; link: ScoreLink };
       growing: { who: string; what: string; button: string };
     };
@@ -54,7 +55,11 @@ export const SCORE_COPY: ScoreCopy = {
   },
   result: {
     next: {
-      title: "Want a founder's read?",
+      title: "Next step",
+      report: {
+        who: "Your full report",
+        what: "A step-by-step plan for your weakest areas, by email.",
+      },
       startup: {
         who: "Funded startup, seed to Series B",
         what: "A 45-minute call and a one-page plan. No charge.",
