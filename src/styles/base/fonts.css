@@ -8,10 +8,10 @@
 
 @font-face {
   font-display: swap;
-  font-family: Sora;
+  font-family: "AUXO Display";
   font-style: normal;
-  font-weight: 600 800;
-  src: url("/fonts/Sora-Variable.woff2") format("woff2-variations");
+  font-weight: 600 900;
+  src: url("/fonts/AUXODisplay-Variable.woff2") format("woff2-variations");
 }
 
 @font-face {
