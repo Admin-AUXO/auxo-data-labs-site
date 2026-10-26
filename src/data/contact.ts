@@ -109,13 +109,13 @@ const topics: ContactTopic[] = [
   {
     slug: "free-audit",
     label: "Free audit",
-    hint: "The free audit starts with the AUXO Score and ends with a founder call. Startups, seed to Series B, one per company.",
+    hint: "Starts with the AUXO Score, then a founder call. For startups, seed to Series B. One per company.",
     hintLink: { text: "Get your free audit", href: "/auxo-score/?offer=free-audit" },
   },
   {
     slug: "deep-dive-audit",
     label: "Deep-dive audit",
-    hint: "A fixed price, set by scope and agreed in writing. NDA first if you want one.",
+    hint: "A fixed price, agreed in writing. NDA first if you want one.",
   },
   {
     slug: "marketplace-tool",
@@ -125,12 +125,12 @@ const topics: ContactTopic[] = [
   {
     slug: "custom-stack",
     label: "Custom stack",
-    hint: "Tell us the function and the work you want to take off your team.",
+    hint: "Tell us which team it's for and the work you want off their plate.",
   },
   {
     slug: "enterprise",
     label: "One unit first",
-    hint: "Tell us about procurement, security review or contract needs. We can start with one team.",
+    hint: "Tell us about your buying, security or contract steps. We can start with one team.",
   },
   { slug: "something-else", label: "Something else" },
 ];
@@ -139,7 +139,7 @@ export const contactContent: ContactContent = {
   meta: {
     title: "Contact: talk to the founders",
     description:
-      "Tell us what you want AI and your data to do. A real person replies within one business day. Based in Dubai, serving the UAE, the US and Europe.",
+      "Tell us what you want AI and your data to do. A real person replies within one business day.",
   },
   hero: {
     title: "Talk to a founder.",
@@ -172,7 +172,7 @@ export const contactContent: ContactContent = {
   },
   form: {
     title: "Send a message",
-    description: "Tell us the problem and the systems it touches.",
+    description: "Tell us the problem and the tools involved.",
     fields: [
       {
         name: "name",
@@ -218,7 +218,7 @@ export const contactContent: ContactContent = {
         name: "message",
         label: "Message",
         type: "textarea",
-        placeholder: "What do you want to fix or set up? Which systems does it touch? And what timeline matters most?",
+        placeholder: "What do you want to fix or set up? Which tools are involved? Any deadline?",
         required: true,
         minLength: 20,
         maxLength: 500,
@@ -253,7 +253,7 @@ export const contactContent: ContactContent = {
   nextSteps: {
     title: "What happens next",
     titleHighlight: "next",
-    subtitle: "Three steps from your note to a clear first move.",
+    subtitle: "Three steps to a clear first move.",
     steps: [
       {
         title: "You send a note",
@@ -277,32 +277,32 @@ export const contactContent: ContactContent = {
       {
         question: "What does working together cost?",
         answer:
-          "We price by scope: a fixed price per phase, in writing, before work starts. The AUXO Score is free, and so is the free audit for startups, seed to Series B.",
+          "Each phase has a fixed price, agreed in writing before we start. The AUXO Score is free, and so is the audit for startups, seed to Series B.",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",
         answer:
-          "Yes. Your name and details stay with us, and we're glad to sign an NDA first. Say so in your message and we'll send ours, or use your legal team's.",
+          "Yes. Your details stay with us, and we're glad to sign an NDA first. We can send ours or use yours.",
       },
       {
         question: "What happens to our data, and is it safe with AI?",
         answer:
-          "We take only what the work needs, anonymised where we can, under NDA and your access rules. It's never reused or fed to tools that train on it, and it's returned or removed when the work ends.",
+          "We take only what the work needs, with names removed where we can. It's never reused or used to train AI. We return or delete it when the work ends.",
       },
       {
         question: "What if our data is messy, scattered or incomplete?",
         answer:
-          "That's the normal starting point, not a blocker. Most of the early work is making sense of what you already hold across spreadsheets, systems and inboxes. You don't need to tidy anything before we talk.",
+          "That's normal, not a blocker. Most early work is making sense of what you already have. You don't need to tidy anything before we talk.",
       },
       {
         question: "Can you make us compliant?",
         answer:
-          "No one should promise that. We build systems that support your standards: clear records, audit trails and rules on who approves what. Formal sign-off stays with your own advisers, and we'll tell you plainly where our work ends and theirs begins.",
+          "No one should promise that. We build systems that help: clear records and rules on who approves what. Formal sign-off stays with your own advisers.",
       },
       {
         question: "What happens after you hand over? Are we stuck with you?",
         answer:
-          "No. Every build ends with a system your team owns, plain documentation and training. Managed upkeep is optional and monthly. Stop with 30 days' notice and keep everything.",
+          "No. Every build ends with a system your team owns, simple guides and training. Upkeep is optional and monthly. Stop with 30 days' notice and keep everything.",
       },
     ],
   },

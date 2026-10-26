@@ -80,7 +80,7 @@ export const SCORE_COPY: ScoreCopy = {
       eyebrow: "The AUXO Score",
       title: "How ready is your data for AI?",
       lede: (n) =>
-        `${n} questions. Pick the answer that matches a normal month, not your best one. You get a score out of 100 at the end.`,
+        `${n} questions. Answer for a normal month, not your best one. You get a score out of 100.`,
     },
     startup: {
       eyebrow: "Free audit",
@@ -99,12 +99,12 @@ export const SCORE_COPY: ScoreCopy = {
     note: (limit) =>
       `Not sure? Pick "I don't know". Picking it ${limit} or more times ends the check with a finding instead of a score.`,
     privacy:
-      "Free, no sign-up. Your answers stay in your browser unless you ask us to email your report.",
+      "Free, no sign-up. Your answers stay on your device unless you ask for the report by email.",
   },
   result: {
     deeper: {
       title: "Want this checked against your real systems?",
-      body: "A review of your own systems and data, under NDA if you want: each fix rated red, amber or green, a build-first plan and a leadership readout. A fixed price, set by scope, in writing.",
+      body: "We review your own systems and data, under NDA if you want. You get each fix rated by urgency, a plan of what to build first and a short readout for your leaders. A fixed price, in writing.",
       link: "Ask about a deep-dive audit →",
       checkTitle: "Is this for you?",
       ticks: [
@@ -117,7 +117,7 @@ export const SCORE_COPY: ScoreCopy = {
     },
     reviewCall: {
       title: "Step 2: book your founder call.",
-      body: "Your score is saved in this browser. Book a 45‑minute call and a founder will go through it with you. A one-page plan of what to fix first follows within 3 business days.",
+      body: "Your score is saved on this device. Book a 45‑minute call to go through it with a founder. Your one-page plan follows within 3 business days.",
       ticks: [
         "We've raised from outside investors, seed to Series B.",
         "This is our company's first free audit with AUXO.",
@@ -149,11 +149,11 @@ export const SCORE_COPY: ScoreCopy = {
     status: "No score yet",
     title: "Too many unknowns to score.",
     default: {
-      lede: "You answered \"I don't know\" three or more times. That is a finding in itself: it's hard to trust or improve data nobody can see clearly. Try again with someone from finance or operations, or talk to us.",
+      lede: "You answered \"I don't know\" three or more times. That's a finding in itself: it's hard to trust data nobody can see. Try again with someone from finance or operations, or talk to us.",
       talk: { text: "Talk to us", href: "/contact/?topic=not-sure" },
     },
     startup: {
-      lede: "That is a finding in itself, and still worth a founder call. Book your call and bring someone from finance or operations, or retake the check with them first.",
+      lede: "That's a finding in itself, and still worth a founder call. Bring someone from finance or operations, or retake the check with them first.",
       book: "Book your founder call",
     },
     retake: "Retake with a colleague",

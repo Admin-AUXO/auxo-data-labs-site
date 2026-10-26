@@ -104,17 +104,17 @@ export const homeContent: HomeContent = {
   meta: {
     title: "Your data, ready for AI",
     description:
-      "We analyse your business and data, advise on the right AI setup, and build it end to end. Built to last, and yours to keep.",
+      "We look at your business and data, tell you which AI fits, and set it up for you. Built to last, and yours to keep.",
   },
   hero: {
     title: "Your data, ready for AI.",
     subtitle:
-      "We analyse your business and data, advise on the right AI setup, and build it end to end. Built to last, and yours to keep.",
+      "We look at your business and data, tell you which AI fits, and set it up for you. Built to last, and yours to keep.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
   },
   proof: {
-    text: "Founder-led. Ex-IBM enterprise delivery across the GCC. Cloud and BI architecture for Fortune 500s.",
+    text: "Founder-led. Ex-IBM delivery across the GCC. Data and cloud work for Fortune 500 companies.",
     link: { text: "Meet the founders", href: "/about/#team" },
   },
   score: {
@@ -122,7 +122,7 @@ export const homeContent: HomeContent = {
     stat: "More than one in three CFOs don't completely trust their own financial data.",
     footnoteId: "ref-1",
     cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
-    reassurance: "Free, 10 questions, no sign-up. Your answers stay in your browser unless you ask us to email your report.",
+    reassurance: "Free, 10 questions, no sign-up. Your answers stay on your device unless you ask for the report by email.",
   },
   logos: {
     label: "Works with",
@@ -151,22 +151,22 @@ export const homeContent: HomeContent = {
     {
       letter: "A",
       title: "Trusted data",
-      desc: "One source your team and your AI tools can rely on, built from the systems you already run.",
+      desc: "One set of numbers your team and your AI can trust, from the tools you already use.",
     },
     {
       letter: "U",
       title: "Clear reporting",
-      desc: "Reporting that holds up when the board, investors or auditors ask hard questions.",
+      desc: "Reports that hold up when the board or investors ask hard questions.",
     },
     {
       letter: "X",
       title: "Reliable automation",
-      desc: "AI agents and software carry the routine work. A person approves what matters.",
+      desc: "AI takes the routine work. A person approves what matters.",
     },
     {
       letter: "O",
       title: "Confident compliance",
-      desc: "Clear rules for your data and AI, written down before anyone asks.",
+      desc: "Simple rules for your data and AI, written down before anyone asks.",
     },
   ],
   ladder: {
@@ -186,7 +186,7 @@ export const homeContent: HomeContent = {
     },
     {
       title: "Build",
-      desc: "Your data infrastructure and AI agent teams, set up end to end and handed over.",
+      desc: "Your data and AI tools, set up end to end and handed over.",
       href: "/how-it-works/#build",
     },
   ],
@@ -211,7 +211,7 @@ export const homeContent: HomeContent = {
       {
         segment: "Large organisations",
         offer: "One unit first",
-        line: "Scoped by proposal, phase by phase.",
+        line: "A written proposal, one phase at a time.",
         href: "/pricing/#large-organisations",
       },
     ],
@@ -246,7 +246,7 @@ export const homeContent: HomeContent = {
   cta: {
     title: "Tell us what isn't working.",
     description:
-      "Bring the problem. You'll leave knowing what to fix first, and what not to build yet.",
+      "Bring the problem. Leave knowing what to fix first.",
     ctaText: "Book a meeting",
     ctaHref: siteData.bookingUrl,
     reassurance,

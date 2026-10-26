@@ -69,12 +69,12 @@ export const aboutContent: AboutContent = {
   meta: {
     title: "About AUXO: data and AI, yours to keep",
     description:
-      "AUXO Data Labs is a founder-led data and AI service platform in Dubai, serving the UAE, the US and Europe. Clients own what we build.",
+      "AUXO Data Labs is a founder-led data and AI firm in Dubai, working with clients in the UAE, the US and Europe. Clients own what we build.",
   },
   hero: {
     title: "Data first. Then AI.",
     titleHighlight: "Then AI",
-    lead: "A founder-led data and AI firm. We get your data ready, set up the AI that runs on it, and hand it over.",
+    lead: "A founder-led data and AI firm. We get your data ready, set up the AI, and hand it over.",
     primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
     facts: [
@@ -86,7 +86,7 @@ export const aboutContent: AboutContent = {
   },
   beliefs: {
     title: "What we believe",
-    lead: "Four convictions shape how we work.",
+    lead: "Four things shape how we work.",
     items: [
       {
         icon: "mdi:cog-outline",
@@ -96,7 +96,7 @@ export const aboutContent: AboutContent = {
       {
         icon: "mdi:key-outline",
         title: "Yours to keep",
-        desc: "You own everything we build: the code, the setup, the documentation and the accounts. No lock-in, no black box.",
+        desc: "You own everything we build, and it's all in your name. No lock-in.",
       },
       {
         icon: "mdi:account-check-outline",
@@ -106,7 +106,7 @@ export const aboutContent: AboutContent = {
       {
         icon: "mdi:message-text-outline",
         title: "Plain and honest",
-        desc: "We're clear about trade-offs and fit. We'll tell you when not to build.",
+        desc: "We're clear about what fits. We'll tell you when not to build.",
       },
     ],
   },
@@ -119,8 +119,8 @@ export const aboutContent: AboutContent = {
         name: "Vignesh Ramesh",
         role: "Co-Founder & CEO",
         lines: [
-          "Ex-IBM systems engineer. 10+ years executing enterprise mandates across the GCC, including BP Oman, RTA, DEWA and TransCo.",
-          "Leads scoping, governance and enterprise work.",
+          "Ex-IBM systems engineer. 10+ years on large projects across the GCC, including BP Oman, RTA, DEWA and TransCo.",
+          "Leads planning and work with large clients.",
         ],
         linkedin: "https://www.linkedin.com/in/vig-auxo",
       },
@@ -128,8 +128,8 @@ export const aboutContent: AboutContent = {
         name: "Ajay Kumar",
         role: "Co-Founder & CTO",
         lines: [
-          "Analytics architect. 10+ years building cloud infrastructure and BI for Fortune 500s and scale-ups across the EU, US and MENA.",
-          "Leads architecture, data builds and agents.",
+          "Analytics architect. 10+ years building data and reporting systems for Fortune 500s and fast-growing firms in Europe, the US and the Middle East.",
+          "Leads the build: data, tools and agents.",
         ],
         linkedin: "https://www.linkedin.com/in/ajaykumar9795",
       },
@@ -137,7 +137,7 @@ export const aboutContent: AboutContent = {
   },
   engagement: {
     title: "What you can hold us to",
-    lead: "Working with an outside team should feel safe. Here's what to expect from the first conversation.",
+    lead: "Working with an outside team should feel safe. Here's what to expect.",
     reassurance: "We are happy to sign an NDA before we begin.",
     principles: [
       {
@@ -148,7 +148,7 @@ export const aboutContent: AboutContent = {
       {
         icon: "mdi:shield-check-outline",
         title: "Careful with your data",
-        desc: "We take only what the work needs, sampled, anonymised or hashed where we can. We never reuse, resell or host it.",
+        desc: "We take only what the work needs, with names removed where we can. We never reuse or resell it.",
       },
       {
         icon: "mdi:cash-multiple",

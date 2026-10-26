@@ -91,7 +91,7 @@ export const cardPage = {
       name: "Ajay Kumar",
       first: "Ajay",
       role: "Co-Founder & CTO",
-      note: "Happy to help with data platforms, AI and delivery.",
+      note: "Happy to help with data, AI and getting it built.",
       vcard: "/vcard/ajay-kumar.vcf",
       contacts: [
         {

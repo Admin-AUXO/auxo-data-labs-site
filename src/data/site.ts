@@ -61,7 +61,7 @@ export const siteData: SiteData = {
     },
     production: {
       value: "Live systems",
-      label: "Working systems for daily use. Not slideware.",
+      label: "Working systems your team uses daily. Not just slides.",
     },
     primaryFocus: {
       value: "Yours to keep",
