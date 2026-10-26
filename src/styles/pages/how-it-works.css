@@ -43,11 +43,10 @@
   outline-offset: 2px;
 }
 
-.hiw-map__index {
-  color: var(--accent-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-mono);
+.hiw-map__icon {
+  block-size: 1.25rem;
+  color: var(--accent);
+  inline-size: 1.25rem;
 }
 
 .hiw-map__name {
@@ -134,12 +133,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-}
-
-.ladder__badge {
-  align-items: center;
-  display: flex;
-  gap: 0.6rem;
 }
 
 .ladder__icon {

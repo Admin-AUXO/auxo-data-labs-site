@@ -20,7 +20,6 @@ export interface LadderItem {
 
 export interface LadderStep {
   id: string;
-  label: string;
   name: string;
   icon: string;
   promise: string;
@@ -61,7 +60,6 @@ export const howItWorksContent = {
     steps: [
       {
         id: "analyze",
-        label: "Step 01",
         name: "Analyze",
         icon: "mdi:magnify",
         promise: "An honest look at your business and data, before you spend on AI.",
@@ -99,7 +97,6 @@ export const howItWorksContent = {
       },
       {
         id: "advise",
-        label: "Step 02",
         name: "Advise",
         icon: "mdi:lightbulb-outline",
         promise: "The right AI for your team, and a plan to get there.",
@@ -135,7 +132,6 @@ export const howItWorksContent = {
       },
       {
         id: "build",
-        label: "Step 03",
         name: "Build",
         icon: "mdi:hammer-wrench",
         promise: "Your data and AI tools, set up end to end and handed over.",

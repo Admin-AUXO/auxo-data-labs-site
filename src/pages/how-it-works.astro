@@ -24,12 +24,12 @@ const faqItems = c.faq.items.map((item) => ({
 const mapItems = [
   ...c.ladder.steps.map((s) => ({
     id: s.id,
-    index: s.label.replace(/\D/g, ""),
+    icon: s.icon,
     name: s.name,
   })),
   {
     id: c.ladder.upkeep.id,
-    index: "+",
+    icon: c.ladder.upkeep.icon,
     name: c.ladder.upkeep.title,
   },
 ];
@@ -59,7 +59,7 @@ const facts = [
             mapItems.map((n) => (
               <li>
                 <a class="hiw-map__link" href={`#${n.id}`}>
-                  <span class="hiw-map__index">{n.index}</span>
+                  <Icon name={n.icon} class="hiw-map__icon" aria-hidden="true" />
                   <span class="hiw-map__name">{n.name}</span>
                   <Icon name="mdi:arrow-right" class="hiw-map__go" aria-hidden="true" />
                 </a>
@@ -78,10 +78,7 @@ const facts = [
         c.ladder.steps.map((step) => (
           <article id={step.id} class="ladder__step hiw-anchor" aria-labelledby={`${step.id}-title`}>
             <div class="ladder__head" data-reveal>
-              <div class="ladder__badge">
-                <Icon name={step.icon} class="ladder__icon" aria-hidden="true" />
-                <span class="section-index">{step.label}</span>
-              </div>
+              <Icon name={step.icon} class="ladder__icon" aria-hidden="true" />
               <h2 id={`${step.id}-title`} class="ladder__name">{step.name}</h2>
               <p class="ladder__promise">{step.promise}</p>
               {step.links.length > 0 && (
