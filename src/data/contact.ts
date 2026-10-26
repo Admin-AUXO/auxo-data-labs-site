@@ -30,7 +30,7 @@ export interface ContactDetail {
 
 export type ContactTopicSlug =
   | "not-sure"
-  | "startup-audit"
+  | "founder-review"
   | "deep-dive-audit"
   | "marketplace-tool"
   | "custom-stack"
@@ -119,8 +119,8 @@ export interface ContactContent {
 const topics: ContactTopic[] = [
   { slug: "not-sure", label: "Not sure where to start" },
   {
-    slug: "startup-audit",
-    label: "Startup audit",
+    slug: "founder-review",
+    label: "Founder review",
     hint: "For startups that raised from outside investors, seed to Series B. One per company.",
     hintLink: { text: "Take the AUXO Score first (optional)", href: "/auxo-score/" },
   },
@@ -298,7 +298,7 @@ export const contactContent: ContactContent = {
       {
         question: "What does working together cost?",
         answer:
-          "Each phase has a fixed price, agreed in writing before we start. There's no charge for the AUXO Score or the startup audit (seed to Series B).",
+          "Each phase has a fixed price, agreed in writing before we start. There's no charge for the AUXO Score or a founder review (funded startups, seed to Series B).",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",

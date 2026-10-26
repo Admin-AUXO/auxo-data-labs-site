@@ -46,7 +46,7 @@ For How it works (`/how-it-works/`):
 3. Follow with the method and an FAQ for objection handling.
 4. End with one clear CTA.
 
-The Analyze offers are the **Startup audit** (seed to Series B, no charge: AUXO Score, a 45-minute founder call, a one-page plan) and the paid **Deep-dive audit**. Large organisations start with **One unit first**. Say "Startup audit", not "free audit".
+Analyze has three depths, always in this order and with these names: **AUXO Score** (3-minute self-check, anyone), **Founder review** (45-minute founder call and a one-page plan, no charge for funded startups, seed to Series B) and the paid **Deep-dive audit** (systems review under NDA). Large organisations start with **One unit first**. Never use "free" as filler.
 
 For Pricing (`/pricing/`):
 

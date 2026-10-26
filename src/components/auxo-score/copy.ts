@@ -1,7 +1,5 @@
 export const LOAD_STEPS = ["Scoring each dimension…", "Building your report…"];
 
-export const OFFER_FREE_AUDIT = "free-audit";
-
 export interface ScoreLink {
   text: string;
   href: string;
@@ -10,16 +8,7 @@ export interface ScoreLink {
 export interface ScoreCopy {
   meta: { title: string; description: string };
   intro: {
-    default: { eyebrow: string; title: string; lede: (n: number) => string };
-    startup: {
-      eyebrow: string;
-      title: string;
-      lede: string;
-      stepsLabel: string;
-      steps: { title: string; detail: string }[];
-      eligibility: string;
-    };
-    dimensionsLabel: string;
+    default: { eyebrow: string; title: string; lede: (n: number) => string };    dimensionsLabel: string;
     facts: { rounds: string; minutes: string; score: string };
     resume: (i: number, n: number) => string;
     resumeButton: string;
@@ -28,42 +17,16 @@ export interface ScoreCopy {
     note: string;
   };
   result: {
-    deeper: {
+    next: {
       title: string;
-      body: string;
-      link: string;
-      checkTitle: string;
-      ticks: [string, string];
-      continue: string;
-      startupLine: string;
-      startupLink: ScoreLink;
+      startup: { who: string; what: string; link: ScoreLink };
+      growing: { who: string; what: string; button: string };
     };
-    reviewCall: {
-      title: string;
-      body: string;
-      ticks: [string, string];
-      button: string;
-      tip: string;
-      notEligible: { before: string; bookText: string; middle: string; deepDive: ScoreLink; after: string };
-    };
-  };
-  extended: {
-    eyebrow: string;
-    title: string;
-    lede: string;
-    label: string;
-    placeholder: string;
-    submit: string;
-    consent: string;
-    privacyLink: string;
-    success: (email: string) => string;
-    back: string;
   };
   inconclusive: {
     status: string;
     title: string;
     default: { lede: string; talk: ScoreLink };
-    startup: { lede: string; book: string };
     retake: string;
   };
 }
@@ -81,18 +44,6 @@ export const SCORE_COPY: ScoreCopy = {
       lede: (n) =>
         `${n} questions. Answer for a normal month, not your best one. You get a score out of 100.`,
     },
-    startup: {
-      eyebrow: "Startup audit",
-      title: "Find out what to fix first.",
-      lede: "Three steps with a founder, starting with the AUXO Score.",
-      stepsLabel: "Startup audit steps",
-      steps: [
-        { title: "AUXO Score", detail: "10 questions, about 3 minutes." },
-        { title: "Founder call", detail: "45 minutes on what your score shows." },
-        { title: "One-page plan", detail: "How to get the numbers investors ask for, within 3 business days." },
-      ],
-      eligibility: "For startups that have raised from outside investors, seed to Series B. One per company.",
-    },
     dimensionsLabel: "Dimensions measured",
     facts: { rounds: "questions", minutes: "min", score: "your score" },
     resume: (i, n) => `You have a check in progress (question ${i} of ${n}).`,
@@ -102,48 +53,19 @@ export const SCORE_COPY: ScoreCopy = {
     note: "Not sure of an answer? Pick \"I don't know\". No sign-up, and your answers stay on your device unless you ask for the report by email.",
   },
   result: {
-    deeper: {
-      title: "Want this checked against your real systems?",
-      body: "We review your own systems and data, under NDA if you want. You get each fix rated by urgency, a plan of what to build first and a short readout for your leaders. A fixed price, in writing.",
-      link: "Ask about a deep-dive audit →",
-      checkTitle: "Is this for you?",
-      ticks: [
-        "We're planning a data or AI project this year.",
-        "I can answer for both finance and operations.",
-      ],
-      continue: "Continue",
-      startupLine: "Startup, seed to Series B? You may qualify for the startup audit.",
-      startupLink: { text: "Apply for the startup audit", href: "/contact/?topic=startup-audit" },
-    },
-    reviewCall: {
-      title: "Step 2: book your founder call.",
-      body: "Your score is saved on this device. Book a 45‑minute call to go through it with a founder. Your one-page plan follows within 3 business days.",
-      ticks: [
-        "We've raised from outside investors, seed to Series B.",
-        "This is our company's first startup audit with AUXO.",
-      ],
-      button: "Book your founder call",
-      tip: "Email the report to yourself first, so you have it on the call.",
-      notEligible: {
-        before: "Not a startup, seed to Series B? ",
-        bookText: "Book a meeting",
-        middle: " instead, or ",
-        deepDive: { text: "ask about a deep-dive audit", href: "/contact/?topic=deep-dive-audit" },
-        after: ".",
+    next: {
+      title: "Want a founder's read?",
+      startup: {
+        who: "Funded startup, seed to Series B",
+        what: "A 45-minute call and a one-page plan. No charge.",
+        link: { text: "Apply for a founder review", href: "/contact/?topic=founder-review" },
+      },
+      growing: {
+        who: "Growing company or larger",
+        what: "Your systems reviewed under NDA. A fixed price, in writing.",
+        button: "Book a scoping call",
       },
     },
-  },
-  extended: {
-    eyebrow: "Deep-dive audit",
-    title: "Ask about a deep-dive audit.",
-    lede: "Leave your work email and a founder will reply within one business day. Your score is sent with your request.",
-    label: "Work email",
-    placeholder: "name@company.com",
-    submit: "Send request",
-    consent: "We'll email you about the deep-dive audit and may follow up once. No spam.",
-    privacyLink: "Privacy Policy",
-    success: (email) => `Request received. A founder will reply to ${email} within one business day.`,
-    back: "← Back to my score",
   },
   inconclusive: {
     status: "No score yet",
@@ -151,10 +73,6 @@ export const SCORE_COPY: ScoreCopy = {
     default: {
       lede: "You answered \"I don't know\" three or more times. That's a finding in itself: it's hard to trust data nobody can see. Try again with someone from finance or operations, or talk to us.",
       talk: { text: "Talk to us", href: "/contact/?topic=not-sure" },
-    },
-    startup: {
-      lede: "That's a finding in itself, and still worth a founder call. Bring someone from finance or operations, or retake the check with them first.",
-      book: "Book your founder call",
     },
     retake: "Retake with a colleague",
   },

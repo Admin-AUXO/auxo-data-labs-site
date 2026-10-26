@@ -69,13 +69,3 @@ export function captureUtm(): Utm {
   return utm;
 }
 
-const OFFER_KEY = "auxo-score-offer";
-
-export function captureOffer(allowed: string): boolean {
-  const param = new URLSearchParams(window.location.search).get("offer");
-  if (param === allowed) {
-    write(session, OFFER_KEY, allowed);
-    return true;
-  }
-  return read<string>(session, OFFER_KEY) === allowed;
-}

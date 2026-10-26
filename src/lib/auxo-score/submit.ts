@@ -101,13 +101,6 @@ export function buildReportPayload(email: string, state: State, r: Result, ctx: 
   };
 }
 
-export function buildExtendedPayload(email: string, state: State, r: Result, ctx: Context) {
-  return {
-    ...envelope("extended_interest", email, state, ctx),
-    qualifiers: { planningProjectThisYear: true, canAnswerFinanceAndOps: true },
-    result: { total: r.total, band: r.band.name, weakest: r.weakest, dimensions: r.dims },
-  };
-}
 
 type SubmitOutcome = { ok: true } | { ok: false; status: number; message: string };
 

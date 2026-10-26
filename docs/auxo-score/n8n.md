@@ -1,6 +1,6 @@
 # AUXO Score: n8n workflows
 
-Two workflows. The site POSTs JSON to each webhook and only shows "sent" when n8n answers `200 { "ok": true }`.
+One workflow. The site POSTs JSON to the report webhook and only shows "sent" when n8n answers `200 { "ok": true }`.
 
 Responses the site understands:
 
@@ -109,49 +109,3 @@ Responses the site understands:
 "I don't know" answers arrive as `{ "tier": 5, "points": 3, "isIdk": true, "label": "I don't know", "sub": "", "quadrant": null }`.
 
 ---
-
-## Workflow B: `auxo-score-extended`
-
-Steps 1–5 as above, with these differences:
-
-- Webhook path `auxo-score-extended`.
-- Validate `type === "extended_interest"` and `qualifiers.planningProjectThisYear === true && qualifiers.canAnswerFinanceAndOps === true` (no `answers` check).
-- Store in the `Extended Interest` tab: `submittedAt, submissionId, attemptId, email, emailDomain, total, band, weakest, Accurate, Complete, Consistent, Timely, Trusted, utm_*, referrer, timezone`.
-
-Then:
-
-6. **Confirmation email**. Subject `Your AUXO extended assessment request`, body: `We've received your request. We keep seats limited each month and will confirm your place by email.`
-7. **Internal alert** to Vignesh: `New extended request: {emailDomain}, {total}/100 ({band}), weakest {weakest}`.
-8. **Respond** `200 { "ok": true }`. No seat logic yet.
-
-### Sample payload
-
-```json
-{
-  "type": "extended_interest",
-  "version": "auxo-score-10card-v1",
-  "submissionId": "c2d4e6f8-1a3b-4c5d-8e7f-9a0b1c2d3e4f",
-  "attemptId": "0b6f2a0e-3c1d-4f7e-8a2b-9d1c4e5f6a7b",
-  "submittedAt": "2026-10-01T09:35:00.000Z",
-  "email": "cfo@company.com",
-  "emailDomain": "company.com",
-  "consent": true,
-  "hp": "",
-  "qualifiers": { "planningProjectThisYear": true, "canAnswerFinanceAndOps": true },
-  "result": {
-    "total": 74,
-    "band": "Stable",
-    "weakest": "Trusted",
-    "dimensions": { "Accurate": 20, "Complete": 20, "Consistent": 14, "Timely": 14, "Trusted": 6 }
-  },
-  "context": {
-    "page": "/auxo-score/",
-    "referrer": "",
-    "utm": { "source": "", "medium": "", "campaign": "", "content": "", "term": "" },
-    "startedAt": "2026-10-01T09:27:38.000Z",
-    "durationSec": 442,
-    "locale": "en-GB",
-    "timezone": "Asia/Dubai"
-  }
-}
-```

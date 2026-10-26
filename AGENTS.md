@@ -43,7 +43,7 @@ Audience: sceptical founders, finance leads, operators and team heads at startup
 - Lead with the buyer's problem, deliverables, and proof — not vision language.
 - Write for skimmers: headings and first sentences carry the argument.
 - Plain language, no jargon, no invented metrics.
-- Offers are **Startup audit** (seed to Series B, no charge), **Deep-dive audit** and **One unit first**. No public prices: "a fixed price per phase, in writing". Don't add "free" as filler.
+- Analyze has three depths, named the same everywhere: **AUXO Score** (self-check, anyone), **Founder review** (45-minute call + one-page plan, no charge for funded startups) and **Deep-dive audit** (paid systems review). Large organisations start with **One unit first**. Every AUXO Score taker sees the same report. No public prices: "a fixed price per phase, in writing". Don't add "free" as filler.
 - Blog posts show no author names.
 - One primary CTA ("Book a meeting", opens the booking modal); secondary CTAs only where a long page needs them.
 

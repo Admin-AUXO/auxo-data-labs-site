@@ -80,7 +80,7 @@ Build-time env vars (set in Netlify, not committed; `.env.local` for local work)
 | Var | Used by |
 |---|---|
 | `PUBLIC_EMAILJS_SERVICE_ID`, `PUBLIC_EMAILJS_TEMPLATE_ID`, `PUBLIC_EMAILJS_PUBLIC_KEY` | Contact form (`src/scripts/forms/contact.ts`). Template params include the optional `fit` ("Which fits you best?") value. |
-| `PUBLIC_N8N_REPORT_WEBHOOK`, `PUBLIC_N8N_EXTENDED_WEBHOOK` | AUXO Score emails |
+| `PUBLIC_N8N_REPORT_WEBHOOK` | AUXO Score report emails |
 | `PUBLIC_GTM_CONTAINER_ID` | Optional; `src/config/env.ts` defaults to `GTM-5TKFHDH5` |
 
 ## Analytics

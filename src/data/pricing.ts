@@ -68,14 +68,14 @@ export interface PricingContent {
 export const pricingContent: PricingContent = {
   metaTitle: "Pricing: three ways in, a fixed price per phase",
   metaDescription:
-    "A startup audit, seed to Series B. A deep-dive audit for growing companies. One unit first for large organisations. A fixed price per phase, in writing.",
+    "A founder review for funded startups, seed to Series B. A deep-dive audit for growing companies. One unit first for large organisations. A fixed price per phase, in writing.",
   hero: {
     eyebrow: "Pricing",
     title: "Start where you are.",
     lead: "Three ways in. Each phase has a fixed price, agreed in writing before we start.",
     rulesTitle: "How pricing works",
     rules: [
-      { tone: "free", icon: "mdi:check", text: "No charge for the AUXO Score or the startup audit." },
+      { tone: "free", icon: "mdi:check", text: "No charge for the AUXO Score or a founder review." },
       { tone: "free", icon: "mdi:key-outline", text: "Stop after any phase. You keep everything delivered." },
       { tone: "optional", icon: "mdi:domain", text: "Tool vendors bill you directly." },
       { tone: "optional", icon: "mdi:sync", text: "Upkeep is optional and monthly. Stop with 30 days' notice." },
@@ -97,7 +97,7 @@ export const pricingContent: PricingContent = {
         icon: "mdi:rocket-launch-outline",
         eyebrow: "Startups, seed to Series B",
         descriptor: "Investor-funded, moving fast, no data team yet.",
-        title: "Startup audit",
+        title: "Founder review",
         subline: "A plan to get the numbers investors ask for.",
         facts: {
           first: "A short application, a 45-minute founder call and a one-page plan.",
@@ -106,7 +106,7 @@ export const pricingContent: PricingContent = {
           price: "How many tools we connect and the metrics you need.",
           stop: "The plan is yours, whether or not you build with us.",
         },
-        cta: { text: "Apply for the startup audit", href: "/contact/?topic=startup-audit" },
+        cta: { text: "Apply for a founder review", href: "/contact/?topic=founder-review" },
         finePrint: "One per company.",
       },
       {
@@ -168,7 +168,7 @@ export const pricingContent: PricingContent = {
           "By what's involved: the tools, the teams and what we build. Each phase gets a fixed price in writing before we start. No two jobs match, so we don't publish prices.",
       },
       {
-        question: "Who can get the startup audit?",
+        question: "Who can get a founder review?",
         answer:
           "For startups that have raised from outside investors, one per company. Not enough data yet? We'll say so and suggest what to set up first.",
       },

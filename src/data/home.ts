@@ -204,7 +204,7 @@ export const homeContent: HomeContent = {
     rows: [
       {
         segment: "Startups, seed to Series B",
-        offer: "Startup audit",
+        offer: "Founder review",
         line: "A plan to get the numbers investors ask for.",
         href: "/pricing/#startups",
       },

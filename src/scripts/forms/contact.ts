@@ -37,7 +37,11 @@ const VALIDATORS: Record<string, Validator> = {
 const joinNames = (names: string[]) =>
   names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 
-const TOPIC_ALIASES: Record<string, string> = { marketplace: "marketplace-tool", "free-audit": "startup-audit" };
+const TOPIC_ALIASES: Record<string, string> = {
+  marketplace: "marketplace-tool",
+  "free-audit": "founder-review",
+  "startup-audit": "founder-review",
+};
 const topicBySlug = (slug: string | null) => {
   const s = slug ? (TOPIC_ALIASES[slug] ?? slug) : slug;
   return topics.find((t) => t.slug === s);

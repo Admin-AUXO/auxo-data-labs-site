@@ -1,75 +1,31 @@
 ---
-import ExtendedGate from "./ExtendedGate.astro";
 import { DIMENSIONS } from "../../lib/auxo-score/scoring";
 import { CARDS } from "../../lib/auxo-score/cards";
 import { LOAD_STEPS, SCORE_COPY } from "./copy";
 import "../../styles/pages/auxo-score.css";
 
 const { intro, result, inconclusive } = SCORE_COPY;
-const { deeper, reviewCall } = result;
+const { next } = result;
 ---
 <div
   class="score"
   data-auxo-score
   data-report-url={import.meta.env.PUBLIC_N8N_REPORT_WEBHOOK ?? ""}
-  data-extended-url={import.meta.env.PUBLIC_N8N_EXTENDED_WEBHOOK ?? ""}
 >
   <section class="score__screen" id="s-intro" data-screen="intro">
-    <span class="score__eyebrow">
-      <span data-path="default">{intro.default.eyebrow}</span>
-      <span data-path="startup" hidden>{intro.startup.eyebrow}</span>
-    </span>
-    <h1 class="score__h1" tabindex="-1">
-      <span data-path="default">{intro.default.title}</span>
-      <span data-path="startup" hidden>{intro.startup.title}</span>
-    </h1>
-    <p class="score__lede">
-      <span data-path="default">{intro.default.lede(CARDS.length)}</span>
-      <span data-path="startup" hidden>{intro.startup.lede}</span>
-    </p>
-    <ul class="score__dims" aria-label={intro.dimensionsLabel} data-path="default">
-      {DIMENSIONS.map((d) => <li>{d}</li>)}
-    </ul>
+    <span class="score__eyebrow">{intro.default.eyebrow}</span>
+    <h1 class="score__h1" tabindex="-1">{intro.default.title}</h1>
+    <p class="score__lede">{intro.default.lede(CARDS.length)}</p>
     <div class="score__side">
-      <ol class="score__steps" aria-label={intro.startup.stepsLabel} data-path="startup" hidden>
-        {
-          intro.startup.steps.map((step, i) => (
-            <li>
-              <span class="score__step-num" aria-hidden="true">{i + 1}</span>
-              <span class="score__step-title">{step.title}</span>
-              <span class="score__step-detail">{step.detail}</span>
-            </li>
-          ))
-        }
-      </ol>
-      <p class="score__eligibility" data-path="startup" hidden>{intro.startup.eligibility}</p>
-      <div class="score__facts" data-path="default">
+      <ul class="score__dims" aria-label={intro.dimensionsLabel}>
+        {DIMENSIONS.map((d) => <li>{d}</li>)}
+      </ul>
+      <div class="score__facts">
         <div><b>{CARDS.length}</b><small>{intro.facts.rounds}</small></div>
         <div><b>~3</b><small>{intro.facts.minutes}</small></div>
         <div><b>/100</b><small>{intro.facts.score}</small></div>
       </div>
     </div>
-    <script is:inline>
-      (function () {
-        var s = document.currentScript;
-        var root = s && s.closest("[data-auxo-score]");
-        if (!root) return;
-        var offer = "free-audit";
-        var on = false;
-        try {
-          on =
-            new URLSearchParams(location.search).get("offer") === offer ||
-            JSON.parse(sessionStorage.getItem("auxo-score-offer") || "null") === offer;
-        } catch (e) {
-          on = false;
-        }
-        if (!on) return;
-        root.dataset.offer = offer;
-        root.querySelectorAll("[data-path]").forEach(function (n) {
-          n.hidden = n.dataset.path !== "startup";
-        });
-      })();
-    </script>
     <div class="score__resume" id="resumeBar" hidden>
       <p id="resumeText">{intro.resume(1, CARDS.length)}</p>
       <div class="score__btn-row">
@@ -115,9 +71,9 @@ const { deeper, reviewCall } = result;
         <p class="score__band-line" id="bandLine"></p>
       </div>
     </div>
+    <div class="score__focus" id="focus"></div>
     <div class="score__panel">
-      <p class="score__panel-title">Score by area, out of 100</p>
-      <svg class="score__radar" id="radar" viewBox="0 0 360 330" role="img" aria-label="Radar chart of the five dimension scores"></svg>
+      <p class="score__panel-title">By area, out of 100</p>
       <table class="score__table" id="dimTable"></table>
       <ul class="score__legend" aria-label="Colour key">
         <li data-tone="ok">60+ solid</li>
@@ -125,8 +81,6 @@ const { deeper, reviewCall } = result;
         <li data-tone="crit">Under 40 at risk</li>
       </ul>
     </div>
-    <div class="score__focus" id="focus"></div>
-    <div class="score__gaps" id="gaps" hidden></div>
 
     <div class="score__cta">
       <button class="score__btn score__btn--full" type="button" id="emailBtn" aria-expanded="false" aria-controls="emailForm">
@@ -147,52 +101,29 @@ const { deeper, reviewCall } = result;
       </form>
     </div>
 
-    <div class="score__deeper" data-path="default">
-      <h3 class="score__deeper-title">{deeper.title}</h3>
-      <p class="score__note">{deeper.body}</p>
-      <button class="score__text-link" type="button" id="extLink" aria-expanded="false" aria-controls="extCheck">
-        {deeper.link}
-      </button>
-      <form class="score__check" id="extCheck" hidden>
-        <p class="score__check-title">{deeper.checkTitle}</p>
-        <label class="score__tick"><input type="checkbox" id="chk1" /> {deeper.ticks[0]}</label>
-        <label class="score__tick"><input type="checkbox" id="chk2" /> {deeper.ticks[1]}</label>
-        <button class="score__btn score__btn--ghost" type="submit" id="extContinue" disabled>{deeper.continue}</button>
-      </form>
-      <p class="score__note score__startup-line">
-        {deeper.startupLine} <a class="score__inline-link" href={deeper.startupLink.href}>{deeper.startupLink.text}</a>
-      </p>
-    </div>
-
-    <div class="score__deeper score__call" data-path="startup" hidden>
-      <h3 class="score__call-title" id="callTitle">{reviewCall.title}</h3>
-      <p class="score__note">{reviewCall.body}</p>
-      <div class="score__check" role="group" aria-labelledby="callTitle">
-        <label class="score__tick"><input type="checkbox" id="callChk1" /> {reviewCall.ticks[0]}</label>
-        <label class="score__tick"><input type="checkbox" id="callChk2" /> {reviewCall.ticks[1]}</label>
-        <button class="score__btn" type="button" id="callBtn" data-google-calendar-open disabled>{reviewCall.button}</button>
-      </div>
-      <button class="score__text-link" type="button" id="callTip" aria-controls="emailForm">{reviewCall.tip}</button>
-      <p class="score__note">
-        {reviewCall.notEligible.before}<button class="score__inline-link" type="button" data-google-calendar-open>{reviewCall.notEligible.bookText}</button>{reviewCall.notEligible.middle}<a class="score__inline-link" href={reviewCall.notEligible.deepDive.href}>{reviewCall.notEligible.deepDive.text}</a>{reviewCall.notEligible.after}
-      </p>
+    <div class="score__next">
+      <h3 class="score__next-title">{next.title}</h3>
+      <ul class="score__next-list">
+        <li class="score__next-item">
+          <p class="score__next-who">{next.startup.who}</p>
+          <p class="score__note">{next.startup.what}</p>
+          <a class="score__btn score__btn--ghost" href={next.startup.link.href}>{next.startup.link.text}</a>
+        </li>
+        <li class="score__next-item">
+          <p class="score__next-who">{next.growing.who}</p>
+          <p class="score__note">{next.growing.what}</p>
+          <button class="score__btn score__btn--ghost" type="button" data-google-calendar-open>{next.growing.button}</button>
+        </li>
+      </ul>
     </div>
   </section>
-
-  <ExtendedGate />
 
   <section class="score__screen" id="s-inconclusive" data-screen="inconclusive" hidden>
     <span class="score__status">{inconclusive.status}</span>
     <h2 class="score__h2" tabindex="-1">{inconclusive.title}</h2>
-    <p class="score__lede">
-      <span data-path="default">{inconclusive.default.lede}</span>
-      <span data-path="startup" hidden>{inconclusive.startup.lede}</span>
-    </p>
+    <p class="score__lede">{inconclusive.default.lede}</p>
     <div class="score__btn-row">
-      <a class="score__btn" href={inconclusive.default.talk.href} data-path="default">{inconclusive.default.talk.text}</a>
-      <button class="score__btn" type="button" id="inconclusiveCallBtn" data-google-calendar-open data-path="startup" hidden>
-        {inconclusive.startup.book}
-      </button>
+      <a class="score__btn" href={inconclusive.default.talk.href}>{inconclusive.default.talk.text}</a>
       <button class="score__btn score__btn--ghost" type="button" id="retakeBtn">{inconclusive.retake}</button>
     </div>
   </section>

@@ -25,7 +25,7 @@ export interface Result {
   idkCount: number;
 }
 
-export type Screen = "intro" | "quiz" | "loader" | "result" | "extended" | "inconclusive";
+export type Screen = "intro" | "quiz" | "loader" | "result" | "inconclusive";
 
 export interface State {
   screen: Screen;

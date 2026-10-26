@@ -27,7 +27,7 @@ const pages: Record<string, OGPage> = {
   },
   pricing: {
     title: "Start where you are.",
-    description: "Startup audit, seed to Series B. Deep-dive audit for growing companies. One unit first for large organisations.",
+    description: "Founder review for funded startups. Deep-dive audit for growing companies. One unit first for large organisations.",
   },
   marketplace: {
     title: "The AI stack for every team.",

@@ -10,7 +10,7 @@ const serviceOffers = [
   {
     name: "Analyze",
     description:
-      "An honest read of your business and your data, before you spend on AI. Includes the AUXO Score and a startup audit (seed to Series B) at no charge, and a paid deep-dive audit.",
+      "An honest read of your business and your data, before you spend on AI. Includes the AUXO Score and a founder review (funded startups, seed to Series B) at no charge, and a paid deep-dive audit.",
   },
   {
     name: "Advise",
