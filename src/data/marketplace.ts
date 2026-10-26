@@ -589,7 +589,6 @@ export const marketplaceContent = {
     liveInSuffix: "(typical)",
     bestForLabel: "Best for",
     backLabel: "Back",
-    vendorLabel: "By {vendor}",
     vendorLink: "Vendor site",
     includesLabel: "Includes",
     agentFacts: ["Built on Claude", "Google Sheets and Drive (v1; not Microsoft 365 yet)"],

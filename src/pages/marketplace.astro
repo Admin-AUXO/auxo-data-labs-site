@@ -103,9 +103,12 @@ const all = c.filters.categories[0];
                 <div class="mkt-flip">
                   <div class="mkt-face mkt-face--front" data-mkt-face="front">
                     <div class="mkt-card__top">
-                      <span class="mkt-badge" data-badge={card.badgeKey} title={badge.meaning}>
-                        <Icon name={badge.icon} aria-hidden="true" />
-                        {card.badge}
+                      <span class="mkt-card__tags">
+                        <span class="mkt-badge" data-badge={card.badgeKey} title={badge.meaning}>
+                          <Icon name={badge.icon} aria-hidden="true" />
+                          {card.badge}
+                        </span>
+                        {card.status && <span class="mkt-status">{card.status}</span>}
                       </span>
                       <button
                         type="button"
@@ -120,10 +123,6 @@ const all = c.filters.categories[0];
                     </div>
                     <div class="mkt-card__head">
                       <h2 class="mkt-card__name" id={nameId}>{card.name}</h2>
-                      <p class="mkt-card__vendor">
-                        {fill(c.card.vendorLabel, { vendor: card.vendor })}
-                        {card.status && <span class="mkt-status">{card.status}</span>}
-                      </p>
                     </div>
                     <p class="mkt-card__line">{card.short}</p>
                     <p class="mkt-card__live">
