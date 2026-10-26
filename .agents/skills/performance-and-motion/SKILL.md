@@ -27,7 +27,7 @@ Fast first. Fancy second.
 - No carousel library is installed; reuse the insight deck (`src/scripts/ui/insight-deck.ts`) or plain CSS where horizontal comparison helps. Do not turn essential navigation or core reading flows into swipe traps.
 - Prefer mobile-only carousel activation for dense card collections when desktop already has enough width.
 - Dropdowns, drawers, and modal menus need deliberate overflow behavior. If the viewport is shorter than the design, the component still has to work.
-- Treat hero media as LCP-critical and everything else as suspect.
+- The hero is text-only; treat its headline as LCP-critical and any added media as suspect.
 - Lazy-load what is not needed immediately.
 - Keep fonts and third-party scripts from blocking the page.
 

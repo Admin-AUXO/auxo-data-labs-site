@@ -15,7 +15,7 @@ A 10-question, evidence-based data health test. Five dimensions (Accurate, Compl
 | `src/lib/auxo-score/submit.ts` | n8n payload builders, `fetch` with 10s timeout, error messages |
 | `src/lib/auxo-score/analytics.ts` | `scoreEvent()`: consent-gated `score_*` events (only when `auxo_consent=granted`), fired from `controller.ts`. GTM maps `score_start` / `score_complete` to GA4 `assessment_start` / `assessment_complete`. |
 | `src/components/auxo-score/AuxoScore.astro` | All screens (markup) |
-| `src/components/auxo-score/copy.ts` | Screen copy, including the startup free-audit intro. **Edit wording here.** |
+| `src/components/auxo-score/copy.ts` | Screen copy, including the startup audit intro. **Edit wording here.** |
 | `src/components/auxo-score/controller.ts` | Client state machine, keyboard, saving, forms |
 | `src/components/auxo-score/Radar.ts` | Radar SVG builder (pure) |
 | `src/components/auxo-score/ExtendedGate.astro` | Extended early-access screen. Swap this for the real extended test later. |
@@ -44,7 +44,7 @@ For local testing, put them in `.env.local` (git-ignored).
 - `auxo-score-v2`: in-progress attempt (screen, index, answers, layout, startedAt, attemptId)
 - `auxo-score-v2-result`: last completed result; feeds the nav score badge
 - `auxo-score-utm` (sessionStorage): UTM params from first page load
-- `auxo-score-offer` (sessionStorage): set by `?offer=free-audit` (the pricing, how-it-works and contact links for startups); switches the intro to the free-audit path for the rest of the session
+- `auxo-score-offer` (sessionStorage): set by `?offer=free-audit` (the pricing, how-it-works and contact links for startups); switches the intro to the startup audit path for the rest of the session
 - The old self-check keys (`auxo-self-check-*`) are deleted on first load.
 
 All reads/writes are wrapped in try/catch; with storage blocked the test still works, it just can't resume.

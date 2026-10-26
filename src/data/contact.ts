@@ -40,6 +40,7 @@ export interface ContactTopic {
 export interface ContactTool {
   slug: string;
   name: string;
+  group: string;
   disclosures: string[];
 }
 
@@ -72,6 +73,8 @@ export interface ContactContent {
     tools: {
       label: string;
       removeLabel: string;
+      addLabel: string;
+      addPlaceholder: string;
       catalogue: ContactTool[];
       functions: ContactFunction[];
     };
@@ -232,7 +235,9 @@ export const contactContent: ContactContent = {
     tools: {
       label: "Tools in this request",
       removeLabel: "Remove {name}",
-      catalogue: marketplaceCards.map((c) => ({ slug: c.slug, name: c.name, disclosures: c.disclosures })),
+      addLabel: "Add from the marketplace",
+      addPlaceholder: "Choose a tool or stack",
+      catalogue: marketplaceCards.map((c) => ({ slug: c.slug, name: c.name, group: c.badge, disclosures: c.disclosures })),
       functions: marketplaceContent.filters.categories
         .filter((c) => c.slug !== "all")
         .map((c) => ({ slug: c.slug, label: c.label })),

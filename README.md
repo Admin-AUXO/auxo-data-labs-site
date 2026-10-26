@@ -60,7 +60,16 @@ Page copy lives in `src/data/*.ts` (home, how-it-works, pricing, marketplace, ab
 
 ## Design
 
-Single dark theme. `src/styles/tokens.css` is the source of truth for colour and type; `docs/design/color-palette.html` is a visual reference of those tokens (open it locally). For the full human brand reference (logos, voice, usage), see the canonical kit in the `auxo-marketing` repo: `brand/`.
+Single dark theme with a lime accent. `src/styles/tokens.css` is the source of truth for colour and type; `docs/design/color-palette.html` is a visual reference of those tokens (open it locally). For the full brand reference (logos, voice, usage), see `brand/` in the `auxo-marketing` repo.
+
+Fonts are self-hosted `woff2` in `public/fonts/`:
+
+| Role | Font |
+|---|---|
+| Headings | AUXO Display (`AUXODisplay-Variable.woff2`): Mona Sans, OFL, instanced at width 112 and renamed per its Reserved Font Name. Licence in `AUXODisplay-OFL.txt`. Weights 800/700 via `--font-weight-display-strong` / `--font-weight-display`. |
+| Body | Plus Jakarta Sans |
+| Mono | JetBrains Mono |
+| Logo | Montserrat AUXO |
 
 ## Deployment
 
@@ -76,7 +85,7 @@ Build-time env vars (set in Netlify, not committed; `.env.local` for local work)
 
 ## Analytics
 
-GTM `GTM-5TKFHDH5` (published version 4) feeds GA4 `G-WBMKHRWS7Z`. Events are pushed to `dataLayer` with `track()` from `src/scripts/analytics/track.ts`, which also sends the automatic ones (page_view on every `astro:page-load`, cta_click, navigation_click, outbound click, file_download, scroll, engagement_milestone, rage_click, exception, search). Other sources:
+GTM `GTM-5TKFHDH5` feeds GA4 `G-WBMKHRWS7Z`. Events are pushed to `dataLayer` with `track()` from `src/scripts/analytics/track.ts`, which also sends the automatic ones (page_view on every `astro:page-load`, cta_click, navigation_click, outbound click, file_download, scroll, engagement_milestone, rage_click, exception, search). Other sources:
 
 - `src/scripts/forms/contact.ts` — form_start, form_abandonment, generate_lead
 - `src/components/auxo-score/controller.ts` via `src/lib/auxo-score/analytics.ts` — consent-gated `score_*`; GTM maps score_start / score_complete to GA4 `assessment_start` / `assessment_complete`
@@ -88,4 +97,4 @@ A new event reaches GA4 only after a matching trigger and tag are published in G
 
 ## AUXO Score
 
-The `/auxo-score/` test and its n8n webhooks are documented in [`docs/auxo-score/README.md`](docs/auxo-score/README.md). The old `/self-check/` path 301s to it.
+The `/auxo-score/` test and its n8n webhooks are documented in [`docs/auxo-score/README.md`](docs/auxo-score/README.md). `/self-check/` 301s to it.

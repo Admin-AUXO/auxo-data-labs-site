@@ -15,6 +15,13 @@ Shape the system before touching components.
 4. Reuse existing tokens and patterns where they still fit. Extend them only when the new direction is clearly better.
 5. Decide where information density should live so design supports scanning instead of fighting it.
 
+## Current System
+
+- Single dark theme, lime accent. Tokens in `src/styles/tokens.css`; `.hl-accent` is the accent colour.
+- Type: headings **AUXO Display** (Mona Sans, OFL, width 112, renamed per its Reserved Font Name), body **Plus Jakarta Sans**, mono **JetBrains Mono**, logo **Montserrat AUXO**. Heading weights 800/700 via `--font-weight-display-strong` / `--font-weight-display`.
+- Sections: eyebrow + heading + lead stacked over a full-width grid. Two-tone headings: the second sentence muted via `HighlightText soften`.
+- Accordions hide item numbers for three items or fewer.
+
 ## Rules
 
 - Use one display voice and one workhorse body face.

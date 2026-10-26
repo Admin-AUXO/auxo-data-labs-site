@@ -23,13 +23,17 @@ If a section does not help answer one of those questions, it is probably clutter
 
 For most marketing pages in this repo:
 
-1. Hero with value proposition and direct CTA
+1. Text-only hero: value proposition, lead and direct CTA (no hero media)
 2. Relevance or proof block that validates the buyer quickly
 3. Core services, offers, or use-case paths
 4. Process, methodology, or decision framework
 5. Supporting proof, industry relevance, case material, or metrics
 6. Objection-handling content such as FAQ, scope guidance, or fit criteria
 7. Final CTA
+
+## Section Pattern
+
+Every section uses the same shape: eyebrow + heading + lead stacked (`SectionHeader`) over a full-width grid of cards or an accordion. Headings are two-tone: the second sentence is muted with `HighlightText soften`.
 
 ## Offer Page Rules
 
@@ -42,10 +46,12 @@ For How it works (`/how-it-works/`):
 3. Follow with the method and an FAQ for objection handling.
 4. End with one clear CTA.
 
+The Analyze offers are the **Startup audit** (seed to Series B, no charge: AUXO Score, a 45-minute founder call, a one-page plan) and the paid **Deep-dive audit**. Large organisations start with **One unit first**. Say "Startup audit", not "free audit".
+
 For Pricing (`/pricing/`):
 
 1. One card per segment: startups (seed to Series B), growing companies (50–500 people), large organisations.
-2. Each card: the way in, what comes first and next, timing, and one CTA. No prices; "a fixed price per phase, set by scope, in writing".
+2. Each card: the way in, what comes first and next, timing, and one CTA. No prices anywhere public; "a fixed price per phase, set by scope, in writing".
 3. Close with what every engagement includes, the FAQ, and the final CTA.
 
 For Marketplace (`/marketplace/`):

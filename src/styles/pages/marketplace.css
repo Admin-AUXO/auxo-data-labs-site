@@ -667,11 +667,12 @@ html:not([data-js]) .mkt-more {
 }
 
 .mkt-card__foot {
-  align-items: flex-start;
+  align-items: center;
   border-block-start: 1px solid var(--hairline);
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  flex-flow: row wrap;
+  gap: 0.6rem 1rem;
+  justify-content: space-between;
   margin-block-start: auto;
   padding-block-start: 0.85rem;
 }
@@ -682,12 +683,8 @@ html:not([data-js]) .mkt-more {
   padding-block-start: 0;
 }
 
-@media (width >= 22rem) and (width < 64rem), (width >= 80rem) {
-  .mkt-face .mkt-card__foot {
-    align-items: center;
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
+.mkt-card__foot .mkt-add {
+  margin-inline-start: auto;
 }
 
 .mkt-card__pay {
@@ -938,4 +935,17 @@ html:not([data-js]) .mkt-more {
   font-size: var(--text-lg);
   font-weight: 600;
   line-height: 1.35;
+}
+
+@media (width < 44rem) {
+  .mkt-flip,
+  .mkt-card[data-flipped="true"] .mkt-flip,
+  .mkt-face--back {
+    transform: none;
+  }
+
+  .mkt-card[data-flipped="false"] .mkt-face--back,
+  .mkt-card[data-flipped="true"] .mkt-face--front {
+    display: none;
+  }
 }

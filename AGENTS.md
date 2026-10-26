@@ -9,7 +9,7 @@ Audience: sceptical founders, finance leads, operators and team heads at startup
 - **Astro 6**, fully static (`output: 'static'`, no adapter), view transitions via `ClientRouter`. Every route prerenders; the contact form posts client-side via EmailJS (`PUBLIC_EMAILJS_*` build vars, optional `fit` field). Netlify auto-deploys `main`; deploy config, redirects and headers in `netlify.toml`.
 - **Tailwind v4**, CSS-first (`@import "tailwindcss"`). Tokens in `src/styles/tokens.css` are the source of truth.
 - **Pagefind** search (lazy-loaded), **astro-icon**, **MDX** for blog and insights, **astro-og-canvas** for OG images. GTM/GA4 load deferred (first interaction or 2.5s post-load) with inline Consent Mode v2 — keep it off the critical path. GTM container ID comes from `src/config/env.ts`.
-- Single dark theme. Self-hosted, subset `woff2` fonts in `public/fonts/`.
+- Single dark theme, lime accent. Self-hosted `woff2` fonts in `public/fonts/`: headings **AUXO Display** (Mona Sans, OFL, instanced at width 112 and renamed per its Reserved Font Name; licence `AUXODisplay-OFL.txt`), body **Plus Jakarta Sans**, mono **JetBrains Mono**, logo **Montserrat AUXO**. Heading weights 800/700 come from the `--font-weight-display-strong` / `--font-weight-display` tokens.
 
 ## Layout
 
@@ -34,6 +34,8 @@ Audience: sceptical founders, finance leads, operators and team heads at startup
 - Motion is on by default for every visitor (the OS reduced-motion setting is not used) and switchable via the footer toggle (persisted in localStorage via `src/scripts/core/motion.ts`). Rich motion only runs under `html[data-motion="on"]` — gate any new animation behind it and read `motionEnabled()` in JS.
 - Push analytics events with `track()` from `src/scripts/analytics/track.ts` (AUXO Score events go through `scoreEvent()` in `src/lib/auxo-score/analytics.ts`). A new event needs a trigger and tag published in GTM `GTM-5TKFHDH5` before it reaches GA4.
 - `public/` bypasses the build pipeline — keep it standards-based and self-contained.
+- Section pattern: eyebrow + heading + lead stacked (`SectionHeader`) over a full-width grid. Headings are two-tone: the second sentence is muted via `HighlightText soften`; `.hl-accent` is the accent colour. The home hero is text-only.
+- `Accordion` hides item numbers when it has three items or fewer.
 
 ## Content
 
@@ -41,6 +43,8 @@ Audience: sceptical founders, finance leads, operators and team heads at startup
 - Lead with the buyer's problem, deliverables, and proof — not vision language.
 - Write for skimmers: headings and first sentences carry the argument.
 - Plain language, no jargon, no invented metrics.
+- Offers are **Startup audit** (seed to Series B, no charge), **Deep-dive audit** and **One unit first**. No public prices: "a fixed price per phase, in writing". Don't add "free" as filler.
+- Blog posts show no author names.
 - One primary CTA ("Book a meeting", opens the booking modal); secondary CTAs only where a long page needs them.
 
 ## Commands

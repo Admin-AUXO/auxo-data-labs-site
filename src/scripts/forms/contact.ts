@@ -127,15 +127,52 @@ function createToolList(messageField: HTMLElement) {
   list.setAttribute("aria-labelledby", label.id);
   const notes = document.createElement("div");
   notes.className = "flex flex-col gap-1 text-sm text-subtle";
-  wrap.append(label, list, notes);
+  const picker = document.createElement("select");
+  picker.className = "select";
+  picker.setAttribute("aria-label", toolCopy.addLabel);
+  wrap.append(label, list, picker, notes);
   messageField.insertAdjacentElement("beforebegin", wrap);
 
   let current: ContactTool[] = [];
+  let open = false;
+
+  const renderPicker = () => {
+    picker.textContent = "";
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = toolCopy.addPlaceholder;
+    picker.append(placeholder);
+    const groups = new Map<string, HTMLOptGroupElement>();
+    for (const tool of toolCopy.catalogue) {
+      if (current.some((t) => t.slug === tool.slug)) continue;
+      let group = groups.get(tool.group);
+      if (!group) {
+        group = document.createElement("optgroup");
+        group.label = tool.group;
+        groups.set(tool.group, group);
+        picker.append(group);
+      }
+      const option = document.createElement("option");
+      option.value = tool.slug;
+      option.textContent = tool.name;
+      group.append(option);
+    }
+    picker.hidden = groups.size === 0;
+  };
+
+  picker.addEventListener("change", () => {
+    const tool = toolCopy.catalogue.find((t) => t.slug === picker.value);
+    if (!tool) return;
+    current = [...current, tool];
+    render();
+    picker.focus();
+  });
 
   const render = () => {
     list.textContent = "";
     notes.textContent = "";
-    wrap.hidden = current.length === 0;
+    wrap.hidden = !open && current.length === 0;
+    renderPicker();
     for (const tool of current) {
       const li = document.createElement("li");
       li.className =
@@ -169,6 +206,10 @@ function createToolList(messageField: HTMLElement) {
   return {
     set(tools: ContactTool[]) {
       current = tools.slice();
+      render();
+    },
+    show(on: boolean) {
+      open = on;
       render();
     },
     get: () => current,
@@ -206,9 +247,12 @@ function initContactForm() {
 
   const renderHint = topicSelect ? createTopicHint(topicSelect) : () => {};
   const currentTopic = () => (topicSelect ? topicByLabel(topicSelect.value) : undefined);
-  topicSelect?.addEventListener("change", () => renderHint(currentTopic()));
-
   const toolList = messageField ? createToolList(messageField) : null;
+  const syncTools = () => toolList?.show(["marketplace-tool", "custom-stack"].includes(currentTopic()?.slug ?? ""));
+  topicSelect?.addEventListener("change", () => {
+    renderHint(currentTopic());
+    syncTools();
+  });
   const selectedTools = () => toolList?.get() ?? [];
 
   const query = readQuery();
@@ -217,6 +261,7 @@ function initContactForm() {
     renderHint(query.topic);
   }
   toolList?.set(query.tools);
+  syncTools();
   if (message && !message.value.trim()) {
     let text = "";
     if (query.tools.length) {
@@ -291,6 +336,7 @@ function initContactForm() {
       form.reset();
       renderHint(undefined);
       toolList?.set([]);
+      syncTools();
     };
 
     if ((honeypotInput?.value ?? "").trim()) {
