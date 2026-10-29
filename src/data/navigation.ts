@@ -23,14 +23,13 @@ export const navigationContent: NavigationContent = {
     { name: "Pricing", href: "/pricing/" },
     { name: "Marketplace", href: "/marketplace/" },
     { name: "Blog", href: "/blog/" },
-    { name: "AUXO Score", href: "/auxo-score/" },
   ],
   secondaryLink: {
-    label: "Contact",
-    href: "/contact/",
+    label: "AUXO Score",
+    href: "/auxo-score/",
   },
   cta: {
-    label: "Book a meeting",
-    href: siteData.bookingUrl,
+    label: "Apply for a Founder review",
+    href: siteData.applyUrl,
   },
 };

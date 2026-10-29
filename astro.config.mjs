@@ -14,6 +14,7 @@ export default defineConfig({
   output: 'static',
   redirects: {
     '/v': '/hello/',
+    '/contact': '/apply/',
   },
   devToolbar: { enabled: false },
   prefetch: {
@@ -34,7 +35,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !/\/(offline|404|hello)\/?$/.test(page),
+      filter: (page) => !/\/(offline|404|hello|links)\/?$/.test(page),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

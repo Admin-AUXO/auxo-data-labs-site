@@ -51,7 +51,7 @@ src/
 public/         Static files: fonts, icons, vCards, robots/llms/ai/humans txt
 scripts/        Icon and Wallet pass generators
 tests/          Playwright specs; tests/auxo-score/ for Vitest
-docs/           AUXO Score + n8n, business card (Wallet notes, /v QR print files), colour palette
+docs/           AUXO Score, lead pipeline, business card (Wallet notes, /v QR print files), colour palette
 ```
 
 ## Editing content
@@ -79,15 +79,14 @@ Build-time env vars (set in Netlify, not committed; `.env.local` for local work)
 
 | Var | Used by |
 |---|---|
-| `PUBLIC_EMAILJS_SERVICE_ID`, `PUBLIC_EMAILJS_TEMPLATE_ID`, `PUBLIC_EMAILJS_PUBLIC_KEY` | Contact form (`src/scripts/forms/contact.ts`). Template params include the optional `fit` ("Which fits you best?") value. |
-| `PUBLIC_N8N_REPORT_WEBHOOK` | AUXO Score report emails |
+| `GOOGLE_SERVICE_ACCOUNT`, `PIPELINE_SHEET_ID`, `SEQUENZY_API_KEY`, `SEQUENZY_FROM` | Netlify functions only (`/api/lead`, daily follow-ups). See `docs/lead-pipeline.md` |
 | `PUBLIC_GTM_CONTAINER_ID` | Optional; `src/config/env.ts` defaults to `GTM-5TKFHDH5` |
 
 ## Analytics
 
 GTM `GTM-5TKFHDH5` feeds GA4 `G-WBMKHRWS7Z`. Events are pushed to `dataLayer` with `track()` from `src/scripts/analytics/track.ts`, which also sends the automatic ones (page_view on every `astro:page-load`, cta_click, navigation_click, outbound click, file_download, scroll, engagement_milestone, rage_click, exception, search). Other sources:
 
-- `src/scripts/forms/contact.ts` — form_start, form_abandonment, generate_lead
+- `src/scripts/forms/contact.ts` (the `/apply/` form) — form_start, form_abandonment, application_submit, generate_lead
 - `src/components/auxo-score/controller.ts` via `src/lib/auxo-score/analytics.ts` — consent-gated `score_*`; GTM maps score_start / score_complete to GA4 `assessment_start` / `assessment_complete`
 - `src/scripts/marketplace.ts` — marketplace_details, stack_add, stack_remove
 - `src/pages/hello.astro` — card_founder_select, card_link_click
@@ -97,4 +96,4 @@ A new event reaches GA4 only after a matching trigger and tag are published in G
 
 ## AUXO Score
 
-The `/auxo-score/` test and its n8n webhooks are documented in [`docs/auxo-score/README.md`](docs/auxo-score/README.md). `/self-check/` 301s to it.
+The `/auxo-score/` test is documented in [`docs/auxo-score/README.md`](docs/auxo-score/README.md). `/self-check/` 301s to it.

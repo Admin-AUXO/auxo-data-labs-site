@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/layout/Section.astro";
+import Button from "../components/ui/Button.astro";
+import { linksContent as c } from "../data/links";
+---
+<BaseLayout title={c.meta.title} description={c.meta.description} noindex>
+  <Section padding="xl" width="5xl" class="text-center">
+    <div class="mx-auto flex max-w-md flex-col items-center gap-6">
+      <h1 class="text-display text-display--5xl">{c.title}</h1>
+      <p class="lead text-balance">{c.lead}</p>
+      <div class="grid w-full gap-3">
+        {c.links.map((l) => (
+          <Button variant={l.primary ? "primary" : "secondary"} size="lg" href={l.href} icon={l.primary}>
+            {l.text}
+          </Button>
+        ))}
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

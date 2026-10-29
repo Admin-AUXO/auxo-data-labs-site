@@ -55,9 +55,9 @@ export function clearLegacy(): void {
 }
 
 export function captureUtm(): Utm {
-  const saved = read<Utm>(session, UTM_KEY);
-  if (saved) return saved;
   const p = new URLSearchParams(window.location.search);
+  const saved = read<Utm>(session, UTM_KEY);
+  if (saved && !p.has("utm_source") && !p.has("utm_campaign")) return saved;
   const utm: Utm = {
     source: p.get("utm_source") ?? "",
     medium: p.get("utm_medium") ?? "",

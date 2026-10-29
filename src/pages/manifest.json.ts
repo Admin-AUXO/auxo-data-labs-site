@@ -36,8 +36,8 @@ const manifest = {
     {
       name: "Contact",
       short_name: "Contact",
-      description: "Book a meeting with AUXO",
-      url: "/contact/",
+      description: "Apply for a Founder review",
+      url: "/apply/",
       icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
     },
   ],

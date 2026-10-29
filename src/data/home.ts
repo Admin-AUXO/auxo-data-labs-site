@@ -113,8 +113,8 @@ export const homeContent: HomeContent = {
     titleHighlight: "AI.",
     subtitle:
       "We look at your business and data, tell you which AI fits, and set it up for you. Built to last, and yours to keep.",
-    primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
-    secondaryCta: { text: "See how it works", href: "/how-it-works/" },
+    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+    secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   proof: {
     text: "Founder-led. Ex-IBM delivery across the GCC. Data and cloud work for Fortune 500 companies.",
@@ -124,7 +124,7 @@ export const homeContent: HomeContent = {
     title: "How ready is your data for AI?",
     stat: "More than one in three CFOs don't completely trust their own financial data.",
     footnoteId: "ref-1",
-    cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
+    cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     reassurance: "10 questions, no sign-up. Your answers stay on your device unless you ask for the report by email.",
   },
   logos: {
@@ -253,8 +253,8 @@ export const homeContent: HomeContent = {
     title: "Tell us what isn't working.",
     description:
       "Bring the problem. Leave knowing what to fix first.",
-    ctaText: "Book a meeting",
-    ctaHref: siteData.bookingUrl,
+    ctaText: "Apply for a Founder review",
+    ctaHref: siteData.applyUrl,
     reassurance,
   },
 };

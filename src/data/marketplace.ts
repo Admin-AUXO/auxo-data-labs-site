@@ -268,7 +268,7 @@ export const marketplaceCards: MarketplaceCard[] = tools.map(toCard);
 
 export const anyPartnerJoined = marketplaceCards.some((c) => c.partnerProgrammeJoined);
 
-export const stackRequestBase = "/contact/?topic=marketplace-tool&tool=";
+export const stackRequestBase = "/apply/?tool=";
 
 export const addToStackHref = (slugs: string | string[]): string =>
   `${stackRequestBase}${[slugs].flat().map(encodeURIComponent).join(",")}`;
@@ -335,8 +335,8 @@ export const marketplaceContent = {
   customStack: {
     title: "Custom stack",
     body: "Not listed? Tell us the work.",
-    cta: "Talk to us",
-    href: "/contact/?topic=custom-stack",
+    cta: "Apply for a Founder review",
+    href: "/apply/?tool=custom-stack",
   },
   howWeGetPaid: {
     eyebrow: "Fees",
@@ -377,8 +377,8 @@ export const marketplaceContent = {
   cta: {
     title: "Not sure what your team needs?",
     description: "We'll suggest a stack for your team.",
-    ctaText: "Book a meeting",
-    ctaHref: siteData.bookingUrl,
+    ctaText: "Apply for a Founder review",
+    ctaHref: siteData.applyUrl,
     reassurance: "A real person replies within one business day.",
   },
 };

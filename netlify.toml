@@ -53,6 +53,18 @@
   force = true
 
 [[redirects]]
+  from = "/contact/"
+  to = "/apply/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "/apply/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/v"
   to = "/hello/"
   status = 301

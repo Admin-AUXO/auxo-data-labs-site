@@ -6,11 +6,11 @@ import "../../styles/pages/auxo-score.css";
 
 const { intro, result, inconclusive } = SCORE_COPY;
 const { next } = result;
+const { gate } = SCORE_COPY;
 ---
 <div
   class="score"
   data-auxo-score
-  data-report-url={import.meta.env.PUBLIC_N8N_REPORT_WEBHOOK ?? ""}
 >
   <section class="score__screen" id="s-intro" data-screen="intro">
     <span class="score__eyebrow">{intro.default.eyebrow}</span>
@@ -62,6 +62,28 @@ const { next } = result;
     </div>
   </section>
 
+  <section class="score__screen" id="s-gate" data-screen="gate" data-pagefind-ignore="all" hidden>
+    <span class="score__eyebrow">{gate.eyebrow}</span>
+    <h2 class="score__h2" tabindex="-1">{gate.title}</h2>
+    <p class="score__lede">{gate.lede}</p>
+    <form class="score__mail" id="gateForm" novalidate>
+      <label for="gateEmail">{gate.label}</label>
+      <div class="score__mail-row">
+        <input id="gateEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" required />
+        <button class="score__btn" type="submit">{gate.button}</button>
+      </div>
+      <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <label class="score__optin">
+        <input type="checkbox" name="newsletter" id="gateNewsletter" />
+        <span>{gate.newsletter}</span>
+      </label>
+      <p class="score__consent">
+        {gate.consent} <a href="/legal/privacy-policy/">Privacy Policy</a>
+      </p>
+      <p class="score__msg" id="gateMsg" role="status"></p>
+    </form>
+  </section>
+
   <section class="score__screen" id="s-result" data-screen="result" data-pagefind-ignore="all" hidden>
     <span class="score__eyebrow">Your AUXO Score</span>
     <div class="score__head" id="scoreHead">
@@ -90,37 +112,11 @@ const { next } = result;
 
     <div class="score__actions">
       <p class="score__panel-title">{next.title}</p>
-      <ul class="score__next-list">
-        <li class="score__next-item score__next-item--report">
-          <p class="score__next-who">{next.report.who}</p>
-          <p class="score__note">{next.report.what}</p>
-          <button class="score__btn" type="button" id="emailBtn" aria-expanded="false" aria-controls="emailForm">
-            Email my full report
-          </button>
-          <form class="score__mail" id="emailForm" novalidate hidden>
-            <label for="emailInput">Work email</label>
-            <div class="score__mail-row">
-              <input id="emailInput" name="email" type="email" autocomplete="email" placeholder="name@company.com" required />
-              <button class="score__btn" type="submit">Send</button>
-            </div>
-            <input class="score__hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <p class="score__consent">
-              We'll email your report and may follow up once. No spam. <a href="/legal/privacy-policy/">Privacy Policy</a>
-            </p>
-            <p class="score__msg" id="emailMsg" role="status"></p>
-          </form>
-        </li>
-        <li class="score__next-item">
-          <p class="score__next-who">{next.startup.who}</p>
-          <p class="score__note">{next.startup.what}</p>
-          <a class="score__btn score__btn--ghost" href={next.startup.link.href}>{next.startup.link.text}</a>
-        </li>
-        <li class="score__next-item">
-          <p class="score__next-who">{next.growing.who}</p>
-          <p class="score__note">{next.growing.what}</p>
-          <button class="score__btn score__btn--ghost" type="button" data-google-calendar-open>{next.growing.button}</button>
-        </li>
-      </ul>
+      <p class="score__note">{next.apply.what}</p>
+      <div class="score__btn-row">
+        <a class="score__btn" id="applyBtn" href={next.apply.href}>{next.apply.text}</a>
+      </div>
+      <p class="score__note" id="reportMsg" role="status"></p>
     </div>
   </section>
 

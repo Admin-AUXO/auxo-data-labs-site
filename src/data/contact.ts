@@ -1,23 +1,17 @@
 import { siteData } from "./site";
-import { marketplaceCards, marketplaceContent, retiredSlugs, type BadgeKey } from "./marketplace";
-
-const toolGroups: Record<BadgeKey, string> = {
-  "auxo-stack": "Team bundles",
-  "works-with": "Setup services",
-  partner: "Partner tools",
-  "built-by-auxo": "AUXO agents",
-};
+import { marketplaceCards, retiredSlugs } from "./marketplace";
 
 export interface ContactField {
   name: string;
   label: string;
-  type: "text" | "email" | "textarea" | "select";
+  type: "text" | "email" | "url" | "textarea" | "select";
   placeholder?: string;
   required?: boolean;
   optional?: boolean;
   options?: string[];
   maxLength?: number;
   minLength?: number;
+  autocomplete?: string;
 }
 
 export interface ContactDetail {
@@ -28,33 +22,9 @@ export interface ContactDetail {
   external?: boolean;
 }
 
-export type ContactTopicSlug =
-  | "not-sure"
-  | "founder-review"
-  | "deep-dive-audit"
-  | "marketplace-tool"
-  | "custom-stack"
-  | "enterprise"
-  | "something-else";
-
-export interface ContactTopic {
-  slug: ContactTopicSlug;
-  label: string;
-  hint?: string;
-  hintLink?: { text: string; href: string };
-}
-
 export interface ContactTool {
   slug: string;
   name: string;
-  group: string;
-  startHere: boolean;
-  disclosures: string[];
-}
-
-export interface ContactFunction {
-  slug: string;
-  label: string;
 }
 
 export interface ContactContent {
@@ -67,38 +37,38 @@ export interface ContactContent {
     title: string;
     titleHighlight: string | string[];
     lead: string;
+    points: string[];
   };
   details: {
     title: string;
     items: ContactDetail[];
-    cta: { text: string };
   };
   form: {
     title: string;
     description: string;
     fields: ContactField[];
-    topics: ContactTopic[];
     tools: {
-      label: string;
       catalogue: ContactTool[];
       aliases: Record<string, string>;
-      functions: ContactFunction[];
+      note: string;
     };
-    prefill: {
-      tools: string;
-      customStack: string;
-      customStackNoFunction: string;
-    };
+    bandNote: string;
+    newsletterLabel: string;
     consentNote: string;
     consentLink: { text: string; href: string };
     submitText: string;
     status: {
       sending: string;
-      success: string;
       error: string;
       consentRequired: string;
-      notConfigured: string;
     };
+  };
+  booking: {
+    title: string;
+    lead: string;
+    note: string;
+    iframeTitle: string;
+    fallback: string;
   };
   nextSteps: {
     eyebrow: string;
@@ -116,48 +86,24 @@ export interface ContactContent {
   };
 }
 
-const topics: ContactTopic[] = [
-  { slug: "not-sure", label: "Not sure where to start" },
-  {
-    slug: "founder-review",
-    label: "Founder review",
-    hint: "For startups that raised from outside investors, seed to Series B. One per company.",
-    hintLink: { text: "Take the AUXO Score first (optional)", href: "/auxo-score/" },
-  },
-  {
-    slug: "deep-dive-audit",
-    label: "Deep-dive audit",
-    hint: "A fixed price, agreed in writing. NDA first if you want one.",
-  },
-  {
-    slug: "marketplace-tool",
-    label: "Marketplace tool",
-    hint: "Tell us about your team and what you want the tool to do.",
-  },
-  {
-    slug: "custom-stack",
-    label: "Custom stack",
-    hint: "Tell us which team it's for and the work you want off their plate.",
-  },
-  {
-    slug: "enterprise",
-    label: "One unit first",
-    hint: "Tell us about your buying, security or contract steps. We can start with one team.",
-  },
-  { slug: "something-else", label: "Something else" },
-];
+export const stageOptions = ["Startup, seed to Series B", "Growing company, 50–500 people", "Larger organisation"];
 
 export const contactContent: ContactContent = {
   meta: {
-    title: "Contact: talk to the founders",
+    title: "Apply for a Founder review",
     description:
-      "Tell us what you want AI and your data to do. A real person replies within one business day.",
+      "A 30-minute call with an AUXO founder, by application. Bring the one number you don't trust. Written next steps within 3 business days.",
   },
   hero: {
-    eyebrow: "Contact",
-    title: "Talk to a founder.",
+    eyebrow: "Founder review",
+    title: "30 minutes with a founder.",
     titleHighlight: "founder",
-    lead: "A few lines is enough.",
+    lead: "Bring the one number you don't trust. Leave with what to fix first.",
+    points: [
+      "A call with Vignesh or Ajay, not a sales team.",
+      "Written next steps within 3 business days.",
+      "Limited places each month. We read every application.",
+    ],
   },
   details: {
     title: "Reach us",
@@ -181,11 +127,10 @@ export const contactContent: ContactContent = {
         external: true,
       },
     ],
-    cta: { text: "Book a meeting" },
   },
   form: {
-    title: "Send a message",
-    description: "Tell us the problem and the tools involved.",
+    title: "Your application",
+    description: "Five questions. Then pick a time.",
     fields: [
       {
         name: "name",
@@ -195,110 +140,108 @@ export const contactContent: ContactContent = {
         required: true,
         minLength: 2,
         maxLength: 100,
+        autocomplete: "name",
       },
       {
         name: "email",
-        label: "Email",
+        label: "Work email",
         type: "email",
         placeholder: "you@company.com",
         required: true,
-        maxLength: 255,
+        maxLength: 200,
+        autocomplete: "email",
       },
       {
-        name: "company",
-        label: "Company",
+        name: "website",
+        label: "Company website",
         type: "text",
-        placeholder: "Your company",
-        optional: true,
-        maxLength: 100,
+        placeholder: "company.com",
+        required: true,
+        maxLength: 200,
+        autocomplete: "url",
       },
       {
-        name: "fit",
-        label: "Which fits you best?",
+        name: "stage",
+        label: "Size or stage",
         type: "select",
         placeholder: "Select one…",
-        optional: true,
-        options: ["Startup, seed to Series B", "Growing company, 50–500 people", "Large organisation", "None of these"],
-      },
-      {
-        name: "topic",
-        label: "What's it about?",
-        type: "select",
-        placeholder: "Select a topic…",
-        options: topics.map((t) => t.label),
-      },
-      {
-        name: "message",
-        label: "Message",
-        type: "textarea",
-        placeholder: "What do you want to fix or set up? Which tools are involved? Any deadline?",
         required: true,
-        minLength: 20,
+        options: stageOptions,
+      },
+      {
+        name: "number",
+        label: "What is the one number you don't trust today?",
+        type: "textarea",
+        placeholder: "For example: monthly revenue, because finance and sales report different figures.",
+        required: true,
+        minLength: 10,
         maxLength: 500,
       },
     ],
-    topics,
     tools: {
-      label: "Tools you're interested in",
-      catalogue: marketplaceCards.map((c) => ({
-        slug: c.slug,
-        name: c.name,
-        group: toolGroups[c.badgeKey],
-        startHere: c.startHere,
-        disclosures: c.disclosures,
-      })),
+      catalogue: [...marketplaceCards.map((c) => ({ slug: c.slug, name: c.name })), { slug: "custom-stack", name: "Custom stack" }],
       aliases: retiredSlugs,
-      functions: marketplaceContent.filters.categories
-        .filter((c) => c.slug !== "all")
-        .map((c) => ({ slug: c.slug, label: c.label })),
+      note: "Tool you're interested in:",
     },
-    prefill: {
-      tools: "We'd like to add {names} to our stack. Our team: ",
-      customStack: "We'd like a custom stack for our {function} team. ",
-      customStackNoFunction: "We'd like a custom stack for our team. ",
-    },
+    bandNote: "Your AUXO Score band:",
+    newsletterLabel: "Send me the AUXO newsletter every 2 weeks.",
     consentNote:
-      "I consent to AUXO holding these details to respond to my enquiry, in line with the Privacy Policy. We use them only to reply, never for marketing without separate opt-in, and we don't sell or rent your details. Any service we use to handle your message is bound to do the same.",
+      "I consent to AUXO holding these details to review my application and reply, in line with the Privacy Policy. We don't sell or rent your details.",
     consentLink: { text: "Privacy Policy", href: "/legal/privacy-policy/" },
-    submitText: "Send message",
+    submitText: "Apply and pick a time",
     status: {
-      sending: "Sending your message…",
-      success: "Thank you. Your message is on its way, and we'll reply within one business day.",
-      error: `That didn't go through. Please try again, or email us at ${siteData.email}. We'll reply within one business day.`,
+      sending: "Sending your application…",
+      error: `That didn't go through. Please try again, or email us at ${siteData.email}.`,
       consentRequired: "Please tick the consent box so we can hold your details to reply.",
-      notConfigured: `The form is not connected yet. Please email us at ${siteData.email}.`,
     },
+  },
+  booking: {
+    title: "Thanks. Now pick a time.",
+    lead: "Choose any open 30-minute slot below.",
+    note: "We review every application before the call and will tell you if it's not a fit.",
+    iframeTitle: "Book your Founder review",
+    fallback: "Calendar not loading? Open the booking page",
   },
   nextSteps: {
     eyebrow: "Next steps",
     title: "What happens next",
     titleHighlight: "next",
-    subtitle: "Three steps to a clear first move.",
+    subtitle: "From application to a clear first move.",
     steps: [
       {
-        title: "You send a note",
-        desc: "Use the form or email us. Say what you want to fix and by when.",
+        title: "You apply and pick a time",
+        desc: "Five questions, then a 30-minute slot. A founder replies within one business day.",
       },
       {
-        title: "We reply within one business day",
-        desc: "Not a sales inbox.",
+        title: "The call",
+        desc: "We learn the business, its customers, its problems and its data, then propose a path. No price on the call.",
       },
       {
-        title: "A short call",
-        desc: "We get the problem clear and agree a first step. If we're not the right fit, we say so.",
+        title: "Next steps in writing",
+        desc: "Within 3 business days. If there is work to do, a fixed price follows in writing. If we're not the right fit, we say so.",
       },
     ],
   },
   faq: {
     eyebrow: "FAQ",
-    title: "Before you reach out",
-    titleHighlight: "reach out",
+    title: "Before you apply",
+    titleHighlight: "apply",
     description: "The questions founders and team leads ask us first.",
     items: [
       {
-        question: "What does working together cost?",
+        question: "Who is the Founder review for?",
         answer:
-          "Each phase has a fixed price, agreed in writing before we start. There's no charge for the AUXO Score or a founder review (funded startups, seed to Series B).",
+          "Any company that wants an honest read of its data before spending on AI, from seed-stage startups to large organisations. One per company.",
+      },
+      {
+        question: "What does it cost?",
+        answer:
+          "No charge for the AUXO Score or the Founder review. If there is work to do, each phase has a fixed price, agreed in writing before we start.",
+      },
+      {
+        question: "Why is it an application?",
+        answer:
+          "Places are limited each month, and we prepare for every call. We read each application first and will tell you if it isn't a fit.",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",
@@ -306,19 +249,9 @@ export const contactContent: ContactContent = {
           "Yes. Your details stay with us, and we're glad to sign an NDA first. We can send ours or use yours.",
       },
       {
-        question: "What happens to our data, and is it safe with AI?",
-        answer:
-          "We take only what the work needs, with names removed where we can. It's never reused or used to train AI. We return or delete it when the work ends.",
-      },
-      {
         question: "What if our data is messy, scattered or incomplete?",
         answer:
-          "That's normal, not a blocker. Most early work is making sense of what you already have. You don't need to tidy anything before we talk.",
-      },
-      {
-        question: "Can you make us compliant?",
-        answer:
-          "No one should promise that. We build systems that help: clear records and rules on who approves what. Formal sign-off stays with your own advisers.",
+          "That's normal, not a blocker. You don't need to tidy anything before we talk. If there isn't enough data yet, we'll say so and suggest what to set up first.",
       },
       {
         question: "What happens after you hand over? Are we stuck with you?",

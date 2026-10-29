@@ -80,7 +80,7 @@ export const aboutContent: AboutContent = {
     title: "Data first. Then AI.",
     titleHighlight: "Then AI",
     lead: "A founder-led data and AI firm. We get your data ready, set up the AI, and hand it over.",
-    primaryCta: { text: "Book a meeting", href: siteData.bookingUrl },
+    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
     facts: [
       { label: "Based in", value: "Dubai Internet City" },
@@ -169,8 +169,8 @@ export const aboutContent: AboutContent = {
     title: "Start with the problem, not a pitch.",
     titleHighlight: "not a pitch",
     description: "The next step is a short conversation. No obligation.",
-    ctaText: "Book a meeting",
-    ctaHref: siteData.bookingUrl,
+    ctaText: "Apply for a Founder review",
+    ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,
   },
 };

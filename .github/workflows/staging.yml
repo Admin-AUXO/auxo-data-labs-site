@@ -1,0 +1,48 @@
+name: Staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: staging
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Mark as staging
+        run: |
+          find dist -name '*.html' -exec sed -i 's#<head>#<head><meta name="robots" content="noindex,nofollow">#' {} +
+          printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+          rm -f dist/sitemap*.xml
+          rm -rf dist/video-drafts
+          echo staging.auxodata.com > dist/CNAME
+          touch dist/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://staging.auxodata.com
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

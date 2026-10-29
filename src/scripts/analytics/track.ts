@@ -1,3 +1,5 @@
+import { captureUtm } from "../../lib/auxo-score/storage";
+
 type Params = Record<string, unknown>;
 interface DataLayerWindow extends Window {
   dataLayer?: Record<string, unknown>[];
@@ -199,6 +201,7 @@ export function initAnalytics(): void {
   document.addEventListener("input", onSearchInput);
   document.addEventListener("astro:page-load", () => {
     resetPageState();
+    captureUtm();
     pageView();
     scheduleEngagement();
   });

@@ -159,6 +159,10 @@ html[data-js] .card__view:not([data-active]) {
   line-height: 1.05;
 }
 
+.card__pick-name span + span {
+  color: var(--card-soft);
+}
+
 .card__pick-role,
 .card__role {
   color: var(--card-soft);

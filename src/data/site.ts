@@ -20,6 +20,7 @@ export interface SiteData {
   social: { linkedin: string; twitter: string };
   founded: number;
   bookingUrl: string;
+  applyUrl: string;
   bookingEmbedUrl: string;
 }
 
@@ -49,6 +50,7 @@ export const siteData: SiteData = {
   },
   founded: 2025,
   bookingUrl: "https://calendar.app.google/aJmnvMS2uBbYPCgC7",
+  applyUrl: "/apply/",
   bookingEmbedUrl:
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cf9JS2XEAvFnPma4oW-Gy3pMVQnHWZNKWuG0X9hhJ1sKDKj5JLtZsowG9uJyPw3h9kZ1qeNH5?gv=true",
 };

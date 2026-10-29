@@ -1,102 +1,124 @@
 ---
 import Button from "../ui/Button.astro";
 import { contactContent } from "../../data/contact";
+import { siteData } from "../../data/site";
 
-const { form } = contactContent;
+const { form, booking } = contactContent;
 const [consentBefore, consentAfter] = form.consentNote.split(form.consentLink.text);
 ---
-<form id="contact-form" class="flex flex-col gap-5" novalidate>
-  {
-    form.fields.map((field) => {
-      const errorId = `${field.name}-error`;
-      const isMessage = field.type === "textarea";
-      const counterId = isMessage ? `${field.name}-counter` : undefined;
-      const describedBy = [errorId, counterId].filter(Boolean).join(" ");
-      return (
-        <div class="field">
-          <div class={isMessage ? "field__head" : undefined}>
-            <label class="field__label" for={field.name}>
-              {field.label}
-              {field.required && <span class="field__required" aria-hidden="true">*</span>}
-              {field.optional && <span class="field__optional"> (optional)</span>}
-            </label>
-            {isMessage && (
-              <span class="field__counter" id={counterId} data-counter={field.name} aria-live="polite">
-                0/{field.maxLength}
-              </span>
-            )}
-          </div>
-
-          {field.type === "textarea" ? (
-            <textarea
-              id={field.name}
-              name={field.name}
-              class="textarea"
-              placeholder={field.placeholder}
-              maxlength={field.maxLength}
-              required={field.required}
-              aria-describedby={describedBy}
-            />
-          ) : field.type === "select" ? (
-            <select id={field.name} name={field.name} class="select" aria-describedby={errorId}>
-              {field.placeholder && (
-                <option value="" disabled selected>
-                  {field.placeholder}
-                </option>
+<div class="apply" data-apply>
+  <form id="contact-form" class="flex flex-col gap-5" novalidate>
+    {
+      form.fields.map((field) => {
+        const errorId = `${field.name}-error`;
+        const isText = field.type === "textarea";
+        const counterId = isText ? `${field.name}-counter` : undefined;
+        const describedBy = [errorId, counterId].filter(Boolean).join(" ");
+        return (
+          <div class="field">
+            <div class={isText ? "field__head" : undefined}>
+              <label class="field__label" for={field.name}>
+                {field.label}
+                {field.required && <span class="field__required" aria-hidden="true">*</span>}
+              </label>
+              {isText && (
+                <span class="field__counter" id={counterId} data-counter={field.name} aria-live="polite">
+                  0/{field.maxLength}
+                </span>
               )}
-              {field.options?.map((option) => <option value={option}>{option}</option>)}
-            </select>
-          ) : (
-            <input
-              type={field.type}
-              id={field.name}
-              name={field.name}
-              class="input"
-              placeholder={field.placeholder}
-              maxlength={field.maxLength}
-              required={field.required}
-              autocomplete={field.type === "email" ? "email" : field.name === "name" ? "name" : field.name === "company" ? "organization" : undefined}
-              aria-describedby={errorId}
-            />
-          )}
+            </div>
 
-          <p class="field__error" id={errorId} role="alert" />
-        </div>
-      );
-    })
-  }
+            {field.type === "textarea" ? (
+              <textarea
+                id={field.name}
+                name={field.name}
+                class="textarea"
+                placeholder={field.placeholder}
+                maxlength={field.maxLength}
+                required={field.required}
+                aria-describedby={describedBy}
+              />
+            ) : field.type === "select" ? (
+              <select id={field.name} name={field.name} class="select" required={field.required} aria-describedby={errorId}>
+                {field.placeholder && (
+                  <option value="" disabled selected>
+                    {field.placeholder}
+                  </option>
+                )}
+                {field.options?.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            ) : (
+              <input
+                type={field.type}
+                id={field.name}
+                name={field.name}
+                class="input"
+                placeholder={field.placeholder}
+                maxlength={field.maxLength}
+                required={field.required}
+                autocomplete={field.autocomplete}
+                aria-describedby={errorId}
+              />
+            )}
 
-  <div class="field-honeypot" aria-hidden="true">
-    <label for="contact-company-url">Company URL (leave this field empty)</label>
-    <input
-      type="text"
-      id="contact-company-url"
-      name="company_url"
-      data-honeypot
-      tabindex="-1"
-      autocomplete="off"
-    />
-  </div>
+            <p class="field__error" id={errorId} role="alert" />
+          </div>
+        );
+      })
+    }
 
-  <label class="field-consent">
-    <input type="checkbox" name="consent" class="field-consent__checkbox" required />
-    <span class="field-consent__text">
-      {consentBefore}<a href={form.consentLink.href} target="_blank" rel="noopener">{form.consentLink.text}</a>{consentAfter}
-    </span>
-  </label>
+    <p class="apply__context text-sm text-muted" data-context hidden></p>
 
-  <div class="form-status" role="status" aria-live="polite" />
+    <input type="hidden" name="band" />
+    <input type="hidden" name="total" />
+    <input type="hidden" name="tool" />
 
-  <Button type="submit" variant="primary" size="lg" icon iconName="mdi:send">
-    {form.submitText}
-  </Button>
+    <div class="field-honeypot" aria-hidden="true">
+      <label for="contact-company-url">Company URL (leave this field empty)</label>
+      <input type="text" id="contact-company-url" name="company_url" data-honeypot tabindex="-1" autocomplete="off" />
+    </div>
 
-  <noscript>
-    <p class="text-sm text-subtle">
-      This form needs JavaScript. You can email us directly and we'll reply within one business day.
-    </p>
-  </noscript>
-</form>
+    <label class="field-consent">
+      <input type="checkbox" name="newsletter" class="field-consent__checkbox" />
+      <span class="field-consent__text">{form.newsletterLabel}</span>
+    </label>
+
+    <label class="field-consent">
+      <input type="checkbox" name="consent" class="field-consent__checkbox" required />
+      <span class="field-consent__text">
+        {consentBefore}<a href={form.consentLink.href} target="_blank" rel="noopener">{form.consentLink.text}</a>{consentAfter}
+      </span>
+    </label>
+
+    <div class="form-status" role="status" aria-live="polite" />
+
+    <Button type="submit" variant="primary" size="lg" icon iconName="mdi:arrow-right">
+      {form.submitText}
+    </Button>
+
+    <noscript>
+      <p class="text-sm text-subtle">
+        This form needs JavaScript. You can email us at {siteData.email} and we'll reply within one business day.
+      </p>
+    </noscript>
+  </form>
+
+  <section class="apply__booking flex flex-col gap-4" data-booking hidden aria-labelledby="booking-title">
+    <h2 id="booking-title" class="text-2xl" tabindex="-1">{booking.title}</h2>
+    <p class="text-muted">{booking.lead}</p>
+    <p class="text-sm text-subtle">{booking.note}</p>
+    <iframe
+      title={booking.iframeTitle}
+      data-src={siteData.bookingEmbedUrl}
+      class="apply__iframe"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+    <a class="text-sm text-muted underline underline-offset-4 hover:text-foreground" href={siteData.bookingUrl} target="_blank" rel="noopener" data-booking-link>
+      {booking.fallback}
+    </a>
+  </section>
+</div>
 
 <script>
   import { init } from "../../scripts/forms/contact";
@@ -142,5 +164,13 @@ const [consentBefore, consentAfter] = form.consentNote.split(form.consentLink.te
 
   .field-consent__text a:hover {
     color: var(--foreground);
+  }
+
+  .apply__iframe {
+    background: #fff;
+    block-size: 680px;
+    border: 0;
+    border-radius: var(--radius-lg, 12px);
+    inline-size: 100%;
   }
 </style>

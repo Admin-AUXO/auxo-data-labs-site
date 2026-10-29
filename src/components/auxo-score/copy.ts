@@ -16,12 +16,21 @@ export interface ScoreCopy {
     startButton: string;
     note: string;
   };
+  gate: {
+    eyebrow: string;
+    title: string;
+    lede: string;
+    label: string;
+    button: string;
+    newsletter: string;
+    consent: string;
+  };
   result: {
     next: {
       title: string;
-      report: { who: string; what: string };
-      startup: { who: string; what: string; link: ScoreLink };
-      growing: { who: string; what: string; button: string };
+      apply: ScoreLink & { what: string };
+      reportSent: (email: string) => string;
+      reportFailed: string;
     };
   };
   inconclusive: {
@@ -51,25 +60,27 @@ export const SCORE_COPY: ScoreCopy = {
     resumeButton: "Resume",
     startOverButton: "Start over",
     startButton: "Start the AUXO Score →",
-    note: "Not sure of an answer? Pick \"I don't know\". No sign-up, and your answers stay on your device unless you ask for the report by email.",
+    note: "Not sure of an answer? Pick \"I don't know\". No sign-up. We ask for a work email before the result, so we can send it to you.",
+  },
+  gate: {
+    eyebrow: "Your result is ready",
+    title: "Where should we send your result?",
+    lede: "Your score, band and first fix, on screen now and by email.",
+    label: "Work email",
+    button: "See my result",
+    newsletter: "Send me the AUXO newsletter every 2 weeks.",
+    consent: "We'll email your result and may follow up once. No spam.",
   },
   result: {
     next: {
       title: "Next step",
-      report: {
-        who: "Your full report",
-        what: "A step-by-step plan for your weakest areas, by email.",
+      apply: {
+        what: "30 minutes with a founder. Bring the one number you don't trust. No charge.",
+        text: "Apply for a Founder review",
+        href: "/apply/",
       },
-      startup: {
-        who: "Funded startup, seed to Series B",
-        what: "A 45-minute call and a one-page plan. No charge.",
-        link: { text: "Apply for a founder review", href: "/contact/?topic=founder-review" },
-      },
-      growing: {
-        who: "Growing company or larger",
-        what: "Your systems reviewed under NDA. A fixed price, in writing.",
-        button: "Book a scoping call",
-      },
+      reportSent: (email: string) => `Your full report is on its way to ${email}.`,
+      reportFailed: "We couldn't email your report just now. Your result is below.",
     },
   },
   inconclusive: {
@@ -77,7 +88,7 @@ export const SCORE_COPY: ScoreCopy = {
     title: "Too many unknowns to score.",
     default: {
       lede: "You answered \"I don't know\" three or more times. That's a finding in itself: it's hard to trust data nobody can see. Try again with someone from finance or operations, or talk to us.",
-      talk: { text: "Talk to us", href: "/contact/?topic=not-sure" },
+      talk: { text: "Apply for a Founder review", href: "/apply/" },
     },
     retake: "Retake with a colleague",
   },

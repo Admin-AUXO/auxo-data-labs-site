@@ -3,7 +3,6 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
-import Button from "../components/ui/Button.astro";
 import Accordion from "../components/ui/Accordion.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import ContactForm from "../components/forms/ContactForm.astro";
@@ -27,6 +26,14 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
             <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} soften />
           </h1>
           <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
+          <ul class="flex flex-col gap-2" data-enter>
+            {c.hero.points.map((p) => (
+              <li class="flex items-start gap-3 text-muted">
+                <Icon name="mdi:check" class="mt-1 size-4 shrink-0 text-accent" aria-hidden="true" />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
         </div>
         <h2 class="text-2xl" data-reveal>{c.details.title}</h2>
 
@@ -59,12 +66,6 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
             ))
           }
         </ul>
-
-        <div>
-          <Button calendar variant="secondary" icon iconName="mdi:calendar-clock-outline">
-            {c.details.cta.text}
-          </Button>
-        </div>
       </div>
 
       <div class="flex flex-col gap-6">

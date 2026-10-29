@@ -12,7 +12,7 @@ A 10-question, evidence-based data health test. Five dimensions (Accurate, Compl
 | `src/lib/auxo-score/scoring.ts` | Scoring, bands, tie order, answer layout (pure, unit-tested) |
 | `src/lib/auxo-score/email.ts` | Work-email check and free-domain list |
 | `src/lib/auxo-score/storage.ts` | Safe localStorage/sessionStorage helpers, UTM capture, legacy key cleanup |
-| `src/lib/auxo-score/submit.ts` | n8n payload builders, `fetch` with 10s timeout, error messages |
+| `src/lib/auxo-score/submit.ts` | Context builder, submit limits and error messages |
 | `src/lib/auxo-score/analytics.ts` | `scoreEvent()`: consent-gated `score_*` events (only when `auxo_consent=granted`), fired from `controller.ts`. GTM maps `score_start` / `score_complete` to GA4 `assessment_start` / `assessment_complete`. |
 | `src/components/auxo-score/AuxoScore.astro` | All screens (markup) |
 | `src/components/auxo-score/copy.ts` | Screen copy, including the result's next-step block. **Edit wording here.** |
@@ -24,17 +24,11 @@ A 10-question, evidence-based data health test. Five dimensions (Accurate, Compl
 
 Edit `cards.ts`. Keep two cards per dimension and four options per card with tiers 1–4 and points 10/7/3/0. `type` controls answer order: `scale_ascending` (best at A), `scale_descending` (worst at A) or `descriptive_shuffle` (shuffled once per attempt). Run `npm run test:unit` after.
 
-If you change questions or scoring, bump `VERSION` in `submit.ts` so n8n can tell old and new submissions apart, and bump the storage key in `storage.ts` so saved attempts don't mix.
+If you change questions or scoring, bump `VERSION` in `submit.ts` and the storage key in `storage.ts` so saved attempts don't mix.
 
-## Environment variables
+## Report email
 
-```
-PUBLIC_N8N_REPORT_WEBHOOK=https://<n8n-host>/webhook/auxo-score-report
-```
-
-Set both in Netlify (Site settings → Environment variables) and rebuild. If one is missing, its form still validates but shows "Email isn't available right now. Please try again later." and logs a warning in dev.
-
-For local testing, put them in `.env.local` (git-ignored).
+The Score asks for a work email before the result, then posts the result to `/api/lead` (`netlify/functions/lead.mts`). The function logs the row in the pipeline sheet and sends the report from `hello@auxodata.com` through Sequenzy (template in `netlify/lib/emails.mts`). See [`../lead-pipeline.md`](../lead-pipeline.md). There is no n8n.
 
 ## Storage
 

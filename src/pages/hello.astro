@@ -35,7 +35,7 @@ const passes = wallet as Record<string, { google: string | null; apple: string |
             c.founders.map((f) => (
               <button type="button" class="card__pick" data-founder={f.id} aria-controls={`panel-${f.id}`}>
                 <span class="card__pick-text">
-                  <span class="card__pick-name">{f.name}</span>
+                  <span class="card__pick-name">{f.name.split(" ").map((part, i) => <span>{i > 0 && " "}{part}</span>)}</span>
                   <span class="card__pick-role">{f.role}</span>
                   <span class="card__pick-note">{f.note}</span>
                 </span>

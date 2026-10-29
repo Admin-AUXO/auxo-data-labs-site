@@ -48,7 +48,7 @@ export const howItWorksContent = {
     title: "Analyze. Advise. Build.",
     titleHighlight: ".",
     lead: "Three steps. Start at any one.",
-    primaryCta: { text: "Book a meeting", href: siteData.bookingUrl } satisfies Link,
+    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl } satisfies Link,
   },
   ladder: {
     navLabel: "Steps",
@@ -76,9 +76,9 @@ export const howItWorksContent = {
           {
             icon: "mdi:account-tie-outline",
             title: "Founder review",
-            tag: "Funded startups",
+            tag: "Every company",
             tone: "free",
-            body: "A 45-minute call with a founder, then a one-page plan of what to fix first. No charge.",
+            body: "A 30-minute call with a founder, by application. Written next steps within 3 business days. No charge.",
           },
           {
             icon: "mdi:file-search-outline",
@@ -88,13 +88,13 @@ export const howItWorksContent = {
             body: "A 2 to 3 week review of your systems under NDA, with a plan of what to build first. Credited if you build with us.",
           },
         ],
-        duration: "Score: about 3 minutes. Founder review: one 45-minute call. Deep-dive: 2 to 3 weeks.",
+        duration: "Score: about 3 minutes. Founder review: one 30-minute call. Deep-dive: 2 to 3 weeks.",
         suits: "Teams about to spend on AI, or whose numbers don't match.",
         bring: "View-only access to the tools we look at.",
         isNot: "A sales pitch, a generic checklist or a compliance certificate.",
         links: [
-          { text: "Get your AUXO Score", href: "/auxo-score/" },
-          { text: "Funded startup? Apply for a founder review", href: "/contact/?topic=founder-review" },
+          { text: "Take the AUXO Score", href: "/auxo-score/" },
+          { text: "Apply for a Founder review", href: siteData.applyUrl },
         ],
       },
       {
@@ -228,8 +228,8 @@ export const howItWorksContent = {
   cta: {
     title: "Not sure where to start? Start with an honest read.",
     description: "Leave knowing where to start.",
-    ctaText: "Book a meeting",
-    ctaHref: siteData.bookingUrl,
+    ctaText: "Apply for a Founder review",
+    ctaHref: siteData.applyUrl,
     reassurance: "A real person replies within one business day.",
   },
 };

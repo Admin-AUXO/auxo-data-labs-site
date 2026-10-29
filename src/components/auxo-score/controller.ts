@@ -3,7 +3,7 @@ import { DIMENSIONS, IDK_LIMIT, IDK_POINTS, QUADS, buildLayout, computeResult, i
 import { checkWorkEmail } from "../../lib/auxo-score/email";
 import { captureUtm, clearLegacy, loadState, saveResult, saveState } from "../../lib/auxo-score/storage";
 import {
-  MAX_SUBMITS, MESSAGES, buildContext, buildReportPayload, durationSec, postJson, uuid,
+  MAX_SUBMITS, MESSAGES, buildContext, durationSec, uuid,
 } from "../../lib/auxo-score/submit";
 import { scoreEvent } from "../../lib/auxo-score/analytics";
 import { LOAD_STEPS, SCORE_COPY } from "./copy";
@@ -11,7 +11,8 @@ import type { Answer, Quadrant, Result, Screen, State } from "../../lib/auxo-sco
 
 const FLASH_MS = 150;
 const LOADER_MS = 1400;
-const SCREENS: Screen[] = ["intro", "quiz", "loader", "result", "inconclusive"];
+const SCREENS: Screen[] = ["intro", "quiz", "loader", "gate", "result", "inconclusive"];
+const LEAD_URL = "/api/lead";
 
 let keyHandler: ((e: KeyboardEvent) => void) | null = null;
 
@@ -36,7 +37,6 @@ export function initAuxoScore(): void {
   root.dataset.bound = "1";
 
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
-  const reportUrl = root.dataset.reportUrl || undefined;
   const screens = SCREENS.map((s) => [s, $(`s-${s}`)] as const);
   const back = $("backBtn");
   const dimPill = $("dimPill");
@@ -55,6 +55,7 @@ export function initAuxoScore(): void {
   let timers: number[] = [];
   let result = null as Result | null;
   let submits = 0;
+  const { next } = SCORE_COPY.result;
 
   const persist = () => saveState(state);
 
@@ -187,7 +188,7 @@ export function initAuxoScore(): void {
 
   function finish(): void {
     renderResult();
-    show("result");
+    show(state.email ? "result" : "gate");
     if (!result) return;
     persistResult(result);
     (window as unknown as { __auxoMarkScore?: () => void }).__auxoMarkScore?.();
@@ -233,6 +234,9 @@ export function initAuxoScore(): void {
     good.append(el("strong", "", "What good looks like: "), f.good);
     focus.append(el("b", "", `Your first fix: ${r.weakest}`), el("p", "", f.why), good);
 
+    const apply = new URLSearchParams({ band: r.band.name.toLowerCase(), score: String(r.total) });
+    $<HTMLAnchorElement>("applyBtn").href = `${next.apply.href}?${apply}`;
+
   }
 
   function clearTimers(): void {
@@ -241,19 +245,17 @@ export function initAuxoScore(): void {
   }
 
   function resetResultActions(): void {
-    $("emailForm").hidden = true;
-    const input = $<HTMLInputElement>("emailInput");
+    const input = $<HTMLInputElement>("gateEmail");
     input.value = "";
     input.removeAttribute("aria-invalid");
-    const m = $("emailMsg");
+    $<HTMLInputElement>("gateNewsletter").checked = false;
+    const m = $("gateMsg");
     m.textContent = "";
     m.classList.remove("is-err");
-    root.querySelectorAll<HTMLButtonElement>(".score__mail button[type=submit]").forEach((b) => {
-      b.disabled = false;
-      b.textContent = b.dataset.label ?? b.textContent;
-    });
-    $("emailBtn").textContent = "Email my full report";
-    $("emailBtn").setAttribute("aria-expanded", "false");
+    $("reportMsg").textContent = "";
+    const btn = $("gateForm").querySelector<HTMLButtonElement>("button[type=submit]")!;
+    btn.disabled = false;
+    btn.textContent = btn.dataset.label ?? btn.textContent;
     submits = 0;
   }
 
@@ -272,19 +274,22 @@ export function initAuxoScore(): void {
     openQuiz(false);
   }
 
-  function wireForm(opts: {
-    formId: string; inputId: string; msgId: string;
-    url: string | undefined; success: (email: string) => string;
-  }): void {
-    const form = $<HTMLFormElement>(opts.formId);
-    const input = $<HTMLInputElement>(opts.inputId);
-    const msg = $(opts.msgId);
+  function wireGate(): void {
+    const form = $<HTMLFormElement>("gateForm");
+    const input = $<HTMLInputElement>("gateEmail");
+    const optIn = $<HTMLInputElement>("gateNewsletter");
+    const msg = $("gateMsg");
     const btn = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
     btn.dataset.label = btn.textContent ?? "";
     const hp = form.querySelector<HTMLInputElement>("input[name=company_website]")!;
     const say = (text: string, err = false) => {
       msg.textContent = text;
       msg.classList.toggle("is-err", err);
+    };
+    const reveal = (email: string, reportOk: boolean) => {
+      state.email = email;
+      $("reportMsg").textContent = reportOk ? next.reportSent(email) : next.reportFailed;
+      show("result");
     };
 
     form.addEventListener("submit", async (e) => {
@@ -299,36 +304,38 @@ export function initAuxoScore(): void {
       }
       input.removeAttribute("aria-invalid");
       const email = input.value.trim().toLowerCase();
-      const done = () => {
-        say(opts.success(email));
-        btn.textContent = "Sent ✓";
-        btn.disabled = true;
-        $("emailBtn").textContent = "Report sent";
-        scoreEvent("score_email_submit", { band: result?.band.name ?? "" });
-      };
-      if (hp.value) return done();
+      if (hp.value) return reveal(email, true);
       if (submits >= MAX_SUBMITS) return say(MESSAGES.tooMany, true);
       submits++;
 
       const r = result ?? computeResult(state.answers);
       const ctx = buildContext(state, utm);
-      const body = buildReportPayload(email, state, r, ctx);
+      const newsletter = optIn.checked;
       btn.disabled = true;
       btn.textContent = "Sending…";
       say("");
-      const out = await postJson(opts.url, body);
-      if (out.ok) return done();
+      const focus = FOCUS[r.weakest];
+      const res = await fetch(LEAD_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "score", email, total: r.total, band: r.band.name, bandLine: r.band.line,
+          weakest: r.weakest, why: focus.why, steps: focus.steps, good: focus.good,
+          newsletter, page: ctx.page,
+          utm: { source: utm.source, medium: utm.medium, campaign: utm.campaign, content: utm.content },
+        }),
+      }).catch(() => null);
+      const out = res?.ok ? ((await res.json().catch(() => null)) as { emailed?: boolean } | null) : null;
+      const emailed = out?.emailed === true;
       btn.disabled = false;
       btn.textContent = btn.dataset.label ?? "";
-      say(out.message, true);
-      scoreEvent("score_email_error", { status: out.status });
+      scoreEvent("score_email_submit", { band: r.band.name, newsletter });
+      if (!emailed) scoreEvent("score_email_error", { status: res?.status ?? 0 });
+      reveal(email, emailed);
     });
   }
 
-  wireForm({
-    formId: "emailForm", inputId: "emailInput", msgId: "emailMsg", url: reportUrl,
-    success: (email) => `Sent. Check ${email} in the next few minutes.`,
-  });
+  wireGate();
 
   $("startBtn").addEventListener("click", start);
   $("startOverBtn").addEventListener("click", start);
@@ -343,15 +350,6 @@ export function initAuxoScore(): void {
   });
   document.addEventListener("astro:before-swap", clearTimers, { once: true });
 
-  $("emailBtn").addEventListener("click", () => {
-    const f = $("emailForm");
-    f.hidden = !f.hidden;
-    $("emailBtn").setAttribute("aria-expanded", String(!f.hidden));
-    if (!f.hidden) {
-      $("emailInput").focus();
-      scoreEvent("score_email_open");
-    }
-  });
   keyHandler = (e: KeyboardEvent) => {
     if (state.screen !== "quiz" || e.metaKey || e.ctrlKey || e.altKey) return;
     const t = e.target as HTMLElement | null;
@@ -381,9 +379,9 @@ export function initAuxoScore(): void {
       $("resumeText").textContent = SCORE_COPY.intro.resume(saved.index + 1, CARDS.length);
       $("resumeBar").hidden = false;
       state.screen = "intro";
-    } else if (saved.screen === "loader" || saved.screen === "result") {
+    } else if (saved.screen === "loader" || saved.screen === "gate" || saved.screen === "result") {
       renderResult();
-      show("result", false);
+      show(saved.email ? "result" : "gate", false);
       if (saved.screen === "loader" && result) persistResult(result);
     } else if (saved.screen === "inconclusive") {
       show("inconclusive", false);

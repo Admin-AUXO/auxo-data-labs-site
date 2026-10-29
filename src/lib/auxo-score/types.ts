@@ -25,10 +25,11 @@ export interface Result {
   idkCount: number;
 }
 
-export type Screen = "intro" | "quiz" | "loader" | "result" | "inconclusive";
+export type Screen = "intro" | "quiz" | "loader" | "gate" | "result" | "inconclusive";
 
 export interface State {
   screen: Screen;
+  email?: string;
   index: number;
   answers: Answers;
   layout: Layout;

@@ -63,7 +63,7 @@ import "../styles/pages/about.css";
       {
         c.team.founders.map((f) => (
           <article class="about-team__person" data-reveal>
-            <h3 class="about-team__name">{f.name}</h3>
+            <h3 class="about-team__name">{f.name.split(" ").map((part, i) => <span>{i > 0 && " "}{part}</span>)}</h3>
             <p class="about-team__role">{f.role}</p>
             {f.lines.map((l) => <p class="about-team__line">{l}</p>)}
             <a

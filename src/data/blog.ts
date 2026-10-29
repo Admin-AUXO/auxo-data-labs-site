@@ -37,8 +37,8 @@ export interface BlogContent {
       description: string;
       ctaText: string;
       ctaHref: string;
-      secondaryText: string;
-      secondaryHref: string;
+      secondaryText?: string;
+      secondaryHref?: string;
       reassurance: string;
     };
   };
@@ -64,7 +64,7 @@ export const blogContent: BlogContent = {
       title: "No posts yet.",
       body: "The first ones are on their way. Meanwhile, take the AUXO Score or read our short insights.",
       links: [
-        { label: "Get your AUXO Score", href: "/auxo-score/" },
+        { label: "Take the AUXO Score", href: "/auxo-score/" },
         { label: "Read the insights", href: "/insights/" },
       ],
     },
@@ -77,11 +77,9 @@ export const blogContent: BlogContent = {
     relatedHeading: "Read next",
     endCta: {
       title: "Want an honest read of your own setup?",
-      description: "A founder will tell you what to fix first.",
-      ctaText: "Book a meeting",
-      ctaHref: siteData.bookingUrl,
-      secondaryText: "Get your AUXO Score",
-      secondaryHref: "/auxo-score/",
+      description: "10 questions, about 3 minutes. See your band and the first thing to fix.",
+      ctaText: "Take the AUXO Score",
+      ctaHref: "/auxo-score/",
       reassurance: "A real person replies within one business day.",
     },
   },

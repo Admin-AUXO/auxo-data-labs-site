@@ -32,7 +32,7 @@ export const footerContent: FooterContent = {
         { label: "About", href: "/about/" },
         { label: "Blog", href: "/blog/" },
         { label: "Insights", href: "/insights/" },
-        { label: "Contact", href: "/contact/" },
+        { label: "Contact", href: "/apply/" },
       ],
     },
     {

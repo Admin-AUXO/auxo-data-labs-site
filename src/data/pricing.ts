@@ -68,14 +68,14 @@ export interface PricingContent {
 export const pricingContent: PricingContent = {
   metaTitle: "Pricing: three ways in, a fixed price per phase",
   metaDescription:
-    "A founder review for funded startups, seed to Series B. A deep-dive audit for growing companies. One unit first for large organisations. A fixed price per phase, in writing.",
+    "Every path starts with a Founder review: a 30-minute call with a founder. Then a fixed price per phase, in writing.",
   hero: {
     eyebrow: "Pricing",
     title: "Start where you are.",
     lead: "Three ways in. Each phase has a fixed price, agreed in writing before we start.",
     rulesTitle: "How pricing works",
     rules: [
-      { tone: "free", icon: "mdi:check", text: "No charge for the AUXO Score or a founder review." },
+      { tone: "free", icon: "mdi:check", text: "No charge for the AUXO Score or the Founder review." },
       { tone: "free", icon: "mdi:key-outline", text: "Stop after any phase. You keep everything delivered." },
       { tone: "optional", icon: "mdi:domain", text: "Tool vendors bill you directly." },
       { tone: "optional", icon: "mdi:sync", text: "Upkeep is optional and monthly. Stop with 30 days' notice." },
@@ -100,14 +100,14 @@ export const pricingContent: PricingContent = {
         title: "Founder review",
         subline: "A plan to get the numbers investors ask for.",
         facts: {
-          first: "A short application, a 45-minute founder call and a one-page plan.",
+          first: "A Founder review: a 30-minute call with a founder and written next steps.",
           then: "Your main tools joined into one clean set of numbers, with the metrics investors ask for.",
-          time: "Plan within 3 business days of the call. Build: 4 to 12 weeks.",
+          time: "Next steps within 3 business days of the call. Build: 4 to 12 weeks.",
           price: "How many tools we connect and the metrics you need.",
           stop: "The plan is yours, whether or not you build with us.",
         },
-        cta: { text: "Apply for a founder review", href: "/contact/?topic=founder-review" },
-        finePrint: "One per company.",
+        cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+        finePrint: "One Founder review per company.",
       },
       {
         id: "growing",
@@ -117,13 +117,13 @@ export const pricingContent: PricingContent = {
         title: "Deep-dive audit",
         subline: "What to fix, what to build first and what not to buy.",
         facts: {
-          first: "We review your systems under NDA. You get each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
+          first: "A Founder review, then your systems reviewed under NDA: each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
           then: "A plan, the right tools and clear rules. Then we build in phases you approve one at a time.",
           time: "Audit: 2 to 3 weeks. Each build phase: 4 to 12 weeks.",
           price: "The tools, companies and teams involved.",
           stop: "Stop after the audit. The findings and plan are yours. The fee is credited if you build with us within 60 days.",
         },
-        cta: { text: "Book a scoping call", href: siteData.bookingUrl },
+        cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
         finePrint: "A guide, not a rule.",
       },
       {
@@ -134,20 +134,20 @@ export const pricingContent: PricingContent = {
         title: "One unit first",
         subline: "A written proposal, one phase at a time.",
         facts: {
-          first: "An NDA, a call to agree scope, then a written proposal.",
+          first: "A Founder review, an NDA, then a written proposal.",
           then: "We build in your systems, alongside your own team or partners. Upkeep if you want it.",
           time: "Proposal within 5 business days. First phase: 2 to 3 weeks, plus your buying steps.",
           price: "The scope of each phase, on your contract terms.",
           stop: "Each phase stands alone. Everything is in your name.",
         },
-        cta: { text: "Talk to us", href: "/contact/?topic=enterprise" },
+        cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
         finePrint: "We answer security questions plainly, including what we don't have.",
       },
     ],
   },
   score: {
     text: "Not ready to talk? Take the AUXO Score: 10 questions, about 3 minutes.",
-    cta: { text: "Get your AUXO Score", href: "/auxo-score/" },
+    cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   includes: {
     title: "Every engagement includes",
@@ -168,9 +168,9 @@ export const pricingContent: PricingContent = {
           "By what's involved: the tools, the teams and what we build. Each phase gets a fixed price in writing before we start. No two jobs match, so we don't publish prices.",
       },
       {
-        question: "Who can get a founder review?",
+        question: "Who can get a Founder review?",
         answer:
-          "For startups that have raised from outside investors, one per company. Not enough data yet? We'll say so and suggest what to set up first.",
+          "Any company, one per company. Places are limited each month, so we read every application first. Not enough data yet? We'll say so and suggest what to set up first.",
       },
       {
         question: "Why not hire a data engineer instead?",
@@ -191,9 +191,9 @@ export const pricingContent: PricingContent = {
   },
   cta: {
     title: "Not sure which path fits?",
-    description: "Book a meeting and leave with one clear next step.",
-    ctaText: "Book a meeting",
-    ctaHref: siteData.bookingUrl,
+    description: "30 minutes with a founder. Leave with one clear next step.",
+    ctaText: "Apply for a Founder review",
+    ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,
   },
 };

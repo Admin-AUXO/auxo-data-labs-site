@@ -994,3 +994,20 @@ html[data-motion="off"] .score *::after {
   flex-direction: column;
   gap: 12px;
 }
+
+.score__optin {
+  align-items: flex-start;
+  color: var(--subtle);
+  display: flex;
+  font-size: var(--text-sm);
+  gap: 0.6rem;
+  margin-block-start: 0.75rem;
+}
+
+.score__optin input {
+  accent-color: var(--accent);
+  block-size: 1.05rem;
+  flex: none;
+  inline-size: 1.05rem;
+  margin-block-start: 0.15rem;
+}
