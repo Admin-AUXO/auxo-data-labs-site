@@ -2,6 +2,7 @@ import { contactContent } from "../../data/contact";
 import { EMAIL_RE, renderStatus, type StatusState } from "./_status";
 import { track } from "../analytics/track";
 import { captureUtm } from "../../lib/auxo-score/storage";
+import { fill } from "../../lib/text";
 
 const FORM_ID = "contact-form";
 const FORM_NAME = "founder_review_application";
@@ -216,6 +217,23 @@ function initContactForm() {
   );
 }
 
+async function initSpots() {
+  const el = document.querySelector<HTMLElement>("[data-spots]");
+  if (!el || el.dataset.bound === "true") return;
+  el.dataset.bound = "true";
+  try {
+    const res = await fetch("/api/spots");
+    if (!res.ok) return;
+    const { cap, left } = (await res.json()) as { cap: number; left: number | null };
+    if (typeof left !== "number") return;
+    el.textContent = left > 0 ? fill(el.dataset.left ?? "", { left: String(left), cap: String(cap) }) : (el.dataset.full ?? "");
+    el.hidden = false;
+  } catch {
+    return;
+  }
+}
+
 export function init() {
   initContactForm();
+  void initSpots();
 }

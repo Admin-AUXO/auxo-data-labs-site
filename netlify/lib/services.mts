@@ -44,3 +44,33 @@ export async function sendEmail(to: string, mail: { subject: string; preview: st
   });
   if (!res.ok) throw new Error(`sequenzy send ${res.status}`);
 }
+
+export const WEEKLY_CAP = 10;
+
+export async function readInbound(token?: string): Promise<string[][]> {
+  const sheetId = process.env.PIPELINE_SHEET_ID;
+  if (!sheetId || !process.env.GOOGLE_SERVICE_ACCOUNT) throw new Error("sheet not configured");
+  const t = token ?? (await googleToken("https://www.googleapis.com/auth/spreadsheets"));
+  const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent("Inbound!A:S")}`, {
+    headers: { Authorization: `Bearer ${t}` },
+  });
+  if (!res.ok) throw new Error(`sheet read ${res.status}`);
+  return ((await res.json()) as { values?: string[][] }).values ?? [];
+}
+
+export function weekStartUtc(now = new Date()): Date {
+  const dubai = new Date(now.getTime() + 4 * 3600e3);
+  const sinceMonday = (dubai.getUTCDay() + 6) % 7;
+  const monday = Date.UTC(dubai.getUTCFullYear(), dubai.getUTCMonth(), dubai.getUTCDate() - sinceMonday);
+  return new Date(monday - 4 * 3600e3);
+}
+
+export function spotsLeft(rows: string[][], now = new Date()): number {
+  const start = weekStartUtc(now).getTime();
+  const taken = new Set(
+    rows
+      .filter((r) => r[1] === "Founder review application" && Date.parse(`${(r[0] ?? "").replace(" ", "T")}Z`) >= start)
+      .map((r) => (r[3] ?? "").toLowerCase()),
+  ).size;
+  return Math.max(0, WEEKLY_CAP - taken);
+}

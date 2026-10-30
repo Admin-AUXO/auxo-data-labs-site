@@ -24,7 +24,7 @@ A 10-question, evidence-based data health test. Five dimensions (Accurate, Compl
 
 Edit `cards.ts`. Keep two cards per dimension and four options per card with tiers 1–4 and points 10/7/3/0. `type` controls answer order: `scale_ascending` (best at A), `scale_descending` (worst at A) or `descriptive_shuffle` (shuffled once per attempt). Run `npm run test:unit` after.
 
-If you change questions or scoring, bump `VERSION` in `submit.ts` and the storage key in `storage.ts` so saved attempts don't mix.
+If you change questions or scoring, bump the storage key in `storage.ts` so saved attempts don't mix.
 
 ## Report email
 

@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Mark from "../components/layout/Mark.astro";
+import CalendarDialog from "../components/layout/CalendarDialog.astro";
 import { cardPage as c } from "../data/card-links";
 import wallet from "../data/wallet.json";
 import "../styles/pages/hello.css";
@@ -243,4 +244,5 @@ const passes = wallet as Record<string, { google: string | null; apple: string |
       if (link) track("card_link_click", { link: link.dataset.cardLink });
     });
   </script>
+  <CalendarDialog />
 </BaseLayout>

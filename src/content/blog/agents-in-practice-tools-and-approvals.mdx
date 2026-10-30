@@ -1,0 +1,75 @@
+---
+title: "Agents in practice: tools, approvals and where a person signs off"
+description: "An agent is a model that can use tools. How to choose a model and effort level for agent work, which tools to grant, and where a person must approve."
+date: 2026-10-30
+author: "Ajay Kumar"
+tags: ["Claude", "AI agents", "Governance", "AI in practice"]
+draft: true
+---
+
+An AI agent is not magic. It is a model that can use tools: search a database, read a file, draft an email, update a record. It decides which tool to use next, looks at the result, and carries on until the task is done.
+
+That ability is useful. It is also where the risk sits. Every tool you give an agent is a permission.
+
+## Which model for agent work
+
+All current Claude models can use tools. Anthropic's guidance gives each a different role in agent work.
+
+- **Fable 5.1** is positioned for long-running agent work, such as sessions that run for hours or multistep research carried through to a finished document.
+- **Opus 5.5** is built for long-running coding and knowledge work, and is Anthropic's suggested starting point for most workloads.
+- **Sonnet 5.5** handles everyday tool use well. For well-specified multistep tasks, Anthropic suggests starting at medium effort and moving to high for harder or longer ones.
+- **Haiku 5.5** suits short, simple steps inside a larger agent, such as a sub-task that sorts or extracts.
+
+Effort matters here too. Anthropic notes that lower effort means fewer and shorter tool calls. That saves money, but on Haiku at low effort, a long agent task is more likely to skip a search or a check. For agent work, measure before you lower it.
+
+## Start simpler than you think
+
+Anthropic's guide to [building effective agents](https://www.anthropic.com/research/building-effective-agents) makes a point worth repeating. Start with the simplest setup that works. Many tasks need a fixed sequence of steps, not an agent that decides for itself. Agents trade higher cost and slower responses for flexibility, and their errors can compound.
+
+A fixed workflow is easier to test, cheaper to run and easier to explain to an auditor. Use an agent only where the steps genuinely vary.
+
+## Grant tools by risk
+
+Think about each tool in three ways.
+
+- **Read or write.** Reading a ticket queue is low risk. Writing to a payment system is not.
+- **Reversible or not.** A draft can be deleted. A sent email cannot be unsent.
+- **Impact.** Changing a label is small. Changing a price, a payment or a contract is large.
+
+Start with read access. Add write access only where the task needs it. Nothing irreversible happens without a person.
+
+## Where a person signs off
+
+Decide the approval points before you build. Then build them into the workflow itself, not into a policy document nobody reads.
+
+**Finance.** The agent can match invoices to purchase orders and flag mismatches. A person approves every payment.
+
+**Operations.** The agent can read stock levels and draft a reorder. A person approves the purchase order before it is sent.
+
+**Sales.** The agent can research an account and draft an outreach email in your CRM. A person reads, edits and sends it.
+
+**Hiring.** The agent can summarise applications against the role's requirements. A person decides who is interviewed. Hiring decisions carry legal and fairness duties that stay with people.
+
+**Content.** The agent can draft a post and check it against your style guide. A person approves it before anything is published.
+
+In each case, the agent drafts, sorts, checks and flags. A person approves what goes out.
+
+## Keep a record
+
+For every run, keep a trace: what the agent was asked, what it read, which tools it used, what it produced, and who approved it. When something goes wrong, and eventually something will, you need to replay it.
+
+## Try this
+
+Pick one task you would like an agent to help with. List every action it would need to take. For each one, mark:
+
+1. Read or write.
+2. Reversible or not.
+3. Who should approve it, if anyone.
+
+If more than half the actions are irreversible writes, start with a fixed workflow that drafts and hands over, not a free-running agent. If most are reads, you have a good first candidate.
+
+## Where AUXO helps
+
+We build agent teams on Claude, set up in your own accounts and handed over. Each one has named approvers, least-privilege access and a record of every run. Never a system that acts alone. Working out the right tools and approval points for your processes is where we start.
+
+To see whether your data is ready for agents, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

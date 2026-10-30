@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/layout/Section.astro";
+import { payContent } from "../../data/pay";
+
+const c = payContent.thanks;
+---
+<BaseLayout title={c.meta.title} description={c.meta.description} noindex>
+  <Section padding="xl" width="5xl">
+    <div class="mx-auto flex max-w-xl flex-col gap-5" data-thanks data-copy={JSON.stringify(c)}>
+      <h1 class="text-display text-display--5xl" data-thanks-title>{c.checking}</h1>
+      <p class="lead" data-thanks-lead hidden></p>
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  import { initThanks } from "../../scripts/pay";
+  document.addEventListener("astro:page-load", initThanks);
+</script>

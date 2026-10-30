@@ -9,7 +9,6 @@ interface Props {
   rel?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  calendar?: boolean;
   icon?: boolean;
   iconName?: string;
   class?: string;
@@ -25,7 +24,6 @@ const {
   rel,
   type = "button",
   disabled = false,
-  calendar = false,
   icon = false,
   iconName = "mdi:arrow-right",
   class: className = "",
@@ -33,7 +31,7 @@ const {
   ariaLabel,
 } = Astro.props;
 
-const isLink = Boolean(href) && !calendar;
+const isLink = Boolean(href);
 const Tag = isLink ? "a" : "button";
 
 const tagProps = isLink
@@ -46,7 +44,6 @@ const tagProps = isLink
   : {
       type,
       disabled,
-      ...(calendar ? { "data-google-calendar-open": "" } : {}),
     };
 ---
 <Tag

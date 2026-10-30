@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/layout/Section.astro";
+import { payContent as c } from "../../data/pay";
+
+const copy = { eyebrow: c.eyebrow, notFound: c.notFound, closed: c.closed, paid: c.paid, titlePrefix: c.titlePrefix, button: c.button, redirecting: c.redirecting, error: c.error };
+---
+<BaseLayout title={c.meta.title} description={c.meta.description} noindex>
+  <Section padding="xl" width="5xl">
+    <div class="pay mx-auto flex max-w-xl flex-col gap-6" data-pay data-copy={JSON.stringify(copy)}>
+      <p class="section-index">{c.eyebrow}</p>
+      <h1 class="text-display text-display--5xl" data-pay-title>{c.loading}</h1>
+      <p class="lead" data-pay-message hidden></p>
+      <dl class="pay__rows" data-pay-rows hidden>
+        <div><dt>{c.labels.covers}</dt><dd data-f="covers"></dd></div>
+        <div><dt>{c.labels.reference}</dt><dd data-f="id"></dd></div>
+        <div><dt>{c.labels.deposit}</dt><dd data-f="deposit"></dd></div>
+        <div data-vat><dt>{c.labels.vat}</dt><dd data-f="vat"></dd></div>
+        <div class="pay__due"><dt>{c.labels.due}</dt><dd data-f="due"></dd></div>
+      </dl>
+      <ul class="flex flex-col gap-1 text-sm text-muted" data-pay-lines hidden>
+        {c.lines.map((l) => <li>{l}</li>)}
+      </ul>
+      <button type="button" class="pay__button" data-pay-button hidden>{c.button}</button>
+      <p class="text-sm text-subtle" data-pay-note hidden>{c.stripeNote}</p>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .pay__rows {
+    border-block: 1px solid var(--border);
+    display: grid;
+    margin: 0;
+  }
+
+  .pay__rows > div {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    padding-block: 0.85rem;
+  }
+
+  .pay__rows > div + div {
+    border-block-start: 1px solid var(--border);
+  }
+
+  .pay__rows dt {
+    color: var(--muted);
+  }
+
+  .pay__rows dd {
+    margin: 0;
+    text-align: end;
+  }
+
+  .pay__due dd {
+    font-size: var(--text-xl);
+    font-weight: 700;
+  }
+
+  .pay__button {
+    align-self: flex-start;
+    background: var(--accent);
+    border-radius: 999px;
+    color: var(--background);
+    font-weight: 700;
+    min-block-size: 3rem;
+    padding-inline: 1.5rem;
+  }
+
+  .pay__button:disabled {
+    opacity: 0.6;
+  }
+</style>
+
+<script>
+  import { initPay } from "../../scripts/pay";
+  document.addEventListener("astro:page-load", initPay);
+</script>

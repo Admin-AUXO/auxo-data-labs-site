@@ -1,0 +1,78 @@
+---
+title: "Cost control: routing, caching, batching, and measuring first"
+description: "AI costs creep up quietly at volume. Four practical controls for Claude workloads, and why you should measure before you scale."
+date: 2026-10-30
+author: "Ajay Kumar"
+tags: ["Claude", "Cost", "Evaluation", "AI in practice"]
+draft: true
+---
+
+A pilot rarely costs much. A pilot that runs on every invoice, every enquiry and every CV, every day, can.
+
+AI costs grow with volume, with how much each request reads, and with how hard the model thinks. The good news is that the main controls are well understood. Anthropic documents most of them itself.
+
+## Control one: route each task to the right model
+
+The current Claude models differ widely in cost. Haiku 5.5 costs a small fraction of Opus 5.5, and Fable 5.1 costs more than either. Sending every task to the biggest model is the most common way to overspend.
+
+Routing means each task goes to the smallest model that does it well. Simple sorting goes to Haiku. Everyday drafting goes to Sonnet. Hard analysis goes to Opus or Fable.
+
+Anthropic describes two patterns for combining models. In one, a lower-cost model does the work and passes hard decisions to a stronger one. In the other, a stronger model plans and hands bulk work to lower-cost ones. Either way, most of the work is billed at the lower rate.
+
+## Control two: set effort deliberately
+
+Effort sets how much the model thinks on each request. More thinking means more tokens, and more cost. Defaults vary by model, so a request you never configured still has a setting.
+
+Run your real tasks at a few effort levels. Keep the lowest one that holds quality. Our earlier post on effort covers how.
+
+## Control three: cache what repeats
+
+Many workloads send the same large block of text with every request: a policy manual, a product catalogue, a long set of instructions. Prompt caching stores that block so later requests read it at a much lower price. On the current models, a cached read costs a small fraction of the normal input price.
+
+Caching works best when the shared part comes first and stays the same. It does nothing for content that changes every time.
+
+## Control four: batch what can wait
+
+Not every task needs an answer in seconds. Overnight tagging of the day's tickets, a weekly review of contracts, or a monthly CV backlog can all wait a few hours.
+
+Anthropic's Batch API processes requests in bulk at half the normal price. If a task can wait, batching is one of the simplest savings available.
+
+## Measure before you scale
+
+None of these controls help if you don't know what you are spending, or whether the output is good.
+
+Before scaling any AI workflow, have three numbers in hand:
+
+- **Cost per task.** Not per month. Per invoice, per enquiry, per report.
+- **Quality per task.** The share of outputs a person accepts without changes, from a fixed set of real examples.
+- **Time saved per task.** Measured against how long the work took before.
+
+Then set a ceiling: a cost per task and a cost per month, with an alert when either is crossed. Agents in particular can loop and spend more than expected.
+
+## By function
+
+**Finance.** Batch the overnight coding of transactions on Haiku. Keep month-end commentary on Opus, where quality matters most.
+
+**Operations.** Cache your standard operating procedures so every request that checks against them reads them cheaply.
+
+**Sales.** Route enquiry sorting to Haiku in real time. Batch weekly account summaries overnight.
+
+**Hiring.** Batch CV extraction. Keep the shortlist write-up, which a person reviews, on a stronger model.
+
+**Content.** Cache your style guide and brand rules. Draft on Sonnet, and save larger models for long research pieces.
+
+## Try this
+
+Pick your highest-volume AI task, or the one you plan to scale next. For one week, record:
+
+1. How many times it ran.
+2. Which model and effort level it used.
+3. How many outputs a person accepted as they were.
+
+Then ask three questions. Could a smaller model do it? Could it wait for a batch? Does every request repeat the same long instructions? A yes to any of them is a saving to test.
+
+## Where AUXO helps
+
+Cost control is a design decision, not a setting you fix later. We set up Claude-based workflows with routing, caching, batching and cost ceilings built in, measured against your real work. You own the result, and a person approves what goes out.
+
+To see where your data and workflows stand, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

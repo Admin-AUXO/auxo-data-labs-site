@@ -38,6 +38,7 @@ export interface ContactContent {
     titleHighlight: string | string[];
     lead: string;
     points: string[];
+    spots: { left: string; full: string };
   };
   details: {
     title: string;
@@ -99,10 +100,14 @@ export const contactContent: ContactContent = {
     title: "30 minutes with a founder.",
     titleHighlight: "founder",
     lead: "Bring the one number you don't trust. Leave with what to fix first.",
+    spots: {
+      left: "{left} of {cap} places left this week.",
+      full: "This week is full. Apply now and we will offer you a slot next week.",
+    },
     points: [
       "A call with Vignesh or Ajay, not a sales team.",
       "Written next steps within 3 business days.",
-      "Limited places each month. We read every application.",
+      "Limited places each week. We read every application.",
     ],
   },
   details: {
@@ -241,7 +246,7 @@ export const contactContent: ContactContent = {
       {
         question: "Why is it an application?",
         answer:
-          "Places are limited each month, and we prepare for every call. We read each application first and will tell you if it isn't a fit.",
+          "Places are limited each week, and we prepare for every call. We read each application first and will tell you if it isn't a fit.",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",

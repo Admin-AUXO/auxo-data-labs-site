@@ -1,0 +1,69 @@
+---
+title: "Which Claude model for which job"
+description: "Fable, Opus, Sonnet or Haiku? A plain map of the current Claude models, matched to finance, operations, sales, hiring and content work."
+date: 2026-10-30
+author: "Ajay Kumar"
+tags: ["Claude", "Model choice", "AI in practice"]
+draft: true
+---
+
+"Which Claude model should we use?"
+
+It is usually the first question a team asks. It is a good question, but it is rarely the one that decides whether the work succeeds. Still, picking well saves money and time from day one. So here is the map.
+
+## The four current models
+
+Anthropic currently offers four Claude models to all customers. Each one is good. They differ in depth, speed and cost, not in whether they are "smart enough".
+
+- **Claude Fable 5.1.** Anthropic's most capable model open to all customers. Anthropic positions it for demanding reasoning and long-running agent work: sessions that run for hours, multistep research, and analysis carried through to a finished document, spreadsheet or deck. It is the slowest and the most expensive of the four.
+- **Claude Opus 5.5.** Built for long-running coding and knowledge work. Anthropic's own guidance is to start with Opus 5.5 for most workloads. It is moderate on speed and sits between Fable and Sonnet on cost.
+- **Claude Sonnet 5.5.** Described as the best combination of speed and intelligence. It suits everyday work: data analysis, content creation, reading images and documents, and tool use. It is fast and costs less than Opus.
+- **Claude Haiku 5.5.** For high-volume, time-sensitive tasks such as classification, extraction and routing. It is the fastest and by far the cheapest.
+
+All four read text and images, work across languages and can use tools. All four share the same very large context window and the same knowledge cutoff. So the choice is not about features. It is about how much thinking a task needs, how fast you need the answer, and how many times you will run it.
+
+## Matching models to business work
+
+Here is how that plays out by function. Treat it as a starting point, not a rule.
+
+**Finance.** Month-end commentary on a variance report needs judgement and care with numbers. Opus 5.5 is a sensible start. Tagging thousands of expense lines to cost centres is a different job. It is repetitive and well defined, which is Haiku territory.
+
+**Operations.** Reading supplier emails and pulling out order numbers, dates and quantities is extraction. Haiku or Sonnet handles it well at volume. Redesigning a process across five systems, with trade-offs to weigh, calls for Opus or Fable.
+
+**Sales.** Sorting inbound enquiries by segment and urgency suits Haiku. Drafting a tailored account brief from your CRM notes and public sources suits Sonnet or Opus. A person still reads the brief before anyone acts on it.
+
+**Hiring.** Pulling skills and years of experience out of CVs into a consistent table is extraction. Writing a fair, specific interview plan for a senior role needs more depth.
+
+**Content.** First drafts of posts and summaries are Sonnet's everyday work. A long research report that has to hold together across many sources is where Opus or Fable earns the extra cost.
+
+## Two ways to start
+
+Anthropic's own guidance describes two approaches.
+
+**Efficiency first.** Start with Haiku, test it on your real task, and move up only where it falls short. This suits prototypes, high-volume work and anything with tight budgets or response times.
+
+**Capability first.** Start with Opus 5.5 and get the task working well. Then try lowering the effort setting or moving to a smaller model. If Opus at its highest settings still falls short on very demanding work, try Fable.
+
+Both approaches end in the same place. You test on your own work, then decide. Anthropic says plainly that a good evaluation set is the most important step.
+
+## The part the map leaves out
+
+The model is one decision among many. It is often not the hardest one. The same model gives very different results depending on what it reads, what it is allowed to do and who checks its work.
+
+A poor answer about last quarter's margin is rarely a model problem. It is usually two systems that define "revenue" differently. A bigger model will not fix that. It will just give you a more articulate wrong answer.
+
+## Try this
+
+Pick one recurring task in your team. Write down three things:
+
+1. How often it runs: daily, weekly, or thousands of times a month.
+2. What a wrong answer would cost: a small fix, an awkward email, or a bad decision.
+3. Who checks the output today.
+
+High volume and a low cost of error points to Haiku. Low volume and a high cost of error points to Opus or Fable. Everything in between is a good place to try Sonnet. Then run ten real examples through your choice and through the model one step up. Compare the results side by side before you decide.
+
+## Where AUXO helps
+
+The map is the easy part. Getting a model to work reliably on your own data, inside your own systems, with a person approving what goes out, is where most of the effort goes. That is the work we do. We build on Claude, and we will tell you when what you already have is good enough.
+
+For a quick read on how ready your data is, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

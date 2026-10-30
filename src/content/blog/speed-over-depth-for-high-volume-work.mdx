@@ -1,0 +1,70 @@
+---
+title: "Speed over depth: small models for high-volume work"
+description: "Sorting, tagging and extraction run thousands of times a month. Why a fast model like Claude Haiku 5.5 often fits this work better than a bigger one."
+date: 2026-10-30
+author: "Ajay Kumar"
+tags: ["Claude", "Model choice", "Automation", "AI in practice"]
+draft: true
+---
+
+A lot of useful AI work is not clever. It is repetitive.
+
+Read this email and say which team it belongs to. Pull the supplier name, date and total from this invoice. Tag this support ticket by product and urgency. Each one takes a person a few seconds. Across a month, they add up to days.
+
+This is the work where a small, fast model often beats a large one.
+
+## Why smaller can be better
+
+Anthropic positions Claude Haiku 5.5 for high-volume, time-sensitive tasks such as classification, extraction and routing. It is the fastest of the current Claude models and costs a small fraction of the larger ones.
+
+That gap matters at volume. A task that runs ten times a month can use any model, and nobody will notice the bill. A task that runs fifty thousand times a month is different. The model choice shows up in your costs, and in how long people wait for results.
+
+Speed matters too. If a sales enquiry is routed in under a second, it reaches the right person while the lead is still warm. If a support ticket is tagged as it arrives, the urgent ones rise to the top straight away.
+
+And Haiku is not a weak model. Anthropic's guidance describes it as suited to cost-sensitive work that still needs strong reasoning. It supports the same effort levels as the larger models, so you can ask it to think harder where needed.
+
+## Good high-volume tasks, by function
+
+**Finance.** Coding expense lines to the right ledger account. Matching remittance emails to open invoices. Flagging invoices where the total does not match the line items, for a person to check.
+
+**Operations.** Extracting order numbers, quantities and delivery dates from supplier emails. Sorting incoming documents by type. Checking that each delivery note has a signature and a date.
+
+**Sales.** Routing website enquiries by segment, region and urgency. Tagging call notes with the topics raised. Spotting duplicate contacts in a CRM export.
+
+**Hiring.** Turning CVs into a consistent table of skills, locations and experience. Checking applications for the must-have requirements before a recruiter reads them.
+
+**Content.** Tagging an archive of articles by topic. Writing short alt text for product images. Sorting customer feedback into themes.
+
+In each case the output is narrow and checkable. There is a right answer, and a person can spot a wrong one quickly.
+
+## What makes this work
+
+Small models do well when the task is tightly defined. A few habits help.
+
+- **Fixed categories.** Give the model a closed list of labels, with a one-line definition for each. "Urgent" means different things to different teams. Write down what it means to yours.
+- **Examples.** Include a handful of real, correctly labelled examples, including awkward ones.
+- **A structured output.** Ask for the same fields in the same format every time, so the result drops straight into your spreadsheet or system.
+- **An "unsure" option.** Let the model say it is not sure. Send those cases to a person rather than forcing a guess.
+- **Spot checks.** Have someone review a sample of results each week. Volume hides errors unless someone looks.
+
+## When to move up
+
+Haiku is not the answer to everything. Move up to Sonnet or Opus when the task needs judgement rather than sorting. Writing a reply, weighing a trade-off or explaining why a number moved is a different kind of work.
+
+A common, sensible pattern is to combine the two. A fast model sorts and extracts at volume. A larger model handles the small share of cases that are genuinely hard. Anthropic describes this approach in its own guidance on balancing cost and intelligence.
+
+## Try this
+
+Pick one sorting or extraction task your team does by hand. Export the last 100 examples, along with the answer a person gave.
+
+1. Write a one-page instruction: the categories or fields, a definition for each, and five worked examples.
+2. Run the 100 examples through Haiku 5.5 at its default effort.
+3. Compare its answers with your team's. Count the matches, and read every mismatch.
+
+Often the mismatches show that your own team disagrees on the categories. That is useful to know. Fix the definitions, then run it again.
+
+## Where AUXO helps
+
+The model is rarely what slows high-volume work down. Unclear categories, messy source data and missing review steps do. We help you define the task, clean the data it reads, and set up the checks so a person reviews what matters.
+
+For a quick read on your own data, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

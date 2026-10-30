@@ -136,7 +136,7 @@ export const pricingContent: PricingContent = {
         facts: {
           first: "A Founder review, an NDA, then a written proposal.",
           then: "We build in your systems, alongside your own team or partners. Upkeep if you want it.",
-          time: "Proposal within 5 business days. First phase: 2 to 3 weeks, plus your buying steps.",
+          time: "Proposal within 3 business days. First phase: 2 to 3 weeks, plus your buying steps.",
           price: "The scope of each phase, on your contract terms.",
           stop: "Each phase stands alone. Everything is in your name.",
         },
@@ -170,7 +170,7 @@ export const pricingContent: PricingContent = {
       {
         question: "Who can get a Founder review?",
         answer:
-          "Any company, one per company. Places are limited each month, so we read every application first. Not enough data yet? We'll say so and suggest what to set up first.",
+          "Any company, one per company. Places are limited each week, so we read every application first. Not enough data yet? We'll say so and suggest what to set up first.",
       },
       {
         question: "Why not hire a data engineer instead?",

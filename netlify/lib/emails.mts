@@ -68,16 +68,53 @@ ${button(BOOKING, "Pick a time")}
   };
 }
 
-export function scoreFollowUp(r: { total: number | string; band: string }) {
-  const apply = `${SITE}/apply/?${new URLSearchParams({ band: r.band.toLowerCase(), score: String(r.total) })}`;
+type Nurture = { total: number | string; band: string; left: number | null; cap: number };
+
+const spotsLine = (n: Nurture) =>
+  typeof n.left === "number"
+    ? n.left > 0
+      ? `<b>${n.left} of ${n.cap} places</b> are left this week.`
+      : "This week is full, so we'll offer you a slot next week."
+    : "Places are limited each week.";
+
+const tagged = (path: string, content: string, extra: Record<string, string> = {}) =>
+  `${SITE}${path}?${new URLSearchParams({ ...extra, utm_source: "email", utm_medium: "nurture", utm_campaign: `nurture-${content}` })}`;
+
+const nurtureClose = (n: Nurture, content: string) =>
+  `<p style="margin:24px 0 0">A Founder review is 30 minutes with Vignesh or Ajay. Bring the one number you don't trust, and leave with what to fix first. No charge. ${spotsLine(n)}</p>
+${button(tagged("/apply/", content, { band: n.band.toLowerCase(), score: String(n.total) }), "Apply for a Founder review")}`;
+
+const readLink = (path: string, content: string, text: string) =>
+  `<p style="margin:18px 0"><a href="${tagged(path, content)}" style="color:#0a0a0a;font-weight:700">${esc(text)} →</a></p>`;
+
+export function nurture(step: 1 | 2 | 3, n: Nurture) {
+  if (step === 1) {
+    const inner = `<p style="margin:0 0 14px">Hi,</p>
+<p style="margin:0 0 14px">You took the AUXO Score a couple of days ago and came out <b>${esc(n.band)}</b>. Here's one idea worth five minutes.</p>
+<h2 style="font-size:19px;margin:22px 0 8px;color:#0a0a0a">Your AI assistant is not the hard part</h2>
+<p style="margin:0 0 14px">Most AI pilots don't stall on the model. They stall because two teams bring two different numbers for the same thing, and nobody trusts the report the AI is reading from. The post covers three questions to ask your leadership team before you spend on AI.</p>
+${readLink("/blog/your-ai-assistant-is-not-the-hard-part/", "business", "Read the post")}
+${nurtureClose(n, "business")}`;
+    return { subject: "Before you spend on AI, ask these three questions", preview: "Why most AI pilots stall, and it isn't the model.", html: shell("Why most AI pilots stall, and it isn't the model.", inner) };
+  }
+  if (step === 2) {
+    const inner = `<p style="margin:0 0 14px">Hi,</p>
+<p style="margin:0 0 14px">If someone on your team would be the one to build it, this one's for them.</p>
+<h2 style="font-size:19px;margin:22px 0 8px;color:#0a0a0a">The model is the easy part</h2>
+<p style="margin:0 0 14px">Often the model can do part of the job. The hard part is the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and who keeps it running. The post is the checklist we use before building any agent.</p>
+${readLink("/blog/the-model-is-the-easy-part/", "technical", "Read the checklist")}
+${nurtureClose(n, "technical")}`;
+    return { subject: "The checklist we use before building any agent", preview: "Data, systems, rules, approvals, upkeep.", html: shell("Data, systems, rules, approvals, upkeep.", inner) };
+  }
   const inner = `<p style="margin:0 0 14px">Hi,</p>
-<p style="margin:0 0 14px">A few days ago you took the AUXO Score and came out <b>${esc(r.band)}</b> (${esc(r.total)}/100).</p>
-<p style="margin:0 0 14px">If the first fix felt clear, great. If you'd rather talk it through, a Founder review is 30 minutes with Vignesh or Ajay. Bring the one number you don't trust, and leave with what to fix first. No charge, and places are limited each month.</p>
-${button(apply, "Apply for a Founder review")}
-<p style="margin:0;color:#555">This is the only follow-up we'll send about your result.</p>`;
-  return {
-    subject: `Your ${r.band} result: want a founder's view?`,
-    preview: "30 minutes, no charge, limited places each month.",
-    html: shell("30 minutes, no charge, limited places each month.", inner),
-  };
+<p style="margin:0 0 14px">Here's what actually happens on a Founder review.</p>
+<ol style="margin:0 0 14px;padding-left:20px">
+<li style="margin:0 0 8px"><b>You apply.</b> Five questions, including the one number you don't trust today. We read every application before the call.</li>
+<li style="margin:0 0 8px"><b>We talk for 30 minutes.</b> Vignesh or Ajay learns how your business runs, where your data lives and where it lets you down. No slides, no pitch, no price on the call.</li>
+<li style="margin:0 0 8px"><b>You get next steps in writing</b> within 3 business days: what to fix first, and what not to buy yet. They're yours, whether or not you work with us.</li>
+<li style="margin:0"><b>If there's work worth doing,</b> a fixed price follows in writing. If we're not the right fit, we say so.</li>
+</ol>
+${nurtureClose(n, "founder-review")}
+<p style="margin:0;color:#555">This is the last email about your Score result. After this, you'll only hear from us if you asked for the newsletter.</p>`;
+  return { subject: "What happens on a Founder review", preview: "30 minutes, written next steps, no pitch.", html: shell("30 minutes, written next steps, no pitch.", inner) };
 }

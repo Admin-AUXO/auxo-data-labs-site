@@ -1,16 +1,10 @@
-import { CARDS, FOCUS } from "./cards";
-
 import type { Utm } from "./storage";
-import type { Result, State } from "./types";
+import type { State } from "./types";
 
-const VERSION = "auxo-score-10card-v1";
 export const MAX_SUBMITS = 3;
 
 export const MESSAGES = {
-  unavailable: "Email isn't available right now. Please try again later.",
-  badRequest: "That didn't go through. Check your email and try again.",
   tooMany: "Too many requests. Please wait a minute and try again.",
-  failed: "Something went wrong on our side. Please try again.",
 } as const;
 
 interface Context {
@@ -52,81 +46,3 @@ export function buildContext(state: State, utm: Utm): Context {
     timezone,
   };
 }
-
-function envelope(type: string, email: string, state: State, ctx: Context) {
-  return {
-    type,
-    version: VERSION,
-    submissionId: uuid(),
-    attemptId: state.attemptId,
-    submittedAt: new Date().toISOString(),
-    email,
-    emailDomain: email.split("@")[1] ?? "",
-    consent: true,
-    hp: "",
-    context: ctx,
-  };
-}
-
-export function buildReportPayload(email: string, state: State, r: Result, ctx: Context) {
-  const answers = CARDS.map((card) => {
-    const a = state.answers[card.id];
-    if (!a || a.isIdk) {
-      return {
-        cardId: card.id, dimension: card.dimension, question: card.question,
-        tier: 5, points: a ? a.points : 0, isIdk: true, label: "I don't know", sub: "", quadrant: null,
-      };
-    }
-    const opt = card.options.find((o) => o.tier === a.tier)!;
-    return {
-      cardId: card.id, dimension: card.dimension, question: card.question,
-      tier: a.tier, points: a.points, isIdk: false, label: opt.label, sub: opt.sub, quadrant: a.selectedQuadrant,
-    };
-  });
-  return {
-    ...envelope("full_report_request", email, state, ctx),
-    result: {
-      total: r.total,
-      band: r.band.name,
-      bandLine: r.band.line,
-      weakest: r.weakest,
-      focus: FOCUS[r.weakest].why,
-      focusSteps: FOCUS[r.weakest].steps,
-      focusGood: FOCUS[r.weakest].good,
-      idkCount: r.idkCount,
-      dimensions: r.dims,
-      radar: r.radar,
-    },
-    answers,
-  };
-}
-
-
-type SubmitOutcome = { ok: true } | { ok: false; status: number; message: string };
-
-export async function postJson(url: string | undefined, body: unknown): Promise<SubmitOutcome> {
-  if (!url) {
-    if (import.meta.env.DEV) console.warn("[auxo-score] webhook env var is not set");
-    return { ok: false, status: 0, message: MESSAGES.unavailable };
-  }
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 10_000);
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-      signal: ctrl.signal,
-    });
-    if (res.status === 400) return { ok: false, status: 400, message: MESSAGES.badRequest };
-    if (res.status === 429) return { ok: false, status: 429, message: MESSAGES.tooMany };
-    if (!res.ok) return { ok: false, status: res.status, message: MESSAGES.failed };
-    const data = (await res.json().catch(() => null)) as { ok?: boolean } | null;
-    return data?.ok === true ? { ok: true } : { ok: false, status: res.status, message: MESSAGES.failed };
-  } catch {
-    return { ok: false, status: 0, message: MESSAGES.failed };
-  } finally {
-    clearTimeout(timer);
-  }
-}
-

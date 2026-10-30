@@ -24,7 +24,7 @@ const routes = [
   "/auxo-score/",
   "/about/",
   "/insights/",
-  "/contact/",
+  "/apply/",
 ];
 
 const BLOCKING = new Set(["critical", "serious"]);

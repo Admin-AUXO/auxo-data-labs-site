@@ -14,6 +14,6 @@
   - Light premium, not flashy. Terse copy, one idea per line.
   - Cards aligned with subgrid. No left/right split sections except the hero and FAQ.
   - Founders appear on About only. No blog authors or dates.
-- **Deploys:** a push to `main` goes straight to production on Netlify. Run `npm run validate` and check desktop and mobile in the preview before pushing.
+- **Deploys:** a push to `main` goes straight to production on Netlify and rebuilds staging.auxodata.com. Run `npm run validate` and check desktop and mobile in the preview before pushing. Netlify production builds are paused while the free credits are used up; test functions with a CLI draft deploy (`docs/lead-pipeline.md`).
 - Preview servers are in `A:/AUXO/.claude/launch.json` (`dev` on 4340) and this repo's `.claude/launch.json`.
 - Never remove the `/v` → `/hello/` redirects in `netlify.toml` and the Astro config: printed business cards use them.

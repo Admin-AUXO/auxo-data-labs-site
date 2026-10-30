@@ -1,0 +1,73 @@
+---
+title: "Long documents and data: why what's underneath matters more"
+description: "Claude can read very long documents in one go. That helps, but it does not fix messy data. Context, retrieval and the data foundations that decide the answer."
+date: 2026-10-30
+author: "Ajay Kumar"
+tags: ["Claude", "Data readiness", "Retrieval", "AI in practice"]
+draft: true
+---
+
+"Can't we just give it all our documents?"
+
+It is a reasonable question. The current Claude models can read a great deal at once. But reading more is not the same as answering well.
+
+## How much Claude can read
+
+Every current Claude model, from Haiku 5.5 to Fable 5.1, has a context window of one million tokens. Anthropic puts that at roughly 555,000 words. That is several long contracts, a year of board packs, or a large slice of a policy library in a single request.
+
+That is genuinely useful. You can ask questions across a whole contract set, compare versions of a policy, or check a long report for internal consistency. Tasks that used to need careful slicing now fit in one go.
+
+But there are three catches.
+
+## Catch one: more reading costs more
+
+You pay for every token the model reads, every time. Sending a full document library with each question is slow and expensive, especially at volume. And Anthropic's pricing notes that very long requests can be billed at a different rate. Check the current pricing page before you design around it.
+
+Prompt caching helps when the same large document is used again and again. A cached read costs a small fraction of a normal one. But caching only helps if the same content repeats. We cover it in more detail later in this series.
+
+## Catch two: the model needs the right documents, not all of them
+
+For most business questions, a small set of the right documents beats a large pile of mixed ones. This is what retrieval is for. A search step finds the few passages that matter, and only those go to the model.
+
+Good retrieval depends on boring things done well:
+
+- **One current version.** If your shared drive holds four copies of the pricing policy, the model may quote the wrong one with confidence.
+- **Clear ownership.** Someone has to say which document is the source of truth.
+- **Useful labels.** Dates, owners, departments and status make search far more accurate.
+- **Access rules.** The model should only see what the person asking is allowed to see. That has to be enforced outside the model.
+
+## Catch three: the numbers have to agree
+
+Documents are one thing. Data is another.
+
+Ask a model, "What was our revenue in the Gulf last quarter?" If your CRM, billing system and finance ledger each define revenue differently, the model will pick one. It may not tell you which. It will still sound sure.
+
+No context window fixes that. The fix is agreeing what each number means, where it comes from and who owns it. Then checking that the systems match.
+
+## By function
+
+**Finance.** Reading a full set of loan agreements to list covenants works well with a large context. Answering "what is our cash position?" depends on clean, reconciled data, not on reading more.
+
+**Operations.** Comparing a supplier contract against your standard terms is a good long-document task. Tracking on-time delivery depends on consistent dates in your systems.
+
+**Sales.** Summarising a long account history before a renewal is a good fit. Forecasting depends on a pipeline where stages mean the same thing to every rep.
+
+**Hiring.** Checking a job description against your policies is straightforward. Comparing candidates fairly needs consistent, structured interview notes.
+
+**Content.** Checking a long report against your style guide works well. Reusing past content depends on an archive that is labelled and current.
+
+## Try this
+
+Pick one question your leadership team asks every month. Write down:
+
+1. Every system or document that holds part of the answer.
+2. Whether those sources agree on the definition of the key number.
+3. Who would settle a disagreement.
+
+Then ask Claude the question with only the documents you would trust. Ask again with everything in the folder. Compare the answers. The difference is a fair measure of how much your data, not your model, is shaping the result.
+
+## Where AUXO helps
+
+This is the core of our work. We get your data ready for AI: agreed definitions, one source of truth, clean retrieval and the right access rules. Then we set up the tools that run on it, with a person approving what goes out.
+
+To see how your data scores on accuracy, completeness, consistency, timeliness and trust, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

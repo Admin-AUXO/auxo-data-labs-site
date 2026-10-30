@@ -73,9 +73,9 @@ Fonts are self-hosted `woff2` in `public/fonts/`:
 
 ## Deployment
 
-Netlify (`auxo-data-labs.netlify.app`, custom domain `auxodata.com`). The site is fully static — every route prerenders; the contact form posts client-side via EmailJS. Pushing to `main` on `origin` (`Admin-AUXO/auxo-data-labs-site`) auto-deploys; build settings, redirects and security headers live in `netlify.toml`. GitHub Actions (`.github/workflows/ci.yml`) only checks: `npm run validate` and `npm run test:unit` on pushes to `main` and on PRs.
+Netlify (`auxo-data-labs.netlify.app`, custom domain `auxodata.com`). Every route prerenders. Leads, emails, the places-left count and Stripe deposits run on Netlify functions in `netlify/` (see [`docs/lead-pipeline.md`](docs/lead-pipeline.md)). Every push to `main` also rebuilds the review copy at https://staging.auxodata.com (`.github/workflows/staging.yml`). Pushing to `main` on `origin` (`Admin-AUXO/auxo-data-labs-site`) auto-deploys; build settings, redirects and security headers live in `netlify.toml`. GitHub Actions (`.github/workflows/ci.yml`) only checks: `npm run validate` and `npm run test:unit` on pushes to `main` and on PRs.
 
-Build-time env vars (set in Netlify, not committed; `.env.local` for local work):
+Env vars (set in Netlify, not committed; `.env.local` for local work):
 
 | Var | Used by |
 |---|---|

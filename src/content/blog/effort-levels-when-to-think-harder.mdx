@@ -1,0 +1,68 @@
+---
+title: "Effort levels: when to think harder, and when it wastes money"
+description: "Claude's effort setting changes how much the model thinks and what each request costs. How to choose a level for real business tasks."
+date: 2026-10-30
+author: "Ajay Kumar"
+tags: ["Claude", "Effort", "Cost", "AI in practice"]
+draft: true
+---
+
+Most teams pick a model and stop there. But the current Claude models have a second dial that often matters as much: effort.
+
+Anthropic's own guidance says tuning effort is often a better lever than switching models. It is worth understanding before you pay for a bigger one.
+
+## What effort does
+
+Effort tells the model how many tokens to spend on a response. That covers its thinking, its answer and any tool calls it makes. Higher effort means more thorough work, slower answers and higher cost. Lower effort means faster, cheaper and shorter work, with some loss of depth.
+
+There are five levels:
+
+- **Low.** The most efficient. Anthropic suggests it for simpler tasks that need speed and low cost.
+- **Medium.** A balance of speed, cost and quality.
+- **High.** Spends as many tokens as the task needs for excellent results. Suited to complex reasoning and difficult problems.
+- **Extra high.** For long-running work, such as agent tasks that run for over half an hour.
+- **Max.** No limit on spending. For the deepest possible analysis.
+
+Two points are easy to miss. First, effort is a signal, not a hard budget. At low effort the model still thinks on a hard problem. It just thinks less. Second, defaults differ. Opus 5.5 and Haiku 5.5 default to medium. Fable 5.1 and Sonnet 5.5 default to high. If you never set it, you are still choosing.
+
+## Thinking is now automatic
+
+On the current models, Claude decides for itself how much to think. Anthropic calls this adaptive thinking, and effort is how you steer it. On Opus 5.5 and Fable 5.1, thinking is always on. That makes effort the main control over what a request costs.
+
+## Matching effort to the work
+
+**Low effort.** Short, well-defined tasks with a clear right answer. Labelling a support ticket. Pulling an invoice number from an email. Checking whether a CV mentions a required licence. Anthropic notes that low effort works best with an explicit checklist when a task has several parts.
+
+**Medium effort.** The everyday workflow. Summarising a sales call into next steps. Drafting a reply to a supplier. Turning meeting notes into an action list. Most business tasks sit here.
+
+**High effort.** Work where a mistake would be expensive or embarrassing. Explaining why gross margin moved this quarter. Reviewing a contract clause against your standard terms. Building a fair scoring rubric for a senior hire.
+
+**Extra high and max.** Long, open-ended work. A multistep research brief, a full financial model review, or an agent working through a large task over hours. Anthropic's guidance is to use these only where your own tests show a real quality gain. On simpler tasks, more thinking mostly adds cost.
+
+## Where effort wastes money
+
+The common mistake is setting everything to high "to be safe". For a task like sorting emails into five folders, extra thinking rarely changes the answer. It only changes the bill and the wait.
+
+The opposite mistake also happens. A team puts a hard analysis on low effort to save money, gets shallow answers, and decides AI can't do the job. The model could. It was told not to try very hard.
+
+The fix for both is the same. Measure.
+
+## Try this
+
+Take one task your team runs often, such as a weekly operations summary. Collect ten real past examples where you know what a good answer looks like.
+
+1. Run all ten at low, medium and high effort on the same model.
+2. Ask the person who owns the task to score each result: usable as is, needs edits, or wrong.
+3. Note how long each one took.
+
+If medium scores as well as high, you have found a cheaper default. If low is just as good, better still. If only high works, you now know why it is worth the cost. Anthropic recommends exactly this kind of effort sweep on your own examples, rather than carrying settings over from an older model.
+
+## The bigger lesson
+
+Effort is a small example of a larger point. The right setup depends on your work, your data and how much error you can accept. No default fits every task, and no article can choose for you.
+
+## Where AUXO helps
+
+We set up Claude-based workflows on your own data, test each task at the right model and effort, and build in the step where a person approves what goes out. The settings are the easy part. Knowing which tasks matter, and what good looks like for each, is where we spend our time.
+
+To see where your data stands, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

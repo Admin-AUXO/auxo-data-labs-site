@@ -34,6 +34,7 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
               </li>
             ))}
           </ul>
+          <p class="text-sm font-medium text-accent" data-spots data-left={c.hero.spots.left} data-full={c.hero.spots.full} hidden></p>
         </div>
         <h2 class="text-2xl" data-reveal>{c.details.title}</h2>
 

@@ -10,7 +10,7 @@ const routes = [
   "/about/",
   "/auxo-score/",
   "/insights/",
-  "/contact/",
+  "/apply/",
   "/legal/privacy-policy/",
   "/legal/terms/",
   "/legal/cookie-policy/",
@@ -36,7 +36,7 @@ for (const route of routes) {
 test("primary nav lists the new routes", async ({ page }) => {
   await page.goto("/");
   const nav = page.getByRole("navigation", { name: "Primary" });
-  for (const href of ["/how-it-works/", "/pricing/", "/marketplace/", "/blog/", "/auxo-score/"]) {
+  for (const href of ["/how-it-works/", "/pricing/", "/marketplace/", "/blog/"]) {
     await expect(nav.locator(`a[href="${href}"]`)).toHaveCount(1);
   }
 });
@@ -65,8 +65,9 @@ test("pricing shows three segment cards with no badge", async ({ page }) => {
     await expect(page.locator(`#${id} article h2`)).toBeVisible();
   }
   await expect(page.locator(".plan__badge")).toHaveCount(0);
-  await expect(page.locator('#startups a[href="/auxo-score/?offer=free-audit"]')).toBeVisible();
-  await expect(page.locator('#large-organisations a[href="/contact/?topic=enterprise"]')).toBeVisible();
+  for (const id of ["startups", "growing", "large-organisations"]) {
+    await expect(page.locator(`#${id} a[href="/apply/"]`)).toBeVisible();
+  }
   const text = await page.locator("main").innerText();
   expect(text).not.toMatch(/AED|USD|\$\s?\d|€\s?\d|most popular/i);
 });
