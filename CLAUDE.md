@@ -8,12 +8,12 @@
   - `website-design-system`: tokens, type, component styling
   - `performance-and-motion`: animation, scripts, service worker
   - `public-assets-and-discovery`: `public/`, llms.txt, manifest, sw.js
-- **Copy:** for any wording change, also load the `auxo-copy` skill (`A:/AUXO/.claude/skills/auxo-copy/SKILL.md`). Copy lives in `src/data/*.ts`.
+- **Copy:** for any wording change, also load the `auxo-copy` skill (`../../.claude/skills/auxo-copy/SKILL.md`). Copy lives in `src/data/*.ts`.
 - **Analytics:** load `auxo-ga4-gtm` before touching tracking.
 - **Owner's design preferences:**
   - Light premium, not flashy. Terse copy, one idea per line.
   - Cards aligned with subgrid. No left/right split sections except the hero and FAQ.
   - Founders appear on About only. No blog authors or dates.
 - **Deploys:** a push to `main` goes straight to production on Netlify and rebuilds staging.auxodata.com. Run `npm run validate` and check desktop and mobile in the preview before pushing. Netlify production builds are paused until the free credits reset on 14 Nov 2026 (no plan upgrade); batch changes so one deploy carries them, and test functions with a CLI draft deploy (`docs/lead-pipeline.md`).
-- Preview servers are in `A:/AUXO/.claude/launch.json` (`dev` on 4340) and this repo's `.claude/launch.json`.
+- Preview servers are in `../../.claude/launch.json` (`dev` on 4340) and this repo's `.claude/launch.json`.
 - Never remove the `/v` → `/hello/` redirects in `netlify.toml` and the Astro config: printed business cards use them.
