@@ -21,7 +21,7 @@ export const navigationContent: NavigationContent = {
   items: [
     { name: "How it works", href: "/how-it-works/" },
     { name: "Pricing", href: "/pricing/" },
-    { name: "Marketplace", href: "/marketplace/" },
+    { name: "Stacks", href: "/marketplace/" },
     { name: "Blog", href: "/blog/" },
   ],
   secondaryLink: {

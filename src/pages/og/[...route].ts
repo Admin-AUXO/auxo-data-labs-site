@@ -30,8 +30,8 @@ const pages: Record<string, OGPage> = {
     description: "Founder review for funded startups. Deep-dive audit for growing companies. One unit first for large organisations.",
   },
   marketplace: {
-    title: "The AI stack for every team.",
-    description: "Tools vetted by AUXO. Set up on your data. Managed if you want it.",
+    title: "Tool bundles, set up on your data.",
+    description: "Stacks vetted by AUXO. You buy direct and own the account."
   },
   blog: {
     title: "Data and AI, written plainly.",

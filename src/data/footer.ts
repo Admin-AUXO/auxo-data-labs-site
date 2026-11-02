@@ -22,7 +22,7 @@ export const footerContent: FooterContent = {
       links: [
         { label: "How it works", href: "/how-it-works/" },
         { label: "Pricing", href: "/pricing/" },
-        { label: "Marketplace", href: "/marketplace/" },
+        { label: "Stacks", href: "/marketplace/" },
         { label: "AUXO Score", href: "/auxo-score/" },
       ],
     },

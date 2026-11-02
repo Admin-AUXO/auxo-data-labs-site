@@ -66,19 +66,19 @@ export interface PricingContent {
 }
 
 export const pricingContent: PricingContent = {
-  metaTitle: "Pricing: three ways in, a fixed price per phase",
+  metaTitle: "Pricing: one path, a fixed price per phase",
   metaDescription:
-    "Every path starts with a Founder review: a 30-minute call with a founder. Then a fixed price per phase, in writing.",
+    "Start with the AUXO Score, then a Founder review. Then a fixed scope and price per phase, agreed in writing.",
   hero: {
     eyebrow: "Pricing",
     title: "Start where you are.",
-    lead: "Three ways in. Each phase has a fixed price, agreed in writing before we start.",
+    lead: "One path: Score, Founder review, Deep-dive audit, Build. Each phase has a fixed price, agreed in writing before we start.",
     rulesTitle: "How pricing works",
     rules: [
       { tone: "free", icon: "mdi:check", text: "No charge for the AUXO Score or the Founder review." },
       { tone: "free", icon: "mdi:key-outline", text: "Stop after any phase. You keep everything delivered." },
       { tone: "optional", icon: "mdi:domain", text: "Tool vendors bill you directly." },
-      { tone: "optional", icon: "mdi:sync", text: "Upkeep is optional and monthly. Stop with 30 days' notice." },
+      { tone: "optional", icon: "mdi:sync", text: "Upkeep and ongoing advice are optional and monthly. Stop with 30 days' notice." },
     ],
   },
   cards: {
@@ -96,12 +96,12 @@ export const pricingContent: PricingContent = {
         id: "startups",
         icon: "mdi:rocket-launch-outline",
         eyebrow: "Startups, seed to Series B",
-        descriptor: "Investor-funded, moving fast, no data team yet.",
+        descriptor: "Funded, heading for a raise or a board meeting, no data team yet.",
         title: "Founder review",
-        subline: "A plan to get the numbers investors ask for.",
+        subline: "A plan to get numbers your deck, model and accounts agree on.",
         facts: {
-          first: "A Founder review: a 30-minute call with a founder and written next steps.",
-          then: "Your main tools joined into one clean set of numbers, with the metrics investors ask for.",
+          first: "A Founder review: a 30-minute call with a founder and written next steps. You decide whether to go on.",
+          then: "Your main tools joined into one clean set of numbers: ARR, burn, runway and the board pack. Your finance lead signs off the definitions.",
           time: "Next steps within 3 business days of the call. Build: 4 to 12 weeks.",
           price: "How many tools we connect and the metrics you need.",
           stop: "The plan is yours, whether or not you build with us.",
@@ -118,7 +118,7 @@ export const pricingContent: PricingContent = {
         subline: "What to fix, what to build first and what not to buy.",
         facts: {
           first: "A Founder review, then your systems reviewed under NDA: each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
-          then: "A plan, the right tools and clear rules. Then we build in phases you approve one at a time.",
+          then: "A plan, the right tools and clear rules. Then we build in phases you sign off one at a time.",
           time: "Audit: 2 to 3 weeks. Each build phase: 4 to 12 weeks.",
           price: "The tools, companies and teams involved.",
           stop: "Stop after the audit. The findings and plan are yours. The fee is credited if you build with us within 60 days.",
@@ -152,9 +152,9 @@ export const pricingContent: PricingContent = {
   includes: {
     title: "Every engagement includes",
     items: [
-      { icon: "mdi:account-tie-outline", text: "A founder on every call" },
+      { icon: "mdi:account-tie-outline", text: "A founder approves every engagement" },
       { icon: "mdi:key-outline", text: "Your accounts, contracts and code" },
-      { icon: "mdi:account-check-outline", text: "A person approves what agents send" },
+      { icon: "mdi:account-check-outline", text: "A person approves what AI sends" },
       { icon: "mdi:school-outline", text: "Documentation and training at handover" },
     ],
   },
@@ -180,7 +180,7 @@ export const pricingContent: PricingContent = {
       {
         question: "You're two founders. Can you deliver?",
         answer:
-          "Yes. A founder leads every job, from first call to handover. Vignesh leads planning and large clients; Ajay leads the build. Everything is written down and in your name, so nothing depends on us.",
+          "Yes. We work to a method: five checks, a fixed scope per phase and a written handover. Everything is in your name, so nothing depends on us. A founder approves every engagement. Vignesh sets scope and price; Ajay builds.",
       },
       {
         question: "Can you work with our procurement process?",
@@ -190,8 +190,8 @@ export const pricingContent: PricingContent = {
     ],
   },
   cta: {
-    title: "Not sure which path fits?",
-    description: "30 minutes with a founder. Leave with one clear next step.",
+    title: "Not sure where to start?",
+    description: "30 minutes with a founder. Leave with one clear next step before your raise or board meeting.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,

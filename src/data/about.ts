@@ -73,20 +73,20 @@ export const aboutContent: AboutContent = {
   meta: {
     title: "About AUXO: data and AI, yours to keep",
     description:
-      "AUXO Data Labs is a founder-led data and AI firm in Dubai, working with clients in the UAE, the US and Europe. Clients own what we build.",
+      "AUXO Data Labs is a data and AI firm in Dubai for funded companies, working in the UAE, the US and Europe. A founder approves every engagement. Clients own what we build.",
   },
   hero: {
     eyebrow: "About",
     title: "Data first. Then AI.",
     titleHighlight: "Then AI",
-    lead: "A founder-led data and AI firm. We get your data ready, set up the AI, and hand it over.",
+    lead: "We get your numbers ready for investors and the board, set up the AI, and hand it over.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
     facts: [
       { label: "Based in", value: "Dubai Internet City" },
       { label: "Serving", value: "The UAE, the US and Europe" },
       { label: "Founded", value: "2025" },
-      { label: "Built for", value: "Startups, growing companies and large organisations" },
+      { label: "Built for", value: "Funded startups and scale-ups, growing companies and large organisations" },
     ],
   },
   beliefs: {
@@ -119,7 +119,7 @@ export const aboutContent: AboutContent = {
   team: {
     eyebrow: "Team",
     title: "The founding team",
-    lead: "A founder leads every engagement, from first call to handover.",
+    lead: "A founder approves every engagement, from first call to handover.",
     linkLabel: "Connect on LinkedIn",
     founders: [
       {
@@ -136,7 +136,7 @@ export const aboutContent: AboutContent = {
         role: "Co-Founder & CTO",
         lines: [
           "Analytics architect. 10+ years building data and reporting systems for Fortune 500s and fast-growing firms in Europe, the US and the Middle East.",
-          "Leads the build: data, tools and agents.",
+          "Leads the build: data and tools.",
         ],
         linkedin: "https://www.linkedin.com/in/ajaykumar9795",
       },

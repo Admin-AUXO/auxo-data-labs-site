@@ -5,8 +5,7 @@ export type CategorySlug =
   | "engineering"
   | "finance"
   | "operations"
-  | "hiring"
-  | "sales-and-content";
+  | "hiring";
 
 export type FilterSlug = "all" | CategorySlug;
 
@@ -53,12 +52,7 @@ interface StackConfig extends ToolBase {
   vendorBilling: string;
 }
 
-interface AgentConfig extends ToolBase {
-  kind: "built-by-auxo";
-  status: "Early access";
-}
-
-type ToolConfig = ThirdPartyConfig | StackConfig | AgentConfig;
+type ToolConfig = ThirdPartyConfig | StackConfig;
 
 export interface MarketplaceCard {
   slug: string;
@@ -87,7 +81,6 @@ const categories: Category[] = [
   { slug: "finance", label: "Finance", icon: "mdi:calculator-variant-outline" },
   { slug: "operations", label: "Operations", icon: "mdi:cog-outline" },
   { slug: "hiring", label: "Hiring", icon: "mdi:account-search-outline" },
-  { slug: "sales-and-content", label: "Sales and content", icon: "mdi:bullhorn-outline" },
 ];
 
 const badges: Record<BadgeKey, BadgeInfo> = {
@@ -101,16 +94,28 @@ const badges: Record<BadgeKey, BadgeInfo> = {
 const tools: ToolConfig[] = [
   {
     kind: "auxo-stack",
+    slug: "investor-metrics-stack",
+    name: "Investor metrics stack",
+    vendor: "AUXO",
+    category: "finance",
+    short: "Stop rebuilding board numbers: one clean source for investor metrics.",
+    liveIn: "4–12 weeks",
+    setupItems: ["Your core tools joined in your own cloud", "One clean source for your numbers", "The metrics investors ask for"],
+    dataNote: "Sits in your own cloud. Your finance lead signs off the numbers.",
+    vendorBilling: "Your cloud provider bills you directly.",
+    startHere: true,
+  },
+  {
+    kind: "auxo-stack",
     slug: "company-ai-rollout",
     name: "Company AI rollout",
     vendor: "AUXO",
     category: "foundation-ai",
     short: "Move your team off personal AI accounts onto one approved assistant.",
     liveIn: "2–3 weeks",
-    setupItems: ["Claude or ChatGPT in your accounts", "Connected to your files, with rules on use", "A training session for your team"],
+    setupItems: ["Claude or ChatGPT in your accounts", "Connected to your files, with a written AI policy and a named person who approves each AI action", "A training session for your team"],
     dataNote: "Stays in your own business account. Your admin controls access.",
     vendorBilling: "Claude or ChatGPT bills you per user.",
-    startHere: true,
   },
   {
     kind: "auxo-stack",
@@ -123,18 +128,6 @@ const tools: ToolConfig[] = [
     setupItems: ["Numeric on your accounts and bank", "A spend tool with approvals", "Claude drafting close notes"],
     dataNote: "Your books stay in your own accounts. Your finance lead approves every entry.",
     vendorBilling: "Each vendor bills you directly.",
-  },
-  {
-    kind: "auxo-stack",
-    slug: "investor-metrics-stack",
-    name: "Investor metrics stack",
-    vendor: "AUXO",
-    category: "finance",
-    short: "Stop rebuilding board numbers: one clean source for investor metrics.",
-    liveIn: "4–12 weeks",
-    setupItems: ["Your core tools joined in your own cloud", "One clean source for your numbers", "The metrics investors ask for"],
-    dataNote: "Sits in your own cloud. Your finance lead signs off the numbers.",
-    vendorBilling: "Your cloud provider bills you directly.",
   },
   {
     kind: "auxo-stack",
@@ -173,30 +166,6 @@ const tools: ToolConfig[] = [
     vendorBilling: "Anthropic bills you: in Claude seats or by usage.",
     url: "https://claude.com/product/claude-code",
     partnerProgrammeJoined: false,
-  },
-  {
-    kind: "built-by-auxo",
-    slug: "auxo-sales-agent",
-    name: "AUXO sales agent",
-    vendor: "AUXO",
-    category: "sales-and-content",
-    short: "Lead lists and outreach drafts, without hiring a sales team.",
-    liveIn: "1–2 weeks to first drafts",
-    setupItems: ["Your ideal customer and tone", "Lead lists and drafts in your Sheets", "Reply tracking and your booking link"],
-    dataNote: "Lives in your Google Sheets and Drive. You approve every message.",
-    status: "Early access",
-  },
-  {
-    kind: "built-by-auxo",
-    slug: "auxo-content-agent",
-    name: "AUXO content agent",
-    vendor: "AUXO",
-    category: "sales-and-content",
-    short: "Steady content, drafted for you and published only once approved.",
-    liveIn: "1–2 weeks to first drafts",
-    setupItems: ["Your topics and tone", "A content calendar in your Sheet", "Approvals and a monthly report"],
-    dataNote: "Lives in your Google Sheets and Drive. Nothing goes out without your approval.",
-    status: "Early access",
   },
 ];
 
@@ -243,23 +212,12 @@ function toCard(t: ToolConfig): MarketplaceCard {
       disclosures: joined ? [disclosure(t.vendor)] : [],
     };
   }
-  if (t.kind === "auxo-stack") {
-    return {
-      ...base,
-      badge: badges["auxo-stack"].label,
-      badgeKey: "auxo-stack",
-      terms: `${badges["auxo-stack"].howYouPay}. ${t.vendorBilling}`,
-      partnerProgrammeJoined: false,
-      disclosures: [],
-    };
-  }
   return {
     ...base,
-    badge: badges["built-by-auxo"].label,
-    badgeKey: "built-by-auxo",
-    terms: `${badges["built-by-auxo"].howYouPay}. ${t.status}.`,
+    badge: badges["auxo-stack"].label,
+    badgeKey: "auxo-stack",
+    terms: `${badges["auxo-stack"].howYouPay}. ${t.vendorBilling}`,
     partnerProgrammeJoined: false,
-    status: t.status,
     disclosures: [],
   };
 }
@@ -276,7 +234,6 @@ export const addToStackHref = (slugs: string | string[]): string =>
 const getPaidItems = [
   { key: "setup", title: "Setup", body: "A one-off fee.", icon: "mdi:hammer-wrench", visible: true },
   { key: "managed", title: "Upkeep", body: "Optional, monthly, 30 days' notice.", icon: "mdi:sync", visible: true },
-  { key: "agents", title: "AUXO agents", body: "A monthly subscription.", icon: "mdi:robot-outline", visible: true },
   {
     key: "referrals",
     title: "Referrals",
@@ -288,14 +245,14 @@ const getPaidItems = [
 
 export const marketplaceContent = {
   meta: {
-    title: "Marketplace: AI tools, set up on your data",
+    title: "Stacks: tool bundles, set up on your data",
     description:
-      "Team bundles and setup services for AI tools, set up on your data in your own accounts. Plus AUXO's own sales and content agents.",
+      "Stacks are tool bundles set up on your data, in your accounts. We recommend, you buy direct and own the account.",
   },
   hero: {
-    eyebrow: "Marketplace",
-    title: "AI tools, set up on your data.",
-    lead: "Set up in your own accounts by a founder.",
+    eyebrow: "Stacks",
+    title: "Tool bundles, set up on your data.",
+    lead: "Set up in your own accounts by a founder. We recommend, you buy direct and own the account.",
   },
   why: {
     title: "Why through us",
