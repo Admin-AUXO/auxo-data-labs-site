@@ -49,6 +49,8 @@ After a yes, Vignesh creates the proposal in the `auxo-google-workspace` repo wi
 
 The page (noindex, not in the sitemap) shows the client, what the deposit covers, the reference, deposit, VAT and amount due, plus the exit, ownership and "Approved by Vignesh Ramesh" lines. The button creates a Stripe Checkout session for that proposal only; nothing is reusable or public. After payment, `/pay/thanks/` confirms the session with Stripe and marks the row Paid. Only rows with status Approved, Sent or Open can be paid. Build phases above a deposit go on Stripe invoices instead.
 
+`STRIPE_WEBHOOK_SECRET` signs the Stripe webhook at `/api/stripe-webhook` (events `checkout.session.completed` and `checkout.session.async_payment_succeeded`), which marks the row Paid even if the buyer never reaches the thanks page. Any project, such as Agent Readiness, is paid by adding a Proposals row; no per-project code.
+
 `STRIPE_SECRET_KEY` on Netlify is the **test** key today. Swap it for the live key (from the Stripe dashboard, by the owner) before the first real proposal.
 
 ## GA4 events

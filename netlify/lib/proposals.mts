@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { googleToken } from "./services.mts";
 
 const RANGE = "Proposals!A:M";
@@ -102,3 +103,27 @@ export const publicView = (p: Proposal) => ({
   paid: /^paid$/i.test(p.status),
   open: /^(approved|sent|open)$/i.test(p.status),
 });
+
+export async function settleSession(session: Record<string, unknown>) {
+  const id = String((session.metadata as Record<string, string> | undefined)?.proposal_id ?? "");
+  const paid = session.payment_status === "paid";
+  const p = await findProposal(id);
+  if (p && paid && !/^paid$/i.test(p.status)) {
+    await markProposal(p.row, { status: "Paid", paidAt: new Date().toISOString().replace("T", " ").slice(0, 16), session: String(session.id) });
+  }
+  return { paid, client: p?.client ?? "", id };
+}
+
+export function verifyStripeSignature(payload: string, header: string, secret: string, nowSeconds = Math.floor(Date.now() / 1000)) {
+  const parts = Object.fromEntries(header.split(",").map((kv) => kv.split("=") as [string, string]));
+  const t = Number(parts.t);
+  if (!t || Math.abs(nowSeconds - t) > 300) return false;
+  const expected = createHmac("sha256", secret).update(`${t}.${payload}`).digest();
+  return header
+    .split(",")
+    .filter((kv) => kv.startsWith("v1="))
+    .some((kv) => {
+      const got = Buffer.from(kv.slice(3), "hex");
+      return got.length === expected.length && timingSafeEqual(got, expected);
+    });
+}
