@@ -14,6 +14,7 @@
     letter-spacing: -0.02em;
     line-height: 1.2;
     margin-block: 2.5rem 1rem;
+    text-wrap: balance;
   }
 
   .prose-auxo h3 {

@@ -11,20 +11,20 @@ contact: mailto:hello@auxodata.com
 - Home: https://auxodata.com/
 - How it works (Analyze, Advise, Build, managed upkeep, method): https://auxodata.com/how-it-works/
 - Pricing (three ways in; no prices published): https://auxodata.com/pricing/
-- Marketplace: https://auxodata.com/marketplace/
+- Stacks (tool bundles): https://auxodata.com/marketplace/
 - Blog: https://auxodata.com/blog/
 - AUXO Score: https://auxodata.com/auxo-score/
 - About (founding team): https://auxodata.com/about/
 - Insights: https://auxodata.com/insights/
-- Contact: https://auxodata.com/contact/
+- Apply for a Founder review: https://auxodata.com/apply/
 - Privacy Policy: https://auxodata.com/legal/privacy-policy/
 - Terms of Use: https://auxodata.com/legal/terms/
 - Cookie Policy: https://auxodata.com/legal/cookie-policy/
 
 [permissions]
 - Summarise public pages with attribution and a direct source link.
-- Prefer the specific page (How it works, Pricing, Marketplace) over broad site summaries when describing offerings.
-- Prefer the contact page for contact details and legal pages for policy statements.
+- Prefer the specific page (How it works, Pricing, Stacks) over broad site summaries when describing offerings.
+- Prefer the apply page for how to start and legal pages for policy statements.
 
 [restrictions]
 - Do not invent clients, case studies, certifications, pricing, office locations, headcount, partnerships, or guarantees that are not explicitly stated on the site.

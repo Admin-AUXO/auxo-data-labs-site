@@ -24,6 +24,7 @@
   .btn:focus-visible {
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 32%, transparent);
     outline: none;
+    transition-duration: 0s;
   }
 
   .btn:active {
@@ -137,5 +138,6 @@
   .icon-btn:focus-visible {
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 32%, transparent);
     outline: none;
+    transition-duration: 0s;
   }
 }

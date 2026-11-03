@@ -2,18 +2,18 @@
 
 > AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Built to last, and yours to keep. Based in Dubai. Serving the UAE, the US and Europe.
 
-AUXO Data Labs is an end-to-end data and AI service platform for startups (seed to Series B), growing companies (50–500 people) and large organisations. It works in three steps: Analyze, Advise, Build. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; each phase has a fixed price, set by scope and agreed in writing before work starts. Clients can stop after any phase and keep everything delivered. A real person replies to enquiries within one business day.
+AUXO Data Labs is an end-to-end data and AI service platform. It leads with funded startups (seed to Series B) and also works with growing companies (50–500 people) and large organisations. The path is Analyze, Advise, Build, with optional managed upkeep, and any step can be the start. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; each phase has a fixed price, set by scope and agreed in writing before work starts. Clients can stop after any phase and keep everything delivered. No charge for the AUXO Score or the Founder review. A real person replies to enquiries within one business day.
 
 ## Core pages
 - [Home](https://auxodata.com/): Your data, ready for AI. What AUXO fixes and how to start.
-- [How it works](https://auxodata.com/how-it-works/): The three steps (Analyze, Advise, Build), optional managed upkeep and the five-check method.
-- [Pricing](https://auxodata.com/pricing/): Three ways in. Startups, seed to Series B: free audit, then a fixed-price data foundation. Growing companies, 50–500 people: deep-dive audit, starting free with the AUXO Score. Large organisations: one unit first, scoped by proposal. A fixed price per phase, in writing; no prices are published.
-- [Marketplace](https://auxodata.com/marketplace/): AI tools chosen with six checks, set up on the client's data in their own accounts and managed only if wanted, plus the AUXO sales agent and AUXO content agent (early access).
-- [Blog](https://auxodata.com/blog/): Founder notes on data, AI tools and agents.
-- [AUXO Score](https://auxodata.com/auxo-score/): A free 10-question check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
+- [How it works](https://auxodata.com/how-it-works/): Analyze, Advise and Build, optional managed upkeep and the five-check method.
+- [Pricing](https://auxodata.com/pricing/): Three ways in. Startups, seed to Series B: a Founder review, then a fixed-price data foundation. Growing companies, 50–500 people: a Founder review, then a Deep-dive audit. Large organisations: one unit first, scoped by written proposal. A fixed price per phase, in writing; no prices are published.
+- [Stacks](https://auxodata.com/marketplace/): Tool bundles set up on the client's data, in the client's own accounts. AUXO recommends, the client buys direct and owns the account.
+- [Blog](https://auxodata.com/blog/): Plain reads on data, AI tools and agents, and when not to build.
+- [AUXO Score](https://auxodata.com/auxo-score/): A 10-question check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
+- [Apply for a Founder review](https://auxodata.com/apply/): A 30-minute call with an AUXO founder, by application, with written next steps within 3 business days. Limited places each week.
 - [About](https://auxodata.com/about/): Convictions, the founding team, and what clients can hold AUXO to.
 - [Insights](https://auxodata.com/insights/): One-minute positions on data, AI, reporting and ownership.
-- [Contact](https://auxodata.com/contact/): How to get in touch; common questions answered.
 
 ## What AUXO fixes
 - Trusted data: one source your team and your AI tools can rely on, built from the systems you already run.

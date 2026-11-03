@@ -45,7 +45,7 @@ export const SCORE_COPY: ScoreCopy = {
   meta: {
     title: "AUXO Score: is your data ready for AI?",
     description:
-      "Is your data ready for AI? 10 questions on five checks, a score out of 100, about 3 minutes. No sign-up.",
+      "Is your data ready for AI? 10 questions on five checks, a score out of 100, about 3 minutes. No sign-up. See where your numbers stand.",
   },
   intro: {
     default: {

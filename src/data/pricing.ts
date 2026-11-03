@@ -68,7 +68,7 @@ export interface PricingContent {
 export const pricingContent: PricingContent = {
   metaTitle: "Pricing: one path, a fixed price per phase",
   metaDescription:
-    "Start with the AUXO Score, then a Founder review. Then a fixed scope and price per phase, agreed in writing.",
+    "Start with the AUXO Score, then a Founder review. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
   hero: {
     eyebrow: "Pricing",
     title: "Start where you are.",
@@ -121,7 +121,7 @@ export const pricingContent: PricingContent = {
           then: "A plan, the right tools and clear rules. Then we build in phases you sign off one at a time.",
           time: "Audit: 2 to 3 weeks. Each build phase: 4 to 12 weeks.",
           price: "The tools, companies and teams involved.",
-          stop: "Stop after the audit. The findings and plan are yours. The fee is credited if you build with us within 60 days.",
+          stop: "Stop after the audit. The findings and plan are yours.",
         },
         cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
         finePrint: "A guide, not a rule.",

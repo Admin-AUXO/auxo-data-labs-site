@@ -196,14 +196,4 @@
       animation-range: entry calc(3% + var(--i) * 6%) entry calc(50% + var(--i) * 6%);
     }
   }
-
-  a:focus-visible,
-  button:focus-visible,
-  input:focus-visible,
-  select:focus-visible,
-  textarea:focus-visible,
-  [tabindex]:focus-visible,
-  [role="button"]:focus-visible {
-    transition: outline-color 160ms ease, outline-offset 160ms ease, box-shadow 160ms ease;
-  }
 }

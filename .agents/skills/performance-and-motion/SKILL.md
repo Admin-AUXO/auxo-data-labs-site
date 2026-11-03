@@ -17,7 +17,7 @@ Fast first. Fancy second.
 ## Rules
 
 - Animate emphasis, transitions, or orientation. Not everything.
-- Motion is on by default and switched by the footer toggle, not the OS reduced-motion setting. Gate CSS under `html[data-motion="on"]` and check `motionEnabled()` from `src/scripts/core/motion.ts` in JS.
+- Motion is on by default, off by default when the OS asks for reduced motion, and switched by the footer toggle. Gate CSS under `html[data-motion="on"]` and check `motionEnabled()` from `src/scripts/core/motion.ts` in JS.
 - Use transform and opacity for movement when possible.
 - Avoid stacked scroll listeners when CSS or existing observers can do the job.
 - Initialise on `astro:page-load` and clear timers on `astro:before-swap`; re-test page transitions and re-initialization after motion changes.

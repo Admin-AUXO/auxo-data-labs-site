@@ -79,7 +79,7 @@ export function initAuxoScore(): void {
     back.tabIndex = state.index === 0 ? -1 : 0;
     dimPill.textContent = card.dimension.toUpperCase();
     count.textContent = `${card.id} / ${CARDS.length}`;
-    progress.style.width = `${(state.index / CARDS.length) * 100}%`;
+    progress.style.transform = `scaleX(${state.index / CARDS.length})`;
     question.textContent = card.question;
 
     grid.textContent = "";

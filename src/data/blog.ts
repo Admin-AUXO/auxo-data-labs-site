@@ -48,7 +48,7 @@ export const blogContent: BlogContent = {
   index: {
     metaTitle: "Blog: data and AI, written plainly",
     metaDescription:
-      "Plain reads from AUXO on data, AI tools and agents, and when not to build. Every figure has a source.",
+      "Plain reads from AUXO on data, AI tools and agents, and when not to build. Every figure has a source. Take the AUXO Score to see where you stand.",
     hero: {
       eyebrow: "Blog",
       title: "Data and AI, written plainly.",

@@ -247,7 +247,7 @@ export const marketplaceContent = {
   meta: {
     title: "Stacks: tool bundles, set up on your data",
     description:
-      "Stacks are tool bundles set up on your data, in your accounts. We recommend, you buy direct and own the account.",
+      "Stacks are tool bundles set up on your data, in your accounts. We recommend, you buy direct and own the account. Apply for a Founder review.",
   },
   hero: {
     eyebrow: "Stacks",

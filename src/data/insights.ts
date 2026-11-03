@@ -22,7 +22,7 @@ export interface InsightsContent {
 export const insightsContent: InsightsContent = {
   meta: {
     title: "Insights: short reads on data and AI",
-    description: "One-minute positions on data, AI, reporting and ownership. Plain, sourced and quick to read.",
+    description: "One-minute positions on data, AI, reporting and ownership. Plain, sourced and quick to read. Take the AUXO Score to see where your data stands.",
   },
   hero: {
     title: "One-minute reads on data and AI.",
