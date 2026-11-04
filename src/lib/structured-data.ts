@@ -1,5 +1,6 @@
 import { siteData } from "../data/site";
 import { absoluteUrl } from "./url";
+import { aboutContent } from "../data/about";
 import type { Founder } from "../data/about";
 import type { BlogPostSummary } from "./blog";
 
@@ -41,6 +42,12 @@ export function organizationSchema() {
     slogan: siteData.tagline,
     email: siteData.email,
     foundingDate: String(siteData.founded),
+    founder: aboutContent.team.founders.map((f) => ({
+      "@type": "Person",
+      name: f.name,
+      jobTitle: f.role,
+      sameAs: [f.linkedin],
+    })),
     address: {
       "@type": "PostalAddress",
       streetAddress: siteData.address.street,

@@ -10,7 +10,7 @@ AUXO Data Labs is an end-to-end data and AI service platform. It leads with fund
 - [Pricing](https://auxodata.com/pricing/): Three ways in. Startups, seed to Series B: a Founder review, then a fixed-price data foundation. Growing companies, 50–500 people: a Founder review, then a Deep-dive audit. Large organisations: one unit first, scoped by written proposal. A fixed price per phase, in writing; no prices are published.
 - [Stacks](https://auxodata.com/marketplace/): Tool bundles set up on the client's data, in the client's own accounts. AUXO recommends, the client buys direct and owns the account.
 - [Blog](https://auxodata.com/blog/): Plain reads on data, AI tools and agents, and when not to build.
-- [AUXO Score](https://auxodata.com/auxo-score/): A 10-question check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
+- [AUXO Score](https://auxodata.com/auxo-score/): An AI readiness assessment in 10 questions: a check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
 - [Apply for a Founder review](https://auxodata.com/apply/): A 30-minute call with an AUXO founder, by application, with written next steps within 3 business days. Limited places each week.
 - [About](https://auxodata.com/about/): Convictions, the founding team, and what clients can hold AUXO to.
 - [Insights](https://auxodata.com/insights/): One-minute positions on data, AI, reporting and ownership.

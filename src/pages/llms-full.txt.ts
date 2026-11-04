@@ -1,5 +1,8 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { howItWorksContent } from "../data/how-it-works";
+import { pricingContent } from "../data/pricing";
+import { auxoScoreAbout } from "../data/auxo-score";
 
 export const prerender = true;
 
@@ -44,7 +47,20 @@ export const GET: APIRoute = async () => {
     })
     .join("\n\n---\n\n");
 
+  const faqGroups = [
+    { name: "AUXO Score", items: auxoScoreAbout.faq.items },
+    { name: "How it works", items: howItWorksContent.faq.items },
+    { name: "Pricing", items: pricingContent.faq.items },
+  ];
+  const faq = faqGroups
+    .map(
+      (g) =>
+        `## ${g.name}\n\n${g.items.map((i) => `Q: ${i.question}\nA: ${i.answer}`).join("\n\n")}`,
+    )
+    .join("\n\n");
+
   const sections = [header];
+  sections.push(`# Frequently asked questions\n\n${faq}\n`);
   if (blog) sections.push(`# Blog posts (full text)\n\n${blog}\n`);
   sections.push(`# Insights (full text)\n\n${insights}\n`);
 
