@@ -681,8 +681,8 @@
 }
 
 .score__focus {
-  border-inline-start: 3px solid var(--accent-2);
-  padding: 4px 0 4px 14px;
+  border-block-start: 1px solid var(--border);
+  padding-block-start: 14px;
 }
 
 .score__focus b {
@@ -904,6 +904,41 @@ html[data-motion="off"] .score *::after {
     grid-column: 1;
   }
 
+  #s-intro > .score__side {
+    align-self: center;
+    grid-column: 2;
+    grid-row: 1 / span 7;
+  }
+
+  #s-result {
+    align-items: start;
+    display: grid;
+    gap: 1.5rem 3rem;
+    grid-template:
+      "eyebrow panel" auto
+      "head panel" auto
+      "focus panel" auto
+      "actions actions" auto / minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  #s-result > .score__eyebrow { grid-area: eyebrow; }
+  #s-result > .score__head { grid-area: head; }
+  #s-result > .score__focus { grid-area: focus; }
+
+  #s-result > .score__actions {
+    grid-area: actions;
+    margin-block-start: 1rem;
+  }
+
+  #s-result > .score__panel {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    grid-area: panel;
+    justify-content: space-between;
+  }
+}
+
 .score__actions {
   display: flex;
   flex-direction: column;
@@ -954,41 +989,6 @@ html[data-motion="off"] .score *::after {
   font-size: 15px;
   font-weight: 700;
   margin: 0;
-}
-
-.score__side {
-    align-self: center;
-    grid-column: 2;
-    grid-row: 1 / span 7;
-  }
-
-  #s-result {
-    align-items: start;
-    display: grid;
-    gap: 1.5rem 3rem;
-    grid-template:
-      "eyebrow panel" auto
-      "head panel" auto
-      "focus panel" auto
-      "actions actions" auto / minmax(0, 1fr) minmax(0, 1fr);
-  }
-
-  #s-result > .score__eyebrow { grid-area: eyebrow; }
-  #s-result > .score__head { grid-area: head; }
-  #s-result > .score__focus { grid-area: focus; }
-
-  #s-result > .score__actions {
-    grid-area: actions;
-    margin-block-start: 1rem;
-  }
-
-  #s-result > .score__panel {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    grid-area: panel;
-    justify-content: space-between;
-  }
 }
 
 .score__side {

@@ -72,7 +72,6 @@
   align-items: center;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-inline-start: 3px solid var(--accent);
   border-radius: var(--radius-xl);
   display: grid;
   gap: 1.75rem;
@@ -132,46 +131,14 @@
   text-transform: uppercase;
 }
 
-.logos__viewport {
-  mask-image: linear-gradient(90deg, transparent, var(--foreground) 6%, var(--foreground) 94%, transparent);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  touch-action: pan-x pan-y;
-}
-
-.logos__viewport::-webkit-scrollbar {
-  display: none;
-}
-
-.logos__viewport:focus-visible {
-  outline-offset: 4px;
-}
-
 .logos__track {
   align-items: flex-end;
   display: flex;
-  gap: clamp(2rem, 1.5rem + 2.5vw, 4rem);
-  inline-size: max-content;
+  flex-wrap: wrap;
+  gap: 1.5rem clamp(2rem, 1.5rem + 2.5vw, 4rem);
   list-style: none;
   margin: 0;
-  padding: 0.75rem clamp(1rem, 4vw, 2rem);
-}
-
-.logos__viewport[data-static] {
-  mask-image: none;
-  overflow: visible;
-}
-
-.logos__viewport[data-static] .logos__track {
-  flex-wrap: wrap;
-  inline-size: auto;
-  justify-content: center;
-  row-gap: 1.5rem;
-}
-
-.logos__viewport[data-static] .logos__item[aria-hidden="true"] {
-  display: none;
+  padding: 0.75rem 0;
 }
 
 .home-proof {

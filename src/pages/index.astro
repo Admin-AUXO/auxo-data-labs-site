@@ -11,8 +11,6 @@ import CtaSection from "../components/sections/shared/CtaSection.astro";
 import { homeContent as c } from "../data/home";
 import "../styles/pages/home.css";
 
-const logoLoop = [...c.logos.items, ...c.logos.items];
-
 const angleOrder = (slug: string) => {
   const i = c.blog.angles.findIndex((a) => a.slug === slug);
   return i === -1 ? c.blog.angles.length : i;
@@ -78,18 +76,16 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   <Section padding="sm" width="7xl">
     <div class="logos" data-reveal>
       <p class="eyebrow logos__label" id="works-with-label">{c.logos.label}</p>
-      <div class="logos__viewport" data-marquee tabindex="0" role="region" aria-labelledby="works-with-label">
-        <ul class="logos__track" aria-labelledby="works-with-label">
-          {
-            logoLoop.map((logo, i) => (
-              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined}>
-                <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
-                <span class="logos__name">{logo.name}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <ul class="logos__track" aria-labelledby="works-with-label">
+        {
+          c.logos.items.map((logo) => (
+            <li class="logos__item">
+              <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
+              <span class="logos__name">{logo.name}</span>
+            </li>
+          ))
+        }
+      </ul>
       <p class="logos__note text-subtle">{c.logos.note}</p>
     </div>
   </Section>
@@ -253,83 +249,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     io.observe(g);
   }
 
-  function initMarquee() {
-    const vp = document.querySelector<HTMLElement>("[data-marquee]");
-    const track = vp?.firstElementChild;
-    if (!vp || !track || vp.dataset.bound) return;
-    vp.dataset.bound = "1";
-    const SPEED = 40;
-    let paused = false;
-    let visible = false;
-    let running = false;
-    let resumeTimer = 0;
-    let last = 0;
-    let pos = vp.scrollLeft;
-    let half = 0;
-    let width = 0;
-    const measure = () => {
-      half = vp.scrollWidth / 2;
-      width = vp.clientWidth;
-    };
-    const tick = (now: number) => {
-      if (!vp.isConnected || !visible || !motionEnabled()) {
-        running = false;
-        last = 0;
-        return;
-      }
-      const dt = last ? Math.min(now - last, 100) : 0;
-      last = now;
-      if (!paused && half > width) {
-        pos += (SPEED * dt) / 1000;
-        if (pos >= half) pos -= half;
-        vp.scrollLeft = pos;
-      } else {
-        pos = vp.scrollLeft;
-      }
-      requestAnimationFrame(tick);
-    };
-    const start = () => {
-      if (running || !visible || !motionEnabled()) return;
-      running = true;
-      requestAnimationFrame(tick);
-    };
-    const sync = () => {
-      if (!vp.isConnected) {
-        window.removeEventListener("auxo:motionchange", sync);
-        return;
-      }
-      vp.toggleAttribute("data-static", !motionEnabled());
-      measure();
-      start();
-    };
-    const pause = () => {
-      paused = true;
-      clearTimeout(resumeTimer);
-    };
-    const resumeSoon = (ms: number) => {
-      clearTimeout(resumeTimer);
-      resumeTimer = window.setTimeout(() => {
-        pos = half ? vp.scrollLeft % half : vp.scrollLeft;
-        paused = false;
-      }, ms);
-    };
-    vp.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") pause(); });
-    vp.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") resumeSoon(0); });
-    vp.addEventListener("touchstart", pause, { passive: true });
-    vp.addEventListener("touchend", () => resumeSoon(2000), { passive: true });
-    vp.addEventListener("focusin", pause);
-    vp.addEventListener("focusout", () => resumeSoon(0));
-    const ro = new ResizeObserver(measure);
-    ro.observe(vp);
-    ro.observe(track);
-    new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      start();
-    }).observe(vp);
-    window.addEventListener("auxo:motionchange", sync);
-    sync();
-  }
-
   function initCube() {
     document.querySelectorAll<HTMLButtonElement>("[data-cube-tile]").forEach((tile) => {
       if (tile.dataset.bound) return;
@@ -345,7 +264,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 
   document.addEventListener("astro:page-load", () => {
     initGauge();
-    initMarquee();
     initCube();
   });
 </script>

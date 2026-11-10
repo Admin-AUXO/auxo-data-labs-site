@@ -336,10 +336,6 @@ html[data-motion="on"] .post-card:hover .post-card__go svg {
   }
 }
 
-body:has(.blog-article) .particle-field {
-  display: none;
-}
-
 .blog-prose {
   max-inline-size: none;
   overflow-wrap: break-word;

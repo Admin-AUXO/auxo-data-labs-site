@@ -33,6 +33,7 @@ Treat `public/` as raw output. No Tailwind pass. No PostCSS rescue. No server-si
 
 ## Verification
 
+- `npm run build` is the check; look in `dist/` for the generated `manifest.json`, `sw.js` and `llms-full.txt`.
 - Check every edited public asset has a real caller or browser purpose.
 - Rebuild when changing metadata paths, service worker behavior, or manifest contents.
 - When editing crawler-facing files, confirm links and canonical paths are current.

@@ -157,22 +157,9 @@
 .ladder__step {
   border-block-start: 1px solid var(--border);
   display: grid;
-  gap: 2.25rem;
+  gap: clamp(2rem, 1.5rem + 1.5vw, 3rem);
   grid-template-columns: minmax(0, 1fr);
   padding-block: clamp(3rem, 2rem + 3vw, 5rem);
-}
-
-@media (width >= 64rem) {
-  .ladder__step {
-    align-items: start;
-    gap: 3.5rem 6rem;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  }
-
-  .ladder__what,
-  .ladder__own {
-    grid-column: 1 / -1;
-  }
 }
 
 @media (width >= 64rem) and (height >= 46rem) {
@@ -230,8 +217,8 @@
 
 .ladder__links {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0 1.75rem;
   list-style: none;
   margin: 0.25rem 0 0;
   padding: 0;
@@ -277,6 +264,22 @@
 @media (width >= 40rem) {
   .ladder__fact {
     grid-template-columns: 7rem minmax(0, 1fr);
+  }
+}
+
+@media (width >= 64rem) {
+  .ladder__facts {
+    column-gap: 2rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding-block-start: 1.15rem;
+  }
+
+  .ladder__fact {
+    border-block-end: 0;
+    grid-row: span 2;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: subgrid;
+    padding-block: 0;
   }
 }
 
@@ -342,6 +345,13 @@
   }
 }
 
+@media (width >= 64rem) {
+  .ladder__get {
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+  }
+}
+
 .ladder__get {
   align-content: start;
   border-block-start: 1px solid var(--border);
@@ -377,7 +387,7 @@
 
 .ladder__get-title {
   color: var(--foreground);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 600;
   line-height: 1.35;
 }
@@ -513,6 +523,7 @@
   flex-direction: column;
   gap: 0.4rem;
   padding: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+  position: relative;
 }
 
 .method__question {
@@ -528,4 +539,42 @@
 
 .hiw-faq-link {
   font-weight: 600;
+}
+
+@keyframes hiw-failsafe {
+  to { visibility: visible; }
+}
+
+[data-motion="on"][data-js] :is(.hiw-hero .section-index, .hiw-hero__title, .hiw-hero__side, .hiw-map) {
+  animation: hiw-failsafe 0s 2.5s forwards;
+  visibility: hidden;
+}
+
+[data-motion="on"] .method__item::before {
+  background: var(--accent);
+  block-size: 2px;
+  content: "";
+  inset-block-start: 0;
+  inset-inline: 0;
+  position: absolute;
+  transform: scaleX(var(--draw, 0));
+  transform-origin: left;
+}
+
+[data-motion="on"] .hiw-map__link,
+[data-motion="on"] .upkeep {
+  position: relative;
+}
+
+[data-motion="on"] .hiw-map__link::before,
+[data-motion="on"] .upkeep::before {
+  background: var(--accent);
+  block-size: 2px;
+  content: "";
+  inset-block-start: -1px;
+  inset-inline: 1.15rem;
+  pointer-events: none;
+  position: absolute;
+  transform: scaleX(var(--draw, 0));
+  transform-origin: left;
 }

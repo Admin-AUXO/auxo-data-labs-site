@@ -48,18 +48,18 @@ const facts = [
   <Section padding="lg" width="7xl" class="hiw-hero-section">
     <div class="hiw-hero">
       <div class="hiw-hero__head">
-        <p class="section-index" data-enter>{c.intro.eyebrow}</p>
-        <h1 class="hiw-hero__title" data-enter>
+        <p class="section-index">{c.intro.eyebrow}</p>
+        <h1 class="hiw-hero__title">
           <HighlightText text={c.intro.title} highlight={c.intro.titleHighlight} />
         </h1>
-        <div class="hiw-hero__side" data-enter>
+        <div class="hiw-hero__side">
           <p class="lead hiw-hero__lead">{c.intro.lead}</p>
           <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
             {c.intro.primaryCta.text}
           </Button>
         </div>
       </div>
-      <nav class="hiw-map" aria-label={c.ladder.navLabel} data-enter>
+      <nav class="hiw-map" aria-label={c.ladder.navLabel}>
         <ol class="hiw-map__list">
           {
             mapItems.map((n) => (
@@ -86,7 +86,7 @@ const facts = [
       {
         c.ladder.steps.map((step) => (
           <article id={step.id} class="ladder__step hiw-anchor" aria-labelledby={`${step.id}-title`}>
-            <div class="ladder__head" data-reveal>
+            <div class="ladder__head">
               <Icon name={step.icon} class="ladder__icon" aria-hidden="true" />
               <h2 id={`${step.id}-title`} class="ladder__name">{step.name}</h2>
               <p class="ladder__promise">{step.promise}</p>
@@ -104,23 +104,11 @@ const facts = [
               )}
             </div>
 
-            <dl class="ladder__facts" data-reveal>
-              {facts.map((f) => (
-                <div class="ladder__fact" data-kind={f.kind}>
-                  <dt class="ladder__fact-label">
-                    <Icon name={f.icon} aria-hidden="true" />
-                    {f.label}
-                  </dt>
-                  <dd>{step[f.kind]}</dd>
-                </div>
-              ))}
-            </dl>
-
-            <div class="ladder__what" data-reveal>
+            <div class="ladder__what">
               <h3 class="sr-only">{c.ladder.labels.whatYouGet}</h3>
               <ul class="ladder__gets" style={`--n:${step.whatYouGet.length}`}>
-                {step.whatYouGet.map((g, i) => (
-                  <li class="ladder__get" data-anim="rise" style={`--i:${i}`}>
+                {step.whatYouGet.map((g) => (
+                  <li class="ladder__get">
                     <span class="ladder__get-icon" aria-hidden="true">
                       <Icon name={g.icon} />
                     </span>
@@ -138,8 +126,20 @@ const facts = [
               </ul>
             </div>
 
+            <dl class="ladder__facts">
+              {facts.map((f) => (
+                <div class="ladder__fact" data-kind={f.kind}>
+                  <dt class="ladder__fact-label">
+                    <Icon name={f.icon} aria-hidden="true" />
+                    {f.label}
+                  </dt>
+                  <dd>{step[f.kind]}</dd>
+                </div>
+              ))}
+            </dl>
+
             {step.id === "build" && (
-              <div class="ladder__own" data-reveal>
+              <div class="ladder__own">
                 <p class="ladder__own-line">{c.ladder.build.ownershipLine}</p>
                 <p class="text-sm text-subtle">{c.ladder.build.aiBuiltNote}</p>
               </div>
@@ -149,7 +149,7 @@ const facts = [
       }
       </div>
 
-      <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title" data-reveal>
+      <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title">
         <Icon name={c.ladder.upkeep.icon} class="upkeep__icon" aria-hidden="true" />
         <div class="upkeep__head">
           <h2 id="managed-upkeep-title" class="upkeep__title">{c.ladder.upkeep.title}</h2>
@@ -167,7 +167,7 @@ const facts = [
     <ol class="method mt-8">
       {
         c.method.dimensions.map((d, i) => (
-          <li class="method__item" data-anim="rise" style={`--i:${i}`}>
+          <li class="method__item">
             <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
             <h3 class="method__name">{d.name}</h3>
             <p class="method__question text-muted">{d.question}</p>
@@ -196,3 +196,7 @@ const facts = [
 
   <StructuredData type="FAQPage" data={faqSchema(c.faq.items)} />
 </BaseLayout>
+
+<script>
+  import "../scripts/how-it-works";
+</script>

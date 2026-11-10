@@ -29,7 +29,8 @@ Build sections that stay readable, mostly static, and easy to maintain.
 - Scope scripts to the section they serve.
 - Guard DOM queries and event listeners.
 - View transitions are on: initialise on `astro:page-load`, make init safe to run again, and clear timers on `astro:before-swap`.
-- Keep the codebase comment-free.
+- Keep the codebase comment-free (only the `src/env.d.ts` `///` directive is allowed).
+- Reuse `SectionHeader`, `HighlightText` and `Accordion` from `src/components/ui/`, `Section.astro` from `src/components/layout/` and `src/components/sections/shared/` before writing new markup.
 - Remove or rename stale selectors when section markup changes.
 
 ## Section Audit Checklist
@@ -38,3 +39,8 @@ Build sections that stay readable, mostly static, and easy to maintain.
 - Are the most important labels, outputs, or actions visible without markup gymnastics?
 - Is the mobile pattern chosen intentionally: stack, accordion, or carousel?
 - Does the data model still make sense if content editors reorder items later?
+
+## Verification
+
+- `npm run lint` for code edits, `npm run build` for markup or routing changes.
+- Check desktop and mobile in the preview, and say what was not checked.
