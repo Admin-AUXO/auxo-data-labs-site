@@ -112,12 +112,12 @@ export const homeContent: HomeContent = {
     title: "Your data, ready for AI.",
     titleHighlight: "AI.",
     subtitle:
-      "For funded startups and scale-ups, seed to Series B. One set of numbers your deck, model and accounts agree on, before the raise or the board meeting. You keep everything.",
+      "For funded startups and scale-ups, seed to Series B. One set of numbers your deck, model and accounts agree on.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   proof: {
-    text: "A founder approves every engagement. Ex-IBM delivery across the GCC. Data and cloud work for Fortune 500 companies.",
+    text: "Ex-IBM delivery across the GCC. Data and cloud work for Fortune 500 companies.",
     link: { text: "Meet the founders", href: "/about/#team" },
   },
   score: {
@@ -129,7 +129,7 @@ export const homeContent: HomeContent = {
   },
   logos: {
     label: "Works with",
-    note: "Tools we set up and work with. A logo here is not a partnership.",
+    note: "Tools we set up and work with.",
     items: [
       { name: "BigQuery", icon: "simple-icons:googlebigquery" },
       { name: "Snowflake", icon: "simple-icons:snowflake" },

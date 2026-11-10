@@ -22,6 +22,8 @@ export interface LadderStep {
   id: string;
   name: string;
   icon: string;
+  shape: "analyze" | "advise" | "build";
+  cost: { label: string; tone: "free" | "paid" | "optional" };
   promise: string;
   whatYouGet: LadderItem[];
   duration: string;
@@ -46,11 +48,13 @@ export const howItWorksContent = {
     eyebrow: "How it works",
     title: "Analyze. Advise. Build.",
     titleHighlight: ".",
-    lead: "One path. At each step you get something in writing, and a person signs off.",
+    lead: "One path. At each step you get something in writing.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl } satisfies Link,
+    secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" } satisfies Link,
   },
   ladder: {
     navLabel: "Steps",
+    stepperLabel: "Where you are",
     labels: {
       whatYouGet: "What you get",
       duration: "Time",
@@ -62,7 +66,9 @@ export const howItWorksContent = {
         id: "analyze",
         name: "Analyze",
         icon: "mdi:magnify",
-        promise: "An honest look at your numbers before the raise or the board meeting.",
+        shape: "analyze",
+        cost: { label: "No charge to start", tone: "free" },
+        promise: "An honest look at your numbers. Before the raise or the board meeting.",
         whatYouGet: [
           {
             icon: "mdi:gauge",
@@ -98,7 +104,9 @@ export const howItWorksContent = {
         id: "advise",
         name: "Advise",
         icon: "mdi:lightbulb-outline",
-        promise: "A plan to get there, and the tools that fit.",
+        shape: "advise",
+        cost: { label: "Fixed price", tone: "paid" },
+        promise: "A plan to get there. And the tools that fit.",
         whatYouGet: [
           {
             icon: "mdi:map-outline",
@@ -125,7 +133,9 @@ export const howItWorksContent = {
         id: "build",
         name: "Build",
         icon: "mdi:hammer-wrench",
-        promise: "One set of numbers, set up end to end and handed over.",
+        shape: "build",
+        cost: { label: "Fixed price", tone: "paid" },
+        promise: "One set of numbers. Set up end to end, and handed over.",
         whatYouGet: [
           {
             icon: "mdi:database-outline",

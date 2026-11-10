@@ -1,0 +1,20 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  kind: "analyze" | "advise" | "build" | "upkeep";
+  icon?: string;
+  class?: string;
+}
+
+const { kind, icon, class: cls = "" } = Astro.props;
+---
+<span class={`step-shape ${cls}`} data-shape={kind} aria-hidden="true">
+  <svg viewBox="0 0 48 48" fill="none">
+    {kind === "analyze" && <circle cx="24" cy="24" r="22" />}
+    {kind === "advise" && <path d="M24 2 46 24 24 46 2 24Z" />}
+    {kind === "build" && <rect x="3" y="3" width="42" height="42" rx="7" />}
+    {kind === "upkeep" && <circle cx="24" cy="24" r="22" stroke-dasharray="4 4" />}
+  </svg>
+  {icon && <Icon name={icon} class="step-shape__icon" />}
+</span>

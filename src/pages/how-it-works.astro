@@ -6,6 +6,7 @@ import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import Accordion from "../components/ui/Accordion.astro";
+import StepShape from "../components/ui/StepShape.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import StructuredData from "../components/layout/StructuredData.astro";
 import { faqSchema } from "../lib/structured-data";
@@ -27,13 +28,17 @@ const mapItems = [
     id: s.id,
     icon: s.icon,
     name: s.name,
-    tag: null as string | null,
+    shape: s.shape as "analyze" | "advise" | "build" | "upkeep",
+    tag: s.cost.label,
+    tone: s.cost.tone as string,
   })),
   {
     id: c.ladder.upkeep.id,
     icon: c.ladder.upkeep.icon,
-    tag: c.ladder.upkeep.label as string | null,
     name: c.ladder.upkeep.title,
+    shape: "upkeep" as const,
+    tag: c.ladder.upkeep.label,
+    tone: "optional",
   },
 ];
 
@@ -53,21 +58,26 @@ const facts = [
         </h1>
         <div class="hiw-hero__side">
           <p class="lead hiw-hero__lead">{c.intro.lead}</p>
-          <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
-            {c.intro.primaryCta.text}
-          </Button>
+          <div class="hiw-hero__ctas">
+            <Button variant="primary" size="lg" href={c.intro.primaryCta.href} icon class="w-full sm:w-auto">
+              {c.intro.primaryCta.text}
+            </Button>
+            <Button variant="secondary" size="lg" href={c.intro.secondaryCta.href} class="w-full sm:w-auto">
+              {c.intro.secondaryCta.text}
+            </Button>
+          </div>
         </div>
       </div>
       <nav class="hiw-map" aria-label={c.ladder.navLabel}>
         <ol class="hiw-map__list">
           {
             mapItems.map((n) => (
-              <li>
+              <li data-shape={n.shape}>
                 <a class="hiw-map__link" href={`#${n.id}`}>
-                  <Icon name={n.icon} class="hiw-map__icon" aria-hidden="true" />
+                  <StepShape kind={n.shape} icon={n.icon} class="hiw-map__shape" />
                   <span class="hiw-map__text">
                     <span class="hiw-map__name">{n.name}</span>
-                    {n.tag && <span class="hiw-map__tag">{n.tag}</span>}
+                    <span class="hiw-map__tag" data-tone={n.tone}>{n.tag}</span>
                   </span>
                   <Icon name="mdi:arrow-down" class="hiw-map__go" aria-hidden="true" />
                 </a>
@@ -81,14 +91,29 @@ const facts = [
 
   <Section padding="sm" width="7xl">
     <div class="ladder">
+      <div class="hiw-stepper" data-stepper>
+        <nav class="hiw-stepper__bar" aria-label={c.ladder.stepperLabel}>
+          {
+            mapItems.map((n) => (
+              <a class="hiw-stepper__item" href={`#${n.id}`} data-step-link={n.id}>
+                <StepShape kind={n.shape} class="hiw-stepper__shape" />
+                <span class="hiw-stepper__name">{n.name}</span>
+              </a>
+            ))
+          }
+        </nav>
+      </div>
       <div class="ladder__stack">
       {
         c.ladder.steps.map((step) => (
-          <article id={step.id} class="ladder__step hiw-anchor" aria-labelledby={`${step.id}-title`}>
+          <article id={step.id} class="ladder__step hiw-anchor" aria-labelledby={`${step.id}-title`} data-step={step.id}>
             <div class="ladder__head">
-              <Icon name={step.icon} class="ladder__icon" aria-hidden="true" />
-              <h2 id={`${step.id}-title`} class="ladder__name">{step.name}</h2>
-              <p class="ladder__promise">{step.promise}</p>
+              <div class="ladder__label-row">
+                <StepShape kind={step.shape} icon={step.icon} class="ladder__shape" />
+                <h2 id={`${step.id}-title`} class="ladder__name">{step.name}</h2>
+                <span class="ladder__cost" data-tone={step.cost.tone}>{step.cost.label}</span>
+              </div>
+              <p class="ladder__promise"><HighlightText text={step.promise} soften /></p>
               {step.links.length > 0 && (
                 <ul class="ladder__links">
                   {step.links.map((l) => (
@@ -105,10 +130,10 @@ const facts = [
 
             <div class="ladder__what">
               <h3 class="sr-only">{c.ladder.labels.whatYouGet}</h3>
-              <ul class="ladder__gets" style={`--n:${step.whatYouGet.length}`}>
+              <ul class="ladder__gets">
                 {step.whatYouGet.map((g) => (
                   <li class="ladder__get">
-                    <span class="ladder__get-icon" aria-hidden="true">
+                    <span class="ladder__get-icon" aria-hidden="true" data-tone={g.tone}>
                       <Icon name={g.icon} />
                     </span>
                     <div class="ladder__get-head">
@@ -148,8 +173,8 @@ const facts = [
       }
       </div>
 
-      <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title">
-        <Icon name={c.ladder.upkeep.icon} class="upkeep__icon" aria-hidden="true" />
+      <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title" data-step={c.ladder.upkeep.id}>
+        <StepShape kind="upkeep" icon={c.ladder.upkeep.icon} class="upkeep__shape" />
         <div class="upkeep__head">
           <h2 id="managed-upkeep-title" class="upkeep__title">{c.ladder.upkeep.title}</h2>
           <span class="upkeep__tag">{c.ladder.upkeep.label}</span>

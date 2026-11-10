@@ -309,10 +309,14 @@
 }
 
 .cube__face--front {
-  background: var(--background);
-  border: 1.5px solid var(--accent);
-  color: var(--accent);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--foreground);
   justify-content: flex-end;
+}
+
+.cube__face--front .cube__letter {
+  color: var(--accent);
 }
 
 .cube__face--back {

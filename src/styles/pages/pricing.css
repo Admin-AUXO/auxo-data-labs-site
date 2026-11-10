@@ -162,6 +162,32 @@
   line-height: var(--text-3xl--line-height);
 }
 
+.plan__cost {
+  --tone: var(--accent);
+
+  align-items: center;
+  align-self: flex-start;
+  color: var(--tone);
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  gap: 0.45rem;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+
+.plan__cost[data-tone="paid"] {
+  --tone: var(--accent-2);
+}
+
+.plan__cost::before {
+  background: var(--tone);
+  block-size: 0.45rem;
+  border-radius: 50%;
+  content: "";
+  inline-size: 0.45rem;
+}
+
 .plan__subline {
   color: var(--muted);
   font-size: var(--text-base);

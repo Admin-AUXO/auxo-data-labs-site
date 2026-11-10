@@ -50,8 +50,8 @@ export const blogContent: BlogContent = {
       "Plain reads from AUXO on data, AI tools and agents, and when not to build. Every figure has a source. Take the AUXO Score to see where you stand.",
     hero: {
       eyebrow: "Blog",
-      title: "Data and AI, written plainly.",
-      titleHighlight: "written plainly",
+      title: "Data and AI. Written plainly.",
+      titleHighlight: [],
       lead: "Founder notes on data, AI tools and agents, and when not to build. Every figure has a source.",
     },
     tagFilterLabel: "Filter posts by topic",

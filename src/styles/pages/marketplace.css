@@ -288,6 +288,10 @@ html:not([data-js]) .mkt-filters {
     align-self: start;
   }
 
+  .mkt-face--front > .mkt-card__live {
+    align-self: end;
+  }
+
   .mkt-face--front > .mkt-card__foot {
     grid-row: 5;
     margin-block-start: 0.9rem;
@@ -621,7 +625,8 @@ html:not([data-js]) .mkt-more {
 
 .mkt-card__start {
   background: none;
-  border: 1px solid color-mix(in oklch, var(--accent-2) 45%, transparent);
+  border: 1px solid color-mix(in oklch, var(--accent) 45%, transparent);
+  color: var(--accent);
 }
 
 .mkt-add__check {

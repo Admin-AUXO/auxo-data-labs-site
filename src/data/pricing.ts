@@ -20,6 +20,7 @@ export interface PlanCard {
   descriptor: string;
   title: string;
   subline: string;
+  cost: { label: string; tone: "free" | "paid" };
   facts: PlanFacts;
   cta: PlanLink;
   finePrint: string;
@@ -98,6 +99,7 @@ export const pricingContent: PricingContent = {
         eyebrow: "Startups, seed to Series B",
         descriptor: "Funded, heading for a raise or a board meeting, no data team yet.",
         title: "Founder review",
+        cost: { label: "No charge", tone: "free" },
         subline: "A plan to get numbers your deck, model and accounts agree on.",
         facts: {
           first: "A Founder review: a 30-minute call and written next steps. You decide whether to go on.",
@@ -115,6 +117,7 @@ export const pricingContent: PricingContent = {
         eyebrow: "Growing companies",
         descriptor: "50–500 people, with numbers spread across tools and spreadsheets.",
         title: "Deep-dive audit",
+        cost: { label: "Fixed price", tone: "paid" },
         subline: "What to fix, what to build first and what not to buy.",
         facts: {
           first: "A Founder review, then your systems reviewed under NDA: each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
@@ -132,6 +135,7 @@ export const pricingContent: PricingContent = {
         eyebrow: "Large organisations",
         descriptor: "Start with one team or unit, through your usual buying and security checks.",
         title: "One unit first",
+        cost: { label: "Fixed price per phase", tone: "paid" },
         subline: "A written proposal, one phase at a time.",
         facts: {
           first: "A Founder review, an NDA, then a written proposal.",

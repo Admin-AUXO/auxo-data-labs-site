@@ -54,19 +54,6 @@ function ladder(stack: HTMLElement, steps: HTMLElement[], sticky: boolean): void
       once: true,
       onEnter: () => tl.play(),
     });
-
-    if (!sticky || i === 0) return;
-    gsap.to(steps[i - 1].querySelectorAll(":scope > *"), {
-      opacity: 0.35,
-      ease: "none",
-      scrollTrigger: {
-        trigger: stack,
-        start: () => `top+=${top(i)} 60%`,
-        end: () => `top+=${top(i)} top`,
-        scrub: true,
-        invalidateOnRefresh: true,
-      },
-    });
   });
 }
 
