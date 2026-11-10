@@ -31,7 +31,6 @@ export const footerContent: FooterContent = {
       links: [
         { label: "About", href: "/about/" },
         { label: "Blog", href: "/blog/" },
-        { label: "Insights", href: "/insights/" },
         { label: "Contact", href: "/apply/" },
       ],
     },

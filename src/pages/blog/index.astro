@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/layout/Section.astro";
 import Button from "../../components/ui/Button.astro";
@@ -67,12 +66,6 @@ const tags = [...tagCounts.entries()]
         </div>
       )
     }
-
-    <p class="blog-shortreads">
-      <a href={c.shortReadsLink.href} class="blog-textlink">
-        <span class="blog-textlink__text">{c.shortReadsLink.label}</span><Icon name="mdi:arrow-right" aria-hidden="true" />
-      </a>
-    </p>
   </Section>
 </BaseLayout>
 

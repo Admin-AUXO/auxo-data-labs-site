@@ -24,7 +24,7 @@ export const auxoScoreAbout = {
       {
         question: "What happens after I get my score?",
         answer:
-          "You see the score, the band and the first fix on screen, and we email the report. The next step is to apply for a Founder review: a 30-minute call with a founder and written next steps.",
+          "You see the score, the band and the first fix on screen, and we email the report. The next step is to apply for a Founder review: a 30-minute call and written next steps.",
       },
     ],
   },

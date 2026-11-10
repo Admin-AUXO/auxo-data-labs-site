@@ -15,7 +15,6 @@ contact: mailto:hello@auxodata.com
 - Blog: https://auxodata.com/blog/
 - AUXO Score: https://auxodata.com/auxo-score/
 - About (founding team): https://auxodata.com/about/
-- Insights: https://auxodata.com/insights/
 - Apply for a Founder review: https://auxodata.com/apply/
 - Privacy Policy: https://auxodata.com/legal/privacy-policy/
 - Terms of Use: https://auxodata.com/legal/terms/

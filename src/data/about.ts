@@ -97,7 +97,7 @@ export const aboutContent: AboutContent = {
       {
         icon: "mdi:cog-outline",
         title: "Built to run",
-        desc: "Systems your team uses every day. Not a deck, not a stalled pilot.",
+        desc: "Systems your team uses every day, built to keep running.",
       },
       {
         icon: "mdi:key-outline",
@@ -119,7 +119,7 @@ export const aboutContent: AboutContent = {
   team: {
     eyebrow: "Team",
     title: "The founding team",
-    lead: "A founder approves every engagement, from first call to handover.",
+    lead: "The two people you work with, from first call to handover.",
     linkLabel: "Connect on LinkedIn",
     founders: [
       {
@@ -166,9 +166,9 @@ export const aboutContent: AboutContent = {
     ],
   },
   cta: {
-    title: "Start with the problem, not a pitch.",
-    titleHighlight: "not a pitch",
-    description: "The next step is a short conversation. No obligation.",
+    title: "Start with the problem.",
+    titleHighlight: "the problem",
+    description: "The next step is a short conversation.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,

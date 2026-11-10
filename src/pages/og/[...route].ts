@@ -41,13 +41,9 @@ const pages: Record<string, OGPage> = {
     title: "Data first. Then AI.",
     description: "Founder-led, based in Dubai. Serving the UAE, the US and Europe.",
   },
-  insights: {
-    title: "Short reads",
-    description: "One-minute positions on data, AI, reporting and ownership.",
-  },
   contact: {
     title: "Let's talk.",
-    description: "A real person replies within one business day.",
+    description: "We reply within one business day.",
   },
   "auxo-score": {
     title: "How ready is your data for AI?",

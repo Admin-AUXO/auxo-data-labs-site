@@ -253,10 +253,6 @@ html[data-motion="on"] .post-card:hover .post-card__go svg {
   padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
 }
 
-.blog-shortreads {
-  margin-block-start: 2.5rem;
-}
-
 .blog-back {
   align-items: center;
   align-self: flex-start;
@@ -272,32 +268,6 @@ html[data-motion="on"] .post-card:hover .post-card__go svg {
   block-size: 1.1em;
   flex-shrink: 0;
   inline-size: 1.1em;
-}
-
-.blog-textlink {
-  color: var(--accent);
-  display: inline;
-  font-weight: 600;
-  padding-block: 0.7rem;
-  text-decoration: none;
-}
-
-.blog-textlink__text {
-  text-decoration: underline;
-  text-decoration-color: color-mix(in oklch, var(--accent) 40%, transparent);
-  text-underline-offset: 0.2em;
-}
-
-.blog-textlink:hover .blog-textlink__text {
-  text-decoration-color: var(--accent);
-}
-
-.blog-textlink svg {
-  block-size: 1.1em;
-  display: inline-block;
-  inline-size: 1.1em;
-  margin-inline-start: 0.4rem;
-  vertical-align: -0.15em;
 }
 
 .blog-back:hover {
@@ -334,6 +304,10 @@ html[data-motion="on"] .post-card:hover .post-card__go svg {
   .blog-byline > span:nth-child(2) {
     display: none;
   }
+}
+
+body:has(.blog-article) .particle-field {
+  display: none;
 }
 
 .blog-prose {

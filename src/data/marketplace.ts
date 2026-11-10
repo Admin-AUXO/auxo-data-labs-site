@@ -159,7 +159,7 @@ const tools: ToolConfig[] = [
     name: "Claude Code for your engineers",
     vendor: "Anthropic",
     category: "engineering",
-    short: "AI help for your engineers, with human code review kept.",
+    short: "AI help for your engineers. Code review stays with your team.",
     liveIn: "About 1 week",
     setupItems: ["Access for your engineers", "Instructions for each project", "Review steps and a hands-on session"],
     dataNote: "Code stays in your repositories. An engineer reviews every change.",
@@ -252,7 +252,7 @@ export const marketplaceContent = {
   hero: {
     eyebrow: "Stacks",
     title: "Tool bundles, set up on your data.",
-    lead: "Set up in your own accounts by a founder. We recommend, you buy direct and own the account.",
+    lead: "Set up in your own accounts. We recommend, you buy direct and own the account.",
   },
   why: {
     title: "Why through us",
@@ -336,6 +336,6 @@ export const marketplaceContent = {
     description: "We'll suggest a stack for your team.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
-    reassurance: "A real person replies within one business day.",
+    reassurance: "We reply within one business day.",
   },
 };

@@ -15,6 +15,7 @@ export default defineConfig({
   redirects: {
     '/v': '/hello/',
     '/contact': '/apply/',
+    '/insights': '/blog/',
   },
   devToolbar: { enabled: false },
   prefetch: {

@@ -2,7 +2,7 @@
 
 > AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Built to last, and yours to keep. Based in Dubai. Serving the UAE, the US and Europe.
 
-AUXO Data Labs is an end-to-end data and AI service platform. It leads with funded startups (seed to Series B) and also works with growing companies (50–500 people) and large organisations. The path is Analyze, Advise, Build, with optional managed upkeep, and any step can be the start. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; each phase has a fixed price, set by scope and agreed in writing before work starts. Clients can stop after any phase and keep everything delivered. No charge for the AUXO Score or the Founder review. A real person replies to enquiries within one business day.
+AUXO Data Labs is an end-to-end data and AI service platform. It leads with funded startups (seed to Series B) and also works with growing companies (50–500 people) and large organisations. The path is Analyze, Advise, Build, with optional managed upkeep, and any step can be the start. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; each phase has a fixed price, set by scope and agreed in writing before work starts. Clients can stop after any phase and keep everything delivered. No charge for the AUXO Score or the Founder review. We reply to enquiries within one business day.
 
 ## Core pages
 - [Home](https://auxodata.com/): Your data, ready for AI. What AUXO fixes and how to start.
@@ -13,7 +13,6 @@ AUXO Data Labs is an end-to-end data and AI service platform. It leads with fund
 - [AUXO Score](https://auxodata.com/auxo-score/): An AI readiness assessment in 10 questions: a check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
 - [Apply for a Founder review](https://auxodata.com/apply/): A 30-minute call with an AUXO founder, by application, with written next steps within 3 business days. Limited places each week.
 - [About](https://auxodata.com/about/): Convictions, the founding team, and what clients can hold AUXO to.
-- [Insights](https://auxodata.com/insights/): One-minute positions on data, AI, reporting and ownership.
 
 ## What AUXO fixes
 - Trusted data: one source your team and your AI tools can rely on, built from the systems you already run.
@@ -31,7 +30,7 @@ AUXO Data Labs is an end-to-end data and AI service platform. It leads with fund
 - [Cookie Policy](https://auxodata.com/legal/cookie-policy/): Cookies, storage and consent controls.
 
 ## Full content
-- [Full text for LLMs](https://auxodata.com/llms-full.txt): every blog post and insight in full, plus this summary.
+- [Full text for LLMs](https://auxodata.com/llms-full.txt): every blog post in full, plus this summary.
 
 ## Contact
 - Website: https://auxodata.com

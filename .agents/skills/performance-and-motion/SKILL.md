@@ -1,6 +1,6 @@
 ---
 name: performance-and-motion
-description: Use when adding or changing animations, scroll-driven behavior, carousel behavior, lazy loading, service worker behavior (`src/pages/sw.js.ts`), client script strategy, or other performance-sensitive front-end behavior in this Astro site. Trigger for reveal effects, hero text, count-ups, runtime media loading, and interaction code that can affect responsiveness.
+description: Use when adding or changing animations, scroll-driven behavior, carousel behavior, lazy loading, service worker behavior (`src/pages/sw.js.ts`), client script strategy, or other performance-sensitive front-end behavior in this Astro site. Trigger for reveal effects, the particle field, hero text, count-ups, runtime media loading, and interaction code that can affect responsiveness.
 ---
 
 # Performance and Motion
@@ -25,7 +25,7 @@ Fast first. Fancy second.
 - Do not fight existing transforms with extra animation layers.
 - Protect nested scroll regions; keep menus, drawers, and dialogs scrollable on their own without the page fighting them.
 - Keep carousel content light and avoid heavy first-frame assets.
-- No carousel library is installed; reuse the insight deck (`src/scripts/ui/insight-deck.ts`) or plain CSS where horizontal comparison helps. Do not turn essential navigation or core reading flows into swipe traps.
+- No carousel library is installed; use plain CSS where horizontal comparison helps. Do not turn essential navigation or core reading flows into swipe traps.
 - Prefer mobile-only carousel activation for dense card collections when desktop already has enough width.
 - Dropdowns, drawers, and modal menus need deliberate overflow behavior. If the viewport is shorter than the design, the component still has to work.
 - The hero is text-only; treat its headline as LCP-critical and any added media as suspect.

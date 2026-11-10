@@ -47,7 +47,7 @@ src/
   config/       env.ts (GTM container ID)
   scripts/      Browser behaviour, analytics
   styles/       Tokens + layered CSS (main.css); page CSS in styles/pages/
-  content/      Blog posts and insights (MDX)
+  content/      Blog posts (MDX)
 public/         Static files: fonts, icons, vCards, robots/llms/ai/humans txt
 scripts/        Icon and Wallet pass generators
 tests/          Playwright specs; tests/auxo-score/ for Vitest
@@ -56,7 +56,7 @@ docs/           AUXO Score, lead pipeline, business card (Wallet notes, /v QR pr
 
 ## Editing content
 
-Page copy lives in `src/data/*.ts` (home, how-it-works, pricing, marketplace, about, blog, insights, contact, legal, navigation, footer, footnotes, not-found, card-links, site). Pages in `src/pages/*.astro` render that data. AUXO Score questions are in `src/lib/auxo-score/cards.ts` and its screen copy in `src/components/auxo-score/copy.ts`. Blog posts are MDX in `src/content/blog/`, insights in `src/content/insights/`.
+Page copy lives in `src/data/*.ts` (home, how-it-works, pricing, marketplace, about, blog, contact, legal, navigation, footer, footnotes, not-found, card-links, site). Pages in `src/pages/*.astro` render that data. AUXO Score questions are in `src/lib/auxo-score/cards.ts` and its screen copy in `src/components/auxo-score/copy.ts`. Blog posts are MDX in `src/content/blog/`.
 
 ## Design
 

@@ -100,7 +100,7 @@ interface HomeContent {
   };
 }
 
-const reassurance = "A real person replies within one business day.";
+const reassurance = "We reply within one business day.";
 
 export const homeContent: HomeContent = {
   meta: {
@@ -148,22 +148,22 @@ export const homeContent: HomeContent = {
   pillars: [
     {
       letter: "A",
-      title: "Trusted data",
+      title: "Accurate data",
       desc: "One set of numbers across ARR, burn and runway, from the tools you already use.",
     },
     {
       letter: "U",
-      title: "Clear reporting",
+      title: "Unified reporting",
       desc: "A board pack that holds up when investors ask hard questions.",
     },
     {
       letter: "X",
-      title: "Reliable automation",
-      desc: "AI takes the routine work. A person approves every step.",
+      title: "Explainable automation",
+      desc: "AI takes the routine work, and every result can be explained.",
     },
     {
       letter: "O",
-      title: "Confident compliance",
+      title: "Oversight built in",
       desc: "Simple rules for your data and AI, written down before diligence asks.",
     },
   ],
@@ -243,9 +243,8 @@ export const homeContent: HomeContent = {
     cta: { text: "Read the blog", href: "/blog/" },
   },
   cta: {
-    title: "Raising, or facing a board meeting?",
-    description:
-      "Bring the numbers that disagree. Leave knowing what to fix first.",
+    title: "Raising, or facing a board meeting? Bring the numbers that disagree.",
+    description: "Leave knowing what to fix first.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
     reassurance,

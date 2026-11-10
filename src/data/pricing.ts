@@ -100,7 +100,7 @@ export const pricingContent: PricingContent = {
         title: "Founder review",
         subline: "A plan to get numbers your deck, model and accounts agree on.",
         facts: {
-          first: "A Founder review: a 30-minute call with a founder and written next steps. You decide whether to go on.",
+          first: "A Founder review: a 30-minute call and written next steps. You decide whether to go on.",
           then: "Your main tools joined into one clean set of numbers: ARR, burn, runway and the board pack. Your finance lead signs off the definitions.",
           time: "Next steps within 3 business days of the call. Build: 4 to 12 weeks.",
           price: "How many tools we connect and the metrics you need.",
@@ -152,7 +152,7 @@ export const pricingContent: PricingContent = {
   includes: {
     title: "Every engagement includes",
     items: [
-      { icon: "mdi:account-tie-outline", text: "A founder approves every engagement" },
+      { icon: "mdi:file-document-outline", text: "A fixed price per phase, in writing" },
       { icon: "mdi:key-outline", text: "Your accounts, contracts and code" },
       { icon: "mdi:account-check-outline", text: "A person approves what AI sends" },
       { icon: "mdi:school-outline", text: "Documentation and training at handover" },
@@ -190,8 +190,8 @@ export const pricingContent: PricingContent = {
     ],
   },
   cta: {
-    title: "Not sure where to start?",
-    description: "30 minutes with a founder. Leave with one clear next step before your raise or board meeting.",
+    title: "Not sure where to start? Tell us what doesn't add up.",
+    description: "Leave with one clear next step before your raise or board meeting.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,

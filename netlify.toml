@@ -52,6 +52,18 @@
   force = true
 
 [[redirects]]
+  from = "/insights/"
+  to = "/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/insights"
+  to = "/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/contact/"
   to = "/apply/"
   status = 301

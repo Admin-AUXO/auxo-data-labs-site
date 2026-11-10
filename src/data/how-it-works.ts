@@ -27,7 +27,6 @@ export interface LadderStep {
   duration: string;
   suits: string;
   bring: string;
-  isNot: string;
   links: Link[];
 }
 
@@ -57,7 +56,6 @@ export const howItWorksContent = {
       duration: "Time",
       suits: "Best for",
       bring: "You bring",
-      isNot: "It isn't",
     },
     steps: [
       {
@@ -78,7 +76,7 @@ export const howItWorksContent = {
             title: "Founder review",
             tag: "Every company",
             tone: "free",
-            body: "A 30-minute call with a founder, by application. Written next steps within 3 business days. No charge. You decide whether to go on.",
+            body: "A 30-minute call, by application. Written next steps within 3 business days. No charge. You decide whether to go on.",
           },
           {
             icon: "mdi:file-search-outline",
@@ -91,7 +89,6 @@ export const howItWorksContent = {
         duration: "Score: about 3 minutes. Founder review: one 30-minute call. Deep-dive: 2 to 3 weeks.",
         suits: "Funded companies preparing a raise, a board meeting or diligence, whose deck, model and accounts disagree.",
         bring: "View-only access to the tools we look at.",
-        isNot: "A sales pitch, a generic checklist or a compliance certificate.",
         links: [
           { text: "Take the AUXO Score", href: "/auxo-score/" },
           { text: "Apply for a Founder review", href: siteData.applyUrl },
@@ -122,7 +119,6 @@ export const howItWorksContent = {
         duration: "1 to 3 weeks, often right after the deep-dive audit.",
         suits: "Teams that know the numbers are wrong and need a plan.",
         bring: "The people who sign off: founder, CFO or finance lead.",
-        isNot: "Endless consulting or a sales pitch for a vendor. Referral fees never decide what we recommend.",
         links: [{ text: "Browse the stacks", href: "/marketplace/" }],
       },
       {
@@ -150,7 +146,6 @@ export const howItWorksContent = {
         duration: "One tool: 1 to 2 weeks. A data foundation: 4 to 12 weeks.",
         suits: "Teams who have done the audit and can share their data.",
         bring: "One named owner for each tool.",
-        isNot: "A black box, a rented system or a stalled pilot.",
         links: [],
       },
     ] satisfies LadderStep[],
@@ -164,7 +159,7 @@ export const howItWorksContent = {
       label: "Optional, after Build",
       icon: "mdi:sync",
       title: "Managed upkeep",
-      promise: "We keep it running after handover. Monthly, no minimum term.",
+      promise: "We keep it running after handover.",
       terms:
         "Monthly, no minimum term. Stop with 30 days' notice and keep everything.",
     },
@@ -218,6 +213,6 @@ export const howItWorksContent = {
     description: "Leave knowing which numbers to fix first.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
-    reassurance: "A real person replies within one business day.",
+    reassurance: "We reply within one business day.",
   },
 };

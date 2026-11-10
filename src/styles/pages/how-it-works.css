@@ -270,7 +270,7 @@
 @media (width >= 64rem) {
   .ladder__facts {
     column-gap: 2rem;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     padding-block-start: 1.15rem;
   }
 
@@ -304,10 +304,6 @@
   font-size: var(--text-sm);
   line-height: 1.6;
   margin: 0;
-}
-
-.ladder__fact[data-kind="isNot"] dd {
-  color: var(--muted);
 }
 
 .ladder__what {
@@ -548,33 +544,4 @@
 [data-motion="on"][data-js] :is(.hiw-hero .section-index, .hiw-hero__title, .hiw-hero__side, .hiw-map) {
   animation: hiw-failsafe 0s 2.5s forwards;
   visibility: hidden;
-}
-
-[data-motion="on"] .method__item::before {
-  background: var(--accent);
-  block-size: 2px;
-  content: "";
-  inset-block-start: 0;
-  inset-inline: 0;
-  position: absolute;
-  transform: scaleX(var(--draw, 0));
-  transform-origin: left;
-}
-
-[data-motion="on"] .hiw-map__link,
-[data-motion="on"] .upkeep {
-  position: relative;
-}
-
-[data-motion="on"] .hiw-map__link::before,
-[data-motion="on"] .upkeep::before {
-  background: var(--accent);
-  block-size: 2px;
-  content: "";
-  inset-block-start: -1px;
-  inset-inline: 1.15rem;
-  pointer-events: none;
-  position: absolute;
-  transform: scaleX(var(--draw, 0));
-  transform-origin: left;
 }

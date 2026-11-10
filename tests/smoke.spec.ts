@@ -9,7 +9,6 @@ const routes = [
   "/blog/",
   "/about/",
   "/auxo-score/",
-  "/insights/",
   "/apply/",
   "/legal/privacy-policy/",
   "/legal/terms/",

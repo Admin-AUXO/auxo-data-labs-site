@@ -25,7 +25,6 @@ export interface BlogContent {
       body: string;
       links: LinkItem[];
     };
-    shortReadsLink: LinkItem;
   };
   post: {
     backLink: LinkItem;
@@ -62,13 +61,11 @@ export const blogContent: BlogContent = {
     cardLink: "Read the post",
     emptyState: {
       title: "No posts yet.",
-      body: "The first ones are on their way. Meanwhile, take the AUXO Score or read our short insights.",
+      body: "The first ones are on their way. Meanwhile, take the AUXO Score.",
       links: [
         { label: "Take the AUXO Score", href: "/auxo-score/" },
-        { label: "Read the insights", href: "/insights/" },
       ],
     },
-    shortReadsLink: { label: "Prefer one-minute reads? See the insights.", href: "/insights/" },
   },
   post: {
     backLink: { label: "Back to the blog", href: "/blog/" },
@@ -80,7 +77,7 @@ export const blogContent: BlogContent = {
       description: "10 questions, about 3 minutes. See your band and the first thing to fix.",
       ctaText: "Take the AUXO Score",
       ctaHref: "/auxo-score/",
-      reassurance: "A real person replies within one business day.",
+      reassurance: "We reply within one business day.",
     },
   },
 };

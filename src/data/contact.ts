@@ -97,15 +97,14 @@ export const contactContent: ContactContent = {
   },
   hero: {
     eyebrow: "Founder review",
-    title: "30 minutes with a founder.",
-    titleHighlight: "founder",
-    lead: "Bring the one number you don't trust. Leave with what to fix first.",
+    title: "Bring the number you doubt.",
+    titleHighlight: "doubt",
+    lead: "A 30-minute call, by application. Leave knowing what to fix first.",
     spots: {
       left: "{left} of {cap} places left this week.",
       full: "This week is full. Apply now and we will offer you a slot next week.",
     },
     points: [
-      "A call with Vignesh or Ajay, not a sales team.",
       "Written next steps within 3 business days.",
       "Limited places each week. We read every application.",
     ],

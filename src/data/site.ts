@@ -32,7 +32,7 @@ export const siteData: SiteData = {
     "AUXO gets your data ready for AI, then sets up the tools and agents that run on it. Built to last, and yours to keep.",
   shortVersion: "End-to-end data and AI, yours to keep.",
   locationLine: "Based in Dubai. Serving the UAE, the US and Europe.",
-  reassurance: "A real person replies within one business day.",
+  reassurance: "We reply within one business day.",
   aiLine: "AI where it earns its place. A person approves what goes out.",
   ownershipLine: "Built to last, and yours to keep.",
   url: import.meta.env.SITE ?? "https://auxodata.com",

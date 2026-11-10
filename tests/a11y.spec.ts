@@ -23,7 +23,6 @@ const routes = [
   ...blogPosts,
   "/auxo-score/",
   "/about/",
-  "/insights/",
   "/apply/",
 ];
 

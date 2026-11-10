@@ -29,8 +29,7 @@ function hero(root: HTMLElement): void {
         .from(eyebrow, { autoAlpha: 0, duration: 0.6 })
         .from(self.words, { yPercent: 105, duration: 0.9, stagger: 0.06 })
         .from(side, { y: 16, autoAlpha: 0, duration: 0.7 }, "<0.4")
-        .from(links, { autoAlpha: 0, y: 12, duration: 0.6, stagger: 0.07 }, "<0.1")
-        .fromTo(links, { "--draw": 0 }, { "--draw": 1, duration: 0.45, stagger: 0.12, ease: "power2.inOut" }, "<0.25");
+        .from(links, { autoAlpha: 0, y: 12, duration: 0.6, stagger: 0.07 }, "<0.1");
       return tl;
     },
   });
@@ -57,12 +56,12 @@ function ladder(stack: HTMLElement, steps: HTMLElement[], sticky: boolean): void
     });
 
     if (!sticky || i === 0) return;
-    gsap.to(steps[i - 1], {
-      autoAlpha: 0.4,
+    gsap.to(steps[i - 1].querySelectorAll(":scope > *"), {
+      opacity: 0.35,
       ease: "none",
       scrollTrigger: {
         trigger: stack,
-        start: () => `top+=${top(i)} bottom`,
+        start: () => `top+=${top(i)} 60%`,
         end: () => `top+=${top(i)} top`,
         scrub: true,
         invalidateOnRefresh: true,
@@ -74,15 +73,13 @@ function ladder(stack: HTMLElement, steps: HTMLElement[], sticky: boolean): void
 function upkeep(el: HTMLElement): void {
   gsap
     .timeline({ scrollTrigger: { trigger: el, start: "top 85%", once: true }, defaults: { ease: EASE } })
-    .fromTo(el, { "--draw": 0 }, { "--draw": 1, duration: 0.8, ease: "power2.inOut" })
-    .from(el.querySelectorAll(".upkeep__icon, .upkeep__head, .upkeep__body"), { autoAlpha: 0, duration: 0.6 }, "<0.2");
+    .from(el, { autoAlpha: 0, y: 16, duration: 0.7 });
 }
 
 function method(list: HTMLElement): void {
   gsap
     .timeline({ scrollTrigger: { trigger: list, start: "top 80%", once: true }, defaults: { ease: EASE } })
-    .fromTo(list.querySelectorAll(".method__item"), { "--draw": 0 }, { "--draw": 1, duration: 0.45, stagger: 0.1, ease: "power2.inOut" })
-    .from(list.querySelectorAll(".method__item > *"), { autoAlpha: 0, duration: 0.6, stagger: 0.03 }, "<0.1");
+    .from(list.querySelectorAll(".method__item > *"), { autoAlpha: 0, duration: 0.6, stagger: 0.03 });
 }
 
 export function build(): () => void {

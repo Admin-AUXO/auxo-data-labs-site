@@ -326,6 +326,10 @@ html[data-js] .card__view:not([data-active]) {
   gap: 0.625rem;
 }
 
+body:has(.card) .particle-field {
+  display: none;
+}
+
 .card__save,
 .card__contact,
 .card__meet {
