@@ -18,9 +18,9 @@ Shape the system before touching components.
 ## Current System
 
 - Single dark theme, lime accent (`--accent`; `--accent-2` is the clay second accent). Scales are `--color-accent-*` and `--color-neutral-*`; roles are `--background`, `--surface`, `--foreground`, `--muted`, `--border`. Tokens live in `src/styles/tokens.css` under Tailwind v4 `@theme`, so they also generate utility classes: do not delete tokens that look unused. `.hl-accent` is the accent colour.
-- Owner preferences: premium, not flashy; terse copy; cards aligned with subgrid; no left/right split sections except the hero and FAQ.
+- Owner preferences: premium and bold, never gimmicky; terse copy; cards aligned with subgrid; left/right splits only for the hero, the FAQ and text beside an example. Two grounds only: night and AUXO green (`background="accent"`, `.ground-lime`, `.ground-night`). No white sections, no decorative icons, no oversized headings.
 - Type: headings **AUXO Display** (Mona Sans, OFL, width 112, renamed per its Reserved Font Name), body **Plus Jakarta Sans**, mono **JetBrains Mono**, logo **Montserrat AUXO**. Heading weights 800/700 via `--font-weight-display-strong` / `--font-weight-display`.
-- Sections: eyebrow + heading + lead stacked over a full-width grid. Two-tone headings: the second sentence muted via `HighlightText soften`.
+- Sections: heading + lead stacked over a full-width grid, no eyebrow label. Two-tone headings: the second sentence lighter via `HighlightText soften`.
 - Accordions hide item numbers for three items or fewer.
 
 ## Rules

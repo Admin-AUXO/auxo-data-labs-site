@@ -1,9 +1,10 @@
 ---
-import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
+import Receipt from "../components/ui/Receipt.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
 import Accordion from "../components/ui/Accordion.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import StructuredData from "../components/layout/StructuredData.astro";
@@ -13,114 +14,113 @@ import { escapeHtml } from "../lib/text";
 import "../styles/pages/pricing.css";
 
 const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escapeHtml(item.answer) }));
-const factKeys = ["first", "then", "time", "price", "stop"] as const;
-const factIds = c.cards.items.map((p) => `${p.id}-facts`).join(" ");
+const factKeys = ["price"] as const;
 ---
 <BaseLayout title={c.metaTitle} description={c.metaDescription}>
   <Section padding="lg" width="7xl">
-    <div class="plans-hero">
-      <div class="flex flex-col gap-6">
-        <p class="section-index" data-enter>{c.hero.eyebrow}</p>
-        <h1 class="text-display text-display--hero max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
-        <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
+    <div class="page-hero">
+      <div class="page-hero__side" data-enter>
+        <h1 class="page-hero__title page-hero__title--long" data-enter="headline">
+          <HighlightText text={c.hero.title} soften />
+        </h1>
+        <p class="page-hero__lead">{c.hero.lead}</p>
+        <div class="page-hero__ctas">
+          <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
+            {c.hero.primaryCta.text}
+          </Button>
+          <Button variant="secondary" size="lg" href={c.hero.secondaryCta.href} class="w-full sm:w-auto">
+            {c.hero.secondaryCta.text}
+          </Button>
+        </div>
       </div>
-      <div class="plans-rules" data-enter>
-        <h2 class="plans-rules__title">{c.hero.rulesTitle}</h2>
-        <ul class="plans-rules__list">
-          {
-            c.hero.rules.map((r) => (
-              <li class="plans-rules__item" data-tone={r.tone}>
-                <Icon name={r.icon} class="plans-rules__icon" aria-hidden="true" />
-                <span>{r.text}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <Receipt data={c.hero.receipt} href="#ledger" />
     </div>
   </Section>
 
-  <Section padding="sm" width="7xl" class="plans-section">
+  <Section id="ledger" padding="lg" width="7xl" class="plans-anchor">
+    <h2 class="ledger__title">{c.ledger.title}</h2>
+    <table class="ledger" data-reveal>
+      <thead>
+        <tr>
+          <th scope="col">{c.ledger.columns.step}</th>
+          <th scope="col">{c.ledger.columns.get}</th>
+          <th scope="col">{c.ledger.columns.takes}</th>
+          <th scope="col">{c.ledger.columns.price}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          c.ledger.rows.map((r) => (
+            <tr data-tone={r.tone}>
+              <th scope="row" class="ledger__step">{r.step}</th>
+              <td class="ledger__get">{r.get}</td>
+              <td class="ledger__takes" data-label={c.ledger.columns.takes}>{r.takes}</td>
+              <td class="ledger__price" data-label={c.ledger.columns.price}>
+                <span class="ledger__amount">{r.price}</span>
+                {r.note && <span class="ledger__note">{r.note}</span>}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+    <p class="ledger__total">
+      {c.ledger.total}
+    </p>
+    <p class="ledger__legend">
+      <span data-tone="free">{c.ledger.legend.free}</span>
+      <span data-tone="paid">{c.ledger.legend.paid}</span>
+    </p>
+  </Section>
+
+  <Section padding="lg" width="7xl" class="plans-section">
+    <h2 class="plans__title">{c.cards.title}</h2>
     <ul class="plans">
       {
         c.cards.items.map((p, i) => (
-          <li id={p.id} class="plan" data-anim="rise" style={`--i:${i}`}>
-            <article class="plan__body" aria-labelledby={`${p.id}-eyebrow ${p.id}-title`}>
-              <header class="plan__head">
-                <div class="plan__who">
-                  <p id={`${p.id}-eyebrow`} class="plan__eyebrow">
-                    <Icon name={p.icon} class="plan__icon" aria-hidden="true" />
-                    {p.eyebrow}
-                  </p>
-                  <p class="plan__descriptor">{p.descriptor}</p>
-                </div>
-                <div class="plan__what">
-                  <h2 id={`${p.id}-title`} class="plan__title">{p.title}</h2>
-                  <p class="plan__cost" data-tone={p.cost.tone}>{p.cost.label}</p>
-                  <p class="plan__subline">{p.subline}</p>
-                </div>
-              </header>
-
-              <div class="plan__cta">
-                <Button variant="secondary" size="lg" href={p.cta.href} icon class="w-full">
-                  {p.cta.text}
-                </Button>
+          <li id={p.id} class:list={["plan", p.featured && "ground-lime"]} data-anim="rise" style={`--i:${i}`}>
+            <article class="plan__body" aria-labelledby={`${p.id}-eyebrow`}>
+              <div class="plan__who">
+                <h3 id={`${p.id}-eyebrow`} class="plan__eyebrow">{p.eyebrow}</h3>
+                <p class="plan__descriptor">{p.descriptor}</p>
               </div>
-
-              <dl class="plan__facts" id={`${p.id}-facts`}>
+              <div class="plan__what">
+                <p class="plan__label">{c.cards.startLabel}</p>
+                <p class="plan__title">{p.title}</p>
+                <p class="plan__subline">{p.subline}</p>
+              </div>
+              <dl class="plan__facts">
                 {factKeys.map((k) => (
-                  <div class="plan__fact" data-fact={k}>
+                  <div class="plan__fact">
                     <dt>{c.cards.factLabels[k]}</dt>
                     <dd>{p.facts[k]}</dd>
                   </div>
                 ))}
               </dl>
-
-              <p class="plan__fine">{p.finePrint}</p>
             </article>
           </li>
         ))
       }
     </ul>
+  </Section>
 
-    <div class="plans-more">
-      <button
-        type="button"
-        class="plan__toggle"
-        data-plans-toggle
-        aria-expanded="false"
-        aria-controls={factIds}
-        data-show={c.cards.detailsShow}
-        data-hide={c.cards.detailsHide}
-      >
-        <span data-plans-label>{c.cards.detailsShow}</span>
-        <Icon name="mdi:plus" aria-hidden="true" />
-      </button>
-    </div>
-
-    <div class="plans-score" data-reveal>
-      <p>{c.score.text}</p>
-      <Button variant="secondary" size="sm" href={c.score.cta.href} icon>{c.score.cta.text}</Button>
-    </div>
-
-    <div class="plans-includes" data-reveal>
-      <h2 class="plans-includes__title">{c.includes.title}</h2>
-      <ul class="plans-includes__list">
-        {
-          c.includes.items.map((item) => (
-            <li class="plans-includes__item">
-              <Icon name={item.icon} aria-hidden="true" />
-              <span>{item.text}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+  <Section padding="lg" width="7xl" background="sunken">
+    <h2 class="includes__title">{c.includes.title}</h2>
+    <ul class="includes" data-reveal>
+      {
+        c.includes.items.map((item) => (
+          <li class="includes__item">
+            <h3 class="includes__name">{item.title}</h3>
+            <p class="includes__body">{item.body}</p>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   <Section id="faq" padding="lg" width="7xl" class="plans-anchor">
     <div class="faq-split">
-      <SectionHeader eyebrow={c.faq.eyebrow} title={c.faq.title} />
+      <SectionHeader title={c.faq.title} />
       <div class="faq-split__list" data-reveal>
         <Accordion items={faqItems} openFirst />
       </div>
@@ -138,23 +138,3 @@ const factIds = c.cards.items.map((p) => `${p.id}-facts`).join(" ");
   <StructuredData type="FAQPage" data={faqSchema(c.faq.items)} />
 </BaseLayout>
 
-<script>
-  function initPlans(): void {
-    const list = document.querySelector<HTMLElement>(".plans");
-    if (!list || list.dataset.bound === "true") return;
-    list.dataset.bound = "true";
-    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-plans-toggle]"));
-    const set = (open: boolean): void => {
-      list.toggleAttribute("data-open", open);
-      for (const b of buttons) {
-        b.setAttribute("aria-expanded", String(open));
-        const label = b.querySelector<HTMLElement>("[data-plans-label]");
-        if (label) label.textContent = (open ? b.dataset.hide : b.dataset.show) ?? "";
-      }
-    };
-    for (const b of buttons) b.addEventListener("click", () => set(!list.hasAttribute("data-open")));
-    set(false);
-  }
-
-  document.addEventListener("astro:page-load", initPlans);
-</script>

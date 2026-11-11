@@ -1,79 +1,63 @@
 ---
-title: "AI governance for a 50-person company"
-description: "A plain AI governance framework for a company with no compliance team: four named roles, four questions and a first month. Short enough to use this week."
+title: "AI governance for a 50-person company: who owns what"
+description: "AI governance for a startup with no compliance team: four named roles, four questions and a first month. Know who decides, approves and sees what."
 date: 2026-11-05
 author: "Ajay Kumar"
 tags: ["Governance", "Ownership", "AI agents"]
 draft: true
 ---
 
-**In short:** AI governance for a company of 50 is four named roles and four questions: who decides, who approves, who can see what and what gets logged. No committee is needed.
+**In short:** AI governance for a company of 50 is four named roles and four questions: who decides, who approves, who can see what and what gets logged. No committee is needed. The written rule is a separate job, covered in our [one-page AI policy template](/blog/a-one-page-ai-policy-for-a-company-of-50/).
 
-Your team already uses AI. Someone drafts replies with it. Someone else has connected it to the CRM.
+Someone on your team drafts investor updates with AI. Someone else has connected it to the CRM.
 
-Nobody decided who approves what it produces. Nobody can say what it can see. You have no compliance team, and the guides you find online assume you do.
+Nobody decided who approves what it produces or what it can see. You have no compliance team, and most guides assume you do.
 
-This is the short version of an AI governance framework. It fits a company of about 50 people, and it runs on named roles, not committees.
-
-## What governance means here
-
-Strip away the jargon and governance answers four questions about every piece of AI work.
+## Four questions for every piece of AI work
 
 - **Who decides.** One person says whether the AI does this job at all, and stops it if it goes wrong.
 - **Who approves.** A named person reads what the AI drafts, sorts or flags before it goes out, gets paid or changes a record.
 - **Who can see what.** Each tool reads only the data its job needs. Read access is the default. Write access is the exception.
-- **What gets logged.** Who asked, what ran, on which data, who approved it and when. Kept long enough to investigate a complaint.
+- **What gets logged.** Who asked, what ran, on which data, who approved it and when.
 
-A fifth question sits behind these. What does the data mean? If "active customer" has three definitions, the AI will pick one and you won't know which. We cover that in [agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
+Behind these sits a fifth: what does the data mean? See [agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
 
-## The roles for a 50-person company
+## Four roles, each with a name
 
-Four roles. One person can hold more than one, but each must have a name next to it.
+One person can hold more than one role. Each needs a name beside it.
 
-**The accountable owner.** One person answers for how the company uses AI. At this size it is usually the COO, the CEO or the head of operations. It is rarely the person who built the tool. This person decides what AI may do and what it may not.
+**The accountable owner.** One person answers for how the company uses AI and decides what it may and may not do. At seed to Series B this is usually a founder or the COO.
 
-**The approver, one per AI output.** Every kind of AI output gets one named approver. The invoice draft goes to the finance lead. The customer reply goes to the support lead. The approver is the person who would be blamed if it were wrong. We wrote about this in [name the approver before you build the agent](/blog/name-the-approver-before-you-build-the-agent/).
+**The approver, one per AI output.** The investor update goes to the CFO or finance lead. The customer reply goes to the support lead. See [name the approver before you build the agent](/blog/name-the-approver-before-you-build-the-agent/).
 
-**The access owner.** One person controls which tools connect to which systems. At 50 people that is often the IT lead, an office manager with admin rights or an outside IT provider. They grant access, review it every quarter and remove it when someone leaves.
+**The access owner.** One person controls which tools connect to which systems. At this size that is often the head of engineering, an ops lead with admin rights or an outside IT provider. They review access every quarter and remove it when someone leaves.
 
-**The data owner.** One person per important data source: the CRM, the finance system, the shared drive. They decide who may read it and what its fields mean. Usually that is the head of the team that uses the data most.
+**The data owner.** One person per important source: the CRM, billing, the finance system, the shared drive. They decide who may read it and what its fields mean.
 
-If any of these roles is empty, you have found your first job.
+If any role is empty, you have found your first job.
 
-## How this compares with the big frameworks
+## What the big frameworks add
 
-You will meet two names early.
+The [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) was released in January 2023. NIST describes it as intended for voluntary use. It sets out four functions: Govern, Map, Measure and Manage.
 
-The [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) was released in January 2023. NIST describes it as intended for voluntary use. It organises AI risk work under four headings: Govern, Map, Measure and Manage.
+[ISO/IEC 42001](https://www.iso.org/standard/42001) is an international standard for an AI management system. ISO describes it as setting out requirements for establishing, implementing, maintaining and continually improving one. Companies can choose to be audited against it. That is a larger project than most 50-person startups need today.
 
-[ISO/IEC 42001](https://www.iso.org/standard/42001) is an international standard for an AI management system. ISO describes it as setting out requirements for establishing, implementing, maintaining and continually improving one. Companies can choose to be audited against it. That is a larger project than most 50-person firms need today.
-
-Treat both as reading to borrow from. Their "Govern" and "management system" ideas are the same ideas as the four roles above, with more detail. This post does not meet either one for you, and it does not claim to. If a customer or regulator later asks for one of them, you will already have the roles and the logs to build on.
+Treat both as reading. This post does not meet either one for you. If an investor or customer later asks for one, you will already have the roles and logs to build on.
 
 ## The first month
 
-Three things.
+**1. List every AI tool in use.** Include personal accounts. One line per tool: what it does, what data it touches, who uses it.
 
-**1. List every AI tool in use.** Ask each team lead. Include the personal accounts people use for work. Write one line per tool: what it does, what data it touches, who uses it. Expect a longer list than you guessed.
+**2. Fill the four roles.** Put a name beside the owner, each approver, the access owner and each data owner. Share the list with the company.
 
-**2. Fill the four roles.** Put a name beside the owner, each approver, the access owner and each data owner. Send the list to the whole company. A role nobody knows about does not work.
+**3. Pick one workflow and add the controls.** Choose the one where a mistake costs most. Set the tool to read-only. Put the approval step in the workflow itself, not in a document. Turn on logging.
 
-**3. Pick one workflow and add the controls.** Choose the one where a mistake costs most. Set the tool to read-only. Put the approval step in the workflow itself, not in a policy document. Turn on logging. If you have no logs, a shared sheet that records who approved what is a fair start.
+After a month, check the setup again. [Will it still run when the builder leaves?](/blog/will-it-still-run-when-the-builder-leaves/) has five checks.
 
-Then check the setup again after a month, and ask what the builder would leave behind if they left. [Will it still run when the builder leaves?](/blog/will-it-still-run-when-the-builder-leaves/) has five checks for that.
+## What to leave out for now
 
-## What to leave out until later
-
-Leave out the 40-page policy. Nobody will read it, and it will be out of date in a quarter.
-
-Leave out the AI ethics board. Four named people do more than a committee that meets twice a year.
-
-Leave out certification. Pursue it only when a customer or a regulator asks.
-
-Leave out tools that score every model on every risk. Start with one workflow, and add more when the first one runs cleanly.
-
-Keep the roles, the approvals, the access list and the log. Everything else can wait.
+Leave out the 40-page policy, the ethics board and certification. Four named people do more than a committee that meets twice a year. Keep the roles, the approvals, the access list and the log.
 
 ## Where to start
 
-If you want a quick read on how ready your data and your controls are, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+For a quick read on how ready your data and your controls are, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

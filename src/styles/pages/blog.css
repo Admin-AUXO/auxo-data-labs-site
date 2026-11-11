@@ -235,9 +235,9 @@ html[data-motion="on"] .post-card:hover .post-card__go svg {
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.04em;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
   line-height: 1.4;
   padding: 0.2rem 0.65rem;
 }

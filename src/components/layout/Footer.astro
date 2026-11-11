@@ -11,16 +11,25 @@ interface Props {
 }
 
 const { footnotes = false } = Astro.props;
-const { sections, note } = footerContent;
+const { sections, note, statement } = footerContent;
 const year = new Date().getFullYear();
 ---
 <footer class="footer" data-pagefind-ignore>
   <div class="footer__inner">
+    <div class="footer__lead">
+      <p class="footer__statement">
+        {statement[0]} <span class="tone-soft">{statement[1]}</span>
+      </p>
+      <div class="footer__reach">
+        <a class="footer__email" href={`mailto:${siteData.email}`}>{siteData.email}</a>
+        <SocialLinks />
+      </div>
+    </div>
+
     <div class="footer__grid">
       <div class="footer__brand">
         <Logo />
         <p class="footer__note">{note}</p>
-        <SocialLinks />
       </div>
 
       {
@@ -39,16 +48,6 @@ const year = new Date().getFullYear();
           </nav>
         ))
       }
-
-      <div class="footer__col">
-        <p class="footer__col-title">Connect</p>
-        <ul class="footer__contact">
-          <li>
-            <Icon name="mdi:email-outline" aria-hidden="true" />
-            <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
-          </li>
-        </ul>
-      </div>
     </div>
 
     {footnotes && (

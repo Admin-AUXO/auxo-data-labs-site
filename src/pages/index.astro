@@ -97,7 +97,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   <Section padding="lg" width="7xl">
     <div class="home-fix">
       <div class="home-head">
-        <p class="section-index" data-reveal>{c.pillarsHeader.eyebrow}</p>
         <SectionHeader title={c.pillarsHeader.title} subtitle={c.pillarsHeader.lead} />
       </div>
       <ul class="cube" aria-label={c.pillarsLabel}>
@@ -121,31 +120,44 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </Section>
 
-  <Section padding="lg" width="7xl">
-    <div class="home-head">
-      <p class="section-index" data-reveal>{c.ladder.eyebrow}</p>
-      <SectionHeader title={c.ladder.title} />
+  <Section padding="lg" width="7xl" background="accent">
+    <div class="trace-band">
+      <div class="compare-head">
+        <h2 class="compare-head__title">{c.compare.title}</h2>
+        <p class="compare-head__lead">{c.compare.lead}</p>
+        <a class="compare__link" href={c.compare.link.href}>
+          {c.compare.link.text}
+          <Icon name="mdi:arrow-right" aria-hidden="true" />
+        </a>
+      </div>
+      <fieldset class="asks ground-night" data-reveal>
+        <legend class="sr-only">{c.compare.groupLabel}</legend>
+        <div class="asks__tabs">
+          {
+            c.compare.asks.map((ask, i) => (
+              <label class="asks__tab">
+                <input class="sr-only" type="radio" name="asks" value={`${i}`} checked={i === 0} />
+                <span>{ask.who}</span>
+              </label>
+            ))
+          }
+        </div>
+        {
+          c.compare.asks.map((ask, i) => (
+            <div class="asks__panel" data-ask={`${i}`}>
+              <p class="asks__when">{ask.when}</p>
+              <p class="asks__question">{ask.question}</p>
+              <p class="asks__answer">{ask.answer}</p>
+            </div>
+          ))
+        }
+      </fieldset>
     </div>
-    <ol class="cards mt-8">
-      {
-        c.cards.map((card, i) => (
-          <li class="cards__cell" data-anim="rise" style={`--i:${i}`}>
-            <a href={card.href} class="cards__card">
-              <Icon name={card.icon} class="cards__icon" aria-hidden="true" />
-              <h3 class="cards__title">{card.title}</h3>
-              <p class="cards__desc text-muted">{card.desc}</p>
-              <Icon name="mdi:arrow-right" class="cards__arrow" aria-hidden="true" />
-            </a>
-          </li>
-        ))
-      }
-    </ol>
   </Section>
 
   <Section padding="lg" width="7xl">
     <div class="home-split">
       <div class="home-head">
-        <p class="section-index" data-reveal>{c.segments.eyebrow}</p>
         <SectionHeader title={c.segments.title} subtitle={c.segments.lead} />
       </div>
       <div>
@@ -170,7 +182,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   <Section padding="lg" width="7xl">
     <div class="market" data-reveal>
       <div class="home-head">
-        <p class="section-index">{c.marketplace.eyebrow}</p>
         <h2 class="text-4xl"><HighlightText text={c.marketplace.title} soften /></h2>
         <p class="lead max-w-2xl text-balance">{c.marketplace.lead}</p>
       </div>
@@ -195,7 +206,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     posts.length > 0 && (
       <Section padding="lg" width="7xl">
         <div class="home-head">
-          <p class="section-index" data-reveal>{c.blog.eyebrow}</p>
           <SectionHeader title={c.blog.title} subtitle={c.blog.lead} />
         </div>
         <ul class="posts mt-8">

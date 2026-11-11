@@ -1,29 +1,40 @@
 import { siteData } from "./site";
 
+export interface ReceiptData {
+  head: string;
+  rows: { item: string; price: string }[];
+  totalLabel: string;
+  total: string;
+  after?: { item: string; price: string };
+  link?: string;
+}
+
 export interface PlanLink {
   text: string;
   href: string;
 }
 
 export interface PlanFacts {
-  first: string;
-  then: string;
-  time: string;
   price: string;
-  stop: string;
 }
 
 export interface PlanCard {
   id: string;
-  icon: string;
   eyebrow: string;
   descriptor: string;
   title: string;
   subline: string;
-  cost: { label: string; tone: "free" | "paid" };
+  featured?: boolean;
   facts: PlanFacts;
-  cta: PlanLink;
-  finePrint: string;
+}
+
+export interface LedgerRow {
+  step: string;
+  get: string;
+  takes: string;
+  price: string;
+  note?: string;
+  tone: "free" | "paid" | "optional";
 }
 
 export interface FaqItem {
@@ -35,25 +46,30 @@ export interface PricingContent {
   metaTitle: string;
   metaDescription: string;
   hero: {
-    eyebrow: string;
     title: string;
     lead: string;
-    rulesTitle: string;
-    rules: { tone: "free" | "paid" | "optional"; icon: string; text: string }[];
+    primaryCta: PlanLink;
+    secondaryCta: PlanLink;
+    receipt: ReceiptData;
+  };
+  ledger: {
+    title: string;
+    columns: { step: string; get: string; takes: string; price: string };
+    rows: LedgerRow[];
+    total: string;
+    legend: { free: string; paid: string };
   };
   cards: {
+    title: string;
+    startLabel: string;
     factLabels: Record<keyof PlanFacts, string>;
-    detailsShow: string;
-    detailsHide: string;
     items: PlanCard[];
   };
-  score: { text: string; cta: { text: string; href: string } };
   includes: {
     title: string;
-    items: { icon: string; text: string }[];
+    items: { title: string; body: string }[];
   };
   faq: {
-    eyebrow: string;
     title: string;
     items: FaqItem[];
   };
@@ -67,109 +83,116 @@ export interface PricingContent {
 }
 
 export const pricingContent: PricingContent = {
-  metaTitle: "Pricing: one path, a fixed price per phase",
+  metaTitle: "Pricing: no charge to start, a fixed price per phase",
   metaDescription:
-    "Start with the AUXO Score, then a Founder review. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
+    "The AUXO Score and the Founder review cost nothing. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
   hero: {
-    eyebrow: "Pricing",
-    title: "Start where you are.",
-    lead: "One path: Score, Founder review, Deep-dive audit, Build. Each phase has a fixed price, agreed in writing before we start.",
-    rulesTitle: "How pricing works",
-    rules: [
-      { tone: "free", icon: "mdi:check", text: "No charge for the AUXO Score or the Founder review." },
-      { tone: "free", icon: "mdi:key-outline", text: "Stop after any phase. You keep everything delivered." },
-      { tone: "optional", icon: "mdi:domain", text: "Tool vendors bill you directly." },
-      { tone: "optional", icon: "mdi:sync", text: "Upkeep and ongoing advice are optional and monthly. Stop with 30 days' notice." },
+    title: "No charge to start. A fixed price after.",
+    lead: "We scope each phase with you and put the price in writing before it starts. Stop after any of them.",
+    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+    secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
+    receipt: {
+      head: "Your first two steps",
+      rows: [
+        { item: "AUXO Score", price: "No charge" },
+        { item: "Founder review", price: "No charge" },
+      ],
+      totalLabel: "To start",
+      total: "Nothing",
+      after: { item: "Each phase after", price: "Fixed, in writing" },
+      link: "See what each step costs",
+    },
+  },
+  ledger: {
+    title: "What does each step cost?",
+    columns: { step: "Step", get: "You get", takes: "Takes", price: "Cost" },
+    legend: { free: "No charge", paid: "A price we agree in writing first" },
+    rows: [
+      { step: "AUXO Score", get: "A score out of 100, and where to look first.", takes: "About 3 minutes", price: "No charge", tone: "free" },
+      { step: "Founder review", get: "A 30-minute call, then written next steps.", takes: "3 business days", price: "No charge", tone: "free" },
+      {
+        step: "Deep-dive audit",
+        get: "Each gap between your deck, model and accounts, and a plan of what to build first.",
+        takes: "2 to 3 weeks",
+        price: "Scoped with you",
+        note: "Credited if you build with us.",
+        tone: "paid",
+      },
+      { step: "Advise", get: "A plan, a short list of tools and clear rules.", takes: "1 to 3 weeks", price: "Scoped with you", tone: "paid" },
+      {
+        step: "Build",
+        get: "One set of numbers in your own accounts, handed over.",
+        takes: "4 to 12 weeks a phase",
+        price: "Agreed phase by phase",
+        tone: "paid",
+      },
+      {
+        step: "Managed upkeep",
+        get: "We keep it running after handover.",
+        takes: "Month by month",
+        price: "Monthly, optional",
+        note: "Stop with 30 days' notice.",
+        tone: "optional",
+      },
     ],
+    total: "Stop after any step. You keep everything delivered.",
   },
   cards: {
-    detailsShow: "Show details",
-    detailsHide: "Hide details",
+    title: "What sets the price.",
+    startLabel: "After the Founder review",
     factLabels: {
-      first: "First",
-      then: "Then",
-      time: "Typical time",
-      price: "Price set by",
-      stop: "If you stop",
+      price: "Price depends on",
     },
     items: [
       {
         id: "startups",
-        icon: "mdi:rocket-launch-outline",
         eyebrow: "Startups, seed to Series B",
-        descriptor: "Funded, heading for a raise or a board meeting, no data team yet.",
-        title: "Founder review",
-        cost: { label: "No charge", tone: "free" },
-        subline: "A plan to get numbers your deck, model and accounts agree on.",
+        descriptor: "Funded, heading for a raise or a board meeting, with no data team yet.",
+        title: "One set of numbers",
+        subline: "ARR, burn and runway that your deck, model and accounts agree on.",
+        featured: true,
         facts: {
-          first: "A Founder review: a 30-minute call and written next steps. You decide whether to go on.",
-          then: "Your main tools joined into one clean set of numbers: ARR, burn, runway and the board pack. Your finance lead signs off the definitions.",
-          time: "Next steps within 3 business days of the call. Build: 4 to 12 weeks.",
           price: "How many tools we connect and the metrics you need.",
-          stop: "The plan is yours, whether or not you build with us.",
         },
-        cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
-        finePrint: "One Founder review per company.",
       },
       {
         id: "growing",
-        icon: "mdi:office-building-outline",
         eyebrow: "Growing companies",
-        descriptor: "50–500 people, with numbers spread across tools and spreadsheets.",
+        descriptor: "50 to 500 people, with numbers spread across tools and spreadsheets.",
         title: "Deep-dive audit",
-        cost: { label: "Fixed price", tone: "paid" },
         subline: "What to fix, what to build first and what not to buy.",
         facts: {
-          first: "A Founder review, then your systems reviewed under NDA: each fix rated by urgency, a plan of what to build first and a short readout for your leaders.",
-          then: "A plan, the right tools and clear rules. Then we build in phases you sign off one at a time.",
-          time: "Audit: 2 to 3 weeks. Each build phase: 4 to 12 weeks.",
           price: "The tools, companies and teams involved.",
-          stop: "Stop after the audit. The findings and plan are yours.",
         },
-        cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
-        finePrint: "A guide, not a rule.",
       },
       {
         id: "large-organisations",
-        icon: "mdi:domain",
         eyebrow: "Large organisations",
-        descriptor: "Start with one team or unit, through your usual buying and security checks.",
+        descriptor: "One team or unit first, through your usual buying and security checks.",
         title: "One unit first",
-        cost: { label: "Fixed price per phase", tone: "paid" },
-        subline: "A written proposal, one phase at a time.",
+        subline: "A written proposal for one team, one phase at a time.",
         facts: {
-          first: "A Founder review, an NDA, then a written proposal.",
-          then: "We build in your systems, alongside your own team or partners. Upkeep if you want it.",
-          time: "Proposal within 3 business days. First phase: 2 to 3 weeks, plus your buying steps.",
           price: "The scope of each phase, on your contract terms.",
-          stop: "Each phase stands alone. Everything is in your name.",
         },
-        cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
-        finePrint: "We answer security questions plainly, including what we don't have.",
       },
     ],
-  },
-  score: {
-    text: "Not ready to talk? Take the AUXO Score: 10 questions, about 3 minutes.",
-    cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   includes: {
     title: "Every engagement includes",
     items: [
-      { icon: "mdi:file-document-outline", text: "A fixed price per phase, in writing" },
-      { icon: "mdi:key-outline", text: "Your accounts, contracts and code" },
-      { icon: "mdi:account-check-outline", text: "A person approves what AI sends" },
-      { icon: "mdi:school-outline", text: "Documentation and training at handover" },
+      { title: "A price in writing", body: "Fixed for each phase, before we start." },
+      { title: "Everything in your name", body: "Your accounts, contracts and code. Tool vendors bill you directly." },
+      { title: "A person in charge of AI", body: "A named person approves what AI sends." },
+      { title: "A full handover", body: "Documentation and training for your team." },
     ],
   },
   faq: {
-    eyebrow: "FAQ",
     title: "Pricing questions",
     items: [
       {
         question: "How do you set the price?",
         answer:
-          "By what's involved: the tools, the teams and what we build. Each phase gets a fixed price in writing before we start. No two jobs match, so we don't publish prices.",
+          "By what's involved: the tools, the teams and what we build. We scope each phase with you and fix the price in writing before we start. No two jobs match, so we don't publish prices.",
       },
       {
         question: "Who can get a Founder review?",
@@ -182,9 +205,9 @@ export const pricingContent: PricingContent = {
           "Often you should, later. We set up the base your first data hire builds on, so they don't start over.",
       },
       {
-        question: "You're two founders. Can you deliver?",
+        question: "Who does the work?",
         answer:
-          "Yes. We work to a method: five checks, a fixed scope per phase and a written handover. Everything is in your name, so nothing depends on us. A founder approves every engagement. Vignesh sets scope and price; Ajay builds.",
+          "The two founders. Vignesh scopes the work with you; Ajay builds it. We work to a method: five checks, a fixed scope per phase and a written handover. Everything is in your name.",
       },
       {
         question: "Can you work with our procurement process?",

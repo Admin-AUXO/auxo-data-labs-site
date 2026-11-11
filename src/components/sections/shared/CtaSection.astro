@@ -2,6 +2,7 @@
 import Section from "../../layout/Section.astro";
 import Button from "../../ui/Button.astro";
 import HighlightText from "../../ui/HighlightText.astro";
+import { siteData } from "../../../data/site";
 
 interface Props {
   eyebrow?: string;
@@ -27,81 +28,159 @@ const {
   secondaryText,
   secondaryHref,
 } = Astro.props;
+
+const showPath = ctaHref === siteData.applyUrl;
 ---
 <Section padding="md" width="7xl">
-  <div class="cta-band" data-reveal>
-    <div class="cta-band__text">
-      <h2 class="cta-band__title">
-        <HighlightText text={title} highlight={titleHighlight} soften />
-      </h2>
-      {
-        description && (
-          <p class="cta-band__desc">
-            <HighlightText text={description} highlight={descriptionHighlight} />
-          </p>
-        )
-      }
-    </div>
-    <div class="cta-band__actions">
-      <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-        <Button variant="primary" size="lg" href={ctaHref} icon class="w-full sm:w-auto">{ctaText}</Button>
+  <div class="cta-panel ground-lime" data-reveal>
+    <div class="cta-panel__main">
+      <div class="cta-panel__text">
+        <h2 class="cta-panel__title">
+          <HighlightText text={title} highlight={titleHighlight} soften />
+        </h2>
         {
-          secondaryText && secondaryHref && (
-            <Button variant="secondary" size="lg" href={secondaryHref} class="w-full sm:w-auto">
-              {secondaryText}
-            </Button>
+          description && !showPath && (
+            <p class="cta-panel__desc">
+              <HighlightText text={description} highlight={descriptionHighlight} />
+            </p>
           )
         }
       </div>
-      {reassurance && <p class="text-sm text-subtle">{reassurance}</p>}
+      <div class="cta-panel__actions">
+        <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+          <Button variant="primary" size="lg" href={ctaHref} icon class="w-full sm:w-auto">{ctaText}</Button>
+          {
+            secondaryText && secondaryHref && (
+              <Button variant="secondary" size="lg" href={secondaryHref} class="w-full sm:w-auto">
+                {secondaryText}
+              </Button>
+            )
+          }
+        </div>
+      </div>
     </div>
+    {
+      showPath && (
+        <div class="cta-panel__path">
+          <ol class="cta-panel__steps">
+            {siteData.applySteps.map((s, i) => (
+              <li>
+                <span class="cta-panel__num">{i + 1}</span>
+                {s}
+              </li>
+            ))}
+          </ol>
+          {reassurance && <p class="cta-panel__reassure">{reassurance}</p>}
+        </div>
+      )
+    }
   </div>
 </Section>
 
 <style>
-  .cta-band {
+  .cta-panel {
+    background: var(--brand);
+    border-radius: 1.25rem;
+    color: var(--foreground);
     display: grid;
-    gap: 1.5rem 3rem;
-    padding-block: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+    gap: clamp(1.75rem, 1.25rem + 1.5vw, 2.75rem);
+    padding: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+  }
+
+  .cta-panel__main {
+    display: grid;
+    gap: 1.75rem 3rem;
   }
 
   @media (width >= 64rem) {
-    .cta-band {
-      align-items: center;
+    .cta-panel__main {
+      align-items: end;
       grid-template-columns: minmax(0, 1fr) auto;
     }
   }
 
-  .cta-band__text {
+  .cta-panel__text {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 1rem;
   }
 
-  .cta-band__title {
+  .cta-panel__title {
     font-size: var(--text-3xl);
+    letter-spacing: var(--tracking-display-3xl);
+    line-height: 1.1;
+    text-wrap: balance;
   }
 
-  .cta-band__title :global(.tone-soft) {
+  .cta-panel__title :global(.tone-soft) {
     display: block;
+    font-weight: 500;
   }
 
-  .cta-band__desc {
+  .cta-panel__desc {
     color: var(--muted);
     font-size: var(--text-lg);
     line-height: 1.5;
     max-inline-size: 36rem;
   }
 
-  .cta-band__actions {
+  .cta-panel__actions {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
 
   @media (width >= 64rem) {
-    .cta-band__actions {
+    .cta-panel__actions {
       align-items: flex-end;
     }
   }
+
+  .cta-panel__reassure {
+    color: var(--muted);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  .cta-panel__path {
+    align-items: center;
+    border-block-start: 1px solid var(--border-strong);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    justify-content: space-between;
+    padding-block-start: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  }
+
+  .cta-panel__steps {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--text-base);
+    font-weight: 600;
+    gap: 0.75rem 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cta-panel__steps li {
+    align-items: center;
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .cta-panel__num {
+    align-items: center;
+    background: var(--foreground);
+    block-size: 1.6rem;
+    border-radius: 50%;
+    color: var(--brand);
+    display: inline-flex;
+    flex: none;
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    inline-size: 1.6rem;
+    justify-content: center;
+  }
+
 </style>

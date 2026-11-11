@@ -1,8 +1,7 @@
 ---
-import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
-import SectionHeader from "../components/ui/SectionHeader.astro";
+import Receipt from "../components/ui/Receipt.astro";
 import Accordion from "../components/ui/Accordion.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import ContactForm from "../components/forms/ContactForm.astro";
@@ -10,6 +9,8 @@ import StructuredData from "../components/layout/StructuredData.astro";
 import { faqSchema } from "../lib/structured-data";
 import { contactContent as c } from "../data/contact";
 import { escapeHtml } from "../lib/text";
+import { siteData } from "../data/site";
+import "../styles/pages/apply.css";
 
 const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escapeHtml(item.answer) }));
 ---
@@ -21,52 +22,14 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
     <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
       <div class="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
         <div class="flex flex-col gap-5">
-          <p class="section-index" data-enter>{c.hero.eyebrow}</p>
           <h1 class="text-display text-display--hero max-w-[12ch]" data-enter="headline">
             <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} soften />
           </h1>
           <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
-          <ul class="flex flex-col gap-2" data-enter>
-            {c.hero.points.map((p) => (
-              <li class="flex items-start gap-3 text-muted">
-                <Icon name="mdi:check" class="mt-1 size-4 shrink-0 text-accent" aria-hidden="true" />
-                <span>{p}</span>
-              </li>
-            ))}
-          </ul>
           <p class="text-sm font-medium text-accent" data-spots data-left={c.hero.spots.left} data-full={c.hero.spots.full} hidden></p>
         </div>
-        <h2 class="text-2xl" data-reveal>{c.details.title}</h2>
-
-        <ul class="flex flex-col">
-          {
-            c.details.items.map((item, i) => (
-              <li
-                class:list={[
-                  "flex items-start gap-4 py-4",
-                  i > 0 && "border-t border-border",
-                ]}
-              >
-                <Icon name={item.icon} class="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
-                <div class="flex flex-col gap-0.5">
-                  <span class="text-sm text-subtle">{item.label}</span>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      class="font-medium text-foreground transition-colors hover:text-accent"
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noopener noreferrer" : undefined}
-                    >
-                      {item.value}
-                    </a>
-                  ) : (
-                    <span class="font-medium text-foreground">{item.value}</span>
-                  )}
-                </div>
-              </li>
-            ))
-          }
-        </ul>
+        <Receipt data={c.hero.receipt} class="apply-receipt" />
+        <a class="apply-mail" href={`mailto:${siteData.email}`}>{siteData.email}</a>
       </div>
 
       <div class="flex flex-col gap-6">
@@ -79,13 +42,8 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
     </div>
   </Section>
 
-  <Section padding="lg" width="7xl">
-    <SectionHeader
-      eyebrow={c.nextSteps.eyebrow}
-      title={c.nextSteps.title}
-      highlight={c.nextSteps.titleHighlight}
-      subtitle={c.nextSteps.subtitle}
-    />
+  <Section padding="lg" width="7xl" background="accent">
+    <h2 class="apply-heading"><HighlightText text={c.nextSteps.title} highlight={c.nextSteps.titleHighlight} soften /></h2>
     <ol class="mt-8 grid gap-x-10 gap-y-8 md:grid-cols-3">
       {
         c.nextSteps.steps.map((step, i) => (
@@ -94,7 +52,7 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
             data-anim={i === 0 ? "rise" : i === 1 ? "slide-right" : "slide-left"}
           >
             <h3 class="text-2xl font-bold">{step.title}</h3>
-            <p class="text-muted">{step.desc}</p>
+            <p class="apply-step__desc">{step.desc}</p>
           </li>
         ))
       }
@@ -103,7 +61,10 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
 
   <Section padding="lg" width="7xl">
     <div class="faq-split">
-      <SectionHeader eyebrow={c.faq.eyebrow} title={c.faq.title} highlight={c.faq.titleHighlight} subtitle={c.faq.description} />
+      <div class="apply-faq-head" data-reveal>
+        <h2 class="apply-heading"><HighlightText text={c.faq.title} highlight={c.faq.titleHighlight} soften /></h2>
+        <p class="apply-faq-head__lead">{c.faq.description}</p>
+      </div>
       <div class="faq-split__list" data-reveal>
         <Accordion items={faqItems} openFirst />
       </div>

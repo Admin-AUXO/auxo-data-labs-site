@@ -1,0 +1,32 @@
+---
+import type { Specimen } from "../../data/how-it-works";
+
+interface Props {
+  label?: string;
+  example: Specimen;
+  class?: string;
+}
+
+const { label, example, class: cls = "" } = Astro.props;
+---
+<figure class={`specimen ground-night ${cls}`.trim()}>
+  <figcaption class="specimen__cap">
+    {label && <span class="specimen__label">{label}</span>}
+    {example.title}
+  </figcaption>
+  <table class="specimen__table">
+    <thead>
+      <tr>{example.head.map((h) => <th scope="col">{h}</th>)}</tr>
+    </thead>
+    <tbody>
+      {
+        example.rows.map((r) => (
+          <tr data-tone={r.tone}>
+            {r.cells.map((cell, n) => (n === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+  <p class="specimen__note">{example.note}</p>
+</figure>

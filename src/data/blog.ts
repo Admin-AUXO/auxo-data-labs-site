@@ -10,7 +10,6 @@ export interface BlogContent {
     metaTitle: string;
     metaDescription: string;
     hero: {
-      eyebrow: string;
       title: string;
       titleHighlight: string | string[];
       lead: string;
@@ -49,7 +48,6 @@ export const blogContent: BlogContent = {
     metaDescription:
       "Plain reads from AUXO on data, AI tools and agents, and when not to build. Every figure has a source. Take the AUXO Score to see where you stand.",
     hero: {
-      eyebrow: "Blog",
       title: "Data and AI. Written plainly.",
       titleHighlight: [],
       lead: "Founder notes on data, AI tools and agents, and when not to build. Every figure has a source.",
@@ -73,7 +71,7 @@ export const blogContent: BlogContent = {
     tagsLabel: "Topics",
     relatedHeading: "Read next",
     endCta: {
-      title: "Want an honest read of your own setup?",
+      title: "See where your own numbers stand.",
       description: "10 questions, about 3 minutes. See your band and the first thing to fix.",
       ctaText: "Take the AUXO Score",
       ctaHref: "/auxo-score/",

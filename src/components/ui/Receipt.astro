@@ -1,0 +1,55 @@
+---
+import { Icon } from "astro-icon/components";
+import Mark from "../layout/Mark.astro";
+import { siteData } from "../../data/site";
+import type { ReceiptData } from "../../data/pricing";
+
+interface Props {
+  data: ReceiptData;
+  href?: string;
+  class?: string;
+}
+
+const { data, href, class: cls = "" } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+<Tag class={`receipt ${cls}`.trim()} href={href} data-enter>
+  <span class="receipt__paper ground-lime">
+    <span class="receipt__brand">
+      <Mark class="receipt__mark" />
+      {siteData.name}
+    </span>
+    <span class="receipt__head">{data.head}</span>
+    {
+      data.rows.map((r) => (
+        <span class="receipt__row">
+          <span>{r.item}</span>
+          <span class="receipt__dots" aria-hidden="true" />
+          <span>{r.price}</span>
+        </span>
+      ))
+    }
+    <span class="receipt__total">
+      <span>{data.totalLabel}</span>
+      <span>{data.total}</span>
+    </span>
+    {
+      data.after && (
+        <span class="receipt__row receipt__row--after">
+          <span>{data.after.item}</span>
+          <span class="receipt__dots" aria-hidden="true" />
+          <span>{data.after.price}</span>
+        </span>
+      )
+    }
+    <span class="receipt__bars" aria-hidden="true" />
+    {
+      data.link && (
+        <span class="receipt__link">
+          {data.link}
+          <Icon name="mdi:arrow-down" aria-hidden="true" />
+        </span>
+      )
+    }
+  </span>
+</Tag>

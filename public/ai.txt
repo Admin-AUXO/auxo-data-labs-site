@@ -10,8 +10,8 @@ contact: mailto:hello@auxodata.com
 [authoritative-pages]
 - Home: https://auxodata.com/
 - How it works (Analyze, Advise, Build, managed upkeep, method): https://auxodata.com/how-it-works/
-- Pricing (three ways in; no prices published): https://auxodata.com/pricing/
-- Stacks (tool bundles): https://auxodata.com/marketplace/
+- Pricing (no charge to start, a fixed price per phase; no prices published): https://auxodata.com/pricing/
+- Stacks (six fixed-price jobs on your numbers): https://auxodata.com/marketplace/
 - Blog: https://auxodata.com/blog/
 - AUXO Score: https://auxodata.com/auxo-score/
 - About (founding team): https://auxodata.com/about/

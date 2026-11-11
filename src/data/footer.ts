@@ -13,6 +13,7 @@ export interface FooterSection {
 export interface FooterContent {
   sections: FooterSection[];
   note: string;
+  statement: [string, string];
 }
 
 export const footerContent: FooterContent = {
@@ -43,5 +44,6 @@ export const footerContent: FooterContent = {
       ],
     },
   ],
-  note: `${siteData.ownershipLine} ${siteData.locationLine}`,
+  note: siteData.locationLine,
+  statement: ["Built to last,", "and yours to keep."],
 };

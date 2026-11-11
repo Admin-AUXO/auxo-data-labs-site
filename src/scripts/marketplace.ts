@@ -65,12 +65,29 @@ function setupStack(root: HTMLElement): void {
   const trayCount = root.querySelector<HTMLElement>("[data-stack-count]");
   const request = root.querySelector<HTMLAnchorElement>("[data-stack-request]");
   const clear = root.querySelector<HTMLButtonElement>("[data-stack-clear]");
+  const lines = root.querySelector<HTMLElement>("[data-stack-lines]");
+  const emptyNote = root.querySelector<HTMLElement>("[data-stack-empty]");
   if (!tray || !trayCount || !request || !clear || buttons.length === 0) return;
 
   const d = root.dataset;
   const base = d.requestBase ?? "";
   const valid = new Set(buttons.map((b) => b.dataset.addToStack ?? ""));
   let stack = readStack(valid);
+
+  const line = (slug: string): HTMLLIElement => {
+    const card = root.querySelector<HTMLElement>(`#tool-${CSS.escape(slug)}`);
+    const row = document.createElement("li");
+    row.className = "receipt__row";
+    const name = document.createElement("span");
+    name.textContent = card?.querySelector(".mkt-card__name")?.textContent ?? slug;
+    const dots = document.createElement("span");
+    dots.className = "receipt__dots";
+    dots.setAttribute("aria-hidden", "true");
+    const time = document.createElement("span");
+    time.textContent = card?.querySelector(".mkt-card__live strong")?.textContent ?? "";
+    row.append(name, dots, time);
+    return row;
+  };
 
   const render = (): void => {
     for (const btn of buttons) {
@@ -82,6 +99,8 @@ function setupStack(root: HTMLElement): void {
       btn.setAttribute("aria-pressed", String(added));
     }
     tray.hidden = stack.length === 0;
+    if (emptyNote) emptyNote.hidden = stack.length > 0;
+    lines?.replaceChildren(...stack.map(line));
     trayCount.textContent =
       stack.length === 0 ? "" : stack.length === 1 ? (d.countOne ?? "") : fill(d.countMany ?? "", { n: stack.length });
     request.href = `${base}${stack.map(encodeURIComponent).join(",")}`;

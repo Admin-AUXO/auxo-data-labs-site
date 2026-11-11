@@ -11,24 +11,26 @@ export interface Dimension {
 }
 
 export interface LadderItem {
-  icon: string;
   title: string;
   tag?: string;
   tone?: "free" | "paid" | "optional";
   body: string;
 }
 
+export interface Specimen {
+  title: string;
+  head: string[];
+  rows: { cells: string[]; tone: "gap" | "ok" | "skip" }[];
+  note: string;
+}
+
 export interface LadderStep {
   id: string;
+  example: Specimen;
   name: string;
-  icon: string;
-  shape: "analyze" | "advise" | "build";
   cost: { label: string; tone: "free" | "paid" | "optional" };
   promise: string;
   whatYouGet: LadderItem[];
-  duration: string;
-  suits: string;
-  bring: string;
   links: Link[];
 }
 
@@ -40,61 +42,56 @@ export interface FaqItem {
 
 export const howItWorksContent = {
   meta: {
-    title: "How it works: Score, review, audit, build",
+    title: "How it works: Analyze, Advise, Build",
     description:
-      "One path: AUXO Score, Founder review, Deep-dive audit, Build. Numbers your board and investors can rely on, and a build you own.",
+      "Analyze, Advise, Build: numbers your board and investors can rely on, and a build you own.",
   },
   intro: {
-    eyebrow: "How it works",
     title: "Analyze. Advise. Build.",
-    titleHighlight: ".",
-    lead: "One path. At each step you get something in writing.",
+    lead: "Each step ends with something in writing. Stop after any of them.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl } satisfies Link,
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" } satisfies Link,
   },
   ladder: {
-    navLabel: "Steps",
-    stepperLabel: "Where you are",
     labels: {
-      whatYouGet: "What you get",
-      duration: "Time",
-      suits: "Best for",
-      bring: "You bring",
+      whatYouGet: "You get",
     },
     steps: [
       {
         id: "analyze",
         name: "Analyze",
-        icon: "mdi:magnify",
-        shape: "analyze",
         cost: { label: "No charge to start", tone: "free" },
-        promise: "An honest look at your numbers. Before the raise or the board meeting.",
+        promise: "Do your deck, model and accounts agree? You get a written read before the raise.",
+        example: {
+          title: "Why ARR has three answers",
+          head: ["Where", "What we find", "ARR"],
+          rows: [
+            { cells: ["Deck", "Counts churned contracts", "Too high"], tone: "gap" },
+            { cells: ["Model", "Counts one-off services", "Too high"], tone: "gap" },
+            { cells: ["Accounts", "Matches billing", "Correct"], tone: "ok" },
+          ],
+          note: "Every gap comes with its cause, in writing.",
+        },
         whatYouGet: [
           {
-            icon: "mdi:gauge",
             title: "AUXO Score",
             tag: "Anyone",
             tone: "free",
-            body: "A self-check: 10 questions, about 3 minutes. You get a score out of 100 and where to look first. You decide what to do next.",
+            body: "A self-check of 10 questions. You get a score out of 100 and where to look first.",
           },
           {
-            icon: "mdi:account-tie-outline",
             title: "Founder review",
             tag: "Every company",
             tone: "free",
-            body: "A 30-minute call, by application. Written next steps within 3 business days. No charge. You decide whether to go on.",
+            body: "A call, by application. Written next steps within 3 business days. No charge.",
           },
           {
-            icon: "mdi:file-search-outline",
             title: "Deep-dive audit",
-            tag: "Paid",
+            tag: "Scoped with you",
             tone: "paid",
-            body: "A 2 to 3 week review of your systems under NDA. You get each gap between your deck, model and accounts, and a plan of what to build first. A founder signs off the findings. Credited if you build with us.",
+            body: "A review of your systems under NDA. You get each gap between your deck, model and accounts, and a plan of what to build first. Credited if you build with us.",
           },
         ],
-        duration: "Score: about 3 minutes. Founder review: one 30-minute call. Deep-dive: 2 to 3 weeks.",
-        suits: "Funded companies preparing a raise, a board meeting or diligence, whose deck, model and accounts disagree.",
-        bring: "View-only access to the tools we look at.",
         links: [
           { text: "Take the AUXO Score", href: "/auxo-score/" },
           { text: "Apply for a Founder review", href: siteData.applyUrl },
@@ -103,81 +100,82 @@ export const howItWorksContent = {
       {
         id: "advise",
         name: "Advise",
-        icon: "mdi:lightbulb-outline",
-        shape: "advise",
-        cost: { label: "Fixed price", tone: "paid" },
-        promise: "A plan to get there. And the tools that fit.",
+        cost: { label: "Scoped with you", tone: "paid" },
+        promise: "What do you fix first, and what do you skip? You get a plan, and the tools that fit.",
+        example: {
+          title: "What a plan says",
+          head: ["Order", "What"],
+          rows: [
+            { cells: ["First", "Agree one definition of ARR"], tone: "ok" },
+            { cells: ["Next", "Join billing and CRM"], tone: "ok" },
+            { cells: ["Then", "Board pack from one source"], tone: "ok" },
+            { cells: ["Skip", "A new reporting tool"], tone: "skip" },
+          ],
+          note: "Approved by your leadership before any build.",
+        },
         whatYouGet: [
           {
-            icon: "mdi:map-outline",
             title: "Plan",
             body: "What to do first, what comes next, and where AI helps. Your leadership approves it.",
           },
           {
-            icon: "mdi:compass-outline",
             title: "Tool choice",
             body: "A short list of tools that fit, and the ones to skip.",
           },
           {
-            icon: "mdi:shield-account-outline",
             title: "Clear rules, and optional ongoing advice",
             body: "Who owns which data, who checks the AI's work, and who has access. A founder on call monthly, if you want it.",
           },
         ],
-        duration: "1 to 3 weeks, often right after the deep-dive audit.",
-        suits: "Teams that know the numbers are wrong and need a plan.",
-        bring: "The people who sign off: founder, CFO or finance lead.",
         links: [{ text: "Browse the stacks", href: "/marketplace/" }],
       },
       {
         id: "build",
         name: "Build",
-        icon: "mdi:hammer-wrench",
-        shape: "build",
-        cost: { label: "Fixed price", tone: "paid" },
-        promise: "One set of numbers. Set up end to end, and handed over.",
+        cost: { label: "Agreed phase by phase", tone: "paid" },
+        promise: "Who builds it, and who owns it after? We build it in your accounts. You keep it.",
+        example: {
+          title: "One set of numbers",
+          head: ["Metric", "Comes from", "Signed off by"],
+          rows: [
+            { cells: ["ARR", "Billing", "Finance lead"], tone: "ok" },
+            { cells: ["Monthly burn", "Accounts", "Finance lead"], tone: "ok" },
+            { cells: ["Runway", "Both", "Finance lead"], tone: "ok" },
+          ],
+          note: "Your deck, model and board pack read the same figures.",
+        },
         whatYouGet: [
           {
-            icon: "mdi:database-outline",
             title: "Data foundation",
             body: "One clean, checked set of numbers from the tools you use, with a board pack where it helps. Your finance lead signs off the definitions.",
           },
           {
-            icon: "mdi:tools",
             title: "AI tools",
-            body: "Tool stacks, set up in your accounts, on your data.",
+            body: "Chat with your data, and workflow automation between your tools.",
           },
           {
-            icon: "mdi:key-outline",
             title: "Handover",
             body: "Guides, training, and everything in your name.",
           },
         ],
-        duration: "One tool: 1 to 2 weeks. A data foundation: 4 to 12 weeks.",
-        suits: "Teams who have done the audit and can share their data.",
-        bring: "One named owner for each tool.",
         links: [],
       },
     ] satisfies LadderStep[],
     build: {
       ownershipLine: siteData.ownershipLine,
-      aiBuiltNote:
-        "We use AI tools to build, then check and test everything before handover.",
     },
     upkeep: {
       id: "managed-upkeep",
       label: "Optional, after Build",
-      icon: "mdi:sync",
       title: "Managed upkeep",
       promise: "We keep it running after handover.",
-      terms:
-        "Monthly, no minimum term. Stop with 30 days' notice and keep everything.",
+      terms: "Billed monthly, with no minimum term. Stop with 30 days' notice and keep everything.",
     },
   },
   method: {
-    eyebrow: "The method",
-    title: "Five checks. One honest score.",
-    lead: "Every score and audit runs the same five checks on your ARR, burn and runway figures.",
+    title: "Five checks. One score.",
+    lead: "Every score and audit asks the same five questions of your ARR, burn and runway figures.",
+    cta: { text: "Take the AUXO Score", href: "/auxo-score/" } satisfies Link,
     dimensions: [
       { name: "Accurate", question: "Is the data correct?" },
       { name: "Complete", question: "Is anything missing?" },
@@ -187,8 +185,7 @@ export const howItWorksContent = {
     ] satisfies Dimension[],
   },
   faq: {
-    eyebrow: "FAQ",
-    title: "Good questions. Plain answers.",
+    title: "Common questions.",
     items: [
       {
         question: "Will it fit the tools we run?",
@@ -196,9 +193,9 @@ export const howItWorksContent = {
           "Yes. We build on what you already use, such as Google Cloud, Azure, Snowflake or Power BI. If a tool works, we keep it.",
       },
       {
-        question: "Do we have to start with Analyze?",
+        question: "Do we need a Deep-dive audit first?",
         answer:
-          "No, but we recommend it. AI on untidy data gives untidy answers. If you know what you need, start at Advise or Build and we'll check the data as we go.",
+          "No. The Founder review comes first, at no charge. After it, if you know what you need, we go straight to Advise or Build and check the data as we go.",
       },
       {
         question: "Why can't Claude or ChatGPT do this for us?",
@@ -219,7 +216,7 @@ export const howItWorksContent = {
     ] satisfies FaqItem[],
   },
   cta: {
-    title: "Raising, or facing a board? Start with an honest read.",
+    title: "Raising, or facing a board? Start with the numbers.",
     description: "Leave knowing which numbers to fix first.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,

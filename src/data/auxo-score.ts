@@ -1,9 +1,7 @@
 export const auxoScoreAbout = {
-  eyebrow: "What it checks",
-  title: "An AI readiness check, in plain terms.",
+  title: "An AI readiness check for your data.",
   lead: "The AUXO Score asks whether the data an AI tool would read is ready to be relied on. It runs the same five checks as our deep-dive audit.",
   faq: {
-    eyebrow: "FAQ",
     title: "About the AUXO Score.",
     items: [
       {

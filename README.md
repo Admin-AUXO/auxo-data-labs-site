@@ -41,7 +41,7 @@ npm run dev      # http://localhost:4340
 src/
   pages/        Routes (also generates manifest.json, sw.js, llms-full.txt, OG images)
   layouts/      Page shells
-  components/   UI, layout, sections, forms, auxo-score, blog
+  components/   UI (incl. Specimen example tables, Receipt), layout, sections, forms, auxo-score, blog
   data/         Page content (edit copy here)
   lib/          AUXO Score logic, blog and structured-data helpers
   config/       env.ts (GTM container ID)
@@ -60,7 +60,7 @@ Page copy lives in `src/data/*.ts` (home, how-it-works, pricing, marketplace, ab
 
 ## Design
 
-Single dark theme with a lime accent. `src/styles/tokens.css` is the source of truth for colour and type; `docs/design/color-palette.html` is a visual reference of those tokens (open it locally). For the full brand reference (logos, voice, usage), see `brand/` in the `auxo-marketing` repo.
+Dark theme with AUXO green (lime) as the accent and as the one coloured ground; no light sections. `src/styles/tokens.css` is the source of truth for colour and type; `docs/design/color-palette.html` is a visual reference of those tokens (open it locally). For the full brand reference (logos, voice, usage), see `brand/` in the `auxo-marketing` repo.
 
 Fonts are self-hosted `woff2` in `public/fonts/`:
 

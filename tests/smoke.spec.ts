@@ -43,7 +43,7 @@ test("primary nav lists the new routes", async ({ page }) => {
 test("homepage hero and section links", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("main h1")).toContainText("Your data, ready for AI");
-  await expect(page.locator('main a[href="/how-it-works/#analyze"]')).toHaveCount(1);
+  await expect(page.locator('main a[href="/how-it-works/"]')).toHaveCount(1);
   await expect(page.locator('main a[href="/pricing/#growing"]')).toHaveCount(1);
   await expect(page.locator('main a[href^="/marketplace/?category="]').first()).toBeVisible();
 });
@@ -61,32 +61,30 @@ test("pricing shows three segment cards with no badge", async ({ page }) => {
   const cards = page.locator(".plans > .plan");
   await expect(cards).toHaveCount(3);
   for (const id of ["startups", "growing", "large-organisations"]) {
-    await expect(page.locator(`#${id} article h2`)).toBeVisible();
+    await expect(page.locator(`#${id} article h3`)).toBeVisible();
   }
   await expect(page.locator(".plan__badge")).toHaveCount(0);
-  for (const id of ["startups", "growing", "large-organisations"]) {
-    await expect(page.locator(`#${id} a[href="/apply/"]`)).toBeVisible();
-  }
+  await expect(page.locator('main a[href="/apply/"]').first()).toBeVisible();
   const text = await page.locator("main").innerText();
   expect(text).not.toMatch(/AED|USD|\$\s?\d|€\s?\d|most popular/i);
 });
 
 test("marketplace filter reads and writes the category", async ({ page }) => {
-  await page.goto("/marketplace/?category=finance");
-  const finance = page.locator('[data-filter="finance"]');
+  await page.goto("/marketplace/?category=numbers");
+  const finance = page.locator('[data-filter="numbers"]');
   await expect(finance).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator('.mkt-grid > [data-category="finance"]').first()).toBeVisible();
-  await expect(page.locator('.mkt-grid > [data-category="engineering"]').first()).toBeHidden();
+  await expect(page.locator('.mkt-grid > [data-category="numbers"]').first()).toBeVisible();
+  await expect(page.locator('.mkt-grid > [data-category="work"]').first()).toBeHidden();
   await expect(page.locator(".mkt-card--custom")).toBeVisible();
 
-  await page.locator('[data-filter="engineering"]').click();
-  await expect(page).toHaveURL(/\?category=engineering$/);
-  await expect(page.locator('.mkt-grid > [data-category="engineering"]').first()).toBeVisible();
-  await expect(page.locator('.mkt-grid > [data-category="finance"]').first()).toBeHidden();
+  await page.locator('[data-filter="work"]').click();
+  await expect(page).toHaveURL(/\?category=work$/);
+  await expect(page.locator('.mkt-grid > [data-category="work"]').first()).toBeVisible();
+  await expect(page.locator('.mkt-grid > [data-category="numbers"]').first()).toBeHidden();
 
   await page.locator('[data-filter="all"]').click();
   await expect(page).not.toHaveURL(/category=/);
-  await expect(page.locator('.mkt-grid > [data-category="finance"]').first()).toBeVisible();
+  await expect(page.locator('.mkt-grid > [data-category="numbers"]').first()).toBeVisible();
 });
 
 test("marketplace add to stack fills the tray", async ({ page }) => {

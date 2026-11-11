@@ -11,17 +11,17 @@ const serviceOffers = [
   {
     name: "Analyze",
     description:
-      "An honest read of your business and your data, before you spend on AI. Includes the AUXO Score and a founder review (funded startups, seed to Series B) at no charge, and a paid deep-dive audit.",
+      "A written read of your numbers. Includes the AUXO Score and a Founder review at no charge, and a paid Deep-dive audit.",
   },
   {
     name: "Advise",
     description:
-      "The right AI and data setup for your team, and a plan to get there: roadmap, tool selection and governance.",
+      "A plan to get there and a short list of tools that fit, approved by your leadership.",
   },
   {
     name: "Build",
     description:
-      "Your data infrastructure and AI agent teams, set up end to end and handed over. Built to last, and yours to keep.",
+      "One set of numbers and the AI tools on top, built in your own accounts and handed over. Built to last, and yours to keep.",
   },
   { name: "Managed upkeep", description: "Optional monthly upkeep and tuning after Build. No minimum term." },
 ];
@@ -139,7 +139,7 @@ export function personSchema(p: Founder) {
   return {
     name: p.name,
     jobTitle: p.role,
-    description: p.lines.join(" "),
+    description: [p.drive, ...p.lines].join(" "),
     url: abs("/about/#team"),
     worksFor: { "@type": "Organization", name: siteData.name, url: home },
     sameAs: [p.linkedin],

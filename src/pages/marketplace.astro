@@ -2,7 +2,9 @@
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
-import SectionHeader from "../components/ui/SectionHeader.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
+import Mark from "../components/layout/Mark.astro";
+import { siteData } from "../data/site";
 import Button from "../components/ui/Button.astro";
 import Accordion from "../components/ui/Accordion.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
@@ -20,26 +22,13 @@ import "../styles/pages/marketplace.css";
 const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i.answer) }));
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description}>
-  <Section padding="lg" width="7xl">
-    <div class="mkt-hero">
-      <div class="flex flex-col gap-6">
-        <p class="section-index" data-enter>{c.hero.eyebrow}</p>
-        <h1 class="text-display text-display--hero max-w-[16ch]" data-enter="headline">{c.hero.title}</h1>
-        <p class="lead max-w-xl" data-enter>{c.hero.lead}</p>
-      </div>
-      <div class="mkt-why" data-enter>
-        <h2 class="mkt-why__title">{c.why.title}</h2>
-        <ul class="mkt-why__list">
-          {
-            c.why.items.map((item) => (
-              <li class="mkt-why__item">
-                <Icon name={item.icon} class="mkt-why__icon" aria-hidden="true" />
-                <h3 class="mkt-why__name">{item.title}</h3>
-                <p class="mkt-why__body">{item.body}</p>
-              </li>
-            ))
-          }
-        </ul>
+  <Section padding="md" width="7xl">
+    <div class="page-hero mkt-hero">
+      <div class="page-hero__side" data-enter>
+        <h1 class="page-hero__title page-hero__title--long" data-enter="headline">
+          <HighlightText text={c.hero.title} soften />
+        </h1>
+        <p class="page-hero__lead">{c.hero.lead}</p>
       </div>
     </div>
   </Section>
@@ -67,7 +56,6 @@ const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i
                 data-filter={cat.slug}
                 aria-pressed={cat.slug === "all" ? "true" : "false"}
               >
-                <Icon name={cat.icon} class="mkt-chip__icon" aria-hidden="true" />
                 {cat.label}
               </button>
             ))
@@ -78,10 +66,10 @@ const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i
         </p>
       </div>
 
+      <div class="mkt-board">
       <ul class="mkt-grid">
         {
           cards.map((card) => {
-            const badge = c.badges[card.badgeKey];
             const nameId = `tool-${card.slug}-name`;
             return (
               <li
@@ -95,10 +83,7 @@ const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i
                   <div class="mkt-face mkt-face--front" data-mkt-face="front">
                     <div class="mkt-card__top">
                       <span class="mkt-card__tags">
-                        <span class="mkt-badge" data-badge={card.badgeKey}>
-                          <Icon name={badge.icon} aria-hidden="true" />
-                          {card.badge}
-                        </span>
+                        {card.startHere && <span class="mkt-status mkt-card__start">{c.card.startHere}</span>}
                       </span>
                       <button
                         type="button"
@@ -111,17 +96,14 @@ const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i
                         <span aria-hidden="true">&rarr;</span>
                       </button>
                     </div>
+                    <p class="mkt-card__q">{card.question}</p>
                     <h2 class="mkt-card__name" id={nameId}>{card.name}</h2>
                     <p class="mkt-card__line">{card.short}</p>
-                    <p class="mkt-card__live">
-                      <Icon name="mdi:clock-outline" aria-hidden="true" />
-                      <span>
-                        {c.card.liveInLabel} <strong>{card.liveIn}</strong>{" "}
-                        <span class="mkt-card__typical">{c.card.liveInSuffix}</span>
-                      </span>
-                    </p>
                     <div class="mkt-card__foot">
-                      {card.startHere && <span class="mkt-status mkt-card__start">{c.card.startHere}</span>}
+                      <p class="mkt-card__live">
+                        <span class="sr-only">{c.card.liveInLabel}</span>
+                        <strong>{card.liveIn}</strong>
+                      </p>
                       <a
                         class="btn mkt-add"
                         data-no-cta
@@ -185,8 +167,41 @@ const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i
           })
         }
       </ul>
+      <aside class="receipt mkt-slip" aria-label={c.tray.title}>
+        <div class="receipt__paper ground-lime">
+          <span class="receipt__brand">
+            <Mark class="receipt__mark" />
+            {siteData.name}
+          </span>
+          <span class="receipt__head">{c.tray.title}</span>
+          <p class="mkt-slip__empty" data-stack-empty>{c.tray.empty}</p>
+          <div class="mkt-slip__body" data-stack-tray hidden>
+            <ul class="mkt-slip__lines" data-stack-lines></ul>
+            <p class="receipt__total">
+              <span>{c.tray.totalLabel}</span>
+              <span data-stack-count aria-live="polite"></span>
+            </p>
+            <p class="receipt__row receipt__row--after">
+              <span>{c.tray.priceLabel}</span>
+              <span class="receipt__dots" aria-hidden="true"></span>
+              <span>{c.tray.price}</span>
+            </p>
+            <div class="mkt-slip__actions">
+              <a class="btn" data-variant="primary" data-size="md" href={stackRequestBase} data-stack-request>
+                {c.tray.action}
+                <Icon name="mdi:arrow-right" class="btn__icon" aria-hidden="true" />
+              </a>
+              <button type="button" class="mkt-slip__clear" data-stack-clear data-no-cta>{c.tray.clear}</button>
+            </div>
+          </div>
+          <span class="receipt__bars" aria-hidden="true"></span>
+        </div>
+      </aside>
+      </div>
 
       <p class="mkt-empty" data-filter-empty hidden>{c.filters.empty}</p>
+
+
 
       <div class="mkt-card mkt-card--custom" data-custom-stack={c.customStack.href}>
         <span class="mkt-card__glyph" aria-hidden="true">
@@ -201,73 +216,27 @@ const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i
         </div>
       </div>
 
-      <p class="mkt-paynote">{c.footnote}</p>
-
-      <div class="mkt-tray" data-stack-tray hidden>
-        <p class="mkt-tray__count" data-stack-count aria-live="polite"></p>
-        <div class="mkt-tray__actions">
-          <button type="button" class="btn" data-variant="ghost" data-size="sm" data-stack-clear data-no-cta>
-            <Icon name="mdi:close" aria-hidden="true" />
-            {c.tray.clear}
-          </button>
-          <a class="btn" data-variant="primary" data-size="sm" href={stackRequestBase} data-stack-request>
-            {c.tray.action}
-            <Icon name="mdi:arrow-right" class="btn__icon" aria-hidden="true" />
-          </a>
-        </div>
-      </div>
     </div>
   </Section>
 
   <Section padding="lg" width="7xl">
     <div class="mkt-how">
-      <div class="mkt-how__col">
-        <SectionHeader eyebrow={c.setup.eyebrow} title={c.setup.title} />
-        <ol class="mkt-how__steps">
-          {
-            c.setup.steps.map((step, i) => (
-              <li class="mkt-how__step" data-anim="rise" style={`--i:${i}`}>
-                <span class="mkt-how__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <p>{step}</p>
-              </li>
-            ))
-          }
-        </ol>
-        <div class="mkt-how__faq" data-reveal>
-          <Accordion items={faqItems} />
-        </div>
-      </div>
-      <div class="mkt-how__col">
-        <SectionHeader eyebrow={c.howWeGetPaid.eyebrow} title={c.howWeGetPaid.title} />
-        <ul class="mkt-how__paid">
-          {
-            c.howWeGetPaid.items.map((item, i) => (
-              <li class="mkt-how__item" data-anim="rise" style={`--i:${i}`}>
-                <Icon name={item.icon} class="mkt-how__icon" aria-hidden="true" />
-                <h3 class="mkt-how__title">{item.title}</h3>
-                <p class="mkt-how__body">{item.body}</p>
-              </li>
-            ))
-          }
-        </ul>
+      <h2 class="mkt-how__heading text-3xl" data-reveal>{c.setup.title}</h2>
+      <ol class="mkt-how__steps">
+        {
+          c.setup.steps.map((step, i) => (
+            <li class="mkt-how__step" data-anim="rise" style={`--i:${i}`}>
+              <span class="mkt-how__num" aria-hidden="true">{i + 1}</span>
+              <p>{step}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mkt-how__fees">{c.setup.fees}</p>
+      <div class="mkt-how__faq" data-reveal>
+        <Accordion items={faqItems} />
       </div>
     </div>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <SectionHeader eyebrow={c.vetting.eyebrow} title={c.vetting.title} />
-    <ol class="mkt-vet mt-8">
-      {
-        c.vetting.items.map((v, i) => (
-          <li class="mkt-vet__item" data-anim="rise" style={`--i:${i}`}>
-            <span class="mkt-vet__check" aria-hidden="true">
-              <Icon name="mdi:check" />
-            </span>
-            <h3 class="mkt-vet__title">{v.title}</h3>
-          </li>
-        ))
-      }
-    </ol>
   </Section>
 
   <CtaSection

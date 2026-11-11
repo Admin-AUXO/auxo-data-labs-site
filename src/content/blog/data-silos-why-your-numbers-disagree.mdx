@@ -1,6 +1,6 @@
 ---
 title: "Data silos: why your numbers disagree"
-description: "Data silos are why the deck, the model and the accounts show three revenue numbers. What they are, how to spot them and how to fix them before you roll out AI."
+description: "Data silos are why your deck, model and accounts show three ARR numbers. How to spot them and fix them before a raise or an AI rollout."
 date: 2026-11-05
 author: "Ajay Kumar"
 tags: ["Data foundation", "Data silos", "AI readiness"]
@@ -9,61 +9,53 @@ draft: true
 
 **In short:** a data silo is data held in one tool that other tools cannot see, so the same number differs between them. Fix it by agreeing what each number means, then connecting the core tools into one clean source in your own accounts.
 
-The board deck says revenue was one number. The finance model says another. The accounts say a third.
+The board deck says ARR was one number. The finance model says another. The accounts say a third.
 
-Nobody made an error. Each tool is doing what it was set up to do. That is what data silos look like from the inside.
+Nobody made an error. Each tool is doing what it was set up to do. That is what data silos look like from the inside, and it is what an investor finds in diligence.
 
 ## What a data silo is
 
-A data silo is a set of data held in one tool or team that other tools and teams cannot easily see or reuse. Each silo has its own definitions, so the same word can mean different things in different places.
+A data silo is data held in one tool or team that others cannot easily see or reuse. Each silo has its own definitions. A single source of truth does not mean one giant system. It means each important number has one agreed definition, one owning system and one clean copy that everything else reads from.
 
-A single source of truth does not mean one giant system. It means each important number has one agreed definition, one owning system and one clean copy that everything else reads from.
-
-## How you can tell you have one
+## How to tell you have one
 
 You rarely see a silo directly. You see its symptoms.
 
-- **Numbers differ by tool.** Sales reports revenue when a deal is signed. Finance reports it when an invoice is issued. Both are right by their own rule.
-- **Someone rebuilds the same report each month.** They export from three tools into a spreadsheet and fix it by hand.
-- **Nobody can say where a number came from.** The answer is "ask whoever built that sheet."
+- **Numbers differ by tool.** Sales counts revenue when a deal is signed. Finance counts it when an invoice is issued. Both are right by their own rule.
+- **Someone rebuilds the same report each month,** from three exports and a spreadsheet.
+- **Nobody can say where a number came from.**
 - **Customers appear more than once.** The same company is "Acme", "Acme Ltd" and "ACME Limited" across the CRM, billing and support.
-- **Every meeting starts with a debate about whose figure is right,** not about what to do.
+- **Every meeting starts with a debate about whose figure is right.**
 
 These problems are common. In MuleSoft's 2026 survey, the average organisation ran 957 applications and only 27% of them were connected ([MuleSoft](https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/)). In its 2025 survey, 90% of organisations said data silos caused business obstacles ([Salesforce](https://www.salesforce.com/blog/mulesoft-connectivity-benchmark-2025/)). Both are vendor surveys, so read them as a signal, not a measurement of your business.
 
-## Why AI makes it worse
+## AI makes it worse
 
-People cope with silos. They know the finance number is the one for the investor update and the sales number is the one for the pipeline review.
+People cope with silos. They know the finance number goes in the investor update and the sales number in the pipeline review.
 
-An AI tool does not know that. It reads whatever it can reach and answers with the same calm confidence whether the data is tidy or not. Ask it for revenue and it picks a source. You may never see which one.
-
-Untidy data in gives untidy answers out, at speed, in good prose. That is more dangerous than a wrong spreadsheet, because it sounds right. We cover the definitions side in [Agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
+An AI tool does not know that. Ask it for revenue and it picks a source, and you may never see which. Untidy data in gives untidy answers out, at speed, in good prose. That is more dangerous than a wrong spreadsheet, because it sounds right. See [Agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
 
 ## The fix, in order
 
-The order matters. Skipping ahead is how projects stall.
-
-1. **Agree what each number means.** Start with the 10 to 20 figures that run the business. Write one sentence for each, including what is left out. Pick the decisions they serve first, as in [Start with the decision, not the dashboard](/blog/start-with-the-decision-not-the-dashboard/).
+1. **Agree what each number means.** Start with the 10 to 20 figures that run the business: ARR, burn, runway, churn, pipeline. Write one sentence for each, including what is left out. Start from the decisions they serve: [Start with the decision, not the dashboard](/blog/start-with-the-decision-not-the-dashboard/).
 2. **Pick the system that owns each number.** Revenue is owned by billing, not by the CRM. Headcount is owned by payroll. One owner per number ends most arguments.
-3. **Connect the few core tools into one clean source.** Usually that is the CRM, billing, accounting and one or two operational tools. Pull them into a single store in your own cloud accounts. Match records, such as the three versions of Acme, into one.
-4. **Add data checks.** Simple rules that run every day: totals that must match between billing and accounts, fields that must not be empty, duplicates that must be flagged. A check that fails should tell a person.
-5. **Name an owner.** One person is accountable for the definitions and the checks. Without a name, the foundation decays within a few months.
+3. **Connect the few core tools into one clean source.** Usually the CRM, billing, accounting and one or two operational tools, pulled into a single store in your own cloud accounts. Match records, such as the three versions of Acme, into one.
+4. **Add data checks.** Rules that run every day: totals that must match between billing and accounts, fields that must not be empty, duplicates that get flagged. A failed check should tell a person.
+5. **Name an owner.** One person is accountable for the definitions and the checks.
 
-You own all of it. The data sits in your cloud accounts, under your logins, and you can read it, move it or switch it off. A data foundation you cannot inspect is another silo.
+You own all of it. The data sits in your cloud accounts, under your logins. A foundation you cannot inspect is another silo.
+
+If the first job is a board deck or data room that ties out, the [Investor metrics stack](/marketplace/) covers it.
 
 ## What not to do
 
-Do not start with a big warehouse project.
-
-It is tempting. A warehouse feels like progress, and vendors will happily sell you one. But if the definitions are not agreed, a warehouse only collects your disagreements in one place. You get the same three revenue numbers, now in a faster system.
-
-Do not try to connect every tool either. Most of the value sits in a handful of them. Add more once the first set is clean and trusted.
+Do not start with a big warehouse project. Without agreed definitions, it only collects your disagreements in one place. Do not connect every tool either. Most of the value sits in a handful. Add more once the first set is trusted.
 
 ## How long a first pass takes
 
-It depends on how many tools are involved and how messy the history is. In plain terms, the first pass is measured in weeks when the scope is held to the few core tools and the key numbers.
+It depends on how many tools are involved and how messy the history is. With the scope held to the core tools and key numbers, the first pass is measured in weeks.
 
-Agreeing definitions is usually the slowest part, because it needs the people who own the numbers in one room. The technical connection is often quicker than that conversation. A realistic first pass gets you one clean source for the numbers that matter, with checks and an owner. It does not finish the job for every tool you have. It gives you a base you can add to.
+Agreeing definitions is usually the slowest part, because it needs the people who own the numbers in one room. The technical connection is often quicker than that conversation.
 
 ## Where to start
 

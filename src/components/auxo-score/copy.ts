@@ -69,13 +69,13 @@ export const SCORE_COPY: ScoreCopy = {
     label: "Work email",
     button: "See my result",
     newsletter: "Send me the AUXO newsletter every 2 weeks.",
-    consent: "We'll email your result and may follow up once. No spam.",
+    consent: "We'll email your result, then up to three follow-ups over the next week.",
   },
   result: {
     next: {
       title: "Next step",
       apply: {
-        what: "30 minutes with a founder. Bring the one number you don't trust. No charge.",
+        what: "A 30-minute call. Bring the number you doubt. No charge.",
         text: "Apply for a Founder review",
         href: "/apply/",
       },

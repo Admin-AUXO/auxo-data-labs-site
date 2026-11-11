@@ -21,7 +21,7 @@ const faqItems = about.faq.items.map((item) => ({
   <AuxoScore />
 
   <Section padding="lg" width="7xl">
-    <SectionHeader eyebrow={about.eyebrow} title={about.title} subtitle={about.lead} />
+    <SectionHeader title={about.title} subtitle={about.lead} />
     <ol class="method mt-8">
       {
         howItWorksContent.method.dimensions.map((d, i) => (
@@ -37,7 +37,7 @@ const faqItems = about.faq.items.map((item) => ({
 
   <Section padding="lg" width="7xl">
     <div class="faq-split">
-      <SectionHeader eyebrow={about.faq.eyebrow} title={about.faq.title} />
+      <SectionHeader title={about.faq.title} />
       <div class="faq-split__list">
         <Accordion items={faqItems} openFirst />
       </div>

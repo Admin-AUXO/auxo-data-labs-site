@@ -17,6 +17,6 @@ export const linksContent: LinksContent = {
     { text: "Apply for a Founder review", href: "/apply/" },
     { text: "The model is the easy part", href: "/blog/the-model-is-the-easy-part/" },
     { text: "Your AI assistant is not the hard part", href: "/blog/your-ai-assistant-is-not-the-hard-part/" },
-    { text: "Stacks: tool bundles", href: "/marketplace/" },
+    { text: "Stacks: six ways to get numbers you can trust", href: "/marketplace/" },
   ],
 };

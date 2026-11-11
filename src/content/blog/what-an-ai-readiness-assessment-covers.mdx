@@ -1,6 +1,6 @@
 ---
 title: "What an AI readiness assessment covers"
-description: "What an AI readiness assessment actually checks, what it is not, and how to run a quick one yourself in an afternoon before you buy any AI tool."
+description: "What an AI readiness assessment checks, what it leaves out, and a ten-question version you can run in an afternoon before you buy any AI tool."
 date: 2026-11-05
 author: "Ajay Kumar"
 tags: ["AI Readiness", "Data Readiness", "Checklist"]
@@ -11,42 +11,40 @@ draft: true
 
 You want to use AI on real work. Someone says you should run an AI readiness assessment first. Nobody explains what that means.
 
-It is a fair thing to be unsure about. Here is what the check looks at, what it leaves out, and how to do a quick version yourself.
+Here is what it looks at, what it leaves out, and how to run a quick version yourself.
 
 ## What the check looks at
 
-An AI readiness assessment asks one question: can an AI tool read your data and get the right answer? Most of the work is data readiness for AI. We use five checks, and each has a plain test.
+An AI readiness assessment asks one question: can an AI tool read your data and get the right answer? We use five checks.
 
-- **Accurate.** The number matches reality. Example: the revenue figure in your CRM matches the invoices in your accounts.
-- **Complete.** The fields you rely on are filled in. Example: if a tool must sort leads by country, most leads need a country.
-- **Consistent.** One word means one thing. Example: "active customer" is the same in sales, finance and operations. We cover this in [agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
-- **Timely.** The data is fresh enough for the job. Example: a stock report that updates weekly cannot answer a question about today.
-- **Trusted.** People use it without a side spreadsheet. Example: if your finance lead rebuilds the numbers by hand every month, the system is not trusted yet.
+- **Accurate.** The number matches reality. The ARR in your CRM matches the invoices in your accounts.
+- **Complete.** The fields you rely on are filled in. If a tool must sort leads by country, most leads need a country.
+- **Consistent.** One word means one thing. "Active customer" is the same in sales, finance and operations. See [agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
+- **Timely.** The data is fresh enough for the job. A pipeline report that updates weekly cannot answer a question about today.
+- **Trusted.** People use it without a side spreadsheet. If your finance lead rebuilds the numbers by hand every month, the system is not trusted yet.
 
-The same lens covers the rest of the setup: who owns each data source, where the data sits, what the tool may touch, and who approves its work.
+The same lens covers who owns each source, what the tool may touch and who approves its work.
 
 ## What it is not
 
-Be clear on the limits, so you buy the right thing.
-
 - **Not a security review.** It notes who can see what. It does not test your defences.
 - **Not a compliance certificate.** It does not tell you that you meet a standard. For risk management, the voluntary [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) is a useful reference.
-- **Not a vendor sales pitch.** A fair check can end with "you do not need this tool yet". If it only ever ends with a product, it was not an assessment.
+- **Not a purchase decision made for you.** A good check can end with "you do not need this tool yet".
 
 ## Why it matters
 
 Gartner reports that [63% of organisations](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) either lack the right data management practices for AI or are unsure they have them. It also predicts that organisations will abandon 60% of AI projects not supported by AI-ready data.
 
-The model is rarely the weak point. We make the same case in [the model is the easy part](/blog/the-model-is-the-easy-part/).
+The model is rarely the weak point. See [the model is the easy part](/blog/the-model-is-the-easy-part/).
 
 ## Run a quick one in an afternoon
 
-Pick one use case. Not the whole company. For example: an assistant that drafts replies to supplier invoices, or one that sorts inbound leads. Then answer these.
+Pick one use case, not the whole company. For example: an assistant that sorts inbound leads, or one that drafts the monthly investor update. Then answer these.
 
-1. Which systems hold the data this task reads? List them.
+1. Which systems hold the data this task reads?
 2. Who owns each one, by name?
 3. Pull 20 real records. Are the key fields filled in?
-4. Check five of those records against a second source. Do they match?
+4. Check five of them against a second source. Do they match?
 5. Do two teams define the main terms differently?
 6. How old is the data when the tool reads it? Is that fast enough?
 7. Does anyone keep a private copy because they do not trust the system?
@@ -54,28 +52,20 @@ Pick one use case. Not the whole company. For example: an assistant that drafts 
 9. Who approves its work before anything goes out?
 10. If it gets one wrong, can you see what it read and why?
 
-Write each answer down. One line is enough.
+Write each answer down in one line.
 
 ## What good and bad answers look like
 
-A good answer is specific. "The CRM, owned by the head of sales. 19 of 20 records have a country. Two systems match on revenue." You can act on that.
-
-A bad answer is vague or missing. "Probably the shared drive." "We think it is mostly right." "Nobody owns it." A bad answer is not a failure. It is the finding, and it tells you where the risk sits.
-
-Watch for the answer "it depends who you ask". That is a consistency problem, and it is the most common one.
+A good answer is specific: "The CRM, owned by the head of sales. 19 of 20 records have a country." A bad answer is vague or missing: "Probably the shared drive." "Nobody owns it." That is not a failure. It is the finding. Watch for "it depends who you ask". That is a consistency problem, and the most common one.
 
 ## What to fix first
-
-Fix in this order.
 
 1. **Name an owner** for each data source the use case needs. Nothing else sticks without this.
 2. **Write down the five to ten terms** the task depends on, with one sentence each.
 3. **Fill the gaps** in the few fields the task reads. Ignore the rest.
-4. **Set the approval step.** Decide which outputs a person checks before they go out. A person approves anything sent, posted, paid or decided.
+4. **Set the approval step.** A person approves anything sent, posted, paid or decided.
 5. **Only then** choose the tool.
-
-Keep it small. One use case with clean data beats ten with messy data.
 
 ## Where to start
 
-Our own version of this check is the AUXO Score. [Take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+Our version of this check is the AUXO Score. [Take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.

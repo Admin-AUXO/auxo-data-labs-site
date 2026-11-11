@@ -1,4 +1,5 @@
 import { siteData } from "./site";
+import type { ReceiptData } from "./pricing";
 import { marketplaceCards, retiredSlugs } from "./marketplace";
 
 export interface ContactField {
@@ -14,14 +15,6 @@ export interface ContactField {
   autocomplete?: string;
 }
 
-export interface ContactDetail {
-  icon: string;
-  label: string;
-  value: string;
-  href?: string;
-  external?: boolean;
-}
-
 export interface ContactTool {
   slug: string;
   name: string;
@@ -33,16 +26,11 @@ export interface ContactContent {
     description: string;
   };
   hero: {
-    eyebrow: string;
     title: string;
     titleHighlight: string | string[];
     lead: string;
-    points: string[];
+    receipt: ReceiptData;
     spots: { left: string; full: string };
-  };
-  details: {
-    title: string;
-    items: ContactDetail[];
   };
   form: {
     title: string;
@@ -72,14 +60,11 @@ export interface ContactContent {
     fallback: string;
   };
   nextSteps: {
-    eyebrow: string;
     title: string;
     titleHighlight?: string | string[];
-    subtitle: string;
     steps: { title: string; desc: string }[];
   };
   faq: {
-    eyebrow: string;
     title: string;
     titleHighlight?: string | string[];
     description: string;
@@ -93,10 +78,9 @@ export const contactContent: ContactContent = {
   meta: {
     title: "Apply for a Founder review",
     description:
-      "A 30-minute call with an AUXO founder, by application. Bring the one number you don't trust. Written next steps within 3 business days.",
+      "A 30-minute call, by application. Bring the one number you don't trust. Written next steps within 3 business days.",
   },
   hero: {
-    eyebrow: "Founder review",
     title: "Bring the number you doubt.",
     titleHighlight: "doubt",
     lead: "A 30-minute call, by application. Leave knowing what to fix first.",
@@ -104,33 +88,16 @@ export const contactContent: ContactContent = {
       left: "{left} of {cap} places left this week.",
       full: "This week is full. Apply now and we will offer you a slot next week.",
     },
-    points: [
-      "Written next steps within 3 business days.",
-      "Limited places each week. We read every application.",
-    ],
-  },
-  details: {
-    title: "Reach us",
-    items: [
-      {
-        icon: "mdi:email-outline",
-        label: "Email",
-        value: siteData.email,
-        href: `mailto:${siteData.email}`,
-      },
-      {
-        icon: "mdi:map-marker-outline",
-        label: "Location",
-        value: `${siteData.address.city}, ${siteData.address.country}`,
-      },
-      {
-        icon: "mdi:linkedin",
-        label: "LinkedIn",
-        value: "AUXO Data Labs",
-        href: siteData.social.linkedin,
-        external: true,
-      },
-    ],
+    receipt: {
+      head: "What you get",
+      rows: [
+        { item: "30-minute call", price: "No charge" },
+        { item: "Written next steps", price: "3 business days" },
+        { item: "NDA", price: "On request" },
+      ],
+      totalLabel: "To apply",
+      total: "5 questions",
+    },
   },
   form: {
     title: "Your application",
@@ -207,14 +174,12 @@ export const contactContent: ContactContent = {
     fallback: "Calendar not loading? Open the booking page",
   },
   nextSteps: {
-    eyebrow: "Next steps",
     title: "What happens next",
     titleHighlight: "next",
-    subtitle: "From application to a clear first move.",
     steps: [
       {
         title: "You apply and pick a time",
-        desc: "Five questions, then a 30-minute slot. A founder replies within one business day.",
+        desc: "Five questions, then a 30-minute slot. We reply within one business day.",
       },
       {
         title: "The call",
@@ -222,12 +187,11 @@ export const contactContent: ContactContent = {
       },
       {
         title: "Next steps in writing",
-        desc: "Within 3 business days. If there is work to do, a fixed price follows in writing. If we're not the right fit, we say so.",
+        desc: "Within 3 business days. If there is work to do, we scope it with you and put the price in writing. If we're not the right fit, we say so.",
       },
     ],
   },
   faq: {
-    eyebrow: "FAQ",
     title: "Before you apply",
     titleHighlight: "apply",
     description: "The questions founders and team leads ask us first.",
@@ -235,12 +199,12 @@ export const contactContent: ContactContent = {
       {
         question: "Who is the Founder review for?",
         answer:
-          "Any company that wants an honest read of its data before spending on AI, from seed-stage startups to large organisations. One per company.",
+          "Any company that wants a clear read of its data before spending on AI, from seed-stage startups to large organisations. One per company.",
       },
       {
         question: "What does it cost?",
         answer:
-          "No charge for the AUXO Score or the Founder review. If there is work to do, each phase has a fixed price, agreed in writing before we start.",
+          "No charge for the AUXO Score or the Founder review. If there is work to do, we scope each phase with you and agree the price in writing before we start.",
       },
       {
         question: "Why is it an application?",
@@ -255,12 +219,12 @@ export const contactContent: ContactContent = {
       {
         question: "What if our data is messy, scattered or incomplete?",
         answer:
-          "That's normal, not a blocker. You don't need to tidy anything before we talk. If there isn't enough data yet, we'll say so and suggest what to set up first.",
+          "That's normal. You don't need to tidy anything before we talk. If there isn't enough data yet, we'll say so and suggest what to set up first.",
       },
       {
-        question: "What happens after you hand over? Are we stuck with you?",
+        question: "What happens after you hand over?",
         answer:
-          "No. Every build ends with a system your team owns, simple guides and training. Upkeep is optional and monthly. Stop with 30 days' notice and keep everything.",
+          "Every build ends with a system your team owns, guides and training. Upkeep is optional and monthly. Stop with 30 days' notice and keep everything.",
       },
     ],
   },

@@ -1,5 +1,5 @@
 @layer base {
-  :where(h1, h2, h3, h4, h5, h6) {
+  h1, h2, h3, h4, h5, h6 {
     color: var(--foreground);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -7,31 +7,31 @@
     text-wrap: balance;
   }
 
-  :where(h1, h2, h3) {
+  h1, h2, h3 {
     font-family: var(--font-brand);
     font-optical-sizing: auto;
     font-weight: var(--font-weight-display-strong);
   }
 
-  :where(h1) {
+  h1 {
     font-size: var(--text-5xl);
     letter-spacing: var(--tracking-display-4xl);
     line-height: var(--text-5xl--line-height);
   }
 
-  :where(h2) {
+  h2 {
     font-size: var(--text-3xl);
     letter-spacing: var(--tracking-display-3xl);
     line-height: var(--text-3xl--line-height);
   }
 
-  :where(h3) {
+  h3 {
     font-size: var(--text-2xl);
     letter-spacing: var(--tracking-display-2xl);
     line-height: var(--text-2xl--line-height);
   }
 
-  :where(h4) {
+  h4 {
     font-size: var(--text-xl);
     letter-spacing: var(--tracking-display-xl);
     line-height: var(--text-xl--line-height);
@@ -66,10 +66,10 @@
   }
 
   .text-display--hero {
-    font-size: clamp(2.75rem, 0.9rem + 5vw, 5.5rem);
+    font-size: clamp(2.5rem, 1.1rem + 4.4vw, 4.5rem);
     font-weight: 800;
-    letter-spacing: -0.045em;
-    line-height: 1;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
   }
 
   .text-display--5xl {

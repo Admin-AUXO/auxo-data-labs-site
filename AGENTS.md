@@ -33,16 +33,23 @@ Audience: sceptical founders, finance leads, operators and team heads at startup
 - Motion is on by default, and off by default for visitors whose OS asks for reduced motion. The footer toggle overrides both via the footer toggle (persisted in localStorage via `src/scripts/core/motion.ts`). Rich motion only runs under `html[data-motion="on"]` — gate any new animation behind it and read `motionEnabled()` in JS.
 - Push analytics events with `track()` from `src/scripts/analytics/track.ts` (AUXO Score events go through `scoreEvent()` in `src/lib/auxo-score/analytics.ts`). A new event needs a trigger and tag published in GTM `GTM-5TKFHDH5` before it reaches GA4.
 - `public/` bypasses the build pipeline — keep it standards-based and self-contained.
-- Section pattern: eyebrow + heading + lead stacked (`SectionHeader`) over a full-width grid. Headings are two-tone: the second sentence is muted via `HighlightText soften`; `.hl-accent` is the accent colour. The home hero is text-only.
+- Section pattern: heading + lead stacked (`SectionHeader`) over a full-width grid. No eyebrow label above a heading. Headings are two-tone: the second sentence is lighter via `HighlightText soften`; `.hl-accent` is the accent colour. The home hero is text-only. Inner page heroes use `.page-hero` (title, then lead and buttons).
 - `Accordion` hides item numbers when it has three items or fewer.
+- Two grounds: night (default) and AUXO green (`Section background="accent"`, or `.ground-lime` on a card; `.ground-night` resets a dark panel inside green). No white or light sections. At most one green band per page, never directly above the closing `CtaSection`, which is itself a green panel.
+- Show the thing instead of describing it: `Specimen` is a labelled example table (data in `src/data/how-it-works.ts`) and `Receipt` is the green receipt (data shape `ReceiptData` in `src/data/pricing.ts`). No before-and-after pairs: the home band shows the questions an investor, board, auditor and team ask (`.asks`, CSS-only tabs). Examples carry no made-up figures, so they need no "Example" label; if a figure is ever invented, label it and never present it as a client result.
+- Type scale: hero h1 up to 4.5rem (home 5.5rem, How it works 5rem); section h2 `--text-3xl`; list and card titles `--text-xl` to `--text-3xl`; body `--text-base`, never below `--text-sm` for reading text. Headings h1 to h3 are weight 800 from `src/styles/base/typography.css`; the lighter second sentence is 500. Mono (`--font-mono`) is for data only (example tables, receipts, counters); labels are sans, sentence case.
+- Icons only on controls and functional links. No decorative icons, shapes in headings or oversized wordmarks. Hero titles stay under about 4.5rem.
+- How it works pins its three step cards as a stack (`.stack` / `.step`, CSS sticky). Each card must fit the screen when pinned: check at 1440x900 and 1440x740 after changing card content.
 
 ## Content
 
 - One job per page. No generic awareness copy.
 - Lead with the buyer's problem, deliverables, and proof — not vision language.
-- Write for skimmers: headings and first sentences carry the argument.
+- Write for skimmers: headings and first sentences carry the argument. Say each thing once per page; do not add copy to fill a layout.
 - Plain language, no jargon, no invented metrics.
+- A Founder review comes first for every company, and every primary button says so. Never describe a different starting point by company size; say what follows the review instead. Do not use this as a headline ("Everyone starts with...").
 - Analyze has three depths, named the same everywhere: **AUXO Score** (self-check, anyone), **Founder review** (30-minute founder call by application, every segment, 10 a week, written next steps, no charge) and **Deep-dive audit** (paid systems review). Large organisations start with **One unit first**. Every AUXO Score taker sees the same report. No public prices: "a fixed price per phase, in writing". Don't add "free" as filler.
+- Money is said quietly. No "Paid" or "Fixed price" badges: a lime dot means no charge and an amber dot means a price we agree in writing first (`--accent` / `--accent-2`), with wording such as "Scoped with you". Keep one plain sentence about cost per page. Write as a collaborator: "with you", "with your team", "your finance lead signs off".
 - Blog posts show no author names.
 - Two CTAs only: "Apply for a Founder review" (primary, `/apply/`) and "Take the AUXO Score". Cold content (blogs, teaser) carries the Score only.
 

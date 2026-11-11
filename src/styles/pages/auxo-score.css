@@ -36,7 +36,7 @@
 .score__eyebrow {
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -78,7 +78,7 @@
   border-radius: 999px;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 0.8125rem;
   letter-spacing: 0.06em;
   padding: 5px 12px;
   text-transform: uppercase;
@@ -109,7 +109,7 @@
 
 .score__facts small {
   color: var(--subtle);
-  font-size: 12px;
+  font-size: 0.8125rem;
 }
 
 .score__resume {
@@ -192,7 +192,7 @@
 
 .score__note {
   color: var(--subtle);
-  font-size: 13px;
+  font-size: 0.875rem;
   margin: 0;
 }
 
@@ -232,7 +232,7 @@
   border-radius: 999px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   padding: 5px 12px;
@@ -241,7 +241,7 @@
 .score__count {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
   justify-self: end;
 }
@@ -307,7 +307,7 @@
   color: var(--score-lime-ink);
   display: grid;
   font-family: var(--font-logo);
-  font-size: 13px;
+  font-size: 0.875rem;
   font-weight: 800;
   inline-size: 26px;
   inset-block-start: 0;
@@ -352,7 +352,7 @@
   color: var(--muted);
   cursor: pointer;
   font: inherit;
-  font-size: 13px;
+  font-size: 0.875rem;
   min-block-size: 44px;
   padding: 7px 16px;
 }
@@ -384,7 +384,7 @@
 .score__hint {
   color: var(--subtle);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.8rem;
   text-align: center;
 }
 
@@ -544,7 +544,7 @@
 .score__big small {
   color: var(--subtle);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.08em;
   margin-block-start: 4px;
@@ -564,7 +564,7 @@
   border-radius: 4px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   padding: 4px 10px;
@@ -595,7 +595,7 @@
 .score__panel-title {
   color: var(--subtle);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.8rem;
   letter-spacing: 0.12em;
   margin: 0 0 8px;
   text-transform: uppercase;
@@ -659,7 +659,7 @@
   color: var(--subtle);
   display: flex;
   flex-wrap: wrap;
-  font-size: 12px;
+  font-size: 0.8125rem;
   gap: 6px 16px;
   list-style: none;
   margin: 12px 0 0;
@@ -689,7 +689,7 @@
   color: var(--accent-2);
   display: block;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 0.875rem;
   letter-spacing: 0.08em;
   margin-block-end: 4px;
   text-transform: uppercase;
@@ -717,7 +717,7 @@
 
 .score__mail label {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -753,7 +753,7 @@
 
 .score__consent {
   color: var(--subtle);
-  font-size: 12px;
+  font-size: 0.8125rem;
   margin: 0;
 }
 
@@ -765,7 +765,7 @@
 
 .score__msg {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 0.875rem;
   margin: 0;
   min-block-size: 1.2em;
 }
@@ -780,7 +780,7 @@
   border-radius: 4px;
   color: var(--accent-2);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   padding: 5px 10px;
@@ -799,7 +799,7 @@ html[data-motion="off"] .score *::after {
   }
 
   .score__sub {
-    font-size: 12px;
+    font-size: 0.8125rem;
   }
 }
 

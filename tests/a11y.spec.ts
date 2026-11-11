@@ -18,7 +18,7 @@ const routes = [
   "/how-it-works/",
   "/pricing/",
   "/marketplace/",
-  "/marketplace/?category=finance",
+  "/marketplace/?category=numbers",
   "/blog/",
   ...blogPosts,
   "/auxo-score/",

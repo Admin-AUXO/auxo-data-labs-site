@@ -41,7 +41,7 @@ ${r.good ? `<p style="margin:0;color:#555"><b style="color:#0a0a0a">What good lo
 <h2 style="font-size:18px;margin:32px 0 8px;color:#0a0a0a">Want a second pair of eyes?</h2>
 <p style="margin:0">Apply for a Founder review: 30 minutes with Vignesh or Ajay. Bring the one number you don't trust, and leave with what to fix first. No charge.</p>
 ${button(apply, "Apply for a Founder review")}
-<p style="margin:0;color:#555">Questions about your result? Just reply to this email. A real person reads every reply.</p>`;
+<p style="margin:0;color:#555">Questions about your result? Reply to this email. We read every reply.</p>`;
   return {
     subject: `Your AUXO Score: ${r.total}/100 (${r.band})`,
     preview: r.weakest ? `Your first fix is ${r.weakest}. Here's where to start.` : "Your result and where to start.",
@@ -55,7 +55,7 @@ export function applicationConfirmation(a: { name?: string }) {
 <p style="margin:0 0 14px">Here's what happens next:</p>
 <ol style="margin:0 0 18px;padding-left:20px">
 <li style="margin:0 0 8px"><b>Pick a time</b> if you haven't already. Choose any open 30-minute slot.</li>
-<li style="margin:0 0 8px"><b>We read your application</b> before the call. A founder replies personally within one business day. If it isn't a fit, we'll say so.</li>
+<li style="margin:0 0 8px"><b>We read your application</b> before the call. We reply within one business day. If it isn't a fit, we'll say so.</li>
 <li style="margin:0 0 8px"><b>The call:</b> we learn your business, your customers and your data, then propose a path. No price on the call.</li>
 <li style="margin:0"><b>Next steps in writing</b> within 3 business days, whether or not you work with us.</li>
 </ol>
@@ -107,7 +107,7 @@ ${nurtureClose(n, "technical")}`;
     return { subject: "The checklist we use before building any agent", preview: "Data, systems, rules, approvals, upkeep.", html: shell("Data, systems, rules, approvals, upkeep.", inner) };
   }
   const inner = `<p style="margin:0 0 14px">Hi,</p>
-<p style="margin:0 0 14px">Here's what actually happens on a Founder review.</p>
+<p style="margin:0 0 14px">Here's what happens on a Founder review.</p>
 <ol style="margin:0 0 14px;padding-left:20px">
 <li style="margin:0 0 8px"><b>You apply.</b> Five questions, including the one number you don't trust today. We read every application before the call.</li>
 <li style="margin:0 0 8px"><b>We talk for 30 minutes.</b> Vignesh or Ajay learns how your business runs, where your data lives and where it lets you down. No slides, no pitch, no price on the call.</li>
@@ -116,5 +116,5 @@ ${nurtureClose(n, "technical")}`;
 </ol>
 ${nurtureClose(n, "founder-review")}
 <p style="margin:0;color:#555">This is the last email about your Score result. After this, you'll only hear from us if you asked for the newsletter.</p>`;
-  return { subject: "What happens on a Founder review", preview: "30 minutes, written next steps, no pitch.", html: shell("30 minutes, written next steps, no pitch.", inner) };
+  return { subject: "What happens on a Founder review", preview: "30 minutes, then written next steps.", html: shell("30 minutes, then written next steps.", inner) };
 }

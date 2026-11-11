@@ -6,7 +6,6 @@ interface Link {
 }
 
 interface SectionIntro {
-  eyebrow: string;
   title: string;
   lead: string;
 }
@@ -20,13 +19,6 @@ interface HomePillar {
   letter: "A" | "U" | "X" | "O";
   title: string;
   desc: string;
-}
-
-interface HomeLadderCard {
-  icon: string;
-  title: string;
-  desc: string;
-  href: string;
 }
 
 interface HomeSegment {
@@ -74,8 +66,13 @@ interface HomeContent {
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  ladder: Omit<SectionIntro, "lead">;
-  cards: HomeLadderCard[];
+  compare: {
+    title: string;
+    lead: string;
+    groupLabel: string;
+    asks: { who: string; when: string; question: string; answer: string }[];
+    link: Link;
+  };
   segments: SectionIntro & {
     listLabel: string;
     rows: HomeSegment[];
@@ -117,7 +114,7 @@ export const homeContent: HomeContent = {
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   proof: {
-    text: "Ex-IBM delivery across the GCC. Data and cloud work for Fortune 500 companies.",
+    text: "Two founders. One from business, one from data.",
     link: { text: "Meet the founders", href: "/about/#team" },
   },
   score: {
@@ -140,7 +137,6 @@ export const homeContent: HomeContent = {
     ],
   },
   pillarsHeader: {
-    eyebrow: "What we fix",
     title: "Four fixes for numbers you can stand behind.",
     lead: "A deck, a model and accounts that disagree cost you in diligence.",
   },
@@ -167,45 +163,52 @@ export const homeContent: HomeContent = {
       desc: "Simple rules for your data and AI, written down before diligence asks.",
     },
   ],
-  ladder: {
-    eyebrow: "How it works",
-    title: "One path. Score, review, audit, build.",
+  compare: {
+    title: "Who asks about your numbers next?",
+    lead: "Each of them asks a different question. One set of numbers answers all four.",
+    groupLabel: "Who is asking",
+    asks: [
+      {
+        who: "Investor",
+        when: "In diligence",
+        question: "Does the ARR in your deck match your accounts?",
+        answer: "Deck, model and accounts read from one source, so the answer is yes.",
+      },
+      {
+        who: "Board",
+        when: "Every quarter",
+        question: "Why did runway change since last time?",
+        answer: "The board pack and the model use the same figures, so the change has one explanation.",
+      },
+      {
+        who: "Auditor",
+        when: "At year end",
+        question: "Where does this number come from?",
+        answer: "Each figure traces back to billing or the accounts, with the definition written down.",
+      },
+      {
+        who: "Your team",
+        when: "Every week",
+        question: "Which dashboard do I trust?",
+        answer: "One definition per metric, signed off by your finance lead.",
+      },
+    ],
+    link: { text: "See how it works", href: "/how-it-works/" },
   },
-  cards: [
-    {
-      icon: "mdi:magnify",
-      title: "Analyze",
-      desc: "The AUXO Score, a Founder review and a Deep-dive audit. You get a written read of your numbers.",
-      href: "/how-it-works/#analyze",
-    },
-    {
-      icon: "mdi:lightbulb-outline",
-      title: "Advise",
-      desc: "A plan and a short list of tools that fit. Your team signs off.",
-      href: "/how-it-works/#advise",
-    },
-    {
-      icon: "mdi:hammer-wrench",
-      title: "Build",
-      desc: "One set of numbers, set up in your accounts and handed over.",
-      href: "/how-it-works/#build",
-    },
-  ],
   segments: {
-    eyebrow: "Ways in",
-    title: "Start where you are.",
-    lead: "Three ways in. A fixed price per phase, in writing.",
+    title: "Who we work with.",
+    lead: "A Founder review comes first. After it, we scope the work with you and agree the price in writing.",
     listLabel: "Ways in",
     rows: [
       {
         segment: "Startups, seed to Series B",
-        offer: "Founder review",
+        offer: "One set of numbers",
         line: "A plan to get the numbers investors and your board ask for.",
         href: "/pricing/#startups",
       },
       {
         segment: "Growing companies, 50–500 people",
-        offer: "Deep-dive audit",
+        offer: "A Deep-dive audit",
         line: "What to fix, what to build first and what not to buy.",
         href: "/pricing/#growing",
       },
@@ -218,21 +221,18 @@ export const homeContent: HomeContent = {
     ],
   },
   marketplace: {
-    eyebrow: "Stacks",
-    title: "Tool stacks, set up on your data.",
-    lead: "Bundles of vetted tools, set up in your accounts. You buy direct and own them.",
-    chipsLabel: "Stack categories",
+    title: "Six ways to get numbers you can trust.",
+    lead: "Work on your billing, CRM and accounts data, built with your team in your own accounts.",
+    chipsLabel: "Stack types",
     chipBase: "/marketplace/",
     chips: [
-      { label: "AI assistants", slug: "foundation-ai" },
-      { label: "Finance", slug: "finance" },
-      { label: "Operations", slug: "operations" },
-      { label: "Hiring", slug: "hiring" },
+      { label: "Numbers", slug: "numbers" },
+      { label: "Checks", slug: "proof" },
+      { label: "AI and automation", slug: "work" },
     ],
     cta: { text: "Browse the stacks", href: "/marketplace/" },
   },
   blog: {
-    eyebrow: "From the blog",
     title: "Why do the numbers in the deck and the model never match?",
     lead: "Investor-ready numbers need clean data and clear rules. The AI tool is rarely the hard part.",
     angles: [

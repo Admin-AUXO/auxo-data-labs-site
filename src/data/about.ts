@@ -1,7 +1,6 @@
 import { siteData } from "./site";
 
-export interface AboutBelief {
-  icon: string;
+export interface AboutCommitment {
   title: string;
   desc: string;
 }
@@ -11,15 +10,10 @@ export interface AboutFact {
   value: string;
 }
 
-export interface AboutEngagementPrinciple {
-  icon: string;
-  title: string;
-  desc: string;
-}
-
 export interface Founder {
   name: string;
   role: string;
+  drive: string;
   lines: string[];
   linkedin: string;
 }
@@ -30,33 +24,22 @@ export interface AboutContent {
     description: string;
   };
   hero: {
-    eyebrow: string;
     title: string;
-    titleHighlight: string | string[];
     lead: string;
     primaryCta: { text: string; href: string };
     secondaryCta: { text: string; href: string };
     facts: AboutFact[];
   };
-  beliefs: {
-    eyebrow: string;
+  commitments: {
     title: string;
-    lead: string;
-    items: AboutBelief[];
+    items: AboutCommitment[];
+    note: string;
   };
   team: {
-    eyebrow: string;
     title: string;
-    lead: string;
+    story: string;
     linkLabel: string;
     founders: Founder[];
-  };
-  engagement: {
-    eyebrow: string;
-    title: string;
-    lead: string;
-    reassurance: string;
-    principles: AboutEngagementPrinciple[];
   };
   cta: {
     title: string;
@@ -73,12 +56,10 @@ export const aboutContent: AboutContent = {
   meta: {
     title: "About AUXO: data and AI, yours to keep",
     description:
-      "AUXO Data Labs is a data and AI firm in Dubai for funded companies, working in the UAE, the US and Europe. A founder approves every engagement. Clients own what we build.",
+      "AUXO Data Labs is a data and AI firm in Dubai for funded companies, working in the UAE, the US and Europe. Clients own what we build.",
   },
   hero: {
-    eyebrow: "About",
     title: "Data first. Then AI.",
-    titleHighlight: "Then AI",
     lead: "We get your numbers ready for investors and the board, set up the AI, and hand it over.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
@@ -89,79 +70,46 @@ export const aboutContent: AboutContent = {
       { label: "Built for", value: "Funded startups and scale-ups, growing companies and large organisations" },
     ],
   },
-  beliefs: {
-    eyebrow: "Principles",
-    title: "What we believe",
-    lead: "Four things shape how we work.",
+  commitments: {
+    title: "What you can hold us to.",
     items: [
+      { title: "Built to run", desc: "Systems your team uses every day, built to keep running." },
+      { title: "Yours to keep", desc: "You own everything we build, in your name. No lock-in." },
+      { title: "A person approves", desc: "AI does the groundwork. A person signs off on what goes out." },
+      { title: "Clear advice", desc: "We say what fits, and when not to build." },
       {
-        icon: "mdi:cog-outline",
-        title: "Built to run",
-        desc: "Systems your team uses every day, built to keep running.",
+        title: "Careful with your data",
+        desc: "Your name, numbers and plans stay between us. We take only what the work needs and never reuse or resell it.",
       },
-      {
-        icon: "mdi:key-outline",
-        title: "Yours to keep",
-        desc: "You own everything we build, and it's all in your name. No lock-in.",
-      },
-      {
-        icon: "mdi:account-check-outline",
-        title: "A person approves",
-        desc: "AI does the groundwork. A person signs off on what goes out.",
-      },
-      {
-        icon: "mdi:message-text-outline",
-        title: "Plain and honest",
-        desc: "We're clear about what fits. We'll tell you when not to build.",
-      },
+      { title: "Open about money", desc: "We tell you how we get paid, including any referral fee, before you commit." },
     ],
+    note: "We are happy to sign an NDA before we begin.",
   },
   team: {
-    eyebrow: "Team",
-    title: "The founding team",
-    lead: "The two people you work with, from first call to handover.",
+    title: "One of us came from business. One from data.",
+    story:
+      "We kept meeting the same problem from both sides: decisions made on numbers nobody fully trusted. AUXO is what we built to fix it.",
     linkLabel: "Connect on LinkedIn",
     founders: [
       {
         name: "Vignesh Ramesh",
         role: "Co-Founder & CEO",
+        drive: "Wants to know how a business really runs, and why its decisions get stuck.",
         lines: [
-          "Ex-IBM systems engineer. 10+ years on large projects across the GCC, including BP Oman, RTA, DEWA and TransCo.",
-          "Leads planning and work with large clients.",
+          "Mechanical engineer by training. Enterprise systems at IBM, then cross-border trade at RVD Commerce.",
+          "Leads scoping and planning.",
         ],
         linkedin: "https://www.linkedin.com/in/vig-auxo",
       },
       {
         name: "Ajay Kumar",
         role: "Co-Founder & CTO",
+        drive: "Wants every number to be one a team can trust, and every system to keep running after handover.",
         lines: [
-          "Analytics architect. 10+ years building data and reporting systems for Fortune 500s and fast-growing firms in Europe, the US and the Middle East.",
-          "Leads the build: data and tools.",
+          "Computer science engineer by training. In data and analytics ever since.",
+          "Leads the build: data, tools and agents.",
         ],
         linkedin: "https://www.linkedin.com/in/ajaykumar9795",
-      },
-    ],
-  },
-  engagement: {
-    eyebrow: "Commitments",
-    title: "What you can hold us to",
-    lead: "Working with an outside team should feel safe. Here's what to expect.",
-    reassurance: "We are happy to sign an NDA before we begin.",
-    principles: [
-      {
-        icon: "mdi:lock-outline",
-        title: "Confidential by default",
-        desc: "Your name, your numbers and your plans stay between us.",
-      },
-      {
-        icon: "mdi:shield-check-outline",
-        title: "Careful with your data",
-        desc: "We take only what the work needs, with names removed where we can. We never reuse or resell it.",
-      },
-      {
-        icon: "mdi:cash-multiple",
-        title: "Open about money",
-        desc: "We tell you how we get paid, including any referral fee, before you commit.",
       },
     ],
   },

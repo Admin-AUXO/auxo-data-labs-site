@@ -2,6 +2,10 @@
   scroll-margin-top: 5.5rem;
 }
 
+.page-hero__title {
+  font-size: clamp(2.75rem, 1.2rem + 4.8vw, 4.5rem);
+}
+
 .about-facts {
   border-block-start: 1px solid var(--border);
   display: grid;
@@ -29,7 +33,7 @@
 }
 
 .about-facts__item dt {
-  color: var(--subtle);
+  color: var(--muted);
   font-size: var(--text-sm);
 }
 
@@ -43,78 +47,79 @@
   margin: 0;
 }
 
-.about-grid {
+.about-heading {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-display-3xl);
+  line-height: 1.1;
+  margin-block-end: clamp(1.75rem, 1.25rem + 1.5vw, 2.75rem);
+}
+
+.commit {
+  border-block-end: 1px solid var(--border);
   display: grid;
-  gap: 2rem 2.5rem;
-  grid-template-columns: minmax(0, 1fr);
   list-style: none;
-  margin-block-end: 0;
+  margin: 0;
   padding: 0;
 }
 
-@media (width >= 40rem) {
-  .about-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .about-grid--three {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (width >= 64rem) {
-  .about-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .about-grid--three {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.about-grid__item {
-  align-content: start;
-  border-block-start: 1px solid var(--border-strong);
+.commit__item {
+  align-items: baseline;
+  border-block-start: 1px solid var(--border);
   display: grid;
-  gap: 0.5rem;
-  padding-block-start: 1.1rem;
+  gap: 0.35rem 2.5rem;
+  padding-block: clamp(1rem, 0.75rem + 1vw, 1.5rem);
 }
 
-.about-grid--two .about-grid__item {
-  column-gap: 1rem;
-  grid-template-columns: 1.4rem minmax(0, 1fr);
+@media (width >= 48rem) {
+  .commit__item {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
 }
 
-.about-grid--two .about-grid__icon {
-  grid-row: 1 / span 2;
-  margin-block-start: 0.15rem;
+.commit__name {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-display-4xl);
+  line-height: 1.1;
 }
 
-.about-grid__icon {
-  block-size: 1.35rem;
-  color: var(--accent);
-  inline-size: 1.35rem;
-}
-
-.about-grid__title {
-  color: var(--foreground);
-  font-family: var(--font-brand);
-  font-size: var(--text-xl);
-  font-weight: var(--font-weight-display);
-  letter-spacing: var(--tracking-display-xl);
-  line-height: 1.3;
-}
-
-.about-grid__desc {
+.commit__desc {
   color: var(--muted);
-  font-size: var(--text-sm);
-  line-height: 1.6;
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  margin: 0;
 }
 
 .about-note {
-  color: var(--subtle);
-  font-size: var(--text-sm);
+  color: var(--muted);
+  font-size: var(--text-base);
   margin-block-start: 1.5rem;
+}
+
+.about-story {
+  display: grid;
+  gap: 1rem 3rem;
+  margin-block-end: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+}
+
+@media (width >= 60rem) {
+  .about-story {
+    align-items: end;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+}
+
+.about-story__title {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-display-3xl);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.about-story__lead {
+  color: var(--muted);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  max-inline-size: var(--measure);
 }
 
 .about-team {
@@ -130,7 +135,7 @@
 }
 
 .about-team__person {
-  border-block-start: 1px solid var(--border-strong);
+  border-block-start: 2px solid var(--foreground);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -141,7 +146,7 @@
   display: flex;
   flex-direction: column;
   font-family: var(--font-brand);
-  font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.25rem);
+  font-size: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem);
   font-weight: var(--font-weight-display-strong);
   letter-spacing: -0.04em;
   line-height: 0.98;
@@ -149,16 +154,27 @@
 }
 
 .about-team__name span + span {
-  color: var(--muted);
+  font-weight: 500;
 }
 
 .about-team__role {
-  color: var(--muted);
-  font-size: var(--text-sm);
+  color: var(--foreground);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.about-team__drive {
+  color: var(--foreground);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-block: 0.5rem 0.25rem;
+  max-inline-size: var(--measure);
 }
 
 .about-team__line {
   color: var(--muted);
+  font-size: var(--text-base);
   line-height: 1.6;
   max-inline-size: var(--measure);
 }
@@ -183,6 +199,6 @@
 
 .about-team__link svg {
   block-size: 1.1rem;
-  color: var(--muted);
+  color: var(--foreground);
   inline-size: 1.1rem;
 }

@@ -22,6 +22,7 @@ export interface SiteData {
   bookingUrl: string;
   applyUrl: string;
   bookingEmbedUrl: string;
+  applySteps: string[];
 }
 
 export const siteData: SiteData = {
@@ -51,6 +52,7 @@ export const siteData: SiteData = {
   founded: 2025,
   bookingUrl: "https://calendar.app.google/aJmnvMS2uBbYPCgC7",
   applyUrl: "/apply/",
+  applySteps: ["Apply with five questions", "A 30-minute call", "Written next steps in 3 business days"],
   bookingEmbedUrl:
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cf9JS2XEAvFnPma4oW-Gy3pMVQnHWZNKWuG0X9hhJ1sKDKj5JLtZsowG9uJyPw3h9kZ1qeNH5?gv=true",
 };

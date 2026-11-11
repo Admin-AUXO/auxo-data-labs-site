@@ -22,16 +22,16 @@ const pages: Record<string, OGPage> = {
     description: "We analyse your business and data, advise on the right AI setup, and build it end to end.",
   },
   "how-it-works": {
-    title: "How it works",
-    description: "Analyze what you have. Advise on what fits. Build it and hand it over.",
+    title: "Analyze. Advise. Build.",
+    description: "Each step ends with something in writing. Stop after any of them.",
   },
   pricing: {
-    title: "Start where you are.",
-    description: "Founder review for funded startups. Deep-dive audit for growing companies. One unit first for large organisations.",
+    title: "No charge to start. A fixed price after.",
+    description: "The AUXO Score and the Founder review cost nothing. Each phase after has a fixed price, in writing.",
   },
   marketplace: {
-    title: "Tool bundles, set up on your data.",
-    description: "Stacks vetted by AUXO. You buy direct and own the account."
+    title: "Six ways to get numbers you can trust.",
+    description: "Work on your data, built with your team in your own accounts."
   },
   blog: {
     title: "Data and AI, written plainly.",
@@ -42,7 +42,7 @@ const pages: Record<string, OGPage> = {
     description: "Founder-led, based in Dubai. Serving the UAE, the US and Europe.",
   },
   contact: {
-    title: "Let's talk.",
+    title: "Bring the number you doubt.",
     description: "We reply within one business day.",
   },
   "auxo-score": {
