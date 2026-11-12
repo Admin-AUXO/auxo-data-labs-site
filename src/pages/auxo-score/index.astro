@@ -26,9 +26,9 @@ const faqItems = about.faq.items.map((item) => ({
       {
         howItWorksContent.method.dimensions.map((d, i) => (
           <li class="method__item">
-            <span class="mono-datum text-accent-2">{String(i + 1).padStart(2, "0")}</span>
+            <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
             <h3 class="method__name">{d.name}</h3>
-            <p class="method__question text-muted">{d.question}</p>
+            <p class="method__question">{d.question}</p>
           </li>
         ))
       }

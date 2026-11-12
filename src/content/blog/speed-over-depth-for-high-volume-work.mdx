@@ -7,7 +7,16 @@ tags: ["Claude", "Model choice", "Automation", "AI in practice"]
 draft: true
 ---
 
-**In short.** Much useful AI work is repetitive: sorting, tagging and pulling fields out of text. A small, fast model such as Claude Haiku 5.5 often fits this better than a large one. It is quicker and costs a fraction as much.
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
+**In short:** Much useful AI work is repetitive: sorting, tagging and pulling fields out of text. A small, fast model such as Claude Haiku 5.5 often fits this better than a large one. It is quicker and costs a fraction as much.
+
+## Does every task need the biggest model?
+
+Picture a support lead on a Monday morning, with a weekend of tickets waiting to be sorted. Think of the jobs your team does over and over. Tagging a ticket. Routing a lead. Reading an expense line and picking the ledger account. Each one is small. Together they add up to thousands a month.
+
+For work like this, the question is less "how clever is the model?" and more "how fast and how cheap is it, per item?"
 
 ## Why smaller can be better
 
@@ -17,7 +26,7 @@ That gap matters at volume. A task that runs ten times a month can use any model
 
 Speed matters too. If an inbound lead is routed in under a second, it reaches the right person while it is still warm. If a support ticket is tagged as it arrives, the urgent ones rise to the top straight away.
 
-Haiku is not a weak model. Anthropic's guidance describes it as suited to cost-sensitive work that still needs strong reasoning. It supports the same effort levels as the larger models, so you can ask it to think harder where needed.
+Anthropic's [guidance on choosing a model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model) describes Haiku as suited to cost-sensitive work that still needs strong reasoning. It supports the same [effort](https://platform.claude.com/docs/en/build-with-claude/effort) levels as the larger models, so you can ask it to think harder where needed.
 
 ## Good high-volume tasks
 
@@ -31,7 +40,11 @@ Haiku is not a weak model. Anthropic's guidance describes it as suited to cost-s
 
 **Content.** Tagging an archive of articles by topic. Writing short alt text for product images.
 
-In each case the output is narrow and checkable. There is a right answer, and a person can spot a wrong one quickly.
+<Callout>
+In each case the output is narrow and checkable.
+</Callout>
+
+There is a right answer, and a person can spot a wrong one quickly.
 
 ## What makes it work
 
@@ -45,9 +58,16 @@ Small models do well when the task is tightly defined.
 
 ## When to move up
 
-Haiku is not the answer to everything. Move up to Sonnet or Opus when the task needs judgement rather than sorting. Writing a reply, weighing a trade-off or explaining why a number moved is a different kind of work.
+Some work needs judgement rather than sorting. Writing a reply, weighing a trade-off or explaining why a number moved is a different kind of job. Move up to Sonnet or Opus for that.
 
 A common pattern is to combine the two. A fast model sorts and extracts at volume. A larger model handles the small share of cases that are genuinely hard. Anthropic describes this approach in its own guidance on balancing cost and intelligence.
+
+<LinkCard
+  href="https://platform.claude.com/docs/en/about-claude/models/choosing-a-model"
+  source="Anthropic, Claude Platform Docs"
+  title="Choosing the right model"
+  note="Anthropic's guidance on matching a model to the task, including starting small and moving up."
+/>
 
 ## Try this
 
@@ -59,8 +79,13 @@ Pick one sorting or extraction task your team does by hand. Export the last 100 
 
 Often the mismatches show that your own team disagrees on the categories. Fix the definitions, then run it again.
 
-## Where AUXO helps
+## What to do next
 
 The model is rarely what slows high-volume work down. Unclear categories, messy source data and missing review steps do. Our [CRM clean-up](/marketplace/) service is built for this: it sorts and de-duplicates your records, flags what it is unsure about, and a person approves the changes.
 
-To check your own data, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+To check your own set-up, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Anthropic, [Choosing the right model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model), Claude Platform Docs
+- Anthropic, [Effort](https://platform.claude.com/docs/en/build-with-claude/effort), Claude Platform Docs

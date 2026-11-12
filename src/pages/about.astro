@@ -75,8 +75,9 @@ import "../styles/pages/about.css";
     <h2 class="about-heading">{c.commitments.title}</h2>
     <ol class="commit">
       {
-        c.commitments.items.map((item) => (
+        c.commitments.items.map((item, i) => (
           <li class="commit__item">
+            <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
             <h3 class="commit__name">{item.title}</h3>
             <p class="commit__desc">{item.desc}</p>
           </li>

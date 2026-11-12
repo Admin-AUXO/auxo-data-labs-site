@@ -108,7 +108,7 @@ const tools: ToolConfig[] = [
     name: "CRM clean-up",
     vendor: "AUXO",
     category: "numbers",
-    short: "Duplicates and gaps in your CRM fixed, so your pipeline numbers hold.",
+    short: "Duplicates and gaps in your CRM fixed, so pipeline numbers hold.",
     liveIn: "2–4 weeks",
     setupItems: ["Duplicates merged across CRM, billing and spreadsheets", "Conflicting fields resolved with your team", "Rules that keep new records clean"],
     dataNote: "Changes are made in your own systems. You approve each merge rule before it runs.",
@@ -147,7 +147,7 @@ const tools: ToolConfig[] = [
     name: "Chat with your data",
     vendor: "AUXO",
     category: "work",
-    short: "Ask Claude or ChatGPT about your metrics and get the right answer.",
+    short: "Ask Claude or ChatGPT about your metrics.",
     liveIn: "2–4 weeks",
     setupItems: ["Claude or ChatGPT in your business account", "Connected to your agreed numbers, with sources shown", "A written AI policy, a named approver and team training"],
     dataNote: "Stays in your own business account. Your admin controls access.",
@@ -156,11 +156,11 @@ const tools: ToolConfig[] = [
   {
     kind: "auxo-stack",
     slug: "hand-offs-with-checks",
-    question: "Who is still copying data between tools?",
+    question: "Could your tools share data on their own?",
     name: "Workflow automation",
     vendor: "AUXO",
     category: "work",
-    short: "Copy-paste between your tools replaced, with a person approving.",
+    short: "Copy-paste between tools replaced. A person approves.",
     liveIn: "3–6 weeks",
     setupItems: ["Two or three manual copy-paste jobs automated", "Records matched, with a queue for exceptions", "Approval steps before anything is sent or paid"],
     dataNote: "Runs in your own automation account. A named owner approves what goes out.",
@@ -245,7 +245,7 @@ export const marketplaceContent = {
   },
   hero: {
     title: "Numbers you can trust.",
-    lead: "Six jobs on your billing, CRM and accounts data, built with your team in your own accounts.",
+    lead: "Six jobs on your billing, CRM and accounts data, built in your own accounts.",
   },
   filters: {
     ariaLabel: "Filter by type",
@@ -279,7 +279,7 @@ export const marketplaceContent = {
   },
   customStack: {
     title: "Custom stack",
-    body: "Need something else done with your data? Tell us the work.",
+    body: "Need something else? Tell us the work.",
     cta: "Apply for a Founder review",
     href: "/apply/?tool=custom-stack",
   },
@@ -287,7 +287,7 @@ export const marketplaceContent = {
     title: "How a stack gets set up.",
     steps: [
       "Tell us the work.",
-      "A short call to scope it with you, then a price in writing.",
+      "A short call to scope it, then a price in writing.",
       "We set it up in your accounts.",
       "We hand it over.",
     ],
@@ -298,7 +298,7 @@ export const marketplaceContent = {
       {
         question: "Can't our own tools do this?",
         answer:
-          "Each tool reports its own version. The work here sits between them: matching records, agreeing definitions and deciding which figure is right. That takes someone who knows both the data and the business.",
+          "Each tool reports its own version. The work sits between them: matching records, agreeing definitions and deciding which figure is right.",
       }
     ],
   },

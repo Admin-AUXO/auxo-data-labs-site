@@ -1,7 +1,7 @@
 @layer components {
   .section {
     background-color: transparent;
-    padding-block: var(--section-py, clamp(2.5rem, 1.75rem + 2.4vw, 4rem));
+    padding-block: var(--section-py, var(--space-section-tight));
     position: relative;
   }
 
@@ -10,11 +10,11 @@
   }
 
   .section[data-pad="lg"] {
-    --section-py: clamp(3rem, 2rem + 3.2vw, 5.25rem);
+    --section-py: calc(var(--space-section) * 0.75);
   }
 
   .section[data-pad="xl"] {
-    --section-py: clamp(3.5rem, 2.25rem + 4vw, 6.5rem);
+    --section-py: var(--space-section);
   }
 
   .section[data-bg="surface"] {
@@ -396,4 +396,78 @@
   .section__container[data-w="6xl"] { --container-max: 72rem; }
   .section__container[data-w="7xl"] { --container-max: var(--container); }
   .section__container[data-w="full"] { --container-max: none; }
+}
+
+@layer components {
+  .sq {
+    align-items: center;
+    background: var(--accent);
+    block-size: 2.25rem;
+    border-radius: 0.35rem;
+    color: var(--accent-foreground);
+    display: inline-flex;
+    flex: none;
+    font-family: var(--font-logo);
+    font-size: var(--text-sm);
+    font-weight: 800;
+    inline-size: 2.25rem;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .sq svg {
+    block-size: 1.15rem;
+    inline-size: 1.15rem;
+  }
+
+  .leader {
+    align-items: baseline;
+    display: grid;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    gap: 0.6rem;
+    grid-template-columns: auto minmax(1rem, 1fr) auto;
+    margin: 0;
+  }
+
+  .leader > :first-child {
+    color: var(--subtle);
+  }
+
+  .leader > :last-child {
+    color: var(--foreground);
+    font-weight: 600;
+    margin: 0;
+    text-align: end;
+  }
+
+  .leader > [data-tone="free"] {
+    color: var(--accent);
+  }
+
+  .leader > [data-tone="paid"] {
+    color: var(--accent-2);
+  }
+
+  .leader__dots {
+    border-block-end: 2px dotted var(--border-strong);
+  }
+
+  .go {
+    align-items: center;
+    border-block-start: 1px solid var(--border);
+    display: flex;
+    font-weight: 600;
+    gap: 1rem;
+    justify-content: space-between;
+    padding-block-start: 1rem;
+  }
+
+  [data-motion="on"] .go .sq svg {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  [data-motion="on"] :is(a, article):hover .go .sq svg {
+    transform: translateX(3px);
+  }
 }

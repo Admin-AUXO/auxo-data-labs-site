@@ -21,16 +21,30 @@ interface HomePillar {
   desc: string;
 }
 
-interface HomeSegment {
-  segment: string;
-  offer: string;
-  line: string;
-  href: string;
+interface HomeProblem {
+  title: string;
+  desc: string;
+  fix: string;
 }
 
-interface HomeChip {
-  label: string;
-  slug: string;
+interface HomeOutcome {
+  figure: string;
+  line: string;
+  lead?: boolean;
+  source: string;
+  footnoteId: string;
+}
+
+interface HomeStep {
+  title: string;
+  desc: string;
+  noCharge?: boolean;
+}
+
+interface HomeExplore {
+  title: string;
+  lead: string;
+  cta: Link;
 }
 
 interface HomeBlogAngle {
@@ -41,7 +55,8 @@ interface HomeBlogAngle {
 interface HomeContent {
   meta: { title: string; description: string };
   hero: {
-    title: string;
+    words: string[];
+    titleRest: string;
     titleHighlight: string;
     subtitle: string;
     primaryCta: Link;
@@ -51,10 +66,13 @@ interface HomeContent {
     text: string;
     link: Link;
   };
+  problem: SectionIntro & {
+    listLabel: string;
+    items: HomeProblem[];
+  };
   score: {
     title: string;
     stat: string;
-    footnoteId: string;
     cta: Link;
     reassurance: string;
   };
@@ -63,25 +81,33 @@ interface HomeContent {
     note: string;
     items: HomeLogo[];
   };
+  outcomes: SectionIntro & {
+    listLabel: string;
+    items: HomeOutcome[];
+    note: string;
+    cta: Link;
+  };
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  compare: {
-    title: string;
-    lead: string;
-    groupLabel: string;
-    asks: { who: string; when: string; question: string; answer: string }[];
+  path: SectionIntro & {
+    noChargeLabel: string;
+    steps: HomeStep[];
+    sample: {
+      label: string;
+      title: string;
+      total: number;
+      band: string;
+      dims: { name: string; value: number }[];
+      fixLabel: string;
+      fix: string;
+    };
+    cta: Link;
     link: Link;
   };
-  segments: SectionIntro & {
-    listLabel: string;
-    rows: HomeSegment[];
-  };
-  marketplace: SectionIntro & {
-    chipsLabel: string;
-    chipBase: string;
-    chips: HomeChip[];
-    cta: Link;
+  explore: {
+    label: string;
+    items: HomeExplore[];
   };
   blog: SectionIntro & {
     angles: HomeBlogAngle[];
@@ -93,6 +119,8 @@ interface HomeContent {
     description: string;
     ctaText: string;
     ctaHref: string;
+    secondaryText: string;
+    secondaryHref: string;
     reassurance: string;
   };
 }
@@ -103,138 +131,199 @@ export const homeContent: HomeContent = {
   meta: {
     title: "Your data, ready for AI",
     description:
-      "For funded startups and scale-ups that need numbers they can stand behind. One set of numbers your deck, model and accounts agree on. Yours to keep.",
+      "We review your business and data, tell you which AI fits, and set it up. For funded startups and scale-ups. Yours to keep.",
   },
   hero: {
-    title: "Your data, ready for AI.",
+    words: ["data", "pipeline", "operations", "company"],
+    titleRest: "ready for",
     titleHighlight: "AI.",
     subtitle:
-      "For funded startups and scale-ups, seed to Series B. One set of numbers your deck, model and accounts agree on.",
+      "We look at your business and data, tell you which AI fits, and set it up for you. Built to last, and yours to keep.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   proof: {
-    text: "Two founders. One from business, one from data.",
+    text: "Two founders: one from business, one from data.",
     link: { text: "Meet the founders", href: "/about/#team" },
   },
+  problem: {
+    title: "Your team already uses AI. Make it count.",
+    lead: "A little set-up turns personal experiments into results the whole company can see.",
+    listLabel: "Where set-up pays off",
+    items: [
+      {
+        title: "Shared set-ups",
+        desc: "The prompts and files that work, saved once, so everyone starts from the best version.",
+        fix: "Built once, used by everyone",
+      },
+      {
+        title: "The right tools",
+        desc: "A short list chosen for the work you do, with a reason for each one.",
+        fix: "Chosen with you",
+      },
+      {
+        title: "Connected to your data",
+        desc: "AI that reads your CRM, files and accounts, with the right access for each person.",
+        fix: "Set up end to end",
+      },
+      {
+        title: "Results you can see",
+        desc: "Each tool tied to a number you already report, so every renewal is an easy call.",
+        fix: "Measured from day one",
+      },
+    ],
+  },
   score: {
-    title: "Know where your numbers stand before investors ask.",
-    stat: "More than one in three CFOs don't completely trust their own financial data.",
-    footnoteId: "ref-1",
+    title: "See where AI can do the most for you.",
+    stat: "Ten questions on tools, data, set-up, adoption and measurement.",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
-    reassurance: "10 questions, no sign-up. Your answers stay on your device unless you ask for the report by email.",
+    reassurance: "About 3 minutes. No sign-up.",
   },
   logos: {
     label: "Works with",
-    note: "Tools we set up and work with.",
+    note: "Tools we work with. A logo is not a partnership.",
     items: [
+      { name: "Claude", icon: "simple-icons:claude" },
+      { name: "OpenAI", icon: "simple-icons:openai" },
+      { name: "Google Cloud", icon: "simple-icons:googlecloud" },
       { name: "BigQuery", icon: "simple-icons:googlebigquery" },
       { name: "Snowflake", icon: "simple-icons:snowflake" },
       { name: "dbt", icon: "simple-icons:dbt" },
-      { name: "Power BI", icon: "simple-icons:powerbi" },
-      { name: "Google Cloud", icon: "simple-icons:googlecloud" },
       { name: "Microsoft Azure", icon: "simple-icons:microsoftazure" },
+      { name: "Power BI", icon: "simple-icons:powerbi" },
+      { name: "Salesforce", icon: "simple-icons:salesforce" },
+      { name: "HubSpot", icon: "simple-icons:hubspot" },
+      { name: "n8n", icon: "simple-icons:n8n" },
     ],
   },
+  outcomes: {
+    title: "What getting it right is worth.",
+    lead: "Independent research. Your Founder review shows what it means for your numbers.",
+    listLabel: "Published research",
+    items: [
+      {
+        figure: "2.2 hrs",
+        line: "saved a week by each person who uses generative AI at work.",
+        lead: true,
+        source: "Federal Reserve Bank of St. Louis, 2025",
+        footnoteId: "ref-stl",
+      },
+      {
+        figure: "55.8%",
+        line: "faster. Developers with an AI pair programmer finished the same coding task ahead of those without.",
+        source: "GitHub Copilot study, 2023",
+        footnoteId: "ref-copilot",
+      },
+      {
+        figure: "14%",
+        line: "more customer issues resolved per hour with AI help, and 34% for novice and less experienced agents.",
+        source: "NBER working paper 31161, 2023",
+        footnoteId: "ref-nber",
+      },
+      {
+        figure: "95%",
+        line: "of organisations see no measurable return from their generative AI pilots.",
+        source: "MIT NANDA, 2025",
+        footnoteId: "ref-nanda",
+      },
+      {
+        figure: "$12.9M",
+        line: "a year, at least: the average cost of poor data quality. AI built on that data inherits it.",
+        source: "Gartner, 2020",
+        footnoteId: "ref-gartner",
+      },
+    ],
+    note: "Industry research, not AUXO client results.",
+    cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+  },
   pillarsHeader: {
-    title: "Four fixes for numbers you can stand behind.",
-    lead: "A deck, a model and accounts that disagree cost you in diligence.",
+    title: "Four fixes that make data ready for AI.",
+    lead: "AI on untidy data gives untidy answers.",
   },
   pillarsLabel: "What we fix",
   pillars: [
     {
       letter: "A",
       title: "Accurate data",
-      desc: "One set of numbers across ARR, burn and runway, from the tools you already use.",
+      desc: "One set of numbers your team and your AI can trust.",
     },
     {
       letter: "U",
       title: "Unified reporting",
-      desc: "A board pack that holds up when investors ask hard questions.",
+      desc: "Reports that hold up when the board or investors ask.",
     },
     {
       letter: "X",
       title: "Explainable automation",
-      desc: "AI takes the routine work, and every result can be explained.",
+      desc: "AI takes the routine work. A person approves what matters.",
     },
     {
       letter: "O",
       title: "Oversight built in",
-      desc: "Simple rules for your data and AI, written down before diligence asks.",
+      desc: "Simple written rules for your data and AI.",
     },
   ],
-  compare: {
-    title: "Who asks about your numbers next?",
-    lead: "Each of them asks a different question. One set of numbers answers all four.",
-    groupLabel: "Who is asking",
-    asks: [
+  path: {
+    title: "Start with a score. Leave with a plan.",
+    lead: "The first three steps cost nothing.",
+    noChargeLabel: "No charge",
+    steps: [
       {
-        who: "Investor",
-        when: "In diligence",
-        question: "Does the ARR in your deck match your accounts?",
-        answer: "Deck, model and accounts read from one source, so the answer is yes.",
+        title: "Take the AUXO Score",
+        desc: "Ten questions. About 3 minutes.",
+        noCharge: true,
       },
       {
-        who: "Board",
-        when: "Every quarter",
-        question: "Why did runway change since last time?",
-        answer: "The board pack and the model use the same figures, so the change has one explanation.",
+        title: "See your gaps",
+        desc: "Your score, each check and the first fix, by email.",
+        noCharge: true,
       },
       {
-        who: "Auditor",
-        when: "At year end",
-        question: "Where does this number come from?",
-        answer: "Each figure traces back to billing or the accounts, with the definition written down.",
+        title: "Apply for a Founder review",
+        desc: "A 30-minute call with a founder about your result. Places are limited.",
+        noCharge: true,
       },
       {
-        who: "Your team",
-        when: "Every week",
-        question: "Which dashboard do I trust?",
-        answer: "One definition per metric, signed off by your finance lead.",
+        title: "Get a written plan",
+        desc: "Next steps within 3 business days, and a fixed price per phase.",
       },
     ],
+    sample: {
+      label: "Sample result",
+      title: "Your AUXO Score",
+      total: 62,
+      band: "Stable",
+      dims: [
+        { name: "Tools", value: 70 },
+        { name: "Data", value: 35 },
+        { name: "Set-up", value: 70 },
+        { name: "Adoption", value: 85 },
+        { name: "Measurement", value: 50 },
+      ],
+      fixLabel: "First fix: Data",
+      fix: "Connect one approved assistant to your CRM or files, with access that matches each person's role.",
+    },
+    cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     link: { text: "See how it works", href: "/how-it-works/" },
   },
-  segments: {
-    title: "Who we work with.",
-    lead: "A Founder review comes first. After it, we scope the work with you and agree the price in writing.",
-    listLabel: "Ways in",
-    rows: [
+  explore: {
+    label: "More from AUXO",
+    items: [
       {
-        segment: "Startups, seed to Series B",
-        offer: "One set of numbers",
-        line: "A plan to get the numbers investors and your board ask for.",
-        href: "/pricing/#startups",
+        title: "No charge to start. A fixed price after.",
+        lead: "A Founder review comes first. Each phase after it is priced in writing.",
+        cta: { text: "See pricing", href: "/pricing/" },
       },
       {
-        segment: "Growing companies, 50–500 people",
-        offer: "A Deep-dive audit",
-        line: "What to fix, what to build first and what not to buy.",
-        href: "/pricing/#growing",
-      },
-      {
-        segment: "Large organisations",
-        offer: "One unit first",
-        line: "A written proposal, one phase at a time.",
-        href: "/pricing/#large-organisations",
+        title: "Ready-made stacks. Set up on your data.",
+        lead: "Six fixed jobs on your numbers, built in your own accounts.",
+        cta: { text: "Browse the stacks", href: "/marketplace/" },
       },
     ],
-  },
-  marketplace: {
-    title: "Six ways to get numbers you can trust.",
-    lead: "Work on your billing, CRM and accounts data, built with your team in your own accounts.",
-    chipsLabel: "Stack types",
-    chipBase: "/marketplace/",
-    chips: [
-      { label: "Numbers", slug: "numbers" },
-      { label: "Checks", slug: "proof" },
-      { label: "AI and automation", slug: "work" },
-    ],
-    cta: { text: "Browse the stacks", href: "/marketplace/" },
   },
   blog: {
-    title: "Why do the numbers in the deck and the model never match?",
-    lead: "Investor-ready numbers need clean data and clear rules. The AI tool is rarely the hard part.",
+    title: "Can't Claude or ChatGPT just do this?",
+    lead: "Often part of it. These posts cover what gets in the way.",
     angles: [
       { slug: "your-ai-assistant-is-not-the-hard-part", label: "For leaders" },
       { slug: "the-model-is-the-easy-part", label: "For engineers" },
@@ -243,10 +332,12 @@ export const homeContent: HomeContent = {
     cta: { text: "Read the blog", href: "/blog/" },
   },
   cta: {
-    title: "Raising, or facing a board meeting? Bring the numbers that disagree.",
-    description: "Leave knowing what to fix first.",
+    title: "Know where you stand. Then talk it through.",
+    description: "A 30-minute call with a founder about your result.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
+    secondaryText: "Take the AUXO Score",
+    secondaryHref: "/auxo-score/",
     reassurance,
   },
 };

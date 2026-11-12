@@ -7,36 +7,72 @@ tags: ["AI agents", "Ownership"]
 draft: false
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
 **In short:** "A person approves what goes out" only works if you decide which person, for which actions, seeing what. Write that down for every action before the agent exists.
 
-## You own what your AI says
+## Who answers for what your AI says?
 
-In 2024, a Canadian tribunal ordered Air Canada to compensate a customer after its website chatbot gave him wrong information about bereavement fares. The airline argued the chatbot was a separate legal entity. The tribunal found the airline responsible for all the information on its website, chatbot included ([American Bar Association](https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/)). It was a small-claims ruling, not binding precedent.
+You do. In 2024, a Canadian tribunal ordered Air Canada to compensate a customer after its website chatbot gave him wrong information about bereavement fares. The airline argued the chatbot was a separate legal entity. The tribunal found the airline responsible for all the information on its website, chatbot included ([American Bar Association](https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/)). It was a small-claims ruling, not binding precedent.
 
-The startup version is an agent that emails a customer, quotes a price or sends a number to an investor. In a McKinsey survey published in March 2025, 27% of respondents whose organisations use generative AI said employees review all of its output before use. A similar share said 20% or less gets checked ([McKinsey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value)).
+Now picture the startup version: an agent that emails a customer, quotes a price or sends a number to an investor.
 
-## Match approval to risk
+In a McKinsey survey published in March 2025, 27% of respondents whose organisations use generative AI said employees review all of its output before use. A similar share said 20% or less gets checked ([McKinsey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value)).
 
-OpenAI's guide to building agents suggests rating each tool low, medium or high, based on read or write access, whether the action can be reversed, the permissions it needs and its financial impact. It says sensitive, irreversible or high-stakes actions, such as large refunds or payments, should go to a person ([OpenAI](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)).
+## How much approval does each action need?
 
+Match it to the risk. OpenAI's guide to building agents suggests rating each tool low, medium or high, based on read or write access, whether the action can be reversed, the permissions it needs and its financial impact. It says sensitive, irreversible or high-stakes actions, such as large refunds or payments, should go to a person ([OpenAI](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)).
 
-- **Read and summarise:** no approval. Spot-check weekly.
-- **Draft for internal use:** the user reviews it.
-- **Send to a customer, supplier or investor:** a named person approves each one.
-- **Pay, refund, sign or decide:** a named person approves, and above a set limit a second person signs too.
+<LinkCard
+  href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf"
+  source="OpenAI"
+  title="A practical guide to building agents"
+  note="OpenAI's guide, including how to rate each tool by risk and when to hand off to a person."
+/>
+
+In practice that gives you four levels:
+
+<Flow
+  title="Four approval levels, from light to heavy"
+  steps={[
+    { label: "Read and summarise", note: "No approval. Spot-check weekly.", tone: "fast" },
+    { label: "Draft for internal use", note: "The user reviews it." },
+    { label: "Send to a customer, supplier or investor", note: "A named person approves each one." },
+    { label: "Pay, refund, sign or decide", note: "A named person approves. Above a set limit, a second person signs too.", tone: "slow" },
+  ]}
+  caption="The more an action reaches outside the company, the more care it gets."
+/>
 
 For each line, write down the approver, what they see and how fast they must respond. If nobody responds, nothing goes out.
 
-## Design against the rubber stamp
+## How do you stop approval becoming a rubber stamp?
 
-An approver facing hundreds of drafts a day will start clicking yes. This is automation bias. A systematic review of research on clinical decision support, published in the Journal of the American Medical Informatics Association, found that heavy workload and time pressure make people more likely to over-rely on automated advice, and that making users accountable helps ([JAMIA](https://academic.oup.com/jamia/article/19/1/121/732254)). The EU AI Act requires high-risk AI systems to be built so the people overseeing them can stay aware of this tendency, and can override or disregard the output ([EU AI Act, Article 14](https://artificialintelligenceact.eu/article/14/)).
+Anyone facing hundreds of drafts a day will start clicking yes. That is automation bias, and it says nothing about the person.
 
-Design for real review. Show the source next to the draft. Keep the queue small enough to read, or narrow the agent's job. Track how often approvers edit or reject: a long run with no edits may mean nobody is reading.
+A systematic review of research on clinical decision support, published in the Journal of the American Medical Informatics Association, found that heavy workload and time pressure make people more likely to over-rely on automated advice, and that making users accountable helps ([JAMIA](https://academic.oup.com/jamia/article/19/1/121/732254)). The EU AI Act requires high-risk AI systems to be built so the people overseeing them can stay aware of this tendency, and can override or disregard the output ([EU AI Act, Article 14](https://artificialintelligenceact.eu/article/14/)).
 
-## Where to skip approval
+So design for real review. Show the source next to the draft. Keep the queue small enough to read, or narrow the agent's job. Track how often approvers edit or reject. A long run with no edits may mean nobody is reading.
 
-Skip approval for internal summaries and easy-to-undo actions. Save attention for mistakes that would reach a customer, an investor or the ledger.
+## Where can you skip approval?
+
+Internal summaries and easy-to-undo actions. Save attention for mistakes that would reach a customer, an investor or the ledger.
 
 ## What to do next
 
-For each action the agent can take, write who approves it, what they see, how fast they respond and what happens if they don't. If you can't fill in the line, the agent shouldn't take that action yet. To see how ready your data is for an agent, [take the AUXO Score](/auxo-score/).
+For each action the agent can take, write who approves it, what they see, how fast they respond and what happens if they don't.
+
+<Callout>
+If you can't fill in the line, the agent shouldn't take that action yet.
+</Callout>
+
+To see how your own set-up looks across tools, data, set-up, adoption and measurement, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- American Bar Association, [article on the tribunal ruling against Air Canada over its chatbot, February 2024](https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/), 2024
+- McKinsey, [The state of AI: How organizations are rewiring to capture value](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value), 2025
+- OpenAI, [A practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
+- Journal of the American Medical Informatics Association, [systematic review on automation bias in clinical decision support](https://academic.oup.com/jamia/article/19/1/121/732254)
+- EU AI Act, [Article 14: Human oversight](https://artificialintelligenceact.eu/article/14/)

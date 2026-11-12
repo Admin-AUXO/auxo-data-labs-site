@@ -1,28 +1,35 @@
 ---
 title: "A one-page AI policy template for a startup"
-description: "An AI policy template for a startup of around 50 people: five questions it must answer, a one-page rule to copy and a one-week rollout before diligence asks."
+description: "A one-page AI policy for a startup of around 50 people: five questions it must answer, a template to copy and a one-week rollout before diligence asks."
 date: 2026-11-05
 author: "Ajay Kumar"
 tags: ["AI policy", "Governance", "Ownership"]
 draft: true
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+
 **In short:** an AI policy for a startup fits on one page. It names the approved tools, the data that never goes in, who approves what leaves the company and who to tell when something goes wrong. Copy the template below and finish it in a week.
 
-Your team already uses AI. Some people use a work account. Some use a personal one, with customer data in it.
+Say an investor emails on a Monday morning to ask what your AI policy says. You look across the office. Your team already uses AI, some on a work account and some on a personal one, and a few have customer data in it.
 
-Then an investor or customer asks what your AI policy says. If nothing is written down, nobody knows what is allowed.
+If nothing is written down, nobody knows what is allowed. That is the gap a one-page policy closes.
 
-## Keep the rule to one page
+## Why one page?
 
-A long policy gets signed and never read. A one-page policy gets used. A policy that bans everything gets ignored, and people use their phones instead. One that allows what is safe gives them an approved way to work.
+<Callout>
+A long policy gets signed and never read. A one-page policy gets used.
+</Callout>
 
-Who owns each tool is a separate question, answered in [AI governance for a 50-person company](/blog/ai-governance-for-a-50-person-company/).
+A policy that bans everything gets ignored, and people reach for their phones instead. One that allows what is safe gives them an approved way to work.
+
+Who owns each tool is a separate question. It is covered in [AI governance for a 50-person company](/blog/ai-governance-for-a-50-person-company/).
 
 ## Five questions the policy must answer
 
 1. **What data may go into an AI tool?** Name what never goes in, and what is fine.
-2. **Which tools are approved?** List them by name and say which account type. Vendors treat plan types differently. OpenAI, for example, [says it does not train on business data by default](https://openai.com/enterprise-privacy/), while consumer plans work differently. Read each tool's data page.
+2. **Which tools are approved?** List them by name and say which account type. Vendors treat plan types differently. OpenAI, for example, [says it does not train on business data by default](https://openai.com/enterprise-privacy/), while consumer plans work differently. Read each tool's data page before you approve it.
 3. **Who approves AI output before it leaves?** A person approves anything sent to a customer, an investor or a supplier.
 4. **Who owns the data and the work?** Both stay with the company, subject to your contracts and local law.
 5. **What happens when something goes wrong?** Who to tell, and how fast.
@@ -51,11 +58,22 @@ Paste this into a document and replace every bracket.
 
 ## Roll it out in a week
 
-- **Day 1.** Ask each team lead which AI tools their people use. Include personal accounts.
-- **Day 2.** Pick the approved tools. Check each vendor's data page. Choose an owner for each.
-- **Day 3.** Fill in the template. One person writes it. Two people read it.
-- **Day 4.** Walk the team through it in 20 minutes. Show one example that is fine and one that is not.
-- **Day 5.** Turn on the controls you can: business accounts, sign-in through your company login and one place to report problems.
+<Flow
+  title="Your policy week"
+  steps={[
+    { label: "Day 1", note: "Ask each team lead which AI tools their people use" },
+    { label: "Day 2", note: "Pick the approved tools and an owner for each" },
+    { label: "Day 3", note: "Fill in the template" },
+    { label: "Day 4", note: "Walk the team through it in 20 minutes" },
+    { label: "Day 5", note: "Turn on the controls you can" },
+  ]}
+/>
+
+- **Day 1.** Include personal accounts when you ask.
+- **Day 2.** Check each vendor's data page before you approve a tool.
+- **Day 3.** One person writes it. Two people read it.
+- **Day 4.** Show one example that is fine and one that is not.
+- **Day 5.** Business accounts, sign-in through your company login and one place to report problems.
 
 Put a review date in the calendar. A policy without one is out of date in six months.
 
@@ -63,6 +81,10 @@ Put a review date in the calendar. A policy without one is out of date in six mo
 
 This post is not legal advice. Ask your own adviser before you finalise the policy if you handle health, financial or children's data, work under sector rules, have contracts that limit how client data is used, or sell into the EU. Rules differ between the UAE, the US and Europe. AUXO does not give legal advice and does not certify anyone.
 
-## Where to start
+## What to do next
 
-Before you write the rule, find out how ready your data is. [Take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+Before you write the rule, it helps to see where your AI set-up stands today. [Take the AUXO Score](/auxo-score/): ten questions on your tools, data, set-up, adoption and measurement, about three minutes.
+
+## Sources
+
+- OpenAI, [OpenAI enterprise privacy page](https://openai.com/enterprise-privacy/), on its default for business data

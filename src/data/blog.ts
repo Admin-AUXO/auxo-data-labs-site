@@ -29,6 +29,7 @@ export interface BlogContent {
     backLink: LinkItem;
     minutesSuffix: string;
     tagsLabel: string;
+    tocLabel: string;
     relatedHeading: string;
     endCta: {
       title: string;
@@ -50,7 +51,7 @@ export const blogContent: BlogContent = {
     hero: {
       title: "Data and AI. Written plainly.",
       titleHighlight: [],
-      lead: "Founder notes on data, AI tools and agents, and when not to build. Every figure has a source.",
+      lead: "Founder notes on data, AI tools and agents. Every figure has a source.",
     },
     tagFilterLabel: "Filter posts by topic",
     tagFilterAll: "All topics",
@@ -69,10 +70,11 @@ export const blogContent: BlogContent = {
     backLink: { label: "Back to the blog", href: "/blog/" },
     minutesSuffix: "min read",
     tagsLabel: "Topics",
+    tocLabel: "On this page",
     relatedHeading: "Read next",
     endCta: {
       title: "See where your own numbers stand.",
-      description: "10 questions, about 3 minutes. See your band and the first thing to fix.",
+      description: "Ten questions, about 3 minutes. See your band and the first fix.",
       ctaText: "Take the AUXO Score",
       ctaHref: "/auxo-score/",
       reassurance: "We reply within one business day.",

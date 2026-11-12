@@ -1,21 +1,38 @@
 ---
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import Button from "../components/ui/Button.astro";
 import { linksContent as c } from "../data/links";
+import "../styles/pages/links.css";
+
+const actions = c.links.slice(0, 2);
+const reads = c.links.slice(2);
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description} noindex>
-  <Section padding="xl" width="5xl" class="text-center">
-    <div class="mx-auto flex max-w-md flex-col items-center gap-6">
-      <h1 class="text-display text-display--5xl">{c.title}</h1>
-      <p class="lead text-balance">{c.lead}</p>
-      <div class="grid w-full gap-3">
-        {c.links.map((l) => (
+  <Section padding="xl" width="5xl">
+    <div class="links">
+      <h1 class="text-display text-display--5xl links__title">{c.title}</h1>
+      <p class="lead links__lead">{c.lead}</p>
+      <div class="links__actions">
+        {actions.map((l) => (
           <Button variant={l.primary ? "primary" : "secondary"} size="lg" href={l.href} icon={l.primary}>
             {l.text}
           </Button>
         ))}
       </div>
+      {reads.length > 0 && (
+        <ul class="links__reads">
+          {reads.map((l) => (
+            <li>
+              <a href={l.href} class="links__read">
+                <span>{l.text}</span>
+                <Icon name="mdi:arrow-right" aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   </Section>
 </BaseLayout>

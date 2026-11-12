@@ -12,6 +12,7 @@ import { homeContent as c } from "../data/home";
 import "../styles/pages/home.css";
 
 const logoLoop = [...c.logos.items, ...c.logos.items];
+const restWord = c.hero.words[c.hero.words.length - 1];
 
 const angleOrder = (slug: string) => {
   const i = c.blog.angles.findIndex((a) => a.slug === slug);
@@ -24,16 +25,15 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .map((post) => ({
     href: `/blog/${post.id}/`,
     title: post.data.title,
-    angle: c.blog.angles.find((a) => a.slug === post.id)?.label,
+    angle: c.blog.angles.find((a) => a.slug === post.id)?.label ?? post.data.tags[0],
+    description: post.data.description,
   }));
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description} footnotes>
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="home-hero__inner">
       <div class="home-hero__main">
-        <h1 class="home-hero__title" data-enter="headline">
-          <HighlightText text={c.hero.title} highlight={c.hero.titleHighlight} />
-        </h1>
+        <h1 class="home-hero__title" data-enter="headline" data-words={c.hero.words.join(" ")}>Your <span class="hero-word">{restWord},</span> {c.hero.titleRest} <span class="hl-accent">{c.hero.titleHighlight}</span></h1>
         <div class="home-hero__row">
           <p class="lead home-hero__lead" data-enter>{c.hero.subtitle}</p>
           <div class="home-hero__ctas" data-enter>
@@ -54,23 +54,41 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </Section>
 
-  <Section padding="md" width="7xl">
-    <div class="score-card" data-reveal>
-      <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
-        <path class="score-gauge__track" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
-        <path class="score-gauge__fill" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
-      </svg>
-      <div class="flex flex-col gap-3">
-        <h2 class="font-bold">{c.score.title}</h2>
-        <p class="max-w-xl text-lg text-muted text-balance">
-          {c.score.stat}<FootnoteRef id={c.score.footnoteId} />
-        </p>
+  <Section padding="lg" width="7xl">
+    <div class="home-fix">
+      <div class="home-head">
+        <SectionHeader title={c.problem.title} subtitle={c.problem.lead} />
       </div>
-      <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
-        <Button variant="secondary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
-          {c.score.cta.text}
-        </Button>
-        <p class="text-sm text-subtle text-pretty min-[56rem]:text-end">{c.score.reassurance}</p>
+      <ol class="stuck" aria-label={c.problem.listLabel}>
+        {
+          c.problem.items.map((p, i) => (
+            <li class="stuck__card" data-anim="rise" style={`--i:${i}`}>
+              <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="stuck__title">{p.title}</h3>
+              <p class="stuck__desc">{p.desc}</p>
+              <p class="stuck__fix">
+                <Icon name="mdi:arrow-right" aria-hidden="true" />
+                {p.fix}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="score-card" data-reveal>
+        <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
+          <path class="score-gauge__track" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
+          <path class="score-gauge__fill" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
+        </svg>
+        <div class="flex flex-col gap-3">
+          <h2 class="font-bold">{c.score.title}</h2>
+          <p class="max-w-xl text-lg text-muted text-balance">{c.score.stat}</p>
+        </div>
+        <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
+          <Button variant="secondary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
+            {c.score.cta.text}
+          </Button>
+          <p class="text-sm text-subtle text-pretty min-[56rem]:text-end">{c.score.reassurance}</p>
+        </div>
       </div>
     </div>
   </Section>
@@ -91,6 +109,31 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         </ul>
       </div>
       <p class="logos__note text-subtle">{c.logos.note}</p>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <div class="home-fix">
+      <div class="home-head">
+        <SectionHeader title={c.outcomes.title} subtitle={c.outcomes.lead} />
+      </div>
+      <ul class="proof" aria-label={c.outcomes.listLabel}>
+        {
+          c.outcomes.items.map((o, i) => (
+            <li class:list={["proof__card", o.lead && "proof__card--lead"]} data-anim="rise" style={`--i:${i}`}>
+              <p class="proof__figure">{o.figure}</p>
+              <p class="proof__line">{o.line}</p>
+              <p class="proof__source">
+                {o.source}<FootnoteRef id={o.footnoteId} />
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="proof__foot">
+        <p>{c.outcomes.note}</p>
+        <Button variant="secondary" href={c.outcomes.cta.href} icon class="w-full sm:w-auto">{c.outcomes.cta.text}</Button>
+      </div>
     </div>
   </Section>
 
@@ -123,83 +166,76 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   <Section padding="lg" width="7xl" background="accent">
     <div class="trace-band">
       <div class="compare-head">
-        <h2 class="compare-head__title">{c.compare.title}</h2>
-        <p class="compare-head__lead">{c.compare.lead}</p>
-        <a class="compare__link" href={c.compare.link.href}>
-          {c.compare.link.text}
+        <h2 class="compare-head__title"><HighlightText text={c.path.title} soften /></h2>
+        <p class="compare-head__lead">{c.path.lead}</p>
+        <ol class="path">
+          {
+            c.path.steps.map((s, i) => (
+              <li class="path__step">
+                <span class="path__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3 class="path__title">
+                    {s.title}
+                    {s.noCharge && <span class="path__tag">{c.path.noChargeLabel}</span>}
+                  </h3>
+                  <p class="path__desc">{s.desc}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <a class="compare__link" href={c.path.link.href}>
+          {c.path.link.text}
           <Icon name="mdi:arrow-right" aria-hidden="true" />
         </a>
       </div>
-      <fieldset class="asks ground-night" data-reveal>
-        <legend class="sr-only">{c.compare.groupLabel}</legend>
-        <div class="asks__tabs">
-          {
-            c.compare.asks.map((ask, i) => (
-              <label class="asks__tab">
-                <input class="sr-only" type="radio" name="asks" value={`${i}`} checked={i === 0} />
-                <span>{ask.who}</span>
-              </label>
-            ))
-          }
+      <figure class="sample ground-night" data-reveal>
+        <figcaption class="sample__label">{c.path.sample.label}</figcaption>
+        <div class="sample__head">
+          <p class="sample__title">{c.path.sample.title}</p>
+          <p class="sample__total"><b>{c.path.sample.total}</b><small>/100</small></p>
+          <span class="sample__band">{c.path.sample.band}</span>
         </div>
-        {
-          c.compare.asks.map((ask, i) => (
-            <div class="asks__panel" data-ask={`${i}`}>
-              <p class="asks__when">{ask.when}</p>
-              <p class="asks__question">{ask.question}</p>
-              <p class="asks__answer">{ask.answer}</p>
-            </div>
-          ))
-        }
-      </fieldset>
+        <table class="sample__dims">
+          <caption class="sr-only">{c.path.sample.title}, by check, out of 100</caption>
+          <tbody>
+            {
+              c.path.sample.dims.map((d) => (
+                <tr data-tone={d.value >= 60 ? "ok" : d.value >= 40 ? "warn" : "crit"}>
+                  <th scope="row">{d.name}</th>
+                  <td class="sample__meter"><span style={`inline-size:${d.value}%`}></span></td>
+                  <td class="sample__value">{d.value}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+        <p class="sample__fix"><b>{c.path.sample.fixLabel}.</b> {c.path.sample.fix}</p>
+        <a class="compare__link" href={c.path.cta.href}>
+          {c.path.cta.text}
+          <Icon name="mdi:arrow-right" aria-hidden="true" />
+        </a>
+      </figure>
     </div>
   </Section>
 
   <Section padding="lg" width="7xl">
-    <div class="home-split">
-      <div class="home-head">
-        <SectionHeader title={c.segments.title} subtitle={c.segments.lead} />
-      </div>
-      <div>
-        <ul class="segments" aria-label={c.segments.listLabel}>
-          {
-            c.segments.rows.map((row, i) => (
-              <li data-anim="rise" style={`--i:${i}`}>
-                <a href={row.href} class="segments__row">
-                  <h3 class="segments__name">{row.segment}</h3>
-                  <span class="segments__offer">{row.offer}</span>
-                  <span class="segments__line text-muted">{row.line}</span>
-                  <Icon name="mdi:arrow-right" class="segments__arrow" aria-hidden="true" />
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
-  </Section>
-
-  <Section padding="lg" width="7xl">
-    <div class="market" data-reveal>
-      <div class="home-head">
-        <h2 class="text-4xl"><HighlightText text={c.marketplace.title} soften /></h2>
-        <p class="lead max-w-2xl text-balance">{c.marketplace.lead}</p>
-      </div>
-      <div class="market__actions">
-        <ul class="market__chips" aria-label={c.marketplace.chipsLabel}>
-          {
-            c.marketplace.chips.map((chip) => (
-              <li>
-                <a href={`${c.marketplace.chipBase}?category=${chip.slug}`} class="market__chip">{chip.label}</a>
-              </li>
-            ))
-          }
-        </ul>
-        <div>
-          <Button variant="secondary" href={c.marketplace.cta.href} icon class="w-full sm:w-auto">{c.marketplace.cta.text}</Button>
-        </div>
-      </div>
-    </div>
+    <ul class="explore" aria-label={c.explore.label}>
+      {
+        c.explore.items.map((item, i) => (
+          <li data-anim="rise" style={`--i:${i}`}>
+            <a class="explore__card" href={item.cta.href}>
+              <h2 class="explore__title"><HighlightText text={item.title} soften /></h2>
+              <p class="explore__lead">{item.lead}</p>
+              <span class="explore__cta go">
+                {item.cta.text}
+                <span class="sq"><Icon name="mdi:arrow-right" aria-hidden="true" /></span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   {
@@ -216,11 +252,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
                 <h3 class="posts__title">
                   <a href={post.href} class="posts__link">{post.title}</a>
                 </h3>
-                <div class="posts__foot">
-                  <span class="posts__more" aria-hidden="true">
-                    {c.blog.linkText}
-                    <Icon name="mdi:arrow-right" />
-                  </span>
+                <p class="posts__desc">{post.description}</p>
+                <div class="posts__foot go" aria-hidden="true">
+                  {c.blog.linkText}
+                  <span class="sq"><Icon name="mdi:arrow-right" /></span>
                 </div>
               </article>
             </li>
@@ -238,12 +273,36 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     description={c.cta.description}
     ctaText={c.cta.ctaText}
     ctaHref={c.cta.ctaHref}
+    secondaryText={c.cta.secondaryText}
+    secondaryHref={c.cta.secondaryHref}
     reassurance={c.cta.reassurance}
   />
 </BaseLayout>
 
 <script>
   import { motionEnabled } from "../scripts/core/motion";
+
+  let wordTimers: number[] = [];
+
+  function initHeroWords() {
+    wordTimers.forEach(clearTimeout);
+    wordTimers = [];
+    const head = document.querySelector<HTMLElement>("[data-words]");
+    const word = head?.querySelector<HTMLElement>(".hero-word");
+    if (!head || !word || !motionEnabled()) return;
+    const words = (head.dataset.words ?? "").split(" ").filter(Boolean);
+    if (words.length < 2) return;
+    const show = (w: string) => {
+      word.textContent = `${w},`;
+      word.style.animation = "none";
+      void word.offsetWidth;
+      word.style.animation = "m-word 0.42s var(--ease-asmr) both";
+    };
+    word.textContent = `${words[0]},`;
+    words.slice(1).forEach((w, i) => {
+      wordTimers.push(window.setTimeout(() => show(w), 1100 + i * 950));
+    });
+  }
 
   function initGauge() {
     const g = document.querySelector<SVGElement>("[data-gauge]");
@@ -355,8 +414,14 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   }
 
   document.addEventListener("astro:page-load", () => {
+    initHeroWords();
     initGauge();
     initMarquee();
     initCube();
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    wordTimers.forEach(clearTimeout);
+    wordTimers = [];
   });
 </script>

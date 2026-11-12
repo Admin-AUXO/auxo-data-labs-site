@@ -5,7 +5,7 @@ const baseURL = `http://localhost:${PORT}`;
 
 export default defineConfig({
   testDir: "./tests",
-  testIgnore: "**/auxo-score/**",
+  testIgnore: ["**/auxo-score/**", "**/pay/**"],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

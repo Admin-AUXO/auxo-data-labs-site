@@ -226,7 +226,7 @@ const faqItems = c.faq.items.map((i) => ({ title: i.question, body: escapeHtml(i
         {
           c.setup.steps.map((step, i) => (
             <li class="mkt-how__step" data-anim="rise" style={`--i:${i}`}>
-              <span class="mkt-how__num" aria-hidden="true">{i + 1}</span>
+              <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <p>{step}</p>
             </li>
           ))

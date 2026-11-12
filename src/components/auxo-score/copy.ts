@@ -45,14 +45,14 @@ export const SCORE_COPY: ScoreCopy = {
   meta: {
     title: "AI readiness assessment: the AUXO Score",
     description:
-      "An AI readiness assessment in 10 questions. Five checks on your data, a score out of 100, about 3 minutes. No sign-up.",
+      "An AI readiness assessment in 10 questions. Five checks on your AI set-up, a score out of 100, about 3 minutes. No sign-up.",
   },
   intro: {
     default: {
       eyebrow: "The AUXO Score",
-      title: "How ready is your data for AI?",
+      title: "How ready is your company for AI?",
       lede: (n) =>
-        `${n} questions. Answer for a normal month, not your best one. You get a score out of 100.`,
+        `${n} questions. Answer for a normal month. You get a score out of 100.`,
     },
     dimensionsLabel: "Dimensions measured",
     facts: { rounds: "questions", minutes: "min", score: "your score" },
@@ -60,12 +60,12 @@ export const SCORE_COPY: ScoreCopy = {
     resumeButton: "Resume",
     startOverButton: "Start over",
     startButton: "Start the AUXO Score →",
-    note: "Not sure of an answer? Pick \"I don't know\". No sign-up. We ask for a work email before the result, so we can send it to you.",
+    note: "Not sure? Pick \"I don't know\". We ask for a work email before the result so we can send it.",
   },
   gate: {
     eyebrow: "Your result is ready",
     title: "Where should we send your result?",
-    lede: "Your score, band and first fix, on screen now and by email.",
+    lede: "Your score, band and first fix, on screen and by email.",
     label: "Work email",
     button: "See my result",
     newsletter: "Send me the AUXO newsletter every 2 weeks.",
@@ -75,7 +75,7 @@ export const SCORE_COPY: ScoreCopy = {
     next: {
       title: "Next step",
       apply: {
-        what: "A 30-minute call. Bring the number you doubt. No charge.",
+        what: "A 30-minute call about your result. No charge.",
         text: "Apply for a Founder review",
         href: "/apply/",
       },
@@ -87,7 +87,7 @@ export const SCORE_COPY: ScoreCopy = {
     status: "No score yet",
     title: "Too many unknowns to score.",
     default: {
-      lede: "You answered \"I don't know\" three or more times. That's a finding in itself: it's hard to trust data nobody can see. Try again with someone from finance or operations, or talk to us.",
+      lede: "You answered \"I don't know\" three or more times. Try again with whoever looks after your tools, or talk to us.",
       talk: { text: "Apply for a Founder review", href: "/apply/" },
     },
     retake: "Retake with a colleague",

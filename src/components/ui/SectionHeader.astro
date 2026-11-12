@@ -24,7 +24,7 @@ const wrap =
     ? "items-center text-center mx-auto max-w-2xl"
     : "items-start text-left max-w-3xl";
 ---
-<div class={`flex flex-col gap-3 ${wrap} ${className}`.trim()} data-reveal>
+<div class={`flex flex-col gap-[var(--space-head)] ${wrap} ${className}`.trim()} data-reveal>
   {eyebrow && <p class="section-index">{eyebrow}</p>}
   <h2 class="text-3xl" data-anim="clip-up">
     <HighlightText text={title} highlight={highlight} soften />

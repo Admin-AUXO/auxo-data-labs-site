@@ -59,26 +59,15 @@ const faqItems = c.faq.items.map((item) => ({
             aria-labelledby={`${step.id}-title`}
           >
             <header class="step__tab">
+              <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <h2 id={`${step.id}-title`} class="step__name">{step.name}</h2>
               <p class="step__cost" data-tone={step.cost.tone}>{step.cost.label}</p>
             </header>
 
             <div class="step__inner">
-              <p class="step__promise"><HighlightText text={step.promise} soften /></p>
-              <div class="step__main">
-                <div class="step__text">
-                  <h3 class="sr-only">{c.ladder.labels.whatYouGet}</h3>
-                  <ul class="step__gets">
-                    {step.whatYouGet.map((g) => (
-                      <li class="step__get">
-                        <h4 class="step__get-title">
-                          {g.title}
-                          {g.tag && <span class="step__tag" data-tone={g.tone}>{g.tag}</span>}
-                        </h4>
-                        <p class="step__get-body">{g.body}</p>
-                      </li>
-                    ))}
-                  </ul>
+              <div class="step__top">
+                <div class="step__lede">
+                  <p class="step__promise"><HighlightText text={step.promise} soften /></p>
                   {step.links.length > 0 && (
                     <ul class="step__links">
                       {step.links.map((l) => (
@@ -93,10 +82,20 @@ const faqItems = c.faq.items.map((item) => ({
                   )}
                   {step.id === "build" && <p class="step__own">{c.ladder.build.ownershipLine}</p>}
                 </div>
-
                 <Specimen example={step.example} />
               </div>
-
+              <h3 class="sr-only">{c.ladder.labels.whatYouGet}</h3>
+              <ul class="step__gets">
+                {step.whatYouGet.map((g) => (
+                  <li class="step__get">
+                    <h4 class="step__get-title">
+                      {g.title}
+                      {g.tag && <span class="step__tag" data-tone={g.tone}>{g.tag}</span>}
+                    </h4>
+                    <p class="step__get-body">{g.body}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </article>
         ))
@@ -104,8 +103,11 @@ const faqItems = c.faq.items.map((item) => ({
     </div>
 
     <article id={c.ladder.upkeep.id} class="upkeep hiw-anchor" aria-labelledby="managed-upkeep-title">
-      <h2 id="managed-upkeep-title" class="upkeep__title">{c.ladder.upkeep.title}</h2>
-      <p class="upkeep__body">{c.ladder.upkeep.promise} {c.ladder.upkeep.terms}</p>
+      <span class="sq" aria-hidden="true">+</span>
+      <div class="upkeep__text">
+        <h2 id="managed-upkeep-title" class="upkeep__title">{c.ladder.upkeep.title}</h2>
+        <p class="upkeep__body">{c.ladder.upkeep.promise} {c.ladder.upkeep.terms}</p>
+      </div>
       <p class="upkeep__tag">{c.ladder.upkeep.label}</p>
     </article>
   </Section>
@@ -117,8 +119,9 @@ const faqItems = c.faq.items.map((item) => ({
     </div>
     <ol class="method">
       {
-        c.method.dimensions.map((d) => (
+        c.method.dimensions.map((d, i) => (
           <li class="method__item">
+            <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
             <h3 class="method__name">{d.name}</h3>
             <p class="method__question">{d.question}</p>
           </li>

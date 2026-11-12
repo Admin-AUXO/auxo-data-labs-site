@@ -42,10 +42,10 @@ test("primary nav lists the new routes", async ({ page }) => {
 
 test("homepage hero and section links", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator("main h1")).toContainText("Your data, ready for AI");
+  await expect(page.locator("main h1")).toContainText("ready for AI");
   await expect(page.locator('main a[href="/how-it-works/"]')).toHaveCount(1);
-  await expect(page.locator('main a[href="/pricing/#growing"]')).toHaveCount(1);
-  await expect(page.locator('main a[href^="/marketplace/?category="]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/pricing/"]')).toHaveCount(1);
+  await expect(page.locator('main a[href="/marketplace/"]')).toHaveCount(1);
 });
 
 test("how it works has the ladder anchors", async ({ page }) => {

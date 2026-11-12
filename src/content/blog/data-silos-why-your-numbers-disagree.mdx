@@ -7,17 +7,26 @@ tags: ["Data foundation", "Data silos", "AI readiness"]
 draft: true
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
 **In short:** a data silo is data held in one tool that other tools cannot see, so the same number differs between them. Fix it by agreeing what each number means, then connecting the core tools into one clean source in your own accounts.
 
-The board deck says ARR was one number. The finance model says another. The accounts say a third.
+Say you open the board deck, the finance model and the accounts side by side. The deck puts ARR at one number. The model says another. The accounts say a third.
 
 Nobody made an error. Each tool is doing what it was set up to do. That is what data silos look like from the inside, and it is what an investor finds in diligence.
 
-## What a data silo is
+## What is a data silo?
 
-A data silo is data held in one tool or team that others cannot easily see or reuse. Each silo has its own definitions. A single source of truth does not mean one giant system. It means each important number has one agreed definition, one owning system and one clean copy that everything else reads from.
+A data silo is data held in one tool or team that others cannot easily see or reuse. Each silo has its own definitions.
 
-## How to tell you have one
+<Callout>
+A single source of truth does not mean one giant system.
+</Callout>
+
+It means each important number has one agreed definition, one owning system and one clean copy that everything else reads from.
+
+## How can you tell you have one?
 
 You rarely see a silo directly. You see its symptoms.
 
@@ -29,7 +38,14 @@ You rarely see a silo directly. You see its symptoms.
 
 These problems are common. In MuleSoft's 2026 survey, the average organisation ran 957 applications and only 27% of them were connected ([MuleSoft](https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/)). In its 2025 survey, 90% of organisations said data silos caused business obstacles ([Salesforce](https://www.salesforce.com/blog/mulesoft-connectivity-benchmark-2025/)). Both are vendor surveys, so read them as a signal, not a measurement of your business.
 
-## AI makes it worse
+<LinkCard
+  href="https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/"
+  source="MuleSoft, 2026"
+  title="Agentic Transformation Reaches New Heights: 2026 Connectivity Benchmark Report Insights"
+  note="The survey behind the 957 applications and 27% connected figures. It is a vendor survey, so read it as a signal."
+/>
+
+## Why does AI make it worse?
 
 People cope with silos. They know the finance number goes in the investor update and the sales number in the pipeline review.
 
@@ -47,16 +63,23 @@ You own all of it. The data sits in your cloud accounts, under your logins. A fo
 
 If the first job is a board deck or data room that ties out, the [Investor metrics stack](/marketplace/) covers it.
 
-## What not to do
+## What to leave alone
 
-Do not start with a big warehouse project. Without agreed definitions, it only collects your disagreements in one place. Do not connect every tool either. Most of the value sits in a handful. Add more once the first set is trusted.
+Do not start with a big warehouse project. Without agreed definitions, it only collects your disagreements in one place.
 
-## How long a first pass takes
+Do not connect every tool either. Most of the value sits in a handful. Add more once the first set is trusted.
+
+## How long does a first pass take?
 
 It depends on how many tools are involved and how messy the history is. With the scope held to the core tools and key numbers, the first pass is measured in weeks.
 
 Agreeing definitions is usually the slowest part, because it needs the people who own the numbers in one room. The technical connection is often quicker than that conversation.
 
-## Where to start
+## What to do next
 
-If you are not sure how many silos you have, or which numbers disagree most, [Take the AUXO Score](/auxo-score/). It is 10 questions and takes about 3 minutes.
+If you are not sure where your set-up stands, [take the AUXO Score](/auxo-score/). It is ten questions on your tools, data, set-up, adoption and measurement, and takes about three minutes.
+
+## Sources
+
+- MuleSoft, [Agentic Transformation Reaches New Heights: 2026 Connectivity Benchmark Report Insights](https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/), 2026
+- Salesforce, [2025 MuleSoft Connectivity Benchmark Report Insights](https://www.salesforce.com/blog/mulesoft-connectivity-benchmark-2025/), 2025

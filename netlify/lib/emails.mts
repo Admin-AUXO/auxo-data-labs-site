@@ -91,7 +91,7 @@ export function nurture(step: 1 | 2 | 3, n: Nurture) {
   if (step === 1) {
     const inner = `<p style="margin:0 0 14px">Hi,</p>
 <p style="margin:0 0 14px">You took the AUXO Score a couple of days ago and came out <b>${esc(n.band)}</b>. Here's one idea worth five minutes.</p>
-<h2 style="font-size:19px;margin:22px 0 8px;color:#0a0a0a">Your AI assistant is not the hard part</h2>
+<h2 style="font-size:19px;margin:22px 0 8px;color:#0a0a0a">Why AI pilots stall, even with Claude or ChatGPT</h2>
 <p style="margin:0 0 14px">Most AI pilots don't stall on the model. They stall because two teams bring two different numbers for the same thing, and nobody trusts the report the AI is reading from. The post covers three questions to ask your leadership team before you spend on AI.</p>
 ${readLink("/blog/your-ai-assistant-is-not-the-hard-part/", "business", "Read the post")}
 ${nurtureClose(n, "business")}`;
@@ -100,7 +100,7 @@ ${nurtureClose(n, "business")}`;
   if (step === 2) {
     const inner = `<p style="margin:0 0 14px">Hi,</p>
 <p style="margin:0 0 14px">If someone on your team would be the one to build it, this one's for them.</p>
-<h2 style="font-size:19px;margin:22px 0 8px;color:#0a0a0a">The model is the easy part</h2>
+<h2 style="font-size:19px;margin:22px 0 8px;color:#0a0a0a">Beyond the model: what an AI set-up needs</h2>
 <p style="margin:0 0 14px">Often the model can do part of the job. The hard part is the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and who keeps it running. The post is the checklist we use before building any agent.</p>
 ${readLink("/blog/the-model-is-the-easy-part/", "technical", "Read the checklist")}
 ${nurtureClose(n, "technical")}`;

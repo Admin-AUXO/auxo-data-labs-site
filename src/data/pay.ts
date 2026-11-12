@@ -20,7 +20,7 @@ export const payContent = {
     meta: { title: "Thank you", description: "Your deposit is confirmed." },
     checking: "Confirming your payment…",
     title: "Thank you. Your deposit is confirmed.",
-    lead: "A receipt is on its way to your email. Vignesh will be in touch within one business day to schedule the kick-off.",
+    lead: "A receipt is on its way. Vignesh will be in touch within one business day to schedule the kick-off.",
     pendingTitle: "Thank you. Your payment is processing.",
     pending: "You'll get a receipt by email once it clears.",
     errorTitle: "Thank you.",

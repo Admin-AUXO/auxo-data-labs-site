@@ -1,17 +1,23 @@
 ---
-title: "The model is the easy part"
-description: "Claude or an agent you already have can do part of the job. The hard part is the data and controls around it. A checklist for founders and first engineers."
+title: "Beyond the model: what an AI set-up needs"
+description: "Claude or an agent you already have can do part of the job. What matters is the data and controls around it. A checklist for founders and first engineers."
 date: 2026-10-25
 author: "Ajay Kumar"
 tags: ["AI agents", "Data infrastructure", "Evaluation", "Engineering"]
 draft: false
 ---
 
-"We already pay for Claude. Our engineers have built an agent or two. Why would we need anyone else?"
+import BarChart from "../../components/blog/BarChart.astro";
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
 
-## In short
+**In short:** Often you don't need anyone else. Claude or an agent you built can do part of the job. What decides whether it works at company scale is the set-up around it: the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and how it keeps running as things change. This is the technical version, for the engineer or CTO who would build it and keep it running.
 
-Often you don't. Claude or an agent you built can do part of the job. The model is rarely the hard part. The hard part is the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and keeping it running as things change. This is the technical version, for the engineer or CTO who would build it and keep it running.
+## "We already pay for Claude. Why would we need anyone else?"
+
+Say you are a founder and you have asked that question. Your engineers have built an agent or two. It works in demos.
+
+It may well be enough. Here is how to tell.
 
 ## Start with what already works
 
@@ -19,9 +25,9 @@ Claude, ChatGPT and Microsoft Copilot help people draft, summarise, write code a
 
 In a study of more than 5,000 customer support agents, access to a generative AI assistant raised issues resolved per hour [by 14% on average](https://www.nber.org/papers/w31161). Narrow steps go well too: Salesforce AI Research's CRMArena-Pro benchmark found leading agents scored above 83% on single-turn workflow execution ([arXiv, 2025](https://arxiv.org/abs/2505.18878)).
 
-If your team uses an assistant on well-scoped tasks, keep doing it. The trouble starts when the work becomes a company process.
+If your team uses an assistant on well-scoped tasks, keep doing it. The picture changes when the work becomes a company process.
 
-## The system around the model is most of the work
+## What sits around the model
 
 A production agent is a model plus everything around it. Take an agent that answers board questions about ARR, churn and runway. It reads from your CRM, billing tool and accounts. Then it needs:
 
@@ -34,21 +40,40 @@ A production agent is a model plus everything around it. Take an agent that answ
 - **Versioning.** Models, prompts and data change. Pin versions and re-run your evaluations before you switch.
 - **Security and data residency.** Where the data goes, who sees it, whether the vendor keeps it, and which region it sits in. In the UAE, the US and Europe, that answer can carry legal weight.
 
-None of this depends on how capable the model is. A better model does not fix a missing data contract.
+<Callout>None of this depends on how capable the model is. A better model does not fill in a missing data contract.</Callout>
 
-## Where it breaks in practice
+## Where it gets hard in practice
 
 These benchmarks tested 2024 and 2025 models, and newer ones score higher. The pattern still shows where the work gets hard.
 
 TheAgentCompany is a research benchmark of 175 realistic office tasks in a simulated company ([arXiv, 2024](https://arxiv.org/abs/2412.14161)). The best agent tested fully completed about 30% of them. The hardest tasks involved talking to colleagues and working through complex office web apps ([The Register, June 2025](https://www.theregister.com/2025/06/29/ai_agents_fail_a_lot/)).
 
-CRMArena-Pro tested agents on realistic CRM data. Success fell from about 58% on single-turn tasks to about 35% when the work ran over several turns. The authors also found the agents showed "near-zero inherent confidentiality awareness" ([arXiv, 2025](https://arxiv.org/abs/2505.18878)). A model will not protect data it was never told is sensitive. Permissions and filtering have to sit outside it.
+CRMArena-Pro tested agents on realistic CRM data. Success fell when the work ran over several turns.
 
-Cost behaves the same way. Anthropic's own engineers report that agents use about four times the tokens of a chat, and multi-agent systems about 15 times ([Anthropic, June 2025](https://www.anthropic.com/engineering/multi-agent-research-system)). They also found multi-agent setups did much better on research tasks, so the cost can be worth paying for valuable work.
+<BarChart
+  title="Agents on realistic CRM tasks: success rate"
+  items={[
+    { label: "Single-turn tasks", value: 58, display: "about 58%" },
+    { label: "Multi-turn tasks", value: 35, display: "about 35%", tone: "warn" },
+  ]}
+  source="Salesforce AI Research, CRMArena-Pro, 2025"
+  href="https://arxiv.org/abs/2505.18878"
+/>
 
-And projects stall. In S&P Global's 2025 survey, 42% of companies said they had abandoned most of their AI initiatives, up from 17% the year before. Cost, data privacy and security were among the top obstacles ([CIO Dive, March 2025](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/)). None of those is a model problem.
+The authors also found the agents showed "near-zero inherent confidentiality awareness" ([arXiv, 2025](https://arxiv.org/abs/2505.18878)). A model will not protect data it was never told is sensitive, so permissions and filtering have to sit outside it.
 
-## The model makers say the same
+<LinkCard
+  href="https://arxiv.org/abs/2505.18878"
+  source="arXiv, 2025"
+  title="CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions"
+  note="The benchmark behind the single-turn, multi-turn and confidentiality findings."
+/>
+
+Cost grows with the set-up too. Anthropic's own engineers report that agents use about four times the tokens of a chat, and multi-agent systems about 15 times ([Anthropic, June 2025](https://www.anthropic.com/engineering/multi-agent-research-system)). They also found multi-agent setups did much better on research tasks, so the cost can be worth paying for valuable work.
+
+And projects stall. In S&P Global's 2025 survey, 42% of companies said they had abandoned most of their AI initiatives, up from 17% the year before. Cost, data privacy and security were among the top obstacles ([CIO Dive, March 2025](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/)).
+
+## What the model makers say
 
 Anthropic's guide to [building effective agents](https://www.anthropic.com/research/building-effective-agents) recommends starting with the simplest setup that works and adding agents only when needed. Its guide to [evaluating agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) says teams without evaluations end up catching problems in production, and suggests starting with 20 to 50 tasks drawn from real failures.
 
@@ -56,7 +81,14 @@ OpenAI's [practical guide to building agents](https://cdn.openai.com/business-gu
 
 Microsoft's [deployment blueprint](https://learn.microsoft.com/en-us/microsoft-365/copilot/secure-govern-copilot-foundational-deployment-guidance) asks customers to fix oversharing before rolling out Copilot and agents. Its [2025 Responsible AI Transparency Report](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Responsible-AI-Transparency-Report-2025-vertical.pdf) says enterprise customers must put their own human oversight and access controls in place.
 
-Three model makers, one message. They supply the model. Data readiness, evaluation and oversight are the customer's job.
+Three model makers, one message. They supply the model. Data readiness, evaluation and oversight sit with the customer.
+
+<LinkCard
+  href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+  source="Anthropic"
+  title="Demystifying evals for AI agents"
+  note="How to build an evaluation set from real failures before you ship."
+/>
 
 ## A checklist before an agent touches real work
 
@@ -73,7 +105,7 @@ Ten clear yeses.
 9. A clear answer on where data is processed and stored, and whether the vendor keeps it.
 10. Code, documentation, accounts and access in your company's name, so it runs without the people who built it.
 
-If your current agent has all ten, keep it. Swapping models or vendors for its own sake adds risk and little else. If it has three, the model was never the problem.
+If your current agent has all ten, keep it. Swapping models or vendors for its own sake adds risk and little else. If it has three, the gaps to close are in the set-up, and a different model will not close them.
 
 ## How AUXO helps
 
@@ -85,4 +117,22 @@ We do the work around the model, with Claude or ChatGPT inside if you like. You 
 
 For a startup, the usual starting points are [Investor metrics and Chat with your data](/marketplace/). AI where it earns its place. A person approves what goes out. If what you have works, we'll say so.
 
-For a quick read on your own data, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+## What to do next
+
+Run your current agent against the ten-point checklist above. Count the yeses.
+
+For a quick read on your wider AI set-up, [take the AUXO Score](/auxo-score/). It covers tools, data, set-up, adoption and measurement: ten questions, about three minutes.
+
+## Sources
+
+- NBER, [Generative AI at Work](https://www.nber.org/papers/w31161)
+- Salesforce AI Research, [CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions](https://arxiv.org/abs/2505.18878), 2025
+- [TheAgentCompany: Benchmarking LLM Agents on Consequential Real World Tasks](https://arxiv.org/abs/2412.14161), arXiv, 2024
+- The Register, [report on the TheAgentCompany benchmark from Carnegie Mellon](https://www.theregister.com/2025/06/29/ai_agents_fail_a_lot/), 2025
+- Anthropic, [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system), 2025
+- CIO Dive, [AI project failure rates are on the rise: report](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/), 2025
+- Anthropic, [Building effective AI agents](https://www.anthropic.com/research/building-effective-agents)
+- Anthropic, [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+- OpenAI, [A practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
+- Microsoft, [Secure & Governed Data Foundation for Microsoft Copilot - Foundational Deployment Guidance](https://learn.microsoft.com/en-us/microsoft-365/copilot/secure-govern-copilot-foundational-deployment-guidance)
+- Microsoft, [2025 Responsible AI Transparency Report](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Responsible-AI-Transparency-Report-2025-vertical.pdf), 2025

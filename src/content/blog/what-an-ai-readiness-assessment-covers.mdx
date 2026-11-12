@@ -7,15 +7,18 @@ tags: ["AI Readiness", "Data Readiness", "Checklist"]
 draft: true
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
 **In short:** an AI readiness assessment checks whether the data an AI tool would read is accurate, complete, consistent, timely and trusted, and who owns it and approves its use. It comes before you buy the tool.
 
-You want to use AI on real work. Someone says you should run an AI readiness assessment first. Nobody explains what that means.
+Say you want an AI tool to sort inbound leads. A colleague suggests an AI readiness assessment first, and nobody can say what that involves.
 
 Here is what it looks at, what it leaves out, and how to run a quick version yourself.
 
-## What the check looks at
+## What does the check look at?
 
-An AI readiness assessment asks one question: can an AI tool read your data and get the right answer? We use five checks.
+A data readiness assessment asks one question: can an AI tool read your data and get the right answer? We use five checks.
 
 - **Accurate.** The number matches reality. The ARR in your CRM matches the invoices in your accounts.
 - **Complete.** The fields you rely on are filled in. If a tool must sort leads by country, most leads need a country.
@@ -25,17 +28,28 @@ An AI readiness assessment asks one question: can an AI tool read your data and 
 
 The same lens covers who owns each source, what the tool may touch and who approves its work.
 
-## What it is not
+<Callout>
+The model is rarely the weak point.
+</Callout>
 
-- **Not a security review.** It notes who can see what. It does not test your defences.
-- **Not a compliance certificate.** It does not tell you that you meet a standard. For risk management, the voluntary [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) is a useful reference.
-- **Not a purchase decision made for you.** A good check can end with "you do not need this tool yet".
+## What it leaves out
 
-## Why it matters
+- **It is not a security review.** It notes who can see what. It does not test your defences.
+- **It is not a compliance certificate.** It does not tell you that you meet a standard. For risk management, the voluntary [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) is a useful reference.
+- **It does not make the purchase decision for you.** A good check can end with "you do not need this tool yet".
+
+<LinkCard
+  href="https://www.nist.gov/itl/ai-risk-management-framework"
+  source="NIST"
+  title="AI Risk Management Framework"
+  note="The voluntary framework for managing AI risk, if you need a wider reference."
+/>
+
+## Why bother?
 
 Gartner reports that [63% of organisations](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) either lack the right data management practices for AI or are unsure they have them. It also predicts that organisations will abandon 60% of AI projects not supported by AI-ready data.
 
-The model is rarely the weak point. See [the model is the easy part](/blog/the-model-is-the-easy-part/).
+Gartner's figures are why the data comes first. See [the model is the easy part](/blog/the-model-is-the-easy-part/).
 
 ## Run a quick one in an afternoon
 
@@ -56,7 +70,9 @@ Write each answer down in one line.
 
 ## What good and bad answers look like
 
-A good answer is specific: "The CRM, owned by the head of sales. 19 of 20 records have a country." A bad answer is vague or missing: "Probably the shared drive." "Nobody owns it." That is not a failure. It is the finding. Watch for "it depends who you ask". That is a consistency problem, and the most common one.
+A good answer is specific: "The CRM, owned by the head of sales. 19 of 20 records have a country." A bad answer is vague or missing: "Probably the shared drive." "Nobody owns it."
+
+That is not a failure. It is the finding. Watch for "it depends who you ask". That is a consistency problem, and the most common one.
 
 ## What to fix first
 
@@ -66,6 +82,11 @@ A good answer is specific: "The CRM, owned by the head of sales. 19 of 20 record
 4. **Set the approval step.** A person approves anything sent, posted, paid or decided.
 5. **Only then** choose the tool.
 
-## Where to start
+## What to do next
 
-Our version of this check is the AUXO Score. [Take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+The data check above looks at one use case in depth. For a wider read on your AI set-up, [take the AUXO Score](/auxo-score/). It asks ten questions across tools, data, set-up, adoption and measurement, and takes about three minutes.
+
+## Sources
+
+- NIST, [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework), 2023
+- Gartner, [press release on AI-ready data](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk), 2025

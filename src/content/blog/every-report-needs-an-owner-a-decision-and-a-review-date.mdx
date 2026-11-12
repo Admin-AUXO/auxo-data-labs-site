@@ -7,38 +7,75 @@ tags: ["Data readiness", "Ownership"]
 draft: false
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
 **In short:** Reports are easy to add and hard to retire, so the pile grows until nobody trusts it. Give each recurring report one owner, one decision it serves and a review date. Archive the rest.
 
-## How the pile grows
+## How does the pile grow?
 
-Someone asks a question. A report answers it and keeps running. Adding a report takes one request. Retiring one takes agreement from everyone who might still look at it. So the pile only grows. We call the result operating debt: the running cost of reporting that no longer serves a decision.
+Say it is the night before the board meeting. Someone is reconciling three versions of "monthly revenue" by hand: one in the CRM, one in the billing tool, one in the deck. It is a familiar scene.
 
-In a startup it looks like three versions of "monthly revenue" across the CRM, the billing tool and the board deck, and someone reconciling them by hand the night before the meeting.
+It starts with a question. A report answers it and keeps running. Adding a report takes one request. Retiring one takes agreement from everyone who might still look at it. So the pile only grows.
 
-In a survey of 566 data and analytics leaders, fewer than half (44%) said their team was effective at providing value to the organisation. In the same survey, 44% said their teams had grown in the past year ([Gartner](https://www.gartner.com/en/newsroom/press-releases/03-21-2023-gartner-survey-reveals-less-than-half-of-data-and-analytics-teams-effectively-provide-value-to-the-organization)).
+We call the result operating debt: the running cost of reporting that no longer serves a decision.
 
-The signs: reports that outlive their decisions, half of them still on last year's revenue rule, only the builder able to explain them, and alarm when anyone suggests switching one off.
+You may recognise the signs:
 
-## AI reads the stale report too
+- Reports outlive the decisions they were built for.
+- Half of them still use last year's revenue rule.
+- Only the builder can explain them.
+- There is alarm when anyone suggests switching one off.
 
-A person learns which report to ignore. An AI assistant doesn't. Connect one to your shared drive or warehouse and it reads the stale report alongside the live one. Microsoft makes the same point to its own customers. It says Copilot and agents work best when content is current and well governed, and it recommends archiving inactive sites so answers draw on current material ([Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-365/copilot/get-ready-copilot-sharepoint-advanced-management)).
+It is common. In a survey of 566 data and analytics leaders, fewer than half (44%) said their team was effective at providing value to the organisation. In the same survey, 44% said their teams had grown in the past year ([Gartner](https://www.gartner.com/en/newsroom/press-releases/03-21-2023-gartner-survey-reveals-less-than-half-of-data-and-analytics-teams-effectively-provide-value-to-the-organization)).
+
+## Why does AI make it matter more?
+
+A person learns which report to ignore. An AI assistant doesn't. Connect one to your shared drive or warehouse and it reads the stale report alongside the live one.
+
+Microsoft makes the same point to its own customers. It says Copilot and agents work best when content is current and well governed, and it recommends archiving inactive sites so answers draw on current material ([Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-365/copilot/get-ready-copilot-sharepoint-advanced-management)).
+
+<LinkCard
+  href="https://learn.microsoft.com/en-us/microsoft-365/copilot/get-ready-copilot-sharepoint-advanced-management"
+  source="Microsoft Learn"
+  title="Secure & Governed Data Foundation for Microsoft Copilot - Foundational Deployment Guidance"
+  note="Microsoft's deployment guidance on current, governed content, including archiving inactive sites."
+/>
 
 Operating debt used to cost hours. Now it can produce confident wrong answers. A diligence team that finds two versions of the same metric in your data room will ask which is true.
 
-## Three things every report needs
+## What does each report need?
 
-1. **An owner.** One named person, not a team.
-2. **A decision it serves.** One sentence: who uses it, for which call.
-3. **A review date.** Every 90 days is a sensible start.
+<Flow
+  title="Three things before a report keeps running"
+  steps={[
+    { label: "An owner", note: "One named person, not a team" },
+    { label: "A decision it serves", note: "One sentence: who uses it, for which call" },
+    { label: "A review date", note: "Every 90 days is a sensible start" },
+  ]}
+  caption="If any of the three is missing, the report is a candidate to archive."
+/>
 
-At each review, the owner confirms the decision it still serves, or the report is archived with a note on why and where its replacement lives. Archive rather than delete.
+At each review, the owner confirms the decision it still serves. If not, the report is archived with a note on why and where its replacement lives. Archive rather than delete.
 
 The first pass is a spreadsheet with one row per report and an afternoon of short conversations.
 
-## When not to bother
+## When can you skip this?
 
-With ten reports, you need one hour and a list. The rule earns its keep when nobody can say how many exist. Don't retire a report just because it is old: a cash report you read every Friday is doing its job.
+With ten reports, you need one hour and a list. The rule earns its keep when nobody can say how many exist.
+
+Don't retire a report just because it is old. A cash report you read every Friday is doing its job.
 
 ## What to do next
 
-Name all three, or switch the report off. To check how clean your reporting is today, [take the AUXO Score](/auxo-score/).
+<Callout>
+Name all three, or switch the report off.
+</Callout>
+
+To see how your own set-up looks across tools, data, set-up, adoption and measurement, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Gartner, [press release on data and analytics team effectiveness, 21 March 2023](https://www.gartner.com/en/newsroom/press-releases/03-21-2023-gartner-survey-reveals-less-than-half-of-data-and-analytics-teams-effectively-provide-value-to-the-organization), 2023
+- Microsoft Learn, [Secure & Governed Data Foundation for Microsoft Copilot - Foundational Deployment Guidance](https://learn.microsoft.com/en-us/microsoft-365/copilot/get-ready-copilot-sharepoint-advanced-management)

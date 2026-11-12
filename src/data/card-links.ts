@@ -58,7 +58,7 @@ export const cardPage = {
       name: "Vignesh Ramesh",
       first: "Vignesh",
       role: "Co-Founder & CEO",
-      note: "Happy to help with scope, pricing and getting started.",
+      note: "Scope, pricing and getting started.",
       vcard: "/vcard/vignesh-ramesh.vcf",
       contacts: [
         {
@@ -91,7 +91,7 @@ export const cardPage = {
       name: "Ajay Kumar",
       first: "Ajay",
       role: "Co-Founder & CTO",
-      note: "Happy to help with data, AI and getting it built.",
+      note: "Data, AI and getting it built.",
       vcard: "/vcard/ajay-kumar.vcf",
       contacts: [
         {

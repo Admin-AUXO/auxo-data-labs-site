@@ -7,18 +7,29 @@ tags: ["Claude", "Model choice", "AI in practice"]
 draft: true
 ---
 
-**In short.** Anthropic offers four Claude models. They differ in depth, speed and cost, not in whether they are smart enough. Match the model to how often a task runs and what a wrong answer costs, then test on your own examples.
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
+**In short:** Anthropic offers four Claude models. They differ in depth, speed and cost, not in whether they are smart enough. Match the model to how often a task runs and what a wrong answer costs, then test on your own examples.
+
+## Which one should you start with?
+
+Say you are a founder with a list of tasks you would like help with: the investor update, lead sorting, support replies, a pull request summary. Four models, and no obvious way to pick.
+
+The good news is that each one is good. You pick by the job.
 
 ## The four current models
 
-Each one is good. Pick by the job.
+Anthropic's own page on [choosing the right model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model) is the source for what follows.
 
-- **Claude Fable 5.2.** Anthropic's most capable model open to all customers. Anthropic positions it for demanding reasoning and long-running agent work: sessions that run for hours, multistep research, and analysis carried through to a finished document, spreadsheet or deck. It is the slowest and the most expensive of the four.
-- **Claude Opus 5.5.** Built for long-running coding and knowledge work. Anthropic's own guidance is to start with Opus 5.5 for most workloads. It is moderate on speed and sits between Fable and Sonnet on cost.
-- **Claude Sonnet 5.5.** Described as the best combination of speed and intelligence. It suits everyday work: data analysis, content creation, reading images and documents, and tool use. It is fast and costs less than Opus.
-- **Claude Haiku 5.5.** For high-volume, time-sensitive tasks such as classification, extraction and routing. It is the fastest and by far the cheapest.
+| Model | What Anthropic positions it for | Speed and cost |
+|---|---|---|
+| Claude Fable 5.2 | Its most capable model open to all customers. Demanding reasoning and long-running agent work: sessions that run for hours, multistep research, and analysis carried through to a finished document, spreadsheet or deck. | The slowest and the most expensive of the four. |
+| Claude Opus 5.5 | Long-running coding and knowledge work. Anthropic's own guidance is to start with Opus 5.5 for most workloads. | Moderate on speed. Sits between Fable and Sonnet on cost. |
+| Claude Sonnet 5.5 | Described as the best combination of speed and intelligence. Everyday work: data analysis, content creation, reading images and documents, and tool use. | Fast, and costs less than Opus. |
+| Claude Haiku 5.5 | High-volume, time-sensitive tasks such as classification, extraction and routing. | The fastest and by far the cheapest. |
 
-All four read text and images, work across languages and can use tools. All four share the same very large context window and the same knowledge cutoff. So the choice is not about features. It is about how much thinking a task needs, how fast you need the answer, and how many times you will run it.
+All four read text and images, work across languages and can use [tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview). All four share the same very large context window and the same knowledge cutoff. So the choice is not about features. It is about how much thinking a task needs, how fast you need the answer, and how many times you will run it.
 
 ## Match the model to the work
 
@@ -44,11 +55,20 @@ Anthropic describes two approaches.
 
 Both end in the same place. You test on your own work, then decide. Anthropic says a good evaluation set is the most important step.
 
+<LinkCard
+  href="https://platform.claude.com/docs/en/about-claude/models/choosing-a-model"
+  source="Anthropic, Claude Platform Docs"
+  title="Choosing the right model"
+  note="Anthropic's guidance on the models, the two ways to start and how to build an evaluation set."
+/>
+
 ## The model is rarely the hardest decision
 
+<Callout>
 The same model gives very different results depending on what it reads, what it is allowed to do and who checks its work.
+</Callout>
 
-A poor answer about last quarter's margin is rarely a model problem. It is usually two systems that define "revenue" differently. A bigger model will not fix that. It will give you a more articulate wrong answer.
+A poor answer about last quarter's margin is usually a set-up issue. Two systems may define "revenue" differently. A bigger model will not fix that. It will give you a more articulate wrong answer.
 
 ## Try this
 
@@ -60,8 +80,13 @@ Pick one recurring task. Write down three things:
 
 High volume and low cost of error points to Haiku. Low volume and high cost of error points to Opus or Fable. Everything between is a good place to try Sonnet. Run ten real examples through your choice and through the model one step up, and compare the results side by side.
 
-## Where AUXO helps
+## What to do next
 
 Getting a model to work reliably on your own data is where most of the effort goes. For startups, [Investor metrics](/marketplace/) is one place we start: it drafts the numbers behind your investor update from your own systems, and a person approves what goes out. We build on Claude, and we will say so when what you already have is good enough.
 
-For a quick read on how ready your data is, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+For a quick read on your own AI set-up, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Anthropic, [Choosing the right model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model), Claude Platform Docs
+- Anthropic, [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), Claude Platform Docs

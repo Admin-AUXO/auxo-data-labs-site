@@ -7,32 +7,82 @@ tags: ["Buying AI", "Decision-making"]
 draft: false
 ---
 
-**In short:** AI makes one step of the work faster. The process still runs at the pace of its slowest step, and that is usually a person's decision. Find that step before you buy anything.
+import BarChart from "../../components/blog/BarChart.astro";
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
 
-## The bottleneck moves
+**In short:** AI makes one step of the work faster. The whole process still moves at the pace of its slowest step, and that step is usually a decision. Find it before you buy anything.
 
-A founder sets up an AI assistant to draft the monthly investor update. Two days become an hour. The board call still happens on the same day, debates the same numbers and puts off the same calls.
+## The update got faster. The decision didn't.
 
-Every process has a slowest step. Speed up any other step and the queue in front of the slow one just gets longer.
+Picture a founder who sets up an AI assistant to draft the monthly investor update. What took two days now takes an hour. It feels like a win, and it is one.
 
-Faros AI, which sells engineering analytics, studied telemetry from over 10,000 developers in a 2025 report. On teams with high AI use, developers completed 21% more tasks and merged 98% more pull requests, but the time spent reviewing those pull requests rose 91%. Its reading: the gains stall at human approval ([Faros AI](https://www.faros.ai/blog/ai-software-engineering)).
+Then the board call arrives on the same day as always. The same numbers get debated. The same decisions get pushed to next month.
 
-## Redesign the workflow, not just the task
+Nothing went wrong with the AI. It did its step well. It just wasn't the step holding things up.
+
+<Flow
+  title="Where the time goes"
+  steps={[
+    { label: "Draft the update", note: "Two days became one hour", tone: "fast" },
+    { label: "Check the numbers", note: "Same as before" },
+    { label: "Board decides", note: "Still waits for the same meeting", tone: "slow" },
+  ]}
+  caption="Speed up the first step and the queue in front of the last one gets longer."
+/>
+
+<Callout>
+Every process has a slowest step. Speed up any other step and the work simply waits longer in front of the slow one.
+</Callout>
+
+You can see this in real teams. Faros AI, which sells engineering analytics, studied telemetry from over 10,000 developers in a 2025 report. On teams with high AI use, developers completed 21% more tasks and merged 98% more pull requests. The time spent reviewing those pull requests rose 91%. Its reading: the gains stall at human approval ([Faros AI](https://www.faros.ai/blog/ai-software-engineering)).
+
+<BarChart
+  title="Teams with high AI use: more output, longer review"
+  items={[
+    { label: "Tasks completed", value: 21, display: "+21%" },
+    { label: "Pull requests merged", value: 98, display: "+98%" },
+    { label: "Time spent reviewing them", value: 91, display: "+91%", tone: "warn" },
+  ]}
+  source="Faros AI, 2025"
+  href="https://www.faros.ai/blog/ai-software-engineering"
+/>
+
+## Look at the workflow around the task
 
 In McKinsey's survey, out of 25 attributes tested, redesigning workflows had the biggest effect on whether organisations saw an EBIT impact from generative AI. Yet only 21% of respondents whose organisations used it said they had fundamentally redesigned at least some workflows ([McKinsey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value)).
 
-Ask which decision the work feeds, who makes it and what the slowest step in front of it is.
+So before you pick a tool, ask three questions. Which decision does this work feed? Who makes it? What is the slowest step in front of it?
 
-Often the fix is not technical. Move the meeting. Let a named person approve spend below a set amount. Agree in advance which number triggers action, such as runway under a set number of months, so the board call confirms rather than debates.
+Often the answer has nothing to do with technology. Move the meeting. Let a named person approve spend below a set amount. Agree in advance which number triggers action, such as runway under a set number of months, so the board call confirms a decision and moves on.
 
-## Count days, not impressions
+## Count days, and trust the count
 
-Count days from month-end close to a decision, not time saved on one step. Feelings are a poor guide. In a 2025 trial by METR, experienced developers using AI tools took 19% longer to finish tasks, yet believed afterwards that AI had sped them up by 20% ([METR](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)). METR's 2026 update says newer tools probably do speed developers up, but it still treats self-reported gains as unreliable ([METR](https://metr.org/blog/2026-02-24-uplift-update/)).
+Measure the days from month-end close to a decision. Time saved on one step tells you little, and how fast the work feels tells you less.
 
-## Leave some steps slow
+In a 2025 trial by METR, experienced developers using AI tools took 19% longer to finish tasks, yet believed afterwards that AI had sped them up by 20% ([METR](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)). METR's 2026 update says newer tools probably do speed developers up, but it still treats self-reported gains as unreliable ([METR](https://metr.org/blog/2026-02-24-uplift-update/)).
 
-A senior hire, a large contract or a price change deserves full attention, and more AI-drafted options can make it worse. If a decision happens once a quarter, saving a day on the draft may not matter.
+<LinkCard
+  href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
+  source="METR, July 2025"
+  title="Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity"
+  note="The trial behind the 19% figure, with the method and the developers' own estimates."
+/>
+
+## Some steps should stay slow
+
+A senior hire, a large contract or a price change deserves your full attention. More AI-drafted options can make those calls harder. And if a decision happens once a quarter, saving a day on the draft may not matter much.
 
 ## What to do next
 
-Before you add AI to a task, find the decision it feeds and fix the slowest step in front of it. To see how ready your data is, [take the AUXO Score](/auxo-score/).
+Before you add AI to a task, find the decision it feeds and look at the slowest step in front of it. That is usually where the time is.
+
+Want a quick read on your own set-up? [Take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Faros AI, [The AI Productivity Paradox Research Report](https://www.faros.ai/blog/ai-software-engineering), 2025
+- McKinsey, [The state of AI: How organizations are rewiring to capture value](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value), 2025
+- METR, [Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), 2025
+- METR, [We are Changing our Developer Productivity Experiment Design](https://metr.org/blog/2026-02-24-uplift-update/), 2026

@@ -33,7 +33,7 @@ For most marketing pages in this repo (two CTAs only: "Apply for a Founder revie
 
 ## Section Pattern
 
-Every section uses the same shape: heading + lead stacked (`SectionHeader`, no eyebrow label) over a full-width grid of cards, a ruled list or an accordion. Headings are two-tone: the second sentence is lighter with `HighlightText soften`. One green band per page at most, never directly above the closing CTA. Prefer a labelled example (`Specimen`, `Receipt`) over another paragraph.
+Every section uses the same shape: heading + lead stacked (`SectionHeader`, no eyebrow label) over a full-width grid of cards or an accordion. Never a ruled list or a plain table: use cards, with the shared `.sq`, `.leader` and `.go` devices from `section.css`. Headings are two-tone: the second sentence is lighter with `HighlightText soften`. One green band per page at most, never directly above the closing CTA. No glows or gradients. Prefer a labelled example (`Specimen`, `Receipt`) over another paragraph.
 
 ## Offer Page Rules
 

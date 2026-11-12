@@ -7,9 +7,13 @@ tags: ["AI agents", "Governance", "Risk"]
 draft: true
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
 **In short:** an AI agent may read and draft without approval. Anything that changes your systems needs a review. Anything that sends, posts, pays or hires needs a named person to approve it every time.
 
-Someone on your team wants to try an AI agent. It can read your inbox, update the CRM and draft replies to customers and investors. Nobody has said what it may do without asking.
+Say someone on your team wants to try an AI agent on Monday. It can read the shared inbox, update the CRM and draft replies to customers and investors. Nobody has said what it may do without asking.
 
 Close that gap before you build.
 
@@ -17,13 +21,33 @@ Close that gap before you build.
 
 Sort every action by what it touches. Two published guides make the same point. Anthropic's guide to [building effective agents](https://www.anthropic.com/research/building-effective-agents) says agents can pause for human feedback at checkpoints. OpenAI's [practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) names high-risk actions, meaning sensitive, irreversible or high-stakes ones, as a trigger for human intervention. Its examples include cancelling orders, authorising large refunds and making payments.
 
+<Flow
+  title="How much approval each action needs"
+  steps={[
+    { label: "Read and draft", note: "No approval. Spot-check a sample.", tone: "fast" },
+    { label: "Change your own systems", note: "A person approves, or a named person reads the log on a set day" },
+    { label: "Act on the outside world", note: "A named person approves every one, every time", tone: "slow" },
+  ]}
+/>
+
 **Tier 1: read and draft.** The agent reads documents, summarises, sorts, checks and flags. It writes drafts nobody has seen yet. No approval is needed. Spot-check a sample.
 
 **Tier 2: change something inside your own systems.** The agent updates a CRM record, moves a ticket, changes a status, files a document. Most can be undone. Either a person approves them, or the agent writes each change to a review log that a named person reads on a set day. Pick one and write it down.
 
 **Tier 3: act on the outside world.** Send, post, pay, sign, hire. A named person approves every one, every time. A sent investor email cannot be unsent.
 
+<Callout>
+An agent drafts, sorts, checks and flags. A named person approves anything that sends, posts, pays or hires.
+</Callout>
+
 AUXO's own rule is short. An agent drafts, sorts, checks and flags. It never sends, posts, pays or makes a hiring decision without a named person approving. See [name the approver before you build the agent](/blog/name-the-approver-before-you-build-the-agent/).
+
+<LinkCard
+  href="https://www.anthropic.com/research/building-effective-agents"
+  source="Anthropic"
+  title="Building effective AI agents"
+  note="Anthropic's guide to agent design, including checkpoints for human feedback and testing in sandboxes."
+/>
 
 ## Five questions before any agent goes live
 
@@ -41,7 +65,7 @@ The [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-managem
 
 Give the agent the least access that does the job. Start with read-only and add write access one permission at a time.
 
-Run it under its own account, never a person's login, so its actions are labelled and you can remove its access without locking out a colleague. Decide who can switch it off, and make sure they can do it in minutes.
+Run it under its own account, never a person's login. Its actions are then labelled, and you can remove its access without locking out a colleague. Decide who can switch it off, and make sure they can do it in minutes.
 
 Keep a log of every run: what it was asked, what it read, which tools it used, what it produced and who approved it. [Agents in practice: tools and approvals](/blog/agents-in-practice-tools-and-approvals/) covers what a good trace holds.
 
@@ -57,16 +81,22 @@ Test in a sandbox with copies of real data, not live systems. Anthropic recommen
 
 ## When the agent gets it wrong
 
-It will, eventually.
+It will, eventually. Plan for it now.
 
 **Stop it.** The named person switches it off first and investigates second.
 
 **Contain it.** Use the log to find every action in the affected period. Reverse what can be reversed. Contact anyone who received something wrong.
 
-**Find the cause.** Bad input, a missing rule, too much access or an approver who did not look closely?
+**Find the cause.** Was it bad input, a missing rule, too much access or an approver who did not look closely?
 
 **Change the tier.** If an action keeps going wrong, move it up a tier.
 
-## Run the check on your own setup
+## What to do next
 
-Most teams find the gaps in questions one and five: nobody listed what the agent can read, and nobody can replay what it did. To see where your data and processes stand before you add an agent, [Take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+Most teams find the gaps in questions one and five: nobody listed what the agent can read, and nobody can replay what it did. To see where your tools, data, set-up, adoption and measurement stand before you add an agent, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Anthropic, [Building effective AI agents](https://www.anthropic.com/research/building-effective-agents)
+- OpenAI, [practical guide to building agents (PDF)](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
+- NIST, [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework), 2023

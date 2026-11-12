@@ -7,11 +7,14 @@ tags: ["Governance", "Ownership", "AI agents"]
 draft: true
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
 **In short:** AI governance for a company of 50 is four named roles and four questions: who decides, who approves, who can see what and what gets logged. No committee is needed. The written rule is a separate job, covered in our [one-page AI policy template](/blog/a-one-page-ai-policy-for-a-company-of-50/).
 
-Someone on your team drafts investor updates with AI. Someone else has connected it to the CRM.
+Picture a company where the finance lead drafts investor updates with AI and someone in sales has connected it to the CRM. Both are doing sensible things.
 
-Nobody decided who approves what it produces or what it can see. You have no compliance team, and most guides assume you do.
+But nobody has decided who approves what it produces, or what it can see. You have no compliance team, and most guides assume you do. This is a version for a company without one.
 
 ## Four questions for every piece of AI work
 
@@ -20,7 +23,11 @@ Nobody decided who approves what it produces or what it can see. You have no com
 - **Who can see what.** Each tool reads only the data its job needs. Read access is the default. Write access is the exception.
 - **What gets logged.** Who asked, what ran, on which data, who approved it and when.
 
-Behind these sits a fifth: what does the data mean? See [agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
+<Callout>
+Four named people do more than a committee that meets twice a year.
+</Callout>
+
+Behind these sits a fifth question: what does the data mean? See [agree what the numbers mean before AI reads them](/blog/agree-what-the-numbers-mean-before-ai-reads-them/).
 
 ## Four roles, each with a name
 
@@ -42,9 +49,16 @@ The [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-managem
 
 [ISO/IEC 42001](https://www.iso.org/standard/42001) is an international standard for an AI management system. ISO describes it as setting out requirements for establishing, implementing, maintaining and continually improving one. Companies can choose to be audited against it. That is a larger project than most 50-person startups need today.
 
+<LinkCard
+  href="https://www.nist.gov/itl/ai-risk-management-framework"
+  source="NIST"
+  title="AI Risk Management Framework"
+  note="NIST's overview of the framework and its four functions: Govern, Map, Measure and Manage."
+/>
+
 Treat both as reading. This post does not meet either one for you. If an investor or customer later asks for one, you will already have the roles and logs to build on.
 
-## The first month
+## Your first month
 
 **1. List every AI tool in use.** Include personal accounts. One line per tool: what it does, what data it touches, who uses it.
 
@@ -52,12 +66,17 @@ Treat both as reading. This post does not meet either one for you. If an investo
 
 **3. Pick one workflow and add the controls.** Choose the one where a mistake costs most. Set the tool to read-only. Put the approval step in the workflow itself, not in a document. Turn on logging.
 
-After a month, check the setup again. [Will it still run when the builder leaves?](/blog/will-it-still-run-when-the-builder-leaves/) has five checks.
+After a month, check the set-up again. [Will it still run when the builder leaves?](/blog/will-it-still-run-when-the-builder-leaves/) has five checks.
 
 ## What to leave out for now
 
-Leave out the 40-page policy, the ethics board and certification. Four named people do more than a committee that meets twice a year. Keep the roles, the approvals, the access list and the log.
+Leave out the 40-page policy, the ethics board and certification. Keep the roles, the approvals, the access list and the log.
 
-## Where to start
+## What to do next
 
-For a quick read on how ready your data and your controls are, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+For a quick read on your tools, data, set-up, adoption and measurement, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- NIST, [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework), 2023
+- ISO, [ISO/IEC 42001 standard page](https://www.iso.org/standard/42001), on the AI management system standard

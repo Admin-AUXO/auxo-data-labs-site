@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href: string;
+  title: string;
+  source: string;
+  note?: string;
+}
+
+const { href, title, source, note } = Astro.props;
+const host = new URL(href).hostname.replace(/^www\./, "");
+---
+<a class="linkcard" href={href} target="_blank" rel="noopener noreferrer">
+  <span class="linkcard__source">{source}</span>
+  <span class="linkcard__title">{title}</span>
+  {note && <span class="linkcard__note">{note}</span>}
+  <span class="linkcard__foot go">
+    <span class="linkcard__host">{host}</span>
+    <span class="sq"><Icon name="mdi:open-in-new" aria-hidden="true" /></span>
+  </span>
+</a>
+
+<style>
+  .linkcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    color: var(--foreground);
+    display: grid;
+    font-weight: 400;
+    gap: 0.5rem;
+    margin-block: 2rem;
+    padding: var(--card-pad);
+    text-decoration: none;
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+
+  .linkcard:hover,
+  .linkcard:focus-visible {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+
+  .linkcard__source {
+    color: var(--accent);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .linkcard__title {
+    font-family: var(--font-brand);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: var(--tracking-display-xl);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .linkcard__note {
+    color: var(--muted);
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+
+  .linkcard__foot {
+    margin-block-start: 0.5rem;
+  }
+
+  .linkcard__host {
+    color: var(--subtle);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+</style>

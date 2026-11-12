@@ -8,7 +8,6 @@ const copy = { eyebrow: c.eyebrow, notFound: c.notFound, closed: c.closed, paid:
 <BaseLayout title={c.meta.title} description={c.meta.description} noindex>
   <Section padding="xl" width="5xl">
     <div class="pay mx-auto flex max-w-xl flex-col gap-6" data-pay data-copy={JSON.stringify(copy)}>
-      <p class="section-index">{c.eyebrow}</p>
       <h1 class="text-display text-display--5xl" data-pay-title>{c.loading}</h1>
       <p class="lead" data-pay-message hidden></p>
       <dl class="pay__rows" data-pay-rows hidden>

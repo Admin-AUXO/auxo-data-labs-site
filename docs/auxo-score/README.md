@@ -1,6 +1,6 @@
 # AUXO Score (`/auxo-score/`)
 
-A 10-question, evidence-based data health test. Five dimensions (Accurate, Complete, Consistent, Timely, Trusted), two cards each. Answers score 10 / 7 / 3 / 0, "I don't know" scores 3. Total 0–100, banded Healthy / Stable / Fragile / Critical. Three "I don't know" answers end the test as Inconclusive.
+A 10-question, evidence-based AI set-up check. Five checks (Tools, Data, Set-up, Adoption, Measurement), two cards each. Answers score 10 / 7 / 3 / 0, "I don't know" scores 3. Total 0–100, banded Healthy / Stable / Fragile / Critical. Three "I don't know" answers end the test as Inconclusive.
 
 ## Where things live
 
@@ -9,7 +9,7 @@ A 10-question, evidence-based data health test. Five dimensions (Accurate, Compl
 | `src/pages/auxo-score/index.astro` | Route (`/auxo-score/`; `/self-check/` 301s here) |
 | `src/lib/auxo-score/cards.ts` | Question bank and focus copy. **Edit questions here.** |
 | `src/lib/auxo-score/types.ts` | Shared types |
-| `src/lib/auxo-score/scoring.ts` | Scoring, bands, tie order, answer layout (pure, unit-tested) |
+| `src/lib/auxo-score/scoring.ts` | Scoring, bands, tie order (Data, Measurement, Set-up, Tools, Adoption), answer layout (pure, unit-tested) |
 | `src/lib/auxo-score/email.ts` | Work-email check and free-domain list |
 | `src/lib/auxo-score/storage.ts` | Safe localStorage/sessionStorage helpers, UTM capture, legacy key cleanup |
 | `src/lib/auxo-score/submit.ts` | Context builder, submit limits and error messages |
@@ -32,8 +32,8 @@ The Score asks for a work email before the result, then posts the result to `/ap
 
 ## Storage
 
-- `auxo-score-v2`: in-progress attempt (screen, index, answers, layout, startedAt, attemptId)
-- `auxo-score-v2-result`: last completed result; feeds the nav score badge
+- `auxo-score-v3`: in-progress attempt (screen, index, answers, layout, startedAt, attemptId)
+- `auxo-score-v3-result`: last completed result; feeds the nav score badge
 - `auxo-score-utm` (sessionStorage): UTM params from first page load
 - The old self-check keys (`auxo-self-check-*`) are deleted on first load.
 

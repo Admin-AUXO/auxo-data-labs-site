@@ -7,25 +7,45 @@ tags: ["Claude", "Effort", "Cost", "AI in practice"]
 draft: true
 ---
 
-**In short.** Effort is a second dial on Claude, next to the choice of model. Anthropic's guidance says tuning it is often a better lever than switching to a bigger model. Set it per task, and test before you trust a default.
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
+**In short:** [Effort](https://platform.claude.com/docs/en/build-with-claude/effort) is a second dial on Claude, next to the choice of model. Anthropic's guidance says tuning it is often a better lever than switching to a bigger model. Set it per task, and test before you trust a default.
+
+## Is "high" always the safe choice?
+
+It feels like it. Say you are setting up the weekly pipeline summary, and the menu offers five levels. If thinking harder is an option, why not ask for it every time?
+
+Because thinking costs tokens, and tokens cost money and time. For some tasks the extra thinking changes the answer. For many it only changes the bill.
 
 ## What effort does
 
 Effort tells the model how many tokens to spend on a response. That covers its thinking, its answer and any tool calls. Higher effort means more thorough work, slower answers and higher cost. Lower effort means faster, cheaper and shorter work, with some loss of depth.
 
-There are five levels:
+There are five levels.
 
-- **Low.** The most efficient. Anthropic suggests it for simpler tasks that need speed and low cost.
-- **Medium.** A balance of speed, cost and quality.
-- **High.** Spends as many tokens as the task needs for excellent results. Suited to complex reasoning and difficult problems.
-- **Extra high.** For long-running work, such as agent tasks that run for over half an hour.
-- **Max.** No limit on spending. For the deepest possible analysis.
+| Level | What Anthropic says it is for |
+|---|---|
+| Low | The most efficient. Simpler tasks that need speed and low cost. |
+| Medium | A balance of speed, cost and quality. |
+| High | Spends as many tokens as the task needs for excellent results. Complex reasoning and difficult problems. |
+| Extra high | Long-running work, such as agent tasks that run for over half an hour. |
+| Max | No limit on spending. The deepest possible analysis. |
 
-Two points are easy to miss. Effort is a signal, not a hard budget. At low effort the model still thinks on a hard problem. It just thinks less. And defaults differ. Opus 5.5 and Haiku 5.5 default to medium. Fable 5.2 and Sonnet 5.5 default to high. If you never set it, you are still choosing.
+Two points are easy to miss. Effort is a signal, not a hard budget. At low effort the model still thinks on a hard problem. It just thinks less.
+
+And defaults differ. Opus 5.5 and Haiku 5.5 default to medium. Fable 5.2 and Sonnet 5.5 default to high. If you never set it, you are still choosing.
+
+<LinkCard
+  href="https://platform.claude.com/docs/en/build-with-claude/effort"
+  source="Anthropic, Claude Platform Docs"
+  title="Effort"
+  note="The five levels, what each is for, and how effort relates to thinking and tool calls."
+/>
 
 ## Thinking is now automatic
 
-On the current models, Claude decides for itself how much to think. Anthropic calls this adaptive thinking, and effort is how you steer it. On Opus 5.5 and Fable 5.2, thinking is always on. That makes effort the main control over what a request costs.
+On the current models, Claude decides for itself how much to think. Anthropic calls this [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost), and effort is how you steer it. On Opus 5.5 and Fable 5.2, thinking is always on. That makes effort the main control over what a request costs.
 
 ## Match effort to the work
 
@@ -43,7 +63,9 @@ The common mistake is setting everything to high "to be safe". For a task like s
 
 The opposite mistake also happens. A team puts a hard analysis on low effort to save money, gets shallow answers, and decides AI can't do the job. The model could. It was told not to try very hard.
 
-The fix for both is to measure.
+<Callout>
+The fix for both mistakes is to measure on your own examples.
+</Callout>
 
 ## Try this
 
@@ -55,8 +77,13 @@ Take one task your team runs often, such as the weekly pipeline summary. Collect
 
 If medium scores as well as high, you have a cheaper default. If low is just as good, better still. If only high works, you now know why it is worth the cost. Anthropic recommends this kind of effort sweep on your own examples, rather than carrying settings over from an older model.
 
-## Where AUXO helps
+## What to do next
 
 We set up Claude-based workflows on your own data and test each task at the right model and effort. A person approves what goes out. The settings are quick. Knowing which tasks matter, and what good looks like for each, is where we spend our time. [Chat with your data](/marketplace/) is one example: your team asks ARR and churn questions in everyday words, and each answer shows its source.
 
-To see where your data stands, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+To see where your own set-up stands, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Anthropic, [Effort](https://platform.claude.com/docs/en/build-with-claude/effort), Claude Platform Docs
+- Anthropic, [Steering thinking](https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost), Claude Platform Docs

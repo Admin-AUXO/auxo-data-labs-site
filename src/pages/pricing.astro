@@ -39,38 +39,41 @@ const factKeys = ["price"] as const;
 
   <Section id="ledger" padding="lg" width="7xl" class="plans-anchor">
     <h2 class="ledger__title">{c.ledger.title}</h2>
-    <table class="ledger" data-reveal>
-      <thead>
-        <tr>
-          <th scope="col">{c.ledger.columns.step}</th>
-          <th scope="col">{c.ledger.columns.get}</th>
-          <th scope="col">{c.ledger.columns.takes}</th>
-          <th scope="col">{c.ledger.columns.price}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          c.ledger.rows.map((r) => (
-            <tr data-tone={r.tone}>
-              <th scope="row" class="ledger__step">{r.step}</th>
-              <td class="ledger__get">{r.get}</td>
-              <td class="ledger__takes" data-label={c.ledger.columns.takes}>{r.takes}</td>
-              <td class="ledger__price" data-label={c.ledger.columns.price}>
-                <span class="ledger__amount">{r.price}</span>
-                {r.note && <span class="ledger__note">{r.note}</span>}
-              </td>
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
-    <p class="ledger__total">
-      {c.ledger.total}
-    </p>
-    <p class="ledger__legend">
-      <span data-tone="free">{c.ledger.legend.free}</span>
-      <span data-tone="paid">{c.ledger.legend.paid}</span>
-    </p>
+    <ol class="costs">
+      {
+        c.ledger.rows.map((r, i) => (
+          <li class="cost" data-tone={r.tone} data-anim="rise" style={`--i:${i}`}>
+            <div class="cost__head">
+              <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="cost__step">{r.step}</h3>
+            </div>
+            <div class="cost__body">
+              <p class="cost__get">{r.get}</p>
+              {r.note && <p class="cost__note">{r.note}</p>}
+            </div>
+            <dl class="cost__rows">
+              <div class="leader">
+                <dt>{c.ledger.columns.takes}</dt>
+                <span class="leader__dots" aria-hidden="true"></span>
+                <dd>{r.takes}</dd>
+              </div>
+              <div class="leader">
+                <dt>{c.ledger.columns.price}</dt>
+                <span class="leader__dots" aria-hidden="true"></span>
+                <dd data-tone={r.tone}>{r.price}</dd>
+              </div>
+            </dl>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="costs__foot">
+      <p class="ledger__total">{c.ledger.total}</p>
+      <p class="ledger__legend">
+        <span data-tone="free">{c.ledger.legend.free}</span>
+        <span data-tone="paid">{c.ledger.legend.paid}</span>
+      </p>
+    </div>
   </Section>
 
   <Section padding="lg" width="7xl" class="plans-section">

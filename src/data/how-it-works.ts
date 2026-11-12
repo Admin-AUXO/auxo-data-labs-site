@@ -48,7 +48,7 @@ export const howItWorksContent = {
   },
   intro: {
     title: "Analyze. Advise. Build.",
-    lead: "Each step ends with something in writing. Stop after any of them.",
+    lead: "Each step ends in writing. Stop after any of them.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl } satisfies Link,
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" } satisfies Link,
   },
@@ -61,7 +61,7 @@ export const howItWorksContent = {
         id: "analyze",
         name: "Analyze",
         cost: { label: "No charge to start", tone: "free" },
-        promise: "Do your deck, model and accounts agree? You get a written read before the raise.",
+        promise: "Do your deck, model and accounts agree? You get a written read.",
         example: {
           title: "Why ARR has three answers",
           head: ["Where", "What we find", "ARR"],
@@ -77,19 +77,19 @@ export const howItWorksContent = {
             title: "AUXO Score",
             tag: "Anyone",
             tone: "free",
-            body: "A self-check of 10 questions. You get a score out of 100 and where to look first.",
+            body: "Ten questions. A score out of 100 and where to look first.",
           },
           {
             title: "Founder review",
             tag: "Every company",
             tone: "free",
-            body: "A call, by application. Written next steps within 3 business days. No charge.",
+            body: "A call, by application. Written next steps within 3 business days.",
           },
           {
             title: "Deep-dive audit",
             tag: "Scoped with you",
             tone: "paid",
-            body: "A review of your systems under NDA. You get each gap between your deck, model and accounts, and a plan of what to build first. Credited if you build with us.",
+            body: "A review of your systems under NDA. Each gap between deck, model and accounts, and what to build first. Credited if you build with us.",
           },
         ],
         links: [
@@ -101,7 +101,7 @@ export const howItWorksContent = {
         id: "advise",
         name: "Advise",
         cost: { label: "Scoped with you", tone: "paid" },
-        promise: "What do you fix first, and what do you skip? You get a plan, and the tools that fit.",
+        promise: "What do you fix first, and what do you skip? You get a plan and the tools that fit.",
         example: {
           title: "What a plan says",
           head: ["Order", "What"],
@@ -116,7 +116,7 @@ export const howItWorksContent = {
         whatYouGet: [
           {
             title: "Plan",
-            body: "What to do first, what comes next, and where AI helps. Your leadership approves it.",
+            body: "What to do first, what next, and where AI helps. Your leadership approves it.",
           },
           {
             title: "Tool choice",
@@ -124,7 +124,7 @@ export const howItWorksContent = {
           },
           {
             title: "Clear rules, and optional ongoing advice",
-            body: "Who owns which data, who checks the AI's work, and who has access. A founder on call monthly, if you want it.",
+            body: "Who owns which data, who checks the AI's work, who has access. A monthly founder call if you want it.",
           },
         ],
         links: [{ text: "Browse the stacks", href: "/marketplace/" }],
@@ -133,7 +133,7 @@ export const howItWorksContent = {
         id: "build",
         name: "Build",
         cost: { label: "Agreed phase by phase", tone: "paid" },
-        promise: "Who builds it, and who owns it after? We build it in your accounts. You keep it.",
+        promise: "We build it in your accounts. You keep it.",
         example: {
           title: "One set of numbers",
           head: ["Metric", "Comes from", "Signed off by"],
@@ -147,7 +147,7 @@ export const howItWorksContent = {
         whatYouGet: [
           {
             title: "Data foundation",
-            body: "One clean, checked set of numbers from the tools you use, with a board pack where it helps. Your finance lead signs off the definitions.",
+            body: "One checked set of numbers from your tools, with a board pack where it helps. Your finance lead signs off the definitions.",
           },
           {
             title: "AI tools",
@@ -174,14 +174,14 @@ export const howItWorksContent = {
   },
   method: {
     title: "Five checks. One score.",
-    lead: "Every score and audit asks the same five questions of your ARR, burn and runway figures.",
+    lead: "The AUXO Score asks five things about how you use AI.",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" } satisfies Link,
     dimensions: [
-      { name: "Accurate", question: "Is the data correct?" },
-      { name: "Complete", question: "Is anything missing?" },
-      { name: "Consistent", question: "Does it agree across systems?" },
-      { name: "Timely", question: "Is it current when you need it?" },
-      { name: "Trusted", question: "Do people rely on it to make decisions?" },
+      { name: "Tools", question: "Do you know which AI tools you use, and why?" },
+      { name: "Data", question: "Can your AI read the company data it needs?" },
+      { name: "Set-up", question: "Does everyone start from a shared set-up?" },
+      { name: "Adoption", question: "Does the team use it every week, with a named owner?" },
+      { name: "Measurement", question: "Can you say what it changed, and who checks it?" },
     ] satisfies Dimension[],
   },
   faq: {
@@ -190,34 +190,34 @@ export const howItWorksContent = {
       {
         question: "Will it fit the tools we run?",
         answer:
-          "Yes. We build on what you already use, such as Google Cloud, Azure, Snowflake or Power BI. If a tool works, we keep it.",
+          "Yes. We build on what you use, such as Google Cloud, Azure, Snowflake or Power BI. If a tool works, we keep it.",
       },
       {
         question: "Do we need a Deep-dive audit first?",
         answer:
-          "No. The Founder review comes first, at no charge. After it, if you know what you need, we go straight to Advise or Build and check the data as we go.",
+          "No. The Founder review comes first. After it, if you know what you need, we go straight to Advise or Build.",
       },
       {
         question: "Why can't Claude or ChatGPT do this for us?",
         answer:
-          "Often it can do part of it. The AI is rarely the hard part. The hard part is clean data, the right connections, clear rules and keeping it running. That's our work, and we can use Claude or ChatGPT to do it.",
+          "Often it can do part of it. The hard part is clean data, the right connections, clear rules and keeping it running. That's our work, and we can use Claude or ChatGPT to do it.",
         link: { text: "Read the longer answer", href: "/blog/your-ai-assistant-is-not-the-hard-part/" },
       },
       {
         question: "Who owns what you build?",
         answer:
-          "You do. Everything is in your name, and tools run on your own contracts. No lock-in.",
+          "You do. Everything is in your name, on your own contracts.",
       },
       {
         question: "Does the AI act on its own?",
         answer:
-          "No. AI drafts, sorts, checks and flags. A named person approves its work. Nothing is sent, posted or paid without a person's say-so.",
+          "No. AI drafts, sorts, checks and flags. A named person approves its work. Nothing is sent, posted or paid without them.",
       },
     ] satisfies FaqItem[],
   },
   cta: {
     title: "Raising, or facing a board? Start with the numbers.",
-    description: "Leave knowing which numbers to fix first.",
+    description: "Leave knowing which to fix first.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
     reassurance: "We reply within one business day.",

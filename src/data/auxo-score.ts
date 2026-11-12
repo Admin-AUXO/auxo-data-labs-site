@@ -1,28 +1,28 @@
 export const auxoScoreAbout = {
-  title: "An AI readiness check for your data.",
-  lead: "The AUXO Score asks whether the data an AI tool would read is ready to be relied on. It runs the same five checks as our deep-dive audit.",
+  title: "Five checks. One score.",
+  lead: "Ten questions on how your company uses AI today.",
   faq: {
     title: "About the AUXO Score.",
     items: [
       {
         question: "What is an AI readiness assessment?",
         answer:
-          "A check of whether the data an AI tool would read is accurate, complete, consistent, timely and trusted. AI on untidy data gives untidy answers, so the check comes before the tool.",
+          "A check of how your company sets up and uses AI: the tools you have, the data they can read, how work is set up, who uses it and what it changes.",
       },
       {
         question: "What does the AUXO Score measure?",
         answer:
-          "Ten questions across five checks: accurate, complete, consistent, timely and trusted. You get a score out of 100, a band (Healthy, Stable, Fragile or Critical) and the first thing to fix.",
+          "Ten questions across five checks: tools, data, set-up, adoption and measurement. You get a score out of 100, a band (Healthy, Stable, Fragile or Critical) and the first thing to fix.",
       },
       {
         question: "Is it a security or compliance review?",
         answer:
-          "No. It is a quick self-check of your data. It is not an audit and not a certificate. For a review of your own systems, apply for a Founder review. A deep-dive audit follows if there is work to do.",
+          "No. It is a quick self-check of your AI set-up, not an audit or a certificate. To have your systems reviewed, apply for a Founder review.",
       },
       {
         question: "What happens after I get my score?",
         answer:
-          "You see the score, the band and the first fix on screen, and we email the report. The next step is to apply for a Founder review: a 30-minute call and written next steps.",
+          "You see the score, the band and the first fix on screen, and we email the report. Next, apply for a Founder review: a 30-minute call and written next steps.",
       },
     ],
   },

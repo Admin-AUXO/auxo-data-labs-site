@@ -44,13 +44,14 @@ const faqItems = c.faq.items.map((item) => ({ title: item.question, body: escape
 
   <Section padding="lg" width="7xl" background="accent">
     <h2 class="apply-heading"><HighlightText text={c.nextSteps.title} highlight={c.nextSteps.titleHighlight} soften /></h2>
-    <ol class="mt-8 grid gap-x-10 gap-y-8 md:grid-cols-3">
+    <ol class="mt-8 grid gap-4 md:grid-cols-3">
       {
         c.nextSteps.steps.map((step, i) => (
           <li
-            class="flex flex-col gap-3 border-t-2 border-foreground pt-5 md:row-span-2 md:grid md:grid-rows-subgrid"
+            class="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6 md:row-span-3 md:grid md:grid-rows-subgrid"
             data-anim={i === 0 ? "rise" : i === 1 ? "slide-right" : "slide-left"}
           >
+            <span class="sq" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
             <h3 class="text-2xl font-bold">{step.title}</h3>
             <p class="apply-step__desc">{step.desc}</p>
           </li>

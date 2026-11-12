@@ -7,29 +7,51 @@ tags: ["Decision-making", "Data infrastructure"]
 draft: false
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+
 **In short:** "We need more visibility" is not a decision. Write down who decides what, by when, using which numbers. Then build only what that sentence needs.
 
-## Visibility is not a decision
+## What is a dashboard actually for?
 
-A dashboard answers "what happened?" A decision answers "what are we doing about it, who says so, and by when?" Most companies have far more of the first. In a McKinsey global survey, only 20% of respondents said their organisations excel at decision making, and 61% said most of the time they spend on decisions is used ineffectively ([McKinsey](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/decision-making-in-the-age-of-urgency)). In a Gartner survey of marketing analytics users, analytics influenced just 53% of marketing decisions, and a third of respondents said decision makers cherry-pick data to fit a view they already hold. Gartner's analyst was blunt: better data alone won't change that ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2022-09-15-gartner-survey-reveals-marketing-analytics-are-only-influencing-53-percent-of-decisions)).
+Say your head of sales asks for a new dashboard "for visibility". It is a reasonable request. But what will anyone do differently once it exists?
 
-## Write the decision down first
+A dashboard answers "what happened?" A decision answers "what are we doing about it, who says so, and by when?" Most companies have far more of the first.
+
+In a McKinsey global survey, only 20% of respondents said their organisations excel at decision making, and 61% said most of the time they spend on decisions is used ineffectively ([McKinsey](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/decision-making-in-the-age-of-urgency)).
+
+In a Gartner survey of marketing analytics users, analytics influenced just 53% of marketing decisions, and a third of respondents said decision makers cherry-pick data to fit a view they already hold. Gartner's analyst was blunt: better data alone won't change that ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2022-09-15-gartner-survey-reveals-marketing-analytics-are-only-influencing-53-percent-of-decisions)).
+
+## What do you write down first?
 
 Before anyone touches a data source, write one sentence:
 
-**Who decides what, by when, using which numbers, and what would change the answer?**
+<Callout>
+Who decides what, by when, using which numbers, and what would change the answer?
+</Callout>
 
 For example: "By the fifth working day of each month, the CEO approves or holds next month's hiring plan, based on runway and the sales pipeline. If runway falls below the level the board agreed, hiring pauses."
 
-That sentence names an owner, sets a deadline and tells you which two numbers matter. It also tells you what you don't need: the other charts that would have gone on the dashboard "just in case". If nobody can write it, that is the finding. Don't build yet.
+That sentence names an owner, sets a deadline and tells you which two numbers matter. It also tells you what you don't need: the other charts that would have gone on the dashboard "just in case".
 
-## Match the build to the door
+<Flow
+  title="From request to build"
+  steps={[
+    { label: "Name the decision", note: "What will be approved, held or changed" },
+    { label: "Set the owner and the date", note: "One person, one deadline" },
+    { label: "Pick the numbers", note: "Only the ones the decision uses" },
+    { label: "Build the smallest thing", note: "Nothing for \"just in case\"", tone: "fast" },
+  ]}
+  caption="If nobody can write the first step, that is the finding. Don't build yet."
+/>
 
-In his 2015 letter to shareholders, Jeff Bezos split decisions into two kinds. One-way doors are hard or impossible to reverse and deserve care. Two-way doors can be undone, and he argued most decisions are like that ([Amazon, 2015 letter](https://www.sec.gov/Archives/edgar/data/1018724/000119312516530910/d168744dex991.htm)). A year later he suggested most decisions should be made with about 70% of the information you wish you had ([Amazon, 2016 letter](https://www.sec.gov/Archives/edgar/data/1018724/000119312517120198/d373368dex991.htm)).
+## How big should the build be?
+
+It depends on the door. In his 2015 letter to shareholders, Jeff Bezos split decisions into two kinds. One-way doors are hard or impossible to reverse and deserve care. Two-way doors can be undone, and he argued most decisions are like that ([Amazon, 2015 letter](https://www.sec.gov/Archives/edgar/data/1018724/000119312516530910/d168744dex991.htm)). A year later he suggested most decisions should be made with about 70% of the information you wish you had ([Amazon, 2016 letter](https://www.sec.gov/Archives/edgar/data/1018724/000119312517120198/d373368dex991.htm)).
 
 A reversible weekly call on ad spend needs a quick, roughly right number. An irreversible call, such as a raise or a senior hire, needs reconciled figures and a person who can explain them.
 
-## When not to build
+## When should you not build?
 
 - **The decision happens twice a year.** A well-kept spreadsheet and a good conversation will do.
 - **The owner won't act differently whatever the number says.** Then the report is decoration. Sort out who decides first.
@@ -38,4 +60,13 @@ A reversible weekly call on ad spend needs a quick, roughly right number. An irr
 
 ## What to do next
 
-To see where your data stands before you build, [take the AUXO Score](/auxo-score/).
+Write the sentence first, then build the smallest thing it needs.
+
+To see how your own set-up looks across tools, data, set-up, adoption and measurement, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- McKinsey, [global survey on decision making, "Decision making in the age of urgency"](https://www.mckinsey.com/capabilities/people-and-organization/our-insights/decision-making-in-the-age-of-urgency)
+- Gartner, [press release on marketing analytics and decisions, 15 September 2022](https://www.gartner.com/en/newsroom/press-releases/2022-09-15-gartner-survey-reveals-marketing-analytics-are-only-influencing-53-percent-of-decisions), 2022
+- Amazon, [2015 letter to shareholders (SEC Exhibit 99.1)](https://www.sec.gov/Archives/edgar/data/1018724/000119312516530910/d168744dex991.htm), 2016 filing
+- Amazon, [2016 letter to shareholders (SEC Exhibit 99.1)](https://www.sec.gov/Archives/edgar/data/1018724/000119312517120198/d373368dex991.htm), 2017 filing

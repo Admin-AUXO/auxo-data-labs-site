@@ -17,6 +17,7 @@ const Heading = headingLevel === 3 ? "h3" : "h2";
 ---
 <article class="post-card" data-anim="rise" style={`--i:${index}`}>
   <p class="post-card__meta mono-datum">
+    <span class="post-card__topic">{post.data.tags[0]}</span>
     <span>{minutes} {c.minutesSuffix}</span>
   </p>
   <Heading class="post-card__title">
@@ -24,8 +25,8 @@ const Heading = headingLevel === 3 ? "h3" : "h2";
   </Heading>
   <p class="post-card__desc">{post.data.description}</p>
   <TagList tags={post.data.tags} label={blogContent.post.tagsLabel} />
-  <span class="post-card__go" aria-hidden="true">
+  <span class="post-card__go go" aria-hidden="true">
     {c.cardLink}
-    <Icon name="mdi:arrow-right" />
+    <span class="sq"><Icon name="mdi:arrow-right" /></span>
   </span>
 </article>

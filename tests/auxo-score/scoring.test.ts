@@ -17,18 +17,18 @@ const bandFor = (total: number) => {
 };
 
 describe("computeResult", () => {
-  it("all tier 1 → 100, Healthy, weakest Trusted on tie", () => {
+  it("all tier 1 → 100, Healthy, weakest Data on tie", () => {
     const r = computeResult(all(1));
     expect(r.total).toBe(100);
     expect(r.band.name).toBe("Healthy");
-    expect(r.weakest).toBe("Trusted");
+    expect(r.weakest).toBe("Data");
   });
 
-  it("all tier 4 → 0, Critical, weakest Trusted", () => {
+  it("all tier 4 → 0, Critical, weakest Data", () => {
     const r = computeResult(all(4));
     expect(r.total).toBe(0);
     expect(r.band.name).toBe("Critical");
-    expect(r.weakest).toBe("Trusted");
+    expect(r.weakest).toBe("Data");
   });
 
   it("mixed answers → 74 Stable", () => {
@@ -37,8 +37,8 @@ describe("computeResult", () => {
     const r = computeResult(a);
     expect(r.total).toBe(74);
     expect(r.band.name).toBe("Stable");
-    expect(r.dims).toEqual({ Accurate: 20, Complete: 20, Consistent: 14, Timely: 14, Trusted: 6 });
-    expect(r.weakest).toBe("Trusted");
+    expect(r.dims).toEqual({ Tools: 20, Data: 20, "Set-up": 14, Adoption: 14, Measurement: 6 });
+    expect(r.weakest).toBe("Measurement");
   });
 
   it("band edges", () => {
@@ -50,14 +50,14 @@ describe("computeResult", () => {
     expect(bandFor(80)).toBe("Healthy");
   });
 
-  it("tie-break: Consistent beats Accurate", () => {
+  it("tie-break: Set-up beats Tools", () => {
     const r = computeResult(byPoints([3, 0, 10, 10, 3, 0, 10, 10, 10, 10]));
-    expect(r.weakest).toBe("Consistent");
+    expect(r.weakest).toBe("Set-up");
   });
 
-  it("tie-break: Complete beats Timely", () => {
+  it("tie-break: Data beats Adoption", () => {
     const r = computeResult(byPoints([10, 10, 3, 0, 10, 10, 3, 0, 10, 10]));
-    expect(r.weakest).toBe("Complete");
+    expect(r.weakest).toBe("Data");
   });
 
   it("radar values are dims × 5 within 0–100", () => {

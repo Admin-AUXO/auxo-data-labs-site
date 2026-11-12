@@ -1,5 +1,5 @@
 ---
-title: "Your AI assistant is not the hard part"
+title: "Why AI pilots stall, even with Claude or ChatGPT"
 description: "Claude or ChatGPT can often do part of the job. Why AI pilots stall anyway, what doing it yourself costs, and what to ask before buying another AI tool."
 date: 2026-10-25
 author: "Vignesh Ramesh"
@@ -7,33 +7,68 @@ tags: ["AI agents", "Data readiness", "Buying AI"]
 draft: false
 ---
 
-"Why can't Claude, ChatGPT or an agent we already have do this?"
+import BarChart from "../../components/blog/BarChart.astro";
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
 
-## In short
+**In short:** Often Claude, ChatGPT or an agent you already have can do part of the job. What decides the rest is the set-up: the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and who keeps it running. If your deck, your model and your accounts disagree on ARR, an assistant will not settle it. It will pick one answer, with confidence.
 
-Often it can do part of it. The model is rarely the hard part. The hard part is the data it reads, the systems it connects to, the rules on what it may do, who approves its work, and keeping it running. If your deck, your model and your accounts disagree on ARR, an assistant will not settle it. It will pick one answer, with confidence.
+## "Why can't the assistant we already have do this?"
 
-## General assistants already deliver for individuals
+Say you are a founder who has just heard that question in a leadership meeting. Someone on the team already uses Claude every day, and it is a fair thing to ask.
+
+The answer depends on whose work it is. Start with the case where an assistant is plenty.
+
+## Assistants already deliver for individuals
 
 In a study of more than 5,000 customer support agents, access to a generative AI assistant raised issues resolved per hour by 14% on average, and by 34% for novice and less skilled workers ([NBER](https://www.nber.org/papers/w31161)). That is a real gain on a well-scoped, repeated task.
+
+<LinkCard
+  href="https://www.nber.org/papers/w31161"
+  source="NBER"
+  title="Generative AI at Work"
+  note="The customer support study, with results for novice and experienced agents."
+/>
 
 A preliminary 2025 report from MIT's NANDA initiative found workers at 90% of the companies it studied using personal AI tools, while only 40% of those companies had bought an official subscription ([VentureBeat](https://venturebeat.com/ai/mit-report-misunderstood-shadow-ai-economy-booms-while-headlines-cry-failure)).
 
 If the job is one person, one task, information they can paste in, and a person reading the result before it goes anywhere, an assistant is often enough. Drafting an investor update. Summarising customer calls. Buy a team plan, write down what data may go in, and get on with it.
 
-## The trouble starts when the work belongs to the company
+## When the work belongs to the company
 
 The task stops being one person's. Now the assistant has to read live data from your CRM, billing tool and accounts, act inside them, and be right often enough that people stop checking every line.
 
-That is where reliability drops. Salesforce AI Research tested leading agents on realistic CRM tasks. They succeeded about 58% of the time on single-turn tasks and about 35% when the work ran over several turns. They also showed near-zero awareness of what was confidential ([arXiv](https://arxiv.org/abs/2505.18878)). Those were 2025 models, and newer ones score higher. The point is the shape: multi-step work on real data is harder than one question in a chat window.
+That is where reliability drops. Salesforce AI Research tested leading agents on realistic CRM tasks. They succeeded about 58% of the time on single-turn tasks and about 35% when the work ran over several turns. They also showed near-zero awareness of what was confidential ([arXiv](https://arxiv.org/abs/2505.18878)). Those were 2025 models, and newer ones score higher. The shape holds: multi-step work on real data is harder than one question in a chat window.
 
-It shows in results too. McKinsey's 2025 survey found 88% of organisations use AI somewhere, but only 39% report any impact on EBIT at the enterprise level ([McKinsey](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-state-of-ai-2025)). Using AI and getting value from it are different things.
+<BarChart
+  title="Agents on realistic CRM tasks: success rate"
+  items={[
+    { label: "Single-turn tasks", value: 58, display: "about 58%" },
+    { label: "Multi-turn tasks", value: 35, display: "about 35%", tone: "warn" },
+  ]}
+  source="Salesforce AI Research, CRMArena-Pro, 2025"
+  href="https://arxiv.org/abs/2505.18878"
+/>
+
+It shows in results too. McKinsey's 2025 survey found that using AI and getting value from it are different things.
+
+<BarChart
+  title="Organisations using AI versus reporting EBIT impact"
+  items={[
+    { label: "Use AI somewhere", value: 88, display: "88%" },
+    { label: "Report any impact on EBIT at enterprise level", value: 39, display: "39%", tone: "warn" },
+  ]}
+  source="McKinsey, 2025"
+  href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-state-of-ai-2025"
+/>
 
 ## Why pilots stall
 
-Pilots rarely stall because the model was too weak. S&P Global found that 42% of companies abandoned most of their AI initiatives in 2025, up from 17% the year before. Cost, privacy and security were among the top obstacles ([CIO Dive](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/)). Gartner predicted in 2024 that at least 30% of generative AI projects would be dropped after proof of concept by the end of 2025, citing poor data quality, weak risk controls, rising costs and unclear business value ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025)).
+The surveys point away from model quality. S&P Global found that 42% of companies abandoned most of their AI initiatives in 2025, up from 17% the year before. Cost, privacy and security were among the top obstacles ([CIO Dive](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/)). Gartner predicted in 2024 that at least 30% of generative AI projects would be dropped after proof of concept by the end of 2025, citing poor data quality, weak risk controls, rising costs and unclear business value ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025)).
 
-The causes sit in the setup.
+<Callout>The causes sit in the set-up, not in the model.</Callout>
+
+Four come up most.
 
 ### The data is not ready
 
@@ -49,9 +84,9 @@ The pilot was someone's side project, and it stops when they leave. Who checks t
 
 ### Running it costs more than the pilot
 
-Anthropic's engineers report that agents use about four times the tokens of a chat, and multi-agent systems about fifteen times ([Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)). Gartner expects at least half of generative AI projects to overrun their budgets through 2028, ([Gartner](https://www.gartner.com/en/articles/hype-cycle-for-genai)).
+Anthropic's engineers report that agents use about four times the tokens of a chat, and multi-agent systems about fifteen times ([Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)). Gartner expects at least half of generative AI projects to overrun their budgets through 2028 ([Gartner](https://www.gartner.com/en/articles/hype-cycle-for-genai)).
 
-## The cost of doing it yourself
+## What doing it yourself costs
 
 Doing it yourself is often the right call. The licence is the cheap part. The cost is the work around the model. Someone has to connect the systems, clean the data, write the rules, build tests, and fix things when a vendor changes an API or a model. Anthropic advises testing an agent on 20 to 50 tasks drawn from real failures, and warns that without that, problems get caught only in production ([Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)).
 
@@ -72,9 +107,7 @@ Anthropic's own advice is to find the simplest solution that works and add compl
 7. **Who owns it after launch?** What if they leave?
 8. **Can you export your data and leave?** Is the account in your company's name?
 
-If you cannot answer the first three, the tool is not your next purchase. The data and the process are.
-
-## When not to hire anyone
+## When you don't need anyone
 
 There are times you should not hire us or anyone else.
 
@@ -93,4 +126,25 @@ When the work does belong to the company, we do the part around the model. You c
 
 For startups, two of our [services](/marketplace/) fit here: Investor metrics, and Chat with your data. We often build with Claude or ChatGPT inside. You own what we build, and a person approves what goes out. We will also tell you when not to build.
 
-For a quick read first, [take the AUXO Score](/auxo-score/): 10 questions on how ready your data is for AI, with no sign-up.
+## What to do next
+
+Work through the eight questions above for the tool you are considering. If the first three are hard to answer, start there.
+
+For a quick read on your AI set-up, [take the AUXO Score](/auxo-score/). It covers tools, data, set-up, adoption and measurement: ten questions, about three minutes, no sign-up.
+
+## Sources
+
+- NBER, [Generative AI at Work](https://www.nber.org/papers/w31161)
+- VentureBeat, [article on the MIT NANDA report and shadow AI use](https://venturebeat.com/ai/mit-report-misunderstood-shadow-ai-economy-booms-while-headlines-cry-failure), 2025
+- Salesforce AI Research, [CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions](https://arxiv.org/abs/2505.18878), 2025
+- McKinsey, [The state of AI in 2025](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-state-of-ai-2025), 2025
+- CIO Dive, [AI project failure rates are on the rise: report](https://www.ciodive.com/news/AI-project-fail-data-SPGlobal/742590/), 2025
+- Gartner, [press release on abandoned generative AI projects](https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025), 2024
+- RSM, [2025 middle-market generative AI survey](https://rsmus.com/newsroom/2025/middle-market-firms-rapidly-embracing-generative-ai-but-expertise-gaps-pose-risks-rsm-2025-ai-survey.html), 2025
+- Microsoft, [Agent Management Essentials for Microsoft 365](https://learn.microsoft.com/en-us/microsoft-365/copilot/agent-essentials/agent-essentials-overview)
+- OpenAI, [A practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
+- Anthropic, [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system), 2025
+- Gartner, [article on its Hype Cycle for generative AI](https://www.gartner.com/en/articles/hype-cycle-for-genai)
+- Anthropic, [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+- Built In, [data engineer salaries](https://builtin.com/salaries/us/data-engineer)
+- Anthropic, [Building effective AI agents](https://www.anthropic.com/research/building-effective-agents)

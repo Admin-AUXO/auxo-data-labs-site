@@ -1,5 +1,5 @@
 ---
-title: "Agree what the numbers mean before AI reads them"
+title: "Define your key numbers before AI reads them"
 description: "Your deck, model and accounts can each give a different customer count or ARR. Why that matters once AI reads your data, and how to fix it first."
 date: 2026-10-25
 author: "Ajay Kumar"
@@ -7,38 +7,75 @@ tags: ["Data readiness", "Data infrastructure"]
 draft: false
 ---
 
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
 **In short:** Most startups carry several versions of the same number. Founders know which one to quote in which room. An AI assistant doesn't, so write down what your key terms mean before you point it at your data.
 
-## One question, three answers
+## How many active customers do you have?
 
-Ask sales, finance and product how many active customers you have. Sales counts open contracts. Finance counts anyone billed this quarter. Product counts anyone who logged in last month. Each is right by its own rule.
+Say an investor asks the question on a call, and your sales lead, finance lead and head of product each reach for a different tab. You will probably get three answers.
 
-The same happens with ARR, churn and runway. The deck, the model and the accounts disagree, and diligence is where investors notice.
+| Team | Counts as "active" |
+|---|---|
+| Sales | Anyone with an open contract |
+| Finance | Anyone billed this quarter |
+| Product | Anyone who logged in last month |
 
-## Small mismatches, large costs
+Each is right by its own rule. The same happens with ARR, churn and runway. The deck, the model and the accounts disagree, and diligence is where investors notice.
 
-NASA lost the Mars Climate Orbiter in 1999 because its ground software used English units while the spacecraft's software used metric. The mismatch threw off the trajectory and sent the spacecraft too close to Mars ([NASA](https://science.nasa.gov/mission/mars-climate-orbiter/)). 
+<Callout>
+An AI assistant picks a definition too, and you may never see which.
+</Callout>
+
+## Small mismatches get expensive
+
+NASA lost the Mars Climate Orbiter in 1999 because its ground software used English units while the spacecraft's software used metric. The mismatch threw off the trajectory and sent the spacecraft too close to Mars ([NASA](https://science.nasa.gov/mission/mars-climate-orbiter/)).
+
+<LinkCard
+  href="https://science.nasa.gov/mission/mars-climate-orbiter/"
+  source="NASA"
+  title="Mars Climate Orbiter"
+  note="NASA's own page on the mission and what went wrong with the units."
+/>
 
 Business mismatches are quieter. Gartner research from 2020 put the cost of poor data quality at an average of at least $12.9 million a year per organisation ([Gartner](https://www.gartner.com/en/data-analytics/topics/data-quality)).
 
-## AI picks a definition and doesn't say which
+## What does an AI assistant do with this?
 
-An AI assistant picks a definition too, and you may never see which. Ask it for churn and it answers with confidence, built on whichever table it found first.
+Ask it for churn and it answers with confidence, built on whichever table it found first.
 
-Gartner found that 63% of organisations either don't have, or aren't sure they have, the right data management practices for AI. It predicts that through 2026, organisations will abandon 60% of AI projects that are not supported by AI-ready data ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk)).
+That is a set-up gap, not a flaw in the tool. Gartner found that 63% of organisations either don't have, or aren't sure they have, the right data management practices for AI. It predicts that through 2026, organisations will abandon 60% of AI projects that are not supported by AI-ready data ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk)).
 
-## Start with the terms in your board deck
+## Start with your board deck
 
-Take the terms in your board deck and data room: ARR, churn, burn, runway, active customer, pipeline. For each, write down:
+Take the terms in your board deck and data room: ARR, churn, burn, runway, active customer, pipeline. For each one, write down five things.
 
-- **Name:** for example, "active customer".
-- **Definition:** one sentence, including what is left out.
-- **Source:** the system and the field it comes from.
-- **Owner:** the person who decides if it changes.
-- **Last changed:** the date and the reason.
+<Flow
+  title="The five lines for each term"
+  steps={[
+    { label: "Name", note: "For example, \"active customer\"" },
+    { label: "Definition", note: "One sentence, including what is left out" },
+    { label: "Source", note: "The system and the field it comes from" },
+    { label: "Owner", note: "The person who decides if it changes" },
+    { label: "Last changed", note: "The date and the reason" },
+  ]}
+  caption="One short entry per term is enough to start."
+/>
 
-Check each definition against the data: does your CRM hold the field, filled in for most records? Then put the glossary where your tools read it, not in a slide deck. If you want a hand getting the investor-facing numbers to agree, AUXO's [Investor metrics](/marketplace/) service covers it.
+Then check each definition against the data. Does your CRM hold the field, filled in for most records?
+
+Put the glossary where your tools read it, not in a slide deck. If you want a hand getting the investor-facing numbers to agree, AUXO's [Investor metrics](/marketplace/) service covers it.
 
 ## What to do next
 
-Agree what the important words mean, where each number comes from and who owns it. It is the cheapest part of any AI project, and the easiest to skip. To see where your own data stands, [take the AUXO Score](/auxo-score/).
+Agree what the important words mean, where each number comes from and who owns it. It is the cheapest part of any AI project, and the easiest to skip.
+
+To see how your own set-up looks across tools, data, set-up, adoption and measurement, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- NASA, [Mars Climate Orbiter](https://science.nasa.gov/mission/mars-climate-orbiter/)
+- Gartner, [data quality topic page](https://www.gartner.com/en/data-analytics/topics/data-quality), 2020 research
+- Gartner, [press release on AI-ready data, 26 February 2025](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk), 2025

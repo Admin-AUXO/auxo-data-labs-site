@@ -13,7 +13,6 @@ const { gate } = SCORE_COPY;
   data-auxo-score
 >
   <section class="score__screen" id="s-intro" data-screen="intro">
-    <span class="score__eyebrow">{intro.default.eyebrow}</span>
     <h1 class="score__h1" tabindex="-1">{intro.default.title}</h1>
     <p class="score__lede">{intro.default.lede(CARDS.length)}</p>
     <div class="score__side">
@@ -42,7 +41,7 @@ const { gate } = SCORE_COPY;
   <section class="score__screen" id="s-quiz" data-screen="quiz" data-pagefind-ignore="all" hidden>
     <div class="score__qhead">
       <button class="score__back" id="backBtn" type="button">← Back</button>
-      <span class="score__pill" id="dimPill">ACCURATE</span>
+      <span class="score__pill" id="dimPill">TOOLS</span>
       <span class="score__count" id="count">1 / {CARDS.length}</span>
     </div>
     <div class="score__bar" aria-hidden="true"><i id="progress"></i></div>
@@ -63,7 +62,6 @@ const { gate } = SCORE_COPY;
   </section>
 
   <section class="score__screen" id="s-gate" data-screen="gate" data-pagefind-ignore="all" hidden>
-    <span class="score__eyebrow">{gate.eyebrow}</span>
     <h2 class="score__h2" tabindex="-1">{gate.title}</h2>
     <p class="score__lede">{gate.lede}</p>
     <form class="score__mail" id="gateForm" novalidate>
@@ -85,7 +83,6 @@ const { gate } = SCORE_COPY;
   </section>
 
   <section class="score__screen" id="s-result" data-screen="result" data-pagefind-ignore="all" hidden>
-    <span class="score__eyebrow">Your AUXO Score</span>
     <div class="score__head" id="scoreHead">
       <div class="score__ring">
         <svg viewBox="0 0 120 120" aria-hidden="true">

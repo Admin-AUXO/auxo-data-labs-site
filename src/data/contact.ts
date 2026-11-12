@@ -78,12 +78,12 @@ export const contactContent: ContactContent = {
   meta: {
     title: "Apply for a Founder review",
     description:
-      "A 30-minute call, by application. Bring the one number you don't trust. Written next steps within 3 business days.",
+      "A 30-minute call, by application. Written next steps within 3 business days.",
   },
   hero: {
     title: "Bring the number you doubt.",
     titleHighlight: "doubt",
-    lead: "A 30-minute call, by application. Leave knowing what to fix first.",
+    lead: "A 30-minute call. Leave knowing what to fix first.",
     spots: {
       left: "{left} of {cap} places left this week.",
       full: "This week is full. Apply now and we will offer you a slot next week.",
@@ -101,7 +101,7 @@ export const contactContent: ContactContent = {
   },
   form: {
     title: "Your application",
-    description: "Five questions. Then pick a time.",
+    description: "Five questions, then pick a time.",
     fields: [
       {
         name: "name",
@@ -169,7 +169,7 @@ export const contactContent: ContactContent = {
   booking: {
     title: "Thanks. Now pick a time.",
     lead: "Choose any open 30-minute slot below.",
-    note: "We review every application before the call and will tell you if it's not a fit.",
+    note: "We read every application first and will say if it's not a fit.",
     iframeTitle: "Book your Founder review",
     fallback: "Calendar not loading? Open the booking page",
   },
@@ -183,48 +183,48 @@ export const contactContent: ContactContent = {
       },
       {
         title: "The call",
-        desc: "We learn the business, its customers, its problems and its data, then propose a path. No price on the call.",
+        desc: "We learn the business and its data, then propose a path. No price on the call.",
       },
       {
         title: "Next steps in writing",
-        desc: "Within 3 business days. If there is work to do, we scope it with you and put the price in writing. If we're not the right fit, we say so.",
+        desc: "Within 3 business days. If there is work, we scope it with you and put the price in writing. If we're not the right fit, we say so.",
       },
     ],
   },
   faq: {
     title: "Before you apply",
     titleHighlight: "apply",
-    description: "The questions founders and team leads ask us first.",
+    description: "What founders and team leads ask first.",
     items: [
       {
         question: "Who is the Founder review for?",
         answer:
-          "Any company that wants a clear read of its data before spending on AI, from seed-stage startups to large organisations. One per company.",
+          "Any company that wants a clear read of its data before spending on AI. One per company.",
       },
       {
         question: "What does it cost?",
         answer:
-          "No charge for the AUXO Score or the Founder review. If there is work to do, we scope each phase with you and agree the price in writing before we start.",
+          "No charge for the AUXO Score or the Founder review. If there is work, we agree the price for each phase in writing first.",
       },
       {
         question: "Why is it an application?",
         answer:
-          "Places are limited each week, and we prepare for every call. We read each application first and will tell you if it isn't a fit.",
+          "Places are limited each week, and we prepare for every call. We read each application first.",
       },
       {
         question: "Is this confidential? Can we sign an NDA first?",
         answer:
-          "Yes. Your details stay with us, and we're glad to sign an NDA first. We can send ours or use yours.",
+          "Yes. Your details stay with us. We can sign an NDA first, ours or yours.",
       },
       {
         question: "What if our data is messy, scattered or incomplete?",
         answer:
-          "That's normal. You don't need to tidy anything before we talk. If there isn't enough data yet, we'll say so and suggest what to set up first.",
+          "That's normal. Don't tidy anything first. If there isn't enough data yet, we'll say so and suggest where to start.",
       },
       {
         question: "What happens after you hand over?",
         answer:
-          "Every build ends with a system your team owns, guides and training. Upkeep is optional and monthly. Stop with 30 days' notice and keep everything.",
+          "Every build ends with a system your team owns, plus guides and training. Upkeep is optional and monthly. Stop with 30 days' notice.",
       },
     ],
   },

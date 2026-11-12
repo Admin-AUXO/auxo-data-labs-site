@@ -1,8 +1,8 @@
 import { CARDS } from "./cards";
 import type { Answers, Band, Dimension, Layout, Result, Tier } from "./types";
 
-export const DIMENSIONS: Dimension[] = ["Accurate", "Complete", "Consistent", "Timely", "Trusted"];
-const TIE_ORDER: Dimension[] = ["Trusted", "Consistent", "Accurate", "Complete", "Timely"];
+export const DIMENSIONS: Dimension[] = ["Tools", "Data", "Set-up", "Adoption", "Measurement"];
+const TIE_ORDER: Dimension[] = ["Data", "Measurement", "Set-up", "Tools", "Adoption"];
 export const QUADS = ["A", "U", "X", "O"] as const;
 export const IDK_POINTS = 3;
 export const IDK_LIMIT = 3;
@@ -10,10 +10,10 @@ export const IDK_LIMIT = 3;
 export const tone = (v: number) => (v >= 60 ? "ok" : v >= 40 ? "warn" : "crit");
 
 export const BANDS: Band[] = [
-  { min: 80, name: "Healthy", line: "Your data is in good shape for AI and for the decisions that matter. Keep it that way as you add tools and people." },
-  { min: 60, name: "Stable", line: "Good foundations with a few blind spots. Fix the weakest area before AI tools start relying on it." },
-  { min: 40, name: "Fragile", line: "It works until someone asks a hard question. AI on this data would repeat the same gaps, so fix the foundations first." },
-  { min: 0, name: "Critical", line: "Decisions are being made without reliable numbers. Start with the one fix below before adding AI or new tools." },
+  { min: 80, name: "Healthy", line: "Your AI set-up is in good shape. Keep the tool list short and keep measuring as you grow." },
+  { min: 60, name: "Stable", line: "Good foundations with a few gaps. Fix the weakest area before you add more tools." },
+  { min: 40, name: "Fragile", line: "AI is in use and the basics are forming. Tools, data and ownership come next." },
+  { min: 0, name: "Critical", line: "A good moment to plan. Start with the one step below before you buy anything new." },
 ];
 
 export const idkCount = (a: Answers) => Object.values(a).filter(x => x.isIdk).length;

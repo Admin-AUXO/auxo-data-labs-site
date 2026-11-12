@@ -1,4 +1,4 @@
-export type Dimension = "Accurate" | "Complete" | "Consistent" | "Timely" | "Trusted";
+export type Dimension = "Tools" | "Data" | "Set-up" | "Adoption" | "Measurement";
 export type CardType = "scale_ascending" | "scale_descending" | "descriptive_shuffle";
 export type Tier = 1 | 2 | 3 | 4;
 export type Quadrant = "A" | "U" | "X" | "O";

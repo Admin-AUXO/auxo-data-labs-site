@@ -1,0 +1,135 @@
+---
+interface Item {
+  label: string;
+  value: number;
+  display?: string;
+  tone?: "accent" | "warn" | "muted";
+}
+
+interface Props {
+  title: string;
+  items: Item[];
+  max?: number;
+  source?: string;
+  href?: string;
+}
+
+const { title, items, max, source, href } = Astro.props;
+const top = max ?? Math.max(...items.map((i) => i.value));
+---
+<figure class="chart not-prose">
+  <figcaption class="chart__title">{title}</figcaption>
+  <ul class="chart__rows">
+    {
+      items.map((item) => (
+        <li class="chart__row" data-tone={item.tone ?? "accent"}>
+          <span class="chart__label">{item.label}</span>
+          <span class="chart__value">{item.display ?? item.value}</span>
+          <span class="chart__track" aria-hidden="true">
+            <span class="chart__bar" style={`inline-size:${Math.max(2, Math.round((item.value / top) * 100))}%`} />
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    source && (
+      <p class="chart__source">
+        Source: {href ? <a href={href} target="_blank" rel="noopener noreferrer">{source}</a> : source}
+      </p>
+    )
+  }
+</figure>
+
+<style>
+  .chart {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    display: grid;
+    gap: 1.25rem;
+    margin-block: 2rem;
+    margin-inline: 0;
+    padding: var(--card-pad);
+  }
+
+  .chart__title {
+    color: var(--foreground);
+    font-family: var(--font-brand);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .chart__rows {
+    display: grid;
+    gap: 0.9rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .chart__row {
+    --tone: var(--accent);
+
+    align-items: center;
+    display: grid;
+    gap: 0.35rem 1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .chart__row[data-tone="warn"] {
+    --tone: var(--accent-2);
+  }
+
+  .chart__row[data-tone="muted"] {
+    --tone: var(--subtle);
+  }
+
+  .chart__label {
+    color: var(--foreground);
+    font-size: var(--text-sm);
+    line-height: 1.35;
+  }
+
+  .chart__value {
+    color: var(--tone);
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 700;
+    text-align: end;
+  }
+
+  .chart__track {
+    background: var(--border);
+    block-size: 0.6rem;
+    border-radius: var(--radius-full);
+    grid-column: 1 / -1;
+    overflow: hidden;
+  }
+
+  .chart__bar {
+    background: var(--tone);
+    block-size: 100%;
+    border-radius: inherit;
+    display: block;
+  }
+
+  .chart__source {
+    border-block-start: 1px solid var(--border);
+    color: var(--subtle);
+    font-size: var(--text-sm);
+    margin: 0;
+    padding-block-start: 0.9rem;
+  }
+
+  .chart__source a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .chart__source a:hover {
+    color: var(--foreground);
+  }
+</style>

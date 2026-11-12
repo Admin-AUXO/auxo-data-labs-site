@@ -7,42 +7,62 @@ tags: ["Claude", "Data readiness", "Retrieval", "AI in practice"]
 draft: true
 ---
 
-**In short.** The current Claude models can read a great deal at once, but reading more is not the same as answering well. The right documents and agreed definitions decide the answer. A bigger context window does not.
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
+
+**In short:** The current Claude models can read a great deal at once, but reading more is not the same as answering well. The right documents and agreed definitions decide the answer. A bigger context window does not.
+
+## If it can read everything, why not give it everything?
+
+Picture a finance lead who drops the whole shared drive into a request and asks, "What was our ARR last quarter?" The model reads it all and answers calmly.
+
+The answer may still be wrong. Not because the model missed something, but because the drive holds more than one version of the truth.
 
 ## How much Claude can read
 
-Every current Claude model, from Haiku 5.5 to Fable 5.2, has a context window of one million tokens. Anthropic puts that at roughly 555,000 words. That is several long contracts, a year of board packs, or a large slice of a policy library in a single request.
+Every current Claude model, from Haiku 5.5 to Fable 5.2, has a [context window](https://platform.claude.com/docs/en/build-with-claude/context-windows) of one million tokens. Anthropic puts that at roughly 555,000 words. That is several long contracts, a year of board packs, or a large slice of a policy library in a single request.
 
 That is useful. You can ask questions across a whole contract set, compare versions of a policy, or check a long report for internal consistency. Tasks that once needed careful slicing now fit in one go.
 
 But there are three catches.
 
+<LinkCard
+  href="https://platform.claude.com/docs/en/build-with-claude/context-windows"
+  source="Anthropic, Claude Platform Docs"
+  title="Context windows"
+  note="How the context window works, and what counts towards it in a request."
+/>
+
 ## Reading more costs more
 
-You pay for every token the model reads, every time. Sending a full document library with each question is slow and expensive, especially at volume. Anthropic's pricing notes that very long requests can be billed at a different rate. Check the current pricing page before you design around it.
+You pay for every token the model reads, every time. Sending a full document library with each question is slow and expensive, especially at volume. Anthropic's pricing notes that very long requests can be billed at a different rate. Check the current [pricing page](https://platform.claude.com/docs/en/about-claude/pricing) before you design around it.
 
-Prompt caching helps when the same large document is used again and again. A cached read costs a small fraction of a normal one. It only helps if the same content repeats. The [cost control post](/blog/cost-control-routing-caching-batching/) in this series covers it.
+[Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) helps when the same large document is used again and again. A cached read costs a small fraction of a normal one. It only helps if the same content repeats. The [cost control post](/blog/cost-control-routing-caching-batching/) in this series covers it.
 
 ## The model needs the right documents
 
 For most business questions, a small set of the right documents beats a large pile of mixed ones. This is what retrieval is for. A search step finds the few passages that matter, and only those go to the model.
 
-Good retrieval depends on ordinary things done well:
+Good retrieval depends on ordinary things done well.
 
 - **One current version.** If your shared drive holds four copies of the pricing policy, the model may quote the wrong one with confidence.
 - **Clear ownership.** Someone has to say which document is the source of truth.
 - **Useful labels.** Dates, owners, departments and status make search far more accurate.
 - **Access rules.** The model should only see what the person asking is allowed to see. That has to be enforced outside the model.
 
-## The numbers have to agree
+## Do the numbers agree?
 
 Documents are one thing. Data is another.
 
 Ask a model, "What was our ARR last quarter?" If your CRM, billing system and finance sheet each define ARR differently, the model will pick one. It may not tell you which. It will still sound sure.
 
-No context window fixes that. The fix is agreeing what each number means, where it comes from and who owns it. Then checking that the systems match.
+<Callout>
+No context window fixes a disagreement between your systems.
+</Callout>
 
-## By function
+The fix is agreeing what each number means, where it comes from and who owns it. Then checking that the systems match.
+
+## What it looks like by function
 
 **Finance.** Reading every contract in the data room to list renewal dates and change-of-control clauses works well with a large context. Answering "what is our runway?" depends on clean, reconciled data, not on reading more.
 
@@ -62,8 +82,14 @@ Pick one question your leadership team asks every month, such as "what is our ne
 
 Then ask Claude the question with only the documents you would trust. Ask again with everything in the folder. Compare the answers. The difference shows how much your data, not your model, is shaping the result.
 
-## Where AUXO helps
+## What to do next
 
-This is the core of our work: agreed definitions, one source of truth, clean retrieval and the right access rules. [Fundraise data room](/marketplace/) applies it to the contracts and metrics investors ask for. It sorts and checks the files, flags gaps, and a person approves what is shared.
+Agreed definitions, one source of truth, clean retrieval and the right access rules are the core of our work. [Fundraise data room](/marketplace/) applies them to the contracts and metrics investors ask for. It sorts and checks the files, flags gaps, and a person approves what is shared.
 
-To see how your data scores on accuracy, completeness, consistency, timeliness and trust, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+To check your own set-up, including your data, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Anthropic, [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows), Claude Platform Docs
+- Anthropic, [Pricing](https://platform.claude.com/docs/en/about-claude/pricing), Claude Platform Docs
+- Anthropic, [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), Claude Platform Docs

@@ -5,17 +5,17 @@
 AUXO Data Labs is an end-to-end data and AI service platform. It leads with funded startups (seed to Series B) and also works with growing companies (50–500 people) and large organisations. The path is Analyze, Advise, Build, with optional managed upkeep. A Founder review comes first for every company. Clients own what is built: the code, the setup, the documentation and the accounts. No lock-in. A person approves anything an AI agent drafts before it goes out. The site publishes no prices; each phase has a fixed price, set by scope and agreed in writing before work starts. Clients can stop after any phase and keep everything delivered. No charge for the AUXO Score or the Founder review. We reply to enquiries within one business day.
 
 ## Core pages
-- [Home](https://auxodata.com/): Your data, ready for AI. What AUXO fixes and how to start.
+- [Home](https://auxodata.com/): Your company, ready for AI. We look at your business and data, tell you which AI fits, and set it up for you. Start with a score, leave with a plan.
 - [How it works](https://auxodata.com/how-it-works/): Analyze, Advise and Build, with an example of what the client holds after each step, optional managed upkeep and the five-check method.
 - [Pricing](https://auxodata.com/pricing/): No charge for the AUXO Score or the Founder review; every phase after has a fixed price, in writing. A Founder review comes first. What follows: for startups (seed to Series B), one set of numbers; for growing companies (50–500 people), a Deep-dive audit; for large organisations, one unit first by written proposal. No prices are published.
 - [Stacks](https://auxodata.com/marketplace/): Six fixed-price jobs on a company's numbers, built in the client's own accounts: Investor metrics, CRM clean-up, Fundraise data room, Metric alerts, Chat with your data and Workflow automation. Any tool is bought direct by the client.
 - [Blog](https://auxodata.com/blog/): Plain reads on data, AI tools and agents, and when not to build.
-- [AUXO Score](https://auxodata.com/auxo-score/): An AI readiness assessment in 10 questions: a check of how ready a company's data is for AI, across Accurate, Complete, Consistent, Timely and Trusted. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
+- [AUXO Score](https://auxodata.com/auxo-score/): How ready is your company for AI? Ten questions, five checks on your AI set-up: Tools, Data, Set-up, Adoption and Measurement. Scores 0 to 100, banded Healthy, Stable, Fragile or Critical. No sign-up.
 - [Apply for a Founder review](https://auxodata.com/apply/): A 30-minute call with an AUXO founder, by application, with written next steps within 3 business days. Limited places each week.
 - [About](https://auxodata.com/about/): Convictions, the founding team, and what clients can hold AUXO to.
 
 ## What AUXO fixes
-- Accurate data: one set of numbers across ARR, burn and runway, from the tools you already use.
+- Accurate data: one set of numbers, from the tools you already use.
 - Unified reporting: a board pack that holds up when investors ask hard questions.
 - Explainable automation: AI takes the routine work, and every result can be explained.
 - Oversight built in: simple rules for your data and AI, written down before diligence asks.

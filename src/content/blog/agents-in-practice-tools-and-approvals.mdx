@@ -7,9 +7,19 @@ tags: ["Claude", "AI agents", "Governance", "AI in practice"]
 draft: true
 ---
 
-**In short.** An agent is a model that can use tools: search a database, read a file, draft an email, update a record. Every tool is a permission. Start with the simplest setup, grant tools by risk, and name who approves before you build.
+import Callout from "../../components/blog/Callout.astro";
+import Flow from "../../components/blog/Flow.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
 
-## Which model for agent work
+**In short:** An agent is a model that can [use tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview): search a database, read a file, draft an email, update a record. Every tool is a permission. Start with the simplest setup, grant tools by risk, and name who approves before you build.
+
+## Who signs off on this?
+
+Say your finance lead has a stack of supplier invoices on the desk and wants an agent to help match them to purchase orders. Before anyone talks about models, someone should ask a plainer question. If it gets one wrong, who sees it first?
+
+That question shapes the whole build. So we start there, then pick the model.
+
+## Which model for agent work?
 
 All current Claude models can use tools. Anthropic's guidance gives each a different role.
 
@@ -18,17 +28,24 @@ All current Claude models can use tools. Anthropic's guidance gives each a diffe
 - **Sonnet 5.5** handles everyday tool use well. For well-specified multistep tasks, Anthropic suggests starting at medium effort and moving to high for harder or longer ones.
 - **Haiku 5.5** suits short steps inside a larger agent, such as a sub-task that sorts or extracts.
 
-Effort matters here too. Anthropic notes that lower effort means fewer and shorter tool calls. That saves money, but on Haiku at low effort, a long agent task is more likely to skip a search or a check. For agent work, measure before you lower it.
+[Effort](https://platform.claude.com/docs/en/build-with-claude/effort) matters here too. Anthropic notes that lower effort means fewer and shorter tool calls. That saves money. But on Haiku at low effort, a long agent task is more likely to skip a search or a check. For agent work, measure before you lower it.
 
 ## Start with less than you think you need
 
 Anthropic's guide to [building effective agents](https://www.anthropic.com/research/building-effective-agents) makes a point worth repeating. Start with the simplest setup that works. Many tasks need a fixed sequence of steps, not an agent that decides for itself. Agents trade higher cost and slower responses for flexibility, and their errors can compound.
 
+<LinkCard
+  href="https://www.anthropic.com/research/building-effective-agents"
+  source="Anthropic"
+  title="Building effective AI agents"
+  note="Anthropic's own guide to when a fixed workflow is enough and when an agent is worth it."
+/>
+
 A fixed workflow is easier to test, cheaper to run and easier to explain to an investor or auditor. Use an agent only where the steps genuinely vary.
 
 ## Grant tools by risk
 
-Think about each tool in three ways.
+Look at each tool in three ways.
 
 - **Read or write.** Reading a ticket queue is low risk. Writing to a payment system is not.
 - **Reversible or not.** A draft can be deleted. A sent email cannot be unsent.
@@ -36,9 +53,24 @@ Think about each tool in three ways.
 
 Start with read access. Add write access only where the task needs it. Nothing irreversible happens without a person.
 
+<Callout>
+Every tool you grant is a permission, so grant them by risk and keep a person at the irreversible steps.
+</Callout>
+
 ## Decide the approval points first
 
 Build them into the workflow itself, not into a policy document nobody reads. In each case below, the agent drafts, sorts, checks and flags, and a named person approves what goes out.
+
+<Flow
+  title="An agent run with a person at the end"
+  steps={[
+    { label: "Agent reads", note: "Read access first" },
+    { label: "Agent drafts or flags", note: "Nothing leaves yet" },
+    { label: "Named person approves", note: "Payments, sends, merges", tone: "slow" },
+    { label: "Run is recorded", note: "Asked, read, used, approved" },
+  ]}
+  caption="The approval step is part of the workflow, so it cannot be skipped by accident."
+/>
 
 **Finance.** The agent matches invoices to purchase orders and flags mismatches. A person approves every payment. It also drafts the monthly investor update from your metrics, and a founder reads and sends it.
 
@@ -50,7 +82,7 @@ Build them into the workflow itself, not into a policy document nobody reads. In
 
 ## Keep a record
 
-For every run, keep a trace: what the agent was asked, what it read, which tools it used, what it produced, and who approved it. When something goes wrong, and eventually something will, you need to replay it.
+For every run, keep a trace: what the agent was asked, what it read, which tools it used, what it produced, and who approved it. When something goes wrong, and eventually something will, you need to be able to replay it.
 
 ## Try this
 
@@ -62,8 +94,14 @@ Pick one task you would like an agent to help with. List every action it would n
 
 If more than half the actions are irreversible writes, start with a fixed workflow that drafts and hands over, not a free-running agent. If most are reads, you have a good first candidate.
 
-## Where AUXO helps
+## What to do next
 
-We build agents on Claude, set up in your own accounts and handed over. Each has named approvers, least-privilege access and a record of every run. [Workflow automation](/marketplace/) is where this starts for most startups: one repeated task, with the approval step built in.
+We build agents on Claude, set up in your own accounts and handed over, with named approvers, least-privilege access and a record of every run. [Workflow automation](/marketplace/) is where this starts for most startups: one repeated task, with the approval step built in.
 
-To see whether your data is ready for agents, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+To see how your own set-up looks, [take the AUXO Score](/auxo-score/). Ten questions, about three minutes.
+
+## Sources
+
+- Anthropic, [Building effective AI agents](https://www.anthropic.com/research/building-effective-agents)
+- Anthropic, [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), Claude Platform Docs
+- Anthropic, [Effort](https://platform.claude.com/docs/en/build-with-claude/effort), Claude Platform Docs

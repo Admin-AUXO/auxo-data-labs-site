@@ -7,17 +7,46 @@ tags: ["Ownership", "Engineering"]
 draft: false
 ---
 
-## In short
+import BarChart from "../../components/blog/BarChart.astro";
+import Callout from "../../components/blog/Callout.astro";
+import LinkCard from "../../components/blog/LinkCard.astro";
 
-Most data and AI projects are scoped as a build. The test comes when the person who built it moves on. In a startup, that is often the one engineer or contractor who knows why the board deck says what it says. Five checks tell you whether you own the system or depend on one person.
+**In short:** Most data and AI projects are scoped as a build, and the real test comes when the person who built it moves on. In a startup, that is often the one engineer or contractor who knows why the board deck says what it says. Five checks tell you whether you own the system or depend on one person.
+
+## Who else can fix it?
+
+Picture a founder a week before a raise. The metrics pipeline has run for a year, and the engineer who built it has just handed in notice.
+
+Nobody else has opened the code. The board deck still needs its numbers on the 1st.
+
+That moment is avoidable, and the checks below are how.
 
 ## Plan for the builder to leave
 
 They will. In the US, the median time workers had been with their current employer was 4.1 years in January 2026, and 3.0 years for workers aged 25 to 34 ([US Bureau of Labor Statistics](https://www.bls.gov/news.release/tenure.nr0.htm)). If a pipeline, a report or an AI agent must run for years, plan for it to outlive its builder.
 
+<Callout>Plan for the system to outlive the person who built it.</Callout>
+
+<BarChart
+  title="Median time with current employer, US, January 2026"
+  items={[
+    { label: "All workers", value: 4.1, display: "4.1 years" },
+    { label: "Workers aged 25 to 34", value: 3.0, display: "3.0 years", tone: "warn" },
+  ]}
+  source="US Bureau of Labor Statistics"
+  href="https://www.bls.gov/news.release/tenure.nr0.htm"
+/>
+
 ## Systems decay, then diligence finds out
 
 They rarely break on day one. A formula only one person understood stops matching the business after a pricing change, and ARR drifts from the accounts. An API key expires, and it lived in a former contractor's personal account. An agent's rules were tuned by one engineer, and nobody else knows why it skips certain customers. The model it runs on is retired by the vendor. Anthropic, for example, publishes a schedule for this, and once a model is retired, requests to it fail ([Anthropic](https://platform.claude.com/docs/en/about-claude/model-deprecations)).
+
+<LinkCard
+  href="https://platform.claude.com/docs/en/about-claude/model-deprecations"
+  source="Anthropic"
+  title="Model deprecations"
+  note="The published retirement schedule, so you can see which models your agent depends on."
+/>
 
 Each is small. Together they leave a system people quietly work around. Then diligence arrives, and nobody can explain the numbers in the data room.
 
@@ -39,8 +68,20 @@ For AI agents, add one more. Keep the prompts, rules, approval lists and model v
 
 A one-off analysis for a board question, a prototype you will throw away, a spreadsheet one person uses alone: leave them light, and label them temporary so nobody builds on them.
 
-## The takeaway
+## A simple test
 
 Ask the builder to take two weeks off. If the system keeps running and someone else can fix it, you own it. If not, you own a dependency on one person. Fix that before you build anything new on top.
 
-Our Build step ends with a handover: one set of numbers, set up in your accounts, with the runbook. [Metric alerts](/marketplace/) covers check 4. To see where your data stands first, [take the AUXO Score](/auxo-score/): 10 questions, about 3 minutes.
+Our Build step ends with a handover: one set of numbers, set up in your accounts, with the runbook. [Metric alerts](/marketplace/) covers check 4.
+
+## What to do next
+
+Score your own system against the five checks. Any no is where to start.
+
+For a read on your wider AI set-up, [take the AUXO Score](/auxo-score/). Ten questions on tools, data, set-up, adoption and measurement, about three minutes.
+
+## Sources
+
+- US Bureau of Labor Statistics, [Employee tenure news release](https://www.bls.gov/news.release/tenure.nr0.htm), January 2026
+- Anthropic, [Model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations)
+- Stack Overflow, [Professional Developers, 2024 Developer Survey](https://survey.stackoverflow.co/2024/professional-developers), 2024

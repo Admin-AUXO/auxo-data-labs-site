@@ -88,7 +88,7 @@ export const pricingContent: PricingContent = {
     "The AUXO Score and the Founder review cost nothing. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
   hero: {
     title: "No charge to start. A fixed price after.",
-    lead: "We scope each phase with you and put the price in writing before it starts. Stop after any of them.",
+    lead: "We scope each phase with you and put the price in writing first. Stop after any of them.",
     primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     receipt: {
@@ -192,33 +192,33 @@ export const pricingContent: PricingContent = {
       {
         question: "How do you set the price?",
         answer:
-          "By what's involved: the tools, the teams and what we build. We scope each phase with you and fix the price in writing before we start. No two jobs match, so we don't publish prices.",
+          "By what's involved: the tools, the teams and what we build. We fix the price for each phase in writing before we start.",
       },
       {
         question: "Who can get a Founder review?",
         answer:
-          "Any company, one per company. Places are limited each week, so we read every application first. Not enough data yet? We'll say so and suggest what to set up first.",
+          "Any company, one per company. Places are limited each week, so we read every application first. Not enough data yet? We'll say so and suggest where to start.",
       },
       {
         question: "Why not hire a data engineer instead?",
         answer:
-          "Often you should, later. We set up the base your first data hire builds on, so they don't start over.",
+          "Often you should, later. We set up the base your first data hire builds on.",
       },
       {
         question: "Who does the work?",
         answer:
-          "The two founders. Vignesh scopes the work with you; Ajay builds it. We work to a method: five checks, a fixed scope per phase and a written handover. Everything is in your name.",
+          "The two founders. Vignesh scopes the work with you. Ajay builds it. Everything is in your name.",
       },
       {
         question: "Can you work with our procurement process?",
         answer:
-          "Yes. We follow your buying, security and contract steps, starting with one team. NDA first if you want one.",
+          "Yes. We follow your buying, security and contract steps, starting with one team.",
       },
     ],
   },
   cta: {
     title: "Not sure where to start? Tell us what doesn't add up.",
-    description: "Leave with one clear next step before your raise or board meeting.",
+    description: "Leave with one clear next step.",
     ctaText: "Apply for a Founder review",
     ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,

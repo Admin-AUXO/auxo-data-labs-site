@@ -11,12 +11,12 @@ export const linksContent: LinksContent = {
     description: "Take the AUXO Score or apply for a Founder review.",
   },
   title: "Your data, ready for AI.",
-  lead: "Start with the AUXO Score. 10 questions, about 3 minutes.",
+  lead: "Start with the AUXO Score. Ten questions, about 3 minutes.",
   links: [
     { text: "Take the AUXO Score", href: "/auxo-score/", primary: true },
     { text: "Apply for a Founder review", href: "/apply/" },
-    { text: "The model is the easy part", href: "/blog/the-model-is-the-easy-part/" },
-    { text: "Your AI assistant is not the hard part", href: "/blog/your-ai-assistant-is-not-the-hard-part/" },
+    { text: "Beyond the model: what an AI set-up needs", href: "/blog/the-model-is-the-easy-part/" },
+    { text: "Why AI pilots stall, even with Claude or ChatGPT", href: "/blog/your-ai-assistant-is-not-the-hard-part/" },
     { text: "Stacks: six ways to get numbers you can trust", href: "/marketplace/" },
   ],
 };

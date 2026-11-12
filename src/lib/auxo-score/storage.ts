@@ -1,7 +1,7 @@
 import type { Band, Dimension, State } from "./types";
 
-const STATE_KEY = "auxo-score-v2";
-export const RESULT_KEY = "auxo-score-v2-result";
+const STATE_KEY = "auxo-score-v3";
+export const RESULT_KEY = "auxo-score-v3-result";
 const UTM_KEY = "auxo-score-utm";
 const LEGACY_KEYS = [
   "auxo-self-check-v3",
