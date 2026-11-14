@@ -14,7 +14,7 @@ export const linksContent: LinksContent = {
   lead: "Start with the AUXO Score. Ten questions, about 3 minutes.",
   links: [
     { text: "Take the AUXO Score", href: "/auxo-score/", primary: true },
-    { text: "Apply for a Founder review", href: "/apply/" },
+    { text: "Apply for a data diagnostic", href: "/apply/" },
     { text: "Beyond the model: what an AI set-up needs", href: "/blog/the-model-is-the-easy-part/" },
     { text: "Why AI pilots stall, even with Claude or ChatGPT", href: "/blog/your-ai-assistant-is-not-the-hard-part/" },
     { text: "Stacks: six ways to get numbers you can trust", href: "/marketplace/" },

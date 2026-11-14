@@ -36,7 +36,7 @@ const manifest = {
     {
       name: "Contact",
       short_name: "Contact",
-      description: "Apply for a Founder review",
+      description: "Apply for a data diagnostic",
       url: "/apply/",
       icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
     },

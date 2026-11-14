@@ -433,10 +433,6 @@
   line-height: 1.15;
 }
 
-.hero-word {
-  color: var(--accent);
-}
-
 .stuck {
   display: grid;
   gap: 1rem;
@@ -842,12 +838,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   .home-hero__title {
     font-size: clamp(2.6rem, 12vw, 3.4rem);
     line-height: 1.02;
-  }
-
-  .home-hero__title > .hero-word,
-  .home-hero__title > .m-word:has(.hero-word) {
-    display: block;
-    inline-size: fit-content;
   }
 
   .home-hero__lead {

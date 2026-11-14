@@ -29,7 +29,7 @@ export const navigationContent: NavigationContent = {
     href: "/auxo-score/",
   },
   cta: {
-    label: "Apply for a Founder review",
+    label: "Apply for a data diagnostic",
     href: siteData.applyUrl,
   },
 };

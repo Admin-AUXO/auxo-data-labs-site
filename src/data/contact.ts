@@ -76,7 +76,7 @@ export const stageOptions = ["Startup, seed to Series B", "Growing company, 50â€
 
 export const contactContent: ContactContent = {
   meta: {
-    title: "Apply for a Founder review",
+    title: "Apply for a data diagnostic",
     description:
       "A 30-minute call, by application. Written next steps within 3 business days.",
   },

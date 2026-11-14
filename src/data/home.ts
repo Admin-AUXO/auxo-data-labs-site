@@ -55,9 +55,9 @@ interface HomeBlogAngle {
 interface HomeContent {
   meta: { title: string; description: string };
   hero: {
-    words: string[];
-    titleRest: string;
+    titleLead: string;
     titleHighlight: string;
+    titleTail: string;
     subtitle: string;
     primaryCta: Link;
     secondaryCta: Link;
@@ -134,12 +134,12 @@ export const homeContent: HomeContent = {
       "We review your business and data, tell you which AI fits, and set it up. For funded startups and scale-ups. Yours to keep.",
   },
   hero: {
-    words: ["data", "pipeline", "operations", "company"],
-    titleRest: "ready for",
-    titleHighlight: "AI.",
+    titleLead: "We turn messy, fragmented data into",
+    titleHighlight: "intelligent decisions",
+    titleTail: "companies act on.",
     subtitle:
-      "We look at your business and data, tell you which AI fits, and set it up for you. Built to last, and yours to keep.",
-    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+      "For funded startups and scale-ups, seed to Series B. One set of numbers your deck, model and accounts agree on.",
+    primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   proof: {
@@ -234,7 +234,7 @@ export const homeContent: HomeContent = {
       },
     ],
     note: "Industry research, not AUXO client results.",
-    cta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+    cta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
   },
   pillarsHeader: {
     title: "Four fixes that make data ready for AI.",
@@ -279,7 +279,7 @@ export const homeContent: HomeContent = {
         noCharge: true,
       },
       {
-        title: "Apply for a Founder review",
+        title: "Apply for a data diagnostic",
         desc: "A 30-minute call with a founder about your result. Places are limited.",
         noCharge: true,
       },
@@ -334,7 +334,7 @@ export const homeContent: HomeContent = {
   cta: {
     title: "Know where you stand. Then talk it through.",
     description: "A 30-minute call with a founder about your result.",
-    ctaText: "Apply for a Founder review",
+    ctaText: "Apply for a data diagnostic",
     ctaHref: siteData.applyUrl,
     secondaryText: "Take the AUXO Score",
     secondaryHref: "/auxo-score/",

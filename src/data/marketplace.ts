@@ -280,7 +280,7 @@ export const marketplaceContent = {
   customStack: {
     title: "Custom stack",
     body: "Need something else? Tell us the work.",
-    cta: "Apply for a Founder review",
+    cta: "Apply for a data diagnostic",
     href: "/apply/?tool=custom-stack",
   },
   setup: {
@@ -305,7 +305,7 @@ export const marketplaceContent = {
   cta: {
     title: "Not sure where to start?",
     description: "Most teams start with Investor metrics.",
-    ctaText: "Apply for a Founder review",
+    ctaText: "Apply for a data diagnostic",
     ctaHref: siteData.applyUrl,
     reassurance: "We reply within one business day.",
   },

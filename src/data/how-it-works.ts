@@ -49,7 +49,7 @@ export const howItWorksContent = {
   intro: {
     title: "Analyze. Advise. Build.",
     lead: "Each step ends in writing. Stop after any of them.",
-    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl } satisfies Link,
+    primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl } satisfies Link,
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" } satisfies Link,
   },
   ladder: {
@@ -94,7 +94,7 @@ export const howItWorksContent = {
         ],
         links: [
           { text: "Take the AUXO Score", href: "/auxo-score/" },
-          { text: "Apply for a Founder review", href: siteData.applyUrl },
+          { text: "Apply for a data diagnostic", href: siteData.applyUrl },
         ],
       },
       {
@@ -218,7 +218,7 @@ export const howItWorksContent = {
   cta: {
     title: "Raising, or facing a board? Start with the numbers.",
     description: "Leave knowing which to fix first.",
-    ctaText: "Apply for a Founder review",
+    ctaText: "Apply for a data diagnostic",
     ctaHref: siteData.applyUrl,
     reassurance: "We reply within one business day.",
   },

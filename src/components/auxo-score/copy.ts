@@ -76,7 +76,7 @@ export const SCORE_COPY: ScoreCopy = {
       title: "Next step",
       apply: {
         what: "A 30-minute call about your result. No charge.",
-        text: "Apply for a Founder review",
+        text: "Apply for a data diagnostic",
         href: "/apply/",
       },
       reportSent: (email: string) => `Your full report is on its way to ${email}.`,
@@ -88,7 +88,7 @@ export const SCORE_COPY: ScoreCopy = {
     title: "Too many unknowns to score.",
     default: {
       lede: "You answered \"I don't know\" three or more times. Try again with whoever looks after your tools, or talk to us.",
-      talk: { text: "Apply for a Founder review", href: "/apply/" },
+      talk: { text: "Apply for a data diagnostic", href: "/apply/" },
     },
     retake: "Retake with a colleague",
   },

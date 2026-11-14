@@ -61,7 +61,7 @@ export const aboutContent: AboutContent = {
   hero: {
     title: "Data first. Then AI.",
     lead: "We get your numbers ready for investors and the board, set up the AI and hand it over.",
-    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+    primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "See how it works", href: "/how-it-works/" },
     facts: [
       { label: "Based in", value: "Dubai Internet City" },
@@ -117,7 +117,7 @@ export const aboutContent: AboutContent = {
     title: "Start with the problem.",
     titleHighlight: "the problem",
     description: "The next step is a short call.",
-    ctaText: "Apply for a Founder review",
+    ctaText: "Apply for a data diagnostic",
     ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,
   },

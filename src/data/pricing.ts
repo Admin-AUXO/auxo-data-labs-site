@@ -89,7 +89,7 @@ export const pricingContent: PricingContent = {
   hero: {
     title: "No charge to start. A fixed price after.",
     lead: "We scope each phase with you and put the price in writing first. Stop after any of them.",
-    primaryCta: { text: "Apply for a Founder review", href: siteData.applyUrl },
+    primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     receipt: {
       head: "Your first two steps",
@@ -219,7 +219,7 @@ export const pricingContent: PricingContent = {
   cta: {
     title: "Not sure where to start? Tell us what doesn't add up.",
     description: "Leave with one clear next step.",
-    ctaText: "Apply for a Founder review",
+    ctaText: "Apply for a data diagnostic",
     ctaHref: siteData.applyUrl,
     reassurance: siteData.reassurance,
   },
