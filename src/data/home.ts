@@ -129,9 +129,9 @@ const reassurance = "We reply within one business day.";
 
 export const homeContent: HomeContent = {
   meta: {
-    title: "Your data, ready for AI",
+    title: "Messy data into decisions you can act on",
     description:
-      "We review your business and data, tell you which AI fits, and set it up. For funded startups and scale-ups. Yours to keep.",
+      "We get your data in shape so you can trust it and actually use it, including for AI. For funded startups and scale-ups. Starts with a data diagnostic.",
   },
   hero: {
     titleLead: "We turn messy, fragmented data into",
@@ -198,7 +198,7 @@ export const homeContent: HomeContent = {
   },
   outcomes: {
     title: "What getting it right is worth.",
-    lead: "Independent research. Your Founder review shows what it means for your numbers.",
+    lead: "Independent research. Your data diagnostic shows what it means for your numbers.",
     listLabel: "Published research",
     items: [
       {
@@ -311,7 +311,7 @@ export const homeContent: HomeContent = {
     items: [
       {
         title: "No charge to start. A fixed price after.",
-        lead: "A Founder review comes first. Each phase after it is priced in writing.",
+        lead: "A data diagnostic comes first. Each phase after it is priced in writing.",
         cta: { text: "See pricing", href: "/pricing/" },
       },
       {

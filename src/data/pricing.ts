@@ -85,7 +85,7 @@ export interface PricingContent {
 export const pricingContent: PricingContent = {
   metaTitle: "Pricing: no charge to start, a fixed price per phase",
   metaDescription:
-    "The AUXO Score and the Founder review cost nothing. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
+    "The AUXO Score and the data diagnostic cost nothing. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
   hero: {
     title: "No charge to start. A fixed price after.",
     lead: "We scope each phase with you and put the price in writing first. Stop after any of them.",
@@ -95,7 +95,7 @@ export const pricingContent: PricingContent = {
       head: "Your first two steps",
       rows: [
         { item: "AUXO Score", price: "No charge" },
-        { item: "Founder review", price: "No charge" },
+        { item: "Data diagnostic", price: "No charge" },
       ],
       totalLabel: "To start",
       total: "Nothing",
@@ -109,7 +109,7 @@ export const pricingContent: PricingContent = {
     legend: { free: "No charge", paid: "A price we agree in writing first" },
     rows: [
       { step: "AUXO Score", get: "A score out of 100, and where to look first.", takes: "About 3 minutes", price: "No charge", tone: "free" },
-      { step: "Founder review", get: "A 30-minute call, then written next steps.", takes: "3 business days", price: "No charge", tone: "free" },
+      { step: "Data diagnostic", get: "A 30-minute call, then written next steps.", takes: "3 business days", price: "No charge", tone: "free" },
       {
         step: "Deep-dive audit",
         get: "Each gap between your deck, model and accounts, and a plan of what to build first.",
@@ -139,7 +139,7 @@ export const pricingContent: PricingContent = {
   },
   cards: {
     title: "What sets the price.",
-    startLabel: "After the Founder review",
+    startLabel: "After the data diagnostic",
     factLabels: {
       price: "Price depends on",
     },
@@ -195,7 +195,7 @@ export const pricingContent: PricingContent = {
           "By what's involved: the tools, the teams and what we build. We fix the price for each phase in writing before we start.",
       },
       {
-        question: "Who can get a Founder review?",
+        question: "Who can get a data diagnostic?",
         answer:
           "Any company, one per company. Places are limited each week, so we read every application first. Not enough data yet? We'll say so and suggest where to start.",
       },

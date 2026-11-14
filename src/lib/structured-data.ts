@@ -11,7 +11,7 @@ const serviceOffers = [
   {
     name: "Analyze",
     description:
-      "A written read of your numbers. Includes the AUXO Score and a Founder review at no charge, and a paid Deep-dive audit.",
+      "A written read of your numbers. Includes the AUXO Score and a data diagnostic at no charge, and a paid Deep-dive audit.",
   },
   {
     name: "Advise",

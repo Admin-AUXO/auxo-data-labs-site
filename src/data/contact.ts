@@ -170,7 +170,7 @@ export const contactContent: ContactContent = {
     title: "Thanks. Now pick a time.",
     lead: "Choose any open 30-minute slot below.",
     note: "We read every application first and will say if it's not a fit.",
-    iframeTitle: "Book your Founder review",
+    iframeTitle: "Book your data diagnostic",
     fallback: "Calendar not loading? Open the booking page",
   },
   nextSteps: {
@@ -197,14 +197,14 @@ export const contactContent: ContactContent = {
     description: "What founders and team leads ask first.",
     items: [
       {
-        question: "Who is the Founder review for?",
+        question: "Who is the data diagnostic for?",
         answer:
           "Any company that wants a clear read of its data before spending on AI. One per company.",
       },
       {
         question: "What does it cost?",
         answer:
-          "No charge for the AUXO Score or the Founder review. If there is work, we agree the price for each phase in writing first.",
+          "No charge for the AUXO Score or the data diagnostic. If there is work, we agree the price for each phase in writing first.",
       },
       {
         question: "Why is it an application?",

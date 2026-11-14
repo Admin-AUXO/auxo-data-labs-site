@@ -80,7 +80,7 @@ export const howItWorksContent = {
             body: "Ten questions. A score out of 100 and where to look first.",
           },
           {
-            title: "Founder review",
+            title: "Data diagnostic",
             tag: "Every company",
             tone: "free",
             body: "A call, by application. Written next steps within 3 business days.",
@@ -195,7 +195,7 @@ export const howItWorksContent = {
       {
         question: "Do we need a Deep-dive audit first?",
         answer:
-          "No. The Founder review comes first. After it, if you know what you need, we go straight to Advise or Build.",
+          "No. The data diagnostic comes first. After it, if you know what you need, we go straight to Advise or Build.",
       },
       {
         question: "Why can't Claude or ChatGPT do this for us?",

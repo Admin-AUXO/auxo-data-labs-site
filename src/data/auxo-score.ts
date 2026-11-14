@@ -17,12 +17,12 @@ export const auxoScoreAbout = {
       {
         question: "Is it a security or compliance review?",
         answer:
-          "No. It is a quick self-check of your AI set-up, not an audit or a certificate. To have your systems reviewed, apply for a Founder review.",
+          "No. It is a quick self-check of your AI set-up, not an audit or a certificate. To have your systems reviewed, apply for a data diagnostic.",
       },
       {
         question: "What happens after I get my score?",
         answer:
-          "You see the score, the band and the first fix on screen, and we email the report. Next, apply for a Founder review: a 30-minute call and written next steps.",
+          "You see the score, the band and the first fix on screen, and we email the report. Next, apply for a data diagnostic: a 30-minute call and written next steps.",
       },
     ],
   },

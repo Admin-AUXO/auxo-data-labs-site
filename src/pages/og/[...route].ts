@@ -27,7 +27,7 @@ const pages: Record<string, OGPage> = {
   },
   pricing: {
     title: "No charge to start. A fixed price after.",
-    description: "The AUXO Score and the Founder review cost nothing. Each phase after has a fixed price, in writing.",
+    description: "The AUXO Score and the data diagnostic cost nothing. Each phase after has a fixed price, in writing.",
   },
   marketplace: {
     title: "Six ways to get numbers you can trust.",
