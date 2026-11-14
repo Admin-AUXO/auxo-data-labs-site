@@ -138,7 +138,7 @@ export const homeContent: HomeContent = {
     titleHighlight: "intelligent decisions",
     titleTail: "companies act on.",
     subtitle:
-      "For funded startups and scale-ups, seed to Series B. One set of numbers your deck, model and accounts agree on.",
+      "We get your data in shape, so your AI actually works.",
     primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
