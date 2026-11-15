@@ -523,10 +523,6 @@
 }
 
 @media (width >= 48rem) {
-  .cube {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .cube__cell {
     aspect-ratio: 5 / 4;
   }
@@ -612,6 +608,13 @@
   line-height: 1;
   opacity: 0.9;
   position: absolute;
+}
+
+.cube__hl {
+  color: var(--accent);
+  text-shadow:
+    0 0 0.3em color-mix(in oklch, var(--accent) 60%, transparent),
+    0 0 0.85em color-mix(in oklch, var(--accent) 35%, transparent);
 }
 
 .cube__title {

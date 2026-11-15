@@ -21,20 +21,6 @@ interface HomePillar {
   desc: string;
 }
 
-interface HomeProblem {
-  title: string;
-  desc: string;
-  fix: string;
-}
-
-interface HomeOutcome {
-  figure: string;
-  line: string;
-  lead?: boolean;
-  source: string;
-  footnoteId: string;
-}
-
 interface HomeStep {
   title: string;
   desc: string;
@@ -66,10 +52,6 @@ interface HomeContent {
     text: string;
     link: Link;
   };
-  problem: SectionIntro & {
-    listLabel: string;
-    items: HomeProblem[];
-  };
   score: {
     title: string;
     stat: string;
@@ -80,12 +62,6 @@ interface HomeContent {
     label: string;
     note: string;
     items: HomeLogo[];
-  };
-  outcomes: SectionIntro & {
-    listLabel: string;
-    items: HomeOutcome[];
-    note: string;
-    cta: Link;
   };
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
@@ -146,33 +122,6 @@ export const homeContent: HomeContent = {
     text: "Two founders: one from business, one from data.",
     link: { text: "Meet the founders", href: "/about/#team" },
   },
-  problem: {
-    title: "Your team already uses AI. Make it count.",
-    lead: "A little set-up turns personal experiments into results the whole company can see.",
-    listLabel: "Where set-up pays off",
-    items: [
-      {
-        title: "Shared set-ups",
-        desc: "The prompts and files that work, saved once, so everyone starts from the best version.",
-        fix: "Built once, used by everyone",
-      },
-      {
-        title: "The right tools",
-        desc: "A short list chosen for the work you do, with a reason for each one.",
-        fix: "Chosen with you",
-      },
-      {
-        title: "Connected to your data",
-        desc: "AI that reads your CRM, files and accounts, with the right access for each person.",
-        fix: "Set up end to end",
-      },
-      {
-        title: "Results you can see",
-        desc: "Each tool tied to a number you already report, so every renewal is an easy call.",
-        fix: "Measured from day one",
-      },
-    ],
-  },
   score: {
     title: "See where AI can do the most for you.",
     stat: "Ten questions on tools, data, set-up, adoption and measurement.",
@@ -195,46 +144,6 @@ export const homeContent: HomeContent = {
       { name: "HubSpot", icon: "simple-icons:hubspot" },
       { name: "n8n", icon: "simple-icons:n8n" },
     ],
-  },
-  outcomes: {
-    title: "What getting it right is worth.",
-    lead: "Independent research. Your data diagnostic shows what it means for your numbers.",
-    listLabel: "Published research",
-    items: [
-      {
-        figure: "2.2 hrs",
-        line: "saved a week by each person who uses generative AI at work.",
-        lead: true,
-        source: "Federal Reserve Bank of St. Louis, 2025",
-        footnoteId: "ref-stl",
-      },
-      {
-        figure: "55.8%",
-        line: "faster. Developers with an AI pair programmer finished the same coding task ahead of those without.",
-        source: "GitHub Copilot study, 2023",
-        footnoteId: "ref-copilot",
-      },
-      {
-        figure: "14%",
-        line: "more customer issues resolved per hour with AI help, and 34% for novice and less experienced agents.",
-        source: "NBER working paper 31161, 2023",
-        footnoteId: "ref-nber",
-      },
-      {
-        figure: "95%",
-        line: "of organisations see no measurable return from their generative AI pilots.",
-        source: "MIT NANDA, 2025",
-        footnoteId: "ref-nanda",
-      },
-      {
-        figure: "$12.9M",
-        line: "a year, at least: the average cost of poor data quality. AI built on that data inherits it.",
-        source: "Gartner, 2020",
-        footnoteId: "ref-gartner",
-      },
-    ],
-    note: "Industry research, not AUXO client results.",
-    cta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
   },
   pillarsHeader: {
     title: "Four fixes that make data ready for AI.",
