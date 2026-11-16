@@ -36,10 +36,6 @@ interface HomeContent {
     primaryCta: Link;
     secondaryCta: Link;
   };
-  proof: {
-    text: string;
-    link: Link;
-  };
   score: {
     title: string;
     stat: string;
@@ -87,10 +83,6 @@ export const homeContent: HomeContent = {
       "We get your data in shape, so your AI actually works.",
     primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
-  },
-  proof: {
-    text: "Two founders: one from business, one from data.",
-    link: { text: "Meet the founders", href: "/about/#team" },
   },
   score: {
     title: "See where AI can do the most for you.",

@@ -51,11 +51,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
           </div>
         </div>
       </div>
-      <p class="home-proof" data-enter>
-        <Icon name="mdi:account-tie-outline" class="home-proof__icon" aria-hidden="true" />
-        <span>{c.proof.text}</span>
-        <a href={c.proof.link.href} class="home-proof__link">{c.proof.link.text}</a>
-      </p>
     </div>
   </Section>
 
