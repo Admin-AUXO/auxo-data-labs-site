@@ -131,8 +131,8 @@ export const homeContent: HomeContent = {
     reassurance: "Ten questions. About 3 minutes. No sign-up.",
   },
   logos: {
-    label: "Works with",
-    note: "Tools we work with. A logo is not a partnership.",
+    label: "Tools we use",
+    note: "A logo here is not a partnership.",
     items: [
       { name: "Claude", icon: "simple-icons:claude" },
       { name: "OpenAI", icon: "simple-icons:openai" },
@@ -165,7 +165,7 @@ export const homeContent: HomeContent = {
     },
     {
       letter: "X",
-      title: "Explainable automation",
+      title: "eXplainable automation",
       desc: "AI takes the routine work. A person approves what matters.",
     },
     {

@@ -116,6 +116,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
                   <span class="cube__title">{p.pre}<span class="cube__hl">{p.hl}</span>{p.post}</span>
                 </span>
                 <span class="cube__face cube__face--back">
+                  <span class="cube__back-letter" aria-hidden="true">{p.letter}</span>
                   <span class="cube__back-title">{p.title}</span>
                   <span class="cube__desc">{p.desc}</span>
                 </span>
