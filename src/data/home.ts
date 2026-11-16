@@ -55,6 +55,7 @@ interface HomeContent {
   score: {
     title: string;
     stat: string;
+    statFootnoteId: string;
     cta: Link;
     reassurance: string;
   };
@@ -124,9 +125,10 @@ export const homeContent: HomeContent = {
   },
   score: {
     title: "See where AI can do the most for you.",
-    stat: "Ten questions on tools, data, set-up, adoption and measurement.",
+    stat: "63% of organizations either do not have, or are unsure if they have, the right data management practices for AI.",
+    statFootnoteId: "ref-gartner-ai-data",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
-    reassurance: "About 3 minutes. No sign-up.",
+    reassurance: "Ten questions. About 3 minutes. No sign-up.",
   },
   logos: {
     label: "Works with",

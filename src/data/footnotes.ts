@@ -8,6 +8,18 @@ interface Footnote {
 
 export const footnotes: Footnote[] = [
   {
+    id: "ref-gartner-ai-data",
+    marker: "*",
+    text: "Sixty-three percent of organizations either do not have or are unsure if they have the right data management practices for AI. Based on a survey of 1,203 data management leaders in July 2024.",
+    source: "Gartner, Lack of AI-Ready Data Puts AI Projects at Risk, February 2025.",
+    url: "https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk",
+  },
+];
+
+// Kept for reuse. FootnoteList renders every entry in `footnotes`, so a note
+// only belongs there once a page actually cites it.
+export const archivedFootnotes: Footnote[] = [
+  {
     id: "ref-stl",
     marker: "1",
     text: "Generative AI users saved 5.4% of their work hours, about 2.2 hours a week for someone working 40 hours.",

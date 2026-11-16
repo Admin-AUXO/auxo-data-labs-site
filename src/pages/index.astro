@@ -7,6 +7,7 @@ import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
 import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
+import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import { homeContent as c } from "../data/home";
 import "../styles/pages/home.css";
 
@@ -34,7 +35,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     description: post.data.description,
   }));
 ---
-<BaseLayout title={c.meta.title} description={c.meta.description}>
+<BaseLayout title={c.meta.title} description={c.meta.description} footnotes>
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="home-hero__inner">
       <div class="home-hero__main">
@@ -68,7 +69,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         </svg>
         <div class="flex flex-col gap-3">
           <h2 class="font-bold">{c.score.title}</h2>
-          <p class="max-w-xl text-lg text-muted text-balance">{c.score.stat}</p>
+          <p class="max-w-xl text-lg text-muted text-balance">{c.score.stat}<FootnoteRef id={c.score.statFootnoteId} /></p>
         </div>
         <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
           <Button variant="secondary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
