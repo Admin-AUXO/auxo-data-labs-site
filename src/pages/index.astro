@@ -5,7 +5,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
-import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import { homeContent as c } from "../data/home";
@@ -128,80 +127,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </Section>
 
-  <Section padding="lg" width="7xl" background="accent">
-    <div class="trace-band">
-      <div class="compare-head">
-        <h2 class="compare-head__title"><HighlightText text={c.path.title} soften /></h2>
-        <p class="compare-head__lead">{c.path.lead}</p>
-        <ol class="path">
-          {
-            c.path.steps.map((s, i) => (
-              <li class="path__step">
-                <span class="path__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 class="path__title">
-                    {s.title}
-                    {s.noCharge && <span class="path__tag">{c.path.noChargeLabel}</span>}
-                  </h3>
-                  <p class="path__desc">{s.desc}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ol>
-        <a class="compare__link" href={c.path.link.href}>
-          {c.path.link.text}
-          <Icon name="mdi:arrow-right" aria-hidden="true" />
-        </a>
-      </div>
-      <figure class="sample ground-night" data-reveal>
-        <figcaption class="sample__label">{c.path.sample.label}</figcaption>
-        <div class="sample__head">
-          <p class="sample__title">{c.path.sample.title}</p>
-          <p class="sample__total"><b>{c.path.sample.total}</b><small>/100</small></p>
-          <span class="sample__band">{c.path.sample.band}</span>
-        </div>
-        <table class="sample__dims">
-          <caption class="sr-only">{c.path.sample.title}, by check, out of 100</caption>
-          <tbody>
-            {
-              c.path.sample.dims.map((d) => (
-                <tr data-tone={d.value >= 60 ? "ok" : d.value >= 40 ? "warn" : "crit"}>
-                  <th scope="row">{d.name}</th>
-                  <td class="sample__meter"><span style={`inline-size:${d.value}%`}></span></td>
-                  <td class="sample__value">{d.value}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-        <p class="sample__fix"><b>{c.path.sample.fixLabel}.</b> {c.path.sample.fix}</p>
-        <a class="compare__link" href={c.path.cta.href}>
-          {c.path.cta.text}
-          <Icon name="mdi:arrow-right" aria-hidden="true" />
-        </a>
-      </figure>
-    </div>
-  </Section>
 
-  <Section padding="lg" width="7xl">
-    <ul class="explore" aria-label={c.explore.label}>
-      {
-        c.explore.items.map((item, i) => (
-          <li data-anim="rise" style={`--i:${i}`}>
-            <a class="explore__card" href={item.cta.href}>
-              <h2 class="explore__title"><HighlightText text={item.title} soften /></h2>
-              <p class="explore__lead">{item.lead}</p>
-              <span class="explore__cta go">
-                {item.cta.text}
-                <span class="sq"><Icon name="mdi:arrow-right" aria-hidden="true" /></span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
 
   {
     posts.length > 0 && (

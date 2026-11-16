@@ -21,18 +21,6 @@ interface HomePillar {
   desc: string;
 }
 
-interface HomeStep {
-  title: string;
-  desc: string;
-  noCharge?: boolean;
-}
-
-interface HomeExplore {
-  title: string;
-  lead: string;
-  cta: Link;
-}
-
 interface HomeBlogAngle {
   slug: string;
   label: string;
@@ -67,25 +55,6 @@ interface HomeContent {
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  path: SectionIntro & {
-    noChargeLabel: string;
-    steps: HomeStep[];
-    sample: {
-      label: string;
-      title: string;
-      total: number;
-      band: string;
-      dims: { name: string; value: number }[];
-      fixLabel: string;
-      fix: string;
-    };
-    cta: Link;
-    link: Link;
-  };
-  explore: {
-    label: string;
-    items: HomeExplore[];
-  };
   blog: SectionIntro & {
     angles: HomeBlogAngle[];
     linkText: string;
@@ -174,64 +143,6 @@ export const homeContent: HomeContent = {
       desc: "Simple written rules for your data and AI.",
     },
   ],
-  path: {
-    title: "Start with a score. Leave with a plan.",
-    lead: "The first three steps cost nothing.",
-    noChargeLabel: "No charge",
-    steps: [
-      {
-        title: "Take the AUXO Score",
-        desc: "Ten questions. About 3 minutes.",
-        noCharge: true,
-      },
-      {
-        title: "See your gaps",
-        desc: "Your score, each check and the first fix, by email.",
-        noCharge: true,
-      },
-      {
-        title: "Apply for a data diagnostic",
-        desc: "A 30-minute call with a founder about your result. Places are limited.",
-        noCharge: true,
-      },
-      {
-        title: "Get a written plan",
-        desc: "Next steps within 3 business days, and a fixed price per phase.",
-      },
-    ],
-    sample: {
-      label: "Sample result",
-      title: "Your AUXO Score",
-      total: 62,
-      band: "Stable",
-      dims: [
-        { name: "Tools", value: 70 },
-        { name: "Data", value: 35 },
-        { name: "Set-up", value: 70 },
-        { name: "Adoption", value: 85 },
-        { name: "Measurement", value: 50 },
-      ],
-      fixLabel: "First fix: Data",
-      fix: "Connect one approved assistant to your CRM or files, with access that matches each person's role.",
-    },
-    cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
-    link: { text: "See how it works", href: "/how-it-works/" },
-  },
-  explore: {
-    label: "More from AUXO",
-    items: [
-      {
-        title: "No charge to start. A fixed price after.",
-        lead: "A data diagnostic comes first. Each phase after it is priced in writing.",
-        cta: { text: "See pricing", href: "/pricing/" },
-      },
-      {
-        title: "Ready-made stacks. Set up on your data.",
-        lead: "Six fixed jobs on your numbers, built in your own accounts.",
-        cta: { text: "Browse the stacks", href: "/marketplace/" },
-      },
-    ],
-  },
   blog: {
     title: "Can't Claude or ChatGPT just do this?",
     lead: "Often part of it. These posts cover what gets in the way.",
