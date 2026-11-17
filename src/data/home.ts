@@ -43,6 +43,15 @@ interface HomeContent {
     cta: Link;
     reassurance: string;
   };
+  film: {
+    label: string;
+    lead: string;
+    poster: string;
+    posterAlt: string;
+    duration: string;
+    playLabel: string;
+    draftNote: string;
+  };
   logos: {
     label: string;
     note: string;
@@ -84,6 +93,18 @@ export const homeContent: HomeContent = {
     primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
+  film: {
+    label: "The film",
+    lead: "Fragments in. Decisions out.",
+    poster: "/video/explainer-poster.jpg",
+    posterAlt:
+      "A dark grid of figures with the readout: all blockers clear, ready for launch.",
+    duration: "1:20",
+    playLabel: "Watch the film",
+    draftNote:
+      "Placeholder still. The band will autoplay a 15-second silent loop; the full 1:20 film opens on click.",
+  },
+
   score: {
     title: "See where AI can do the most for you.",
     stat: "63% of organizations either do not have, or are unsure if they have, the right data management practices for AI.",

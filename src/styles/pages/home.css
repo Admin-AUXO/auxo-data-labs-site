@@ -1048,3 +1048,113 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Film band — placement placeholder for the AUXO explainer.
+   Static poster for now; swap .film-band__poster for a <video> once the
+   15s silent loop is encoded. See claude/Explainer_Video_Placement_Nov2026.md
+--------------------------------------------------------------------------- */
+.film-band {
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.film-band__frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(14px, 1.4vw, 22px);
+  aspect-ratio: 21 / 9;
+  background: #000;
+  border: 1px solid color-mix(in oklch, var(--accent) 18%, transparent);
+}
+
+.film-band__poster {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: 50% 62%;
+  display: block;
+}
+
+/* Keeps the overlay type legible over the brightest part of the grid. */
+.film-band__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgb(0 0 0 / 0.82) 0%, rgb(0 0 0 / 0.25) 46%, rgb(0 0 0 / 0.1) 100%),
+    radial-gradient(120% 90% at 50% 100%, rgb(0 0 0 / 0.5), transparent 60%);
+}
+
+.film-band__overlay {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: grid;
+  gap: 0.55rem;
+  justify-items: start;
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.film-band__label {
+  margin: 0;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.film-band__lead {
+  margin: 0;
+  font-family: var(--font-display, system-ui, sans-serif);
+  font-weight: 650;
+  font-size: clamp(1.3rem, 1rem + 1.8vw, 2.1rem);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.film-band__play {
+  margin-block-start: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.52rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 560;
+  color: #fff;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  backdrop-filter: blur(6px);
+}
+
+.film-band__play-icon {
+  inline-size: 0;
+  block-size: 0;
+  border-block: 0.38rem solid transparent;
+  border-inline-start: 0.62rem solid var(--accent);
+}
+
+.film-band__dur {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  opacity: 0.62;
+}
+
+/* Draft-only. Delete with the placeholder. */
+.film-band__note {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+@media (width < 34rem) {
+  .film-band__frame { aspect-ratio: 4 / 5; }
+}

@@ -54,6 +54,27 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </Section>
 
+  <!-- Placement placeholder for the AUXO explainer film. Static poster only -->
+  <!-- no <video> yet. See claude/Explainer_Video_Placement_Nov2026.md. -->
+  <Section padding="sm" width="7xl">
+    <figure class="film-band" data-reveal>
+      <div class="film-band__frame">
+        <img class="film-band__poster" src={c.film.poster} alt={c.film.posterAlt} width="1600" height="900" loading="lazy" decoding="async" />
+        <div class="film-band__veil" aria-hidden="true"></div>
+        <div class="film-band__overlay">
+          <p class="film-band__label">{c.film.label}</p>
+          <p class="film-band__lead">{c.film.lead}</p>
+          <span class="film-band__play">
+            <span class="film-band__play-icon" aria-hidden="true"></span>
+            {c.film.playLabel}
+            <span class="film-band__dur">{c.film.duration}</span>
+          </span>
+        </div>
+      </div>
+      <figcaption class="film-band__note">{c.film.draftNote}</figcaption>
+    </figure>
+  </Section>
+
   <Section padding="lg" width="7xl">
     <div class="home-fix">
       <div class="score-card" data-reveal>
