@@ -54,26 +54,53 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </Section>
 
-  <!-- Placement placeholder for the AUXO explainer film. Static poster only -->
-  <!-- no <video> yet. See claude/Explainer_Video_Placement_Nov2026.md. -->
+  <!-- Explainer film. Click to load: no bytes fetched until the still is pressed. -->
+  <!-- See claude/Explainer_Video_Placement_Nov2026.md -->
   <Section padding="sm" width="7xl">
     <figure class="film-band" data-reveal>
-      <div class="film-band__frame">
-        <img class="film-band__poster" src={c.film.poster} alt={c.film.posterAlt} width="1600" height="900" loading="lazy" decoding="async" />
-        <div class="film-band__veil" aria-hidden="true"></div>
-        <div class="film-band__overlay">
-          <p class="film-band__label">{c.film.label}</p>
-          <p class="film-band__lead">{c.film.lead}</p>
-          <span class="film-band__play">
-            <span class="film-band__play-icon" aria-hidden="true"></span>
-            {c.film.playLabel}
-            <span class="film-band__dur">{c.film.duration}</span>
+      <div class="film-band__frame" data-film data-src={c.film.src}>
+        <button class="film-band__trigger" type="button" data-film-play aria-label={`${c.film.playLabel}, ${c.film.duration}`}>
+          <img class="film-band__poster" src={c.film.poster} alt={c.film.posterAlt} width="1600" height="900" loading="lazy" decoding="async" />
+          <span class="film-band__veil" aria-hidden="true"></span>
+          <span class="film-band__overlay">
+            <span class="film-band__label">{c.film.label}</span>
+            <span class="film-band__lead">{c.film.lead}</span>
+            <span class="film-band__play">
+              <span class="film-band__play-icon" aria-hidden="true"></span>
+              {c.film.playLabel}
+              <span class="film-band__dur">{c.film.duration}</span>
+            </span>
           </span>
-        </div>
+        </button>
       </div>
       <figcaption class="film-band__note">{c.film.draftNote}</figcaption>
+      <p class="sr-only">{c.film.transcript}</p>
     </figure>
   </Section>
+
+  <script is:inline>
+    (function () {
+      var band = document.querySelector("[data-film]");
+      var btn = band && band.querySelector("[data-film-play]");
+      if (!band || !btn) return;
+      btn.addEventListener("click", function () {
+        if (band.dataset.playing === "1") return;
+        band.dataset.playing = "1";
+        var v = document.createElement("video");
+        v.className = "film-band__video";
+        v.src = band.dataset.src;
+        v.poster = btn.querySelector("img").getAttribute("src");
+        v.controls = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        v.setAttribute("playsinline", "");
+        band.appendChild(v);
+        btn.remove();
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    })();
+  </script>
 
   <Section padding="lg" width="7xl">
     <div class="home-fix">

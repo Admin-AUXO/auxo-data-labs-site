@@ -1089,6 +1089,7 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .film-band__overlay {
+  pointer-events: none;
   position: absolute;
   inset-inline: 0;
   inset-block-end: 0;
@@ -1099,6 +1100,7 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .film-band__label {
+  display: block;
   margin: 0;
   font-family: var(--font-mono, ui-monospace, monospace);
   font-size: 0.68rem;
@@ -1108,6 +1110,7 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .film-band__lead {
+  display: block;
   margin: 0;
   font-family: var(--font-display, system-ui, sans-serif);
   font-weight: 650;
@@ -1119,6 +1122,7 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .film-band__play {
+  transition: background-color 180ms ease, border-color 180ms ease;
   margin-block-start: 0.35rem;
   display: inline-flex;
   align-items: center;
@@ -1145,6 +1149,45 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   opacity: 0.62;
+}
+
+/* The poster is a button until it is pressed. */
+.film-band__trigger {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+  text-align: start;
+}
+
+.film-band__video {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+  background: #000;
+}
+
+/* Opens out from the cinematic crop to the film's own 16:9 on play. */
+.film-band__frame[data-playing="1"] {
+  aspect-ratio: 16 / 9;
+}
+
+.film-band__trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.film-band__trigger:hover .film-band__play {
+  background: rgb(255 255 255 / 0.16);
+  border-color: rgb(255 255 255 / 0.4);
 }
 
 /* Draft-only. Delete with the placeholder. */

@@ -46,10 +46,12 @@ interface HomeContent {
   film: {
     label: string;
     lead: string;
+    src: string;
     poster: string;
     posterAlt: string;
     duration: string;
     playLabel: string;
+    transcript: string;
     draftNote: string;
   };
   logos: {
@@ -96,13 +98,16 @@ export const homeContent: HomeContent = {
   film: {
     label: "The film",
     lead: "Fragments in. Decisions out.",
+    src: "/video/auxo-explainer.mp4",
     poster: "/video/explainer-poster.jpg",
     posterAlt:
       "A dark grid of figures with the readout: all blockers clear, ready for launch.",
-    duration: "1:20",
+    duration: "1:28",
     playLabel: "Watch the film",
+    transcript:
+      "An invoice and a production blocker are typed on black, then scatter into a cloud of data. A scan resolves the cloud into one grid. Three blocks rise out of it: receivables of 2.4 million, four new suppliers in Q3, and a blocker cleared. All blockers clear, ready for launch. The view lifts into orbit and the AUXO mark assembles.",
     draftNote:
-      "Placeholder still. The band will autoplay a 15-second silent loop; the full 1:20 film opens on click.",
+      "Draft asset: v10 picture, silent, 720p, 10.9 MB. Nothing downloads until the still is clicked.",
   },
 
   score: {
