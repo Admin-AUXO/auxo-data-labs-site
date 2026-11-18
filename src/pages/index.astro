@@ -143,35 +143,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   </Section>
 
 
-  <Section padding="lg" width="7xl">
-    <div class="home-fix">
-      <div class="home-head">
-        <SectionHeader title={c.pillarsHeader.title} subtitle={c.pillarsHeader.lead} />
-      </div>
-      <ul class="cube" aria-label={c.pillarsLabel}>
-        {
-          pillars.map((p) => (
-            <li class="cube__cell">
-              <button type="button" class="cube__tile" aria-pressed="false" data-cube-tile>
-                <span class="cube__face cube__face--front">
-                  <span class="cube__letter" aria-hidden="true">{p.letter}</span>
-                  <span class="cube__title">{p.pre}<span class="cube__hl">{p.hl}</span>{p.post}</span>
-                </span>
-                <span class="cube__face cube__face--back">
-                  <span class="cube__back-letter" aria-hidden="true">{p.letter}</span>
-                  <span class="cube__back-title">{p.title}</span>
-                  <span class="cube__desc">{p.desc}</span>
-                </span>
-              </button>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </Section>
-
-
-
   {
     posts.length > 0 && (
       <Section padding="lg" width="7xl">
@@ -201,6 +172,34 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
       </Section>
     )
   }
+
+  <Section padding="lg" width="7xl">
+    <div class="home-fix">
+      <div class="home-head">
+        <SectionHeader title={c.pillarsHeader.title} subtitle={c.pillarsHeader.lead} />
+      </div>
+      <ul class="cube" aria-label={c.pillarsLabel}>
+        {
+          pillars.map((p) => (
+            <li class="cube__cell">
+              <button type="button" class="cube__tile" aria-pressed="false" data-cube-tile>
+                <span class="cube__face cube__face--front">
+                  <span class="cube__letter" aria-hidden="true">{p.letter}</span>
+                  <span class="cube__title">{p.pre}<span class="cube__hl">{p.hl}</span>{p.post}</span>
+                </span>
+                <span class="cube__face cube__face--back">
+                  <span class="cube__back-letter" aria-hidden="true">{p.letter}</span>
+                  <span class="cube__back-title">{p.title}</span>
+                  <span class="cube__desc">{p.desc}</span>
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
 
   <CtaSection
     title={c.cta.title}
