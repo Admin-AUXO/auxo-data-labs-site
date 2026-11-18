@@ -1201,3 +1201,176 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 @media (width < 34rem) {
   .film-band__frame { aspect-ratio: 4 / 5; }
 }
+
+/* ---------------------------------------------------------------------------
+   Objection section — one question, four answers, and the point.
+   Pairs with .followups below it. See claude/ notes for the reasoning.
+--------------------------------------------------------------------------- */
+.disagree {
+  display: grid;
+  gap: 1.3rem;
+}
+
+.disagree__q {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 0.85rem + 0.9vw, 1.45rem);
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.disagree__prompt {
+  color: var(--accent);
+  margin-inline-end: 0.5rem;
+}
+
+.disagree__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (width >= 56rem) {
+  .disagree__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.src {
+  inline-size: 100%;
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+  padding: 1.1rem 1.15rem 1.15rem;
+  text-align: start;
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-fast) var(--ease-standard);
+}
+
+.src:hover { border-color: var(--border-strong); }
+
+.src__name {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Amber is an unreconciled figure, the same as in the film. */
+.src__num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--accent-2);
+}
+
+.src__def {
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--muted);
+  max-block-size: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-block-size var(--dur-base) var(--ease-glide),
+    opacity var(--dur-base) var(--ease-out),
+    margin-block-start var(--dur-base) var(--ease-glide);
+}
+
+.src[data-open="1"] {
+  border-color: var(--accent);
+  background: var(--surface-raised);
+}
+
+.src[data-open="1"] .src__def {
+  max-block-size: 6rem;
+  opacity: 1;
+  margin-block-start: 0.45rem;
+}
+
+.disagree__hint {
+  margin: -0.4rem 0 0;
+  font-size: var(--text-xs);
+  color: var(--subtle);
+}
+
+.answer {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.15rem 1.3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: var(--radius-lg);
+}
+
+.answer__who {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.answer__text {
+  margin: 0;
+  font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.5rem);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.answer__pick {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.answer__sub {
+  margin: 0.2rem 0 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.disagree__close {
+  margin: 0.4rem 0 0;
+  max-inline-size: 60ch;
+  font-size: clamp(1.02rem, 0.95rem + 0.4vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--foreground);
+  text-wrap: pretty;
+}
+
+.followups { margin-block-start: clamp(2.4rem, 2rem + 2vw, 3.6rem); }
+
+.followups__label {
+  color: var(--subtle);
+  margin-block-end: 0.8rem;
+}
+
+.followups__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.2rem;
+  margin-block-start: 1.6rem;
+}
+
+.followups__quiet {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.followups__quiet:hover { color: var(--foreground); }

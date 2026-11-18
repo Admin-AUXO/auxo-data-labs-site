@@ -1,9 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
+import Accordion from "../components/ui/Accordion.astro";
 import Button from "../components/ui/Button.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import FootnoteRef from "../components/ui/FootnoteRef.astro";
@@ -12,11 +12,6 @@ import "../styles/pages/home.css";
 
 const logoLoop = [...c.logos.items, ...c.logos.items];
 
-const angleOrder = (slug: string) => {
-  const i = c.blog.angles.findIndex((a) => a.slug === slug);
-  return i === -1 ? c.blog.angles.length : i;
-};
-
 const pillars = c.pillars.map((p) => {
   const i = p.title.toLowerCase().indexOf(p.letter.toLowerCase());
   return i === -1
@@ -24,15 +19,6 @@ const pillars = c.pillars.map((p) => {
     : { ...p, pre: p.title.slice(0, i), hl: p.title.slice(i, i + 1), post: p.title.slice(i + 1) };
 });
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf() || angleOrder(a.id) - angleOrder(b.id))
-  .slice(0, 3)
-  .map((post) => ({
-    href: `/blog/${post.id}/`,
-    title: post.data.title,
-    angle: c.blog.angles.find((a) => a.slug === post.id)?.label ?? post.data.tags[0],
-    description: post.data.description,
-  }));
 ---
 <BaseLayout title={c.meta.title} description={c.meta.description} footnotes>
   <Section padding="lg" width="7xl" class="home-hero">
@@ -143,35 +129,67 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   </Section>
 
 
-  {
-    posts.length > 0 && (
-      <Section padding="lg" width="7xl">
-        <div class="home-head">
-          <SectionHeader title={c.blog.title} subtitle={c.blog.lead} />
-        </div>
-        <ul class="posts mt-8">
-          {posts.map((post, i) => (
-            <li data-anim="rise" style={`--i:${i}`}>
-              <article class="posts__card">
-                <p class="posts__angle">{post.angle}</p>
-                <h3 class="posts__title">
-                  <a href={post.href} class="posts__link">{post.title}</a>
-                </h3>
-                <p class="posts__desc">{post.description}</p>
-                <div class="posts__foot go" aria-hidden="true">
-                  {c.blog.linkText}
-                  <span class="sq"><Icon name="mdi:arrow-right" /></span>
-                </div>
-              </article>
-            </li>
-          ))}
-        </ul>
-        <div class="home-more">
-          <Button variant="secondary" href={c.blog.cta.href} icon class="w-full sm:w-auto">{c.blog.cta.text}</Button>
-        </div>
-      </Section>
-    )
-  }
+  <Section padding="lg" width="7xl">
+    <div class="home-head">
+      <SectionHeader title={c.objection.title} />
+    </div>
+
+    <div class="disagree mt-8">
+      <p class="disagree__q" data-reveal>
+        <span class="disagree__prompt" aria-hidden="true">&gt;</span>{c.objection.question}
+      </p>
+
+      <ul class="disagree__grid" role="list">
+        {c.objection.sources.map((src, i) => (
+          <li data-anim="rise" style={`--i:${i}`}>
+            <button type="button" class="src" data-source>
+              <span class="src__name">{src.name}</span>
+              <span class="src__num">{src.value}</span>
+              <span class="src__def">{src.definition}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <p class="disagree__hint">{c.objection.hint}</p>
+
+      <div class="answer" data-reveal>
+        <p class="answer__who">{c.objection.assistantLabel}</p>
+        <p class="answer__text">
+          {c.objection.assistantLead} <span class="answer__pick">{c.objection.assistantPick}</span> {c.objection.assistantTail}
+        </p>
+        <p class="answer__sub">
+          {c.objection.assistantNoteLead} <em class="hl-glow">{c.objection.assistantNoteGlow}</em>
+        </p>
+      </div>
+
+      <p class="disagree__close" data-reveal>
+        {c.objection.closeLead} <em class="hl-glow">{c.objection.closeGlow}</em>{c.objection.closeTail}
+      </p>
+    </div>
+
+    <div class="followups">
+      <p class="eyebrow followups__label">{c.objection.followupsLabel}</p>
+      <Accordion items={c.objection.followups} />
+      <div class="followups__foot">
+        <Button variant="secondary" href={c.objection.cta.href}>{c.objection.cta.text}</Button>
+        <a class="followups__quiet" href={c.objection.blogLink.href}>{c.objection.blogLink.text}</a>
+      </div>
+    </div>
+  </Section>
+
+  <script is:inline>
+    (function () {
+      var all = document.querySelectorAll("[data-source]");
+      all.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var open = b.getAttribute("data-open") === "1";
+          all.forEach(function (o) { o.removeAttribute("data-open"); });
+          if (!open) b.setAttribute("data-open", "1");
+        });
+      });
+    })();
+  </script>
 
   <Section padding="lg" width="7xl">
     <div class="home-fix">

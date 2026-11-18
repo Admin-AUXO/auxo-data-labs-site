@@ -21,9 +21,16 @@ interface HomePillar {
   desc: string;
 }
 
-interface HomeBlogAngle {
-  slug: string;
-  label: string;
+interface ObjectionSource {
+  name: string;
+  value: string;
+  definition: string;
+}
+
+interface ObjectionFollowup {
+  title: string;
+  /** Rendered as HTML: may contain <em class="hl-glow"> and one link. */
+  body: string;
 }
 
 interface HomeContent {
@@ -62,10 +69,24 @@ interface HomeContent {
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  blog: SectionIntro & {
-    angles: HomeBlogAngle[];
-    linkText: string;
+  objection: {
+    title: string;
+    question: string;
+    sources: ObjectionSource[];
+    assistantLabel: string;
+    assistantLead: string;
+    assistantPick: string;
+    assistantTail: string;
+    assistantNoteLead: string;
+    assistantNoteGlow: string;
+    hint: string;
+    closeLead: string;
+    closeGlow: string;
+    closeTail: string;
+    followupsLabel: string;
+    followups: ObjectionFollowup[];
     cta: Link;
+    blogLink: Link;
   };
   cta: {
     title: string;
@@ -161,15 +182,46 @@ export const homeContent: HomeContent = {
       desc: "Simple written rules for your data and AI.",
     },
   ],
-  blog: {
+  objection: {
     title: "Can't Claude or ChatGPT just do this?",
-    lead: "Often part of it. These posts cover what gets in the way.",
-    angles: [
-      { slug: "your-ai-assistant-is-not-the-hard-part", label: "For leaders" },
-      { slug: "the-model-is-the-easy-part", label: "For engineers" },
+    question: "How many customers do we have?",
+    sources: [
+      { name: "CRM", value: "4,812", definition: "Every account ever created." },
+      { name: "Billing", value: "4,190", definition: "Accounts with a paid invoice this month." },
+      { name: "Support", value: "5,037", definition: "Anyone who has ever opened a ticket." },
+      { name: "Board deck", value: "~5,000", definition: "Last quarter's number, rounded." },
     ],
-    linkText: "Read the post",
-    cta: { text: "Read the blog", href: "/blog/" },
+    assistantLabel: "Your AI assistant",
+    assistantLead: "You have",
+    assistantPick: "4,812",
+    assistantTail: "customers.",
+    assistantNoteLead: "It picked one.",
+    assistantNoteGlow: "It never mentioned the other three.",
+    hint: "Press a source to see what it counts.",
+    closeLead: "None of them is lying. They are answering",
+    closeGlow: "four different questions",
+    closeTail:
+      ". Agreeing which one you mean is the fix \u2014 the part no model can do for you.",
+    followupsLabel: "Other questions we get",
+    followups: [
+      {
+        title: "Isn't this just data cleaning?",
+        body:
+          '<p>Cleaning has <em class="hl-glow">no finish line</em>. We work back from the decisions you actually make to the few numbers they depend on, and fix those. The rest can stay messy.</p><p><a href="/blog/start-with-the-decision-not-the-dashboard/">The long version &rarr;</a></p>',
+      },
+      {
+        title: "We already have a warehouse and a BI tool.",
+        body:
+          '<p>Those move data and draw charts. Neither decides <em class="hl-glow">which definition of revenue wins</em>, or who may change it. That is why two dashboards disagree in the same meeting.</p><p><a href="/blog/data-silos-why-your-numbers-disagree/">The long version &rarr;</a></p>',
+      },
+      {
+        title: "Where would we start?",
+        body:
+          '<p>The AUXO Score. Ten questions, about three minutes, no sign-up. It tells you <em class="hl-glow">which of the four fixes you are missing</em> before you spend anything.</p>',
+      },
+    ],
+    cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
+    blogLink: { text: "Read the blog", href: "/blog/" },
   },
   cta: {
     title: "Know where you stand. Then talk it through.",
