@@ -108,9 +108,10 @@ export const homeContent: HomeContent = {
       "We get your data in shape so you can trust it and actually use it, including for AI. For funded startups and scale-ups. Starts with a data diagnostic.",
   },
   hero: {
-    titleLead: "We turn messy, fragmented data into",
+    titleLead: "We turn fragmented data into",
     titleHighlight: "intelligent decisions",
-    titleTail: "companies act on.",
+    // Appended with no space, so a tail that starts a word needs a leading one.
+    titleTail: " companies act on.",
     subtitle:
       "We get your data in shape, so your AI actually works.",
     primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
