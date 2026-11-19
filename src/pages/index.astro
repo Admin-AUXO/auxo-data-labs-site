@@ -291,8 +291,9 @@ const pillars = c.pillars.map((p) => {
       const dt = last ? Math.min(now - last, 100) : 0;
       last = now;
       if (!paused && half > width) {
-        pos += (SPEED * dt) / 1000;
-        if (pos >= half) pos -= half;
+        // Scrolling left moves the track right, so the logos travel left to right.
+        pos -= (SPEED * dt) / 1000;
+        if (pos <= 0) pos += half;
         vp.scrollLeft = pos;
       } else {
         pos = vp.scrollLeft;
@@ -311,6 +312,11 @@ const pillars = c.pillars.map((p) => {
       }
       vp.toggleAttribute("data-static", !motionEnabled());
       measure();
+      // Travelling right means starting a full copy in, with room to scroll back.
+      if (half > width && pos <= 0) {
+        pos = half;
+        vp.scrollLeft = pos;
+      }
       start();
     };
     const pause = () => {
@@ -324,7 +330,11 @@ const pillars = c.pillars.map((p) => {
         paused = false;
       }, ms);
     };
-    vp.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") pause(); });
+    const pauseForMouse = (e: PointerEvent) => { if (e.pointerType === "mouse") pause(); };
+    vp.addEventListener("pointerenter", pauseForMouse);
+    // pointermove keeps it paused while the pointer sits inside, and covers the
+    // case where the pointer is already over the strip before the script binds.
+    vp.addEventListener("pointermove", pauseForMouse, { passive: true });
     vp.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") resumeSoon(0); });
     vp.addEventListener("touchstart", pause, { passive: true });
     vp.addEventListener("touchend", () => resumeSoon(2000), { passive: true });

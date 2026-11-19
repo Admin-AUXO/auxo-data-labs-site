@@ -90,3 +90,7 @@ video/out/
 # Local data exploration — not part of the site
 data_analysis/
 .font-originals/
+
+# Local preview build (see DRAFT_HANDOFF.md)
+auxo-draft-preview.html
+preview-assets/
