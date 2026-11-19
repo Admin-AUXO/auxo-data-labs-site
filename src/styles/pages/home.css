@@ -37,6 +37,16 @@
   max-inline-size: 13ch;
 }
 
+/* Past six lines Chromium gives up on text-wrap: balance, which on a phone
+   left "on." alone on the last line. `pretty` has no line limit and exists to
+   stop exactly that orphan. Sizing is handled by the width < 40rem rule
+   further down; this only changes how the lines break. */
+@media (width < 40rem) {
+  .home-hero__title {
+    text-wrap: pretty;
+  }
+}
+
 .home-hero__row {
   display: grid;
   gap: 1.75rem;
