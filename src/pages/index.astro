@@ -151,7 +151,7 @@ const pillars = c.pillars.map((p) => {
         <span class="disagree__prompt" aria-hidden="true">&gt;</span>{c.objection.question}
       </p>
 
-      <ul class="disagree__grid" role="list">
+      <ul class="disagree__grid">
         {c.objection.sources.map((src, i) => (
           <li data-anim="rise" style={`--i:${i}`}>
             <button type="button" class="src" data-source>

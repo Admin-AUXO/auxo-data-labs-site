@@ -621,6 +621,7 @@
 
 .cube__letter {
   font-family: var(--font-logo);
+
   /* Big enough to hold the top of the card, so the face reads as composed
      rather than as a letter and a title with a hole between them. */
   font-size: clamp(2.25rem, 1.3rem + 5vw, 6.5rem);
@@ -1076,93 +1077,93 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
    15s silent loop is encoded. See claude/Explainer_Video_Placement_Nov2026.md
 --------------------------------------------------------------------------- */
 .film-band {
-  margin: 0;
   display: grid;
   gap: 0.7rem;
+  margin: 0;
 }
 
 .film-band__frame {
-  position: relative;
-  overflow: hidden;
-  border-radius: clamp(14px, 1.4vw, 22px);
   aspect-ratio: 21 / 9;
   background: #000;
   border: 1px solid color-mix(in oklch, var(--accent) 18%, transparent);
+  border-radius: clamp(14px, 1.4vw, 22px);
+  overflow: hidden;
+  position: relative;
 }
 
 .film-band__poster {
-  position: absolute;
-  inset: 0;
-  inline-size: 100%;
   block-size: 100%;
+  display: block;
+  inline-size: 100%;
+  inset: 0;
   object-fit: cover;
   object-position: 50% 62%;
-  display: block;
+  position: absolute;
 }
 
 /* Keeps the overlay type legible over the brightest part of the grid. */
 .film-band__veil {
-  position: absolute;
-  inset: 0;
   background:
-    linear-gradient(to top, rgb(0 0 0 / 0.82) 0%, rgb(0 0 0 / 0.25) 46%, rgb(0 0 0 / 0.1) 100%),
-    radial-gradient(120% 90% at 50% 100%, rgb(0 0 0 / 0.5), transparent 60%);
+    linear-gradient(to top, rgb(0 0 0 / 82%) 0%, rgb(0 0 0 / 25%) 46%, rgb(0 0 0 / 10%) 100%),
+    radial-gradient(120% 90% at 50% 100%, rgb(0 0 0 / 50%), transparent 60%);
+  inset: 0;
+  position: absolute;
 }
 
 .film-band__overlay {
-  pointer-events: none;
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
   display: grid;
   gap: 0.55rem;
+  inset-block-end: 0;
+  inset-inline: 0;
   justify-items: start;
   padding: clamp(18px, 3vw, 34px);
+  pointer-events: none;
+  position: absolute;
 }
 
 .film-band__label {
+  color: var(--accent);
   display: block;
-  margin: 0;
   font-family: var(--font-mono, ui-monospace, monospace);
   font-size: 0.68rem;
   letter-spacing: 0.16em;
+  margin: 0;
   text-transform: uppercase;
-  color: var(--accent);
 }
 
 .film-band__lead {
-  display: block;
-  margin: 0;
-  font-family: var(--font-display, system-ui, sans-serif);
-  font-weight: 650;
-  font-size: clamp(1.3rem, 1rem + 1.8vw, 2.1rem);
-  line-height: 1.14;
-  letter-spacing: -0.02em;
   color: #fff;
+  display: block;
+  font-family: var(--font-display, system-ui, sans-serif);
+  font-size: clamp(1.3rem, 1rem + 1.8vw, 2.1rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+  margin: 0;
   text-wrap: balance;
 }
 
 .film-band__play {
-  transition: background-color 180ms ease, border-color 180ms ease;
-  margin-block-start: 0.35rem;
-  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.52rem 0.95rem;
+  backdrop-filter: blur(6px);
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 22%);
   border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
   font-size: 0.9rem;
   font-weight: 560;
-  color: #fff;
-  background: rgb(255 255 255 / 0.08);
-  border: 1px solid rgb(255 255 255 / 0.22);
-  backdrop-filter: blur(6px);
+  gap: 0.6rem;
+  margin-block-start: 0.35rem;
+  padding: 0.52rem 0.95rem;
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
 .film-band__play-icon {
-  inline-size: 0;
   block-size: 0;
   border-block: 0.38rem solid transparent;
   border-inline-start: 0.62rem solid var(--accent);
+  inline-size: 0;
 }
 
 .film-band__dur {
@@ -1174,26 +1175,26 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 
 /* The poster is a button until it is pressed. */
 .film-band__trigger {
-  position: absolute;
-  inset: 0;
+  background: none;
+  block-size: 100%;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
   display: block;
   inline-size: 100%;
-  block-size: 100%;
+  inset: 0;
   padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  color: inherit;
+  position: absolute;
   text-align: start;
 }
 
 .film-band__video {
-  position: absolute;
-  inset: 0;
-  inline-size: 100%;
+  background: #000;
   block-size: 100%;
   display: block;
-  background: #000;
+  inline-size: 100%;
+  inset: 0;
+  position: absolute;
 }
 
 /* Opens out from the cinematic crop to the film's own 16:9 on play. */
@@ -1207,16 +1208,16 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .film-band__trigger:hover .film-band__play {
-  background: rgb(255 255 255 / 0.16);
-  border-color: rgb(255 255 255 / 0.4);
+  background: rgb(255 255 255 / 16%);
+  border-color: rgb(255 255 255 / 40%);
 }
 
 /* Draft-only. Delete with the placeholder. */
 .film-band__note {
-  margin: 0;
+  color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.4;
-  color: var(--muted);
+  margin: 0;
 }
 
 @media (width < 34rem) {
@@ -1233,11 +1234,11 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .disagree__q {
-  margin: 0;
+  color: var(--foreground);
   font-family: var(--font-mono);
   font-size: clamp(1rem, 0.85rem + 0.9vw, 1.45rem);
   letter-spacing: -0.01em;
-  color: var(--foreground);
+  margin: 0;
 }
 
 .disagree__prompt {
@@ -1246,13 +1247,13 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .disagree__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
+  display: grid;
   gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
 @media (width >= 56rem) {
@@ -1260,16 +1261,16 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .src {
-  inline-size: 100%;
-  display: grid;
   align-content: start;
-  gap: 0.3rem;
-  padding: 1.1rem 1.15rem 1.15rem;
-  text-align: start;
-  cursor: pointer;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  cursor: pointer;
+  display: grid;
+  gap: 0.3rem;
+  inline-size: 100%;
+  padding: 1.1rem 1.15rem 1.15rem;
+  text-align: start;
   transition:
     border-color var(--dur-fast) var(--ease-standard),
     background-color var(--dur-fast) var(--ease-standard);
@@ -1278,27 +1279,27 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 .src:hover { border-color: var(--border-strong); }
 
 .src__name {
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
 }
 
 /* Amber is an unreconciled figure, the same as in the film. */
 .src__num {
+  color: var(--accent-2);
   font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
   font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.3rem);
+  font-variant-numeric: tabular-nums;
   font-weight: 500;
   line-height: 1.05;
-  color: var(--accent-2);
 }
 
 .src__def {
+  color: var(--muted);
   font-size: var(--text-sm);
   line-height: 1.45;
-  color: var(--muted);
   max-block-size: 0;
   opacity: 0;
   overflow: hidden;
@@ -1309,66 +1310,66 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .src[data-open="1"] {
-  border-color: var(--accent);
   background: var(--surface-raised);
+  border-color: var(--accent);
 }
 
 .src[data-open="1"] .src__def {
+  margin-block-start: 0.45rem;
   max-block-size: 6rem;
   opacity: 1;
-  margin-block-start: 0.45rem;
 }
 
 .disagree__hint {
-  margin: -0.4rem 0 0;
-  font-size: var(--text-xs);
   color: var(--subtle);
+  font-size: var(--text-xs);
+  margin: -0.4rem 0 0;
 }
 
 .answer {
-  display: grid;
-  gap: 0.3rem;
-  padding: 1.15rem 1.3rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-inline-start: 3px solid var(--accent);
   border-radius: var(--radius-lg);
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.15rem 1.3rem;
 }
 
 .answer__who {
-  margin: 0;
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.15em;
+  margin: 0;
   text-transform: uppercase;
-  color: var(--muted);
 }
 
 .answer__text {
-  margin: 0;
+  color: var(--foreground);
   font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.5rem);
   font-weight: 600;
-  color: var(--foreground);
+  margin: 0;
 }
 
 .answer__pick {
+  color: var(--accent);
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  color: var(--accent);
 }
 
 .answer__sub {
-  margin: 0.2rem 0 0;
-  font-size: var(--text-sm);
   color: var(--muted);
+  font-size: var(--text-sm);
+  margin: 0.2rem 0 0;
 }
 
 .disagree__close {
-  margin: 0.4rem 0 0;
-  max-inline-size: 60ch;
+  color: var(--foreground);
   font-size: clamp(1.02rem, 0.95rem + 0.4vw, 1.2rem);
   line-height: 1.5;
-  color: var(--foreground);
+  margin: 0.4rem 0 0;
+  max-inline-size: 60ch;
   text-wrap: pretty;
 }
 
@@ -1380,16 +1381,16 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
 }
 
 .followups__foot {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.9rem 1.2rem;
   margin-block-start: 1.6rem;
 }
 
 .followups__quiet {
-  font-size: var(--text-sm);
   color: var(--muted);
+  font-size: var(--text-sm);
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
