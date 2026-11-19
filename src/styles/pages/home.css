@@ -522,15 +522,24 @@
   padding: 0;
 }
 
-@media (width >= 48rem) {
-  .cube__cell {
-    aspect-ratio: 5 / 4;
-  }
-}
-
+/* Square only while the cells are narrow. Past that a square cell grows with
+   the viewport until the section is a screenful and the letter floats far from
+   its title, so the cards get wider as they get bigger, never taller. */
 .cube__cell {
   aspect-ratio: 1;
   perspective: 900px;
+}
+
+@media (width >= 48rem) {
+  .cube__cell { aspect-ratio: 4 / 3; }
+}
+
+@media (width >= 64rem) {
+  .cube__cell { aspect-ratio: 3 / 2; }
+}
+
+@media (width >= 90rem) {
+  .cube__cell { aspect-ratio: 16 / 9; }
 }
 
 .cube__tile {
@@ -602,7 +611,9 @@
 
 .cube__letter {
   font-family: var(--font-logo);
-  font-size: clamp(2rem, 1.2rem + 4vw, 3.75rem);
+  /* Big enough to hold the top of the card, so the face reads as composed
+     rather than as a letter and a title with a hole between them. */
+  font-size: clamp(2.25rem, 1.3rem + 5vw, 6.5rem);
   font-weight: 800;
   inset-block-start: clamp(0.6rem, 0.4rem + 1vw, 1rem);
   inset-inline-start: clamp(0.9rem, 0.6rem + 1.5vw, 1.5rem);
@@ -628,7 +639,7 @@
 
 .cube__back-letter {
   font-family: var(--font-logo);
-  font-size: clamp(5rem, 3rem + 12vw, 11rem);
+  font-size: clamp(4.5rem, 2.6rem + 9vw, 8.5rem);
   font-weight: 800;
   inset-block-end: -0.18em;
   inset-inline-end: 0.04em;
