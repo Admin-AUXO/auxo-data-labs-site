@@ -135,7 +135,7 @@ export const homeContent: HomeContent = {
     transcript:
       "An invoice and a production blocker are typed on black, then scatter into a cloud of data. A scan resolves the cloud into one grid. Three blocks rise out of it: receivables of 2.4 million, four new suppliers in Q3, and a blocker cleared. All blockers clear, ready for launch. The view lifts into orbit and the AUXO mark assembles.",
     draftNote:
-      "Draft asset: v10 cut to 60 seconds, silent, 720p, 10.0 MB, with the T-minus clock. Nothing downloads until the still is clicked.",
+      "Draft asset: v10 cut to 60 seconds, with the Neon score, 720p, 11.5 MB, with the T-minus clock. Nothing downloads until the still is clicked.",
   },
 
   score: {
