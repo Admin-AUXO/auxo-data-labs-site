@@ -45,10 +45,16 @@ interface HomeContent {
   };
   score: {
     title: string;
+    /** Substring of `title` drawn in the accent colour. */
+    titleAccent: string;
     stat: string;
+    /** Substring of `stat` drawn in the accent colour, with the halo. */
+    statAccent: string;
     statFootnoteId: string;
     cta: Link;
     reassurance: string;
+    /** Substring of `reassurance` drawn in the accent colour. */
+    reassuranceAccent: string;
   };
   film: {
     label: string;
@@ -134,10 +140,13 @@ export const homeContent: HomeContent = {
 
   score: {
     title: "See where AI can do the most for you.",
+    titleAccent: "the most",
     stat: "63% of organizations either do not have, or are unsure if they have, the right data management practices for AI.",
+    statAccent: "63%",
     statFootnoteId: "ref-gartner-ai-data",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     reassurance: "Ten questions. About 3 minutes. No sign-up.",
+    reassuranceAccent: "No sign-up.",
   },
   logos: {
     label: "Tools we use",
