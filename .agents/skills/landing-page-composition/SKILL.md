@@ -21,7 +21,7 @@ If a section does not help answer one of those questions, it is probably clutter
 
 ## Default Flow
 
-For most marketing pages in this repo (two CTAs only: "Apply for a Founder review" to `/apply/` is primary; "Take the AUXO Score" is secondary and the only CTA on cold content):
+For most marketing pages in this repo (two CTAs only: "Apply for a data diagnostic" to `/apply/` is primary; "Take the AUXO Score" is secondary and the only CTA on cold content):
 
 1. Text-only hero: value proposition, lead and direct CTA (no hero media)
 2. Relevance or proof block that validates the buyer quickly
@@ -46,7 +46,7 @@ For How it works (`/how-it-works/`):
 3. Follow with the method and an FAQ for objection handling.
 4. End with one clear CTA.
 
-Analyze has three depths, always in this order and with these names: **AUXO Score** (10 questions, about 3 minutes, anyone), **Founder review** (30-minute founder call by application, every segment, 10 a week, written next steps, no charge) and the paid **Deep-dive audit** (systems review under NDA). Large organisations start with **One unit first**. Never use "free" as filler. If this disagrees with the positioning brief (`AUXO-Marketing/strategy/positioning/auxo_positioning_brief_2026-10.md`), the brief wins.
+Analyze has three depths, always in this order and with these names: **AUXO Score** (10 questions, about 3 minutes, anyone), **Data diagnostic** (30-minute founder call by application, every segment, 10 a week, written next steps, no charge) and the paid **Deep-dive audit** (systems review under NDA). Large organisations start with **One unit first**. Never use "free" as filler. If this disagrees with the positioning brief (`AUXO-Marketing/strategy/positioning/auxo_positioning_brief_2026-10.md`), the brief wins.
 
 For Pricing (`/pricing/`):
 

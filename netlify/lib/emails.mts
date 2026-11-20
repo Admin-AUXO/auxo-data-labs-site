@@ -39,8 +39,8 @@ ${r.why ? `<p style="margin:0 0 14px">${esc(r.why)}</p>` : ""}
 ${steps ? `<ol style="margin:0 0 14px;padding-left:20px">${steps}</ol>` : ""}
 ${r.good ? `<p style="margin:0;color:#555"><b style="color:#0a0a0a">What good looks like:</b> ${esc(r.good)}</p>` : ""}` : ""}
 <h2 style="font-size:18px;margin:32px 0 8px;color:#0a0a0a">Want a second pair of eyes?</h2>
-<p style="margin:0">Apply for a Founder review: 30 minutes with Vignesh or Ajay. Bring the one number you don't trust, and leave with what to fix first. No charge.</p>
-${button(apply, "Apply for a Founder review")}
+<p style="margin:0">Apply for a data diagnostic: 30 minutes with Vignesh or Ajay. Bring the one number you don't trust, and leave with what to fix first. No charge.</p>
+${button(apply, "Apply for a data diagnostic")}
 <p style="margin:0;color:#555">Questions about your result? Reply to this email. We read every reply.</p>`;
   return {
     subject: `Your AUXO Score: ${r.total}/100 (${r.band})`,
@@ -62,7 +62,7 @@ export function applicationConfirmation(a: { name?: string }) {
 ${button(BOOKING, "Pick a time")}
 <p style="margin:0;color:#555">Anything to add before we talk? Just reply to this email.</p>`;
   return {
-    subject: "Your Founder review application is in",
+    subject: "Your data diagnostic application is in",
     preview: "What happens next, and how to pick a time.",
     html: shell("What happens next, and how to pick a time.", inner),
   };
@@ -81,8 +81,8 @@ const tagged = (path: string, content: string, extra: Record<string, string> = {
   `${SITE}${path}?${new URLSearchParams({ ...extra, utm_source: "email", utm_medium: "nurture", utm_campaign: `nurture-${content}` })}`;
 
 const nurtureClose = (n: Nurture, content: string) =>
-  `<p style="margin:24px 0 0">A Founder review is 30 minutes with Vignesh or Ajay. Bring the one number you don't trust, and leave with what to fix first. No charge. ${spotsLine(n)}</p>
-${button(tagged("/apply/", content, { band: n.band.toLowerCase(), score: String(n.total) }), "Apply for a Founder review")}`;
+  `<p style="margin:24px 0 0">A data diagnostic is 30 minutes with Vignesh or Ajay. Bring the one number you don't trust, and leave with what to fix first. No charge. ${spotsLine(n)}</p>
+${button(tagged("/apply/", content, { band: n.band.toLowerCase(), score: String(n.total) }), "Apply for a data diagnostic")}`;
 
 const readLink = (path: string, content: string, text: string) =>
   `<p style="margin:18px 0"><a href="${tagged(path, content)}" style="color:#0a0a0a;font-weight:700">${esc(text)} →</a></p>`;
@@ -107,7 +107,7 @@ ${nurtureClose(n, "technical")}`;
     return { subject: "The checklist we use before building any agent", preview: "Data, systems, rules, approvals, upkeep.", html: shell("Data, systems, rules, approvals, upkeep.", inner) };
   }
   const inner = `<p style="margin:0 0 14px">Hi,</p>
-<p style="margin:0 0 14px">Here's what happens on a Founder review.</p>
+<p style="margin:0 0 14px">Here's what happens on a data diagnostic.</p>
 <ol style="margin:0 0 14px;padding-left:20px">
 <li style="margin:0 0 8px"><b>You apply.</b> Five questions, including the one number you don't trust today. We read every application before the call.</li>
 <li style="margin:0 0 8px"><b>We talk for 30 minutes.</b> Vignesh or Ajay learns how your business runs, where your data lives and where it lets you down. No slides, no pitch, no price on the call.</li>
@@ -116,5 +116,5 @@ ${nurtureClose(n, "technical")}`;
 </ol>
 ${nurtureClose(n, "founder-review")}
 <p style="margin:0;color:#555">This is the last email about your Score result. After this, you'll only hear from us if you asked for the newsletter.</p>`;
-  return { subject: "What happens on a Founder review", preview: "30 minutes, then written next steps.", html: shell("30 minutes, then written next steps.", inner) };
+  return { subject: "What happens on a data diagnostic", preview: "30 minutes, then written next steps.", html: shell("30 minutes, then written next steps.", inner) };
 }

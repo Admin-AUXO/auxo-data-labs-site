@@ -3,8 +3,8 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
-import Accordion from "../components/ui/Accordion.astro";
 import Button from "../components/ui/Button.astro";
+import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import { homeContent as c } from "../data/home";
@@ -12,7 +12,6 @@ import "../styles/pages/home.css";
 
 const logoLoop = [...c.logos.items, ...c.logos.items];
 
-/** Split a sentence around the substring to accent, as the pillars do with their letter. */
 const splitOn = (text: string, needle: string) => {
   const i = needle ? text.indexOf(needle) : -1;
   return i === -1
@@ -52,8 +51,6 @@ const pillars = c.pillars.map((p) => {
     </div>
   </Section>
 
-  <!-- Explainer film. Click to load: no bytes fetched until the still is pressed. -->
-  <!-- See claude/Explainer_Video_Placement_Nov2026.md -->
   <Section padding="sm" width="7xl">
     <figure class="film-band" data-reveal>
       <div class="film-band__frame" data-film data-src={c.film.src}>
@@ -71,7 +68,6 @@ const pillars = c.pillars.map((p) => {
           </span>
         </button>
       </div>
-      <figcaption class="film-band__note">{c.film.draftNote}</figcaption>
       <p class="sr-only">{c.film.transcript}</p>
     </figure>
   </Section>
@@ -101,49 +97,8 @@ const pillars = c.pillars.map((p) => {
   </script>
 
   <Section padding="lg" width="7xl">
-    <div class="home-fix">
-      <div class="score-card" data-reveal>
-        <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
-          <path class="score-gauge__track" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
-          <path class="score-gauge__fill" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
-        </svg>
-        <div class="flex flex-col gap-3">
-          <h2 class="font-bold">{scoreTitle.pre}<span class="hl-accent">{scoreTitle.hl}</span>{scoreTitle.post}</h2>
-          <p class="max-w-xl text-lg text-muted text-balance">{scoreStat.pre}<em class="hl-glow">{scoreStat.hl}</em>{scoreStat.post}<FootnoteRef id={c.score.statFootnoteId} /></p>
-        </div>
-        <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
-          <Button variant="secondary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
-            {c.score.cta.text}
-          </Button>
-          <p class="text-sm text-subtle text-pretty min-[56rem]:text-end">{scoreNote.pre}<span class="hl-accent whitespace-nowrap">{scoreNote.hl}</span>{scoreNote.post}</p>
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <Section padding="sm" width="7xl">
-    <div class="logos" data-reveal>
-      <p class="eyebrow logos__label" id="works-with-label">{c.logos.label}</p>
-      <div class="logos__viewport" data-marquee tabindex="0" role="region" aria-labelledby="works-with-label">
-        <ul class="logos__track" aria-labelledby="works-with-label">
-          {
-            logoLoop.map((logo, i) => (
-              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined}>
-                <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
-                <span class="logos__name">{logo.name}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <p class="logos__note text-subtle">{c.logos.note}</p>
-    </div>
-  </Section>
-
-
-  <Section padding="lg" width="7xl">
     <div class="home-head">
-      <SectionHeader title={c.objection.title} />
+      <SectionHeader title={c.objection.title} subtitle={c.objection.lead} />
     </div>
 
     <div class="disagree mt-8">
@@ -170,23 +125,29 @@ const pillars = c.pillars.map((p) => {
         <p class="answer__text">
           {c.objection.assistantLead} <span class="answer__pick">{c.objection.assistantPick}</span> {c.objection.assistantTail}
         </p>
-        <p class="answer__sub">
-          {c.objection.assistantNoteLead} <em class="hl-glow">{c.objection.assistantNoteGlow}</em>
-        </p>
+        <p class="answer__sub">{c.objection.assistantNote}</p>
       </div>
 
       <p class="disagree__close" data-reveal>
-        {c.objection.closeLead} <em class="hl-glow">{c.objection.closeGlow}</em>{c.objection.closeTail}
+        {c.objection.closeLead} <span class="hl-accent">{c.objection.closeAccent}</span>{c.objection.closeTail}
       </p>
     </div>
 
-    <div class="followups">
-      <p class="eyebrow followups__label">{c.objection.followupsLabel}</p>
-      <Accordion items={c.objection.followups} />
-      <div class="followups__foot">
-        <Button variant="secondary" href={c.objection.cta.href}>{c.objection.cta.text}</Button>
-        <a class="followups__quiet" href={c.objection.blogLink.href}>{c.objection.blogLink.text}</a>
-      </div>
+    <ul class="gaps" aria-label={c.objection.gapsLabel}>
+      {c.objection.gaps.map((g, i) => (
+        <li class="gap" data-anim="rise" style={`--i:${i}`}>
+          <h3 class="gap__title">{g.title}</h3>
+          <p class="gap__desc">{g.desc}</p>
+          {g.stat && g.footnoteId && (
+            <p class="gap__stat"><span class="hl-accent">{g.stat.split(" ")[0]}</span> {g.stat.split(" ").slice(1).join(" ")}<FootnoteRef id={g.footnoteId} /></p>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <div class="followups__foot">
+      <Button variant="secondary" href={c.objection.cta.href}>{c.objection.cta.text}</Button>
+      <a class="followups__quiet" href={c.objection.blogLink.href}>{c.objection.blogLink.text}</a>
     </div>
   </Section>
 
@@ -230,6 +191,64 @@ const pillars = c.pillars.map((p) => {
     </div>
   </Section>
 
+  <Section padding="lg" width="7xl">
+    <div class="home-fix">
+      <div class="score-card" data-reveal>
+        <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
+          <path class="score-gauge__track" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
+          <path class="score-gauge__fill" d="M10 62 A50 50 0 0 1 110 62" pathLength="100" />
+        </svg>
+        <div class="flex flex-col gap-3">
+          <h2 class="font-bold">{scoreTitle.pre}<span class="hl-accent">{scoreTitle.hl}</span>{scoreTitle.post}</h2>
+          <p class="max-w-xl text-lg text-muted text-balance">{scoreStat.pre}<span class="hl-accent">{scoreStat.hl}</span>{scoreStat.post}<FootnoteRef id={c.score.statFootnoteId} /></p>
+        </div>
+        <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
+          <Button variant="secondary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
+            {c.score.cta.text}
+          </Button>
+          <p class="text-sm text-subtle text-pretty min-[56rem]:text-end">{scoreNote.pre}<span class="hl-accent whitespace-nowrap">{scoreNote.hl}</span>{scoreNote.post}</p>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section padding="sm" width="7xl">
+    <div class="logos" data-reveal>
+      <p class="eyebrow logos__label" id="works-with-label">{c.logos.label}</p>
+      <div class="logos__viewport" data-marquee tabindex="0" role="region" aria-labelledby="works-with-label">
+        <ul class="logos__track" aria-labelledby="works-with-label">
+          {
+            logoLoop.map((logo, i) => (
+              <li class="logos__item" aria-hidden={i >= c.logos.items.length ? "true" : undefined}>
+                <Icon name={logo.icon} class="logos__icon" aria-hidden="true" />
+                <span class="logos__name">{logo.name}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <p class="logos__note text-subtle">{c.logos.note}</p>
+    </div>
+  </Section>
+
+  <Section padding="lg" width="7xl">
+    <ul class="explore" aria-label={c.explore.label}>
+      {
+        c.explore.items.map((item, i) => (
+          <li data-anim="rise" style={`--i:${i}`}>
+            <a class="explore__card" href={item.cta.href}>
+              <h2 class="explore__title"><HighlightText text={item.title} soften /></h2>
+              <p class="explore__lead">{item.lead}</p>
+              <span class="explore__cta go">
+                {item.cta.text}
+                <span class="sq"><Icon name="mdi:arrow-right" aria-hidden="true" /></span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
 
   <CtaSection
     title={c.cta.title}
@@ -291,7 +310,6 @@ const pillars = c.pillars.map((p) => {
       const dt = last ? Math.min(now - last, 100) : 0;
       last = now;
       if (!paused && half > width) {
-        // Scrolling left moves the track right, so the logos travel left to right.
         pos -= (SPEED * dt) / 1000;
         if (pos <= 0) pos += half;
         vp.scrollLeft = pos;
@@ -312,7 +330,6 @@ const pillars = c.pillars.map((p) => {
       }
       vp.toggleAttribute("data-static", !motionEnabled());
       measure();
-      // Travelling right means starting a full copy in, with room to scroll back.
       if (half > width && pos <= 0) {
         pos = half;
         vp.scrollLeft = pos;
@@ -332,8 +349,6 @@ const pillars = c.pillars.map((p) => {
     };
     const pauseForMouse = (e: PointerEvent) => { if (e.pointerType === "mouse") pause(); };
     vp.addEventListener("pointerenter", pauseForMouse);
-    // pointermove keeps it paused while the pointer sits inside, and covers the
-    // case where the pointer is already over the strip before the script binds.
     vp.addEventListener("pointermove", pauseForMouse, { passive: true });
     vp.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") resumeSoon(0); });
     vp.addEventListener("touchstart", pause, { passive: true });

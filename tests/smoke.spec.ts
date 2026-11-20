@@ -42,8 +42,7 @@ test("primary nav lists the new routes", async ({ page }) => {
 
 test("homepage hero and section links", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator("main h1")).toContainText("ready for AI");
-  await expect(page.locator('main a[href="/how-it-works/"]')).toHaveCount(1);
+  await expect(page.locator("main h1")).toContainText("intelligent decisions");
   await expect(page.locator('main a[href="/pricing/"]')).toHaveCount(1);
   await expect(page.locator('main a[href="/marketplace/"]')).toHaveCount(1);
 });

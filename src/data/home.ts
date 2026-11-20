@@ -27,10 +27,17 @@ interface ObjectionSource {
   definition: string;
 }
 
-interface ObjectionFollowup {
+interface ObjectionGap {
   title: string;
-  /** Rendered as HTML: may contain <em class="hl-glow"> and one link. */
-  body: string;
+  desc: string;
+  stat?: string;
+  footnoteId?: string;
+}
+
+interface HomeExplore {
+  title: string;
+  lead: string;
+  cta: Link;
 }
 
 interface HomeContent {
@@ -45,15 +52,12 @@ interface HomeContent {
   };
   score: {
     title: string;
-    /** Substring of `title` drawn in the accent colour. */
     titleAccent: string;
     stat: string;
-    /** Substring of `stat` drawn in the accent colour, with the halo. */
     statAccent: string;
     statFootnoteId: string;
     cta: Link;
     reassurance: string;
-    /** Substring of `reassurance` drawn in the accent colour. */
     reassuranceAccent: string;
   };
   film: {
@@ -65,7 +69,6 @@ interface HomeContent {
     duration: string;
     playLabel: string;
     transcript: string;
-    draftNote: string;
   };
   logos: {
     label: string;
@@ -75,24 +78,26 @@ interface HomeContent {
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  objection: {
-    title: string;
+  objection: SectionIntro & {
     question: string;
     sources: ObjectionSource[];
     assistantLabel: string;
     assistantLead: string;
     assistantPick: string;
     assistantTail: string;
-    assistantNoteLead: string;
-    assistantNoteGlow: string;
+    assistantNote: string;
     hint: string;
     closeLead: string;
-    closeGlow: string;
+    closeAccent: string;
     closeTail: string;
-    followupsLabel: string;
-    followups: ObjectionFollowup[];
+    gapsLabel: string;
+    gaps: ObjectionGap[];
     cta: Link;
     blogLink: Link;
+  };
+  explore: {
+    label: string;
+    items: HomeExplore[];
   };
   cta: {
     title: string;
@@ -109,14 +114,13 @@ const reassurance = "We reply within one business day.";
 
 export const homeContent: HomeContent = {
   meta: {
-    title: "Messy data into decisions you can act on",
+    title: "Your data, ready for AI",
     description:
       "We get your data in shape so you can trust it and actually use it, including for AI. For funded startups and scale-ups. Starts with a data diagnostic.",
   },
   hero: {
     titleLead: "We turn fragmented data into",
     titleHighlight: "intelligent decisions",
-    // Appended with no space, so a tail that starts a word needs a leading one.
     titleTail: " companies act on.",
     subtitle:
       "We get your data in shape, so your AI actually works.",
@@ -134,16 +138,14 @@ export const homeContent: HomeContent = {
     playLabel: "Watch the film",
     transcript:
       "An invoice and a production blocker are typed on black, then scatter into a cloud of data. A scan resolves the cloud into one grid. Three blocks rise out of it: receivables of 2.4 million, four new suppliers in Q3, and a blocker cleared. All blockers clear, ready for launch. The view lifts into orbit and the AUXO mark assembles.",
-    draftNote:
-      "Draft asset: v10 cut to 60 seconds, with the Neon score, 720p, 11.5 MB, with the T-minus clock. Nothing downloads until the still is clicked.",
   },
 
   score: {
     title: "See where AI can do the most for you.",
     titleAccent: "the most",
-    stat: "63% of organizations either do not have, or are unsure if they have, the right data management practices for AI.",
-    statAccent: "63%",
-    statFootnoteId: "ref-gartner-ai-data",
+    stat: "57% of data teams already run or pilot AI agents. Only 8% say the data feeding them is ready for production.",
+    statAccent: "8%",
+    statFootnoteId: "ref-mdc-agents",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     reassurance: "Ten questions. About 3 minutes. No sign-up.",
     reassuranceAccent: "No sign-up.",
@@ -194,6 +196,7 @@ export const homeContent: HomeContent = {
   ],
   objection: {
     title: "Can't Claude or ChatGPT just do this?",
+    lead: "Yes, once your data gives them one answer to find.",
     question: "How many customers do we have?",
     sources: [
       { name: "CRM", value: "4,812", definition: "Every account ever created." },
@@ -205,33 +208,47 @@ export const homeContent: HomeContent = {
     assistantLead: "You have",
     assistantPick: "4,812",
     assistantTail: "customers.",
-    assistantNoteLead: "It picked one.",
-    assistantNoteGlow: "It never mentioned the other three.",
+    assistantNote: "A clear answer from one source. Nothing told it which one you meant.",
     hint: "Press a source to see what it counts.",
-    closeLead: "None of them is lying. They are answering",
-    closeGlow: "four different questions",
-    closeTail:
-      ". Agreeing which one you mean is the fix \u2014 the part no model can do for you.",
-    followupsLabel: "Other questions we get",
-    followups: [
+    closeLead: "Every number is right. Each one counts",
+    closeAccent: "a different customer",
+    closeTail: ". Agree which one you mean, and any assistant gives the answer your board uses.",
+    gapsLabel: "What helps an assistant answer well",
+    gaps: [
       {
-        title: "Isn't this just data cleaning?",
-        body:
-          '<p>Cleaning has <em class="hl-glow">no finish line</em>. We work back from the decisions you actually make to the few numbers they depend on, and fix those. The rest can stay messy.</p><p><a href="/blog/start-with-the-decision-not-the-dashboard/">The long version &rarr;</a></p>',
+        title: "One meaning per number",
+        desc: "Customer, revenue and active user, written down once. Every tool then counts the same thing.",
+        stat: "64% of companies traced a confident but wrong AI answer to their own business data in the past six months.",
+        footnoteId: "ref-vb-context",
       },
       {
-        title: "We already have a warehouse and a BI tool.",
-        body:
-          '<p>Those move data and draw charts. Neither decides <em class="hl-glow">which definition of revenue wins</em>, or who may change it. That is why two dashboards disagree in the same meeting.</p><p><a href="/blog/data-silos-why-your-numbers-disagree/">The long version &rarr;</a></p>',
+        title: "Sources it can read in full",
+        desc: "A connector brings back what one search finds. We connect the systems that hold the answer, with access that matches each person's role.",
       },
       {
-        title: "Where would we start?",
-        body:
-          '<p>The AUXO Score. Ten questions, about three minutes, no sign-up. It tells you <em class="hl-glow">which of the four fixes you are missing</em> before you spend anything.</p>',
+        title: "An owner for every figure",
+        desc: "Each key number has a source and a person who signs it off, so an answer can be checked before it reaches the board.",
+        stat: "41% of data teams name unclear data ownership as a challenge.",
+        footnoteId: "ref-dbt-ownership",
       },
     ],
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     blogLink: { text: "Read the blog", href: "/blog/" },
+  },
+  explore: {
+    label: "More from AUXO",
+    items: [
+      {
+        title: "No charge to start. A fixed price after.",
+        lead: "A data diagnostic comes first. Each phase after it is priced in writing.",
+        cta: { text: "See pricing", href: "/pricing/" },
+      },
+      {
+        title: "Ready-made stacks. Set up on your data.",
+        lead: "Six fixed jobs on your numbers, built in your own accounts.",
+        cta: { text: "Browse the stacks", href: "/marketplace/" },
+      },
+    ],
   },
   cta: {
     title: "Know where you stand. Then talk it through.",

@@ -37,10 +37,6 @@
   max-inline-size: 13ch;
 }
 
-/* Past six lines Chromium gives up on text-wrap: balance, which on a phone
-   left "on." alone on the last line. `pretty` has no line limit and exists to
-   stop exactly that orphan. Sizing is handled by the width < 40rem rule
-   further down; this only changes how the lines break. */
 @media (width < 40rem) {
   .home-hero__title {
     text-wrap: pretty;
@@ -474,7 +470,6 @@
   padding: var(--card-pad);
 }
 
-
 .stuck__title {
   font-family: var(--font-brand);
   font-size: var(--text-xl);
@@ -532,9 +527,6 @@
   padding: 0;
 }
 
-/* Square only while the cells are narrow. Past that a square cell grows with
-   the viewport until the section is a screenful and the letter floats far from
-   its title, so the cards get wider as they get bigger, never taller. */
 .cube__cell {
   aspect-ratio: 1;
   perspective: 900px;
@@ -621,10 +613,7 @@
 
 .cube__letter {
   font-family: var(--font-logo);
-
-  /* Big enough to hold the top of the card, so the face reads as composed
-     rather than as a letter and a title with a hole between them. */
-  font-size: clamp(2.25rem, 1.3rem + 5vw, 6.5rem);
+    font-size: clamp(2.25rem, 1.3rem + 5vw, 6.5rem);
   font-weight: 800;
   inset-block-start: clamp(0.6rem, 0.4rem + 1vw, 1rem);
   inset-inline-start: clamp(0.9rem, 0.6rem + 1.5vw, 1.5rem);
@@ -635,9 +624,6 @@
 
 .cube__hl {
   color: var(--accent);
-  text-shadow:
-    0 0 0.3em color-mix(in oklch, var(--accent) 60%, transparent),
-    0 0 0.85em color-mix(in oklch, var(--accent) 35%, transparent);
 }
 
 .cube__title {
@@ -1071,11 +1057,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   }
 }
 
-/* ---------------------------------------------------------------------------
-   Film band — placement placeholder for the AUXO explainer.
-   Static poster for now; swap .film-band__poster for a <video> once the
-   15s silent loop is encoded. See claude/Explainer_Video_Placement_Nov2026.md
---------------------------------------------------------------------------- */
 .film-band {
   display: grid;
   gap: 0.7rem;
@@ -1101,7 +1082,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   position: absolute;
 }
 
-/* Keeps the overlay type legible over the brightest part of the grid. */
 .film-band__veil {
   background:
     linear-gradient(to top, rgb(0 0 0 / 82%) 0%, rgb(0 0 0 / 25%) 46%, rgb(0 0 0 / 10%) 100%),
@@ -1173,7 +1153,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   opacity: 0.62;
 }
 
-/* The poster is a button until it is pressed. */
 .film-band__trigger {
   background: none;
   block-size: 100%;
@@ -1197,7 +1176,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   position: absolute;
 }
 
-/* Opens out from the cinematic crop to the film's own 16:9 on play. */
 .film-band__frame[data-playing="1"] {
   aspect-ratio: 16 / 9;
 }
@@ -1212,22 +1190,10 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   border-color: rgb(255 255 255 / 40%);
 }
 
-/* Draft-only. Delete with the placeholder. */
-.film-band__note {
-  color: var(--muted);
-  font-size: 0.78rem;
-  line-height: 1.4;
-  margin: 0;
-}
-
 @media (width < 34rem) {
   .film-band__frame { aspect-ratio: 4 / 5; }
 }
 
-/* ---------------------------------------------------------------------------
-   Objection section — one question, four answers, and the point.
-   Pairs with .followups below it. See claude/ notes for the reasoning.
---------------------------------------------------------------------------- */
 .disagree {
   display: grid;
   gap: 1.3rem;
@@ -1286,7 +1252,6 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   text-transform: uppercase;
 }
 
-/* Amber is an unreconciled figure, the same as in the film. */
 .src__num {
   color: var(--accent-2);
   font-family: var(--font-mono);
@@ -1373,11 +1338,50 @@ html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
   text-wrap: pretty;
 }
 
-.followups { margin-block-start: clamp(2.4rem, 2rem + 2vw, 3.6rem); }
+.gaps {
+  display: grid;
+  gap: var(--col-gap);
+  grid-template-columns: minmax(0, 1fr);
+  list-style: none;
+  margin: clamp(2.4rem, 2rem + 2vw, 3.6rem) 0 0;
+  padding: 0;
+}
 
-.followups__label {
-  color: var(--subtle);
-  margin-block-end: 0.8rem;
+.gap {
+  align-content: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  display: grid;
+  gap: 0.75rem;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  padding: clamp(1.4rem, 1rem + 1.5vw, 2rem);
+}
+
+.gap__title {
+  font-size: var(--text-xl);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.gap__desc {
+  color: var(--muted);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.gap__stat {
+  align-self: end;
+  border-block-start: 1px dashed var(--border);
+  color: var(--foreground);
+  font-size: var(--text-sm);
+  margin: 0;
+  padding-block-start: 0.75rem;
+}
+
+@media (width >= 56rem) {
+  .gaps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 .followups__foot {

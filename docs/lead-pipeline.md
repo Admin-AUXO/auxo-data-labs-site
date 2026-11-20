@@ -1,6 +1,6 @@
 # Lead pipeline
 
-Post → AUXO Score (work email before the result) → Apply for a Founder review (`/apply/`) → Google booking page → founder call.
+Post → AUXO Score (work email before the result) → Apply for a data diagnostic (`/apply/`) → Google booking page → founder call.
 
 ## What each step does
 
@@ -9,8 +9,8 @@ Post → AUXO Score (work email before the result) → Apply for a Founder revie
 | Score email step | `src/components/auxo-score/controller.ts` | `/api/lead` type `score`, with the band, first fix and steps |
 | Application | `src/scripts/forms/contact.ts` | `/api/lead` type `application`, then shows the booking iframe |
 | `/api/lead` | `netlify/functions/lead.mts` | Row in "AUXO GTM Pipeline 2026" → tab **Inbound**; Sequenzy subscriber with tags; the Score report or the applicant confirmation email |
-| Nurture week | `netlify/functions/followups.mts` (daily, 06:00 UTC) | Score takers who haven't applied get three emails: day 2 business blog, day 4 technical blog, day 6 "What happens on a Founder review" (swap for the Neurostellar case study once approved). Each ends with Apply and the live places-left count. Marks "Nurture N sent" in Notes |
-| Places left | `netlify/functions/spots.mts` (`/api/spots`) | 10 Founder reviews a week (Monday to Sunday, Dubai time), counted from applications in the Inbound tab. Shown on /apply/ and in the nurture emails |
+| Nurture week | `netlify/functions/followups.mts` (daily, 06:00 UTC) | Score takers who haven't applied get three emails: day 2 business blog, day 4 technical blog, day 6 "What happens on a data diagnostic" (swap for the Neurostellar case study once approved). Each ends with Apply and the live places-left count. Marks "Nurture N sent" in Notes |
+| Places left | `netlify/functions/spots.mts` (`/api/spots`) | 10 data diagnostics a week (Monday to Sunday, Dubai time), counted from applications in the Inbound tab. Shown on /apply/ and in the nurture emails |
 | Deposit | `netlify/functions/pay.mts`, `pay-confirm.mts`; pages `/pay/` and `/pay/thanks/` | See Payments below |
 | Booking | Google appointment page (`siteData.bookingEmbedUrl`) | Calendar event; `auxo-google-workspace` `npm run bookings` sets Stage = Booked and sends GA4 `booking_made` |
 
