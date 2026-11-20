@@ -147,7 +147,7 @@ export const homeContent: HomeContent = {
     statAccent: "8%",
     statFootnoteId: "ref-mdc-agents",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
-    reassurance: "Ten questions. About 3 minutes. No sign-up.",
+    reassurance: "Ten questions. About 3 minutes. No sign-up.",
     reassuranceAccent: "No sign-up.",
   },
   logos: {
@@ -255,7 +255,7 @@ export const homeContent: HomeContent = {
     description: "A 30-minute call with a founder about your result.",
     ctaText: "Apply for a data diagnostic",
     ctaHref: siteData.applyUrl,
-    secondaryText: "Take the AUXO Score",
+    secondaryText: "Take the AUXO Score",
     secondaryHref: "/auxo-score/",
     reassurance,
   },

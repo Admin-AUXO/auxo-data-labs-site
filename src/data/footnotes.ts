@@ -10,7 +10,7 @@ export const footnotes: Footnote[] = [
   {
     id: "ref-vb-context",
     marker: "1",
-    text: "In the past six months, 64% of respondents traced at least one confident but wrong agent answer to missing or inconsistent business context. VB Pulse survey of 130 people at organisations with 100 or more employees, August 2026.",
+    text: "In the past six months, 64% of respondents traced at least one confident but wrong agent answer to missing or inconsistent business context. VB Pulse survey of 130 people at organisations with 100 or more employees, August 2026.",
     source: "VentureBeat Intelligence, Agentic context layers, October 2026.",
     url: "https://venturebeat.com/resources/agentic-context-layers-64-of-enterprises-traced-a-confidently-wrong-ai-agent-answer-to-problems-in-their-own-company-data-in-the-past-six-months",
   },
@@ -48,7 +48,7 @@ export const archivedFootnotes: Footnote[] = [
   {
     id: "ref-stl",
     marker: "1",
-    text: "Generative AI users saved 5.4% of their work hours, about 2.2 hours a week for someone working 40 hours.",
+    text: "Generative AI users saved 5.4% of their work hours, about 2.2 hours a week for someone working 40 hours.",
     source: "Federal Reserve Bank of St. Louis, The Impact of Generative AI on Work Productivity, 2025.",
     url: "https://www.stlouisfed.org/on-the-economy/2025/feb/impact-generative-ai-work-productivity",
   },

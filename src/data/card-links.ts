@@ -38,8 +38,8 @@ export const cardPage = {
   score: {
     id: "auxo_score",
     eyebrow: "Before we meet again",
-    label: "What's your AUXO Score?",
-    hint: "10 questions · 3 minutes",
+    label: "What's your AUXO Score?",
+    hint: "10 questions · 3 minutes",
     href: "/auxo-score/",
   },
   site: { label: "auxodata.com", href: "/" },

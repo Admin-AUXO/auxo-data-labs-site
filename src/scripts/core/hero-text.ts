@@ -4,6 +4,7 @@ function splitHeadline(head: HTMLElement): void {
   if (head.dataset.split !== undefined) return;
 
   const frag = document.createDocumentFragment();
+  let target: Node = frag;
   let i = 0;
 
   const addWord = (word: string, cls: string | null): void => {
@@ -18,14 +19,14 @@ function splitHeadline(head: HTMLElement): void {
       if (extra.length) inner.classList.add(...extra);
     }
     outer.appendChild(inner);
-    frag.appendChild(outer);
+    target.appendChild(outer);
     i += 1;
   };
 
   const processText = (text: string, cls: string | null): void => {
     for (const tok of text.split(/(\s+)/)) {
       if (tok === "") continue;
-      if (/^\s+$/.test(tok)) frag.appendChild(document.createTextNode(" "));
+      if (/^\s+$/.test(tok)) target.appendChild(document.createTextNode(" "));
       else addWord(tok, cls);
     }
   };
@@ -35,7 +36,35 @@ function splitHeadline(head: HTMLElement): void {
       processText(node.textContent ?? "", null);
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       const el = node as HTMLElement;
-      processText(el.textContent ?? "", el.className || null);
+      if (el.dataset.group !== undefined) {
+        const group = document.createElement("span");
+        group.className = el.className;
+        frag.appendChild(group);
+        target = group;
+        processText(el.textContent ?? "", null);
+        target = frag;
+        if (el.dataset.scatter !== undefined) {
+          head.setAttribute("aria-label", head.textContent?.replace(/\s+/g, " ").trim() ?? "");
+          group.querySelectorAll<HTMLElement>(".m-word-i").forEach((word) => {
+            const chars = [...(word.textContent ?? "")];
+            word.textContent = "";
+            chars.forEach((ch, k) => {
+              const c = document.createElement("span");
+              c.className = "m-char";
+              c.setAttribute("aria-hidden", "true");
+              c.textContent = ch;
+              const r = () => Math.random() * 2 - 1;
+              c.style.setProperty("--dx", `${(r() * 0.8).toFixed(2)}em`);
+              c.style.setProperty("--dy", `${(r() * 0.5).toFixed(2)}em`);
+              c.style.setProperty("--rot", `${Math.round(r() * 24)}deg`);
+              c.style.setProperty("--k", String(k));
+              word.appendChild(c);
+            });
+          });
+        }
+      } else {
+        processText(el.textContent ?? "", el.className || null);
+      }
     }
   });
 

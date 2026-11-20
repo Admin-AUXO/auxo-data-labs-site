@@ -85,7 +85,7 @@ export interface PricingContent {
 export const pricingContent: PricingContent = {
   metaTitle: "Pricing: no charge to start, a fixed price per phase",
   metaDescription:
-    "The AUXO Score and the data diagnostic cost nothing. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
+    "The AUXO Score and the data diagnostic cost nothing. After that, each phase has a fixed price, agreed in writing. Stop after any phase and keep everything.",
   hero: {
     title: "No charge to start. A fixed price after.",
     lead: "We scope each phase with you and put the price in writing first. Stop after any of them.",
@@ -94,7 +94,7 @@ export const pricingContent: PricingContent = {
     receipt: {
       head: "Your first two steps",
       rows: [
-        { item: "AUXO Score", price: "No charge" },
+        { item: "AUXO Score", price: "No charge" },
         { item: "Data diagnostic", price: "No charge" },
       ],
       totalLabel: "To start",
@@ -108,21 +108,21 @@ export const pricingContent: PricingContent = {
     columns: { step: "Step", get: "You get", takes: "Takes", price: "Cost" },
     legend: { free: "No charge", paid: "A price we agree in writing first" },
     rows: [
-      { step: "AUXO Score", get: "A score out of 100, and where to look first.", takes: "About 3 minutes", price: "No charge", tone: "free" },
-      { step: "Data diagnostic", get: "A 30-minute call, then written next steps.", takes: "3 business days", price: "No charge", tone: "free" },
+      { step: "AUXO Score", get: "A score out of 100, and where to look first.", takes: "About 3 minutes", price: "No charge", tone: "free" },
+      { step: "Data diagnostic", get: "A 30-minute call, then written next steps.", takes: "3 business days", price: "No charge", tone: "free" },
       {
         step: "Deep-dive audit",
         get: "Each gap between your deck, model and accounts, and a plan of what to build first.",
-        takes: "2 to 3 weeks",
+        takes: "2 to 3 weeks",
         price: "Scoped with you",
         note: "Credited if you build with us.",
         tone: "paid",
       },
-      { step: "Advise", get: "A plan, a short list of tools and clear rules.", takes: "1 to 3 weeks", price: "Scoped with you", tone: "paid" },
+      { step: "Advise", get: "A plan, a short list of tools and clear rules.", takes: "1 to 3 weeks", price: "Scoped with you", tone: "paid" },
       {
         step: "Build",
         get: "One set of numbers in your own accounts, handed over.",
-        takes: "4 to 12 weeks a phase",
+        takes: "4 to 12 weeks a phase",
         price: "Agreed phase by phase",
         tone: "paid",
       },
@@ -131,7 +131,7 @@ export const pricingContent: PricingContent = {
         get: "We keep it running after handover.",
         takes: "Month by month",
         price: "Monthly, optional",
-        note: "Stop with 30 days' notice.",
+        note: "Stop with 30 days' notice.",
         tone: "optional",
       },
     ],
@@ -158,7 +158,7 @@ export const pricingContent: PricingContent = {
       {
         id: "growing",
         eyebrow: "Growing companies",
-        descriptor: "50 to 500 people, with numbers spread across tools and spreadsheets.",
+        descriptor: "50 to 500 people, with numbers spread across tools and spreadsheets.",
         title: "Deep-dive audit",
         subline: "What to fix, what to build first and what not to buy.",
         facts: {

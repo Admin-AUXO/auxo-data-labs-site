@@ -74,7 +74,7 @@ export const howItWorksContent = {
         },
         whatYouGet: [
           {
-            title: "AUXO Score",
+            title: "AUXO Score",
             tag: "Anyone",
             tone: "free",
             body: "Ten questions. A score out of 100 and where to look first.",
@@ -83,7 +83,7 @@ export const howItWorksContent = {
             title: "Data diagnostic",
             tag: "Every company",
             tone: "free",
-            body: "A call, by application. Written next steps within 3 business days.",
+            body: "A call, by application. Written next steps within 3 business days.",
           },
           {
             title: "Deep-dive audit",
@@ -169,12 +169,12 @@ export const howItWorksContent = {
       label: "Optional, after Build",
       title: "Managed upkeep",
       promise: "We keep it running after handover.",
-      terms: "Billed monthly, with no minimum term. Stop with 30 days' notice and keep everything.",
+      terms: "Billed monthly, with no minimum term. Stop with 30 days' notice and keep everything.",
     },
   },
   method: {
     title: "Five checks. One score.",
-    lead: "The AUXO Score asks five things about how you use AI.",
+    lead: "The AUXO Score asks five things about how you use AI.",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" } satisfies Link,
     dimensions: [
       { name: "Tools", question: "Do you know which AI tools you use, and why?" },

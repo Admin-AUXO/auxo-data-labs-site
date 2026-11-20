@@ -25,7 +25,7 @@ export const navigationContent: NavigationContent = {
     { name: "Blog", href: "/blog/" },
   ],
   secondaryLink: {
-    label: "AUXO Score",
+    label: "AUXO Score",
     href: "/auxo-score/",
   },
   cta: {

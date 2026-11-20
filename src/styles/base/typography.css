@@ -51,6 +51,10 @@
     color: var(--accent);
   }
 
+  :where(p, li) .hl-accent {
+    white-space: nowrap;
+  }
+
   .tone-soft {
     color: var(--muted);
   }

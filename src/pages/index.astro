@@ -35,7 +35,7 @@ const pillars = c.pillars.map((p) => {
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="home-hero__inner">
       <div class="home-hero__main">
-        <h1 class="home-hero__title" data-enter="headline">{c.hero.titleLead} <span class="hl-accent">{c.hero.titleHighlight}</span>{c.hero.titleTail}</h1>
+        <h1 class="home-hero__title" data-enter="headline"><span class="home-hero__small" data-group>{c.hero.titleLead}</span> <span class="home-hero__big hl-accent" data-group data-scatter>{c.hero.titleHighlight}</span> <span class="home-hero__small" data-group>{c.hero.titleTail.trim()}</span></h1>
         <div class="home-hero__row">
           <p class="lead home-hero__lead" data-enter>{c.hero.subtitle}</p>
           <div class="home-hero__ctas" data-enter>
@@ -169,21 +169,13 @@ const pillars = c.pillars.map((p) => {
       <div class="home-head">
         <SectionHeader title={c.pillarsHeader.title} subtitle={c.pillarsHeader.lead} />
       </div>
-      <ul class="cube" aria-label={c.pillarsLabel}>
+      <ul class="fixes" aria-label={c.pillarsLabel}>
         {
-          pillars.map((p) => (
-            <li class="cube__cell">
-              <button type="button" class="cube__tile" aria-pressed="false" data-cube-tile>
-                <span class="cube__face cube__face--front">
-                  <span class="cube__letter" aria-hidden="true">{p.letter}</span>
-                  <span class="cube__title">{p.pre}<span class="cube__hl">{p.hl}</span>{p.post}</span>
-                </span>
-                <span class="cube__face cube__face--back">
-                  <span class="cube__back-letter" aria-hidden="true">{p.letter}</span>
-                  <span class="cube__back-title">{p.title}</span>
-                  <span class="cube__desc">{p.desc}</span>
-                </span>
-              </button>
+          pillars.map((p, i) => (
+            <li class="fix" data-anim="rise" style={`--i:${i}`}>
+              <h3 class="fix__title">{p.pre}<span class="hl-accent">{p.hl}</span>{p.post}</h3>
+              <p class="fix__desc">{p.desc}</p>
+              <span class="fix__letter" aria-hidden="true">{p.letter}</span>
             </li>
           ))
         }
@@ -366,23 +358,9 @@ const pillars = c.pillars.map((p) => {
     sync();
   }
 
-  function initCube() {
-    document.querySelectorAll<HTMLButtonElement>("[data-cube-tile]").forEach((tile) => {
-      if (tile.dataset.bound) return;
-      tile.dataset.bound = "1";
-      tile.addEventListener("click", (e) => {
-        if ((e as PointerEvent).pointerType === "mouse" && window.matchMedia("(hover: hover)").matches) return;
-        const on = tile.getAttribute("aria-pressed") !== "true";
-        tile.setAttribute("aria-pressed", String(on));
-      });
-      tile.addEventListener("blur", () => tile.setAttribute("aria-pressed", "false"));
-    });
-  }
-
   document.addEventListener("astro:page-load", () => {
     initGauge();
     initMarquee();
-    initCube();
   });
 
 </script>

@@ -72,13 +72,13 @@ export interface ContactContent {
   };
 }
 
-export const stageOptions = ["Startup, seed to Series B", "Growing company, 50–500 people", "Larger organisation"];
+export const stageOptions = ["Startup, seed to Series B", "Growing company, 50–500 people", "Larger organisation"];
 
 export const contactContent: ContactContent = {
   meta: {
     title: "Apply for a data diagnostic",
     description:
-      "A 30-minute call, by application. Written next steps within 3 business days.",
+      "A 30-minute call, by application. Written next steps within 3 business days.",
   },
   hero: {
     title: "Bring the number you doubt.",
@@ -92,11 +92,11 @@ export const contactContent: ContactContent = {
       head: "What you get",
       rows: [
         { item: "30-minute call", price: "No charge" },
-        { item: "Written next steps", price: "3 business days" },
+        { item: "Written next steps", price: "3 business days" },
         { item: "NDA", price: "On request" },
       ],
       totalLabel: "To apply",
-      total: "5 questions",
+      total: "5 questions",
     },
   },
   form: {
@@ -154,8 +154,8 @@ export const contactContent: ContactContent = {
       aliases: retiredSlugs,
       note: "Tool you're interested in:",
     },
-    bandNote: "Your AUXO Score band:",
-    newsletterLabel: "Send me the AUXO newsletter every 2 weeks.",
+    bandNote: "Your AUXO Score band:",
+    newsletterLabel: "Send me the AUXO newsletter every 2 weeks.",
     consentNote:
       "I consent to AUXO holding these details to review my application and reply, in line with the Privacy Policy. We don't sell or rent your details.",
     consentLink: { text: "Privacy Policy", href: "/legal/privacy-policy/" },
@@ -187,7 +187,7 @@ export const contactContent: ContactContent = {
       },
       {
         title: "Next steps in writing",
-        desc: "Within 3 business days. If there is work, we scope it with you and put the price in writing. If we're not the right fit, we say so.",
+        desc: "Within 3 business days. If there is work, we scope it with you and put the price in writing. If we're not the right fit, we say so.",
       },
     ],
   },
@@ -204,7 +204,7 @@ export const contactContent: ContactContent = {
       {
         question: "What does it cost?",
         answer:
-          "No charge for the AUXO Score or the data diagnostic. If there is work, we agree the price for each phase in writing first.",
+          "No charge for the AUXO Score or the data diagnostic. If there is work, we agree the price for each phase in writing first.",
       },
       {
         question: "Why is it an application?",
@@ -224,7 +224,7 @@ export const contactContent: ContactContent = {
       {
         question: "What happens after you hand over?",
         answer:
-          "Every build ends with a system your team owns, plus guides and training. Upkeep is optional and monthly. Stop with 30 days' notice.",
+          "Every build ends with a system your team owns, plus guides and training. Upkeep is optional and monthly. Stop with 30 days' notice.",
       },
     ],
   },

@@ -8,10 +8,10 @@ export interface LinksContent {
 export const linksContent: LinksContent = {
   meta: {
     title: "AUXO links",
-    description: "Take the AUXO Score or apply for a data diagnostic.",
+    description: "Take the AUXO Score or apply for a data diagnostic.",
   },
   title: "Your data, ready for AI.",
-  lead: "Start with the AUXO Score. Ten questions, about 3 minutes.",
+  lead: "Start with the AUXO Score. Ten questions, about 3 minutes.",
   links: [
     { text: "Take the AUXO Score", href: "/auxo-score/", primary: true },
     { text: "Apply for a data diagnostic", href: "/apply/" },

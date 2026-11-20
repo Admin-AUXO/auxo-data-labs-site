@@ -2,7 +2,7 @@ export const auxoScoreAbout = {
   title: "Five checks. One score.",
   lead: "Ten questions on how your company uses AI today.",
   faq: {
-    title: "About the AUXO Score.",
+    title: "About the AUXO Score.",
     items: [
       {
         question: "What is an AI readiness assessment?",
@@ -10,7 +10,7 @@ export const auxoScoreAbout = {
           "A check of how your company sets up and uses AI: the tools you have, the data they can read, how work is set up, who uses it and what it changes.",
       },
       {
-        question: "What does the AUXO Score measure?",
+        question: "What does the AUXO Score measure?",
         answer:
           "Ten questions across five checks: tools, data, set-up, adoption and measurement. You get a score out of 100, a band (Healthy, Stable, Fragile or Critical) and the first thing to fix.",
       },
