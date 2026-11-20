@@ -48,9 +48,13 @@
   font-size: clamp(3.4rem, 0.6rem + 14.5vw, 12rem);
   letter-spacing: -0.055em;
   line-height: 0.88;
-  margin-block: 0.2em 0.34em;
+  margin-block: 0.2em 0;
   margin-inline-start: -0.045em;
   text-box: trim-both cap alphabetic;
+}
+
+.home-hero__big + .home-hero__big {
+  margin-block: 0.16em 0.34em;
 }
 
 .home-hero__big ~ .home-hero__small {
@@ -73,7 +77,7 @@
   position: relative;
 }
 
-[data-motion="on"] .home-hero__big .m-word:last-of-type .m-char:last-child::after {
+[data-motion="on"] .home-hero__big.hl-accent .m-word:last-of-type .m-char:last-child::after {
   animation: hero-caret-end 1.6s steps(1) both;
   animation-delay: calc(0.45s + var(--k) * 0.05s);
   background: var(--accent);
@@ -87,6 +91,15 @@
 
 [data-motion="on"] .home-hero__title[data-split] > .home-hero__small:last-child {
   animation: hero-closer 0.7s var(--ease-out) 1.25s both;
+}
+
+[data-motion="on"] .home-hero__big:not(.hl-accent) .m-char {
+  animation-name: hero-read-plain;
+}
+
+@keyframes hero-read-plain {
+  from { color: color-mix(in oklch, var(--foreground) 16%, transparent); }
+  to { color: var(--foreground); }
 }
 
 @keyframes hero-read {
@@ -1116,15 +1129,6 @@
   position: absolute;
 }
 
-.film-band__label {
-  color: var(--accent);
-  display: block;
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  margin: 0;
-  text-transform: uppercase;
-}
 
 .film-band__lead {
   color: #fff;

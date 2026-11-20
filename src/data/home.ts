@@ -44,6 +44,7 @@ interface HomeContent {
   meta: { title: string; description: string };
   hero: {
     titleLead: string;
+    titleVerb: string;
     titleHighlight: string;
     titleTail: string;
     subtitle: string;
@@ -61,7 +62,6 @@ interface HomeContent {
     reassuranceAccent: string;
   };
   film: {
-    label: string;
     lead: string;
     src: string;
     poster: string;
@@ -120,7 +120,8 @@ export const homeContent: HomeContent = {
   },
   hero: {
     titleLead: "Every AI tool you buy",
-    titleHighlight: "reads your data.",
+    titleVerb: "reads",
+    titleHighlight: "your data.",
     titleTail: "We make it worth reading.",
     subtitle:
       "One set of numbers, the tools set up on them, and all of it yours to keep.",
@@ -128,7 +129,6 @@ export const homeContent: HomeContent = {
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   film: {
-    label: "The film",
     lead: "Fragments in. Decisions out.",
     src: "/video/auxo-explainer.mp4",
     poster: "/video/explainer-poster.jpg",

@@ -125,7 +125,17 @@
 }
 
 .step .specimen__table :is(th, td) {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+}
+
+.step .specimen__table :is(th, td):first-child {
+  white-space: nowrap;
+}
+
+@media (width < 30rem) {
+  .step .specimen__table {
+    font-size: 0.78rem;
+  }
 }
 
 .step__lede {

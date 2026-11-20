@@ -6,6 +6,7 @@ function splitHeadline(head: HTMLElement): void {
   const frag = document.createDocumentFragment();
   let target: Node = frag;
   let i = 0;
+  let k = 0;
 
   const addWord = (word: string, cls: string | null): void => {
     const outer = document.createElement("span");
@@ -45,7 +46,6 @@ function splitHeadline(head: HTMLElement): void {
         target = frag;
         if (el.dataset.read !== undefined) {
           head.setAttribute("aria-label", head.textContent?.replace(/\s+/g, " ").trim() ?? "");
-          let k = 0;
           group.querySelectorAll<HTMLElement>(".m-word-i").forEach((word) => {
             const chars = [...(word.textContent ?? "")];
             word.textContent = "";
@@ -59,7 +59,6 @@ function splitHeadline(head: HTMLElement): void {
               k += 1;
             });
           });
-          group.style.setProperty("--chars", String(k));
         }
       } else {
         processText(el.textContent ?? "", el.className || null);
