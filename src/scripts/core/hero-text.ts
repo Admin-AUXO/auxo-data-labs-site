@@ -24,9 +24,9 @@ function splitHeadline(head: HTMLElement): void {
   };
 
   const processText = (text: string, cls: string | null): void => {
-    for (const tok of text.split(/(\s+)/)) {
+    for (const tok of text.split(/([ \t\n\r]+)/)) {
       if (tok === "") continue;
-      if (/^\s+$/.test(tok)) target.appendChild(document.createTextNode(" "));
+      if (/^[ \t\n\r]+$/.test(tok)) target.appendChild(document.createTextNode(" "));
       else addWord(tok, cls);
     }
   };
@@ -43,24 +43,23 @@ function splitHeadline(head: HTMLElement): void {
         target = group;
         processText(el.textContent ?? "", null);
         target = frag;
-        if (el.dataset.scatter !== undefined) {
+        if (el.dataset.read !== undefined) {
           head.setAttribute("aria-label", head.textContent?.replace(/\s+/g, " ").trim() ?? "");
+          let k = 0;
           group.querySelectorAll<HTMLElement>(".m-word-i").forEach((word) => {
             const chars = [...(word.textContent ?? "")];
             word.textContent = "";
-            chars.forEach((ch, k) => {
+            chars.forEach((ch) => {
               const c = document.createElement("span");
               c.className = "m-char";
               c.setAttribute("aria-hidden", "true");
               c.textContent = ch;
-              const r = () => Math.random() * 2 - 1;
-              c.style.setProperty("--dx", `${(r() * 0.8).toFixed(2)}em`);
-              c.style.setProperty("--dy", `${(r() * 0.5).toFixed(2)}em`);
-              c.style.setProperty("--rot", `${Math.round(r() * 24)}deg`);
               c.style.setProperty("--k", String(k));
               word.appendChild(c);
+              k += 1;
             });
           });
+          group.style.setProperty("--chars", String(k));
         }
       } else {
         processText(el.textContent ?? "", el.className || null);

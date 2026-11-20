@@ -119,11 +119,11 @@ export const homeContent: HomeContent = {
       "We get your data in shape so you can trust it and actually use it, including for AI. For funded startups and scale-ups. Starts with a data diagnostic.",
   },
   hero: {
-    titleLead: "We turn fragmented data into",
-    titleHighlight: "intelligent decisions",
-    titleTail: " companies act on.",
+    titleLead: "Every AI tool you buy",
+    titleHighlight: "reads your data.",
+    titleTail: "We make it worth reading.",
     subtitle:
-      "We get your data in shape, so your AI actually works.",
+      "One set of numbers, the tools set up on them, and all of it yours to keep.",
     primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
