@@ -3,8 +3,8 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
+import Accordion from "../components/ui/Accordion.astro";
 import Button from "../components/ui/Button.astro";
-import HighlightText from "../components/ui/HighlightText.astro";
 import CtaSection from "../components/sections/shared/CtaSection.astro";
 import FootnoteRef from "../components/ui/FootnoteRef.astro";
 import { homeContent as c } from "../data/home";
@@ -12,6 +12,7 @@ import "../styles/pages/home.css";
 
 const logoLoop = [...c.logos.items, ...c.logos.items];
 
+/** Split a sentence around the substring to accent, as the pillars do with their letter. */
 const splitOn = (text: string, needle: string) => {
   const i = needle ? text.indexOf(needle) : -1;
   return i === -1
@@ -35,7 +36,7 @@ const pillars = c.pillars.map((p) => {
   <Section padding="lg" width="7xl" class="home-hero">
     <div class="home-hero__inner">
       <div class="home-hero__main">
-        <h1 class="home-hero__title" data-enter="headline"><span class="home-hero__small" data-group>{c.hero.titleLead}</span> <span class="home-hero__big" data-group data-read>{c.hero.titleVerb}</span> <span class="home-hero__big hl-accent" data-group data-read>{c.hero.titleHighlight}</span> <span class="home-hero__small" data-group>{c.hero.titleTail}</span></h1>
+        <h1 class="home-hero__title" data-enter="headline">{c.hero.titleLead} <span class="hl-accent">{c.hero.titleHighlight}</span>{c.hero.titleTail}</h1>
         <div class="home-hero__row">
           <p class="lead home-hero__lead" data-enter>{c.hero.subtitle}</p>
           <div class="home-hero__ctas" data-enter>
@@ -51,6 +52,8 @@ const pillars = c.pillars.map((p) => {
     </div>
   </Section>
 
+  <!-- Explainer film. Click to load: no bytes fetched until the still is pressed. -->
+  <!-- See claude/Explainer_Video_Placement_Nov2026.md -->
   <Section padding="sm" width="7xl">
     <figure class="film-band" data-reveal>
       <div class="film-band__frame" data-film data-src={c.film.src}>
@@ -58,6 +61,7 @@ const pillars = c.pillars.map((p) => {
           <img class="film-band__poster" src={c.film.poster} alt={c.film.posterAlt} width="1600" height="900" loading="lazy" decoding="async" />
           <span class="film-band__veil" aria-hidden="true"></span>
           <span class="film-band__overlay">
+            <span class="film-band__label">{c.film.label}</span>
             <span class="film-band__lead">{c.film.lead}</span>
             <span class="film-band__play">
               <span class="film-band__play-icon" aria-hidden="true"></span>
@@ -96,93 +100,6 @@ const pillars = c.pillars.map((p) => {
   </script>
 
   <Section padding="lg" width="7xl">
-    <div class="home-head">
-      <SectionHeader title={c.objection.title} subtitle={c.objection.lead} />
-    </div>
-
-    <div class="disagree mt-8">
-      <p class="disagree__q" data-reveal>
-        <span class="disagree__prompt" aria-hidden="true">&gt;</span>{c.objection.question}
-      </p>
-
-      <ul class="disagree__grid">
-        {c.objection.sources.map((src, i) => (
-          <li data-anim="rise" style={`--i:${i}`}>
-            <button type="button" class="src" data-source>
-              <span class="src__name">{src.name}</span>
-              <span class="src__num">{src.value}</span>
-              <span class="src__def">{src.definition}</span>
-            </button>
-          </li>
-        ))}
-      </ul>
-
-      <p class="disagree__hint">{c.objection.hint}</p>
-
-      <div class="answer" data-reveal>
-        <p class="answer__who">{c.objection.assistantLabel}</p>
-        <p class="answer__text">
-          {c.objection.assistantLead} <span class="answer__pick">{c.objection.assistantPick}</span> {c.objection.assistantTail}
-        </p>
-        <p class="answer__sub">{c.objection.assistantNote}</p>
-      </div>
-
-      <p class="disagree__close" data-reveal>
-        {c.objection.closeLead} <span class="hl-accent">{c.objection.closeAccent}</span>{c.objection.closeTail}
-      </p>
-    </div>
-
-    <ul class="gaps" aria-label={c.objection.gapsLabel}>
-      {c.objection.gaps.map((g, i) => (
-        <li class="gap" data-anim="rise" style={`--i:${i}`}>
-          <h3 class="gap__title">{g.title}</h3>
-          <p class="gap__desc">{g.desc}</p>
-          {g.stat && g.footnoteId && (
-            <p class="gap__stat"><span class="hl-accent">{g.stat.split(" ")[0]}</span> {g.stat.split(" ").slice(1).join(" ")}<FootnoteRef id={g.footnoteId} /></p>
-          )}
-        </li>
-      ))}
-    </ul>
-
-    <div class="followups__foot">
-      <Button variant="secondary" href={c.objection.cta.href}>{c.objection.cta.text}</Button>
-      <a class="followups__quiet" href={c.objection.blogLink.href}>{c.objection.blogLink.text}</a>
-    </div>
-  </Section>
-
-  <script is:inline>
-    (function () {
-      var all = document.querySelectorAll("[data-source]");
-      all.forEach(function (b) {
-        b.addEventListener("click", function () {
-          var open = b.getAttribute("data-open") === "1";
-          all.forEach(function (o) { o.removeAttribute("data-open"); });
-          if (!open) b.setAttribute("data-open", "1");
-        });
-      });
-    })();
-  </script>
-
-  <Section padding="lg" width="7xl">
-    <div class="home-fix">
-      <div class="home-head">
-        <SectionHeader title={c.pillarsHeader.title} subtitle={c.pillarsHeader.lead} />
-      </div>
-      <ul class="fixes" aria-label={c.pillarsLabel}>
-        {
-          pillars.map((p, i) => (
-            <li class="fix" data-anim="rise" style={`--i:${i}`}>
-              <h3 class="fix__title">{p.pre}<span class="hl-accent">{p.hl}</span>{p.post}</h3>
-              <p class="fix__desc">{p.desc}</p>
-              <span class="fix__letter" aria-hidden="true">{p.letter}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </Section>
-
-  <Section padding="lg" width="7xl">
     <div class="home-fix">
       <div class="score-card" data-reveal>
         <svg class="score-gauge" data-gauge="idle" viewBox="0 0 120 70" aria-hidden="true">
@@ -191,7 +108,7 @@ const pillars = c.pillars.map((p) => {
         </svg>
         <div class="flex flex-col gap-3">
           <h2 class="font-bold">{scoreTitle.pre}<span class="hl-accent">{scoreTitle.hl}</span>{scoreTitle.post}</h2>
-          <p class="max-w-xl text-lg text-muted text-balance">{scoreStat.pre}<span class="hl-accent">{scoreStat.hl}</span>{scoreStat.post}<FootnoteRef id={c.score.statFootnoteId} /></p>
+          <p class="max-w-xl text-lg text-muted text-balance">{scoreStat.pre}<em class="hl-glow">{scoreStat.hl}</em>{scoreStat.post}<FootnoteRef id={c.score.statFootnoteId} /></p>
         </div>
         <div class="flex flex-col items-start gap-3 min-[56rem]:items-end">
           <Button variant="secondary" size="lg" href={c.score.cta.href} icon class="w-full sm:w-auto">
@@ -222,24 +139,96 @@ const pillars = c.pillars.map((p) => {
     </div>
   </Section>
 
+
   <Section padding="lg" width="7xl">
-    <ul class="explore" aria-label={c.explore.label}>
-      {
-        c.explore.items.map((item, i) => (
+    <div class="home-head">
+      <SectionHeader title={c.objection.title} />
+    </div>
+
+    <div class="disagree mt-8">
+      <p class="disagree__q" data-reveal>
+        <span class="disagree__prompt" aria-hidden="true">&gt;</span>{c.objection.question}
+      </p>
+
+      <ul class="disagree__grid">
+        {c.objection.sources.map((src, i) => (
           <li data-anim="rise" style={`--i:${i}`}>
-            <a class="explore__card" href={item.cta.href}>
-              <h2 class="explore__title"><HighlightText text={item.title} soften /></h2>
-              <p class="explore__lead">{item.lead}</p>
-              <span class="explore__cta go">
-                {item.cta.text}
-                <span class="sq"><Icon name="mdi:arrow-right" aria-hidden="true" /></span>
-              </span>
-            </a>
+            <button type="button" class="src" data-source>
+              <span class="src__name">{src.name}</span>
+              <span class="src__num">{src.value}</span>
+              <span class="src__def">{src.definition}</span>
+            </button>
           </li>
-        ))
-      }
-    </ul>
+        ))}
+      </ul>
+
+      <p class="disagree__hint">{c.objection.hint}</p>
+
+      <div class="answer" data-reveal>
+        <p class="answer__who">{c.objection.assistantLabel}</p>
+        <p class="answer__text">
+          {c.objection.assistantLead} <span class="answer__pick">{c.objection.assistantPick}</span> {c.objection.assistantTail}
+        </p>
+        <p class="answer__sub">
+          {c.objection.assistantNoteLead} <em class="hl-glow">{c.objection.assistantNoteGlow}</em>
+        </p>
+      </div>
+
+      <p class="disagree__close" data-reveal>
+        {c.objection.closeLead} <em class="hl-glow">{c.objection.closeGlow}</em>{c.objection.closeTail}
+      </p>
+    </div>
+
+    <div class="followups">
+      <p class="eyebrow followups__label">{c.objection.followupsLabel}</p>
+      <Accordion items={c.objection.followups} />
+      <div class="followups__foot">
+        <Button variant="secondary" href={c.objection.cta.href}>{c.objection.cta.text}</Button>
+        <a class="followups__quiet" href={c.objection.blogLink.href}>{c.objection.blogLink.text}</a>
+      </div>
+    </div>
   </Section>
+
+  <script is:inline>
+    (function () {
+      var all = document.querySelectorAll("[data-source]");
+      all.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var open = b.getAttribute("data-open") === "1";
+          all.forEach(function (o) { o.removeAttribute("data-open"); });
+          if (!open) b.setAttribute("data-open", "1");
+        });
+      });
+    })();
+  </script>
+
+  <Section padding="lg" width="7xl">
+    <div class="home-fix">
+      <div class="home-head">
+        <SectionHeader title={c.pillarsHeader.title} subtitle={c.pillarsHeader.lead} />
+      </div>
+      <ul class="cube" aria-label={c.pillarsLabel}>
+        {
+          pillars.map((p) => (
+            <li class="cube__cell">
+              <button type="button" class="cube__tile" aria-pressed="false" data-cube-tile>
+                <span class="cube__face cube__face--front">
+                  <span class="cube__letter" aria-hidden="true">{p.letter}</span>
+                  <span class="cube__title">{p.pre}<span class="cube__hl">{p.hl}</span>{p.post}</span>
+                </span>
+                <span class="cube__face cube__face--back">
+                  <span class="cube__back-letter" aria-hidden="true">{p.letter}</span>
+                  <span class="cube__back-title">{p.title}</span>
+                  <span class="cube__desc">{p.desc}</span>
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
 
   <CtaSection
     title={c.cta.title}
@@ -301,6 +290,7 @@ const pillars = c.pillars.map((p) => {
       const dt = last ? Math.min(now - last, 100) : 0;
       last = now;
       if (!paused && half > width) {
+        // Scrolling left moves the track right, so the logos travel left to right.
         pos -= (SPEED * dt) / 1000;
         if (pos <= 0) pos += half;
         vp.scrollLeft = pos;
@@ -321,6 +311,7 @@ const pillars = c.pillars.map((p) => {
       }
       vp.toggleAttribute("data-static", !motionEnabled());
       measure();
+      // Travelling right means starting a full copy in, with room to scroll back.
       if (half > width && pos <= 0) {
         pos = half;
         vp.scrollLeft = pos;
@@ -340,6 +331,8 @@ const pillars = c.pillars.map((p) => {
     };
     const pauseForMouse = (e: PointerEvent) => { if (e.pointerType === "mouse") pause(); };
     vp.addEventListener("pointerenter", pauseForMouse);
+    // pointermove keeps it paused while the pointer sits inside, and covers the
+    // case where the pointer is already over the strip before the script binds.
     vp.addEventListener("pointermove", pauseForMouse, { passive: true });
     vp.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") resumeSoon(0); });
     vp.addEventListener("touchstart", pause, { passive: true });
@@ -357,9 +350,23 @@ const pillars = c.pillars.map((p) => {
     sync();
   }
 
+  function initCube() {
+    document.querySelectorAll<HTMLButtonElement>("[data-cube-tile]").forEach((tile) => {
+      if (tile.dataset.bound) return;
+      tile.dataset.bound = "1";
+      tile.addEventListener("click", (e) => {
+        if ((e as PointerEvent).pointerType === "mouse" && window.matchMedia("(hover: hover)").matches) return;
+        const on = tile.getAttribute("aria-pressed") !== "true";
+        tile.setAttribute("aria-pressed", String(on));
+      });
+      tile.addEventListener("blur", () => tile.setAttribute("aria-pressed", "false"));
+    });
+  }
+
   document.addEventListener("astro:page-load", () => {
     initGauge();
     initMarquee();
+    initCube();
   });
 
 </script>

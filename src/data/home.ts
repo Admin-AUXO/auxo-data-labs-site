@@ -27,24 +27,16 @@ interface ObjectionSource {
   definition: string;
 }
 
-interface ObjectionGap {
+interface ObjectionFollowup {
   title: string;
-  desc: string;
-  stat?: string;
-  footnoteId?: string;
-}
-
-interface HomeExplore {
-  title: string;
-  lead: string;
-  cta: Link;
+  /** Rendered as HTML: may contain <em class="hl-glow"> and one link. */
+  body: string;
 }
 
 interface HomeContent {
   meta: { title: string; description: string };
   hero: {
     titleLead: string;
-    titleVerb: string;
     titleHighlight: string;
     titleTail: string;
     subtitle: string;
@@ -53,15 +45,19 @@ interface HomeContent {
   };
   score: {
     title: string;
+    /** Substring of `title` drawn in the accent colour. */
     titleAccent: string;
     stat: string;
+    /** Substring of `stat` drawn in the accent colour, with the halo. */
     statAccent: string;
     statFootnoteId: string;
     cta: Link;
     reassurance: string;
+    /** Substring of `reassurance` drawn in the accent colour. */
     reassuranceAccent: string;
   };
   film: {
+    label: string;
     lead: string;
     src: string;
     poster: string;
@@ -78,26 +74,24 @@ interface HomeContent {
   pillarsHeader: SectionIntro;
   pillarsLabel: string;
   pillars: HomePillar[];
-  objection: SectionIntro & {
+  objection: {
+    title: string;
     question: string;
     sources: ObjectionSource[];
     assistantLabel: string;
     assistantLead: string;
     assistantPick: string;
     assistantTail: string;
-    assistantNote: string;
+    assistantNoteLead: string;
+    assistantNoteGlow: string;
     hint: string;
     closeLead: string;
-    closeAccent: string;
+    closeGlow: string;
     closeTail: string;
-    gapsLabel: string;
-    gaps: ObjectionGap[];
+    followupsLabel: string;
+    followups: ObjectionFollowup[];
     cta: Link;
     blogLink: Link;
-  };
-  explore: {
-    label: string;
-    items: HomeExplore[];
   };
   cta: {
     title: string;
@@ -114,21 +108,22 @@ const reassurance = "We reply within one business day.";
 
 export const homeContent: HomeContent = {
   meta: {
-    title: "Your data, ready for AI",
+    title: "Messy data into decisions you can act on",
     description:
       "We get your data in shape so you can trust it and actually use it, including for AI. For funded startups and scale-ups. Starts with a data diagnostic.",
   },
   hero: {
-    titleLead: "Every AI tool you buy",
-    titleVerb: "reads",
-    titleHighlight: "your data.",
-    titleTail: "We make it worth reading.",
+    titleLead: "We turn fragmented data into",
+    titleHighlight: "intelligent decisions",
+    // Appended with no space, so a tail that starts a word needs a leading one.
+    titleTail: " companies act on.",
     subtitle:
-      "One set of numbers, the tools set up on them, and all of it yours to keep.",
+      "We act as the operating layer between your data and decisions.",
     primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
   film: {
+    label: "The film",
     lead: "Fragments in. Decisions out.",
     src: "/video/auxo-explainer.mp4",
     poster: "/video/explainer-poster.jpg",
@@ -143,11 +138,11 @@ export const homeContent: HomeContent = {
   score: {
     title: "See where AI can do the most for you.",
     titleAccent: "the most",
-    stat: "57% of data teams already run or pilot AI agents. Only 8% say the data feeding them is ready for production.",
-    statAccent: "8%",
-    statFootnoteId: "ref-mdc-agents",
+    stat: "63% of organizations either do not have, or are unsure if they have, the right data management practices for AI.",
+    statAccent: "63%",
+    statFootnoteId: "ref-gartner-ai-data",
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
-    reassurance: "Ten questions. About 3 minutes. No sign-up.",
+    reassurance: "Ten questions. About 3 minutes. No sign-up.",
     reassuranceAccent: "No sign-up.",
   },
   logos: {
@@ -196,7 +191,6 @@ export const homeContent: HomeContent = {
   ],
   objection: {
     title: "Can't Claude or ChatGPT just do this?",
-    lead: "Yes, once your data gives them one answer to find.",
     question: "How many customers do we have?",
     sources: [
       { name: "CRM", value: "4,812", definition: "Every account ever created." },
@@ -208,54 +202,40 @@ export const homeContent: HomeContent = {
     assistantLead: "You have",
     assistantPick: "4,812",
     assistantTail: "customers.",
-    assistantNote: "A clear answer from one source. Nothing told it which one you meant.",
+    assistantNoteLead: "It picked one.",
+    assistantNoteGlow: "It never mentioned the other three.",
     hint: "Press a source to see what it counts.",
-    closeLead: "Every number is right. Each one counts",
-    closeAccent: "a different customer",
-    closeTail: ". Agree which one you mean, and any assistant gives the answer your board uses.",
-    gapsLabel: "What helps an assistant answer well",
-    gaps: [
+    closeLead: "None of them is lying. They are answering",
+    closeGlow: "four different questions",
+    closeTail:
+      ". Agreeing which one you mean is the fix \u2014 the part no model can do for you.",
+    followupsLabel: "Other questions we get",
+    followups: [
       {
-        title: "One meaning per number",
-        desc: "Customer, revenue and active user, written down once. Every tool then counts the same thing.",
-        stat: "64% of companies traced a confident but wrong AI answer to their own business data in the past six months.",
-        footnoteId: "ref-vb-context",
+        title: "Isn't this just data cleaning?",
+        body:
+          '<p>Cleaning has <em class="hl-glow">no finish line</em>. We work back from the decisions you actually make to the few numbers they depend on, and fix those. The rest can stay messy.</p><p><a href="/blog/start-with-the-decision-not-the-dashboard/">The long version &rarr;</a></p>',
       },
       {
-        title: "Sources it can read in full",
-        desc: "A connector brings back what one search finds. We connect the systems that hold the answer, with access that matches each person's role.",
+        title: "We already have a warehouse and a BI tool.",
+        body:
+          '<p>Those move data and draw charts. Neither decides <em class="hl-glow">which definition of revenue wins</em>, or who may change it. That is why two dashboards disagree in the same meeting.</p><p><a href="/blog/data-silos-why-your-numbers-disagree/">The long version &rarr;</a></p>',
       },
       {
-        title: "An owner for every figure",
-        desc: "Each key number has a source and a person who signs it off, so an answer can be checked before it reaches the board.",
-        stat: "41% of data teams name unclear data ownership as a challenge.",
-        footnoteId: "ref-dbt-ownership",
+        title: "Where would we start?",
+        body:
+          '<p>The AUXO Score. Ten questions, about three minutes, no sign-up. It tells you <em class="hl-glow">which of the four fixes you are missing</em> before you spend anything.</p>',
       },
     ],
     cta: { text: "Take the AUXO Score", href: "/auxo-score/" },
     blogLink: { text: "Read the blog", href: "/blog/" },
-  },
-  explore: {
-    label: "More from AUXO",
-    items: [
-      {
-        title: "No charge to start. A fixed price after.",
-        lead: "A data diagnostic comes first. Each phase after it is priced in writing.",
-        cta: { text: "See pricing", href: "/pricing/" },
-      },
-      {
-        title: "Ready-made stacks. Set up on your data.",
-        lead: "Six fixed jobs on your numbers, built in your own accounts.",
-        cta: { text: "Browse the stacks", href: "/marketplace/" },
-      },
-    ],
   },
   cta: {
     title: "Know where you stand. Then talk it through.",
     description: "A 30-minute call with a founder about your result.",
     ctaText: "Apply for a data diagnostic",
     ctaHref: siteData.applyUrl,
-    secondaryText: "Take the AUXO Score",
+    secondaryText: "Take the AUXO Score",
     secondaryHref: "/auxo-score/",
     reassurance,
   },

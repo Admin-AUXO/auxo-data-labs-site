@@ -28,111 +28,28 @@
 }
 
 .home-hero__title {
-  display: grid;
   font-family: var(--font-brand);
+  font-size: clamp(3rem, 1rem + 5.4vw, 5.5rem);
   font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
   margin: 0;
+  max-inline-size: 13ch;
 }
 
-.home-hero__small {
-  display: block;
-  font-size: clamp(1.1rem, 5.5vw, 3.1rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  text-box: trim-both cap alphabetic;
-}
-
-.home-hero__big {
-  display: block;
-  font-size: clamp(3.4rem, 0.6rem + 14.5vw, 12rem);
-  letter-spacing: -0.055em;
-  line-height: 0.88;
-  margin-block: 0.2em 0;
-  margin-inline-start: -0.045em;
-  text-box: trim-both cap alphabetic;
-}
-
-.home-hero__big + .home-hero__big {
-  margin-block: 0.16em 0.34em;
-}
-
-.home-hero__big ~ .home-hero__small {
-  font-weight: 500;
-  letter-spacing: -0.025em;
-}
-
-[data-motion="on"] .home-hero__big .m-word {
-  overflow: visible;
-}
-
-[data-motion="on"] .home-hero__big .m-word-i {
-  animation: none;
-}
-
-[data-motion="on"] .home-hero__big .m-char {
-  animation: hero-read 0.2s linear both;
-  animation-delay: calc(0.35s + var(--k) * 0.05s);
-  display: inline-block;
-  position: relative;
-}
-
-[data-motion="on"] .home-hero__big.hl-accent .m-word:last-of-type .m-char:last-child::after {
-  animation: hero-caret-end 1.6s steps(1) both;
-  animation-delay: calc(0.45s + var(--k) * 0.05s);
-  background: var(--accent);
-  content: "";
-  inline-size: 0.055em;
-  inset-block: 0.14em 0.06em;
-  inset-inline-end: -0.12em;
-  opacity: 0;
-  position: absolute;
-}
-
-[data-motion="on"] .home-hero__title[data-split] > .home-hero__small:last-child {
-  animation: hero-closer 0.7s var(--ease-out) 1.25s both;
-}
-
-[data-motion="on"] .home-hero__big:not(.hl-accent) .m-char {
-  animation-name: hero-read-plain;
-}
-
-@keyframes hero-read-plain {
-  from { color: color-mix(in oklch, var(--foreground) 16%, transparent); }
-  to { color: var(--foreground); }
-}
-
-@keyframes hero-read {
-  from { color: color-mix(in oklch, var(--foreground) 16%, transparent); }
-  to { color: var(--accent); }
-}
-
-@keyframes hero-caret-end {
-  0%, 25%, 50%, 100% { opacity: 0; }
-  12.5%, 37.5%, 62.5% { opacity: 1; }
-}
-
-@keyframes hero-closer {
-  from {
-    opacity: 0;
-    transform: translateY(0.35em);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
+/* Past six lines Chromium gives up on text-wrap: balance, which on a phone
+   left "on." alone on the last line. `pretty` has no line limit and exists to
+   stop exactly that orphan. Sizing is handled by the width < 40rem rule
+   further down; this only changes how the lines break. */
+@media (width < 40rem) {
+  .home-hero__title {
+    text-wrap: pretty;
   }
 }
 
 .home-hero__row {
   display: grid;
   gap: 1.75rem;
-}
-
-@media (width >= 64rem) {
-  .home-hero__main { gap: 2rem; }
-
-  .home-hero__lead { max-inline-size: 48ch; }
 }
 
 .home-hero__lead {
@@ -156,7 +73,7 @@
 
 @media (width >= 64rem) {
   .home-hero__row {
-    align-items: center;
+    align-items: end;
     grid-template-columns: minmax(0, 1fr) auto;
   }
 }
@@ -186,23 +103,6 @@
 .score-gauge {
   block-size: auto;
   inline-size: 7.5rem;
-}
-
-@media (width < 56rem) {
-  .score-card {
-    align-items: start;
-    column-gap: 1.25rem;
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .score-card > :last-child {
-    grid-column: 1 / -1;
-  }
-
-  .score-gauge {
-    inline-size: clamp(3.5rem, 2.5rem + 4vw, 5rem);
-    margin-block-start: 0.35rem;
-  }
 }
 
 .score-gauge path {
@@ -574,6 +474,7 @@
   padding: var(--card-pad);
 }
 
+
 .stuck__title {
   font-family: var(--font-brand);
   font-size: var(--text-xl);
@@ -622,114 +523,199 @@
   }
 }
 
-.fixes {
+.cube {
   display: grid;
-  gap: clamp(0.75rem, 0.5rem + 0.8vw, 1rem);
-  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.fix {
-  align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  display: grid;
-  gap: 0.3rem 1.25rem;
-  grid-template-areas: "letter title" "letter desc";
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  overflow: hidden;
-  padding: 1.1rem 1.25rem;
-  position: relative;
-  transition: border-color var(--dur-base) var(--ease-out);
+/* Square only while the cells are narrow. Past that a square cell grows with
+   the viewport until the section is a screenful and the letter floats far from
+   its title, so the cards get wider as they get bigger, never taller. */
+.cube__cell {
+  aspect-ratio: 1;
+  perspective: 900px;
 }
 
-.fix:hover {
-  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
-}
-
-.fix__title {
-  align-self: end;
-  font-size: var(--text-xl);
-  grid-area: title;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  margin: 0;
-  text-wrap: balance;
-}
-
-.fix__desc {
-  align-self: start;
-  color: var(--muted);
-  font-size: var(--text-sm);
-  grid-area: desc;
-  line-height: 1.45;
-  margin: 0;
-  text-wrap: pretty;
-}
-
-.fix__letter {
-  color: var(--accent);
-  font-family: var(--font-logo);
-  font-size: 4.75rem;
-  font-weight: 800;
-  grid-area: letter;
-  justify-self: center;
-  line-height: 0.8;
-  user-select: none;
-}
-
-@media (width >= 40rem) {
-  .fixes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-  .fix {
-    align-items: start;
-    gap: 0;
-    grid-row: span 3;
-    grid-template: subgrid / minmax(0, 1fr);
-    padding: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
-  }
-
-  .fix__letter {
-    font-size: clamp(5.5rem, 3rem + 5vw, 8rem);
-    grid-area: 1 / 1;
-    justify-self: start;
-    line-height: 0.78;
-    margin-block-end: clamp(1.5rem, 1rem + 2vw, 2.75rem);
-    margin-inline-start: -0.04em;
-  }
-
-  .fix__title {
-    align-self: start;
-    font-size: var(--text-2xl);
-    grid-area: 2 / 1;
-    margin-block-end: 0.5rem;
-  }
-
-  .fix__desc {
-    font-size: var(--text-base);
-    grid-area: 3 / 1;
-    max-inline-size: 32ch;
-  }
+@media (width >= 48rem) {
+  .cube__cell { aspect-ratio: 4 / 3; }
 }
 
 @media (width >= 64rem) {
-  .fixes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-  .fix__title { font-size: var(--text-xl); }
-
-  .fix__desc { font-size: var(--text-sm); }
+  .cube__cell { aspect-ratio: 3 / 2; }
 }
 
-[data-motion="on"] .fix__letter {
-  transition: transform var(--dur-base) var(--ease-out);
+@media (width >= 90rem) {
+  .cube__cell { aspect-ratio: 16 / 9; }
+}
+
+.cube__tile {
+  appearance: none;
+  background: none;
+  block-size: 100%;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font: inherit;
+  inline-size: 100%;
+  padding: 0;
+  position: relative;
+  text-align: start;
+  transform-style: preserve-3d;
+}
+
+[data-motion="on"] .cube__tile {
+  transition: transform 0.7s cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+.cube__tile:focus-visible {
+  border-radius: var(--radius-lg);
+  outline-offset: 4px;
+}
+
+.cube__tile[aria-pressed="true"],
+.cube__tile:focus-visible {
+  transform: rotateY(180deg);
 }
 
 @media (hover: hover) {
-  [data-motion="on"] .fix:hover .fix__letter {
-    transform: translateY(-0.06em);
+  .cube__cell:hover .cube__tile {
+    transform: rotateY(180deg);
+  }
+}
+
+.cube__face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  padding: clamp(0.9rem, 0.6rem + 1.5vw, 1.5rem);
+  position: absolute;
+}
+
+.cube__face--front {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--foreground);
+  justify-content: flex-end;
+}
+
+.cube__face--front .cube__letter {
+  color: var(--accent);
+}
+
+.cube__face--back {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  gap: 0.6rem;
+  justify-content: center;
+  overflow: hidden;
+  transform: rotateY(180deg);
+}
+
+.cube__letter {
+  font-family: var(--font-logo);
+
+  /* Big enough to hold the top of the card, so the face reads as composed
+     rather than as a letter and a title with a hole between them. */
+  font-size: clamp(2.25rem, 1.3rem + 5vw, 6.5rem);
+  font-weight: 800;
+  inset-block-start: clamp(0.6rem, 0.4rem + 1vw, 1rem);
+  inset-inline-start: clamp(0.9rem, 0.6rem + 1.5vw, 1.5rem);
+  line-height: 1;
+  opacity: 0.9;
+  position: absolute;
+}
+
+.cube__hl {
+  color: var(--accent);
+  text-shadow:
+    0 0 0.3em color-mix(in oklch, var(--accent) 60%, transparent),
+    0 0 0.85em color-mix(in oklch, var(--accent) 35%, transparent);
+}
+
+.cube__title {
+  font-family: var(--font-brand);
+  font-size: clamp(1rem, 0.8rem + 1.1vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.cube__back-letter {
+  font-family: var(--font-logo);
+  font-size: clamp(4.5rem, 2.6rem + 9vw, 8.5rem);
+  font-weight: 800;
+  inset-block-end: -0.18em;
+  inset-inline-end: 0.04em;
+  line-height: 0.8;
+  opacity: 0.14;
+  pointer-events: none;
+  position: absolute;
+  user-select: none;
+}
+
+.cube__back-title {
+  border-block-end: 1px solid color-mix(in oklch, var(--accent-foreground) 28%, transparent);
+  color: var(--accent-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.72;
+  padding-block-end: 0.55rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.cube__desc {
+  font-size: clamp(1.02rem, 0.88rem + 0.72vw, 1.42rem);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.32;
+  position: relative;
+  text-wrap: pretty;
+}
+
+html:not([data-motion="on"]) .cube__tile,
+html:not([data-motion="on"]) .cube__tile[aria-pressed="true"],
+html:not([data-motion="on"]) .cube__tile:focus-visible,
+html:not([data-motion="on"]) .cube__cell:hover .cube__tile {
+  transform: none;
+}
+
+html:not([data-motion="on"]) .cube__face {
+  backface-visibility: visible;
+}
+
+html:not([data-motion="on"]) .cube__face--back {
+  opacity: 0;
+  transform: none;
+}
+
+html:not([data-motion="on"]) .cube__tile[aria-pressed="true"] .cube__face--back,
+html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--back {
+  opacity: 1;
+}
+
+html:not([data-motion="on"]) .cube__tile[aria-pressed="true"] .cube__face--front,
+html:not([data-motion="on"]) .cube__tile:focus-visible .cube__face--front {
+  opacity: 0;
+}
+
+@media (hover: hover) {
+  html:not([data-motion="on"]) .cube__cell:hover .cube__face--back {
+    opacity: 1;
+  }
+
+  html:not([data-motion="on"]) .cube__cell:hover .cube__face--front {
+    opacity: 0;
   }
 }
 
@@ -912,8 +898,8 @@
     padding-block: 3.5rem 3rem;
   }
 
-  .home-hero__big {
-    font-size: min(clamp(3.4rem, 0.6rem + 14.5vw, 12rem), 17svh);
+  .home-hero__title {
+    font-size: min(clamp(3rem, 1rem + 5.4vw, 5.5rem), 13svh);
   }
 }
 
@@ -1085,6 +1071,11 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Film band — placement placeholder for the AUXO explainer.
+   Static poster for now; swap .film-band__poster for a <video> once the
+   15s silent loop is encoded. See claude/Explainer_Video_Placement_Nov2026.md
+--------------------------------------------------------------------------- */
 .film-band {
   display: grid;
   gap: 0.7rem;
@@ -1110,6 +1101,7 @@
   position: absolute;
 }
 
+/* Keeps the overlay type legible over the brightest part of the grid. */
 .film-band__veil {
   background:
     linear-gradient(to top, rgb(0 0 0 / 82%) 0%, rgb(0 0 0 / 25%) 46%, rgb(0 0 0 / 10%) 100%),
@@ -1129,6 +1121,15 @@
   position: absolute;
 }
 
+.film-band__label {
+  color: var(--accent);
+  display: block;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  margin: 0;
+  text-transform: uppercase;
+}
 
 .film-band__lead {
   color: #fff;
@@ -1172,6 +1173,7 @@
   opacity: 0.62;
 }
 
+/* The poster is a button until it is pressed. */
 .film-band__trigger {
   background: none;
   block-size: 100%;
@@ -1195,6 +1197,7 @@
   position: absolute;
 }
 
+/* Opens out from the cinematic crop to the film's own 16:9 on play. */
 .film-band__frame[data-playing="1"] {
   aspect-ratio: 16 / 9;
 }
@@ -1209,10 +1212,15 @@
   border-color: rgb(255 255 255 / 40%);
 }
 
+
 @media (width < 34rem) {
   .film-band__frame { aspect-ratio: 4 / 5; }
 }
 
+/* ---------------------------------------------------------------------------
+   Objection section — one question, four answers, and the point.
+   Pairs with .followups below it. See claude/ notes for the reasoning.
+--------------------------------------------------------------------------- */
 .disagree {
   display: grid;
   gap: 1.3rem;
@@ -1271,6 +1279,7 @@
   text-transform: uppercase;
 }
 
+/* Amber is an unreconciled figure, the same as in the film. */
 .src__num {
   color: var(--accent-2);
   font-family: var(--font-mono);
@@ -1312,7 +1321,8 @@
 
 .answer {
   background: var(--surface);
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--accent);
   border-radius: var(--radius-lg);
   display: grid;
   gap: 0.3rem;
@@ -1356,50 +1366,11 @@
   text-wrap: pretty;
 }
 
-.gaps {
-  display: grid;
-  gap: var(--col-gap);
-  grid-template-columns: minmax(0, 1fr);
-  list-style: none;
-  margin: clamp(2.4rem, 2rem + 2vw, 3.6rem) 0 0;
-  padding: 0;
-}
+.followups { margin-block-start: clamp(2.4rem, 2rem + 2vw, 3.6rem); }
 
-.gap {
-  align-content: start;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  display: grid;
-  gap: 0.75rem;
-  grid-row: span 3;
-  grid-template-rows: subgrid;
-  padding: clamp(1.4rem, 1rem + 1.5vw, 2rem);
-}
-
-.gap__title {
-  font-size: var(--text-xl);
-  line-height: 1.15;
-  margin: 0;
-}
-
-.gap__desc {
-  color: var(--muted);
-  margin: 0;
-  text-wrap: pretty;
-}
-
-.gap__stat {
-  align-self: end;
-  border-block-start: 1px dashed var(--border);
-  color: var(--foreground);
-  font-size: var(--text-sm);
-  margin: 0;
-  padding-block-start: 0.75rem;
-}
-
-@media (width >= 56rem) {
-  .gaps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.followups__label {
+  color: var(--subtle);
+  margin-block-end: 0.8rem;
 }
 
 .followups__foot {
