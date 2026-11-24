@@ -532,6 +532,17 @@
   padding: 0;
 }
 
+/* Once there is room, the four cards take 65% of the viewport rather than the
+   full content column: at full width they read as a wall. 65vw tracks the
+   window live, so a resize or a rotation re-fits them with no breakpoint to
+   cross, and the 60rem ceiling stops them inflating on a large monitor.
+   Below 64rem they go back to the full column, where they need every pixel. */
+@media (width >= 64rem) {
+  .cube {
+    max-inline-size: min(65vw, 60rem);
+  }
+}
+
 /* Square only while the cells are narrow. Past that a square cell grows with
    the viewport until the section is a screenful and the letter floats far from
    its title, so the cards get wider as they get bigger, never taller. */
@@ -549,7 +560,7 @@
 }
 
 @media (width >= 90rem) {
-  .cube__cell { aspect-ratio: 16 / 9; }
+  .cube__cell { aspect-ratio: 3 / 2; }
 }
 
 .cube__tile {
