@@ -539,6 +539,12 @@
    Below 64rem they go back to the full column, where they need every pixel. */
 @media (width >= 64rem) {
   .cube {
+    /* inline-size keeps the grid stretching to its capped box. Without it the
+       auto margins make it shrink to fit, and because every card face is
+       absolutely positioned there is no in-flow content to measure, so the
+       whole grid collapses. */
+    inline-size: 100%;
+    margin-inline: auto;
     max-inline-size: min(65vw, 60rem);
   }
 }
