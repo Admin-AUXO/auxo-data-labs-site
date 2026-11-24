@@ -20,6 +20,7 @@ const splitOn = (text: string, needle: string) => {
     : { pre: text.slice(0, i), hl: needle, post: text.slice(i + needle.length) };
 };
 
+const heroSubtitle = splitOn(c.hero.subtitle, c.hero.subtitleAccent);
 const scoreTitle = splitOn(c.score.title, c.score.titleAccent);
 const scoreStat = splitOn(c.score.stat, c.score.statAccent);
 const scoreNote = splitOn(c.score.reassurance, c.score.reassuranceAccent);
@@ -38,7 +39,7 @@ const pillars = c.pillars.map((p) => {
       <div class="home-hero__main">
         <h1 class="home-hero__title" data-enter="headline">{c.hero.titleLead} <span class="hl-accent">{c.hero.titleHighlight}</span>{c.hero.titleTail}</h1>
         <div class="home-hero__row">
-          <p class="lead home-hero__lead" data-enter>{c.hero.subtitle}</p>
+          <p class="lead home-hero__lead" data-enter>{heroSubtitle.pre}<span class="hl-accent">{heroSubtitle.hl}</span>{heroSubtitle.post}</p>
           <div class="home-hero__ctas" data-enter>
             <Button variant="primary" size="lg" href={c.hero.primaryCta.href} icon class="w-full sm:w-auto">
               {c.hero.primaryCta.text}

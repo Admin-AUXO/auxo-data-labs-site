@@ -40,6 +40,8 @@ interface HomeContent {
     titleHighlight: string;
     titleTail: string;
     subtitle: string;
+    /** Substring of `subtitle` drawn in the accent colour. */
+    subtitleAccent: string;
     primaryCta: Link;
     secondaryCta: Link;
   };
@@ -119,6 +121,7 @@ export const homeContent: HomeContent = {
     titleTail: " companies act on.",
     subtitle:
       "We act as the operating layer between your data and decisions.",
+    subtitleAccent: "operating layer",
     primaryCta: { text: "Apply for a data diagnostic", href: siteData.applyUrl },
     secondaryCta: { text: "Take the AUXO Score", href: "/auxo-score/" },
   },
